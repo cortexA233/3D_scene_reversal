@@ -17,6 +17,7 @@ function parseArguments(args) {
     repetitions: 2,
     output: null,
     geometryBaseline: null,
+    appearanceBaseline: null,
   };
   for (let index = 0; index < args.length; index += 1) {
     if (args[index] === "--browser" && args[index + 1]) {
@@ -29,6 +30,8 @@ function parseArguments(args) {
       options.output = path.resolve(PROJECT_ROOT, args[++index]);
     } else if (args[index] === "--geometry-baseline" && args[index + 1]) {
       options.geometryBaseline = args[++index];
+    } else if (args[index] === "--appearance-baseline" && args[index + 1]) {
+      options.appearanceBaseline = args[++index];
     } else {
       throw new Error(`Unknown or incomplete argument: ${args[index]}`);
     }
@@ -38,6 +41,9 @@ function parseArguments(args) {
   }
   if (options.objects.length === 0) {
     options.objects = [...QUALIFICATION_OBJECTS];
+  }
+  if (options.geometryBaseline && options.appearanceBaseline) {
+    throw new Error("category geometry and appearance baselines are exclusive");
   }
   if (!Number.isInteger(options.repetitions) || options.repetitions < 2) {
     throw new Error("--repetitions must be an integer of at least 2");
@@ -122,6 +128,10 @@ async function evaluateObject(options, configuration, objectId, objectIndex) {
         options.geometryBaseline
           ? `&geometry-baseline=${encodeURIComponent(options.geometryBaseline)}`
           : ""
+      }${
+        options.appearanceBaseline
+          ? `&appearance-baseline=${encodeURIComponent(options.appearanceBaseline)}`
+          : ""
       }`,
       readyState: { state: "evaluated", objectId },
       probeExpression: `({
@@ -171,7 +181,15 @@ async function evaluateObject(options, configuration, objectId, objectIndex) {
               report.comparison.gate.baselineVersions?.appearance ===
                 "single-mesh-quality-baseline-v1",
           )
-        : true,
+        : options.appearanceBaseline
+          ? runs.every(
+              ({ report }) =>
+                report.comparison.gate.baselineVersions?.geometry ===
+                  "single-mesh-quality-baseline-v1" &&
+                report.comparison.gate.baselineVersions?.appearance ===
+                  "patterned-appearance-baseline-v2",
+            )
+          : true,
       detail: runs.map(
         ({ report }) =>
           report.comparison.gate.baselineVersions ??
@@ -223,6 +241,7 @@ async function main() {
     productionUse: "prohibited",
     browser: options.browser,
     geometryBaseline: options.geometryBaseline,
+    appearanceBaseline: options.appearanceBaseline,
     configuration: {
       browserBinary: configuration.browserBinary,
       driverBinary: configuration.driverBinary,

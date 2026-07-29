@@ -13,6 +13,11 @@ import {
   evaluateStoneGeometryV2Gate,
   stoneUniformAppearanceEvidence,
 } from "/dev-tools/evaluation/stone-v2-calibration-contract.mjs";
+import {
+  aggregatePatternedAppearanceEvidence,
+  evaluatePatternedAppearanceView,
+} from "/dev-tools/evaluation/patterned-appearance-metrics.mjs";
+import { evaluatePatternedAppearanceV2Gate } from "/dev-tools/evaluation/patterned-appearance-v2-contract.mjs";
 import { evaluateGeometricDiagnostics } from "/dev-tools/evaluation/geometric-diagnostics.mjs";
 import {
   createLocalReferenceClone,
@@ -202,6 +207,32 @@ function mergeViews(geometry, appearance) {
   }));
 }
 
+function patternedAppearanceEvidence(context, replacementCaptures) {
+  const views = EVALUATION_VIEWS.map((view) => ({
+    viewId: view.id,
+    patterned: evaluatePatternedAppearanceView({
+      width: context.manifest.capture.width,
+      height: context.manifest.capture.height,
+      referenceSilhouette: context.referenceCaptures.get(
+        captureKey(view.id, "silhouette"),
+      ),
+      replacementSilhouette: replacementCaptures.get(
+        captureKey(view.id, "silhouette"),
+      ),
+      referenceAlbedo: context.referenceCaptures.get(
+        captureKey(view.id, "albedo"),
+      ),
+      replacementAlbedo: replacementCaptures.get(
+        captureKey(view.id, "albedo"),
+      ),
+    }),
+  }));
+  return {
+    views,
+    aggregate: aggregatePatternedAppearanceEvidence(views),
+  };
+}
+
 function diagnosticEvidence(referenceRoot, replacementRoot) {
   const reference = canonicalGeometry(referenceRoot);
   const replacement = canonicalGeometry(replacementRoot);
@@ -228,7 +259,63 @@ function fullComparison(context, replacementCaptures) {
   const aggregate = aggregateVisualEvidence(perView);
   let categoryAppearance = null;
   let gate;
-  if (context.geometryBaseline) {
+  if (context.appearanceBaseline) {
+    const patterned = patternedAppearanceEvidence(
+      context,
+      replacementCaptures,
+    );
+    perView.forEach((view, index) => {
+      view.patterned = patterned.views[index].patterned;
+    });
+    aggregate.patterned = patterned.aggregate;
+    const v1Probe = evaluateQualityGate(context.objectId, aggregate);
+    if (!v1Probe.geometryGate.passed) {
+      gate = {
+        baselineVersion: context.appearanceBaseline.version,
+        baselineVersions: {
+          geometry: qualityBaselineDefinition().version,
+          appearance: context.appearanceBaseline.version,
+        },
+        objectId: context.objectId,
+        passed: false,
+        failures: v1Probe.geometryGate.failures,
+        geometryGate: v1Probe.geometryGate,
+        appearanceGate: {
+          evaluated: false,
+          passed: null,
+          reason: "geometry-gate-failed",
+          failures: [],
+        },
+      };
+    } else {
+      const appearanceGate = evaluatePatternedAppearanceV2Gate({
+        baseline: context.appearanceBaseline,
+        aggregate,
+      });
+      categoryAppearance = {
+        evidenceClass: "bounded-semantic-pattern-v2",
+        global: aggregate.appearance,
+        semanticRecall: aggregate.patterned,
+      };
+      gate = {
+        baselineVersion: context.appearanceBaseline.version,
+        baselineVersions: {
+          geometry: qualityBaselineDefinition().version,
+          appearance: context.appearanceBaseline.version,
+        },
+        objectId: context.objectId,
+        passed: appearanceGate.passed,
+        failures: appearanceGate.failures,
+        geometryGate: v1Probe.geometryGate,
+        appearanceGate: {
+          evaluated: true,
+          passed: appearanceGate.passed,
+          evidencePolicy: "global-appearance-plus-semantic-pattern-recall-v2",
+          failures: appearanceGate.failures,
+        },
+      };
+    }
+  } else if (context.geometryBaseline) {
     const geometryGate = evaluateStoneGeometryV2Gate({
       baseline: context.geometryBaseline,
       aggregate,
@@ -618,6 +705,7 @@ export async function runObjectEvaluation({
   canvas,
   objectId,
   geometryBaseline = null,
+  appearanceBaseline = null,
   onProgress = () => {},
 }) {
   onProgress(`Loading ${objectId}`);
@@ -647,6 +735,7 @@ export async function runObjectEvaluation({
       referenceBounds: boundsOf(reference.root),
       referenceMaterial: materialOf(reference.root),
       geometryBaseline,
+      appearanceBaseline,
     };
     const comparison = fullComparison(context, replacementCaptures);
     harness.preview({
@@ -669,6 +758,14 @@ export async function runObjectEvaluation({
               thresholds: qualityBaselineDefinition().appearance[objectId],
             },
           }
+        : appearanceBaseline
+          ? {
+              geometry: {
+                version: qualityBaselineDefinition().version,
+                thresholds: qualityBaselineDefinition().geometry[objectId],
+              },
+              appearance: appearanceBaseline,
+            }
         : qualityBaselineDefinition(),
       manifest,
       captures: {

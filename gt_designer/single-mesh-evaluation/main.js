@@ -256,7 +256,12 @@ async function initialize() {
     document.body.dataset.state = "evaluating";
     const { runObjectEvaluation } = await import("./calibration-runner.js");
     const geometryBaselineId = parameters.get("geometry-baseline");
+    const appearanceBaselineId = parameters.get("appearance-baseline");
     let geometryBaseline = null;
+    let appearanceBaseline = null;
+    if (geometryBaselineId && appearanceBaselineId) {
+      throw new Error("geometry and appearance category baselines are exclusive");
+    }
     if (geometryBaselineId) {
       if (geometryBaselineId !== "stone-v2" || state.unitId !== "stone") {
         throw new Error("unsupported category geometry baseline request");
@@ -269,10 +274,26 @@ async function initialize() {
       }
       geometryBaseline = await response.json();
     }
+    if (appearanceBaselineId) {
+      if (
+        appearanceBaselineId !== "patterned-v2" ||
+        state.unitId !== "umbrella"
+      ) {
+        throw new Error("unsupported category appearance baseline request");
+      }
+      const response = await fetch(
+        "./baselines/patterned-appearance-baseline-v2.json",
+      );
+      if (!response.ok) {
+        throw new Error("Patterned Appearance Baseline v2 could not be loaded");
+      }
+      appearanceBaseline = await response.json();
+    }
     state.objectEvaluationReport = await runObjectEvaluation({
       canvas: elements.canvas,
       objectId: state.unitId,
       geometryBaseline,
+      appearanceBaseline,
       onProgress(message) {
         elements.state.textContent = message;
         elements.summary.textContent = `Object acceptance\n${message}`;

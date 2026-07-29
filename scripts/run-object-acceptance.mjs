@@ -20,6 +20,7 @@ function parseArguments(args) {
     output: null,
     evidenceVersion: "v1",
     geometryBaseline: null,
+    appearanceBaseline: null,
   };
   for (let index = 0; index < args.length; index += 1) {
     if (args[index] === "--check") options.check = true;
@@ -31,11 +32,16 @@ function parseArguments(args) {
       options.evidenceVersion = args[++index];
     } else if (args[index] === "--geometry-baseline" && args[index + 1]) {
       options.geometryBaseline = args[++index];
+    } else if (args[index] === "--appearance-baseline" && args[index + 1]) {
+      options.appearanceBaseline = args[++index];
     } else throw new Error(`Unknown or incomplete argument: ${args[index]}`);
   }
   if (!options.objectId) throw new Error("--object is required");
   if (!/^v\d+$/.test(options.evidenceVersion)) {
     throw new Error("--evidence-version must use the form v<number>");
+  }
+  if (options.geometryBaseline && options.appearanceBaseline) {
+    throw new Error("category geometry and appearance baselines are exclusive");
   }
   options.output ??= path.join(
     PROJECT_ROOT,
@@ -46,6 +52,25 @@ function parseArguments(args) {
 
 async function main() {
   const options = parseArguments(process.argv.slice(2));
+  const checkUmbrellaGeometry = async () => {
+    if (options.appearanceBaseline !== "patterned-v2") {
+      return { passed: true, detail: null };
+    }
+    try {
+      const result = await execFile(
+        process.execPath,
+        ["scripts/freeze-umbrella-geometry.mjs", "--check"],
+        { cwd: PROJECT_ROOT },
+      );
+      return { passed: true, detail: result.stdout.trim() };
+    } catch (error) {
+      return { passed: false, detail: error.stderr ?? error.message };
+    }
+  };
+  const umbrellaGeometryBefore = await checkUmbrellaGeometry();
+  if (!umbrellaGeometryBefore.passed) {
+    throw new Error(`Umbrella geometry freeze failed before evaluation: ${umbrellaGeometryBefore.detail}`);
+  }
   const candidateManifest = options.geometryBaseline === "stone-v2"
     ? JSON.parse(
         await readFile(
@@ -95,6 +120,10 @@ async function main() {
       options.geometryBaseline
         ? `&geometry-baseline=${encodeURIComponent(options.geometryBaseline)}`
         : ""
+    }${
+      options.appearanceBaseline
+        ? `&appearance-baseline=${encodeURIComponent(options.appearanceBaseline)}`
+        : ""
     }`,
     readyState: { state: "evaluated", objectId: options.objectId },
     probeExpression: `({
@@ -106,6 +135,7 @@ async function main() {
     port: 8460,
   });
   const visual = browser.state.report;
+  const umbrellaGeometryAfter = await checkUmbrellaGeometry();
   const candidateAfter = candidateManifest
     ? await verifyCandidateFreeze({
         projectRoot: PROJECT_ROOT,
@@ -145,8 +175,13 @@ async function main() {
             "stone-geometry-baseline-v2" &&
           visual.comparison.gate.baselineVersions?.appearance ===
             "single-mesh-quality-baseline-v1"
-        : visual.comparison.gate.baselineVersion ===
-            "single-mesh-quality-baseline-v1",
+        : options.appearanceBaseline
+          ? visual.comparison.gate.baselineVersions?.geometry ===
+              "single-mesh-quality-baseline-v1" &&
+            visual.comparison.gate.baselineVersions?.appearance ===
+              "patterned-appearance-baseline-v2"
+          : visual.comparison.gate.baselineVersion ===
+              "single-mesh-quality-baseline-v1",
       detail: visual.comparison.gate.baselineVersions ??
         visual.comparison.gate.baselineVersion,
     },
@@ -154,6 +189,11 @@ async function main() {
       id: "candidate-quarantine-before-and-after",
       passed: candidateBefore.passed && candidateAfter.passed,
       detail: [...candidateBefore.failures, ...candidateAfter.failures],
+    },
+    {
+      id: "umbrella-geometry-freeze-before-and-after",
+      passed: umbrellaGeometryBefore.passed && umbrellaGeometryAfter.passed,
+      detail: [umbrellaGeometryBefore.detail, umbrellaGeometryAfter.detail],
     },
   ];
   const report = {
@@ -163,6 +203,7 @@ async function main() {
     productionUse: "prohibited",
     objectId: options.objectId,
     geometryBaseline: options.geometryBaseline,
+    appearanceBaseline: options.appearanceBaseline,
     visual,
     nonvisual,
     acceptance: {
