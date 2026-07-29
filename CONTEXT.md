@@ -73,7 +73,7 @@ The fixed shared arrangement established by Single Mesh Lab for its eight Recons
 _Avoid_: Island-village layout, source-world layout, authored-world restoration
 
 **Reference-layout Delivery**:
-The integrated Code-only scene that places available Procedural Replacements in their corresponding positions within the Eight-slot Lab Reference Layout; unavailable slots remain empty, and per-object scenes are excluded from delivery.
+The integrated Code-only scene that places Procedural Replacements in their corresponding positions within the Eight-slot Lab Reference Layout; staged previews may leave unfinished slots empty, but formal delivery contains all eight and per-object scenes are excluded from delivery.
 _Avoid_: Per-object deliverable, object showcase scene, isolated final scene
 
 **Stage 1.5 Decision Gate**:
@@ -81,7 +81,7 @@ A blocking evidence phase between the frozen Stage 1 result and Stage 2 implemen
 _Avoid_: Stage 2 preview, cleanup sprint, evidence backlog
 
 **Versioned Category Exit**:
-A formal Single Mesh Lab exit in which every required Reconstruction Unit passes its declared Category-specific Quality Baseline and the report preserves each baseline version without rewriting an earlier tranche's result.
+A formal Single Mesh Lab exit in which all eight Reconstruction Units pass their declared Category-specific Quality Baselines and the report preserves each baseline version without rewriting an earlier tranche's result.
 _Avoid_: Mixed-baseline score, retroactive Stage 1 pass, aggregate recovery
 
 **Reconstruction Unit**:
@@ -136,9 +136,17 @@ _Avoid_: Inherited threshold, difficulty discount, post-fit adjustment
 A Category-specific Quality Baseline for hero patterned objects, calibrated from Authored Reference pattern perturbations before candidate fitting and versioned separately from historical baselines; it remains valid only while materially wrong palette, motif-family, coverage, and phase controls still fail.
 _Avoid_: Texture discount, Umbrella exception, retroactive pass
 
+**Human-anchored Patterned Appearance Baseline**:
+A separately versioned Category-specific Quality Baseline for a complex authored pattern that names a human-approved Procedural Replacement as a positive semantic exemplar alongside the Authored Reference and requires destructive variants to remain separable; it explicitly records that the evidence is candidate-informed and never rewrites a candidate-independent baseline result.
+_Avoid_: Manual override, hidden post-fit tuning, retroactive pass
+
 **Semantic Pattern Recall**:
-A reference-side appearance measurement for a declared motif family, such as flower, leaf, or branch, that measures same-position albedo retention separately from permissive global color and SSIM gates; it prevents a compact candidate from buying a global similarity pass by deleting identity-bearing motifs.
+A historical patterned-v2 reference-side appearance measurement for a declared motif family, such as flower, leaf, or branch, that measures same-position albedo retention separately from permissive global color and SSIM gates.
 _Avoid_: Texture mask score, candidate motif bonus, palette cluster count
+
+**Semantic Pattern Coverage**:
+A position-tolerant rendered measurement that checks whether declared motif families retain bounded visible coverage and their declared role palette without requiring source and replacement pixels to occupy identical image coordinates.
+_Avoid_: Pixel recall, texture match, unbounded motif presence
 
 **Ground Truth Extractor**:
 The development-only tool that derives object-independent geometric, topology, transform, and material facts from Authored References without attempting to invent an Object Generator.
@@ -150,7 +158,7 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 
 ## Shared facts
 
-- Reference-layout Delivery means the Eight-slot Lab Reference Layout, not island-village source-world placement. A stage populates only the slots for its available Procedural Replacements and never fills unfinished slots with Authored Reference assets.
+- Reference-layout Delivery means the Eight-slot Lab Reference Layout, not island-village source-world placement. A stage populates only the slots for its available Procedural Replacements and never fills unfinished slots with Authored Reference assets; formal delivery requires all eight slots.
 - Stage 1 uses the frozen `single-mesh-quality-baseline-v1` thresholds for Stone Path, Stone, Vase, and Umbrella. Browser calibration passed 29 repeatability, identity, sensitivity-ordering, diagnostic, and policy checks without using the one permitted pre-fitting correction.
 - Future Category-specific Quality Baselines, including those for Bamboo Shoot and Mushroom, may use looser numerical tolerances than Stage 1 when pre-implementation sensitivity calibration justifies them; the frozen Stage 1 values remain unchanged.
 - A Representation Contract Failure must be repaired and rerun against the currently applicable frozen Quality Baseline before it may trigger a rebaseline or count as one of the representation's permitted negative experiments. A Fitting Reproducibility Failure does not invalidate candidate evidence when the corrected fitter regenerates the frozen recipe exactly.
@@ -161,7 +169,7 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 - Patterned Appearance Baseline v2 may be loosened during reference-only pre-calibration, but a flat canopy, wrong dominant palette, deleted major motif family, materially reduced pattern coverage, and large phase or pattern-scale errors must still fail; no further loosening is permitted after candidate fitting begins.
 - `patterned-appearance-baseline-v2` is frozen from two byte-stable reference-only runs with global limits of mean DeltaE <= 6.6967, P90 DeltaE <= 30.8300, mean SSIM >= 0.7287, and worst-view SSIM >= 0.5870 plus flower/leaf/branch Semantic Pattern Recall minima of 0.0451/0.1615/0.5905. Palette centroid and coverage clustering are diagnostic because minor complex-texture palette changes made them discontinuous; flat, wrong-palette, three family-deletion, half-coverage, and large phase/scale controls still fail.
 - The geometry-frozen Stage 1.5 Umbrella Bounded Semantic Pattern Program passes its unchanged v1 geometry gate, 2-batch/5,336-triangle golden freeze, complete-source 83/96 scalar audit, all nonvisual budgets, determinism, and Reference Independence, but fails all seven frozen patterned-v2 Chrome appearance metrics: mean/P90 DeltaE 10.1431/56.9890, mean/worst SSIM 0.4189/0.2800, and flower/leaf/branch recall 0.0157/0.0443/0.0100. This is a negative representation-boundary result, not permission to change the baseline.
-- The resumed Stage 1.5 effort therefore stops before native Firefox/Safari candidate gates and before Bamboo Shoot/Mushroom pre-calibration. Tickets 03–04 are not executed, Stage 2 remains unauthorized, and the project must revisit hero-pattern representation or the full-island Code-only Production Runtime target before another specification cycle.
+- The patterned-v2 effort stopped before native Firefox/Safari candidate gates and before Bamboo Shoot/Mushroom pre-calibration. That stopped sequence remains historical; ADR-0032 authorizes a separate human-anchored patterned-v3 decision path without changing its result.
 - Firefox and Safari evidence for an otherwise-qualified candidate requires a Native GPU Visual Gate with two stable full-protocol capture runs, recorded browser/OS/Three.js/GPU/color metadata, and an explicit rejection of software rendering. JavaScriptCore and SpiderMonkey structure/bounds signatures do not satisfy this gate.
 - Bamboo Shoot and Mushroom receive separate Category-specific Quality Baselines and separate compactness/runtime budgets, calibrated and frozen together during Stage 1.5 before either Stage 2 candidate is fitted. They share the evaluation protocol and cross-browser gates, but a failure or later finding for one cannot change the other's frozen values.
 - Every new Category-specific Quality Baseline requires a Calibration Bracket: identity and declared mild perturbations pass, declared destructive controls fail, and a metric that cannot separate the two before candidate fitting is revised or made diagnostic rather than loosened until both pass.
@@ -169,12 +177,15 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 - Bamboo Shoot's first Stage 2 representation uses a compact tapered asymmetric core plus separate lateral-sheath and crown-leaf Axial Layer Families with stable semantic identities and preserved open boundaries. The 17 source components inform those families but do not become 17 copied production transforms; a second representation is chosen only from first-candidate failure evidence.
 - Mushroom's five closed source components are five complete repeated organic forms with similar topology but materially different height, scale, orientation, and placement. Its Calibration Bracket perturbs per-form size, cap/stem proportion, lean, placement, and cap resolution, while destructive controls delete a visible member or major part, collapse the group to one form, erase inter-form variation, swap dominant scale/layout roles, flatten appearance, corrupt the palette, delete a motif family, or halve pattern coverage.
 - Mushroom's first Stage 2 representation uses one shared stem-and-radial-cap generator to produce five Repeated Organic Forms with compact per-form placement, proportion, orientation, lean, and seed controls, stable semantic identities, and no more than two compatible render batches. A second representation is chosen only from first-candidate failure evidence.
-- Formal Single Mesh Lab exit may be claimed as a Versioned Category Exit when six required references, including Bamboo Shoot and Mushroom, pass their declared baseline versions and all shared gates. The historical Stage 1 v1 result remains two of four and is never restated as a retroactive four-of-four pass.
+- Formal Single Mesh Lab exit may be claimed only when all eight references pass their declared baseline versions and shared gates in the Eight-slot Lab Reference Layout. The historical Stage 1 v1 result remains two of four and is never restated as a retroactive four-of-four pass.
 - The reported Umbrella `86/96` scalar pass counted recipe literals but excluded Object Generator and generated-shader constants, so it is incomplete evidence against the declared Object-specific Scalar definition. Stage 1.5 must re-audit every Stage 1 object across its complete production source before relying on scalar headroom or nonvisual acceptance.
 - The frozen calibration report is development-only evidence. Its per-view metrics, checksums, source topology diagnostics, and perturbation results are prohibited from the Code-only Production Runtime just like other Ground Truth measurements.
 - The frozen Stage 1 certification result is negative: Stone Path and Vase pass every object gate, Stone fails contour and depth-tail geometry gates, and Umbrella passes geometry but fails procedural-appearance gates. The required core-hypothesis result is therefore two of four, and formal Single Mesh Lab exit is not claimed.
 - Stage 1's combined production constraints pass independently of its visual failures: the four-object bundle is 7,714 bytes gzip excluding Three.js, sequential warm generation is 1.6 ms p95 on the normative machine, and the replacement runtime has no WASM or runtime textures and renders in the isolated offline audit.
 - Stage 1 does not trigger a shared geometry layer or third-party Runtime Kernel. No missing geometry operation recurred across two generators, and all four generators met their compactness and runtime budgets. Umbrella instead triggers a future review of compact procedural appearance and the Code-only Production Runtime boundary for hero patterned objects.
-- Stone Path's footprint extrusion and Vase's hollow lathe/procedural gradient are accepted production candidates. Stone's compact loft and Umbrella's radial assembly/procedural flower shader are retained negative experiments, not accepted Exact-ish Procedural Replacements.
+- Stone Path's footprint extrusion, Vase's hollow lathe/procedural gradient, Stone's v2 bounded support polyhedron, and Umbrella's human-approved v3 radial assembly/procedural flower shader are accepted candidates under their declared baseline versions. The Stone loft and Umbrella patterned-v2 result remain historical negative experiments.
 - Stone's sole second compact representation candidate is a Bounded Support-plane Polyhedron with at most 24 canonical-direction support distances under the frozen Stone quality and nonvisual budgets; adding more rings, arbitrary source-derived plane normals, or more support directions does not count as another permitted representation.
 - A Bounded Semantic Pattern Program is permitted within the Code-only Production Runtime for hero patterned objects. Its object-specific controls count against the existing scalar and bundle budgets, while textures, pixel or sample tables, resolution-scaled paths, and sampled appearance disguised as shader constants remain prohibited.
+- `patterned-appearance-baseline-v3` is a Human-anchored Patterned Appearance Baseline. It retains v1 geometry, roughness, metalness, scalar, determinism, Reference Independence, runtime, and bundle gates; exact-position DeltaE, SSIM, palette clustering, and v2 same-position recall are diagnostic.
+- Umbrella patterned-v3 hard appearance evidence uses evaluation-space flower/leaf/branch role colors and bounded replacement coverage. The approved Chrome capture has flower/leaf/branch coverage `0.02063/0.03169/0.02287` and total coverage `0.07519`; the hard minima are `0.016/0.023/0.017` and `0.060`, with bounded maxima and role-distance ceilings. Flat, wrong-role-palette, flower deletion, leaf deletion, branch deletion, and half-coverage controls all fail.
+- The hash-frozen approved Umbrella candidate passes patterned-v3 plus unchanged geometry and nonvisual gates in Chrome and two stable full-protocol hardware-GPU repetitions in Firefox and Safari. The v2 FAIL remains unchanged; Stage 1.5 continues with pre-calibration for Bamboo Shoot, Mushroom, Blue Hat, and Candle before Stage 2 fitting is authorized.

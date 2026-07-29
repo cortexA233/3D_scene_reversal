@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: superseded by ADR-0032
 ---
 
 # Stop Stage 1.5 at the Umbrella pattern boundary

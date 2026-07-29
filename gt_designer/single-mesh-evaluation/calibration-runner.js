@@ -15,9 +15,12 @@ import {
 } from "/dev-tools/evaluation/stone-v2-calibration-contract.mjs";
 import {
   aggregatePatternedAppearanceEvidence,
+  aggregateSemanticPatternCoverageEvidence,
   evaluatePatternedAppearanceView,
+  evaluateSemanticPatternCoverageView,
 } from "/dev-tools/evaluation/patterned-appearance-metrics.mjs";
 import { evaluatePatternedAppearanceV2Gate } from "/dev-tools/evaluation/patterned-appearance-v2-contract.mjs";
+import { evaluatePatternedAppearanceV3Gate } from "/dev-tools/evaluation/patterned-appearance-v3-contract.mjs";
 import { evaluateGeometricDiagnostics } from "/dev-tools/evaluation/geometric-diagnostics.mjs";
 import {
   createLocalReferenceClone,
@@ -233,6 +236,32 @@ function patternedAppearanceEvidence(context, replacementCaptures) {
   };
 }
 
+function semanticPatternCoverageEvidence(context, replacementCaptures) {
+  const views = EVALUATION_VIEWS.map((view) => ({
+    viewId: view.id,
+    semanticPattern: evaluateSemanticPatternCoverageView({
+      width: context.manifest.capture.width,
+      height: context.manifest.capture.height,
+      referenceSilhouette: context.referenceCaptures.get(
+        captureKey(view.id, "silhouette"),
+      ),
+      replacementSilhouette: replacementCaptures.get(
+        captureKey(view.id, "silhouette"),
+      ),
+      referenceAlbedo: context.referenceCaptures.get(
+        captureKey(view.id, "albedo"),
+      ),
+      replacementAlbedo: replacementCaptures.get(
+        captureKey(view.id, "albedo"),
+      ),
+    }),
+  }));
+  return {
+    views,
+    aggregate: aggregateSemanticPatternCoverageEvidence(views),
+  };
+}
+
 function diagnosticEvidence(referenceRoot, replacementRoot) {
   const reference = canonicalGeometry(referenceRoot);
   const replacement = canonicalGeometry(replacementRoot);
@@ -257,6 +286,16 @@ function fullComparison(context, replacementCaptures) {
   });
   const perView = mergeViews(geometry, appearance);
   const aggregate = aggregateVisualEvidence(perView);
+  if (context.objectId === "umbrella") {
+    const semantic = semanticPatternCoverageEvidence(
+      context,
+      replacementCaptures,
+    );
+    perView.forEach((view, index) => {
+      view.semanticPattern = semantic.views[index].semanticPattern;
+    });
+    aggregate.semanticPattern = semantic.aggregate;
+  }
   let categoryAppearance = null;
   let gate;
   if (context.appearanceBaseline) {
@@ -288,15 +327,29 @@ function fullComparison(context, replacementCaptures) {
         },
       };
     } else {
-      const appearanceGate = evaluatePatternedAppearanceV2Gate({
-        baseline: context.appearanceBaseline,
-        aggregate,
-      });
-      categoryAppearance = {
-        evidenceClass: "bounded-semantic-pattern-v2",
-        global: aggregate.appearance,
-        semanticRecall: aggregate.patterned,
-      };
+      const isV3 = context.appearanceBaseline.version ===
+        "patterned-appearance-baseline-v3";
+      const appearanceGate = isV3
+        ? evaluatePatternedAppearanceV3Gate({
+            baseline: context.appearanceBaseline,
+            aggregate,
+          })
+        : evaluatePatternedAppearanceV2Gate({
+            baseline: context.appearanceBaseline,
+            aggregate,
+          });
+      categoryAppearance = isV3
+        ? {
+            evidenceClass: "human-anchored-semantic-pattern-v3",
+            semanticCoverage: aggregate.semanticPattern,
+            diagnosticGlobal: aggregate.appearance,
+            diagnosticSamePositionRecall: aggregate.patterned,
+          }
+        : {
+            evidenceClass: "bounded-semantic-pattern-v2",
+            global: aggregate.appearance,
+            semanticRecall: aggregate.patterned,
+          };
       gate = {
         baselineVersion: context.appearanceBaseline.version,
         baselineVersions: {
@@ -310,7 +363,9 @@ function fullComparison(context, replacementCaptures) {
         appearanceGate: {
           evaluated: true,
           passed: appearanceGate.passed,
-          evidencePolicy: "global-appearance-plus-semantic-pattern-recall-v2",
+          evidencePolicy: isV3
+            ? "human-anchored-semantic-role-coverage-v3"
+            : "global-appearance-plus-semantic-pattern-recall-v2",
           failures: appearanceGate.failures,
         },
       };
@@ -706,12 +761,26 @@ export async function runObjectEvaluation({
   objectId,
   geometryBaseline = null,
   appearanceBaseline = null,
+  appearanceVariant = null,
   onProgress = () => {},
 }) {
   onProgress(`Loading ${objectId}`);
   const reference = await loadAuthoredReference(objectId);
   const definition = getObjectDefinition(objectId);
-  const replacementRoot = generateObject(definition.recipe, definition.generator);
+  let replacementRecipe = definition.recipe;
+  if (appearanceVariant) {
+    if (objectId !== "umbrella") {
+      throw new Error("appearance variants are supported only for Umbrella");
+    }
+    const { createUmbrellaAppearanceVariantRecipe } = await import(
+      "./umbrella-v3-appearance-variants.js"
+    );
+    replacementRecipe = createUmbrellaAppearanceVariantRecipe(
+      definition.recipe,
+      appearanceVariant,
+    );
+  }
+  const replacementRoot = generateObject(replacementRecipe, definition.generator);
   const manifest = createEvaluationManifest(objectId, reference.worldBounds);
   const harness = createEvaluationHarness({
     canvas,
@@ -749,6 +818,7 @@ export async function runObjectEvaluation({
       productionUse: "prohibited",
       objectId,
       semanticId: definition.recipe.id,
+      appearanceVariant,
       evaluationProtocolVersion: EVALUATION_PROTOCOL_VERSION,
       qualityBaseline: geometryBaseline
         ? {

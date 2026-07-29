@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: superseded by ADR-0033
 ---
 
 # Allow a versioned-category Single Mesh Lab exit

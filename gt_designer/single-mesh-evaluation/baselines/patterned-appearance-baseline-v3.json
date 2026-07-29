@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "human-anchored-patterned-appearance-quality-baseline-v3",
+  "version": "patterned-appearance-baseline-v3",
+  "objectId": "umbrella",
+  "artifactRole": "development-only-quality-baseline",
+  "productionUse": "prohibited",
+  "anchorPolicy": {
+    "kind": "human-anchored-semantic-positive-bracket",
+    "candidateIndependent": false,
+    "historicalV2Result": "FAIL retained without alteration",
+    "exactPositionPixelMetrics": "diagnostic-only"
+  },
+  "humanApproval": {
+    "decision": "approved-positive-exemplar",
+    "scope": "Umbrella patterned appearance in the shared eight-slot Lab scene",
+    "finding": "The current Umbrella presentation completely meets the requested visual expectation",
+    "recordedDate": "2026-07-29"
+  },
+  "positiveExemplars": [
+    {
+      "id": "authored-reference",
+      "role": "ground-truth semantic source"
+    },
+    {
+      "id": "approved-umbrella-v3",
+      "role": "named human-approved semantic alternative",
+      "candidateFreeze": "umbrella-v3-approved-candidate-freeze.json"
+    }
+  ],
+  "hard": [
+    {
+      "path": "semanticPattern.roles.flower.replacementCoverage",
+      "operator": ">=",
+      "threshold": 0.016,
+      "source": "approved-positive-exemplar-with-destructive-separation"
+    },
+    {
+      "path": "semanticPattern.roles.flower.replacementCoverage",
+      "operator": "<=",
+      "threshold": 0.032,
+      "source": "bounded-role-coverage"
+    },
+    {
+      "path": "semanticPattern.roles.leaf.replacementCoverage",
+      "operator": ">=",
+      "threshold": 0.023,
+      "source": "approved-positive-exemplar-with-destructive-separation"
+    },
+    {
+      "path": "semanticPattern.roles.leaf.replacementCoverage",
+      "operator": "<=",
+      "threshold": 0.048,
+      "source": "bounded-role-coverage"
+    },
+    {
+      "path": "semanticPattern.roles.branch.replacementCoverage",
+      "operator": ">=",
+      "threshold": 0.017,
+      "source": "approved-positive-exemplar-with-destructive-separation"
+    },
+    {
+      "path": "semanticPattern.roles.branch.replacementCoverage",
+      "operator": "<=",
+      "threshold": 0.038,
+      "source": "bounded-role-coverage"
+    },
+    {
+      "path": "semanticPattern.total.replacementCoverage",
+      "operator": ">=",
+      "threshold": 0.06,
+      "source": "reject-half-pattern-coverage"
+    },
+    {
+      "path": "semanticPattern.total.replacementCoverage",
+      "operator": "<=",
+      "threshold": 0.11,
+      "source": "bounded-total-pattern-coverage"
+    },
+    {
+      "path": "semanticPattern.roles.flower.meanReplacementRoleDistance",
+      "operator": "<=",
+      "threshold": 4,
+      "source": "declared-role-palette"
+    },
+    {
+      "path": "semanticPattern.roles.leaf.meanReplacementRoleDistance",
+      "operator": "<=",
+      "threshold": 10,
+      "source": "declared-role-palette"
+    },
+    {
+      "path": "semanticPattern.roles.branch.meanReplacementRoleDistance",
+      "operator": "<=",
+      "threshold": 10,
+      "source": "declared-role-palette"
+    },
+    {
+      "path": "appearance.roughnessAbsoluteError",
+      "operator": "<=",
+      "threshold": 0.1,
+      "source": "unchanged-single-mesh-quality-baseline-v1"
+    },
+    {
+      "path": "appearance.metalnessAbsoluteError",
+      "operator": "<=",
+      "threshold": 0.05,
+      "source": "unchanged-single-mesh-quality-baseline-v1"
+    }
+  ],
+  "diagnostic": [
+    { "path": "appearance.meanDeltaE00", "reason": "exact-position color error is not a hard equivalence metric for an approved semantic alternative" },
+    { "path": "appearance.p90DeltaE00", "reason": "exact-position color tail is not a hard equivalence metric for an approved semantic alternative" },
+    { "path": "appearance.meanMaskedSsim", "reason": "exact-position SSIM penalizes acceptable motif relocation" },
+    { "path": "appearance.worstViewSsim", "reason": "exact-position SSIM penalizes acceptable motif relocation" },
+    { "path": "appearance.paletteCentroidDeltaE00", "reason": "palette clustering is discontinuous for complex texture alternatives" },
+    { "path": "appearance.paletteCoverageL1", "reason": "palette clustering is discontinuous for complex texture alternatives" },
+    { "path": "patterned.flowerRecall", "reason": "historical v2 same-position recall is retained for diagnosis only" },
+    { "path": "patterned.leafRecall", "reason": "historical v2 same-position recall is retained for diagnosis only" },
+    { "path": "patterned.branchRecall", "reason": "historical v2 same-position recall is retained for diagnosis only" }
+  ],
+  "destructiveControls": [
+    { "id": "flat-canopy", "requiredOutcome": "reject" },
+    { "id": "wrong-role-palette", "requiredOutcome": "reject" },
+    { "id": "delete-flower-family", "requiredOutcome": "reject" },
+    { "id": "delete-leaf-family", "requiredOutcome": "reject" },
+    { "id": "delete-branch-family", "requiredOutcome": "reject" },
+    { "id": "half-pattern-coverage", "requiredOutcome": "reject" }
+  ],
+  "frozen": true
+}

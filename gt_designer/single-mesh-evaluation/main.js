@@ -257,6 +257,7 @@ async function initialize() {
     const { runObjectEvaluation } = await import("./calibration-runner.js");
     const geometryBaselineId = parameters.get("geometry-baseline");
     const appearanceBaselineId = parameters.get("appearance-baseline");
+    const appearanceVariant = parameters.get("appearance-variant");
     let geometryBaseline = null;
     let appearanceBaseline = null;
     if (geometryBaselineId && appearanceBaselineId) {
@@ -276,16 +277,18 @@ async function initialize() {
     }
     if (appearanceBaselineId) {
       if (
-        appearanceBaselineId !== "patterned-v2" ||
+        !["patterned-v2", "patterned-v3"].includes(appearanceBaselineId) ||
         state.unitId !== "umbrella"
       ) {
         throw new Error("unsupported category appearance baseline request");
       }
       const response = await fetch(
-        "./baselines/patterned-appearance-baseline-v2.json",
+        appearanceBaselineId === "patterned-v3"
+          ? "./baselines/patterned-appearance-baseline-v3.json"
+          : "./baselines/patterned-appearance-baseline-v2.json",
       );
       if (!response.ok) {
-        throw new Error("Patterned Appearance Baseline v2 could not be loaded");
+        throw new Error("Patterned Appearance Baseline could not be loaded");
       }
       appearanceBaseline = await response.json();
     }
@@ -294,6 +297,7 @@ async function initialize() {
       objectId: state.unitId,
       geometryBaseline,
       appearanceBaseline,
+      appearanceVariant,
       onProgress(message) {
         elements.state.textContent = message;
         elements.summary.textContent = `Object acceptance\n${message}`;

@@ -53,7 +53,7 @@ function parseArguments(args) {
 async function main() {
   const options = parseArguments(process.argv.slice(2));
   const checkUmbrellaGeometry = async () => {
-    if (options.appearanceBaseline !== "patterned-v2") {
+    if (!["patterned-v2", "patterned-v3"].includes(options.appearanceBaseline)) {
       return { passed: true, detail: null };
     }
     try {
@@ -81,7 +81,17 @@ async function main() {
           "utf8",
         ),
       )
-    : null;
+    : options.appearanceBaseline === "patterned-v3"
+      ? JSON.parse(
+          await readFile(
+            path.join(
+              PROJECT_ROOT,
+              "gt_designer/single-mesh-evaluation/baselines/umbrella-v3-approved-candidate-freeze.json",
+            ),
+            "utf8",
+          ),
+        )
+      : null;
   const candidateBefore = candidateManifest
     ? await verifyCandidateFreeze({
         projectRoot: PROJECT_ROOT,
@@ -179,7 +189,9 @@ async function main() {
           ? visual.comparison.gate.baselineVersions?.geometry ===
               "single-mesh-quality-baseline-v1" &&
             visual.comparison.gate.baselineVersions?.appearance ===
-              "patterned-appearance-baseline-v2"
+              (options.appearanceBaseline === "patterned-v3"
+                ? "patterned-appearance-baseline-v3"
+                : "patterned-appearance-baseline-v2")
           : visual.comparison.gate.baselineVersion ===
               "single-mesh-quality-baseline-v1",
       detail: visual.comparison.gate.baselineVersions ??

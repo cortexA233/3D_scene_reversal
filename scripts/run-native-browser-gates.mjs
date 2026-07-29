@@ -183,11 +183,13 @@ async function evaluateObject(options, configuration, objectId, objectIndex) {
           )
         : options.appearanceBaseline
           ? runs.every(
-              ({ report }) =>
-                report.comparison.gate.baselineVersions?.geometry ===
-                  "single-mesh-quality-baseline-v1" &&
-                report.comparison.gate.baselineVersions?.appearance ===
-                  "patterned-appearance-baseline-v2",
+            ({ report }) =>
+              report.comparison.gate.baselineVersions?.geometry ===
+                "single-mesh-quality-baseline-v1" &&
+              report.comparison.gate.baselineVersions?.appearance ===
+                  (options.appearanceBaseline === "patterned-v3"
+                    ? "patterned-appearance-baseline-v3"
+                    : "patterned-appearance-baseline-v2"),
             )
           : true,
       detail: runs.map(
