@@ -1,0 +1,49 @@
+{
+  "name": "procedural-scene-reversal",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "smoke:replacement": "node scripts/smoke-single-mesh-replacement.mjs",
+    "smoke:evaluation": "node scripts/smoke-single-mesh-evaluation.mjs",
+    "smoke:runtime-audit": "node scripts/smoke-runtime-audit.mjs",
+    "calibrate:quality": "node scripts/run-quality-calibration.mjs",
+    "check:quality-calibration": "node scripts/run-quality-calibration.mjs --check",
+    "audit:nonvisual": "node scripts/run-nonvisual-acceptance.mjs",
+    "check:nonvisual": "node scripts/run-nonvisual-acceptance.mjs --check",
+    "accept:stone-path": "node scripts/run-object-acceptance.mjs --object stone-path",
+    "check:stone-path": "node scripts/run-object-acceptance.mjs --object stone-path --check",
+    "accept:stone": "node scripts/run-object-acceptance.mjs --object stone",
+    "check:stone": "node scripts/run-object-acceptance.mjs --object stone --check",
+    "accept:vase": "node scripts/run-object-acceptance.mjs --object vase",
+    "check:vase": "node scripts/run-object-acceptance.mjs --object vase --check",
+    "accept:umbrella": "node scripts/run-object-acceptance.mjs --object umbrella",
+    "check:umbrella": "node scripts/run-object-acceptance.mjs --object umbrella --check",
+    "certify:stage-1": "node scripts/run-stage-1-certification.mjs",
+    "check:stage-1": "node scripts/run-stage-1-certification.mjs --check",
+    "extract:ground-truth": "node tools/ground-truth/extract-single-mesh.mjs",
+    "check:ground-truth": "node tools/ground-truth/extract-single-mesh.mjs --check",
+    "accept:ticket-01": "npm test && npm run smoke:replacement",
+    "accept:ticket-02": "npm test && npm run check:ground-truth",
+    "accept:ticket-03": "npm test && npm run check:ground-truth && npm run smoke:replacement && npm run smoke:evaluation",
+    "accept:ticket-04": "npm test && npm run check:ground-truth && npm run check:quality-calibration",
+    "accept:ticket-05": "npm test && npm run check:ground-truth && npm run check:nonvisual",
+    "accept:ticket-06": "npm test && npm run check:ground-truth && npm run check:stone-path",
+    "accept:ticket-07": "npm test && npm run check:ground-truth && npm run check:stone",
+    "accept:ticket-08": "npm test && npm run check:ground-truth && npm run check:vase",
+    "accept:ticket-09": "npm test && npm run check:ground-truth && npm run check:umbrella",
+    "accept:ticket-10": "npm test && npm run check:ground-truth && npm run check:stage-1"
+  },
+  "dependencies": {
+    "three": "0.170.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "4.4.2",
+    "@gltf-transform/extensions": "4.4.2",
+    "draco3dgltf": "1.5.7",
+    "esbuild": "0.28.1"
+  }
+}

@@ -1,0 +1,807 @@
+{
+  "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+  "artifactRole": "development-only-nonvisual-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "vase",
+  "runtime": {
+    "schemaVersion": "single-mesh-runtime-evidence-v1",
+    "objectId": "vase",
+    "semanticId": "island.decor.vase",
+    "recipe": {
+      "encoding": "canonical-minified-utf8-json",
+      "bytes": 576,
+      "serialized": "{\"id\":\"island.decor.vase\",\"kind\":\"hollow-lathed-profile-v1\",\"seed\":1516109825,\"shape\":{\"outerProfile\":[[0.4875,0],[0.4541,0.0202],[0.4875,0.1568],[0.6615,0.352],[0.933,0.6643],[1.1533,1.0416],[1.2269,1.3344],[1.1866,1.628],[1.0056,1.9403],[0.7443,2.1615],[0.4561,2.4332],[0.3945,2.6597],[0.4705,3.4679],[0.5743,3.6453],[0.8624,3.8593],[0.8592,3.8915]],\"radialSegments\":12,\"axisTilt\":[0.00946,-0.00125],\"wallThickness\":0.034,\"baseThickness\":0.276,\"rimThickness\":0.078},\"appearance\":{\"baseColor\":9772306,\"topColor\":16774373,\"transitionHeight\":0.9,\"roughness\":0.8,\"metalness\":0}}"
+    },
+    "recipeScalars": {
+      "definition": "finite numeric leaves in the object-specific recipe",
+      "count": 44
+    },
+    "deterministic": {
+      "repetitions": 3,
+      "byteStable": true,
+      "snapshot": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.decor.vase",
+            "parentSemanticId": null,
+            "type": "Mesh"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.decor.vase",
+            "parentSemanticId": null,
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "LatheGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 1287,
+                  "byteLength": 5148,
+                  "checksum": "7d20ae4a"
+                },
+                "uv": {
+                  "constructor": "Float32Array",
+                  "length": 858,
+                  "byteLength": 3432,
+                  "checksum": "13ba32d1"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 1287,
+                  "byteLength": 5148,
+                  "checksum": "7ac4b520"
+                },
+                "color": {
+                  "constructor": "Float32Array",
+                  "length": 1287,
+                  "byteLength": 5148,
+                  "checksum": "550c0804"
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 2304,
+                "byteLength": 4608,
+                "checksum": "fb0197fa"
+              },
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 16777215,
+              "emissive": 0,
+              "roughness": 0.8,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 2,
+              "vertexColors": true,
+              "hasRuntimeTexture": false
+            }
+          }
+        ],
+        "bounds": {
+          "min": [
+            -1.2268450260162354,
+            0,
+            -1.2268990278244019
+          ],
+          "max": [
+            1.2268450260162354,
+            3.9304254055023193,
+            1.2268990278244019
+          ]
+        },
+        "triangles": 768,
+        "drawCalls": 1,
+        "geometryMemoryBytes": 23484,
+        "runtimeTextureCount": 0
+      }
+    },
+    "benchmark": {
+      "warmups": 10,
+      "repetitions": 100,
+      "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+      "minimumMilliseconds": 0,
+      "medianMilliseconds": 0.10000000894069672,
+      "p95Milliseconds": 0.20000000298023224,
+      "maximumMilliseconds": 0.29999999701976776
+    },
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "hardwareConcurrency": 10,
+      "deviceMemoryGiB": 32,
+      "threeRevision": "170",
+      "renderer": {
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "vendor": "Google Inc. (Google)",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+      }
+    }
+  },
+  "sourceScalars": {
+    "definition": "JavaScript numeric literals in object-specific semantic recipe sources, excluding generator control-flow literals",
+    "count": 44,
+    "files": [
+      {
+        "sourceFile": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+        "evidence": {
+          "definition": "JavaScript numeric literals outside comments and string/template literals",
+          "count": 44,
+          "literals": [
+            {
+              "literal": "0x5a5e0001",
+              "offset": 603
+            },
+            {
+              "literal": "0.4875",
+              "offset": 695
+            },
+            {
+              "literal": "0",
+              "offset": 703
+            },
+            {
+              "literal": "0.4541",
+              "offset": 729
+            },
+            {
+              "literal": "0.0202",
+              "offset": 737
+            },
+            {
+              "literal": "0.4875",
+              "offset": 768
+            },
+            {
+              "literal": "0.1568",
+              "offset": 776
+            },
+            {
+              "literal": "0.6615",
+              "offset": 807
+            },
+            {
+              "literal": "0.352",
+              "offset": 815
+            },
+            {
+              "literal": "0.933",
+              "offset": 845
+            },
+            {
+              "literal": "0.6643",
+              "offset": 852
+            },
+            {
+              "literal": "1.1533",
+              "offset": 883
+            },
+            {
+              "literal": "1.0416",
+              "offset": 891
+            },
+            {
+              "literal": "1.2269",
+              "offset": 922
+            },
+            {
+              "literal": "1.3344",
+              "offset": 930
+            },
+            {
+              "literal": "1.1866",
+              "offset": 961
+            },
+            {
+              "literal": "1.628",
+              "offset": 969
+            },
+            {
+              "literal": "1.0056",
+              "offset": 999
+            },
+            {
+              "literal": "1.9403",
+              "offset": 1007
+            },
+            {
+              "literal": "0.7443",
+              "offset": 1038
+            },
+            {
+              "literal": "2.1615",
+              "offset": 1046
+            },
+            {
+              "literal": "0.4561",
+              "offset": 1077
+            },
+            {
+              "literal": "2.4332",
+              "offset": 1085
+            },
+            {
+              "literal": "0.3945",
+              "offset": 1116
+            },
+            {
+              "literal": "2.6597",
+              "offset": 1124
+            },
+            {
+              "literal": "0.4705",
+              "offset": 1155
+            },
+            {
+              "literal": "3.4679",
+              "offset": 1163
+            },
+            {
+              "literal": "0.5743",
+              "offset": 1194
+            },
+            {
+              "literal": "3.6453",
+              "offset": 1202
+            },
+            {
+              "literal": "0.8624",
+              "offset": 1233
+            },
+            {
+              "literal": "3.8593",
+              "offset": 1241
+            },
+            {
+              "literal": "0.8592",
+              "offset": 1272
+            },
+            {
+              "literal": "3.8915",
+              "offset": 1280
+            },
+            {
+              "literal": "12",
+              "offset": 1318
+            },
+            {
+              "literal": "0.00946",
+              "offset": 1351
+            },
+            {
+              "literal": "0.00125",
+              "offset": 1361
+            },
+            {
+              "literal": "0.034",
+              "offset": 1391
+            },
+            {
+              "literal": "0.276",
+              "offset": 1417
+            },
+            {
+              "literal": "0.078",
+              "offset": 1442
+            },
+            {
+              "literal": "0x951d12",
+              "offset": 1500
+            },
+            {
+              "literal": "0xfff4e5",
+              "offset": 1524
+            },
+            {
+              "literal": "0.9",
+              "offset": 1556
+            },
+            {
+              "literal": "0.8",
+              "offset": 1576
+            },
+            {
+              "literal": "0",
+              "offset": 1596
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "bundles": {
+    "production": {
+      "bytes": 21991,
+      "gzipBytes": 7714,
+      "minified": true,
+      "sourceMapBytes": 0,
+      "threeExcluded": true
+    },
+    "objectIncrement": {
+      "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+      "bytes": 868,
+      "objectBundleGzipBytes": 409,
+      "combinedBundleGzipBytes": 2154,
+      "sharedFrameworkGzipBytes": 927,
+      "gzipBytes": 1227
+    }
+  },
+  "budgets": {
+    "objectId": "vase",
+    "passed": true,
+    "budget": {
+      "scalars": 48,
+      "recipeBytes": 1024,
+      "bundleGzipBytes": 5120,
+      "triangles": 1100,
+      "drawCalls": 1,
+      "geometryMemoryBytes": 40960,
+      "warmGenerationP95Milliseconds": 5
+    },
+    "actual": {
+      "scalars": 44,
+      "recipeBytes": 576,
+      "bundleGzipBytes": 1227,
+      "triangles": 768,
+      "drawCalls": 1,
+      "geometryMemoryBytes": 23484,
+      "warmGenerationP95Milliseconds": 0.20000000298023224
+    },
+    "checks": [
+      {
+        "metric": "scalars",
+        "value": 44,
+        "maximum": 48,
+        "passed": true
+      },
+      {
+        "metric": "recipeBytes",
+        "value": 576,
+        "maximum": 1024,
+        "passed": true
+      },
+      {
+        "metric": "bundleGzipBytes",
+        "value": 1227,
+        "maximum": 5120,
+        "passed": true
+      },
+      {
+        "metric": "triangles",
+        "value": 768,
+        "maximum": 1100,
+        "passed": true
+      },
+      {
+        "metric": "drawCalls",
+        "value": 1,
+        "maximum": 1,
+        "passed": true
+      },
+      {
+        "metric": "geometryMemoryBytes",
+        "value": 23484,
+        "maximum": 40960,
+        "passed": true
+      },
+      {
+        "metric": "warmGenerationP95Milliseconds",
+        "value": 0.20000000298023224,
+        "maximum": 5,
+        "passed": true
+      },
+      {
+        "metric": "deterministicCpuBytes",
+        "value": true,
+        "expected": true,
+        "passed": true
+      },
+      {
+        "metric": "runtimeTextureCount",
+        "value": 0,
+        "maximum": 0,
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  "staticAudit": {
+    "passed": true,
+    "productionFiles": [
+      {
+        "file": "gt_designer/single-mesh-replacement/main.js",
+        "bytes": 2488
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/object-generator.js",
+        "bytes": 2912
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/rng.js",
+        "bytes": 976
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+        "bytes": 1590
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+        "bytes": 4269
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+        "bytes": 3222
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+        "bytes": 1545
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+        "bytes": 1540
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+        "bytes": 14740
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+        "bytes": 2717
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+        "bytes": 3913
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+        "bytes": 1609
+      },
+      {
+        "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+        "bytes": 2056
+      }
+    ],
+    "thirdPartyInputs": [],
+    "failures": []
+  },
+  "bundleAudit": {
+    "passed": true,
+    "failures": []
+  },
+  "offline": {
+    "passed": true,
+    "servedFiles": [
+      "bundle.js",
+      "index.html",
+      "three.module.js"
+    ],
+    "authoredDirectoriesAvailableToServer": false,
+    "emptyBrowserProfile": true,
+    "networkResolutionBlocked": true,
+    "localRequestCount": 3
+  },
+  "crossEngine": {
+    "boundsToleranceCanonical": 0.000007,
+    "normative": {
+      "engine": "Chrome/V8",
+      "signature": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.decor.vase",
+            "parentSemanticId": null,
+            "type": "Mesh"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.decor.vase",
+            "parentSemanticId": null,
+            "type": "Mesh",
+            "geometry": {
+              "type": "LatheGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 1287
+                },
+                "uv": {
+                  "constructor": "Float32Array",
+                  "length": 858
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 1287
+                },
+                "color": {
+                  "constructor": "Float32Array",
+                  "length": 1287
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 2304
+              },
+              "groups": []
+            }
+          }
+        ],
+        "bounds": {
+          "min": [
+            -1.2268450260162354,
+            0,
+            -1.2268990278244019
+          ],
+          "max": [
+            1.2268450260162354,
+            3.9304254055023193,
+            1.2268990278244019
+          ]
+        },
+        "triangles": 768,
+        "drawCalls": 1
+      }
+    },
+    "candidates": [
+      {
+        "engine": "JavaScriptCore (Safari 26.2 system framework)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.decor.vase",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.decor.vase",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "geometry": {
+                "type": "LatheGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 1287
+                  },
+                  "uv": {
+                    "constructor": "Float32Array",
+                    "length": 858
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 1287
+                  },
+                  "color": {
+                    "constructor": "Float32Array",
+                    "length": 1287
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 2304
+                },
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -1.2268450260162354,
+              0,
+              -1.2268990278244019
+            ],
+            "max": [
+              1.2268450260162354,
+              3.9304254055023193,
+              1.2268990278244019
+            ]
+          },
+          "triangles": 768,
+          "drawCalls": 1
+        }
+      },
+      {
+        "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.decor.vase",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.decor.vase",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "geometry": {
+                "type": "LatheGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 1287
+                  },
+                  "uv": {
+                    "constructor": "Float32Array",
+                    "length": 858
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 1287
+                  },
+                  "color": {
+                    "constructor": "Float32Array",
+                    "length": 1287
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 2304
+                },
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -1.2268450260162354,
+              0,
+              -1.2268990278244019
+            ],
+            "max": [
+              1.2268450260162354,
+              3.9304254055023193,
+              1.2268990278244019
+            ]
+          },
+          "triangles": 768,
+          "drawCalls": 1
+        }
+      }
+    ],
+    "passed": true
+  },
+  "environment": {
+    "normativeBaseline": {
+      "model": "Apple M5 MacBook Pro",
+      "operatingSystem": "macOS 26.2",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0"
+    },
+    "actual": {
+      "modelName": "MacBook Pro",
+      "modelIdentifier": "Mac17,2",
+      "chip": "Apple M5",
+      "cores": "10 (4 performance and 6 efficiency)",
+      "memory": "32 GB",
+      "operatingSystem": "macOS 26.2",
+      "operatingSystemBuild": "25C56",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0",
+      "powerState": [
+        "Now drawing from 'Battery Power'",
+        "-InternalBattery-0 (id=22610019)\t14%; discharging; 0:46 remaining present: true"
+      ]
+    },
+    "migrationRequired": false
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "object-budgets",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "static-source-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "minified-bundle-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "isolated-offline-render",
+        "passed": true,
+        "detail": {
+          "passed": true,
+          "servedFiles": [
+            "bundle.js",
+            "index.html",
+            "three.module.js"
+          ],
+          "authoredDirectoriesAvailableToServer": false,
+          "emptyBrowserProfile": true,
+          "networkResolutionBlocked": true,
+          "localRequestCount": 3
+        }
+      },
+      {
+        "id": "cross-engine-structure-and-bounds",
+        "passed": true,
+        "detail": [
+          {
+            "engine": "JavaScriptCore (Safari 26.2 system framework)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          },
+          {
+            "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "normative-environment",
+        "passed": true,
+        "detail": {
+          "modelName": "MacBook Pro",
+          "modelIdentifier": "Mac17,2",
+          "chip": "Apple M5",
+          "cores": "10 (4 performance and 6 efficiency)",
+          "memory": "32 GB",
+          "operatingSystem": "macOS 26.2",
+          "operatingSystemBuild": "25C56",
+          "browser": "Google Chrome 150.0.7871.184",
+          "three": "0.170.0",
+          "powerState": [
+            "Now drawing from 'Battery Power'",
+            "-InternalBattery-0 (id=22610019)\t14%; discharging; 0:46 remaining present: true"
+          ]
+        }
+      }
+    ],
+    "failures": []
+  }
+}

@@ -1,0 +1,663 @@
+{
+  "schemaVersion": "single-mesh-stage-1-certification-v1",
+  "artifactRole": "development-only-stage-certification",
+  "productionUse": "prohibited",
+  "objectRuns": [
+    {
+      "objectId": "stone-path",
+      "exitCode": 0,
+      "stdout": "nonvisual acceptance: PASS (6 checks, 0.100 ms p95)\nnonvisual acceptance: wrote gt_designer/single-mesh-runtime-audit/reports/stone-path-nonvisual-v1.json\nobject acceptance: PASS (stone-path, 4 checks)\nobject acceptance: wrote gt_designer/single-mesh-evaluation/reports/stone-path-acceptance-v1.json",
+      "stderr": ""
+    },
+    {
+      "objectId": "stone",
+      "exitCode": 1,
+      "stdout": "nonvisual acceptance: PASS (6 checks, 0.100 ms p95)\nnonvisual acceptance: wrote gt_designer/single-mesh-runtime-audit/reports/stone-nonvisual-v1.json",
+      "stderr": "object acceptance failure: visual-quality-gate: [{\"metric\":\"geometry.silhouette.meanEdgeDistancePixels\",\"actual\":2.7270589492619464,\"operator\":\"<=\",\"threshold\":2.5},{\"metric\":\"geometry.silhouette.edgeDistanceP95Pixels\",\"actual\":14.7648230602334,\"operator\":\"<=\",\"threshold\":7},{\"metric\":\"geometry.depth.p95\",\"actual\":0.09155928677120073,\"operator\":\"<=\",\"threshold\":0.07}]"
+    },
+    {
+      "objectId": "vase",
+      "exitCode": 0,
+      "stdout": "nonvisual acceptance: PASS (6 checks, 0.200 ms p95)\nnonvisual acceptance: wrote gt_designer/single-mesh-runtime-audit/reports/vase-nonvisual-v1.json\nobject acceptance: PASS (vase, 4 checks)\nobject acceptance: wrote gt_designer/single-mesh-evaluation/reports/vase-acceptance-v1.json",
+      "stderr": ""
+    },
+    {
+      "objectId": "umbrella",
+      "exitCode": 1,
+      "stdout": "nonvisual acceptance: PASS (6 checks, 1.600 ms p95)\nnonvisual acceptance: wrote gt_designer/single-mesh-runtime-audit/reports/umbrella-nonvisual-v1.json",
+      "stderr": "object acceptance failure: visual-quality-gate: [{\"metric\":\"appearance.p90DeltaE00\",\"actual\":59.910914481652476,\"operator\":\"<=\",\"threshold\":22},{\"metric\":\"appearance.meanMaskedSsim\",\"actual\":0.4509464537869432,\"operator\":\">=\",\"threshold\":0.78},{\"metric\":\"appearance.worstViewSsim\",\"actual\":0.3232226488343034,\"operator\":\">=\",\"threshold\":0.68},{\"metric\":\"appearance.paletteCentroidDeltaE00\",\"actual\":19.010978477934678,\"operator\":\"<=\",\"threshold\":8},{\"metric\":\"appearance.paletteCoverageL1\",\"actual\":0.9103763163708667,\"operator\":\"<=\",\"threshold\":0.2}]"
+    }
+  ],
+  "objects": [
+    {
+      "objectId": "stone-path",
+      "passed": true,
+      "metrics": {
+        "passed": true,
+        "geometryPassed": true,
+        "appearanceEvaluated": true,
+        "appearancePassed": true,
+        "meanSilhouetteIou": 0.9999499840463271,
+        "worstSilhouetteIou": 0.999773276904474,
+        "depthP95": 0,
+        "meanDeltaE00": 0.007737672575976234,
+        "p90DeltaE00": 0,
+        "meanMaskedSsim": 0.999957843463637,
+        "worstViewSsim": 0.9995522735978214,
+        "failures": []
+      },
+      "budgets": {
+        "objectId": "stone-path",
+        "passed": true,
+        "budget": {
+          "scalars": 48,
+          "recipeBytes": 1024,
+          "bundleGzipBytes": 4096,
+          "triangles": 96,
+          "drawCalls": 1,
+          "geometryMemoryBytes": 5120,
+          "warmGenerationP95Milliseconds": 5
+        },
+        "actual": {
+          "scalars": 33,
+          "recipeBytes": 618,
+          "bundleGzipBytes": 1111,
+          "triangles": 36,
+          "drawCalls": 1,
+          "geometryMemoryBytes": 2592,
+          "warmGenerationP95Milliseconds": 0.10000000894069672
+        },
+        "checks": [
+          {
+            "metric": "scalars",
+            "value": 33,
+            "maximum": 48,
+            "passed": true
+          },
+          {
+            "metric": "recipeBytes",
+            "value": 618,
+            "maximum": 1024,
+            "passed": true
+          },
+          {
+            "metric": "bundleGzipBytes",
+            "value": 1111,
+            "maximum": 4096,
+            "passed": true
+          },
+          {
+            "metric": "triangles",
+            "value": 36,
+            "maximum": 96,
+            "passed": true
+          },
+          {
+            "metric": "drawCalls",
+            "value": 1,
+            "maximum": 1,
+            "passed": true
+          },
+          {
+            "metric": "geometryMemoryBytes",
+            "value": 2592,
+            "maximum": 5120,
+            "passed": true
+          },
+          {
+            "metric": "warmGenerationP95Milliseconds",
+            "value": 0.10000000894069672,
+            "maximum": 5,
+            "passed": true
+          },
+          {
+            "metric": "deterministicCpuBytes",
+            "value": true,
+            "expected": true,
+            "passed": true
+          },
+          {
+            "metric": "runtimeTextureCount",
+            "value": 0,
+            "maximum": 0,
+            "passed": true
+          }
+        ],
+        "failures": []
+      },
+      "deterministicByteStable": true,
+      "runtimeTextureCount": 0,
+      "offlinePassed": true,
+      "crossEnginePassed": true,
+      "reports": {
+        "acceptance": "gt_designer/single-mesh-evaluation/reports/stone-path-acceptance-v1.json",
+        "nonvisual": "gt_designer/single-mesh-runtime-audit/reports/stone-path-nonvisual-v1.json"
+      }
+    },
+    {
+      "objectId": "stone",
+      "passed": false,
+      "metrics": {
+        "passed": false,
+        "geometryPassed": false,
+        "appearanceEvaluated": false,
+        "appearancePassed": null,
+        "meanSilhouetteIou": 0.9546403032164479,
+        "worstSilhouetteIou": 0.9398969558434019,
+        "depthP95": 0.09155928677120073,
+        "meanDeltaE00": 3.4750104921603917,
+        "p90DeltaE00": 12.351799053980766,
+        "meanMaskedSsim": 0.8860549515789892,
+        "worstViewSsim": 0.7677027948325621,
+        "failures": [
+          {
+            "id": "visual-quality-gate",
+            "passed": false,
+            "detail": [
+              {
+                "metric": "geometry.silhouette.meanEdgeDistancePixels",
+                "actual": 2.7270589492619464,
+                "operator": "<=",
+                "threshold": 2.5
+              },
+              {
+                "metric": "geometry.silhouette.edgeDistanceP95Pixels",
+                "actual": 14.7648230602334,
+                "operator": "<=",
+                "threshold": 7
+              },
+              {
+                "metric": "geometry.depth.p95",
+                "actual": 0.09155928677120073,
+                "operator": "<=",
+                "threshold": 0.07
+              }
+            ]
+          }
+        ]
+      },
+      "budgets": {
+        "objectId": "stone",
+        "passed": true,
+        "budget": {
+          "scalars": 32,
+          "recipeBytes": 1024,
+          "bundleGzipBytes": 4096,
+          "triangles": 320,
+          "drawCalls": 1,
+          "geometryMemoryBytes": 24576,
+          "warmGenerationP95Milliseconds": 5
+        },
+        "actual": {
+          "scalars": 32,
+          "recipeBytes": 571,
+          "bundleGzipBytes": 1265,
+          "triangles": 54,
+          "drawCalls": 1,
+          "geometryMemoryBytes": 1452,
+          "warmGenerationP95Milliseconds": 0.10000000894069672
+        },
+        "checks": [
+          {
+            "metric": "scalars",
+            "value": 32,
+            "maximum": 32,
+            "passed": true
+          },
+          {
+            "metric": "recipeBytes",
+            "value": 571,
+            "maximum": 1024,
+            "passed": true
+          },
+          {
+            "metric": "bundleGzipBytes",
+            "value": 1265,
+            "maximum": 4096,
+            "passed": true
+          },
+          {
+            "metric": "triangles",
+            "value": 54,
+            "maximum": 320,
+            "passed": true
+          },
+          {
+            "metric": "drawCalls",
+            "value": 1,
+            "maximum": 1,
+            "passed": true
+          },
+          {
+            "metric": "geometryMemoryBytes",
+            "value": 1452,
+            "maximum": 24576,
+            "passed": true
+          },
+          {
+            "metric": "warmGenerationP95Milliseconds",
+            "value": 0.10000000894069672,
+            "maximum": 5,
+            "passed": true
+          },
+          {
+            "metric": "deterministicCpuBytes",
+            "value": true,
+            "expected": true,
+            "passed": true
+          },
+          {
+            "metric": "runtimeTextureCount",
+            "value": 0,
+            "maximum": 0,
+            "passed": true
+          }
+        ],
+        "failures": []
+      },
+      "deterministicByteStable": true,
+      "runtimeTextureCount": 0,
+      "offlinePassed": true,
+      "crossEnginePassed": true,
+      "reports": {
+        "acceptance": "gt_designer/single-mesh-evaluation/reports/stone-acceptance-v1.json",
+        "nonvisual": "gt_designer/single-mesh-runtime-audit/reports/stone-nonvisual-v1.json"
+      }
+    },
+    {
+      "objectId": "vase",
+      "passed": true,
+      "metrics": {
+        "passed": true,
+        "geometryPassed": true,
+        "appearanceEvaluated": true,
+        "appearancePassed": true,
+        "meanSilhouetteIou": 0.99461527602344,
+        "worstSilhouetteIou": 0.9913522938806286,
+        "depthP95": 0.006558509288541815,
+        "meanDeltaE00": 5.6865438355034925,
+        "p90DeltaE00": 14.858880849051078,
+        "meanMaskedSsim": 0.9248834381706194,
+        "worstViewSsim": 0.7899997267631956,
+        "failures": []
+      },
+      "budgets": {
+        "objectId": "vase",
+        "passed": true,
+        "budget": {
+          "scalars": 48,
+          "recipeBytes": 1024,
+          "bundleGzipBytes": 5120,
+          "triangles": 1100,
+          "drawCalls": 1,
+          "geometryMemoryBytes": 40960,
+          "warmGenerationP95Milliseconds": 5
+        },
+        "actual": {
+          "scalars": 44,
+          "recipeBytes": 576,
+          "bundleGzipBytes": 1227,
+          "triangles": 768,
+          "drawCalls": 1,
+          "geometryMemoryBytes": 23484,
+          "warmGenerationP95Milliseconds": 0.20000000298023224
+        },
+        "checks": [
+          {
+            "metric": "scalars",
+            "value": 44,
+            "maximum": 48,
+            "passed": true
+          },
+          {
+            "metric": "recipeBytes",
+            "value": 576,
+            "maximum": 1024,
+            "passed": true
+          },
+          {
+            "metric": "bundleGzipBytes",
+            "value": 1227,
+            "maximum": 5120,
+            "passed": true
+          },
+          {
+            "metric": "triangles",
+            "value": 768,
+            "maximum": 1100,
+            "passed": true
+          },
+          {
+            "metric": "drawCalls",
+            "value": 1,
+            "maximum": 1,
+            "passed": true
+          },
+          {
+            "metric": "geometryMemoryBytes",
+            "value": 23484,
+            "maximum": 40960,
+            "passed": true
+          },
+          {
+            "metric": "warmGenerationP95Milliseconds",
+            "value": 0.20000000298023224,
+            "maximum": 5,
+            "passed": true
+          },
+          {
+            "metric": "deterministicCpuBytes",
+            "value": true,
+            "expected": true,
+            "passed": true
+          },
+          {
+            "metric": "runtimeTextureCount",
+            "value": 0,
+            "maximum": 0,
+            "passed": true
+          }
+        ],
+        "failures": []
+      },
+      "deterministicByteStable": true,
+      "runtimeTextureCount": 0,
+      "offlinePassed": true,
+      "crossEnginePassed": true,
+      "reports": {
+        "acceptance": "gt_designer/single-mesh-evaluation/reports/vase-acceptance-v1.json",
+        "nonvisual": "gt_designer/single-mesh-runtime-audit/reports/vase-nonvisual-v1.json"
+      }
+    },
+    {
+      "objectId": "umbrella",
+      "passed": false,
+      "metrics": {
+        "passed": false,
+        "geometryPassed": true,
+        "appearanceEvaluated": true,
+        "appearancePassed": false,
+        "meanSilhouetteIou": 0.9878629310594343,
+        "worstSilhouetteIou": 0.965951409824437,
+        "depthP95": 0.045864647126119706,
+        "meanDeltaE00": 9.985216665753695,
+        "p90DeltaE00": 59.910914481652476,
+        "meanMaskedSsim": 0.4509464537869432,
+        "worstViewSsim": 0.3232226488343034,
+        "failures": [
+          {
+            "id": "visual-quality-gate",
+            "passed": false,
+            "detail": [
+              {
+                "metric": "appearance.p90DeltaE00",
+                "actual": 59.910914481652476,
+                "operator": "<=",
+                "threshold": 22
+              },
+              {
+                "metric": "appearance.meanMaskedSsim",
+                "actual": 0.4509464537869432,
+                "operator": ">=",
+                "threshold": 0.78
+              },
+              {
+                "metric": "appearance.worstViewSsim",
+                "actual": 0.3232226488343034,
+                "operator": ">=",
+                "threshold": 0.68
+              },
+              {
+                "metric": "appearance.paletteCentroidDeltaE00",
+                "actual": 19.010978477934678,
+                "operator": "<=",
+                "threshold": 8
+              },
+              {
+                "metric": "appearance.paletteCoverageL1",
+                "actual": 0.9103763163708667,
+                "operator": "<=",
+                "threshold": 0.2
+              }
+            ]
+          }
+        ]
+      },
+      "budgets": {
+        "objectId": "umbrella",
+        "passed": true,
+        "budget": {
+          "scalars": 96,
+          "recipeBytes": 2048,
+          "bundleGzipBytes": 10240,
+          "triangles": 5760,
+          "drawCalls": 2,
+          "geometryMemoryBytes": 262144,
+          "warmGenerationP95Milliseconds": 12
+        },
+        "actual": {
+          "scalars": 86,
+          "recipeBytes": 1061,
+          "bundleGzipBytes": 3219,
+          "triangles": 5336,
+          "drawCalls": 2,
+          "geometryMemoryBytes": 221544,
+          "warmGenerationP95Milliseconds": 1.6000000089406967
+        },
+        "checks": [
+          {
+            "metric": "scalars",
+            "value": 86,
+            "maximum": 96,
+            "passed": true
+          },
+          {
+            "metric": "recipeBytes",
+            "value": 1061,
+            "maximum": 2048,
+            "passed": true
+          },
+          {
+            "metric": "bundleGzipBytes",
+            "value": 3219,
+            "maximum": 10240,
+            "passed": true
+          },
+          {
+            "metric": "triangles",
+            "value": 5336,
+            "maximum": 5760,
+            "passed": true
+          },
+          {
+            "metric": "drawCalls",
+            "value": 2,
+            "maximum": 2,
+            "passed": true
+          },
+          {
+            "metric": "geometryMemoryBytes",
+            "value": 221544,
+            "maximum": 262144,
+            "passed": true
+          },
+          {
+            "metric": "warmGenerationP95Milliseconds",
+            "value": 1.6000000089406967,
+            "maximum": 12,
+            "passed": true
+          },
+          {
+            "metric": "deterministicCpuBytes",
+            "value": true,
+            "expected": true,
+            "passed": true
+          },
+          {
+            "metric": "runtimeTextureCount",
+            "value": 0,
+            "maximum": 0,
+            "passed": true
+          }
+        ],
+        "failures": []
+      },
+      "deterministicByteStable": true,
+      "runtimeTextureCount": 0,
+      "offlinePassed": true,
+      "crossEnginePassed": true,
+      "reports": {
+        "acceptance": "gt_designer/single-mesh-evaluation/reports/umbrella-acceptance-v1.json",
+        "nonvisual": "gt_designer/single-mesh-runtime-audit/reports/umbrella-nonvisual-v1.json"
+      }
+    }
+  ],
+  "aggregate": {
+    "productionBundle": {
+      "bytes": 21991,
+      "gzipBytes": 7714,
+      "maximumGzipBytes": 40960,
+      "threeExcluded": true,
+      "passed": true
+    },
+    "sequentialGeneration": {
+      "warmups": 10,
+      "repetitions": 100,
+      "objectCount": 4,
+      "measurement": "sequential semantic roots, geometry attributes, normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+      "minimumMilliseconds": 1.2999999970197678,
+      "medianMilliseconds": 1.5,
+      "p95Milliseconds": 1.6000000089406967,
+      "maximumMilliseconds": 1.7999999970197678,
+      "maximumP95Milliseconds": 25,
+      "passed": true
+    },
+    "referenceIndependence": {
+      "wasmDetected": false,
+      "runtimeTextureCount": 0,
+      "offlinePassed": true,
+      "passed": true
+    },
+    "determinism": {
+      "normativeByteStable": true,
+      "crossEngineStructureAndBounds": true,
+      "engines": [
+        "Chrome/V8",
+        "Safari JavaScriptCore",
+        "Firefox SpiderMonkey"
+      ],
+      "passed": true
+    },
+    "browserVisualTolerance": {
+      "status": "not-run-after-normative-hard-gate-failure",
+      "reason": "Firefox/Safari GPU visual reruns cannot make a stage pass after Stone and Umbrella fail normative frozen gates.",
+      "passed": false
+    }
+  },
+  "architectureEvidence": {
+    "repeatedMissingGeometryOperationCount": 0,
+    "generalGeometryLayerTriggerMet": false,
+    "thirdPartyGeometryRuntimeTriggerMet": false,
+    "productionDependencies": [
+      "three"
+    ],
+    "proceduralAppearanceReviewRequired": true,
+    "evidence": "Umbrella geometry passes without CSG/SDF/WASM; its authored floral identity fails after compact vertex-color and shader representations."
+  },
+  "certification": {
+    "passed": false,
+    "passedObjectCount": 2,
+    "requiredObjectCount": 4,
+    "coreHypothesisSupported": false,
+    "formalSingleMeshLabExitClaimed": false,
+    "checks": [
+      {
+        "id": "four-of-four-object-hard-gates",
+        "passed": false,
+        "detail": {
+          "passed": 2,
+          "required": 4
+        }
+      },
+      {
+        "id": "combined-production-payload",
+        "passed": true,
+        "detail": {
+          "bytes": 21991,
+          "gzipBytes": 7714,
+          "maximumGzipBytes": 40960,
+          "threeExcluded": true,
+          "passed": true
+        }
+      },
+      {
+        "id": "sequential-warm-generation",
+        "passed": true,
+        "detail": {
+          "warmups": 10,
+          "repetitions": 100,
+          "objectCount": 4,
+          "measurement": "sequential semantic roots, geometry attributes, normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+          "minimumMilliseconds": 1.2999999970197678,
+          "medianMilliseconds": 1.5,
+          "p95Milliseconds": 1.6000000089406967,
+          "maximumMilliseconds": 1.7999999970197678,
+          "maximumP95Milliseconds": 25,
+          "passed": true
+        }
+      },
+      {
+        "id": "reference-independence",
+        "passed": true,
+        "detail": {
+          "wasmDetected": false,
+          "runtimeTextureCount": 0,
+          "offlinePassed": true,
+          "passed": true
+        }
+      },
+      {
+        "id": "deterministic-structure-and-bounds",
+        "passed": true,
+        "detail": {
+          "normativeByteStable": true,
+          "crossEngineStructureAndBounds": true,
+          "engines": [
+            "Chrome/V8",
+            "Safari JavaScriptCore",
+            "Firefox SpiderMonkey"
+          ],
+          "passed": true
+        }
+      },
+      {
+        "id": "supported-browser-visual-tolerance",
+        "passed": false,
+        "detail": {
+          "status": "not-run-after-normative-hard-gate-failure",
+          "reason": "Firefox/Safari GPU visual reruns cannot make a stage pass after Stone and Umbrella fail normative frozen gates.",
+          "passed": false
+        }
+      }
+    ],
+    "failures": [
+      {
+        "id": "four-of-four-object-hard-gates",
+        "passed": false,
+        "detail": {
+          "passed": 2,
+          "required": 4
+        }
+      },
+      {
+        "id": "supported-browser-visual-tolerance",
+        "passed": false,
+        "detail": {
+          "status": "not-run-after-normative-hard-gate-failure",
+          "reason": "Firefox/Safari GPU visual reruns cannot make a stage pass after Stone and Umbrella fail normative frozen gates.",
+          "passed": false
+        }
+      }
+    ]
+  }
+}

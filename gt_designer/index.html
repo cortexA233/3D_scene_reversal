@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Painterly Island</title>
+    <link rel="icon" href="data:," />
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #9fc3e0;
+      }
+      canvas {
+        display: block;
+      }
+      #load {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        color: #eaf2fb;
+        font:
+          13px/1.5 ui-monospace,
+          Menlo,
+          monospace;
+        background: #0d1622;
+        transition: opacity 1.1s;
+        z-index: 5;
+      }
+      #load .bar {
+        width: 240px;
+        height: 3px;
+        background: #22324a;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      #load .bar i {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: #7fd0ff;
+      }
+      #keys {
+        position: fixed;
+        left: 14px;
+        top: 14px;
+        z-index: 4;
+        pointer-events: none;
+        font:
+          12px/1.7 ui-monospace,
+          Menlo,
+          monospace;
+        color: #fff;
+        background: rgba(13, 22, 34, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        padding: 9px 12px;
+        backdrop-filter: blur(3px);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      }
+      #keys b {
+        display: inline-block;
+        min-width: 46px;
+        color: #7fd0ff;
+        font-weight: 700;
+      }
+      #err {
+        position: fixed;
+        left: 10px;
+        top: 34px;
+        color: #ff9a9a;
+        font:
+          11px ui-monospace,
+          monospace;
+        white-space: pre-wrap;
+        max-width: 92vw;
+        z-index: 9;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="load">
+      <div id="loadmsg">building the island…</div>
+      <div class="bar"><i id="loadbar"></i></div>
+    </div>
+    <div id="keys">
+      <b>WASD</b>move<br /><b>Mouse</b>look<br /><b>Q / E</b>up / down<br /><b>Esc</b>release mouse
+    </div>
+    <div id="err"></div>
+    <script>
+      window.island = { ready: false, error: null };
+      window.addEventListener("error", (e) => {
+        document.title = "SCENE_ERROR"; // reflect a load error in the tab title
+        document.getElementById("err").textContent +=
+          (e.message || e.error) + "\n";
+        window.island.error =
+          (window.island.error || "") + (e.message || e.error) + "\n";
+      });
+      window.addEventListener("unhandledrejection", (e) => {
+        const m = "promise: " + ((e.reason && e.reason.message) || e.reason);
+        document.getElementById("err").textContent += m + "\n";
+        window.island.error = (window.island.error || "") + m + "\n";
+      });
+    </script>
+    <script type="module" src="./main.js?v=20260720.2"></script>
+  </body>
+</html>

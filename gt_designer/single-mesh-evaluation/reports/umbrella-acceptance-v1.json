@@ -1,0 +1,3218 @@
+{
+  "schemaVersion": "single-mesh-object-acceptance-v1",
+  "artifactRole": "development-only-object-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "umbrella",
+  "visual": {
+    "schemaVersion": "single-mesh-object-evaluation-v1",
+    "artifactRole": "development-only-object-acceptance",
+    "productionUse": "prohibited",
+    "objectId": "umbrella",
+    "semanticId": "island.prop.umbrella",
+    "evaluationProtocolVersion": "single-mesh-evaluation-v1",
+    "qualityBaseline": {
+      "version": "single-mesh-quality-baseline-v1",
+      "geometry": {
+        "stone-path": {
+          "meanSilhouetteIouMinimum": 0.95,
+          "worstViewIouMinimum": 0.92,
+          "meanSymmetricEdgeDistancePixelsMaximum": 1.5,
+          "edgeDistanceP95PixelsMaximum": 4,
+          "depthMaeMaximum": 0.015,
+          "depthP95Maximum": 0.04
+        },
+        "stone": {
+          "meanSilhouetteIouMinimum": 0.92,
+          "worstViewIouMinimum": 0.88,
+          "meanSymmetricEdgeDistancePixelsMaximum": 2.5,
+          "edgeDistanceP95PixelsMaximum": 7,
+          "depthMaeMaximum": 0.025,
+          "depthP95Maximum": 0.07
+        },
+        "vase": {
+          "meanSilhouetteIouMinimum": 0.95,
+          "worstViewIouMinimum": 0.92,
+          "meanSymmetricEdgeDistancePixelsMaximum": 1.5,
+          "edgeDistanceP95PixelsMaximum": 4,
+          "depthMaeMaximum": 0.015,
+          "depthP95Maximum": 0.04
+        },
+        "umbrella": {
+          "meanSilhouetteIouMinimum": 0.9,
+          "worstViewIouMinimum": 0.84,
+          "meanSymmetricEdgeDistancePixelsMaximum": 2.5,
+          "edgeDistanceP95PixelsMaximum": 8,
+          "depthMaeMaximum": 0.03,
+          "depthP95Maximum": 0.08
+        }
+      },
+      "appearance": {
+        "stone-path": {
+          "meanDeltaE00Maximum": 4,
+          "p90DeltaE00Maximum": 8,
+          "meanMaskedSsimMinimum": 0.95,
+          "worstViewSsimMinimum": 0.92,
+          "paletteCentroidDeltaE00Maximum": 3,
+          "paletteCoverageL1Maximum": 0.08
+        },
+        "stone": {
+          "meanDeltaE00Maximum": 4,
+          "p90DeltaE00Maximum": 8,
+          "meanMaskedSsimMinimum": 0.95,
+          "worstViewSsimMinimum": 0.92,
+          "paletteCentroidDeltaE00Maximum": 3,
+          "paletteCoverageL1Maximum": 0.08
+        },
+        "vase": {
+          "meanDeltaE00Maximum": 8,
+          "p90DeltaE00Maximum": 18,
+          "meanMaskedSsimMinimum": 0.82,
+          "worstViewSsimMinimum": 0.75,
+          "paletteCentroidDeltaE00Maximum": 6,
+          "paletteCoverageL1Maximum": 0.15
+        },
+        "umbrella": {
+          "meanDeltaE00Maximum": 10,
+          "p90DeltaE00Maximum": 22,
+          "meanMaskedSsimMinimum": 0.78,
+          "worstViewSsimMinimum": 0.68,
+          "paletteCentroidDeltaE00Maximum": 8,
+          "paletteCoverageL1Maximum": 0.2
+        }
+      },
+      "common": {
+        "maxAxisRelativeErrorMaximum": 0.02,
+        "bottomAnchorErrorCanonicalMaximum": 0.02,
+        "roughnessAbsoluteErrorMaximum": 0.1,
+        "metalnessAbsoluteErrorMaximum": 0.05
+      }
+    },
+    "manifest": {
+      "schemaVersion": "single-mesh-evaluation-v1",
+      "artifactRole": "development-only-evaluation-manifest",
+      "unitId": "umbrella",
+      "capture": {
+        "width": 512,
+        "height": 512,
+        "pixelOrigin": "bottom-left",
+        "channels": "RGBA8"
+      },
+      "renderer": {
+        "threeRevision": "170",
+        "toneMapping": "ACESFilmic",
+        "toneMappingExposure": 1.05,
+        "outputColorSpace": "sRGB for color passes; linear RGBA8 for data passes",
+        "lighting": "frozen hemisphere plus directional key"
+      },
+      "framing": {
+        "sourceWorldBounds": {
+          "min": [
+            18.070812225341797,
+            25.305038452148438,
+            28.091371536254883
+          ],
+          "max": [
+            29.009185791015625,
+            34.49787902832031,
+            37.40772247314453
+          ],
+          "size": [
+            10.938373565673828,
+            9.192840576171875,
+            9.316350936889648
+          ]
+        },
+        "reconstructionFrame": {
+          "sourceWorldBottomCenter": [
+            23.53999900817871,
+            25.305038452148438,
+            32.74954700469971
+          ],
+          "sourceWorldAxesPreserved": true
+        },
+        "referenceTransform": {
+          "translationBeforeScale": [
+            -23.53999900817871,
+            -25.305038452148438,
+            -32.74954700469971
+          ],
+          "uniformScale": 0.6399488880108278
+        },
+        "replacementTransform": {
+          "translationBeforeScale": [
+            0,
+            0,
+            0
+          ],
+          "uniformScale": 0.6399488880108278,
+          "independentlyFramed": false
+        },
+        "canonicalBounds": {
+          "min": [
+            -3.5,
+            0,
+            -2.9809942111905823
+          ],
+          "max": [
+            3.5,
+            5.8829481043820095,
+            2.9809942111905823
+          ],
+          "size": [
+            7,
+            5.8829481043820095,
+            5.9619884223811646
+          ]
+        },
+        "camera": {
+          "fovDegrees": 38,
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "boundingSphereRadius": 5.4578930080081935,
+          "distance": 18.440631329005097,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338,
+          "framingMargin": 1.1
+        }
+      },
+      "views": [
+        {
+          "id": "low-000",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 0,
+          "position": [
+            0,
+            9.248541422353146,
+            17.32852518249953
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "low-045",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 45,
+          "position": [
+            12.253117664507272,
+            9.248541422353146,
+            12.253117664507274
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "low-090",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 90,
+          "position": [
+            17.32852518249953,
+            9.248541422353146,
+            1.0610661449346176e-15
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "low-135",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 135,
+          "position": [
+            12.253117664507274,
+            9.248541422353146,
+            -12.253117664507272
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "low-180",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 180,
+          "position": [
+            2.1221322898692353e-15,
+            9.248541422353146,
+            -17.32852518249953
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "low-225",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 225,
+          "position": [
+            -12.253117664507272,
+            9.248541422353146,
+            -12.253117664507275
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "low-270",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 270,
+          "position": [
+            -17.32852518249953,
+            9.248541422353146,
+            -3.1831984348038525e-15
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "low-315",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 315,
+          "position": [
+            -12.253117664507275,
+            9.248541422353146,
+            12.25311766450727
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "high-045",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 45,
+          "position": [
+            6.5197477310503,
+            18.911529244932613,
+            6.519747731050302
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "high-135",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 135,
+          "position": [
+            6.519747731050302,
+            18.911529244932613,
+            -6.5197477310503
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "high-225",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 225,
+          "position": [
+            -6.5197477310503,
+            18.911529244932613,
+            -6.519747731050303
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        },
+        {
+          "id": "high-315",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 315,
+          "position": [
+            -6.519747731050303,
+            18.911529244932613,
+            6.519747731050299
+          ],
+          "target": [
+            0,
+            2.9414740521910048,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 11.618265068994855,
+          "far": 25.262997589015338
+        }
+      ],
+      "passes": [
+        {
+          "id": "neutral-rgb",
+          "label": "Neutral RGB",
+          "encoding": "sRGB display color under frozen lights"
+        },
+        {
+          "id": "silhouette",
+          "label": "Silhouette",
+          "encoding": "white foreground on black background"
+        },
+        {
+          "id": "linear-depth",
+          "label": "Linear Depth",
+          "encoding": "RGB=(viewDistance-near)/(far-near); white background"
+        },
+        {
+          "id": "world-normal",
+          "label": "World Normal",
+          "encoding": "RGB=normalize(worldNormal)*0.5+0.5; black background"
+        },
+        {
+          "id": "semantic-id",
+          "label": "Semantic ID",
+          "encoding": "stable 24-bit semantic color; black background"
+        },
+        {
+          "id": "albedo",
+          "label": "Unlit Albedo",
+          "encoding": "sRGB base color and base-color map without lighting"
+        },
+        {
+          "id": "lit-rgb",
+          "label": "Frozen-lighting RGB",
+          "encoding": "sRGB authored/procedural material under frozen lights"
+        }
+      ],
+      "captures": []
+    },
+    "captures": {
+      "expectedCount": 168,
+      "referenceChecksums": {
+        "low-000/neutral-rgb": "ed117b13",
+        "low-000/silhouette": "7f6c330c",
+        "low-000/linear-depth": "6690bd7e",
+        "low-000/world-normal": "3844b9bb",
+        "low-000/semantic-id": "bb8afd96",
+        "low-000/albedo": "defbe2a7",
+        "low-000/lit-rgb": "972aa72b",
+        "low-045/neutral-rgb": "f94fdced",
+        "low-045/silhouette": "e39fe205",
+        "low-045/linear-depth": "a3e6363b",
+        "low-045/world-normal": "7f1ca99a",
+        "low-045/semantic-id": "47885d8d",
+        "low-045/albedo": "0e0a3515",
+        "low-045/lit-rgb": "8cd11408",
+        "low-090/neutral-rgb": "a468238a",
+        "low-090/silhouette": "3e7aa7bd",
+        "low-090/linear-depth": "475057da",
+        "low-090/world-normal": "8b1ab76c",
+        "low-090/semantic-id": "407467f9",
+        "low-090/albedo": "fe1314a1",
+        "low-090/lit-rgb": "7c2503ef",
+        "low-135/neutral-rgb": "1f5842ab",
+        "low-135/silhouette": "82523cdc",
+        "low-135/linear-depth": "d1428f28",
+        "low-135/world-normal": "847f467d",
+        "low-135/semantic-id": "3144548a",
+        "low-135/albedo": "cbacd2bb",
+        "low-135/lit-rgb": "8cbdb946",
+        "low-180/neutral-rgb": "c1a4909d",
+        "low-180/silhouette": "f2464d4d",
+        "low-180/linear-depth": "087023de",
+        "low-180/world-normal": "88ee28cc",
+        "low-180/semantic-id": "b67aad71",
+        "low-180/albedo": "162a9739",
+        "low-180/lit-rgb": "c51a3807",
+        "low-225/neutral-rgb": "7d56e38f",
+        "low-225/silhouette": "d402cd0d",
+        "low-225/linear-depth": "f4af236d",
+        "low-225/world-normal": "133296f9",
+        "low-225/semantic-id": "c29c9cd5",
+        "low-225/albedo": "11025c40",
+        "low-225/lit-rgb": "03e8fecb",
+        "low-270/neutral-rgb": "e9127326",
+        "low-270/silhouette": "9de6ad8c",
+        "low-270/linear-depth": "2d8e3359",
+        "low-270/world-normal": "79eda77e",
+        "low-270/semantic-id": "0431453e",
+        "low-270/albedo": "60a45bd9",
+        "low-270/lit-rgb": "b809ce4c",
+        "low-315/neutral-rgb": "a8e8adb3",
+        "low-315/silhouette": "12ba6324",
+        "low-315/linear-depth": "518af921",
+        "low-315/world-normal": "b84025d1",
+        "low-315/semantic-id": "0459cb9a",
+        "low-315/albedo": "aa5628e2",
+        "low-315/lit-rgb": "a4037a75",
+        "high-045/neutral-rgb": "226befd0",
+        "high-045/silhouette": "1ad02365",
+        "high-045/linear-depth": "030bd93e",
+        "high-045/world-normal": "6bab8dba",
+        "high-045/semantic-id": "fb6a12d9",
+        "high-045/albedo": "03d0154d",
+        "high-045/lit-rgb": "4ec666e1",
+        "high-135/neutral-rgb": "ada91bc7",
+        "high-135/silhouette": "e2047a5c",
+        "high-135/linear-depth": "065eeabf",
+        "high-135/world-normal": "7168623e",
+        "high-135/semantic-id": "2e88816a",
+        "high-135/albedo": "0709424a",
+        "high-135/lit-rgb": "d6618148",
+        "high-225/neutral-rgb": "8e5db885",
+        "high-225/silhouette": "7d14c26c",
+        "high-225/linear-depth": "98d52a15",
+        "high-225/world-normal": "df88839d",
+        "high-225/semantic-id": "46f9620e",
+        "high-225/albedo": "2b5132dc",
+        "high-225/lit-rgb": "8d920eae",
+        "high-315/neutral-rgb": "edcd1ffd",
+        "high-315/silhouette": "2fb73225",
+        "high-315/linear-depth": "eaa36f54",
+        "high-315/world-normal": "2c92efb6",
+        "high-315/semantic-id": "36dbdfd5",
+        "high-315/albedo": "39871b39",
+        "high-315/lit-rgb": "1e7df7ee"
+      },
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "e59ab4e8",
+        "low-000/silhouette": "4d8596c4",
+        "low-000/linear-depth": "4498f081",
+        "low-000/world-normal": "576a3a4b",
+        "low-000/semantic-id": "729b46c1",
+        "low-000/albedo": "640512ac",
+        "low-000/lit-rgb": "c6dec43e",
+        "low-045/neutral-rgb": "629c74ed",
+        "low-045/silhouette": "d8a68b9d",
+        "low-045/linear-depth": "5290cb23",
+        "low-045/world-normal": "906fe14c",
+        "low-045/semantic-id": "1e152c69",
+        "low-045/albedo": "88923d20",
+        "low-045/lit-rgb": "de67db05",
+        "low-090/neutral-rgb": "e149c305",
+        "low-090/silhouette": "7299a915",
+        "low-090/linear-depth": "785c2431",
+        "low-090/world-normal": "15898456",
+        "low-090/semantic-id": "6072c82d",
+        "low-090/albedo": "265e281a",
+        "low-090/lit-rgb": "6a7f9a94",
+        "low-135/neutral-rgb": "cc204f39",
+        "low-135/silhouette": "75fa6fac",
+        "low-135/linear-depth": "7b807603",
+        "low-135/world-normal": "2dd927f8",
+        "low-135/semantic-id": "3cc80065",
+        "low-135/albedo": "1452a982",
+        "low-135/lit-rgb": "3de3c7f0",
+        "low-180/neutral-rgb": "708b2713",
+        "low-180/silhouette": "83a3e9ec",
+        "low-180/linear-depth": "aa96abb1",
+        "low-180/world-normal": "0dc012fb",
+        "low-180/semantic-id": "00b38105",
+        "low-180/albedo": "e6440a4b",
+        "low-180/lit-rgb": "cabb854c",
+        "low-225/neutral-rgb": "9d8a2e44",
+        "low-225/silhouette": "6075190c",
+        "low-225/linear-depth": "5de5f1f4",
+        "low-225/world-normal": "470a76a7",
+        "low-225/semantic-id": "5001cc8d",
+        "low-225/albedo": "e2419a06",
+        "low-225/lit-rgb": "1e31fc08",
+        "low-270/neutral-rgb": "fefdb4da",
+        "low-270/silhouette": "dba2526d",
+        "low-270/linear-depth": "8b7ece91",
+        "low-270/world-normal": "703e42db",
+        "low-270/semantic-id": "24e8c6d1",
+        "low-270/albedo": "2cc1c4b3",
+        "low-270/lit-rgb": "eca3b360",
+        "low-315/neutral-rgb": "5beeff2d",
+        "low-315/silhouette": "02cd115c",
+        "low-315/linear-depth": "7bb9926c",
+        "low-315/world-normal": "02c586af",
+        "low-315/semantic-id": "3b71576d",
+        "low-315/albedo": "fe17b871",
+        "low-315/lit-rgb": "cb6a3b7a",
+        "high-045/neutral-rgb": "0d2e8d6d",
+        "high-045/silhouette": "6d5b5874",
+        "high-045/linear-depth": "3999b873",
+        "high-045/world-normal": "352d98b8",
+        "high-045/semantic-id": "92f8c651",
+        "high-045/albedo": "e469e04a",
+        "high-045/lit-rgb": "692b4e49",
+        "high-135/neutral-rgb": "cd96a04f",
+        "high-135/silhouette": "0197024d",
+        "high-135/linear-depth": "d54028d5",
+        "high-135/world-normal": "799322c3",
+        "high-135/semantic-id": "07d72e29",
+        "high-135/albedo": "c7150fe3",
+        "high-135/lit-rgb": "639444c6",
+        "high-225/neutral-rgb": "64dc2f49",
+        "high-225/silhouette": "fab95d2c",
+        "high-225/linear-depth": "b2edf156",
+        "high-225/world-normal": "9c97cfe0",
+        "high-225/semantic-id": "f34d7d7d",
+        "high-225/albedo": "45844b97",
+        "high-225/lit-rgb": "cf016ddc",
+        "high-315/neutral-rgb": "835609e2",
+        "high-315/silhouette": "5f2790a5",
+        "high-315/linear-depth": "d08552b0",
+        "high-315/world-normal": "34e3ba2e",
+        "high-315/semantic-id": "2561b0ed",
+        "high-315/albedo": "02bb38d1",
+        "high-315/lit-rgb": "b33f267a"
+      }
+    },
+    "comparison": {
+      "perView": [
+        {
+          "viewId": "low-000",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 62681,
+              "replacementForegroundPixels": 62753,
+              "intersectionPixels": 62635,
+              "unionPixels": 62799,
+              "iou": 0.9973884934473479,
+              "symmetricEdgeMeanPixels": 0.20150418290490535,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 62635,
+              "mae": 0.00117123817479403,
+              "p95": 0.007644107854353369,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 62635,
+              "meanDegrees": 7.523425392026039,
+              "p95Degrees": 42.078879420674916
+            }
+          },
+          "appearance": {
+            "comparedPixels": 60381,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 8.085794667204521,
+              "p90DeltaE00": 30.24332958594373,
+              "maskedSsim": 0.37361177511599647
+            },
+            "litRgb": {
+              "meanDeltaE00": 9.937942489357255,
+              "p90DeltaE00": 33.117495852359056,
+              "maskedSsim": 0.4737529560334673
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 2.619188189496756,
+              "coverageL1": 0.1145227803448105
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-045",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 38732,
+              "replacementForegroundPixels": 38812,
+              "intersectionPixels": 38681,
+              "unionPixels": 38863,
+              "iou": 0.9953168823816998,
+              "symmetricEdgeMeanPixels": 0.23607427055702918,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 38681,
+              "mae": 0.002054251470902838,
+              "p95": 0.007644107854353369,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 38681,
+              "meanDegrees": 8.290700628181169,
+              "p95Degrees": 41.6072582014211
+            }
+          },
+          "appearance": {
+            "comparedPixels": 36529,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 11.40110608082939,
+              "p90DeltaE00": 34.412124045110936,
+              "maskedSsim": 0.36601092596905466
+            },
+            "litRgb": {
+              "meanDeltaE00": 14.356330048351062,
+              "p90DeltaE00": 52.023206511397994,
+              "maskedSsim": 0.40877232948041636
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 3.8261312242448806,
+              "coverageL1": 0.11916559445919686
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-090",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 11178,
+              "replacementForegroundPixels": 10994,
+              "intersectionPixels": 10894,
+              "unionPixels": 11278,
+              "iou": 0.965951409824437,
+              "symmetricEdgeMeanPixels": 0.42875545345122773,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 10894,
+              "mae": 0.008714872365619634,
+              "p95": 0.0076441078543538765,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 10894,
+              "meanDegrees": 14.134976696435585,
+              "p95Degrees": 49.19848826033379
+            }
+          },
+          "appearance": {
+            "comparedPixels": 8359,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 16.168968842336987,
+              "p90DeltaE00": 37.11824240170062,
+              "maskedSsim": 0.3719633597853663
+            },
+            "litRgb": {
+              "meanDeltaE00": 21.57463678815978,
+              "p90DeltaE00": 59.910914481652476,
+              "maskedSsim": 0.371949111565905
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 14.25142768680264,
+              "coverageL1": 0.6208876659887546
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-135",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 29203,
+              "replacementForegroundPixels": 29127,
+              "intersectionPixels": 29014,
+              "unionPixels": 29316,
+              "iou": 0.9896984581798335,
+              "symmetricEdgeMeanPixels": 0.33764044943820226,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 29014,
+              "mae": 0.009802658059450782,
+              "p95": 0.03057643141741297,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 29014,
+              "meanDegrees": 21.692253798190308,
+              "p95Degrees": 101.35397347405927
+            }
+          },
+          "appearance": {
+            "comparedPixels": 26639,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 6.316599601366915,
+              "p90DeltaE00": 33.337667316190036,
+              "maskedSsim": 0.6600092659857291
+            },
+            "litRgb": {
+              "meanDeltaE00": 2.7437596891571703,
+              "p90DeltaE00": 7.247255012225579,
+              "maskedSsim": 0.8935969834987683
+            },
+            "palette": {
+              "colorCount": 3,
+              "centroidDeltaE00": 3.454337080319462,
+              "coverageL1": 0.17114005780997785
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-180",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 31622,
+              "replacementForegroundPixels": 31593,
+              "intersectionPixels": 31458,
+              "unionPixels": 31757,
+              "iou": 0.9905847529678496,
+              "symmetricEdgeMeanPixels": 0.32763435995685,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 31458,
+              "mae": 0.00952026516706996,
+              "p95": 0.03057643141741297,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 31458,
+              "meanDegrees": 20.58502654981497,
+              "p95Degrees": 93.71794455236859
+            }
+          },
+          "appearance": {
+            "comparedPixels": 29127,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 6.092662874660502,
+              "p90DeltaE00": 33.27851798826082,
+              "maskedSsim": 0.6528816557285128
+            },
+            "litRgb": {
+              "meanDeltaE00": 2.365332142852548,
+              "p90DeltaE00": 6.1381375452293305,
+              "maskedSsim": 0.932644410138045
+            },
+            "palette": {
+              "colorCount": 3,
+              "centroidDeltaE00": 3.243174450603509,
+              "coverageL1": 0.15758574518487997
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-225",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 14296,
+              "replacementForegroundPixels": 14199,
+              "intersectionPixels": 14074,
+              "unionPixels": 14421,
+              "iou": 0.975937868386381,
+              "symmetricEdgeMeanPixels": 0.4007397900852113,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 14074,
+              "mae": 0.017212006387982166,
+              "p95": 0.045864647126119706,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 14074,
+              "meanDegrees": 19.625839798910977,
+              "p95Degrees": 78.15700751281528
+            }
+          },
+          "appearance": {
+            "comparedPixels": 11633,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 5.492597823436155,
+              "p90DeltaE00": 32.38698162334676,
+              "maskedSsim": 0.69247179513741
+            },
+            "litRgb": {
+              "meanDeltaE00": 3.5206601476778734,
+              "p90DeltaE00": 8.435284923140422,
+              "maskedSsim": 0.9148717262959731
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 1.9429525168450255,
+              "coverageL1": 0.07341184561162209
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-270",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 29477,
+              "replacementForegroundPixels": 29584,
+              "intersectionPixels": 29316,
+              "unionPixels": 29745,
+              "iou": 0.9855774079677256,
+              "symmetricEdgeMeanPixels": 0.53887201623168,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 29316,
+              "mae": 0.0018202864282726929,
+              "p95": 0.007644107854353369,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 29316,
+              "meanDegrees": 9.225397731754898,
+              "p95Degrees": 44.82670968223407
+            }
+          },
+          "appearance": {
+            "comparedPixels": 27158,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 4.429912888707832,
+              "p90DeltaE00": 15.487628000025326,
+              "maskedSsim": 0.5452565258915019
+            },
+            "litRgb": {
+              "meanDeltaE00": 5.4147760495424535,
+              "p90DeltaE00": 17.995668933261,
+              "maskedSsim": 0.6298695566827273
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 19.010978477934678,
+              "coverageL1": 0.9103763163708667
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-315",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 58203,
+              "replacementForegroundPixels": 58379,
+              "intersectionPixels": 58139,
+              "unionPixels": 58443,
+              "iou": 0.9947983505295759,
+              "symmetricEdgeMeanPixels": 0.382814149364382,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 58139,
+              "mae": 0.001167015279162694,
+              "p95": 0.007644107854353369,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 58139,
+              "meanDegrees": 7.237912200424589,
+              "p95Degrees": 39.302489163034586
+            }
+          },
+          "appearance": {
+            "comparedPixels": 55959,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 6.460747048362078,
+              "p90DeltaE00": 26.44470489488211,
+              "maskedSsim": 0.4006641437547768
+            },
+            "litRgb": {
+              "meanDeltaE00": 7.80958578587649,
+              "p90DeltaE00": 27.100626459909634,
+              "maskedSsim": 0.5147841041833902
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 2.373531125741824,
+              "coverageL1": 0.10550581675869831
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-045",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 51362,
+              "replacementForegroundPixels": 51507,
+              "intersectionPixels": 51336,
+              "unionPixels": 51533,
+              "iou": 0.9961772068383365,
+              "symmetricEdgeMeanPixels": 0.2588409762003849,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 51336,
+              "mae": 0.0014293242810879785,
+              "p95": 0.007644107854353369,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 51336,
+              "meanDegrees": 7.88621956285145,
+              "p95Degrees": 42.79249288420521
+            }
+          },
+          "appearance": {
+            "comparedPixels": 49271,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 11.502421338447775,
+              "p90DeltaE00": 34.22666891125276,
+              "maskedSsim": 0.3336604028081085
+            },
+            "litRgb": {
+              "meanDeltaE00": 14.256027459569196,
+              "p90DeltaE00": 50.22309627847779,
+              "maskedSsim": 0.39303805563862076
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 3.7868796686892745,
+              "coverageL1": 0.12236406811308886
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-135",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 19707,
+              "replacementForegroundPixels": 19636,
+              "intersectionPixels": 19467,
+              "unionPixels": 19876,
+              "iou": 0.9794224189977863,
+              "symmetricEdgeMeanPixels": 0.44424017549957734,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 19467,
+              "mae": 0.002423952215797254,
+              "p95": 0.007644107854353369,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 19467,
+              "meanDegrees": 9.978520668704729,
+              "p95Degrees": 44.82102135272771
+            }
+          },
+          "appearance": {
+            "comparedPixels": 17274,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 13.532908556650897,
+              "p90DeltaE00": 35.10633966717106,
+              "maskedSsim": 0.3232226488343034
+            },
+            "litRgb": {
+              "meanDeltaE00": 16.954716609111447,
+              "p90DeltaE00": 53.55462884229839,
+              "maskedSsim": 0.345057544208609
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 14.709240186462086,
+              "coverageL1": 0.6919069121222647
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-225",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 27325,
+              "replacementForegroundPixels": 27405,
+              "intersectionPixels": 27190,
+              "unionPixels": 27540,
+              "iou": 0.9872912127814089,
+              "symmetricEdgeMeanPixels": 0.43205403727734965,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 27190,
+              "mae": 0.0018372285703641463,
+              "p95": 0.007644107854353369,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 27190,
+              "meanDegrees": 9.117528410781317,
+              "p95Degrees": 43.23502211414432
+            }
+          },
+          "appearance": {
+            "comparedPixels": 24985,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 8.739714514866009,
+              "p90DeltaE00": 31.307231608363107,
+              "maskedSsim": 0.34607198240441167
+            },
+            "litRgb": {
+              "meanDeltaE00": 10.557912480835467,
+              "p90DeltaE00": 36.12765701687081,
+              "maskedSsim": 0.4405844551868388
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 4.501074869420339,
+              "coverageL1": 0.09945967580548329
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-315",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                5.8829481043820095,
+                5.9619884223811646
+              ],
+              "replacementSize": [
+                7.029395845546655,
+                5.892028800015624,
+                5.964914824394954
+              ],
+              "perAxisRelativeError": [
+                0.0041994065066649966,
+                0.0015435620835837025,
+                0.0004908432902694264
+              ],
+              "maxAxisRelativeError": 0.0041994065066649966,
+              "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 61584,
+              "replacementForegroundPixels": 61688,
+              "intersectionPixels": 61519,
+              "unionPixels": 61753,
+              "iou": 0.9962107104108302,
+              "symmetricEdgeMeanPixels": 0.29242211370040566,
+              "symmetricEdgeP95Pixels": 1
+            },
+            "depth": {
+              "comparedPixels": 61519,
+              "mae": 0.0011149495241650756,
+              "p95": 0.007644107854353369,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 61519,
+              "meanDegrees": 7.281686594921395,
+              "p95Degrees": 40.524833345743026
+            }
+          },
+          "appearance": {
+            "comparedPixels": 59284,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 8.54836277746484,
+              "p90DeltaE00": 31.17885397146413,
+              "maskedSsim": 0.3455329640281479
+            },
+            "litRgb": {
+              "meanDeltaE00": 10.330920298553606,
+              "p90DeltaE00": 34.35782001190545,
+              "maskedSsim": 0.4558148534105093
+            },
+            "palette": {
+              "colorCount": 5,
+              "centroidDeltaE00": 2.6976399003039706,
+              "coverageL1": 0.12537952904662303
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        }
+      ],
+      "aggregate": {
+        "viewCount": 12,
+        "geometry": {
+          "bounds": {
+            "maxAxisRelativeError": 0.0041994065066649966,
+            "bottomAnchorErrorCanonical": 1.7763568394002505e-15
+          },
+          "silhouette": {
+            "meanIou": 0.9878629310594343,
+            "worstViewIou": 0.965951409824437,
+            "meanEdgeDistancePixels": 0.35679933122226704,
+            "edgeDistanceP95Pixels": 1
+          },
+          "depth": {
+            "mae": 0.004855670660389105,
+            "p95": 0.045864647126119706
+          },
+          "worldNormal": {
+            "meanDegrees": 11.881624002749783,
+            "p95Degrees": 101.35397347405927
+          }
+        },
+        "appearance": {
+          "meanDeltaE00": 9.985216665753695,
+          "p90DeltaE00": 59.910914481652476,
+          "meanMaskedSsim": 0.4509464537869432,
+          "worstViewSsim": 0.3232226488343034,
+          "paletteCentroidDeltaE00": 19.010978477934678,
+          "paletteCoverageL1": 0.9103763163708667,
+          "roughnessAbsoluteError": 1.1920928910669204e-8,
+          "metalnessAbsoluteError": 0,
+          "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+        }
+      },
+      "gate": {
+        "baselineVersion": "single-mesh-quality-baseline-v1",
+        "objectId": "umbrella",
+        "passed": false,
+        "failures": [
+          {
+            "metric": "appearance.p90DeltaE00",
+            "actual": 59.910914481652476,
+            "operator": "<=",
+            "threshold": 22
+          },
+          {
+            "metric": "appearance.meanMaskedSsim",
+            "actual": 0.4509464537869432,
+            "operator": ">=",
+            "threshold": 0.78
+          },
+          {
+            "metric": "appearance.worstViewSsim",
+            "actual": 0.3232226488343034,
+            "operator": ">=",
+            "threshold": 0.68
+          },
+          {
+            "metric": "appearance.paletteCentroidDeltaE00",
+            "actual": 19.010978477934678,
+            "operator": "<=",
+            "threshold": 8
+          },
+          {
+            "metric": "appearance.paletteCoverageL1",
+            "actual": 0.9103763163708667,
+            "operator": "<=",
+            "threshold": 0.2
+          }
+        ],
+        "geometryGate": {
+          "passed": true,
+          "failures": []
+        },
+        "appearanceGate": {
+          "evaluated": true,
+          "passed": false,
+          "reason": null,
+          "failures": [
+            {
+              "metric": "appearance.p90DeltaE00",
+              "actual": 59.910914481652476,
+              "operator": "<=",
+              "threshold": 22
+            },
+            {
+              "metric": "appearance.meanMaskedSsim",
+              "actual": 0.4509464537869432,
+              "operator": ">=",
+              "threshold": 0.78
+            },
+            {
+              "metric": "appearance.worstViewSsim",
+              "actual": 0.3232226488343034,
+              "operator": ">=",
+              "threshold": 0.68
+            },
+            {
+              "metric": "appearance.paletteCentroidDeltaE00",
+              "actual": 19.010978477934678,
+              "operator": "<=",
+              "threshold": 8
+            },
+            {
+              "metric": "appearance.paletteCoverageL1",
+              "actual": 0.9103763163708667,
+              "operator": "<=",
+              "threshold": 0.2
+            }
+          ]
+        }
+      },
+      "diagnostics": {
+        "units": "canonical",
+        "surfaceArea": {
+          "reference": 129.66901520419538,
+          "replacement": 112.91587632499561,
+          "relativeError": 0.1291992451150946
+        },
+        "volume": {
+          "reference": 2.2151957947467977,
+          "replacement": 1.5294902270382724,
+          "relativeError": 0.309546257416448,
+          "referenceUnavailableReason": null,
+          "replacementUnavailableReason": null
+        },
+        "topology": {
+          "referenceConnectedComponents": 76,
+          "replacementConnectedComponents": 30,
+          "referenceClosed": true,
+          "replacementClosed": true
+        },
+        "pointSetDistance": {
+          "sampling": "position-attribute-vertices-with-duplicates-retained",
+          "referencePointCount": 3053,
+          "replacementPointCount": 5450,
+          "symmetricChamferMeanCanonical": 0.1200418678984795,
+          "symmetricHausdorffCanonical": 0.6480645985680873
+        }
+      },
+      "captureChecksums": {
+        "low-000/neutral-rgb": "e59ab4e8",
+        "low-000/silhouette": "4d8596c4",
+        "low-000/linear-depth": "4498f081",
+        "low-000/world-normal": "576a3a4b",
+        "low-000/semantic-id": "729b46c1",
+        "low-000/albedo": "640512ac",
+        "low-000/lit-rgb": "c6dec43e",
+        "low-045/neutral-rgb": "629c74ed",
+        "low-045/silhouette": "d8a68b9d",
+        "low-045/linear-depth": "5290cb23",
+        "low-045/world-normal": "906fe14c",
+        "low-045/semantic-id": "1e152c69",
+        "low-045/albedo": "88923d20",
+        "low-045/lit-rgb": "de67db05",
+        "low-090/neutral-rgb": "e149c305",
+        "low-090/silhouette": "7299a915",
+        "low-090/linear-depth": "785c2431",
+        "low-090/world-normal": "15898456",
+        "low-090/semantic-id": "6072c82d",
+        "low-090/albedo": "265e281a",
+        "low-090/lit-rgb": "6a7f9a94",
+        "low-135/neutral-rgb": "cc204f39",
+        "low-135/silhouette": "75fa6fac",
+        "low-135/linear-depth": "7b807603",
+        "low-135/world-normal": "2dd927f8",
+        "low-135/semantic-id": "3cc80065",
+        "low-135/albedo": "1452a982",
+        "low-135/lit-rgb": "3de3c7f0",
+        "low-180/neutral-rgb": "708b2713",
+        "low-180/silhouette": "83a3e9ec",
+        "low-180/linear-depth": "aa96abb1",
+        "low-180/world-normal": "0dc012fb",
+        "low-180/semantic-id": "00b38105",
+        "low-180/albedo": "e6440a4b",
+        "low-180/lit-rgb": "cabb854c",
+        "low-225/neutral-rgb": "9d8a2e44",
+        "low-225/silhouette": "6075190c",
+        "low-225/linear-depth": "5de5f1f4",
+        "low-225/world-normal": "470a76a7",
+        "low-225/semantic-id": "5001cc8d",
+        "low-225/albedo": "e2419a06",
+        "low-225/lit-rgb": "1e31fc08",
+        "low-270/neutral-rgb": "fefdb4da",
+        "low-270/silhouette": "dba2526d",
+        "low-270/linear-depth": "8b7ece91",
+        "low-270/world-normal": "703e42db",
+        "low-270/semantic-id": "24e8c6d1",
+        "low-270/albedo": "2cc1c4b3",
+        "low-270/lit-rgb": "eca3b360",
+        "low-315/neutral-rgb": "5beeff2d",
+        "low-315/silhouette": "02cd115c",
+        "low-315/linear-depth": "7bb9926c",
+        "low-315/world-normal": "02c586af",
+        "low-315/semantic-id": "3b71576d",
+        "low-315/albedo": "fe17b871",
+        "low-315/lit-rgb": "cb6a3b7a",
+        "high-045/neutral-rgb": "0d2e8d6d",
+        "high-045/silhouette": "6d5b5874",
+        "high-045/linear-depth": "3999b873",
+        "high-045/world-normal": "352d98b8",
+        "high-045/semantic-id": "92f8c651",
+        "high-045/albedo": "e469e04a",
+        "high-045/lit-rgb": "692b4e49",
+        "high-135/neutral-rgb": "cd96a04f",
+        "high-135/silhouette": "0197024d",
+        "high-135/linear-depth": "d54028d5",
+        "high-135/world-normal": "799322c3",
+        "high-135/semantic-id": "07d72e29",
+        "high-135/albedo": "c7150fe3",
+        "high-135/lit-rgb": "639444c6",
+        "high-225/neutral-rgb": "64dc2f49",
+        "high-225/silhouette": "fab95d2c",
+        "high-225/linear-depth": "b2edf156",
+        "high-225/world-normal": "9c97cfe0",
+        "high-225/semantic-id": "f34d7d7d",
+        "high-225/albedo": "45844b97",
+        "high-225/lit-rgb": "cf016ddc",
+        "high-315/neutral-rgb": "835609e2",
+        "high-315/silhouette": "5f2790a5",
+        "high-315/linear-depth": "d08552b0",
+        "high-315/world-normal": "34e3ba2e",
+        "high-315/semantic-id": "2561b0ed",
+        "high-315/albedo": "02bb38d1",
+        "high-315/lit-rgb": "b33f267a"
+      }
+    },
+    "environment": {
+      "threeRevision": "170",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "captureBackend": "browser-webgl-rgba8"
+    }
+  },
+  "nonvisual": {
+    "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+    "artifactRole": "development-only-nonvisual-acceptance",
+    "productionUse": "prohibited",
+    "objectId": "umbrella",
+    "runtime": {
+      "schemaVersion": "single-mesh-runtime-evidence-v1",
+      "objectId": "umbrella",
+      "semanticId": "island.prop.umbrella",
+      "recipe": {
+        "encoding": "canonical-minified-utf8-json",
+        "bytes": 1061,
+        "serialized": "{\"id\":\"island.prop.umbrella\",\"kind\":\"radial-parasol-assembly-v1\",\"seed\":188616961,\"shape\":{\"canopyRadius\":5.614,\"canopySurfaceRadius\":5.34,\"canopyDrop\":2.18,\"rimDrop\":0.107,\"canopyThickness\":0.053,\"panels\":24,\"angularSubdivisions\":8,\"radialBands\":8,\"phaseDegrees\":-7.3233,\"axis\":[-0.2231853,0.6613441,0.7161092],\"shaftLength\":9.349,\"shaftRadius\":0.082,\"runnerCenter\":-2.555,\"runnerLength\":1.075,\"runnerRadius\":0.294,\"gripCenter\":-9.077,\"gripLength\":1.076,\"gripRadius\":0.171,\"ribStart\":0.43,\"ribLayerOffset\":0.122,\"supportRadius\":2.48,\"supportHubHeight\":-2.211,\"supportEndHeight\":-1.282},\"appearance\":{\"canopyColor\":12434877,\"ribColor\":6841924,\"flowerColor\":15065560,\"leafColor\":3233617,\"accentColor\":10386768,\"blossoms\":[[0.3,-1.85,0.55],[1.05,0.15,0.68],[1.55,0.85,0.72],[1.85,-0.45,0.74],[2.27,-2.47,0.7],[2.3,1.97,0.46],[3.4,-0.1,0.45]],\"leaves\":[[2.2,1.6,0.87,0.35],[2.75,-0.35,1.12,0.42],[3.4,0.25,1.15,0.43],[3.45,-2.77,0.98,0.38],[3.85,-0.75,1.12,0.42],[4.25,-2.43,1.01,0.38],[4.53,-0.92,0.92,0.35],[4.98,-0.36,0.81,0.32]],\"roughness\":0.8,\"metalness\":0}}"
+      },
+      "recipeScalars": {
+        "definition": "finite numeric leaves in the object-specific recipe",
+        "count": 86
+      },
+      "deterministic": {
+        "repetitions": 3,
+        "byteStable": true,
+        "snapshot": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.prop.umbrella",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.prop.umbrella/canopy",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.umbrella/hardware",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.umbrella/ribs",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/shaft",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/runner",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/grip",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.prop.umbrella",
+              "parentSemanticId": null,
+              "type": "Group",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.prop.umbrella/canopy",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true,
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 6342,
+                    "byteLength": 25368,
+                    "checksum": "b29f75b7"
+                  },
+                  "canopyData": {
+                    "constructor": "Float32Array",
+                    "length": 6342,
+                    "byteLength": 25368,
+                    "checksum": "09ade8f5"
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 6342,
+                    "byteLength": 25368,
+                    "checksum": "0912243c"
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 12672,
+                  "byteLength": 25344,
+                  "checksum": "f27af2e9"
+                },
+                "groups": []
+              },
+              "material": {
+                "type": "MeshStandardMaterial",
+                "color": 16777215,
+                "emissive": 0,
+                "roughness": 0.8,
+                "metalness": 0,
+                "opacity": 1,
+                "transparent": false,
+                "side": 2,
+                "vertexColors": false,
+                "hasRuntimeTexture": false
+              }
+            },
+            {
+              "semanticId": "island.prop.umbrella/hardware",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true,
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 10008,
+                    "byteLength": 40032,
+                    "checksum": "02be2321"
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 10008,
+                    "byteLength": 40032,
+                    "checksum": "500ec6b1"
+                  },
+                  "color": {
+                    "constructor": "Float32Array",
+                    "length": 10008,
+                    "byteLength": 40032,
+                    "checksum": "ba820c25"
+                  }
+                },
+                "index": null,
+                "groups": []
+              },
+              "material": {
+                "type": "MeshStandardMaterial",
+                "color": 16777215,
+                "emissive": 0,
+                "roughness": 0.8,
+                "metalness": 0,
+                "opacity": 1,
+                "transparent": false,
+                "side": 2,
+                "vertexColors": true,
+                "hasRuntimeTexture": false
+              }
+            },
+            {
+              "semanticId": "island.prop.umbrella/ribs",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.prop.umbrella/shaft",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.prop.umbrella/runner",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.prop.umbrella/grip",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            }
+          ],
+          "bounds": {
+            "min": [
+              -5.492154121398926,
+              0,
+              -4.660461902618408
+            ],
+            "max": [
+              5.492154121398926,
+              9.207030296325684,
+              4.660461902618408
+            ]
+          },
+          "triangles": 5336,
+          "drawCalls": 2,
+          "geometryMemoryBytes": 221544,
+          "runtimeTextureCount": 0
+        }
+      },
+      "benchmark": {
+        "warmups": 10,
+        "repetitions": 100,
+        "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+        "minimumMilliseconds": 1.1000000089406967,
+        "medianMilliseconds": 1.300000011920929,
+        "p95Milliseconds": 1.6000000089406967,
+        "maximumMilliseconds": 2.2000000029802322
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "hardwareConcurrency": 10,
+        "deviceMemoryGiB": 32,
+        "threeRevision": "170",
+        "renderer": {
+          "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "vendor": "Google Inc. (Google)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+        }
+      }
+    },
+    "sourceScalars": {
+      "definition": "JavaScript numeric literals in object-specific semantic recipe sources, excluding generator control-flow literals",
+      "count": 86,
+      "files": [
+        {
+          "sourceFile": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+          "evidence": {
+            "definition": "JavaScript numeric literals outside comments and string/template literals",
+            "count": 86,
+            "literals": [
+              {
+                "literal": "0x0b3e1101",
+                "offset": 1123
+              },
+              {
+                "literal": "5.614",
+                "offset": 1178
+              },
+              {
+                "literal": "5.34",
+                "offset": 1210
+              },
+              {
+                "literal": "2.18",
+                "offset": 1232
+              },
+              {
+                "literal": "0.107",
+                "offset": 1251
+              },
+              {
+                "literal": "0.053",
+                "offset": 1279
+              },
+              {
+                "literal": "24",
+                "offset": 1298
+              },
+              {
+                "literal": "8",
+                "offset": 1327
+              },
+              {
+                "literal": "8",
+                "offset": 1347
+              },
+              {
+                "literal": "7.3233",
+                "offset": 1369
+              },
+              {
+                "literal": "0.2231853",
+                "offset": 1403
+              },
+              {
+                "literal": "0.6613441",
+                "offset": 1414
+              },
+              {
+                "literal": "0.7161092",
+                "offset": 1425
+              },
+              {
+                "literal": "9.349",
+                "offset": 1455
+              },
+              {
+                "literal": "0.082",
+                "offset": 1479
+              },
+              {
+                "literal": "2.555",
+                "offset": 1505
+              },
+              {
+                "literal": "1.075",
+                "offset": 1530
+              },
+              {
+                "literal": "0.294",
+                "offset": 1555
+              },
+              {
+                "literal": "9.077",
+                "offset": 1579
+              },
+              {
+                "literal": "1.076",
+                "offset": 1602
+              },
+              {
+                "literal": "0.171",
+                "offset": 1625
+              },
+              {
+                "literal": "0.43",
+                "offset": 1646
+              },
+              {
+                "literal": "0.122",
+                "offset": 1672
+              },
+              {
+                "literal": "2.48",
+                "offset": 1698
+              },
+              {
+                "literal": "2.211",
+                "offset": 1727
+              },
+              {
+                "literal": "1.282",
+                "offset": 1757
+              },
+              {
+                "literal": "0xbdbdbd",
+                "offset": 1817
+              },
+              {
+                "literal": "0x686644",
+                "offset": 1841
+              },
+              {
+                "literal": "0xe5e1d8",
+                "offset": 1868
+              },
+              {
+                "literal": "0x315751",
+                "offset": 1893
+              },
+              {
+                "literal": "0x9e7d50",
+                "offset": 1920
+              },
+              {
+                "literal": "0.3",
+                "offset": 1981
+              },
+              {
+                "literal": "1.85",
+                "offset": 1987
+              },
+              {
+                "literal": "0.55",
+                "offset": 1993
+              },
+              {
+                "literal": "1.05",
+                "offset": 2022
+              },
+              {
+                "literal": "0.15",
+                "offset": 2028
+              },
+              {
+                "literal": "0.68",
+                "offset": 2034
+              },
+              {
+                "literal": "1.55",
+                "offset": 2063
+              },
+              {
+                "literal": "0.85",
+                "offset": 2069
+              },
+              {
+                "literal": "0.72",
+                "offset": 2075
+              },
+              {
+                "literal": "1.85",
+                "offset": 2104
+              },
+              {
+                "literal": "0.45",
+                "offset": 2111
+              },
+              {
+                "literal": "0.74",
+                "offset": 2117
+              },
+              {
+                "literal": "2.27",
+                "offset": 2146
+              },
+              {
+                "literal": "2.47",
+                "offset": 2153
+              },
+              {
+                "literal": "0.7",
+                "offset": 2159
+              },
+              {
+                "literal": "2.3",
+                "offset": 2187
+              },
+              {
+                "literal": "1.97",
+                "offset": 2192
+              },
+              {
+                "literal": "0.46",
+                "offset": 2198
+              },
+              {
+                "literal": "3.4",
+                "offset": 2227
+              },
+              {
+                "literal": "0.1",
+                "offset": 2233
+              },
+              {
+                "literal": "0.45",
+                "offset": 2238
+              },
+              {
+                "literal": "2.2",
+                "offset": 2303
+              },
+              {
+                "literal": "1.6",
+                "offset": 2308
+              },
+              {
+                "literal": "0.87",
+                "offset": 2313
+              },
+              {
+                "literal": "0.35",
+                "offset": 2319
+              },
+              {
+                "literal": "2.75",
+                "offset": 2348
+              },
+              {
+                "literal": "0.35",
+                "offset": 2355
+              },
+              {
+                "literal": "1.12",
+                "offset": 2361
+              },
+              {
+                "literal": "0.42",
+                "offset": 2367
+              },
+              {
+                "literal": "3.4",
+                "offset": 2396
+              },
+              {
+                "literal": "0.25",
+                "offset": 2401
+              },
+              {
+                "literal": "1.15",
+                "offset": 2407
+              },
+              {
+                "literal": "0.43",
+                "offset": 2413
+              },
+              {
+                "literal": "3.45",
+                "offset": 2442
+              },
+              {
+                "literal": "2.77",
+                "offset": 2449
+              },
+              {
+                "literal": "0.98",
+                "offset": 2455
+              },
+              {
+                "literal": "0.38",
+                "offset": 2461
+              },
+              {
+                "literal": "3.85",
+                "offset": 2490
+              },
+              {
+                "literal": "0.75",
+                "offset": 2497
+              },
+              {
+                "literal": "1.12",
+                "offset": 2503
+              },
+              {
+                "literal": "0.42",
+                "offset": 2509
+              },
+              {
+                "literal": "4.25",
+                "offset": 2538
+              },
+              {
+                "literal": "2.43",
+                "offset": 2545
+              },
+              {
+                "literal": "1.01",
+                "offset": 2551
+              },
+              {
+                "literal": "0.38",
+                "offset": 2557
+              },
+              {
+                "literal": "4.53",
+                "offset": 2586
+              },
+              {
+                "literal": "0.92",
+                "offset": 2593
+              },
+              {
+                "literal": "0.92",
+                "offset": 2599
+              },
+              {
+                "literal": "0.35",
+                "offset": 2605
+              },
+              {
+                "literal": "4.98",
+                "offset": 2634
+              },
+              {
+                "literal": "0.36",
+                "offset": 2641
+              },
+              {
+                "literal": "0.81",
+                "offset": 2647
+              },
+              {
+                "literal": "0.32",
+                "offset": 2653
+              },
+              {
+                "literal": "0.8",
+                "offset": 2684
+              },
+              {
+                "literal": "0",
+                "offset": 2704
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "bundles": {
+      "production": {
+        "bytes": 21991,
+        "gzipBytes": 7714,
+        "minified": true,
+        "sourceMapBytes": 0,
+        "threeExcluded": true
+      },
+      "objectIncrement": {
+        "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+        "bytes": 1294,
+        "objectBundleGzipBytes": 630,
+        "combinedBundleGzipBytes": 4146,
+        "sharedFrameworkGzipBytes": 927,
+        "gzipBytes": 3219
+      }
+    },
+    "budgets": {
+      "objectId": "umbrella",
+      "passed": true,
+      "budget": {
+        "scalars": 96,
+        "recipeBytes": 2048,
+        "bundleGzipBytes": 10240,
+        "triangles": 5760,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 262144,
+        "warmGenerationP95Milliseconds": 12
+      },
+      "actual": {
+        "scalars": 86,
+        "recipeBytes": 1061,
+        "bundleGzipBytes": 3219,
+        "triangles": 5336,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 221544,
+        "warmGenerationP95Milliseconds": 1.6000000089406967
+      },
+      "checks": [
+        {
+          "metric": "scalars",
+          "value": 86,
+          "maximum": 96,
+          "passed": true
+        },
+        {
+          "metric": "recipeBytes",
+          "value": 1061,
+          "maximum": 2048,
+          "passed": true
+        },
+        {
+          "metric": "bundleGzipBytes",
+          "value": 3219,
+          "maximum": 10240,
+          "passed": true
+        },
+        {
+          "metric": "triangles",
+          "value": 5336,
+          "maximum": 5760,
+          "passed": true
+        },
+        {
+          "metric": "drawCalls",
+          "value": 2,
+          "maximum": 2,
+          "passed": true
+        },
+        {
+          "metric": "geometryMemoryBytes",
+          "value": 221544,
+          "maximum": 262144,
+          "passed": true
+        },
+        {
+          "metric": "warmGenerationP95Milliseconds",
+          "value": 1.6000000089406967,
+          "maximum": 12,
+          "passed": true
+        },
+        {
+          "metric": "deterministicCpuBytes",
+          "value": true,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "metric": "runtimeTextureCount",
+          "value": 0,
+          "maximum": 0,
+          "passed": true
+        }
+      ],
+      "failures": []
+    },
+    "staticAudit": {
+      "passed": true,
+      "productionFiles": [
+        {
+          "file": "gt_designer/single-mesh-replacement/main.js",
+          "bytes": 2488
+        },
+        {
+          "file": "gt_designer/src/reconstruction/core/object-generator.js",
+          "bytes": 2912
+        },
+        {
+          "file": "gt_designer/src/reconstruction/core/rng.js",
+          "bytes": 976
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+          "bytes": 1590
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+          "bytes": 4269
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+          "bytes": 3222
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+          "bytes": 1545
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+          "bytes": 1540
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+          "bytes": 14740
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+          "bytes": 2717
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+          "bytes": 3913
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+          "bytes": 1609
+        },
+        {
+          "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+          "bytes": 2056
+        }
+      ],
+      "thirdPartyInputs": [],
+      "failures": []
+    },
+    "bundleAudit": {
+      "passed": true,
+      "failures": []
+    },
+    "offline": {
+      "passed": true,
+      "servedFiles": [
+        "bundle.js",
+        "index.html",
+        "three.module.js"
+      ],
+      "authoredDirectoriesAvailableToServer": false,
+      "emptyBrowserProfile": true,
+      "networkResolutionBlocked": true,
+      "localRequestCount": 3
+    },
+    "crossEngine": {
+      "boundsToleranceCanonical": 0.000007,
+      "normative": {
+        "engine": "Chrome/V8",
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.prop.umbrella",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.prop.umbrella/canopy",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.umbrella/hardware",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.umbrella/ribs",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/shaft",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/runner",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/grip",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.prop.umbrella",
+              "parentSemanticId": null,
+              "type": "Group",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/canopy",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  },
+                  "canopyData": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 12672
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.umbrella/hardware",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  },
+                  "color": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  }
+                },
+                "index": null,
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.umbrella/ribs",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/shaft",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/runner",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/grip",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            }
+          ],
+          "bounds": {
+            "min": [
+              -5.492154121398926,
+              0,
+              -4.660461902618408
+            ],
+            "max": [
+              5.492154121398926,
+              9.207030296325684,
+              4.660461902618408
+            ]
+          },
+          "triangles": 5336,
+          "drawCalls": 2
+        }
+      },
+      "candidates": [
+        {
+          "engine": "JavaScriptCore (Safari 26.2 system framework)",
+          "comparison": {
+            "structureMatches": true,
+            "maximumBoundsDifference": 0,
+            "boundsTolerance": 0.000007,
+            "boundsMatch": true,
+            "passed": true
+          },
+          "signature": {
+            "semanticHierarchy": [
+              {
+                "semanticId": "island.prop.umbrella",
+                "parentSemanticId": null,
+                "type": "Group"
+              },
+              {
+                "semanticId": "island.prop.umbrella/canopy",
+                "parentSemanticId": "island.prop.umbrella",
+                "type": "Mesh"
+              },
+              {
+                "semanticId": "island.prop.umbrella/hardware",
+                "parentSemanticId": "island.prop.umbrella",
+                "type": "Mesh"
+              },
+              {
+                "semanticId": "island.prop.umbrella/ribs",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.prop.umbrella/shaft",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.prop.umbrella/runner",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.prop.umbrella/grip",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D"
+              }
+            ],
+            "objects": [
+              {
+                "semanticId": "island.prop.umbrella",
+                "parentSemanticId": null,
+                "type": "Group",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.prop.umbrella/canopy",
+                "parentSemanticId": "island.prop.umbrella",
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 6342
+                    },
+                    "canopyData": {
+                      "constructor": "Float32Array",
+                      "length": 6342
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 6342
+                    }
+                  },
+                  "index": {
+                    "constructor": "Uint16Array",
+                    "length": 12672
+                  },
+                  "groups": []
+                }
+              },
+              {
+                "semanticId": "island.prop.umbrella/hardware",
+                "parentSemanticId": "island.prop.umbrella",
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 10008
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 10008
+                    },
+                    "color": {
+                      "constructor": "Float32Array",
+                      "length": 10008
+                    }
+                  },
+                  "index": null,
+                  "groups": []
+                }
+              },
+              {
+                "semanticId": "island.prop.umbrella/ribs",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.prop.umbrella/shaft",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.prop.umbrella/runner",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.prop.umbrella/grip",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D",
+                "geometry": null
+              }
+            ],
+            "bounds": {
+              "min": [
+                -5.492154121398926,
+                0,
+                -4.660461902618408
+              ],
+              "max": [
+                5.492154121398926,
+                9.207030296325684,
+                4.660461902618408
+              ]
+            },
+            "triangles": 5336,
+            "drawCalls": 2
+          }
+        },
+        {
+          "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+          "comparison": {
+            "structureMatches": true,
+            "maximumBoundsDifference": 0,
+            "boundsTolerance": 0.000007,
+            "boundsMatch": true,
+            "passed": true
+          },
+          "signature": {
+            "semanticHierarchy": [
+              {
+                "semanticId": "island.prop.umbrella",
+                "parentSemanticId": null,
+                "type": "Group"
+              },
+              {
+                "semanticId": "island.prop.umbrella/canopy",
+                "parentSemanticId": "island.prop.umbrella",
+                "type": "Mesh"
+              },
+              {
+                "semanticId": "island.prop.umbrella/hardware",
+                "parentSemanticId": "island.prop.umbrella",
+                "type": "Mesh"
+              },
+              {
+                "semanticId": "island.prop.umbrella/ribs",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.prop.umbrella/shaft",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.prop.umbrella/runner",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.prop.umbrella/grip",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D"
+              }
+            ],
+            "objects": [
+              {
+                "semanticId": "island.prop.umbrella",
+                "parentSemanticId": null,
+                "type": "Group",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.prop.umbrella/canopy",
+                "parentSemanticId": "island.prop.umbrella",
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 6342
+                    },
+                    "canopyData": {
+                      "constructor": "Float32Array",
+                      "length": 6342
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 6342
+                    }
+                  },
+                  "index": {
+                    "constructor": "Uint16Array",
+                    "length": 12672
+                  },
+                  "groups": []
+                }
+              },
+              {
+                "semanticId": "island.prop.umbrella/hardware",
+                "parentSemanticId": "island.prop.umbrella",
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 10008
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 10008
+                    },
+                    "color": {
+                      "constructor": "Float32Array",
+                      "length": 10008
+                    }
+                  },
+                  "index": null,
+                  "groups": []
+                }
+              },
+              {
+                "semanticId": "island.prop.umbrella/ribs",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.prop.umbrella/shaft",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.prop.umbrella/runner",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.prop.umbrella/grip",
+                "parentSemanticId": "island.prop.umbrella/hardware",
+                "type": "Object3D",
+                "geometry": null
+              }
+            ],
+            "bounds": {
+              "min": [
+                -5.492154121398926,
+                0,
+                -4.660461902618408
+              ],
+              "max": [
+                5.492154121398926,
+                9.207030296325684,
+                4.660461902618408
+              ]
+            },
+            "triangles": 5336,
+            "drawCalls": 2
+          }
+        }
+      ],
+      "passed": true
+    },
+    "environment": {
+      "normativeBaseline": {
+        "model": "Apple M5 MacBook Pro",
+        "operatingSystem": "macOS 26.2",
+        "browser": "Google Chrome 150.0.7871.184",
+        "three": "0.170.0"
+      },
+      "actual": {
+        "modelName": "MacBook Pro",
+        "modelIdentifier": "Mac17,2",
+        "chip": "Apple M5",
+        "cores": "10 (4 performance and 6 efficiency)",
+        "memory": "32 GB",
+        "operatingSystem": "macOS 26.2",
+        "operatingSystemBuild": "25C56",
+        "browser": "Google Chrome 150.0.7871.184",
+        "three": "0.170.0",
+        "powerState": [
+          "Now drawing from 'Battery Power'",
+          "-InternalBattery-0 (id=22610019)\t14%; discharging; 0:46 remaining present: true"
+        ]
+      },
+      "migrationRequired": false
+    },
+    "acceptance": {
+      "passed": true,
+      "checks": [
+        {
+          "id": "object-budgets",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "static-source-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "minified-bundle-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "isolated-offline-render",
+          "passed": true,
+          "detail": {
+            "passed": true,
+            "servedFiles": [
+              "bundle.js",
+              "index.html",
+              "three.module.js"
+            ],
+            "authoredDirectoriesAvailableToServer": false,
+            "emptyBrowserProfile": true,
+            "networkResolutionBlocked": true,
+            "localRequestCount": 3
+          }
+        },
+        {
+          "id": "cross-engine-structure-and-bounds",
+          "passed": true,
+          "detail": [
+            {
+              "engine": "JavaScriptCore (Safari 26.2 system framework)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            },
+            {
+              "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "normative-environment",
+          "passed": true,
+          "detail": {
+            "modelName": "MacBook Pro",
+            "modelIdentifier": "Mac17,2",
+            "chip": "Apple M5",
+            "cores": "10 (4 performance and 6 efficiency)",
+            "memory": "32 GB",
+            "operatingSystem": "macOS 26.2",
+            "operatingSystemBuild": "25C56",
+            "browser": "Google Chrome 150.0.7871.184",
+            "three": "0.170.0",
+            "powerState": [
+              "Now drawing from 'Battery Power'",
+              "-InternalBattery-0 (id=22610019)\t14%; discharging; 0:46 remaining present: true"
+            ]
+          }
+        }
+      ],
+      "failures": []
+    }
+  },
+  "acceptance": {
+    "passed": false,
+    "checks": [
+      {
+        "id": "visual-quality-gate",
+        "passed": false,
+        "detail": [
+          {
+            "metric": "appearance.p90DeltaE00",
+            "actual": 59.910914481652476,
+            "operator": "<=",
+            "threshold": 22
+          },
+          {
+            "metric": "appearance.meanMaskedSsim",
+            "actual": 0.4509464537869432,
+            "operator": ">=",
+            "threshold": 0.78
+          },
+          {
+            "metric": "appearance.worstViewSsim",
+            "actual": 0.3232226488343034,
+            "operator": ">=",
+            "threshold": 0.68
+          },
+          {
+            "metric": "appearance.paletteCentroidDeltaE00",
+            "actual": 19.010978477934678,
+            "operator": "<=",
+            "threshold": 8
+          },
+          {
+            "metric": "appearance.paletteCoverageL1",
+            "actual": 0.9103763163708667,
+            "operator": "<=",
+            "threshold": 0.2
+          }
+        ]
+      },
+      {
+        "id": "nonvisual-acceptance",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "complete-fixed-capture-set",
+        "passed": true,
+        "detail": 168
+      },
+      {
+        "id": "reference-derived-framing",
+        "passed": true,
+        "detail": {
+          "translationBeforeScale": [
+            0,
+            0,
+            0
+          ],
+          "uniformScale": 0.6399488880108278,
+          "independentlyFramed": false
+        }
+      }
+    ],
+    "failures": [
+      {
+        "id": "visual-quality-gate",
+        "passed": false,
+        "detail": [
+          {
+            "metric": "appearance.p90DeltaE00",
+            "actual": 59.910914481652476,
+            "operator": "<=",
+            "threshold": 22
+          },
+          {
+            "metric": "appearance.meanMaskedSsim",
+            "actual": 0.4509464537869432,
+            "operator": ">=",
+            "threshold": 0.78
+          },
+          {
+            "metric": "appearance.worstViewSsim",
+            "actual": 0.3232226488343034,
+            "operator": ">=",
+            "threshold": 0.68
+          },
+          {
+            "metric": "appearance.paletteCentroidDeltaE00",
+            "actual": 19.010978477934678,
+            "operator": "<=",
+            "threshold": 8
+          },
+          {
+            "metric": "appearance.paletteCoverageL1",
+            "actual": 0.9103763163708667,
+            "operator": "<=",
+            "threshold": 0.2
+          }
+        ]
+      }
+    ]
+  }
+}

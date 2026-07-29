@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Single Mesh Runtime Audit</title>
+    <link rel="icon" href="data:," />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/vendor/three/build/three.module.js"
+        }
+      }
+    </script>
+    <style>
+      body { margin: 0; padding: 32px; color: #dbe8ef; background: #101820; font: 14px/1.5 ui-monospace, monospace; }
+      pre { white-space: pre-wrap; }
+    </style>
+  </head>
+  <body data-state="loading">
+    <h1>Runtime Audit</h1>
+    <pre id="state">Measuring…</pre>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

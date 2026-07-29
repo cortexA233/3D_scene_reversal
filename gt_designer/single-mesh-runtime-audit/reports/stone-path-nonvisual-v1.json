@@ -1,0 +1,713 @@
+{
+  "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+  "artifactRole": "development-only-nonvisual-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "stone-path",
+  "runtime": {
+    "schemaVersion": "single-mesh-runtime-evidence-v1",
+    "objectId": "stone-path",
+    "semanticId": "island.path.stone-path",
+    "recipe": {
+      "encoding": "canonical-minified-utf8-json",
+      "bytes": 618,
+      "serialized": "{\"id\":\"island.path.stone-path\",\"kind\":\"shallow-footprint-extrusion-v1\",\"seed\":1511514113,\"shape\":{\"footprint\":[[-0.576911926,2.545286179],[-3.49080658,2.664556503],[-4.565631866,1.947961807],[-3.514774323,-0.177858353],[-1.604084015,-1.634878159],[1.978473663,-2.494709015],[3.530937195,-2.661909103],[4.486351013,-0.989759445],[4.558105469,0.156820297],[3.507247925,1.852655411]],\"basePlane\":[-0.014371128553539378,0.005112762942845987,0.06952903150497299],\"extrusion\":[0.007524108900000071,0.5262370588,-0.002702712999999954],\"hardSideCorners\":[2,6,9]},\"appearance\":{\"color\":16777215,\"roughness\":0.78,\"metalness\":0}}"
+    },
+    "recipeScalars": {
+      "definition": "finite numeric leaves in the object-specific recipe",
+      "count": 33
+    },
+    "deterministic": {
+      "repetitions": 3,
+      "byteStable": true,
+      "snapshot": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.path.stone-path",
+            "parentSemanticId": null,
+            "type": "Mesh"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.path.stone-path",
+            "parentSemanticId": null,
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 324,
+                  "byteLength": 1296,
+                  "checksum": "c8b0b1a8"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 324,
+                  "byteLength": 1296,
+                  "checksum": "44d7a524"
+                }
+              },
+              "index": null,
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 16777215,
+              "emissive": 0,
+              "roughness": 0.78,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 2,
+              "vertexColors": false,
+              "hasRuntimeTexture": false
+            }
+          }
+        ],
+        "bounds": {
+          "min": [
+            -4.565631866455078,
+            -0.000005301051714923233,
+            -2.66461181640625
+          ],
+          "max": [
+            4.565629482269287,
+            0.6713388562202454,
+            2.6645565032958984
+          ]
+        },
+        "triangles": 36,
+        "drawCalls": 1,
+        "geometryMemoryBytes": 2592,
+        "runtimeTextureCount": 0
+      }
+    },
+    "benchmark": {
+      "warmups": 10,
+      "repetitions": 100,
+      "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+      "minimumMilliseconds": 0,
+      "medianMilliseconds": 0,
+      "p95Milliseconds": 0.10000000894069672,
+      "maximumMilliseconds": 0.20000000298023224
+    },
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "hardwareConcurrency": 10,
+      "deviceMemoryGiB": 32,
+      "threeRevision": "170",
+      "renderer": {
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "vendor": "Google Inc. (Google)",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+      }
+    }
+  },
+  "sourceScalars": {
+    "definition": "JavaScript numeric literals in object-specific semantic recipe sources, excluding generator control-flow literals",
+    "count": 33,
+    "files": [
+      {
+        "sourceFile": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+        "evidence": {
+          "definition": "JavaScript numeric literals outside comments and string/template literals",
+          "count": 33,
+          "literals": [
+            {
+              "literal": "0x5a17e001",
+              "offset": 578
+            },
+            {
+              "literal": "0.576911926",
+              "offset": 668
+            },
+            {
+              "literal": "2.545286179",
+              "offset": 681
+            },
+            {
+              "literal": "3.49080658",
+              "offset": 718
+            },
+            {
+              "literal": "2.664556503",
+              "offset": 730
+            },
+            {
+              "literal": "4.565631866",
+              "offset": 767
+            },
+            {
+              "literal": "1.947961807",
+              "offset": 780
+            },
+            {
+              "literal": "3.514774323",
+              "offset": 817
+            },
+            {
+              "literal": "0.177858353",
+              "offset": 831
+            },
+            {
+              "literal": "1.604084015",
+              "offset": 868
+            },
+            {
+              "literal": "1.634878159",
+              "offset": 882
+            },
+            {
+              "literal": "1.978473663",
+              "offset": 918
+            },
+            {
+              "literal": "2.494709015",
+              "offset": 932
+            },
+            {
+              "literal": "3.530937195",
+              "offset": 968
+            },
+            {
+              "literal": "2.661909103",
+              "offset": 982
+            },
+            {
+              "literal": "4.486351013",
+              "offset": 1018
+            },
+            {
+              "literal": "0.989759445",
+              "offset": 1032
+            },
+            {
+              "literal": "4.558105469",
+              "offset": 1068
+            },
+            {
+              "literal": "0.156820297",
+              "offset": 1081
+            },
+            {
+              "literal": "3.507247925",
+              "offset": 1117
+            },
+            {
+              "literal": "1.852655411",
+              "offset": 1130
+            },
+            {
+              "literal": "0.014371128553539378",
+              "offset": 1191
+            },
+            {
+              "literal": "0.005112762942845987",
+              "offset": 1219
+            },
+            {
+              "literal": "0.06952903150497299",
+              "offset": 1247
+            },
+            {
+              "literal": "0.007524108900000071",
+              "offset": 1313
+            },
+            {
+              "literal": "0.5262370588",
+              "offset": 1341
+            },
+            {
+              "literal": "0.002702712999999954",
+              "offset": 1362
+            },
+            {
+              "literal": "2",
+              "offset": 1428
+            },
+            {
+              "literal": "6",
+              "offset": 1431
+            },
+            {
+              "literal": "9",
+              "offset": 1434
+            },
+            {
+              "literal": "0xffffff",
+              "offset": 1486
+            },
+            {
+              "literal": "0.78",
+              "offset": 1511
+            },
+            {
+              "literal": "0",
+              "offset": 1532
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "bundles": {
+    "production": {
+      "bytes": 21991,
+      "gzipBytes": 7714,
+      "minified": true,
+      "sourceMapBytes": 0,
+      "threeExcluded": true
+    },
+    "objectIncrement": {
+      "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+      "bytes": 870,
+      "objectBundleGzipBytes": 458,
+      "combinedBundleGzipBytes": 2038,
+      "sharedFrameworkGzipBytes": 927,
+      "gzipBytes": 1111
+    }
+  },
+  "budgets": {
+    "objectId": "stone-path",
+    "passed": true,
+    "budget": {
+      "scalars": 48,
+      "recipeBytes": 1024,
+      "bundleGzipBytes": 4096,
+      "triangles": 96,
+      "drawCalls": 1,
+      "geometryMemoryBytes": 5120,
+      "warmGenerationP95Milliseconds": 5
+    },
+    "actual": {
+      "scalars": 33,
+      "recipeBytes": 618,
+      "bundleGzipBytes": 1111,
+      "triangles": 36,
+      "drawCalls": 1,
+      "geometryMemoryBytes": 2592,
+      "warmGenerationP95Milliseconds": 0.10000000894069672
+    },
+    "checks": [
+      {
+        "metric": "scalars",
+        "value": 33,
+        "maximum": 48,
+        "passed": true
+      },
+      {
+        "metric": "recipeBytes",
+        "value": 618,
+        "maximum": 1024,
+        "passed": true
+      },
+      {
+        "metric": "bundleGzipBytes",
+        "value": 1111,
+        "maximum": 4096,
+        "passed": true
+      },
+      {
+        "metric": "triangles",
+        "value": 36,
+        "maximum": 96,
+        "passed": true
+      },
+      {
+        "metric": "drawCalls",
+        "value": 1,
+        "maximum": 1,
+        "passed": true
+      },
+      {
+        "metric": "geometryMemoryBytes",
+        "value": 2592,
+        "maximum": 5120,
+        "passed": true
+      },
+      {
+        "metric": "warmGenerationP95Milliseconds",
+        "value": 0.10000000894069672,
+        "maximum": 5,
+        "passed": true
+      },
+      {
+        "metric": "deterministicCpuBytes",
+        "value": true,
+        "expected": true,
+        "passed": true
+      },
+      {
+        "metric": "runtimeTextureCount",
+        "value": 0,
+        "maximum": 0,
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  "staticAudit": {
+    "passed": true,
+    "productionFiles": [
+      {
+        "file": "gt_designer/single-mesh-replacement/main.js",
+        "bytes": 2488
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/object-generator.js",
+        "bytes": 2912
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/rng.js",
+        "bytes": 976
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+        "bytes": 1590
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+        "bytes": 4269
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+        "bytes": 3222
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+        "bytes": 1545
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+        "bytes": 1540
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+        "bytes": 14740
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+        "bytes": 2717
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+        "bytes": 3913
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+        "bytes": 1609
+      },
+      {
+        "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+        "bytes": 2056
+      }
+    ],
+    "thirdPartyInputs": [],
+    "failures": []
+  },
+  "bundleAudit": {
+    "passed": true,
+    "failures": []
+  },
+  "offline": {
+    "passed": true,
+    "servedFiles": [
+      "bundle.js",
+      "index.html",
+      "three.module.js"
+    ],
+    "authoredDirectoriesAvailableToServer": false,
+    "emptyBrowserProfile": true,
+    "networkResolutionBlocked": true,
+    "localRequestCount": 3
+  },
+  "crossEngine": {
+    "boundsToleranceCanonical": 0.000007,
+    "normative": {
+      "engine": "Chrome/V8",
+      "signature": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.path.stone-path",
+            "parentSemanticId": null,
+            "type": "Mesh"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.path.stone-path",
+            "parentSemanticId": null,
+            "type": "Mesh",
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 324
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 324
+                }
+              },
+              "index": null,
+              "groups": []
+            }
+          }
+        ],
+        "bounds": {
+          "min": [
+            -4.565631866455078,
+            -0.000005301051714923233,
+            -2.66461181640625
+          ],
+          "max": [
+            4.565629482269287,
+            0.6713388562202454,
+            2.6645565032958984
+          ]
+        },
+        "triangles": 36,
+        "drawCalls": 1
+      }
+    },
+    "candidates": [
+      {
+        "engine": "JavaScriptCore (Safari 26.2 system framework)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.path.stone-path",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.path.stone-path",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 324
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 324
+                  }
+                },
+                "index": null,
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -4.565631866455078,
+              -0.000005301051714923233,
+              -2.66461181640625
+            ],
+            "max": [
+              4.565629482269287,
+              0.6713388562202454,
+              2.6645565032958984
+            ]
+          },
+          "triangles": 36,
+          "drawCalls": 1
+        }
+      },
+      {
+        "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.path.stone-path",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.path.stone-path",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 324
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 324
+                  }
+                },
+                "index": null,
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -4.565631866455078,
+              -0.000005301051714923233,
+              -2.66461181640625
+            ],
+            "max": [
+              4.565629482269287,
+              0.6713388562202454,
+              2.6645565032958984
+            ]
+          },
+          "triangles": 36,
+          "drawCalls": 1
+        }
+      }
+    ],
+    "passed": true
+  },
+  "environment": {
+    "normativeBaseline": {
+      "model": "Apple M5 MacBook Pro",
+      "operatingSystem": "macOS 26.2",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0"
+    },
+    "actual": {
+      "modelName": "MacBook Pro",
+      "modelIdentifier": "Mac17,2",
+      "chip": "Apple M5",
+      "cores": "10 (4 performance and 6 efficiency)",
+      "memory": "32 GB",
+      "operatingSystem": "macOS 26.2",
+      "operatingSystemBuild": "25C56",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0",
+      "powerState": [
+        "Now drawing from 'Battery Power'",
+        "-InternalBattery-0 (id=22610019)\t15%; discharging; 0:51 remaining present: true"
+      ]
+    },
+    "migrationRequired": false
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "object-budgets",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "static-source-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "minified-bundle-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "isolated-offline-render",
+        "passed": true,
+        "detail": {
+          "passed": true,
+          "servedFiles": [
+            "bundle.js",
+            "index.html",
+            "three.module.js"
+          ],
+          "authoredDirectoriesAvailableToServer": false,
+          "emptyBrowserProfile": true,
+          "networkResolutionBlocked": true,
+          "localRequestCount": 3
+        }
+      },
+      {
+        "id": "cross-engine-structure-and-bounds",
+        "passed": true,
+        "detail": [
+          {
+            "engine": "JavaScriptCore (Safari 26.2 system framework)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          },
+          {
+            "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "normative-environment",
+        "passed": true,
+        "detail": {
+          "modelName": "MacBook Pro",
+          "modelIdentifier": "Mac17,2",
+          "chip": "Apple M5",
+          "cores": "10 (4 performance and 6 efficiency)",
+          "memory": "32 GB",
+          "operatingSystem": "macOS 26.2",
+          "operatingSystemBuild": "25C56",
+          "browser": "Google Chrome 150.0.7871.184",
+          "three": "0.170.0",
+          "powerState": [
+            "Now drawing from 'Battery Power'",
+            "-InternalBattery-0 (id=22610019)\t15%; discharging; 0:51 remaining present: true"
+          ]
+        }
+      }
+    ],
+    "failures": []
+  }
+}

@@ -1,0 +1,2399 @@
+{
+  "schemaVersion": "single-mesh-object-acceptance-v1",
+  "artifactRole": "development-only-object-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "stone-path",
+  "visual": {
+    "schemaVersion": "single-mesh-object-evaluation-v1",
+    "artifactRole": "development-only-object-acceptance",
+    "productionUse": "prohibited",
+    "objectId": "stone-path",
+    "semanticId": "island.path.stone-path",
+    "evaluationProtocolVersion": "single-mesh-evaluation-v1",
+    "qualityBaseline": {
+      "version": "single-mesh-quality-baseline-v1",
+      "geometry": {
+        "stone-path": {
+          "meanSilhouetteIouMinimum": 0.95,
+          "worstViewIouMinimum": 0.92,
+          "meanSymmetricEdgeDistancePixelsMaximum": 1.5,
+          "edgeDistanceP95PixelsMaximum": 4,
+          "depthMaeMaximum": 0.015,
+          "depthP95Maximum": 0.04
+        },
+        "stone": {
+          "meanSilhouetteIouMinimum": 0.92,
+          "worstViewIouMinimum": 0.88,
+          "meanSymmetricEdgeDistancePixelsMaximum": 2.5,
+          "edgeDistanceP95PixelsMaximum": 7,
+          "depthMaeMaximum": 0.025,
+          "depthP95Maximum": 0.07
+        },
+        "vase": {
+          "meanSilhouetteIouMinimum": 0.95,
+          "worstViewIouMinimum": 0.92,
+          "meanSymmetricEdgeDistancePixelsMaximum": 1.5,
+          "edgeDistanceP95PixelsMaximum": 4,
+          "depthMaeMaximum": 0.015,
+          "depthP95Maximum": 0.04
+        },
+        "umbrella": {
+          "meanSilhouetteIouMinimum": 0.9,
+          "worstViewIouMinimum": 0.84,
+          "meanSymmetricEdgeDistancePixelsMaximum": 2.5,
+          "edgeDistanceP95PixelsMaximum": 8,
+          "depthMaeMaximum": 0.03,
+          "depthP95Maximum": 0.08
+        }
+      },
+      "appearance": {
+        "stone-path": {
+          "meanDeltaE00Maximum": 4,
+          "p90DeltaE00Maximum": 8,
+          "meanMaskedSsimMinimum": 0.95,
+          "worstViewSsimMinimum": 0.92,
+          "paletteCentroidDeltaE00Maximum": 3,
+          "paletteCoverageL1Maximum": 0.08
+        },
+        "stone": {
+          "meanDeltaE00Maximum": 4,
+          "p90DeltaE00Maximum": 8,
+          "meanMaskedSsimMinimum": 0.95,
+          "worstViewSsimMinimum": 0.92,
+          "paletteCentroidDeltaE00Maximum": 3,
+          "paletteCoverageL1Maximum": 0.08
+        },
+        "vase": {
+          "meanDeltaE00Maximum": 8,
+          "p90DeltaE00Maximum": 18,
+          "meanMaskedSsimMinimum": 0.82,
+          "worstViewSsimMinimum": 0.75,
+          "paletteCentroidDeltaE00Maximum": 6,
+          "paletteCoverageL1Maximum": 0.15
+        },
+        "umbrella": {
+          "meanDeltaE00Maximum": 10,
+          "p90DeltaE00Maximum": 22,
+          "meanMaskedSsimMinimum": 0.78,
+          "worstViewSsimMinimum": 0.68,
+          "paletteCentroidDeltaE00Maximum": 8,
+          "paletteCoverageL1Maximum": 0.2
+        }
+      },
+      "common": {
+        "maxAxisRelativeErrorMaximum": 0.02,
+        "bottomAnchorErrorCanonicalMaximum": 0.02,
+        "roughnessAbsoluteErrorMaximum": 0.1,
+        "metalnessAbsoluteErrorMaximum": 0.05
+      }
+    },
+    "manifest": {
+      "schemaVersion": "single-mesh-evaluation-v1",
+      "artifactRole": "development-only-evaluation-manifest",
+      "unitId": "stone-path",
+      "capture": {
+        "width": 512,
+        "height": 512,
+        "pixelOrigin": "bottom-left",
+        "channels": "RGBA8"
+      },
+      "renderer": {
+        "threeRevision": "170",
+        "toneMapping": "ACESFilmic",
+        "toneMappingExposure": 1.05,
+        "outputColorSpace": "sRGB for color passes; linear RGBA8 for data passes",
+        "lighting": "frozen hemisphere plus directional key"
+      },
+      "framing": {
+        "sourceWorldBounds": {
+          "min": [
+            -62.77131271362305,
+            25.57322120666504,
+            31.538726806640625
+          ],
+          "max": [
+            -53.64004898071289,
+            26.24453353881836,
+            36.86783981323242
+          ],
+          "size": [
+            9.131263732910156,
+            0.6713123321533203,
+            5.329113006591797
+          ]
+        },
+        "reconstructionFrame": {
+          "sourceWorldBottomCenter": [
+            -58.20568084716797,
+            25.57322120666504,
+            34.20328330993652
+          ],
+          "sourceWorldAxesPreserved": true
+        },
+        "referenceTransform": {
+          "translationBeforeScale": [
+            58.20568084716797,
+            -25.57322120666504,
+            -34.20328330993652
+          ],
+          "uniformScale": 0.7665970674761228
+        },
+        "replacementTransform": {
+          "translationBeforeScale": [
+            0,
+            0,
+            0
+          ],
+          "uniformScale": 0.7665970674761228,
+          "independentlyFramed": false
+        },
+        "canonicalBounds": {
+          "min": [
+            -3.5,
+            0,
+            -2.0426412015510675
+          ],
+          "max": [
+            3.5,
+            0.5146260651892922,
+            2.0426412015510675
+          ],
+          "size": [
+            7,
+            0.5146260651892922,
+            4.085282403102135
+          ]
+        },
+        "camera": {
+          "fovDegrees": 38,
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "boundingSphereRadius": 4.060614864157526,
+          "distance": 13.71963531881947,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378,
+          "framingMargin": 1.1
+        }
+      },
+      "views": [
+        {
+          "id": "low-000",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 0,
+          "position": [
+            0,
+            4.949704670713188,
+            12.89224006896838
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "low-045",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 45,
+          "position": [
+            9.116190377452464,
+            4.949704670713188,
+            9.116190377452465
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "low-090",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 90,
+          "position": [
+            12.89224006896838,
+            4.949704670713188,
+            7.8942202671506895e-16
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "low-135",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 135,
+          "position": [
+            9.116190377452465,
+            4.949704670713188,
+            -9.116190377452464
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "low-180",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 180,
+          "position": [
+            1.5788440534301379e-15,
+            4.949704670713188,
+            -12.89224006896838
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "low-225",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 225,
+          "position": [
+            -9.116190377452464,
+            4.949704670713188,
+            -9.116190377452467
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "low-270",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 270,
+          "position": [
+            -12.89224006896838,
+            4.949704670713188,
+            -2.368266080145207e-15
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "low-315",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 315,
+          "position": [
+            -9.116190377452467,
+            4.949704670713188,
+            9.116190377452464
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "high-045",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 45,
+          "position": [
+            4.850623584671855,
+            12.138865749350524,
+            4.8506235846718555
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "high-135",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 135,
+          "position": [
+            4.8506235846718555,
+            12.138865749350524,
+            -4.850623584671855
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "high-225",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 225,
+          "position": [
+            -4.850623584671855,
+            12.138865749350524,
+            -4.850623584671856
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        },
+        {
+          "id": "high-315",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 315,
+          "position": [
+            -4.850623584671856,
+            12.138865749350524,
+            4.850623584671854
+          ],
+          "target": [
+            0,
+            0.2573130325946461,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.643866738622563,
+          "far": 18.795403899016378
+        }
+      ],
+      "passes": [
+        {
+          "id": "neutral-rgb",
+          "label": "Neutral RGB",
+          "encoding": "sRGB display color under frozen lights"
+        },
+        {
+          "id": "silhouette",
+          "label": "Silhouette",
+          "encoding": "white foreground on black background"
+        },
+        {
+          "id": "linear-depth",
+          "label": "Linear Depth",
+          "encoding": "RGB=(viewDistance-near)/(far-near); white background"
+        },
+        {
+          "id": "world-normal",
+          "label": "World Normal",
+          "encoding": "RGB=normalize(worldNormal)*0.5+0.5; black background"
+        },
+        {
+          "id": "semantic-id",
+          "label": "Semantic ID",
+          "encoding": "stable 24-bit semantic color; black background"
+        },
+        {
+          "id": "albedo",
+          "label": "Unlit Albedo",
+          "encoding": "sRGB base color and base-color map without lighting"
+        },
+        {
+          "id": "lit-rgb",
+          "label": "Frozen-lighting RGB",
+          "encoding": "sRGB authored/procedural material under frozen lights"
+        }
+      ],
+      "captures": []
+    },
+    "captures": {
+      "expectedCount": 168,
+      "referenceChecksums": {
+        "low-000/neutral-rgb": "f413ba5d",
+        "low-000/silhouette": "338c2c9d",
+        "low-000/linear-depth": "eead8064",
+        "low-000/world-normal": "730d43c9",
+        "low-000/semantic-id": "d033758d",
+        "low-000/albedo": "338c2c9d",
+        "low-000/lit-rgb": "1fa6ff99",
+        "low-045/neutral-rgb": "02a7c336",
+        "low-045/silhouette": "8e52170c",
+        "low-045/linear-depth": "13687812",
+        "low-045/world-normal": "8e63fd3b",
+        "low-045/semantic-id": "79af4342",
+        "low-045/albedo": "8e52170c",
+        "low-045/lit-rgb": "672c9177",
+        "low-090/neutral-rgb": "c1e04034",
+        "low-090/silhouette": "10316564",
+        "low-090/linear-depth": "9f3d7b22",
+        "low-090/world-normal": "3b2cf799",
+        "low-090/semantic-id": "5530007a",
+        "low-090/albedo": "10316564",
+        "low-090/lit-rgb": "76432d0f",
+        "low-135/neutral-rgb": "8525b541",
+        "low-135/silhouette": "06a7d8cc",
+        "low-135/linear-depth": "3e5b8799",
+        "low-135/world-normal": "36cc0345",
+        "low-135/semantic-id": "b1f25612",
+        "low-135/albedo": "06a7d8cc",
+        "low-135/lit-rgb": "5a757dd3",
+        "low-180/neutral-rgb": "f3a2ffac",
+        "low-180/silhouette": "804aa2ed",
+        "low-180/linear-depth": "a30934cd",
+        "low-180/world-normal": "e77fe54b",
+        "low-180/semantic-id": "87858bad",
+        "low-180/albedo": "804aa2ed",
+        "low-180/lit-rgb": "2b8a5403",
+        "low-225/neutral-rgb": "35847f2a",
+        "low-225/silhouette": "4bb97a54",
+        "low-225/linear-depth": "a0464847",
+        "low-225/world-normal": "b140c475",
+        "low-225/semantic-id": "b5db5dba",
+        "low-225/albedo": "4bb97a54",
+        "low-225/lit-rgb": "6614b616",
+        "low-270/neutral-rgb": "9e96ce1a",
+        "low-270/silhouette": "b32c7f04",
+        "low-270/linear-depth": "9178ca1d",
+        "low-270/world-normal": "aa223894",
+        "low-270/semantic-id": "3ac8cb2a",
+        "low-270/albedo": "b32c7f04",
+        "low-270/lit-rgb": "705ed7c6",
+        "low-315/neutral-rgb": "fd1c7688",
+        "low-315/silhouette": "1afaf3c5",
+        "low-315/linear-depth": "1998f51c",
+        "low-315/world-normal": "4189ec90",
+        "low-315/semantic-id": "eff2d615",
+        "low-315/albedo": "1afaf3c5",
+        "low-315/lit-rgb": "a39b7416",
+        "high-045/neutral-rgb": "2b5b7405",
+        "high-045/silhouette": "3ffec845",
+        "high-045/linear-depth": "f1ab0e6b",
+        "high-045/world-normal": "9388f139",
+        "high-045/semantic-id": "0a40cb95",
+        "high-045/albedo": "3ffec845",
+        "high-045/lit-rgb": "d70ec76b",
+        "high-135/neutral-rgb": "26861eb0",
+        "high-135/silhouette": "1333effd",
+        "high-135/linear-depth": "68e68dff",
+        "high-135/world-normal": "c5d7ae21",
+        "high-135/semantic-id": "7d44452d",
+        "high-135/albedo": "1333effd",
+        "high-135/lit-rgb": "bc9890ad",
+        "high-225/neutral-rgb": "195b84ea",
+        "high-225/silhouette": "abb039c5",
+        "high-225/linear-depth": "f1bf6d4e",
+        "high-225/world-normal": "9358ac3c",
+        "high-225/semantic-id": "480df6d5",
+        "high-225/albedo": "abb039c5",
+        "high-225/lit-rgb": "2cf1d924",
+        "high-315/neutral-rgb": "a6de466b",
+        "high-315/silhouette": "703bb044",
+        "high-315/linear-depth": "ccb5dbab",
+        "high-315/world-normal": "59d30934",
+        "high-315/semantic-id": "0a684b3a",
+        "high-315/albedo": "703bb044",
+        "high-315/lit-rgb": "0dcac043"
+      },
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "cdd53f01",
+        "low-000/silhouette": "338c2c9d",
+        "low-000/linear-depth": "825fdffd",
+        "low-000/world-normal": "aed43384",
+        "low-000/semantic-id": "12dc6489",
+        "low-000/albedo": "338c2c9d",
+        "low-000/lit-rgb": "52927252",
+        "low-045/neutral-rgb": "c02c69c1",
+        "low-045/silhouette": "0bed11e5",
+        "low-045/linear-depth": "0f585206",
+        "low-045/world-normal": "264122ff",
+        "low-045/semantic-id": "4e769961",
+        "low-045/albedo": "0bed11e5",
+        "low-045/lit-rgb": "784af793",
+        "low-090/neutral-rgb": "ec2de6b6",
+        "low-090/silhouette": "47f8bed4",
+        "low-090/linear-depth": "e3d83f5e",
+        "low-090/world-normal": "52f33543",
+        "low-090/semantic-id": "6212d287",
+        "low-090/albedo": "47f8bed4",
+        "low-090/lit-rgb": "9cd62516",
+        "low-135/neutral-rgb": "5d4371c2",
+        "low-135/silhouette": "9de6a315",
+        "low-135/linear-depth": "91386729",
+        "low-135/world-normal": "75b4c2da",
+        "low-135/semantic-id": "4805132d",
+        "low-135/albedo": "9de6a315",
+        "low-135/lit-rgb": "57613c42",
+        "low-180/neutral-rgb": "22398bf0",
+        "low-180/silhouette": "804aa2ed",
+        "low-180/linear-depth": "bde6f2f1",
+        "low-180/world-normal": "2964c78e",
+        "low-180/semantic-id": "b4904d2d",
+        "low-180/albedo": "804aa2ed",
+        "low-180/lit-rgb": "60f867c9",
+        "low-225/neutral-rgb": "80e43138",
+        "low-225/silhouette": "4bb97a54",
+        "low-225/linear-depth": "87a77aa0",
+        "low-225/world-normal": "708de602",
+        "low-225/semantic-id": "248c5153",
+        "low-225/albedo": "4bb97a54",
+        "low-225/lit-rgb": "91f724d7",
+        "low-270/neutral-rgb": "e2a04526",
+        "low-270/silhouette": "4b783edd",
+        "low-270/linear-depth": "da8ada5b",
+        "low-270/world-normal": "435104b9",
+        "low-270/semantic-id": "bd7f1691",
+        "low-270/albedo": "4b783edd",
+        "low-270/lit-rgb": "cd3470ac",
+        "low-315/neutral-rgb": "8aed23c0",
+        "low-315/silhouette": "d95b460d",
+        "low-315/linear-depth": "d16c5ee7",
+        "low-315/world-normal": "af31498d",
+        "low-315/semantic-id": "e6c2f341",
+        "low-315/albedo": "d95b460d",
+        "low-315/lit-rgb": "9ad204a4",
+        "high-045/neutral-rgb": "67ed9328",
+        "high-045/silhouette": "3ffec845",
+        "high-045/linear-depth": "51bd4b42",
+        "high-045/world-normal": "666d7090",
+        "high-045/semantic-id": "bba56339",
+        "high-045/albedo": "3ffec845",
+        "high-045/lit-rgb": "fe2ea99f",
+        "high-135/neutral-rgb": "3fa7ec30",
+        "high-135/silhouette": "1333effd",
+        "high-135/linear-depth": "7e64ea46",
+        "high-135/world-normal": "e805852f",
+        "high-135/semantic-id": "e0bbc469",
+        "high-135/albedo": "1333effd",
+        "high-135/lit-rgb": "e250c02f",
+        "high-225/neutral-rgb": "597ba4ee",
+        "high-225/silhouette": "99b12b4d",
+        "high-225/linear-depth": "b37318b2",
+        "high-225/world-normal": "d45bb903",
+        "high-225/semantic-id": "3170e971",
+        "high-225/albedo": "99b12b4d",
+        "high-225/lit-rgb": "23444bfa",
+        "high-315/neutral-rgb": "456e7616",
+        "high-315/silhouette": "703bb044",
+        "high-315/linear-depth": "10a66a3f",
+        "high-315/world-normal": "c6ed1158",
+        "high-315/semantic-id": "812c291f",
+        "high-315/albedo": "703bb044",
+        "high-315/lit-rgb": "dc5c4012"
+      }
+    },
+    "comparison": {
+      "perView": [
+        {
+          "viewId": "low-000",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 29692,
+              "replacementForegroundPixels": 29692,
+              "intersectionPixels": 29692,
+              "unionPixels": 29692,
+              "iou": 1,
+              "symmetricEdgeMeanPixels": 0,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 29692,
+              "mae": 0.00003849906602725705,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 29692,
+              "meanDegrees": 0.004823109699987697,
+              "p95Degrees": 0.0000012074182697257333
+            }
+          },
+          "appearance": {
+            "comparedPixels": 27720,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.01687262352408402,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999866308183764
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-045",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 30309,
+              "replacementForegroundPixels": 30310,
+              "intersectionPixels": 30309,
+              "unionPixels": 30310,
+              "iou": 0.9999670075882547,
+              "symmetricEdgeMeanPixels": 0.0012360939431396785,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 30309,
+              "mae": 0.000061733070490097,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 30309,
+              "meanDegrees": 0.002548692333526893,
+              "p95Degrees": 0.0000012074182697257333
+            }
+          },
+          "appearance": {
+            "comparedPixels": 28367,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.010351663203647365,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999849126389329
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-090",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 29355,
+              "replacementForegroundPixels": 29355,
+              "intersectionPixels": 29354,
+              "unionPixels": 29356,
+              "iou": 0.9999318708270881,
+              "symmetricEdgeMeanPixels": 0.0032310177705977385,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 29354,
+              "mae": 0.00005812293722238375,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 29354,
+              "meanDegrees": 0.00998880874577809,
+              "p95Degrees": 0.0000012074182697257333
+            }
+          },
+          "appearance": {
+            "comparedPixels": 27758,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.014383845429166264,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9995522735978214
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-135",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 28451,
+              "replacementForegroundPixels": 28452,
+              "intersectionPixels": 28451,
+              "unionPixels": 28452,
+              "iou": 0.9999648530858991,
+              "symmetricEdgeMeanPixels": 0.001584786053882726,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 28451,
+              "mae": 0.000045575443092040594,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 28451,
+              "meanDegrees": 0.006372918339114282,
+              "p95Degrees": 0.0000012074182697257333
+            }
+          },
+          "appearance": {
+            "comparedPixels": 26764,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.015424988809497013,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999995967224032
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-180",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 27850,
+              "replacementForegroundPixels": 27850,
+              "intersectionPixels": 27850,
+              "unionPixels": 27850,
+              "iou": 1,
+              "symmetricEdgeMeanPixels": 0,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 27850,
+              "mae": 0.000043700072966407254,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 27850,
+              "meanDegrees": 0.011816061832506882,
+              "p95Degrees": 0.0000012074182697257333
+            }
+          },
+          "appearance": {
+            "comparedPixels": 25975,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.009897939186299137,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999995661656027
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-225",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 27381,
+              "replacementForegroundPixels": 27381,
+              "intersectionPixels": 27381,
+              "unionPixels": 27381,
+              "iou": 1,
+              "symmetricEdgeMeanPixels": 0,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 27381,
+              "mae": 0.0000637650432370788,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 27381,
+              "meanDegrees": 0.01036659009894479,
+              "p95Degrees": 0.0000012074182697257333
+            }
+          },
+          "appearance": {
+            "comparedPixels": 25420,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.006710063005220043,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999999539564229
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-270",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 24973,
+              "replacementForegroundPixels": 24968,
+              "intersectionPixels": 24968,
+              "unionPixels": 24973,
+              "iou": 0.9997997837664678,
+              "symmetricEdgeMeanPixels": 0.008787346221441126,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 24968,
+              "mae": 0.00006172756187789821,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 24968,
+              "meanDegrees": 0.00805130025532582,
+              "p95Degrees": 0.0000012074182697257333
+            }
+          },
+          "appearance": {
+            "comparedPixels": 23451,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.004035307421213843,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999921749441492
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-315",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 26462,
+              "replacementForegroundPixels": 26460,
+              "intersectionPixels": 26458,
+              "unionPixels": 26464,
+              "iou": 0.999773276904474,
+              "symmetricEdgeMeanPixels": 0.009724473257698542,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 26458,
+              "mae": 0.000052232744968362766,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 26458,
+              "meanDegrees": 0.004594540628430377,
+              "p95Degrees": 0.0000012074182697257333
+            }
+          },
+          "appearance": {
+            "comparedPixels": 24772,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.010862244530236416,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.999995766874818
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-045",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 57182,
+              "replacementForegroundPixels": 57182,
+              "intersectionPixels": 57182,
+              "unionPixels": 57182,
+              "iou": 1,
+              "symmetricEdgeMeanPixels": 0,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 57182,
+              "mae": 0.000017206017101306486,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 57182,
+              "meanDegrees": 0.0005190605299126118,
+              "p95Degrees": 8.537736462515939e-7
+            }
+          },
+          "appearance": {
+            "comparedPixels": 54708,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.0010606959776357718,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.999987782790046
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-135",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 55588,
+              "replacementForegroundPixels": 55588,
+              "intersectionPixels": 55588,
+              "unionPixels": 55588,
+              "iou": 1,
+              "symmetricEdgeMeanPixels": 0,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 55588,
+              "mae": 0.00001708555184396615,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 55588,
+              "meanDegrees": 0.0008029156101567186,
+              "p95Degrees": 8.537736462515939e-7
+            }
+          },
+          "appearance": {
+            "comparedPixels": 53181,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.0009532063319808853,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999997874469234
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-225",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 54078,
+              "replacementForegroundPixels": 54076,
+              "intersectionPixels": 54076,
+              "unionPixels": 54078,
+              "iou": 0.999963016383742,
+              "symmetricEdgeMeanPixels": 0.002369668246445498,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 54076,
+              "mae": 0.000022190724630560352,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 54076,
+              "meanDegrees": 0.0018143260150945378,
+              "p95Degrees": 8.537736462515939e-7
+            }
+          },
+          "appearance": {
+            "comparedPixels": 51618,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.0010177339308068904,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999999646402677
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-315",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                7,
+                0.5146260651892902,
+                4.085282403102134
+              ],
+              "replacementSize": [
+                6.999998172290164,
+                0.5146504622319137,
+                4.085324805970323
+              ],
+              "perAxisRelativeError": [
+                2.611014051317235e-7,
+                0.000047407320137381504,
+                0.000010379421544256104
+              ],
+              "maxAxisRelativeError": 0.000047407320137381504,
+              "bottomAnchorErrorCanonical": 0.000021606715871772193
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 54219,
+              "replacementForegroundPixels": 54219,
+              "intersectionPixels": 54219,
+              "unionPixels": 54219,
+              "iou": 1,
+              "symmetricEdgeMeanPixels": 0,
+              "symmetricEdgeP95Pixels": 0
+            },
+            "depth": {
+              "comparedPixels": 54219,
+              "mae": 0.00001971968322632658,
+              "p95": 0,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 54219,
+              "meanDegrees": 0.0006670419777839828,
+              "p95Degrees": 8.537736462515939e-7
+            }
+          },
+          "appearance": {
+            "comparedPixels": 51801,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 0.0012817595619271465,
+              "p90DeltaE00": 0,
+              "maskedSsim": 0.9999957109678825
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        }
+      ],
+      "aggregate": {
+        "viewCount": 12,
+        "geometry": {
+          "bounds": {
+            "maxAxisRelativeError": 0.000047407320137381504,
+            "bottomAnchorErrorCanonical": 0.000021606715871772193
+          },
+          "silhouette": {
+            "meanIou": 0.9999499840463271,
+            "worstViewIou": 0.999773276904474,
+            "meanEdgeDistancePixels": 0.0022444487911004425,
+            "edgeDistanceP95Pixels": 0
+          },
+          "depth": {
+            "mae": 0.00004179649305697375,
+            "p95": 0
+          },
+          "worldNormal": {
+            "meanDegrees": 0.005197113838880223,
+            "p95Degrees": 0.0000012074182697257333
+          }
+        },
+        "appearance": {
+          "meanDeltaE00": 0.007737672575976234,
+          "p90DeltaE00": 0,
+          "meanMaskedSsim": 0.999957843463637,
+          "worstViewSsim": 0.9995522735978214,
+          "paletteCentroidDeltaE00": 0,
+          "paletteCoverageL1": 0,
+          "roughnessAbsoluteError": 2.8610229518832853e-8,
+          "metalnessAbsoluteError": 0,
+          "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+        }
+      },
+      "gate": {
+        "baselineVersion": "single-mesh-quality-baseline-v1",
+        "objectId": "stone-path",
+        "passed": true,
+        "failures": [],
+        "geometryGate": {
+          "passed": true,
+          "failures": []
+        },
+        "appearanceGate": {
+          "evaluated": true,
+          "passed": true,
+          "reason": null,
+          "failures": []
+        }
+      },
+      "diagnostics": {
+        "units": "canonical",
+        "surfaceArea": {
+          "reference": 47.31325980607965,
+          "replacement": 47.31322505603001,
+          "relativeError": 7.34467457655189e-7
+        },
+        "volume": {
+          "reference": 8.082080537573376,
+          "replacement": 8.081829812273543,
+          "relativeError": 0.00003102237086928794,
+          "referenceUnavailableReason": null,
+          "replacementUnavailableReason": null
+        },
+        "topology": {
+          "referenceConnectedComponents": 1,
+          "replacementConnectedComponents": 1,
+          "referenceClosed": true,
+          "replacementClosed": true
+        },
+        "pointSetDistance": {
+          "sampling": "position-attribute-vertices-with-duplicates-retained",
+          "referencePointCount": 63,
+          "replacementPointCount": 108,
+          "symmetricChamferMeanCanonical": 0.044115025519763595,
+          "symmetricHausdorffCanonical": 1.8437320679142086
+        }
+      },
+      "captureChecksums": {
+        "low-000/neutral-rgb": "cdd53f01",
+        "low-000/silhouette": "338c2c9d",
+        "low-000/linear-depth": "825fdffd",
+        "low-000/world-normal": "aed43384",
+        "low-000/semantic-id": "12dc6489",
+        "low-000/albedo": "338c2c9d",
+        "low-000/lit-rgb": "52927252",
+        "low-045/neutral-rgb": "c02c69c1",
+        "low-045/silhouette": "0bed11e5",
+        "low-045/linear-depth": "0f585206",
+        "low-045/world-normal": "264122ff",
+        "low-045/semantic-id": "4e769961",
+        "low-045/albedo": "0bed11e5",
+        "low-045/lit-rgb": "784af793",
+        "low-090/neutral-rgb": "ec2de6b6",
+        "low-090/silhouette": "47f8bed4",
+        "low-090/linear-depth": "e3d83f5e",
+        "low-090/world-normal": "52f33543",
+        "low-090/semantic-id": "6212d287",
+        "low-090/albedo": "47f8bed4",
+        "low-090/lit-rgb": "9cd62516",
+        "low-135/neutral-rgb": "5d4371c2",
+        "low-135/silhouette": "9de6a315",
+        "low-135/linear-depth": "91386729",
+        "low-135/world-normal": "75b4c2da",
+        "low-135/semantic-id": "4805132d",
+        "low-135/albedo": "9de6a315",
+        "low-135/lit-rgb": "57613c42",
+        "low-180/neutral-rgb": "22398bf0",
+        "low-180/silhouette": "804aa2ed",
+        "low-180/linear-depth": "bde6f2f1",
+        "low-180/world-normal": "2964c78e",
+        "low-180/semantic-id": "b4904d2d",
+        "low-180/albedo": "804aa2ed",
+        "low-180/lit-rgb": "60f867c9",
+        "low-225/neutral-rgb": "80e43138",
+        "low-225/silhouette": "4bb97a54",
+        "low-225/linear-depth": "87a77aa0",
+        "low-225/world-normal": "708de602",
+        "low-225/semantic-id": "248c5153",
+        "low-225/albedo": "4bb97a54",
+        "low-225/lit-rgb": "91f724d7",
+        "low-270/neutral-rgb": "e2a04526",
+        "low-270/silhouette": "4b783edd",
+        "low-270/linear-depth": "da8ada5b",
+        "low-270/world-normal": "435104b9",
+        "low-270/semantic-id": "bd7f1691",
+        "low-270/albedo": "4b783edd",
+        "low-270/lit-rgb": "cd3470ac",
+        "low-315/neutral-rgb": "8aed23c0",
+        "low-315/silhouette": "d95b460d",
+        "low-315/linear-depth": "d16c5ee7",
+        "low-315/world-normal": "af31498d",
+        "low-315/semantic-id": "e6c2f341",
+        "low-315/albedo": "d95b460d",
+        "low-315/lit-rgb": "9ad204a4",
+        "high-045/neutral-rgb": "67ed9328",
+        "high-045/silhouette": "3ffec845",
+        "high-045/linear-depth": "51bd4b42",
+        "high-045/world-normal": "666d7090",
+        "high-045/semantic-id": "bba56339",
+        "high-045/albedo": "3ffec845",
+        "high-045/lit-rgb": "fe2ea99f",
+        "high-135/neutral-rgb": "3fa7ec30",
+        "high-135/silhouette": "1333effd",
+        "high-135/linear-depth": "7e64ea46",
+        "high-135/world-normal": "e805852f",
+        "high-135/semantic-id": "e0bbc469",
+        "high-135/albedo": "1333effd",
+        "high-135/lit-rgb": "e250c02f",
+        "high-225/neutral-rgb": "597ba4ee",
+        "high-225/silhouette": "99b12b4d",
+        "high-225/linear-depth": "b37318b2",
+        "high-225/world-normal": "d45bb903",
+        "high-225/semantic-id": "3170e971",
+        "high-225/albedo": "99b12b4d",
+        "high-225/lit-rgb": "23444bfa",
+        "high-315/neutral-rgb": "456e7616",
+        "high-315/silhouette": "703bb044",
+        "high-315/linear-depth": "10a66a3f",
+        "high-315/world-normal": "c6ed1158",
+        "high-315/semantic-id": "812c291f",
+        "high-315/albedo": "703bb044",
+        "high-315/lit-rgb": "dc5c4012"
+      }
+    },
+    "environment": {
+      "threeRevision": "170",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "captureBackend": "browser-webgl-rgba8"
+    }
+  },
+  "nonvisual": {
+    "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+    "artifactRole": "development-only-nonvisual-acceptance",
+    "productionUse": "prohibited",
+    "objectId": "stone-path",
+    "runtime": {
+      "schemaVersion": "single-mesh-runtime-evidence-v1",
+      "objectId": "stone-path",
+      "semanticId": "island.path.stone-path",
+      "recipe": {
+        "encoding": "canonical-minified-utf8-json",
+        "bytes": 618,
+        "serialized": "{\"id\":\"island.path.stone-path\",\"kind\":\"shallow-footprint-extrusion-v1\",\"seed\":1511514113,\"shape\":{\"footprint\":[[-0.576911926,2.545286179],[-3.49080658,2.664556503],[-4.565631866,1.947961807],[-3.514774323,-0.177858353],[-1.604084015,-1.634878159],[1.978473663,-2.494709015],[3.530937195,-2.661909103],[4.486351013,-0.989759445],[4.558105469,0.156820297],[3.507247925,1.852655411]],\"basePlane\":[-0.014371128553539378,0.005112762942845987,0.06952903150497299],\"extrusion\":[0.007524108900000071,0.5262370588,-0.002702712999999954],\"hardSideCorners\":[2,6,9]},\"appearance\":{\"color\":16777215,\"roughness\":0.78,\"metalness\":0}}"
+      },
+      "recipeScalars": {
+        "definition": "finite numeric leaves in the object-specific recipe",
+        "count": 33
+      },
+      "deterministic": {
+        "repetitions": 3,
+        "byteStable": true,
+        "snapshot": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.path.stone-path",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.path.stone-path",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true,
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 324,
+                    "byteLength": 1296,
+                    "checksum": "c8b0b1a8"
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 324,
+                    "byteLength": 1296,
+                    "checksum": "44d7a524"
+                  }
+                },
+                "index": null,
+                "groups": []
+              },
+              "material": {
+                "type": "MeshStandardMaterial",
+                "color": 16777215,
+                "emissive": 0,
+                "roughness": 0.78,
+                "metalness": 0,
+                "opacity": 1,
+                "transparent": false,
+                "side": 2,
+                "vertexColors": false,
+                "hasRuntimeTexture": false
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -4.565631866455078,
+              -0.000005301051714923233,
+              -2.66461181640625
+            ],
+            "max": [
+              4.565629482269287,
+              0.6713388562202454,
+              2.6645565032958984
+            ]
+          },
+          "triangles": 36,
+          "drawCalls": 1,
+          "geometryMemoryBytes": 2592,
+          "runtimeTextureCount": 0
+        }
+      },
+      "benchmark": {
+        "warmups": 10,
+        "repetitions": 100,
+        "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+        "minimumMilliseconds": 0,
+        "medianMilliseconds": 0,
+        "p95Milliseconds": 0.10000000894069672,
+        "maximumMilliseconds": 0.20000000298023224
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "hardwareConcurrency": 10,
+        "deviceMemoryGiB": 32,
+        "threeRevision": "170",
+        "renderer": {
+          "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "vendor": "Google Inc. (Google)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+        }
+      }
+    },
+    "sourceScalars": {
+      "definition": "JavaScript numeric literals in object-specific semantic recipe sources, excluding generator control-flow literals",
+      "count": 33,
+      "files": [
+        {
+          "sourceFile": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+          "evidence": {
+            "definition": "JavaScript numeric literals outside comments and string/template literals",
+            "count": 33,
+            "literals": [
+              {
+                "literal": "0x5a17e001",
+                "offset": 578
+              },
+              {
+                "literal": "0.576911926",
+                "offset": 668
+              },
+              {
+                "literal": "2.545286179",
+                "offset": 681
+              },
+              {
+                "literal": "3.49080658",
+                "offset": 718
+              },
+              {
+                "literal": "2.664556503",
+                "offset": 730
+              },
+              {
+                "literal": "4.565631866",
+                "offset": 767
+              },
+              {
+                "literal": "1.947961807",
+                "offset": 780
+              },
+              {
+                "literal": "3.514774323",
+                "offset": 817
+              },
+              {
+                "literal": "0.177858353",
+                "offset": 831
+              },
+              {
+                "literal": "1.604084015",
+                "offset": 868
+              },
+              {
+                "literal": "1.634878159",
+                "offset": 882
+              },
+              {
+                "literal": "1.978473663",
+                "offset": 918
+              },
+              {
+                "literal": "2.494709015",
+                "offset": 932
+              },
+              {
+                "literal": "3.530937195",
+                "offset": 968
+              },
+              {
+                "literal": "2.661909103",
+                "offset": 982
+              },
+              {
+                "literal": "4.486351013",
+                "offset": 1018
+              },
+              {
+                "literal": "0.989759445",
+                "offset": 1032
+              },
+              {
+                "literal": "4.558105469",
+                "offset": 1068
+              },
+              {
+                "literal": "0.156820297",
+                "offset": 1081
+              },
+              {
+                "literal": "3.507247925",
+                "offset": 1117
+              },
+              {
+                "literal": "1.852655411",
+                "offset": 1130
+              },
+              {
+                "literal": "0.014371128553539378",
+                "offset": 1191
+              },
+              {
+                "literal": "0.005112762942845987",
+                "offset": 1219
+              },
+              {
+                "literal": "0.06952903150497299",
+                "offset": 1247
+              },
+              {
+                "literal": "0.007524108900000071",
+                "offset": 1313
+              },
+              {
+                "literal": "0.5262370588",
+                "offset": 1341
+              },
+              {
+                "literal": "0.002702712999999954",
+                "offset": 1362
+              },
+              {
+                "literal": "2",
+                "offset": 1428
+              },
+              {
+                "literal": "6",
+                "offset": 1431
+              },
+              {
+                "literal": "9",
+                "offset": 1434
+              },
+              {
+                "literal": "0xffffff",
+                "offset": 1486
+              },
+              {
+                "literal": "0.78",
+                "offset": 1511
+              },
+              {
+                "literal": "0",
+                "offset": 1532
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "bundles": {
+      "production": {
+        "bytes": 21991,
+        "gzipBytes": 7714,
+        "minified": true,
+        "sourceMapBytes": 0,
+        "threeExcluded": true
+      },
+      "objectIncrement": {
+        "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+        "bytes": 870,
+        "objectBundleGzipBytes": 458,
+        "combinedBundleGzipBytes": 2038,
+        "sharedFrameworkGzipBytes": 927,
+        "gzipBytes": 1111
+      }
+    },
+    "budgets": {
+      "objectId": "stone-path",
+      "passed": true,
+      "budget": {
+        "scalars": 48,
+        "recipeBytes": 1024,
+        "bundleGzipBytes": 4096,
+        "triangles": 96,
+        "drawCalls": 1,
+        "geometryMemoryBytes": 5120,
+        "warmGenerationP95Milliseconds": 5
+      },
+      "actual": {
+        "scalars": 33,
+        "recipeBytes": 618,
+        "bundleGzipBytes": 1111,
+        "triangles": 36,
+        "drawCalls": 1,
+        "geometryMemoryBytes": 2592,
+        "warmGenerationP95Milliseconds": 0.10000000894069672
+      },
+      "checks": [
+        {
+          "metric": "scalars",
+          "value": 33,
+          "maximum": 48,
+          "passed": true
+        },
+        {
+          "metric": "recipeBytes",
+          "value": 618,
+          "maximum": 1024,
+          "passed": true
+        },
+        {
+          "metric": "bundleGzipBytes",
+          "value": 1111,
+          "maximum": 4096,
+          "passed": true
+        },
+        {
+          "metric": "triangles",
+          "value": 36,
+          "maximum": 96,
+          "passed": true
+        },
+        {
+          "metric": "drawCalls",
+          "value": 1,
+          "maximum": 1,
+          "passed": true
+        },
+        {
+          "metric": "geometryMemoryBytes",
+          "value": 2592,
+          "maximum": 5120,
+          "passed": true
+        },
+        {
+          "metric": "warmGenerationP95Milliseconds",
+          "value": 0.10000000894069672,
+          "maximum": 5,
+          "passed": true
+        },
+        {
+          "metric": "deterministicCpuBytes",
+          "value": true,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "metric": "runtimeTextureCount",
+          "value": 0,
+          "maximum": 0,
+          "passed": true
+        }
+      ],
+      "failures": []
+    },
+    "staticAudit": {
+      "passed": true,
+      "productionFiles": [
+        {
+          "file": "gt_designer/single-mesh-replacement/main.js",
+          "bytes": 2488
+        },
+        {
+          "file": "gt_designer/src/reconstruction/core/object-generator.js",
+          "bytes": 2912
+        },
+        {
+          "file": "gt_designer/src/reconstruction/core/rng.js",
+          "bytes": 976
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+          "bytes": 1590
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+          "bytes": 4269
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+          "bytes": 3222
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+          "bytes": 1545
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+          "bytes": 1540
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+          "bytes": 14740
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+          "bytes": 2717
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+          "bytes": 3913
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+          "bytes": 1609
+        },
+        {
+          "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+          "bytes": 2056
+        }
+      ],
+      "thirdPartyInputs": [],
+      "failures": []
+    },
+    "bundleAudit": {
+      "passed": true,
+      "failures": []
+    },
+    "offline": {
+      "passed": true,
+      "servedFiles": [
+        "bundle.js",
+        "index.html",
+        "three.module.js"
+      ],
+      "authoredDirectoriesAvailableToServer": false,
+      "emptyBrowserProfile": true,
+      "networkResolutionBlocked": true,
+      "localRequestCount": 3
+    },
+    "crossEngine": {
+      "boundsToleranceCanonical": 0.000007,
+      "normative": {
+        "engine": "Chrome/V8",
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.path.stone-path",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.path.stone-path",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 324
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 324
+                  }
+                },
+                "index": null,
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -4.565631866455078,
+              -0.000005301051714923233,
+              -2.66461181640625
+            ],
+            "max": [
+              4.565629482269287,
+              0.6713388562202454,
+              2.6645565032958984
+            ]
+          },
+          "triangles": 36,
+          "drawCalls": 1
+        }
+      },
+      "candidates": [
+        {
+          "engine": "JavaScriptCore (Safari 26.2 system framework)",
+          "comparison": {
+            "structureMatches": true,
+            "maximumBoundsDifference": 0,
+            "boundsTolerance": 0.000007,
+            "boundsMatch": true,
+            "passed": true
+          },
+          "signature": {
+            "semanticHierarchy": [
+              {
+                "semanticId": "island.path.stone-path",
+                "parentSemanticId": null,
+                "type": "Mesh"
+              }
+            ],
+            "objects": [
+              {
+                "semanticId": "island.path.stone-path",
+                "parentSemanticId": null,
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 324
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 324
+                    }
+                  },
+                  "index": null,
+                  "groups": []
+                }
+              }
+            ],
+            "bounds": {
+              "min": [
+                -4.565631866455078,
+                -0.000005301051714923233,
+                -2.66461181640625
+              ],
+              "max": [
+                4.565629482269287,
+                0.6713388562202454,
+                2.6645565032958984
+              ]
+            },
+            "triangles": 36,
+            "drawCalls": 1
+          }
+        },
+        {
+          "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+          "comparison": {
+            "structureMatches": true,
+            "maximumBoundsDifference": 0,
+            "boundsTolerance": 0.000007,
+            "boundsMatch": true,
+            "passed": true
+          },
+          "signature": {
+            "semanticHierarchy": [
+              {
+                "semanticId": "island.path.stone-path",
+                "parentSemanticId": null,
+                "type": "Mesh"
+              }
+            ],
+            "objects": [
+              {
+                "semanticId": "island.path.stone-path",
+                "parentSemanticId": null,
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 324
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 324
+                    }
+                  },
+                  "index": null,
+                  "groups": []
+                }
+              }
+            ],
+            "bounds": {
+              "min": [
+                -4.565631866455078,
+                -0.000005301051714923233,
+                -2.66461181640625
+              ],
+              "max": [
+                4.565629482269287,
+                0.6713388562202454,
+                2.6645565032958984
+              ]
+            },
+            "triangles": 36,
+            "drawCalls": 1
+          }
+        }
+      ],
+      "passed": true
+    },
+    "environment": {
+      "normativeBaseline": {
+        "model": "Apple M5 MacBook Pro",
+        "operatingSystem": "macOS 26.2",
+        "browser": "Google Chrome 150.0.7871.184",
+        "three": "0.170.0"
+      },
+      "actual": {
+        "modelName": "MacBook Pro",
+        "modelIdentifier": "Mac17,2",
+        "chip": "Apple M5",
+        "cores": "10 (4 performance and 6 efficiency)",
+        "memory": "32 GB",
+        "operatingSystem": "macOS 26.2",
+        "operatingSystemBuild": "25C56",
+        "browser": "Google Chrome 150.0.7871.184",
+        "three": "0.170.0",
+        "powerState": [
+          "Now drawing from 'Battery Power'",
+          "-InternalBattery-0 (id=22610019)\t15%; discharging; 0:51 remaining present: true"
+        ]
+      },
+      "migrationRequired": false
+    },
+    "acceptance": {
+      "passed": true,
+      "checks": [
+        {
+          "id": "object-budgets",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "static-source-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "minified-bundle-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "isolated-offline-render",
+          "passed": true,
+          "detail": {
+            "passed": true,
+            "servedFiles": [
+              "bundle.js",
+              "index.html",
+              "three.module.js"
+            ],
+            "authoredDirectoriesAvailableToServer": false,
+            "emptyBrowserProfile": true,
+            "networkResolutionBlocked": true,
+            "localRequestCount": 3
+          }
+        },
+        {
+          "id": "cross-engine-structure-and-bounds",
+          "passed": true,
+          "detail": [
+            {
+              "engine": "JavaScriptCore (Safari 26.2 system framework)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            },
+            {
+              "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "normative-environment",
+          "passed": true,
+          "detail": {
+            "modelName": "MacBook Pro",
+            "modelIdentifier": "Mac17,2",
+            "chip": "Apple M5",
+            "cores": "10 (4 performance and 6 efficiency)",
+            "memory": "32 GB",
+            "operatingSystem": "macOS 26.2",
+            "operatingSystemBuild": "25C56",
+            "browser": "Google Chrome 150.0.7871.184",
+            "three": "0.170.0",
+            "powerState": [
+              "Now drawing from 'Battery Power'",
+              "-InternalBattery-0 (id=22610019)\t15%; discharging; 0:51 remaining present: true"
+            ]
+          }
+        }
+      ],
+      "failures": []
+    }
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "visual-quality-gate",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "nonvisual-acceptance",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "complete-fixed-capture-set",
+        "passed": true,
+        "detail": 168
+      },
+      {
+        "id": "reference-derived-framing",
+        "passed": true,
+        "detail": {
+          "translationBeforeScale": [
+            0,
+            0,
+            0
+          ],
+          "uniformScale": 0.7665970674761228,
+          "independentlyFramed": false
+        }
+      }
+    ],
+    "failures": []
+  }
+}
