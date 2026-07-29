@@ -112,6 +112,10 @@ _Avoid_: Post-fit tuning, candidate-fit tolerance, retroactive pass
 A negative experiment in which its fitter, recipe, Object Generator, or Evaluation Harness assigns different semantics to the same compact parameters; its artifact measurements remain factual, but it is not evidence that the representation family failed.
 _Avoid_: Bad fit, representation failure, threshold problem
 
+**Fitting Reproducibility Failure**:
+A development-tool defect in which a fitter cannot regenerate a production recipe under the Object Generator's declared semantics, while an independently corrected refit may prove that the existing recipe and generated artifact were already valid.
+_Avoid_: Candidate failure, representation failure, production regression
+
 **Category-specific Quality Baseline**:
 A Quality Baseline calibrated for one object or shape category, normally before its Procedural Replacement is fitted; it may be looser or stricter than an earlier category's values when reference sensitivity evidence supports the difference, but after fitting it may change only through an explicit Quarantined Rebaseline.
 _Avoid_: Inherited threshold, difficulty discount, post-fit adjustment
@@ -132,8 +136,8 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 
 - Stage 1 uses the frozen `single-mesh-quality-baseline-v1` thresholds for Stone Path, Stone, Vase, and Umbrella. Browser calibration passed 29 repeatability, identity, sensitivity-ordering, diagnostic, and policy checks without using the one permitted pre-fitting correction.
 - Future Category-specific Quality Baselines, including those for Bamboo Shoot and Mushroom, may use looser numerical tolerances than Stage 1 when pre-implementation sensitivity calibration justifies them; the frozen Stage 1 values remain unchanged.
-- A Representation Contract Failure must be repaired and rerun against the currently applicable frozen Quality Baseline before it may trigger a rebaseline or count as one of the representation's permitted negative experiments.
-- After the Stone support-direction contract is repaired, a remaining v1 failure may activate one Quarantined Rebaseline for `stone-geometry-baseline-v2` without changing the representation or its nonvisual ceilings. The corrected candidate's known metrics are not calibration inputs; if reference-only mild and destructive controls cannot be separated, or the unchanged candidate later fails v2, no second threshold relaxation is allowed under this boundary.
+- A Representation Contract Failure must be repaired and rerun against the currently applicable frozen Quality Baseline before it may trigger a rebaseline or count as one of the representation's permitted negative experiments. A Fitting Reproducibility Failure does not invalidate candidate evidence when the corrected fitter regenerates the frozen recipe exactly.
+- The corrected Stone fitter reproduced all 24 existing support distances exactly, so the v1 negative result remains valid and activates one Quarantined Rebaseline for `stone-geometry-baseline-v2` without changing the representation or its nonvisual ceilings. The candidate's known metrics are not calibration inputs; if reference-only mild and destructive controls cannot be separated, or the unchanged candidate later fails v2, no second threshold relaxation is allowed under this boundary.
 - The Stage 1 `single-mesh-quality-baseline-v1` and its two-of-four result remain historical evidence. Stage 1.5 may evaluate a new Umbrella candidate against a separately pre-calibrated Patterned Appearance Baseline v2 whose appearance tolerances may be materially looser, while Umbrella geometry gates and nonvisual budgets remain unchanged.
 - Patterned Appearance Baseline v2 may be loosened during reference-only pre-calibration, but a flat canopy, wrong dominant palette, deleted major motif family, materially reduced pattern coverage, and large phase or pattern-scale errors must still fail; no further loosening is permitted after candidate fitting begins.
 - Firefox and Safari evidence for an otherwise-qualified candidate requires a Native GPU Visual Gate with two stable full-protocol capture runs, recorded browser/OS/Three.js/GPU/color metadata, and an explicit rejection of software rendering. JavaScriptCore and SpiderMonkey structure/bounds signatures do not satisfy this gate.

@@ -29,15 +29,14 @@ thresholds. The negative certification and its metric values remain frozen;
 this amendment does not reinterpret that result as a pass.
 
 Subsequent code review found that the fitting tool and production generator
-assign different normals to ten support-distance positions. This is a
-Representation Contract Failure, so the metric report is factual for the
-artifact but the conclusion that a second reasonable representation failed is
-suspended. The fitter must consume the production direction definition, refit
-only the existing 24 distances, and rerun the corrected candidate against
-unchanged v1 before any threshold calibration.
+assigned different normals to ten support-distance positions. The fitter was
+changed to consume the production direction definition, whereupon a complete
+deterministic refit reproduced every existing recipe distance exactly and the
+unchanged v1 visual run reproduced all six failures. The production candidate
+was therefore valid; the defect was a Fitting Reproducibility Failure, not a
+Representation Contract Failure. The second representation failure stands.
 
-Only if the contract-corrected candidate still fails v1 does the continuation
-boundary become a one-time **Quarantined Rebaseline**:
+The continuation boundary is therefore the one-time **Quarantined Rebaseline**:
 
 - freeze the corrected Stone generator, recipe, and new evidence at its repair
   commit before calibration;
@@ -127,8 +126,8 @@ Stone must pass:
 - deterministic generation and Reference Independence;
 - normative Chrome plus native Firefox and Safari visual gates.
 
-Recorded outcome: the first artifact failed, but its support-direction contract
-is invalid. Repair and v1 reevaluation now precede the Quarantined Rebaseline;
+Recorded outcome: the artifact failed; the corrected fitter reproduced its
+recipe and all six v1 failures exactly. The Quarantined Rebaseline now proceeds;
 Umbrella v2 work still does not begin until Stone has a valid passing result.
 
 ### 4. Calibrate patterned-appearance v2
@@ -363,4 +362,5 @@ The principal accepted ADRs are:
 - [ADR-0022](./adr/0022-bound-stone-support-polyhedron-to-24-directions.md) — Stone second representation;
 - [ADR-0023](./adr/0023-audit-object-specific-scalars-across-complete-production-source.md) — complete-source scalar evidence;
 - [ADR-0024](./adr/0024-quarantine-stone-geometry-v2-rebaseline.md) — one-time Stone geometry v2 boundary restart;
-- [ADR-0025](./adr/0025-repair-stone-support-direction-contract-before-rebaseline.md) — representation-validity repair before any Stone rebaseline.
+- [ADR-0025](./adr/0025-repair-stone-support-direction-contract-before-rebaseline.md) — superseded representation-validity suspicion;
+- [ADR-0026](./adr/0026-treat-stone-fitter-drift-as-reproducibility-failure.md) — preserve Stone's negative conclusion after the corrected refit reproduces it.

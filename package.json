@@ -25,6 +25,7 @@
     "certify:stage-1-5": "node scripts/run-stage-1-5-certification.mjs",
     "extract:ground-truth": "node tools/ground-truth/extract-single-mesh.mjs",
     "check:ground-truth": "node tools/ground-truth/extract-single-mesh.mjs --check",
+    "check:stone-support-fit": "node tools/development/fit-stone-supports.mjs --check",
     "accept:ticket-01": "npm test && npm run smoke:replacement",
     "accept:ticket-02": "npm test && npm run check:ground-truth",
     "accept:ticket-03": "npm test && npm run check:ground-truth && npm run smoke:replacement && npm run smoke:evaluation",

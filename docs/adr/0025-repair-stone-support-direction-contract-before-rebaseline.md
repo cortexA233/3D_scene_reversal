@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: superseded by ADR-0026
 ---
 
 # Repair Stone's support-direction contract before rebaseline

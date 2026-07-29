@@ -4,7 +4,7 @@ status: accepted
 
 # Quarantine Stone's geometry v2 rebaseline
 
-After the Representation Contract validity gate added by ADR-0025 passes,
+After the representation-validity review closed by ADR-0026,
 Stone's corrected 24-direction Bounded Support-plane Polyhedron may receive one
 separately versioned `stone-geometry-baseline-v2` if it still fails v1, without
 changing `single-mesh-quality-baseline-v1`, the historical negative reports,

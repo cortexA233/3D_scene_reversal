@@ -1,6 +1,8 @@
 import * as THREE from "three";
 
-function canonicalSupportDirections(supportCount) {
+export const STONE_SUPPORT_DIRECTION_COUNT = 24;
+
+export function canonicalSupportDirections() {
   const directions = [
     new THREE.Vector3(1, 0, 0),
     new THREE.Vector3(-1, 0, 0),
@@ -35,7 +37,7 @@ function canonicalSupportDirections(supportCount) {
       new THREE.Vector3(Math.cos(azimuth), 0, Math.sin(azimuth)),
     );
   }
-  if (directions.length !== supportCount) {
+  if (directions.length !== STONE_SUPPORT_DIRECTION_COUNT) {
     throw new RangeError("stone canonical support count is incomplete");
   }
   return directions;
@@ -45,7 +47,12 @@ function supportPlanes(recipe, rng) {
   const rotation = new THREE.Quaternion().setFromEuler(
     new THREE.Euler(...recipe.shape.orientation),
   );
-  return canonicalSupportDirections(recipe.shape.supportDistances.length)
+  if (
+    recipe.shape.supportDistances.length !== STONE_SUPPORT_DIRECTION_COUNT
+  ) {
+    throw new RangeError("stone support distance count is incomplete");
+  }
+  return canonicalSupportDirections()
     .map((normal, index) => ({
     normal: normal.applyQuaternion(rotation),
     distance: recipe.shape.supportDistances[index] * (
@@ -151,9 +158,6 @@ function triangulatePlanes(planes, vertices) {
  */
 export function generateStone(recipe, rng) {
   const planes = supportPlanes(recipe, rng);
-  if (planes.length !== recipe.shape.supportDistances.length) {
-    throw new RangeError("stone support distance count is incomplete");
-  }
   const vertices = polyhedronVertices(planes);
   const indices = triangulatePlanes(planes, vertices);
   const geometry = new THREE.BufferGeometry();

@@ -3,44 +3,16 @@ import { KHRDracoMeshCompression } from "@gltf-transform/extensions";
 import draco3d from "draco3dgltf";
 import * as THREE from "three";
 
-const SOURCE_NODE = "Stone__stone_8__0.003";
+import {
+  canonicalSupportDirections,
+  STONE_SUPPORT_DIRECTION_COUNT,
+} from "../../gt_designer/src/reconstruction/objects/stone-generator.js";
+import { STONE_RECIPE } from "../../gt_designer/src/reconstruction/objects/stone-recipe.js";
 
-function canonicalDirections() {
-  const directions = [
-    new THREE.Vector3(1, 0, 0),
-    new THREE.Vector3(-1, 0, 0),
-    new THREE.Vector3(0, 1, 0),
-    new THREE.Vector3(0, -1, 0),
-    new THREE.Vector3(0, 0, 1),
-    new THREE.Vector3(0, 0, -1),
-  ];
-  const phase = -Math.PI / 6;
-  for (let index = 0; index < 4; index += 1) {
-    const angle = phase + index * Math.PI / 2;
-    for (const azimuth of [angle, angle + Math.PI / 4]) {
-      directions.push(
-        new THREE.Vector3(Math.cos(azimuth), 0.5, Math.sin(azimuth)).normalize(),
-      );
-    }
-  }
-  for (let index = 0; index < 4; index += 1) {
-    const angle = phase + index * Math.PI / 2;
-    for (const azimuth of [angle, angle + Math.PI / 4]) {
-      directions.push(
-        new THREE.Vector3(
-          Math.cos(azimuth),
-          0.5 * 0.5,
-          Math.sin(azimuth),
-        ).normalize(),
-      );
-    }
-  }
-  for (const azimuth of [phase, phase + Math.PI]) {
-    directions.push(
-      new THREE.Vector3(Math.cos(azimuth), 3, Math.sin(azimuth)).normalize(),
-    );
-  }
-  return directions;
+const SOURCE_NODE = "Stone__stone_8__0.003";
+const args = new Set(process.argv.slice(2));
+if ([...args].some((argument) => argument !== "--check")) {
+  throw new Error("usage: node tools/development/fit-stone-supports.mjs [--check]");
 }
 
 async function sourceGeometry() {
@@ -213,7 +185,10 @@ const sourceTriangles = trianglesOf(source);
 const sourceSamples = samplesOf(source, sourceTriangles);
 const sourceVolume = volumeOf(source);
 const sourceBounds = new THREE.Box3().setFromPoints(source.positions);
-const directions = canonicalDirections();
+const directions = canonicalSupportDirections();
+if (directions.length !== STONE_SUPPORT_DIRECTION_COUNT) {
+  throw new Error("production Stone support-direction contract is incomplete");
+}
 const distances = directions.map((normal) =>
   Math.max(...source.positions.map((point) => point.dot(normal)))
 );
@@ -281,4 +256,18 @@ for (const step of [0.5, 0.25, 0.1, 0.05, 0.02, 0.01]) {
   }
   process.stdout.write(`step ${step} ${JSON.stringify(best)}\n`);
 }
-process.stdout.write(`${distances.map((value) => value.toFixed(6)).join(",\n")}\n`);
+const fittedDistances = distances.map((value) => Number(value.toFixed(6)));
+process.stdout.write(
+  `${fittedDistances.map((value) => value.toFixed(6)).join(",\n")}\n`,
+);
+if (args.has("--check")) {
+  const frozenDistances = [...STONE_RECIPE.shape.supportDistances];
+  if (JSON.stringify(fittedDistances) !== JSON.stringify(frozenDistances)) {
+    throw new Error(
+      `frozen Stone recipe does not match the production-direction refit:\n${JSON.stringify({ fittedDistances, frozenDistances }, null, 2)}`,
+    );
+  }
+  process.stdout.write(
+    `stone support fit: PASS (${STONE_SUPPORT_DIRECTION_COUNT} distances reproduced)\n`,
+  );
+}
