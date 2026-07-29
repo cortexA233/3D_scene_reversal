@@ -9,6 +9,7 @@ connections so the 70 MB of assets don't load one at a time.
     ./serve.py --lab          # open the isolated single-mesh reference scene
     ./serve.py --replacement  # open the reference-independent procedural scene
     ./serve.py --evaluation   # open the fixed-view Evaluation Harness
+    ./serve.py --stage-1-5    # open replacements in the eight-slot Lab layout
     ./serve.py --port 5173    # pick the port
     ./serve.py --no-open      # don't launch a browser
     ./serve.py --quiet        # only log errors (default logs errors + slow/large hits)
@@ -225,6 +226,11 @@ def main() -> None:
         help="open the browser-side deterministic and performance audit",
     )
     scene_group.add_argument(
+        "--stage-1-5",
+        action="store_true",
+        help="open Stage 1.5 replacements in the eight-slot Lab layout",
+    )
+    scene_group.add_argument(
         "--production-audit-root",
         type=Path,
         help="serve an isolated generated production package as the web root",
@@ -246,14 +252,14 @@ def main() -> None:
     if not (ROOT / "index.html").is_file():
         sys.exit(f"can't find {ROOT / 'index.html'} — run this script from its own directory")
 
-    if args.replacement or args.evaluation or args.runtime_audit:
+    if args.replacement or args.evaluation or args.runtime_audit or args.stage_1_5:
         args.local_three = True
 
     port = pick_port(args.port)
     SceneHandler.quiet = args.quiet
     if args.local_three:
         SceneHandler.three_dir = find_three()
-        if args.replacement or args.evaluation or args.runtime_audit:
+        if args.replacement or args.evaluation or args.runtime_audit or args.stage_1_5:
             version = three_version(SceneHandler.three_dir)
             if version != TARGET_THREE:
                 sys.exit(
@@ -273,6 +279,9 @@ def main() -> None:
     elif args.runtime_audit:
         url_path = "/single-mesh-runtime-audit/"
         scene_name = "Single Mesh Runtime Audit"
+    elif args.stage_1_5:
+        url_path = "/stage-1-5-scene/"
+        scene_name = "Stage 1.5 Reference-layout Scene"
     elif args.production_audit_root:
         url_path = "/"
         scene_name = "Isolated Production Audit Package"
@@ -296,6 +305,8 @@ def main() -> None:
             check_cdn()
         if args.replacement:
             controls_help = "static deterministic fixture"
+        elif args.stage_1_5:
+            controls_help = "orbit · zoom · pan · focus controls"
         elif args.evaluation or args.runtime_audit or args.production_audit_root:
             controls_help = "fixed protocol controls"
         else:

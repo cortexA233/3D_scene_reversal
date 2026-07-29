@@ -1,0 +1,3006 @@
+{
+  "schemaVersion": "single-mesh-object-acceptance-v3",
+  "evidenceVersion": "v3",
+  "artifactRole": "development-only-object-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "stone",
+  "geometryBaseline": "stone-v2",
+  "visual": {
+    "schemaVersion": "single-mesh-object-evaluation-v1",
+    "artifactRole": "development-only-object-acceptance",
+    "productionUse": "prohibited",
+    "objectId": "stone",
+    "semanticId": "island.nature.stone",
+    "evaluationProtocolVersion": "single-mesh-evaluation-v1",
+    "qualityBaseline": {
+      "geometry": {
+        "schemaVersion": "stone-geometry-quality-baseline-v2",
+        "version": "stone-geometry-baseline-v2",
+        "objectId": "stone",
+        "artifactRole": "development-only-quality-baseline",
+        "productionUse": "prohibited",
+        "contractSchemaVersion": "stone-geometry-v2-calibration-contract-v1",
+        "selectionStrategy": "least-permissive-mild-envelope-plus-fixed-allowance",
+        "hard": [
+          {
+            "path": "geometry.bounds.maxAxisRelativeError",
+            "operator": "<=",
+            "threshold": 0.022,
+            "mildEnvelope": 0.019999999999998876,
+            "repeatabilityAllowance": 0.002,
+            "group": "bounds",
+            "destructiveScenarioIds": [
+              "uniform-scale/-0.05",
+              "uniform-scale/+0.05",
+              "anisotropic-x/1.10",
+              "squash-y/0.80"
+            ]
+          },
+          {
+            "path": "geometry.bounds.bottomAnchorErrorCanonical",
+            "operator": "<=",
+            "threshold": 0.030824658817,
+            "mildEnvelope": 0.028824658816565707,
+            "repeatabilityAllowance": 0.002,
+            "group": "bounds",
+            "destructiveScenarioIds": [
+              "pivot-x/0.10"
+            ]
+          },
+          {
+            "path": "geometry.silhouette.meanIou",
+            "operator": ">=",
+            "threshold": 0.844703618056,
+            "mildEnvelope": 0.8467036180562363,
+            "repeatabilityAllowance": 0.002,
+            "group": "silhouette",
+            "destructiveScenarioIds": [
+              "support-hull/8",
+              "substitute/ellipsoid",
+              "substitute/box"
+            ]
+          },
+          {
+            "path": "geometry.silhouette.worstViewIou",
+            "operator": ">=",
+            "threshold": 0.811907117733,
+            "mildEnvelope": 0.8149071177333546,
+            "repeatabilityAllowance": 0.003,
+            "group": "silhouette",
+            "destructiveScenarioIds": [
+              "support-hull/8",
+              "substitute/ellipsoid",
+              "substitute/box"
+            ]
+          },
+          {
+            "path": "geometry.silhouette.meanEdgeDistancePixels",
+            "operator": "<=",
+            "threshold": 10.600715268357,
+            "mildEnvelope": 10.350715268357161,
+            "repeatabilityAllowance": 0.25,
+            "group": "silhouette",
+            "destructiveScenarioIds": [
+              "support-hull/8",
+              "substitute/ellipsoid",
+              "substitute/box"
+            ]
+          },
+          {
+            "path": "geometry.silhouette.edgeDistanceP95Pixels",
+            "operator": "<=",
+            "threshold": 33.557641192199,
+            "mildEnvelope": 32.55764119219941,
+            "repeatabilityAllowance": 1,
+            "group": "silhouette",
+            "destructiveScenarioIds": [
+              "support-hull/8",
+              "substitute/ellipsoid",
+              "substitute/box"
+            ]
+          },
+          {
+            "path": "geometry.depth.mae",
+            "operator": "<=",
+            "threshold": 0.040584035391,
+            "mildEnvelope": 0.038584035391087596,
+            "repeatabilityAllowance": 0.002,
+            "group": "depth",
+            "destructiveScenarioIds": [
+              "profile-compression/0.80",
+              "support-hull/8",
+              "substitute/ellipsoid",
+              "substitute/box",
+              "squash-y/0.80"
+            ]
+          },
+          {
+            "path": "geometry.depth.p95",
+            "operator": "<=",
+            "threshold": 0.145860441186,
+            "mildEnvelope": 0.1408604411864631,
+            "repeatabilityAllowance": 0.005,
+            "group": "depth",
+            "destructiveScenarioIds": [
+              "profile-compression/0.80",
+              "support-hull/8",
+              "substitute/ellipsoid",
+              "substitute/box",
+              "squash-y/0.80"
+            ]
+          }
+        ],
+        "diagnostic": [],
+        "frozen": true
+      },
+      "appearance": {
+        "version": "single-mesh-quality-baseline-v1",
+        "thresholds": {
+          "meanDeltaE00Maximum": 4,
+          "p90DeltaE00Maximum": 8,
+          "meanMaskedSsimMinimum": 0.95,
+          "worstViewSsimMinimum": 0.92,
+          "paletteCentroidDeltaE00Maximum": 3,
+          "paletteCoverageL1Maximum": 0.08
+        }
+      }
+    },
+    "manifest": {
+      "schemaVersion": "single-mesh-evaluation-v1",
+      "artifactRole": "development-only-evaluation-manifest",
+      "unitId": "stone",
+      "capture": {
+        "width": 512,
+        "height": 512,
+        "pixelOrigin": "bottom-left",
+        "channels": "RGBA8"
+      },
+      "renderer": {
+        "threeRevision": "170",
+        "toneMapping": "ACESFilmic",
+        "toneMappingExposure": 1.05,
+        "outputColorSpace": "sRGB for color passes; linear RGBA8 for data passes",
+        "lighting": "frozen hemisphere plus directional key"
+      },
+      "framing": {
+        "sourceWorldBounds": {
+          "min": [
+            166.65536499023438,
+            12.001924514770508,
+            117.56472778320312
+          ],
+          "max": [
+            181.44210815429688,
+            19.476530075073242,
+            133.6248016357422
+          ],
+          "size": [
+            14.7867431640625,
+            7.474605560302734,
+            16.060073852539062
+          ]
+        },
+        "reconstructionFrame": {
+          "sourceWorldBottomCenter": [
+            174.04873657226562,
+            12.001924514770508,
+            125.59476470947266
+          ],
+          "sourceWorldAxesPreserved": true
+        },
+        "referenceTransform": {
+          "translationBeforeScale": [
+            -174.04873657226562,
+            -12.001924514770508,
+            -125.59476470947266
+          ],
+          "uniformScale": 0.4358635000232776
+        },
+        "replacementTransform": {
+          "translationBeforeScale": [
+            0,
+            0,
+            0
+          ],
+          "uniformScale": 0.4358635000232776,
+          "independentlyFramed": false
+        },
+        "canonicalBounds": {
+          "min": [
+            -3.2225008147167777,
+            0,
+            -3.5
+          ],
+          "max": [
+            3.2225008147167777,
+            3.257907740807002,
+            3.5
+          ],
+          "size": [
+            6.4450016294335555,
+            3.257907740807002,
+            7
+          ]
+        },
+        "camera": {
+          "fovDegrees": 38,
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "boundingSphereRadius": 5.028717750356729,
+          "distance": 16.990573094028875,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788,
+          "framingMargin": 1.1
+        }
+      },
+      "views": [
+        {
+          "id": "low-000",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 0,
+          "position": [
+            0,
+            7.4400721152085065,
+            15.965916159382534
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "low-045",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 45,
+          "position": [
+            11.289607584155268,
+            7.4400721152085065,
+            11.28960758415527
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "low-090",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 90,
+          "position": [
+            15.965916159382534,
+            7.4400721152085065,
+            9.77630406002141e-16
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "low-135",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 135,
+          "position": [
+            11.28960758415527,
+            7.4400721152085065,
+            -11.289607584155268
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "low-180",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 180,
+          "position": [
+            1.955260812004282e-15,
+            7.4400721152085065,
+            -15.965916159382534
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "low-225",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 225,
+          "position": [
+            -11.289607584155268,
+            7.4400721152085065,
+            -11.289607584155272
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "low-270",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 270,
+          "position": [
+            -15.965916159382534,
+            7.4400721152085065,
+            -2.9328912180064235e-15
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "low-315",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 315,
+          "position": [
+            -11.289607584155272,
+            7.4400721152085065,
+            11.289607584155267
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "high-045",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 45,
+          "position": [
+            6.007074725516759,
+            16.343221794688876,
+            6.00707472551676
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "high-135",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 135,
+          "position": [
+            6.00707472551676,
+            16.343221794688876,
+            -6.007074725516759
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "high-225",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 225,
+          "position": [
+            -6.007074725516759,
+            16.343221794688876,
+            -6.007074725516761
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        },
+        {
+          "id": "high-315",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 315,
+          "position": [
+            -6.007074725516761,
+            16.343221794688876,
+            6.007074725516758
+          ],
+          "target": [
+            0,
+            1.628953870403501,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 10.704675906082963,
+          "far": 23.276470281974788
+        }
+      ],
+      "passes": [
+        {
+          "id": "neutral-rgb",
+          "label": "Neutral RGB",
+          "encoding": "sRGB display color under frozen lights"
+        },
+        {
+          "id": "silhouette",
+          "label": "Silhouette",
+          "encoding": "white foreground on black background"
+        },
+        {
+          "id": "linear-depth",
+          "label": "Linear Depth",
+          "encoding": "RGB=(viewDistance-near)/(far-near); white background"
+        },
+        {
+          "id": "world-normal",
+          "label": "World Normal",
+          "encoding": "RGB=normalize(worldNormal)*0.5+0.5; black background"
+        },
+        {
+          "id": "semantic-id",
+          "label": "Semantic ID",
+          "encoding": "stable 24-bit semantic color; black background"
+        },
+        {
+          "id": "albedo",
+          "label": "Unlit Albedo",
+          "encoding": "sRGB base color and base-color map without lighting"
+        },
+        {
+          "id": "lit-rgb",
+          "label": "Frozen-lighting RGB",
+          "encoding": "sRGB authored/procedural material under frozen lights"
+        }
+      ],
+      "captures": []
+    },
+    "captures": {
+      "expectedCount": 168,
+      "referenceChecksums": {
+        "low-000/neutral-rgb": "d77717db",
+        "low-000/silhouette": "a440489c",
+        "low-000/linear-depth": "bb16c110",
+        "low-000/world-normal": "1a8ee446",
+        "low-000/semantic-id": "7fa97fb1",
+        "low-000/albedo": "9cd97882",
+        "low-000/lit-rgb": "9c1b9f1c",
+        "low-045/neutral-rgb": "8841fc38",
+        "low-045/silhouette": "a2452244",
+        "low-045/linear-depth": "3119537c",
+        "low-045/world-normal": "da1b8724",
+        "low-045/semantic-id": "d8d56cc1",
+        "low-045/albedo": "43bfbc2a",
+        "low-045/lit-rgb": "717cd51c",
+        "low-090/neutral-rgb": "a7281046",
+        "low-090/silhouette": "f1a72935",
+        "low-090/linear-depth": "5a7c7468",
+        "low-090/world-normal": "5d16560f",
+        "low-090/semantic-id": "e2ffc6a5",
+        "low-090/albedo": "e3dc95f5",
+        "low-090/lit-rgb": "443b10cf",
+        "low-135/neutral-rgb": "6e5839b7",
+        "low-135/silhouette": "3de4416d",
+        "low-135/linear-depth": "4ef45094",
+        "low-135/world-normal": "edc1ed43",
+        "low-135/semantic-id": "4dde8c95",
+        "low-135/albedo": "fce185ad",
+        "low-135/lit-rgb": "24341a56",
+        "low-180/neutral-rgb": "500c3312",
+        "low-180/silhouette": "09e3c50c",
+        "low-180/linear-depth": "71a63f1c",
+        "low-180/world-normal": "07614f39",
+        "low-180/semantic-id": "c9d18f31",
+        "low-180/albedo": "fe978c32",
+        "low-180/lit-rgb": "091b7abc",
+        "low-225/neutral-rgb": "1092bb86",
+        "low-225/silhouette": "7c04cfc5",
+        "low-225/linear-depth": "b08e9ea7",
+        "low-225/world-normal": "76d42fe8",
+        "low-225/semantic-id": "da9448e5",
+        "low-225/albedo": "bcde2665",
+        "low-225/lit-rgb": "0c0dc528",
+        "low-270/neutral-rgb": "27ccbf10",
+        "low-270/silhouette": "1b0fb8dd",
+        "low-270/linear-depth": "aa3204aa",
+        "low-270/world-normal": "78dd6013",
+        "low-270/semantic-id": "6d9446f5",
+        "low-270/albedo": "a6812cdd",
+        "low-270/lit-rgb": "cb4f7523",
+        "low-315/neutral-rgb": "1015a79e",
+        "low-315/silhouette": "11ad0d0d",
+        "low-315/linear-depth": "06fab339",
+        "low-315/world-normal": "a8145072",
+        "low-315/semantic-id": "b558a315",
+        "low-315/albedo": "4667bb4d",
+        "low-315/lit-rgb": "4ca94858",
+        "high-045/neutral-rgb": "c6371543",
+        "high-045/silhouette": "b5406125",
+        "high-045/linear-depth": "291f6104",
+        "high-045/world-normal": "3bd4cad7",
+        "high-045/semantic-id": "346b5e65",
+        "high-045/albedo": "8c7e8de5",
+        "high-045/lit-rgb": "1ac19cf9",
+        "high-135/neutral-rgb": "64eb07fd",
+        "high-135/silhouette": "ca90752d",
+        "high-135/linear-depth": "d30398a4",
+        "high-135/world-normal": "fb4d4bc3",
+        "high-135/semantic-id": "70bc06b5",
+        "high-135/albedo": "30b719cd",
+        "high-135/lit-rgb": "1fc632fd",
+        "high-225/neutral-rgb": "1a4ef8eb",
+        "high-225/silhouette": "5b5f97dc",
+        "high-225/linear-depth": "e3cc6c98",
+        "high-225/world-normal": "7e116125",
+        "high-225/semantic-id": "7c06c431",
+        "high-225/albedo": "26f43f82",
+        "high-225/lit-rgb": "2919ea17",
+        "high-315/neutral-rgb": "3f990bb4",
+        "high-315/silhouette": "b0edf78c",
+        "high-315/linear-depth": "8253a85c",
+        "high-315/world-normal": "e3c564c3",
+        "high-315/semantic-id": "8d66ad91",
+        "high-315/albedo": "f8c445b2",
+        "high-315/lit-rgb": "bc1e9774"
+      },
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "6af1b326",
+        "low-000/silhouette": "01f22bed",
+        "low-000/linear-depth": "6030e51e",
+        "low-000/world-normal": "0ef8945f",
+        "low-000/semantic-id": "84d9f3fd",
+        "low-000/albedo": "ba9bd70d",
+        "low-000/lit-rgb": "856aedfe",
+        "low-045/neutral-rgb": "174a5c90",
+        "low-045/silhouette": "18b21255",
+        "low-045/linear-depth": "44005985",
+        "low-045/world-normal": "8a243e49",
+        "low-045/semantic-id": "a3799ea5",
+        "low-045/albedo": "a5e8b775",
+        "low-045/lit-rgb": "e8b76544",
+        "low-090/neutral-rgb": "8de7b689",
+        "low-090/silhouette": "0d21e8b5",
+        "low-090/linear-depth": "8569cce8",
+        "low-090/world-normal": "ac60fb4b",
+        "low-090/semantic-id": "5530b845",
+        "low-090/albedo": "ced21f95",
+        "low-090/lit-rgb": "418458b3",
+        "low-135/neutral-rgb": "2f745c80",
+        "low-135/silhouette": "f3cc8764",
+        "low-135/linear-depth": "7459eb55",
+        "low-135/world-normal": "11ac2ff3",
+        "low-135/semantic-id": "3911c4dc",
+        "low-135/albedo": "6f1ea3ea",
+        "low-135/lit-rgb": "cef890c1",
+        "low-180/neutral-rgb": "306fc1b3",
+        "low-180/silhouette": "b0724694",
+        "low-180/linear-depth": "b811c144",
+        "low-180/world-normal": "6165f684",
+        "low-180/semantic-id": "3999662c",
+        "low-180/albedo": "f8d6f69a",
+        "low-180/lit-rgb": "ac7ce72f",
+        "low-225/neutral-rgb": "3c53a222",
+        "low-225/silhouette": "81b99d94",
+        "low-225/linear-depth": "6526461c",
+        "low-225/world-normal": "ae209b13",
+        "low-225/semantic-id": "0894d3ac",
+        "low-225/albedo": "55e552fa",
+        "low-225/lit-rgb": "b036bc35",
+        "low-270/neutral-rgb": "4390d606",
+        "low-270/silhouette": "f810278d",
+        "low-270/linear-depth": "1890c241",
+        "low-270/world-normal": "c88ec3a1",
+        "low-270/semantic-id": "75768b6d",
+        "low-270/albedo": "3e0b4dcd",
+        "low-270/lit-rgb": "650d5ddd",
+        "low-315/neutral-rgb": "a4c17cd9",
+        "low-315/silhouette": "993a579c",
+        "low-315/linear-depth": "3f0524f3",
+        "low-315/world-normal": "2928ffff",
+        "low-315/semantic-id": "ddb9e184",
+        "low-315/albedo": "c04c8482",
+        "low-315/lit-rgb": "aa4e546f",
+        "high-045/neutral-rgb": "f3ec3efe",
+        "high-045/silhouette": "e52e5d5d",
+        "high-045/linear-depth": "17f656a5",
+        "high-045/world-normal": "77d31bbe",
+        "high-045/semantic-id": "57930f4d",
+        "high-045/albedo": "7d49adfd",
+        "high-045/lit-rgb": "39543c48",
+        "high-135/neutral-rgb": "6e1c8210",
+        "high-135/silhouette": "53c36824",
+        "high-135/linear-depth": "1995979a",
+        "high-135/world-normal": "087ccd5c",
+        "high-135/semantic-id": "c51c606c",
+        "high-135/albedo": "3930996a",
+        "high-135/lit-rgb": "d16d017f",
+        "high-225/neutral-rgb": "e8370590",
+        "high-225/silhouette": "0fb370b4",
+        "high-225/linear-depth": "6cbdba11",
+        "high-225/world-normal": "7f77581b",
+        "high-225/semantic-id": "f4ae610c",
+        "high-225/albedo": "1a4c7d3a",
+        "high-225/lit-rgb": "0c1492ca",
+        "high-315/neutral-rgb": "e10085c3",
+        "high-315/silhouette": "bfe7a694",
+        "high-315/linear-depth": "1994e956",
+        "high-315/world-normal": "4841b90c",
+        "high-315/semantic-id": "10adafdc",
+        "high-315/albedo": "396a729a",
+        "high-315/lit-rgb": "aff83ff0"
+      }
+    },
+    "comparison": {
+      "perView": [
+        {
+          "viewId": "low-000",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 46105,
+              "replacementForegroundPixels": 51042,
+              "intersectionPixels": 45252,
+              "unionPixels": 51895,
+              "iou": 0.8719915213411696,
+              "symmetricEdgeMeanPixels": 8.045652097106442,
+              "symmetricEdgeP95Pixels": 21.840329667841555
+            },
+            "depth": {
+              "comparedPixels": 45252,
+              "mae": 0.02633257887375079,
+              "p95": 0.07747324265255477,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 45252,
+              "meanDegrees": 12.10521786780281,
+              "p95Degrees": 35.799146876326425
+            }
+          },
+          "appearance": {
+            "comparedPixels": 43318,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 4.3231690917155765,
+              "p90DeltaE00": 8.81796000705541,
+              "maskedSsim": 0.7977886512927225
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-045",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 46721,
+              "replacementForegroundPixels": 50918,
+              "intersectionPixels": 45398,
+              "unionPixels": 52241,
+              "iou": 0.8690109301123639,
+              "symmetricEdgeMeanPixels": 7.987273256052119,
+              "symmetricEdgeP95Pixels": 20.8806130178211
+            },
+            "depth": {
+              "comparedPixels": 45398,
+              "mae": 0.03358769716383305,
+              "p95": 0.10564533088984719,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 45398,
+              "meanDegrees": 11.201401803139573,
+              "p95Degrees": 30.94010142336865
+            }
+          },
+          "appearance": {
+            "comparedPixels": 43410,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 3.924080839484109,
+              "p90DeltaE00": 8.882651292666191,
+              "maskedSsim": 0.8136584286678117
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-090",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 46252,
+              "replacementForegroundPixels": 50322,
+              "intersectionPixels": 45551,
+              "unionPixels": 51023,
+              "iou": 0.8927542480841973,
+              "symmetricEdgeMeanPixels": 6.506900626257473,
+              "symmetricEdgeP95Pixels": 19
+            },
+            "depth": {
+              "comparedPixels": 45551,
+              "mae": 0.03327727807626114,
+              "p95": 0.09155928677120073,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 45551,
+              "meanDegrees": 14.55256570466422,
+              "p95Degrees": 43.73956998424717
+            }
+          },
+          "appearance": {
+            "comparedPixels": 43607,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 6.506027817382688,
+              "p90DeltaE00": 19.876245596293533,
+              "maskedSsim": 0.886214430131417
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-135",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 46568,
+              "replacementForegroundPixels": 50427,
+              "intersectionPixels": 45381,
+              "unionPixels": 51614,
+              "iou": 0.8792381911884373,
+              "symmetricEdgeMeanPixels": 7.340004809308233,
+              "symmetricEdgeP95Pixels": 21.540659228538015
+            },
+            "depth": {
+              "comparedPixels": 45381,
+              "mae": 0.029432137511218478,
+              "p95": 0.09155928677120098,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 45381,
+              "meanDegrees": 17.889455326066457,
+              "p95Degrees": 50.50271167650028
+            }
+          },
+          "appearance": {
+            "comparedPixels": 43359,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 8.088588452110205,
+              "p90DeltaE00": 21.44916236351166,
+              "maskedSsim": 0.7665698610010651
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-180",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 48329,
+              "replacementForegroundPixels": 53327,
+              "intersectionPixels": 47881,
+              "unionPixels": 53775,
+              "iou": 0.8903951650395165,
+              "symmetricEdgeMeanPixels": 7.0004029409689235,
+              "symmetricEdgeP95Pixels": 16.0312195418814
+            },
+            "depth": {
+              "comparedPixels": 47881,
+              "mae": 0.032413552306147744,
+              "p95": 0.07747324265255452,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 47881,
+              "meanDegrees": 18.264871871139313,
+              "p95Degrees": 45.93510166142518
+            }
+          },
+          "appearance": {
+            "comparedPixels": 45914,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 6.418935794283912,
+              "p90DeltaE00": 17.7172318614978,
+              "maskedSsim": 0.7773212479892341
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-225",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 51978,
+              "replacementForegroundPixels": 54397,
+              "intersectionPixels": 50607,
+              "unionPixels": 55768,
+              "iou": 0.9074558886816813,
+              "symmetricEdgeMeanPixels": 5.914734402951456,
+              "symmetricEdgeP95Pixels": 15.524174696260024
+            },
+            "depth": {
+              "comparedPixels": 50607,
+              "mae": 0.028379452887809967,
+              "p95": 0.07043022059323155,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 50607,
+              "meanDegrees": 18.32808353239237,
+              "p95Degrees": 34.5814991146606
+            }
+          },
+          "appearance": {
+            "comparedPixels": 48483,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 5.5820038100305,
+              "p90DeltaE00": 15.014656903900358,
+              "maskedSsim": 0.7846168666594118
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-270",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 50116,
+              "replacementForegroundPixels": 54420,
+              "intersectionPixels": 49886,
+              "unionPixels": 54650,
+              "iou": 0.9128270814272644,
+              "symmetricEdgeMeanPixels": 5.370742048263831,
+              "symmetricEdgeP95Pixels": 21.587033144922902
+            },
+            "depth": {
+              "comparedPixels": 49886,
+              "mae": 0.027717481112431316,
+              "p95": 0.0845162647118775,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 49886,
+              "meanDegrees": 19.467332152496176,
+              "p95Degrees": 42.755648941363965
+            }
+          },
+          "appearance": {
+            "comparedPixels": 47850,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 5.877402646739012,
+              "p90DeltaE00": 13.527159736106515,
+              "maskedSsim": 0.8230500113332752
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "low-315",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 48248,
+              "replacementForegroundPixels": 51461,
+              "intersectionPixels": 47140,
+              "unionPixels": 52569,
+              "iou": 0.8967262074606708,
+              "symmetricEdgeMeanPixels": 6.275447034958878,
+              "symmetricEdgeP95Pixels": 18.027756377319946
+            },
+            "depth": {
+              "comparedPixels": 47140,
+              "mae": 0.030377477473987956,
+              "p95": 0.10564533088984719,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 47140,
+              "meanDegrees": 16.525296539815397,
+              "p95Degrees": 41.81833617232939
+            }
+          },
+          "appearance": {
+            "comparedPixels": 45111,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 5.746394544964586,
+              "p90DeltaE00": 12.828930948709129,
+              "maskedSsim": 0.8851106965580667
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-045",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 59256,
+              "replacementForegroundPixels": 60798,
+              "intersectionPixels": 57249,
+              "unionPixels": 62805,
+              "iou": 0.9115357057559111,
+              "symmetricEdgeMeanPixels": 6.073746088898683,
+              "symmetricEdgeP95Pixels": 17.26267650163207
+            },
+            "depth": {
+              "comparedPixels": 57249,
+              "mae": 0.026121272018171438,
+              "p95": 0.05634417647458534,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 57249,
+              "meanDegrees": 13.936914897341227,
+              "p95Degrees": 38.06207477247902
+            }
+          },
+          "appearance": {
+            "comparedPixels": 54992,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 5.789494288660331,
+              "p90DeltaE00": 15.061177271352843,
+              "maskedSsim": 0.7833367439332612
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-135",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 56746,
+              "replacementForegroundPixels": 60375,
+              "intersectionPixels": 54967,
+              "unionPixels": 62154,
+              "iou": 0.8843678604755929,
+              "symmetricEdgeMeanPixels": 8.034326747141952,
+              "symmetricEdgeP95Pixels": 22.090722034374522
+            },
+            "depth": {
+              "comparedPixels": 54967,
+              "mae": 0.027764500899977052,
+              "p95": 0.07747324265255427,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 54967,
+              "meanDegrees": 17.171057827782413,
+              "p95Degrees": 44.083308735795455
+            }
+          },
+          "appearance": {
+            "comparedPixels": 52711,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 8.066558589214402,
+              "p90DeltaE00": 20.597764676294766,
+              "maskedSsim": 0.7914313389205965
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-225",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 56601,
+              "replacementForegroundPixels": 59767,
+              "intersectionPixels": 54637,
+              "unionPixels": 61731,
+              "iou": 0.8850820495375095,
+              "symmetricEdgeMeanPixels": 8.085172431725532,
+              "symmetricEdgeP95Pixels": 23.769728648009426
+            },
+            "depth": {
+              "comparedPixels": 54637,
+              "mae": 0.026715324646833783,
+              "p95": 0.09155928677120073,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 54637,
+              "meanDegrees": 17.743815286248378,
+              "p95Degrees": 35.918144039048855
+            }
+          },
+          "appearance": {
+            "comparedPixels": 52395,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 7.528307285356549,
+              "p90DeltaE00": 18.58554015138284,
+              "maskedSsim": 0.7684248190332967
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        },
+        {
+          "viewId": "high-315",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                6.445001629433563,
+                3.257907740807002,
+                7
+              ],
+              "replacementSize": [
+                6.445002045105381,
+                3.2579079486429148,
+                7
+              ],
+              "perAxisRelativeError": [
+                6.449522321993078e-8,
+                6.379429052610286e-8,
+                0
+              ],
+              "maxAxisRelativeError": 6.449522321993078e-8,
+              "bottomAnchorErrorCanonical": 0
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 56833,
+              "replacementForegroundPixels": 59535,
+              "intersectionPixels": 55621,
+              "unionPixels": 60747,
+              "iou": 0.9156172321266893,
+              "symmetricEdgeMeanPixels": 5.7894498141222055,
+              "symmetricEdgeP95Pixels": 17.204650534085253
+            },
+            "depth": {
+              "comparedPixels": 55621,
+              "mae": 0.02589232755058037,
+              "p95": 0.08451626471187776,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 55621,
+              "meanDegrees": 15.667616260665142,
+              "p95Degrees": 37.84920867692942
+            }
+          },
+          "appearance": {
+            "comparedPixels": 53401,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 0,
+              "p90DeltaE00": 0,
+              "maskedSsim": 1
+            },
+            "litRgb": {
+              "meanDeltaE00": 6.927683497328443,
+              "p90DeltaE00": 17.175768129837383,
+              "maskedSsim": 0.793606688401989
+            },
+            "palette": {
+              "colorCount": 1,
+              "centroidDeltaE00": 0,
+              "coverageL1": 0
+            },
+            "material": {
+              "roughnessAbsoluteError": 2.8610229518832853e-8,
+              "metalnessAbsoluteError": 0
+            }
+          }
+        }
+      ],
+      "aggregate": {
+        "viewCount": 12,
+        "geometry": {
+          "bounds": {
+            "maxAxisRelativeError": 6.449522321993078e-8,
+            "bottomAnchorErrorCanonical": 0
+          },
+          "silhouette": {
+            "meanIou": 0.8930835067692503,
+            "worstViewIou": 0.8690109301123639,
+            "meanEdgeDistancePixels": 6.868654358146311,
+            "edgeDistanceP95Pixels": 23.769728648009426
+          },
+          "depth": {
+            "mae": 0.029000923376750257,
+            "p95": 0.10564533088984719
+          },
+          "worldNormal": {
+            "meanDegrees": 16.071135755796124,
+            "p95Degrees": 50.50271167650028
+          }
+        },
+        "appearance": {
+          "meanDeltaE00": 6.23155388810586,
+          "p90DeltaE00": 21.44916236351166,
+          "meanMaskedSsim": 0.8059274819935122,
+          "worstViewSsim": 0.7665698610010651,
+          "paletteCentroidDeltaE00": 0,
+          "paletteCoverageL1": 0,
+          "roughnessAbsoluteError": 2.8610229518832853e-8,
+          "metalnessAbsoluteError": 0,
+          "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+        }
+      },
+      "categoryAppearance": {
+        "hard": {
+          "meanDeltaE00": 0,
+          "p90DeltaE00": 0,
+          "meanMaskedSsim": 1,
+          "worstViewSsim": 1,
+          "paletteCentroidDeltaE00": 0,
+          "paletteCoverageL1": 0,
+          "roughnessAbsoluteError": 2.8610229518832853e-8,
+          "metalnessAbsoluteError": 0,
+          "passPolicy": "v1 numeric appearance thresholds over albedo, palette, roughness, and metalness"
+        },
+        "diagnostic": {
+          "evidenceClass": "geometry-conditioned-lit-rgb",
+          "meanDeltaE00": 6.23155388810586,
+          "p90DeltaE00": 21.44916236351166,
+          "meanMaskedSsim": 0.8059274819935122,
+          "worstViewSsim": 0.7665698610010651
+        }
+      },
+      "gate": {
+        "baselineVersion": "stone-geometry-baseline-v2",
+        "objectId": "stone",
+        "passed": true,
+        "failures": [],
+        "geometryGate": {
+          "passed": true,
+          "failures": []
+        },
+        "appearanceGate": {
+          "evaluated": true,
+          "passed": true,
+          "reason": null,
+          "failures": [],
+          "evidencePolicy": "uniform-albedo-palette-material-v1",
+          "geometryConditionedLitRgb": {
+            "evidenceClass": "geometry-conditioned-lit-rgb",
+            "meanDeltaE00": 6.23155388810586,
+            "p90DeltaE00": 21.44916236351166,
+            "meanMaskedSsim": 0.8059274819935122,
+            "worstViewSsim": 0.7665698610010651
+          }
+        },
+        "baselineVersions": {
+          "geometry": "stone-geometry-baseline-v2",
+          "appearance": "single-mesh-quality-baseline-v1"
+        }
+      },
+      "diagnostics": {
+        "units": "canonical",
+        "surfaceArea": {
+          "reference": 102.90757714223119,
+          "replacement": 109.6433044793261,
+          "relativeError": 0.0654541436514951
+        },
+        "volume": {
+          "reference": 69.59260340908982,
+          "replacement": 74.94292308443657,
+          "relativeError": 0.07688057944744058,
+          "referenceUnavailableReason": null,
+          "replacementUnavailableReason": null
+        },
+        "topology": {
+          "referenceConnectedComponents": 1,
+          "replacementConnectedComponents": 1,
+          "referenceClosed": true,
+          "replacementClosed": true
+        },
+        "pointSetDistance": {
+          "sampling": "position-attribute-vertices-with-duplicates-retained",
+          "referencePointCount": 324,
+          "replacementPointCount": 42,
+          "symmetricChamferMeanCanonical": 0.5143376138993903,
+          "symmetricHausdorffCanonical": 1.4308097678941285
+        }
+      },
+      "captureChecksums": {
+        "low-000/neutral-rgb": "6af1b326",
+        "low-000/silhouette": "01f22bed",
+        "low-000/linear-depth": "6030e51e",
+        "low-000/world-normal": "0ef8945f",
+        "low-000/semantic-id": "84d9f3fd",
+        "low-000/albedo": "ba9bd70d",
+        "low-000/lit-rgb": "856aedfe",
+        "low-045/neutral-rgb": "174a5c90",
+        "low-045/silhouette": "18b21255",
+        "low-045/linear-depth": "44005985",
+        "low-045/world-normal": "8a243e49",
+        "low-045/semantic-id": "a3799ea5",
+        "low-045/albedo": "a5e8b775",
+        "low-045/lit-rgb": "e8b76544",
+        "low-090/neutral-rgb": "8de7b689",
+        "low-090/silhouette": "0d21e8b5",
+        "low-090/linear-depth": "8569cce8",
+        "low-090/world-normal": "ac60fb4b",
+        "low-090/semantic-id": "5530b845",
+        "low-090/albedo": "ced21f95",
+        "low-090/lit-rgb": "418458b3",
+        "low-135/neutral-rgb": "2f745c80",
+        "low-135/silhouette": "f3cc8764",
+        "low-135/linear-depth": "7459eb55",
+        "low-135/world-normal": "11ac2ff3",
+        "low-135/semantic-id": "3911c4dc",
+        "low-135/albedo": "6f1ea3ea",
+        "low-135/lit-rgb": "cef890c1",
+        "low-180/neutral-rgb": "306fc1b3",
+        "low-180/silhouette": "b0724694",
+        "low-180/linear-depth": "b811c144",
+        "low-180/world-normal": "6165f684",
+        "low-180/semantic-id": "3999662c",
+        "low-180/albedo": "f8d6f69a",
+        "low-180/lit-rgb": "ac7ce72f",
+        "low-225/neutral-rgb": "3c53a222",
+        "low-225/silhouette": "81b99d94",
+        "low-225/linear-depth": "6526461c",
+        "low-225/world-normal": "ae209b13",
+        "low-225/semantic-id": "0894d3ac",
+        "low-225/albedo": "55e552fa",
+        "low-225/lit-rgb": "b036bc35",
+        "low-270/neutral-rgb": "4390d606",
+        "low-270/silhouette": "f810278d",
+        "low-270/linear-depth": "1890c241",
+        "low-270/world-normal": "c88ec3a1",
+        "low-270/semantic-id": "75768b6d",
+        "low-270/albedo": "3e0b4dcd",
+        "low-270/lit-rgb": "650d5ddd",
+        "low-315/neutral-rgb": "a4c17cd9",
+        "low-315/silhouette": "993a579c",
+        "low-315/linear-depth": "3f0524f3",
+        "low-315/world-normal": "2928ffff",
+        "low-315/semantic-id": "ddb9e184",
+        "low-315/albedo": "c04c8482",
+        "low-315/lit-rgb": "aa4e546f",
+        "high-045/neutral-rgb": "f3ec3efe",
+        "high-045/silhouette": "e52e5d5d",
+        "high-045/linear-depth": "17f656a5",
+        "high-045/world-normal": "77d31bbe",
+        "high-045/semantic-id": "57930f4d",
+        "high-045/albedo": "7d49adfd",
+        "high-045/lit-rgb": "39543c48",
+        "high-135/neutral-rgb": "6e1c8210",
+        "high-135/silhouette": "53c36824",
+        "high-135/linear-depth": "1995979a",
+        "high-135/world-normal": "087ccd5c",
+        "high-135/semantic-id": "c51c606c",
+        "high-135/albedo": "3930996a",
+        "high-135/lit-rgb": "d16d017f",
+        "high-225/neutral-rgb": "e8370590",
+        "high-225/silhouette": "0fb370b4",
+        "high-225/linear-depth": "6cbdba11",
+        "high-225/world-normal": "7f77581b",
+        "high-225/semantic-id": "f4ae610c",
+        "high-225/albedo": "1a4c7d3a",
+        "high-225/lit-rgb": "0c1492ca",
+        "high-315/neutral-rgb": "e10085c3",
+        "high-315/silhouette": "bfe7a694",
+        "high-315/linear-depth": "1994e956",
+        "high-315/world-normal": "4841b90c",
+        "high-315/semantic-id": "10adafdc",
+        "high-315/albedo": "396a729a",
+        "high-315/lit-rgb": "aff83ff0"
+      }
+    },
+    "environment": {
+      "threeRevision": "170",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "captureBackend": "browser-webgl-rgba8",
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "antialias": true,
+        "hardwareAccelerated": false,
+        "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i",
+        "colorManagement": {
+          "outputColorSpace": "srgb",
+          "toneMapping": 0,
+          "toneMappingExposure": 1.05
+        }
+      }
+    }
+  },
+  "nonvisual": {
+    "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+    "artifactRole": "development-only-nonvisual-acceptance",
+    "productionUse": "prohibited",
+    "objectId": "stone",
+    "runtime": {
+      "schemaVersion": "single-mesh-runtime-evidence-v1",
+      "objectId": "stone",
+      "semanticId": "island.nature.stone",
+      "recipe": {
+        "encoding": "canonical-minified-utf8-json",
+        "bytes": 424,
+        "serialized": "{\"id\":\"island.nature.stone\",\"kind\":\"bounded-support-polyhedron-v2\",\"seed\":1459675138,\"shape\":{\"supportDistances\":[7.393372,7.393372,7.474606,0,8.030037,8.030037,6.290965,7.12871,6.531625,7.634384,8.190199,7.418739,7.15722,7.439888,8.006101,8.243552,8.116754,8.177689,8.124639,7.242121,6.972414,7.51558,7.497669,8.018415],\"orientation\":[0,0,0],\"deformation\":0},\"appearance\":{\"linearGray\":0.4918658137321472,\"roughness\":0.78}}"
+      },
+      "recipeScalars": {
+        "definition": "finite numeric leaves in the object-specific recipe",
+        "count": 31
+      },
+      "deterministic": {
+        "repetitions": 3,
+        "byteStable": true,
+        "snapshot": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.nature.stone",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.nature.stone",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true,
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 126,
+                    "byteLength": 504,
+                    "checksum": "4425f234"
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 126,
+                    "byteLength": 504,
+                    "checksum": "d33085c1"
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 240,
+                  "byteLength": 480,
+                  "checksum": "4abbfb12"
+                },
+                "groups": []
+              },
+              "material": {
+                "type": "MeshStandardMaterial",
+                "color": 12237498,
+                "emissive": 0,
+                "roughness": 0.78,
+                "metalness": 0,
+                "opacity": 1,
+                "transparent": false,
+                "side": 2,
+                "vertexColors": false,
+                "hasRuntimeTexture": false
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -7.393372058868408,
+              0,
+              -8.030036926269531
+            ],
+            "max": [
+              7.393372058868408,
+              7.474606037139893,
+              8.030036926269531
+            ]
+          },
+          "triangles": 80,
+          "drawCalls": 1,
+          "geometryMemoryBytes": 1488,
+          "runtimeTextureCount": 0
+        }
+      },
+      "benchmark": {
+        "warmups": 10,
+        "repetitions": 100,
+        "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+        "minimumMilliseconds": 0,
+        "medianMilliseconds": 0.10000000894069672,
+        "p95Milliseconds": 0.20000000298023224,
+        "maximumMilliseconds": 0.30000001192092896
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "hardwareConcurrency": 10,
+        "deviceMemoryGiB": 32,
+        "threeRevision": "170",
+        "renderer": {
+          "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "vendor": "Google Inc. (Google)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+        }
+      }
+    },
+    "sourceScalars": {
+      "definition": "all numeric recipe leaves plus object-specific numeric literals in generators, generated shaders, and explicitly listed object helpers",
+      "exclusionPolicy": "generator literals are excluded only when equal to a frozen universal algorithm/control-flow value; recipe leaves are never excluded",
+      "universalAlgorithmValues": [
+        0,
+        0.01,
+        0.5,
+        1,
+        2,
+        3,
+        4
+      ],
+      "recipe": {
+        "sourceFile": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+        "evidence": {
+          "definition": "JavaScript numeric literals outside comments and string/template literals",
+          "count": 31,
+          "literals": [
+            {
+              "literal": "0x5700e002",
+              "offset": 474
+            },
+            {
+              "literal": "7.393372",
+              "offset": 555
+            },
+            {
+              "literal": "7.393372",
+              "offset": 571
+            },
+            {
+              "literal": "7.474606",
+              "offset": 587
+            },
+            {
+              "literal": "0",
+              "offset": 603
+            },
+            {
+              "literal": "8.030037",
+              "offset": 612
+            },
+            {
+              "literal": "8.030037",
+              "offset": 628
+            },
+            {
+              "literal": "6.290965",
+              "offset": 644
+            },
+            {
+              "literal": "7.12871",
+              "offset": 660
+            },
+            {
+              "literal": "6.531625",
+              "offset": 675
+            },
+            {
+              "literal": "7.634384",
+              "offset": 691
+            },
+            {
+              "literal": "8.190199",
+              "offset": 707
+            },
+            {
+              "literal": "7.418739",
+              "offset": 723
+            },
+            {
+              "literal": "7.15722",
+              "offset": 739
+            },
+            {
+              "literal": "7.439888",
+              "offset": 754
+            },
+            {
+              "literal": "8.006101",
+              "offset": 770
+            },
+            {
+              "literal": "8.243552",
+              "offset": 786
+            },
+            {
+              "literal": "8.116754",
+              "offset": 802
+            },
+            {
+              "literal": "8.177689",
+              "offset": 818
+            },
+            {
+              "literal": "8.124639",
+              "offset": 834
+            },
+            {
+              "literal": "7.242121",
+              "offset": 850
+            },
+            {
+              "literal": "6.972414",
+              "offset": 866
+            },
+            {
+              "literal": "7.51558",
+              "offset": 882
+            },
+            {
+              "literal": "7.497669",
+              "offset": 897
+            },
+            {
+              "literal": "8.018415",
+              "offset": 913
+            },
+            {
+              "literal": "0",
+              "offset": 963
+            },
+            {
+              "literal": "0",
+              "offset": 966
+            },
+            {
+              "literal": "0",
+              "offset": 969
+            },
+            {
+              "literal": "0",
+              "offset": 991
+            },
+            {
+              "literal": "0.4918658137321472",
+              "offset": 1046
+            },
+            {
+              "literal": "0.78",
+              "offset": 1081
+            }
+          ]
+        }
+      },
+      "generators": [
+        {
+          "sourceFile": "gt_designer/src/reconstruction/objects/stone-generator.js",
+          "evidence": {
+            "definition": "numeric literals in generator and generated shader source, excluding only the declared universal algorithm/control-flow values",
+            "universalValues": [
+              0,
+              0.01,
+              0.5,
+              1,
+              2,
+              3,
+              4
+            ],
+            "count": 1,
+            "objectSpecific": [
+              {
+                "literal": "24",
+                "value": 24,
+                "line": 3,
+                "column": 46,
+                "classification": "object-specific"
+              }
+            ],
+            "classifiedLiteralCount": 62,
+            "literals": [
+              {
+                "literal": "24",
+                "value": 24,
+                "line": 3,
+                "column": 46,
+                "classification": "object-specific"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 7,
+                "column": 23,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 7,
+                "column": 26,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 7,
+                "column": 29,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 8,
+                "column": 24,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 8,
+                "column": 27,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 8,
+                "column": 30,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 9,
+                "column": 23,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 9,
+                "column": 26,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 9,
+                "column": 29,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 10,
+                "column": 23,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 10,
+                "column": 27,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 10,
+                "column": 30,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 11,
+                "column": 23,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 11,
+                "column": 26,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 11,
+                "column": 29,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 12,
+                "column": 23,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 12,
+                "column": 26,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 12,
+                "column": 30,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "2",
+                "value": 2,
+                "line": 14,
+                "column": 29,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 14,
+                "column": 33,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 15,
+                "column": 20,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "4",
+                "value": 4,
+                "line": 15,
+                "column": 31,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 15,
+                "column": 43,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "2",
+                "value": 2,
+                "line": 16,
+                "column": 45,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "4",
+                "value": 4,
+                "line": 17,
+                "column": 53,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0.5",
+                "value": 0.5,
+                "line": 20,
+                "column": 9,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 25,
+                "column": 20,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "4",
+                "value": 4,
+                "line": 25,
+                "column": 31,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 25,
+                "column": 43,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "2",
+                "value": 2,
+                "line": 26,
+                "column": 45,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "4",
+                "value": 4,
+                "line": 27,
+                "column": 53,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 30,
+                "column": 9,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 37,
+                "column": 44,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 59,
+                "column": 7,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "2",
+                "value": 2,
+                "line": 59,
+                "column": 30,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 59,
+                "column": 34,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 83,
+                "column": 21,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 89,
+                "column": 20,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "2",
+                "value": 2,
+                "line": 89,
+                "column": 47,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 89,
+                "column": 59,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 90,
+                "column": 31,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 90,
+                "column": 59,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 90,
+                "column": 72,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 91,
+                "column": 33,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 91,
+                "column": 68,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 121,
+                "column": 23,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 124,
+                "column": 23,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0.5",
+                "value": 0.5,
+                "line": 125,
+                "column": 46,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 126,
+                "column": 27,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 126,
+                "column": 30,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 126,
+                "column": 33,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 127,
+                "column": 27,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 127,
+                "column": 30,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 127,
+                "column": 33,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 145,
+                "column": 22,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 145,
+                "column": 47,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 145,
+                "column": 59,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 146,
+                "column": 25,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 146,
+                "column": 67,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 168,
+                "column": 7,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 186,
+                "column": 18,
+                "classification": "universal-algorithm-or-control-flow"
+              }
+            ]
+          }
+        }
+      ],
+      "recipeCount": 31,
+      "generatorCount": 1,
+      "count": 32,
+      "maximum": 32,
+      "passed": true
+    },
+    "bundles": {
+      "production": {
+        "bytes": 22514,
+        "gzipBytes": 7789,
+        "minified": true,
+        "sourceMapBytes": 0,
+        "threeExcluded": true
+      },
+      "objectIncrement": {
+        "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+        "bytes": 509,
+        "objectBundleGzipBytes": 336,
+        "combinedBundleGzipBytes": 2329,
+        "sharedFrameworkGzipBytes": 927,
+        "gzipBytes": 1402
+      }
+    },
+    "budgets": {
+      "objectId": "stone",
+      "passed": true,
+      "budget": {
+        "scalars": 32,
+        "recipeBytes": 1024,
+        "bundleGzipBytes": 4096,
+        "triangles": 320,
+        "drawCalls": 1,
+        "geometryMemoryBytes": 24576,
+        "warmGenerationP95Milliseconds": 5
+      },
+      "actual": {
+        "scalars": 32,
+        "recipeBytes": 424,
+        "bundleGzipBytes": 1402,
+        "triangles": 80,
+        "drawCalls": 1,
+        "geometryMemoryBytes": 1488,
+        "warmGenerationP95Milliseconds": 0.20000000298023224
+      },
+      "checks": [
+        {
+          "metric": "scalars",
+          "value": 32,
+          "maximum": 32,
+          "passed": true
+        },
+        {
+          "metric": "recipeBytes",
+          "value": 424,
+          "maximum": 1024,
+          "passed": true
+        },
+        {
+          "metric": "bundleGzipBytes",
+          "value": 1402,
+          "maximum": 4096,
+          "passed": true
+        },
+        {
+          "metric": "triangles",
+          "value": 80,
+          "maximum": 320,
+          "passed": true
+        },
+        {
+          "metric": "drawCalls",
+          "value": 1,
+          "maximum": 1,
+          "passed": true
+        },
+        {
+          "metric": "geometryMemoryBytes",
+          "value": 1488,
+          "maximum": 24576,
+          "passed": true
+        },
+        {
+          "metric": "warmGenerationP95Milliseconds",
+          "value": 0.20000000298023224,
+          "maximum": 5,
+          "passed": true
+        },
+        {
+          "metric": "deterministicCpuBytes",
+          "value": true,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "metric": "runtimeTextureCount",
+          "value": 0,
+          "maximum": 0,
+          "passed": true
+        }
+      ],
+      "failures": []
+    },
+    "staticAudit": {
+      "passed": true,
+      "productionFiles": [
+        {
+          "file": "gt_designer/single-mesh-replacement/main.js",
+          "bytes": 2488
+        },
+        {
+          "file": "gt_designer/src/reconstruction/core/object-generator.js",
+          "bytes": 2912
+        },
+        {
+          "file": "gt_designer/src/reconstruction/core/rng.js",
+          "bytes": 976
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+          "bytes": 1590
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+          "bytes": 6043
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+          "bytes": 3222
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+          "bytes": 1545
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+          "bytes": 1097
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+          "bytes": 14698
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+          "bytes": 2541
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+          "bytes": 3882
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+          "bytes": 1609
+        },
+        {
+          "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+          "bytes": 2056
+        }
+      ],
+      "thirdPartyInputs": [],
+      "failures": []
+    },
+    "bundleAudit": {
+      "passed": true,
+      "failures": []
+    },
+    "offline": {
+      "passed": true,
+      "servedFiles": [
+        "bundle.js",
+        "index.html",
+        "three.module.js"
+      ],
+      "authoredDirectoriesAvailableToServer": false,
+      "emptyBrowserProfile": true,
+      "networkResolutionBlocked": true,
+      "localRequestCount": 3
+    },
+    "crossEngine": {
+      "boundsToleranceCanonical": 0.000007,
+      "normative": {
+        "engine": "Chrome/V8",
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.nature.stone",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.nature.stone",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 126
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 126
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 240
+                },
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -7.393372058868408,
+              0,
+              -8.030036926269531
+            ],
+            "max": [
+              7.393372058868408,
+              7.474606037139893,
+              8.030036926269531
+            ]
+          },
+          "triangles": 80,
+          "drawCalls": 1
+        }
+      },
+      "candidates": [
+        {
+          "engine": "JavaScriptCore (Safari 26.2 system framework)",
+          "comparison": {
+            "structureMatches": true,
+            "maximumBoundsDifference": 0,
+            "boundsTolerance": 0.000007,
+            "boundsMatch": true,
+            "passed": true
+          },
+          "signature": {
+            "semanticHierarchy": [
+              {
+                "semanticId": "island.nature.stone",
+                "parentSemanticId": null,
+                "type": "Mesh"
+              }
+            ],
+            "objects": [
+              {
+                "semanticId": "island.nature.stone",
+                "parentSemanticId": null,
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 126
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 126
+                    }
+                  },
+                  "index": {
+                    "constructor": "Uint16Array",
+                    "length": 240
+                  },
+                  "groups": []
+                }
+              }
+            ],
+            "bounds": {
+              "min": [
+                -7.393372058868408,
+                0,
+                -8.030036926269531
+              ],
+              "max": [
+                7.393372058868408,
+                7.474606037139893,
+                8.030036926269531
+              ]
+            },
+            "triangles": 80,
+            "drawCalls": 1
+          }
+        },
+        {
+          "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+          "comparison": {
+            "structureMatches": true,
+            "maximumBoundsDifference": 0,
+            "boundsTolerance": 0.000007,
+            "boundsMatch": true,
+            "passed": true
+          },
+          "signature": {
+            "semanticHierarchy": [
+              {
+                "semanticId": "island.nature.stone",
+                "parentSemanticId": null,
+                "type": "Mesh"
+              }
+            ],
+            "objects": [
+              {
+                "semanticId": "island.nature.stone",
+                "parentSemanticId": null,
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 126
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 126
+                    }
+                  },
+                  "index": {
+                    "constructor": "Uint16Array",
+                    "length": 240
+                  },
+                  "groups": []
+                }
+              }
+            ],
+            "bounds": {
+              "min": [
+                -7.393372058868408,
+                0,
+                -8.030036926269531
+              ],
+              "max": [
+                7.393372058868408,
+                7.474606037139893,
+                8.030036926269531
+              ]
+            },
+            "triangles": 80,
+            "drawCalls": 1
+          }
+        }
+      ],
+      "passed": true
+    },
+    "environment": {
+      "normativeBaseline": {
+        "model": "Apple M5 MacBook Pro",
+        "operatingSystem": "macOS 26.2",
+        "browser": "Google Chrome 150.0.7871.184",
+        "three": "0.170.0"
+      },
+      "actual": {
+        "modelName": "MacBook Pro",
+        "modelIdentifier": "Mac17,2",
+        "chip": "Apple M5",
+        "cores": "10 (4 performance and 6 efficiency)",
+        "memory": "32 GB",
+        "operatingSystem": "macOS 26.2",
+        "operatingSystemBuild": "25C56",
+        "browser": "Google Chrome 150.0.7871.184",
+        "three": "0.170.0",
+        "powerState": [
+          "Now drawing from 'Battery Power'",
+          "-InternalBattery-0 (id=22610019)\t85%; discharging; 5:45 remaining present: true"
+        ]
+      },
+      "migrationRequired": false
+    },
+    "acceptance": {
+      "passed": true,
+      "checks": [
+        {
+          "id": "complete-source-scalar-audit",
+          "passed": true,
+          "detail": {
+            "value": 32,
+            "maximum": 32
+          }
+        },
+        {
+          "id": "object-budgets",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "static-source-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "minified-bundle-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "isolated-offline-render",
+          "passed": true,
+          "detail": {
+            "passed": true,
+            "servedFiles": [
+              "bundle.js",
+              "index.html",
+              "three.module.js"
+            ],
+            "authoredDirectoriesAvailableToServer": false,
+            "emptyBrowserProfile": true,
+            "networkResolutionBlocked": true,
+            "localRequestCount": 3
+          }
+        },
+        {
+          "id": "cross-engine-structure-and-bounds",
+          "passed": true,
+          "detail": [
+            {
+              "engine": "JavaScriptCore (Safari 26.2 system framework)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            },
+            {
+              "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "normative-environment",
+          "passed": true,
+          "detail": {
+            "modelName": "MacBook Pro",
+            "modelIdentifier": "Mac17,2",
+            "chip": "Apple M5",
+            "cores": "10 (4 performance and 6 efficiency)",
+            "memory": "32 GB",
+            "operatingSystem": "macOS 26.2",
+            "operatingSystemBuild": "25C56",
+            "browser": "Google Chrome 150.0.7871.184",
+            "three": "0.170.0",
+            "powerState": [
+              "Now drawing from 'Battery Power'",
+              "-InternalBattery-0 (id=22610019)\t85%; discharging; 5:45 remaining present: true"
+            ]
+          }
+        }
+      ],
+      "failures": []
+    }
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "visual-quality-gate",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "nonvisual-acceptance",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "complete-fixed-capture-set",
+        "passed": true,
+        "detail": 168
+      },
+      {
+        "id": "reference-derived-framing",
+        "passed": true,
+        "detail": {
+          "translationBeforeScale": [
+            0,
+            0,
+            0
+          ],
+          "uniformScale": 0.4358635000232776,
+          "independentlyFramed": false
+        }
+      },
+      {
+        "id": "versioned-geometry-and-appearance-baselines",
+        "passed": true,
+        "detail": {
+          "geometry": "stone-geometry-baseline-v2",
+          "appearance": "single-mesh-quality-baseline-v1"
+        }
+      },
+      {
+        "id": "candidate-quarantine-before-and-after",
+        "passed": true,
+        "detail": []
+      }
+    ],
+    "failures": []
+  }
+}

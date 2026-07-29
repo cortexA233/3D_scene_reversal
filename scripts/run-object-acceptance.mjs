@@ -5,6 +5,7 @@ import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
 import { runLocalSceneAutomation } from "./lib/smoke-local-scene.mjs";
+import { verifyCandidateFreeze } from "../tools/evaluation/candidate-freeze.mjs";
 
 const execFile = promisify(execFileCallback);
 const PROJECT_ROOT = path.resolve(
@@ -13,28 +14,112 @@ const PROJECT_ROOT = path.resolve(
 );
 
 function parseArguments(args) {
-  const options = { objectId: null, check: false, output: null };
+  const options = {
+    objectId: null,
+    check: false,
+    output: null,
+    evidenceVersion: "v1",
+    categoryBaseline: null,
+    geometryBaseline: null,
+    appearanceBaseline: null,
+  };
   for (let index = 0; index < args.length; index += 1) {
     if (args[index] === "--check") options.check = true;
     else if (args[index] === "--object" && args[index + 1]) {
       options.objectId = args[++index];
     } else if (args[index] === "--output" && args[index + 1]) {
       options.output = path.resolve(PROJECT_ROOT, args[++index]);
+    } else if (args[index] === "--evidence-version" && args[index + 1]) {
+      options.evidenceVersion = args[++index];
+    } else if (args[index] === "--category-baseline" && args[index + 1]) {
+      options.categoryBaseline = args[++index];
+    } else if (args[index] === "--geometry-baseline" && args[index + 1]) {
+      options.geometryBaseline = args[++index];
+    } else if (args[index] === "--appearance-baseline" && args[index + 1]) {
+      options.appearanceBaseline = args[++index];
     } else throw new Error(`Unknown or incomplete argument: ${args[index]}`);
   }
   if (!options.objectId) throw new Error("--object is required");
+  if (!/^v\d+$/.test(options.evidenceVersion)) {
+    throw new Error("--evidence-version must use the form v<number>");
+  }
+  if ([options.categoryBaseline, options.geometryBaseline, options.appearanceBaseline].filter(Boolean).length > 1) {
+    throw new Error("category, geometry, and appearance baselines are exclusive");
+  }
   options.output ??= path.join(
     PROJECT_ROOT,
-    `gt_designer/single-mesh-evaluation/reports/${options.objectId}-acceptance-v1.json`,
+    `gt_designer/single-mesh-evaluation/reports/${options.objectId}-acceptance-${options.evidenceVersion}.json`,
   );
   return options;
 }
 
 async function main() {
   const options = parseArguments(process.argv.slice(2));
+  const checkUmbrellaGeometry = async () => {
+    if (!["patterned-v2", "patterned-v3"].includes(options.appearanceBaseline)) {
+      return { passed: true, detail: null };
+    }
+    try {
+      const result = await execFile(
+        process.execPath,
+        ["scripts/freeze-umbrella-geometry.mjs", "--check"],
+        { cwd: PROJECT_ROOT },
+      );
+      return { passed: true, detail: result.stdout.trim() };
+    } catch (error) {
+      return { passed: false, detail: error.stderr ?? error.message };
+    }
+  };
+  const umbrellaGeometryBefore = await checkUmbrellaGeometry();
+  if (!umbrellaGeometryBefore.passed) {
+    throw new Error(`Umbrella geometry freeze failed before evaluation: ${umbrellaGeometryBefore.detail}`);
+  }
+  const candidateManifest = options.geometryBaseline === "stone-v2"
+    ? JSON.parse(
+        await readFile(
+          path.join(
+            PROJECT_ROOT,
+            "gt_designer/single-mesh-evaluation/baselines/stone-v2-candidate-freeze.json",
+          ),
+          "utf8",
+        ),
+      )
+      : options.appearanceBaseline === "patterned-v3"
+      ? JSON.parse(
+          await readFile(
+            path.join(
+              PROJECT_ROOT,
+              "gt_designer/single-mesh-evaluation/baselines/umbrella-v3-approved-candidate-freeze.json",
+            ),
+            "utf8",
+          ),
+        )
+      : options.categoryBaseline === "stage2-v2" &&
+          options.objectId === "bamboo-shoot"
+        ? JSON.parse(
+            await readFile(
+              path.join(
+                PROJECT_ROOT,
+                "gt_designer/single-mesh-evaluation/baselines/bamboo-shoot-v2-approved-candidate-freeze.json",
+              ),
+              "utf8",
+            ),
+          )
+      : null;
+  const candidateBefore = candidateManifest
+    ? await verifyCandidateFreeze({
+        projectRoot: PROJECT_ROOT,
+        manifest: candidateManifest,
+      })
+    : { passed: true, failures: [] };
+  if (!candidateBefore.passed) {
+    throw new Error(
+      `candidate quarantine failed before evaluation: ${JSON.stringify(candidateBefore.failures)}`,
+    );
+  }
   const nonvisualOutput = path.join(
     PROJECT_ROOT,
-    `gt_designer/single-mesh-runtime-audit/reports/${options.objectId}-nonvisual-v1.json`,
+    `gt_designer/single-mesh-runtime-audit/reports/${options.objectId}-nonvisual-${options.evidenceVersion}.json`,
   );
   const nonvisualArguments = [
     "scripts/run-nonvisual-acceptance.mjs",
@@ -55,7 +140,19 @@ async function main() {
     label: `${options.objectId}-visual-acceptance`,
     serverFlag: "--evaluation",
     path: "/single-mesh-evaluation/",
-    query: `?evaluate=object&unit=${encodeURIComponent(options.objectId)}`,
+    query: `?evaluate=object&unit=${encodeURIComponent(options.objectId)}${
+      options.categoryBaseline
+        ? `&category-baseline=${encodeURIComponent(options.categoryBaseline)}`
+        : ""
+    }${
+      options.geometryBaseline
+        ? `&geometry-baseline=${encodeURIComponent(options.geometryBaseline)}`
+        : ""
+    }${
+      options.appearanceBaseline
+        ? `&appearance-baseline=${encodeURIComponent(options.appearanceBaseline)}`
+        : ""
+    }`,
     readyState: { state: "evaluated", objectId: options.objectId },
     probeExpression: `({
       state: document.body?.dataset?.state ?? null,
@@ -66,6 +163,13 @@ async function main() {
     port: 8460,
   });
   const visual = browser.state.report;
+  const umbrellaGeometryAfter = await checkUmbrellaGeometry();
+  const candidateAfter = candidateManifest
+    ? await verifyCandidateFreeze({
+        projectRoot: PROJECT_ROOT,
+        manifest: candidateManifest,
+      })
+    : { passed: true, failures: [] };
   const checks = [
     {
       id: "visual-quality-gate",
@@ -92,12 +196,54 @@ async function main() {
         false,
       detail: visual.manifest.framing.replacementTransform,
     },
+    {
+      id: "versioned-geometry-and-appearance-baselines",
+      passed: options.categoryBaseline
+        ? visual.comparison.gate.baselineVersions?.geometry ===
+            (options.categoryBaseline === "stage2-v2"
+              ? `${options.objectId}-category-baseline-v1`
+              : `${options.objectId}-category-baseline-v1`) &&
+          visual.comparison.gate.baselineVersions?.appearance ===
+            (options.categoryBaseline === "stage2-v2"
+              ? `${options.objectId}-semantic-category-baseline-v2`
+              : `${options.objectId}-category-baseline-v1`)
+        : options.geometryBaseline
+        ? visual.comparison.gate.baselineVersions?.geometry ===
+            "stone-geometry-baseline-v2" &&
+          visual.comparison.gate.baselineVersions?.appearance ===
+            "single-mesh-quality-baseline-v1"
+        : options.appearanceBaseline
+          ? visual.comparison.gate.baselineVersions?.geometry ===
+              "single-mesh-quality-baseline-v1" &&
+            visual.comparison.gate.baselineVersions?.appearance ===
+              (options.appearanceBaseline === "patterned-v3"
+                ? "patterned-appearance-baseline-v3"
+                : "patterned-appearance-baseline-v2")
+          : visual.comparison.gate.baselineVersion ===
+              "single-mesh-quality-baseline-v1",
+      detail: visual.comparison.gate.baselineVersions ??
+        visual.comparison.gate.baselineVersion,
+    },
+    {
+      id: "candidate-quarantine-before-and-after",
+      passed: candidateBefore.passed && candidateAfter.passed,
+      detail: [...candidateBefore.failures, ...candidateAfter.failures],
+    },
+    {
+      id: "umbrella-geometry-freeze-before-and-after",
+      passed: umbrellaGeometryBefore.passed && umbrellaGeometryAfter.passed,
+      detail: [umbrellaGeometryBefore.detail, umbrellaGeometryAfter.detail],
+    },
   ];
   const report = {
-    schemaVersion: "single-mesh-object-acceptance-v1",
+    schemaVersion: `single-mesh-object-acceptance-${options.evidenceVersion}`,
+    evidenceVersion: options.evidenceVersion,
     artifactRole: "development-only-object-acceptance",
     productionUse: "prohibited",
     objectId: options.objectId,
+    categoryBaseline: options.categoryBaseline,
+    geometryBaseline: options.geometryBaseline,
+    appearanceBaseline: options.appearanceBaseline,
     visual,
     nonvisual,
     acceptance: {

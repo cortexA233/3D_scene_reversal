@@ -9,6 +9,19 @@ import {
   evaluateQualityGate,
   qualityBaselineDefinition,
 } from "/dev-tools/evaluation/visual-metrics.mjs";
+import {
+  evaluateStoneGeometryV2Gate,
+  stoneUniformAppearanceEvidence,
+} from "/dev-tools/evaluation/stone-v2-calibration-contract.mjs";
+import {
+  aggregatePatternedAppearanceEvidence,
+  aggregateSemanticPatternCoverageEvidence,
+  evaluatePatternedAppearanceView,
+  evaluateSemanticPatternCoverageView,
+} from "/dev-tools/evaluation/patterned-appearance-metrics.mjs";
+import { evaluatePatternedAppearanceV2Gate } from "/dev-tools/evaluation/patterned-appearance-v2-contract.mjs";
+import { evaluatePatternedAppearanceV3Gate } from "/dev-tools/evaluation/patterned-appearance-v3-contract.mjs";
+import { evaluateStage2CategoryGate } from "/dev-tools/evaluation/stage2-precalibration-contract.mjs";
 import { evaluateGeometricDiagnostics } from "/dev-tools/evaluation/geometric-diagnostics.mjs";
 import {
   createLocalReferenceClone,
@@ -198,6 +211,65 @@ function mergeViews(geometry, appearance) {
   }));
 }
 
+function patternedAppearanceEvidence(context, replacementCaptures) {
+  const views = EVALUATION_VIEWS.map((view) => ({
+    viewId: view.id,
+    patterned: evaluatePatternedAppearanceView({
+      width: context.manifest.capture.width,
+      height: context.manifest.capture.height,
+      referenceSilhouette: context.referenceCaptures.get(
+        captureKey(view.id, "silhouette"),
+      ),
+      replacementSilhouette: replacementCaptures.get(
+        captureKey(view.id, "silhouette"),
+      ),
+      referenceAlbedo: context.referenceCaptures.get(
+        captureKey(view.id, "albedo"),
+      ),
+      replacementAlbedo: replacementCaptures.get(
+        captureKey(view.id, "albedo"),
+      ),
+    }),
+  }));
+  return {
+    views,
+    aggregate: aggregatePatternedAppearanceEvidence(views),
+  };
+}
+
+function semanticPatternCoverageEvidence(
+  context,
+  replacementCaptures,
+  roles = undefined,
+  maximumRoleDistance = undefined,
+) {
+  const views = EVALUATION_VIEWS.map((view) => ({
+    viewId: view.id,
+    semanticPattern: evaluateSemanticPatternCoverageView({
+      width: context.manifest.capture.width,
+      height: context.manifest.capture.height,
+      referenceSilhouette: context.referenceCaptures.get(
+        captureKey(view.id, "silhouette"),
+      ),
+      replacementSilhouette: replacementCaptures.get(
+        captureKey(view.id, "silhouette"),
+      ),
+      referenceAlbedo: context.referenceCaptures.get(
+        captureKey(view.id, "albedo"),
+      ),
+      replacementAlbedo: replacementCaptures.get(
+        captureKey(view.id, "albedo"),
+      ),
+      roles,
+      maximumRoleDistance,
+    }),
+  }));
+  return {
+    views,
+    aggregate: aggregateSemanticPatternCoverageEvidence(views),
+  };
+}
+
 function diagnosticEvidence(referenceRoot, replacementRoot) {
   const reference = canonicalGeometry(referenceRoot);
   const replacement = canonicalGeometry(replacementRoot);
@@ -222,10 +294,171 @@ function fullComparison(context, replacementCaptures) {
   });
   const perView = mergeViews(geometry, appearance);
   const aggregate = aggregateVisualEvidence(perView);
+  if (context.objectId === "umbrella" || context.categoryBaseline?.semanticRoles) {
+    const semantic = semanticPatternCoverageEvidence(
+      context,
+      replacementCaptures,
+      context.categoryBaseline?.semanticRoles,
+      context.categoryBaseline?.maximumRoleDistance,
+    );
+    perView.forEach((view, index) => {
+      view.semanticPattern = semantic.views[index].semanticPattern;
+    });
+    aggregate.semanticPattern = semantic.aggregate;
+  }
+  let categoryAppearance = null;
+  let gate;
+  if (context.categoryBaseline) {
+    gate = evaluateStage2CategoryGate({
+      baseline: context.categoryBaseline,
+      aggregate,
+    });
+    gate.baselineVersions = {
+      geometry: context.categoryBaseline.geometryBaselineVersion ??
+        context.categoryBaseline.version,
+      appearance: context.categoryBaseline.version,
+    };
+  } else if (context.appearanceBaseline) {
+    const patterned = patternedAppearanceEvidence(
+      context,
+      replacementCaptures,
+    );
+    perView.forEach((view, index) => {
+      view.patterned = patterned.views[index].patterned;
+    });
+    aggregate.patterned = patterned.aggregate;
+    const v1Probe = evaluateQualityGate(context.objectId, aggregate);
+    if (!v1Probe.geometryGate.passed) {
+      gate = {
+        baselineVersion: context.appearanceBaseline.version,
+        baselineVersions: {
+          geometry: qualityBaselineDefinition().version,
+          appearance: context.appearanceBaseline.version,
+        },
+        objectId: context.objectId,
+        passed: false,
+        failures: v1Probe.geometryGate.failures,
+        geometryGate: v1Probe.geometryGate,
+        appearanceGate: {
+          evaluated: false,
+          passed: null,
+          reason: "geometry-gate-failed",
+          failures: [],
+        },
+      };
+    } else {
+      const isV3 = context.appearanceBaseline.version ===
+        "patterned-appearance-baseline-v3";
+      const appearanceGate = isV3
+        ? evaluatePatternedAppearanceV3Gate({
+            baseline: context.appearanceBaseline,
+            aggregate,
+          })
+        : evaluatePatternedAppearanceV2Gate({
+            baseline: context.appearanceBaseline,
+            aggregate,
+          });
+      categoryAppearance = isV3
+        ? {
+            evidenceClass: "human-anchored-semantic-pattern-v3",
+            semanticCoverage: aggregate.semanticPattern,
+            diagnosticGlobal: aggregate.appearance,
+            diagnosticSamePositionRecall: aggregate.patterned,
+          }
+        : {
+            evidenceClass: "bounded-semantic-pattern-v2",
+            global: aggregate.appearance,
+            semanticRecall: aggregate.patterned,
+          };
+      gate = {
+        baselineVersion: context.appearanceBaseline.version,
+        baselineVersions: {
+          geometry: qualityBaselineDefinition().version,
+          appearance: context.appearanceBaseline.version,
+        },
+        objectId: context.objectId,
+        passed: appearanceGate.passed,
+        failures: appearanceGate.failures,
+        geometryGate: v1Probe.geometryGate,
+        appearanceGate: {
+          evaluated: true,
+          passed: appearanceGate.passed,
+          evidencePolicy: isV3
+            ? "human-anchored-semantic-role-coverage-v3"
+            : "global-appearance-plus-semantic-pattern-recall-v2",
+          failures: appearanceGate.failures,
+        },
+      };
+    }
+  } else if (context.geometryBaseline) {
+    const geometryGate = evaluateStoneGeometryV2Gate({
+      baseline: context.geometryBaseline,
+      aggregate,
+    });
+    if (!geometryGate.passed) {
+      gate = {
+        baselineVersion: context.geometryBaseline.version,
+        baselineVersions: {
+          geometry: context.geometryBaseline.version,
+          appearance: qualityBaselineDefinition().version,
+        },
+        objectId: context.objectId,
+        passed: false,
+        failures: geometryGate.failures,
+        geometryGate: {
+          passed: false,
+          failures: geometryGate.failures,
+        },
+        appearanceGate: {
+          evaluated: false,
+          passed: null,
+          reason: "geometry-gate-failed",
+          failures: [],
+        },
+      };
+    } else {
+      categoryAppearance = stoneUniformAppearanceEvidence(perView);
+      const appearanceProbe = evaluateQualityGate(context.objectId, {
+        ...aggregate,
+        appearance: categoryAppearance.hard,
+        geometry: {
+          ...aggregate.geometry,
+          bounds: {
+            maxAxisRelativeError: 0,
+            bottomAnchorErrorCanonical: 0,
+          },
+          silhouette: {
+            meanIou: 1,
+            worstViewIou: 1,
+            meanEdgeDistancePixels: 0,
+            edgeDistanceP95Pixels: 0,
+          },
+          depth: { mae: 0, p95: 0 },
+        },
+      });
+      gate = {
+        ...appearanceProbe,
+        baselineVersion: context.geometryBaseline.version,
+        baselineVersions: {
+          geometry: context.geometryBaseline.version,
+          appearance: qualityBaselineDefinition().version,
+        },
+        geometryGate: { passed: true, failures: [] },
+        appearanceGate: {
+          ...appearanceProbe.appearanceGate,
+          evidencePolicy: "uniform-albedo-palette-material-v1",
+          geometryConditionedLitRgb: categoryAppearance.diagnostic,
+        },
+      };
+    }
+  } else {
+    gate = evaluateQualityGate(context.objectId, aggregate);
+  }
   return {
     perView,
     aggregate,
-    gate: evaluateQualityGate(context.objectId, aggregate),
+    categoryAppearance,
+    gate,
     diagnostics: diagnosticEvidence(
       context.referenceRoot,
       context.replacementRoot,
@@ -546,12 +779,38 @@ export async function runQualityCalibration({ canvas, onProgress = () => {} }) {
 export async function runObjectEvaluation({
   canvas,
   objectId,
+  categoryBaseline = null,
+  geometryBaseline = null,
+  appearanceBaseline = null,
+  appearanceVariant = null,
   onProgress = () => {},
 }) {
   onProgress(`Loading ${objectId}`);
   const reference = await loadAuthoredReference(objectId);
   const definition = getObjectDefinition(objectId);
-  const replacementRoot = generateObject(definition.recipe, definition.generator);
+  let replacementRecipe = definition.recipe;
+  if (appearanceVariant) {
+    if (objectId === "umbrella") {
+      const { createUmbrellaAppearanceVariantRecipe } = await import(
+        "./umbrella-v3-appearance-variants.js"
+      );
+      replacementRecipe = createUmbrellaAppearanceVariantRecipe(
+        definition.recipe,
+        appearanceVariant,
+      );
+    } else if (objectId === "bamboo-shoot") {
+      const { createBambooShootAppearanceVariantRecipe } = await import(
+        "./bamboo-shoot-appearance-variants.js"
+      );
+      replacementRecipe = createBambooShootAppearanceVariantRecipe(
+        definition.recipe,
+        appearanceVariant,
+      );
+    } else {
+      throw new Error("appearance variants are not supported for this object");
+    }
+  }
+  const replacementRoot = generateObject(replacementRecipe, definition.generator);
   const manifest = createEvaluationManifest(objectId, reference.worldBounds);
   const harness = createEvaluationHarness({
     canvas,
@@ -574,6 +833,9 @@ export async function runObjectEvaluation({
       referenceCaptures,
       referenceBounds: boundsOf(reference.root),
       referenceMaterial: materialOf(reference.root),
+      categoryBaseline,
+      geometryBaseline,
+      appearanceBaseline,
     };
     const comparison = fullComparison(context, replacementCaptures);
     harness.preview({
@@ -587,8 +849,27 @@ export async function runObjectEvaluation({
       productionUse: "prohibited",
       objectId,
       semanticId: definition.recipe.id,
+      appearanceVariant,
       evaluationProtocolVersion: EVALUATION_PROTOCOL_VERSION,
-      qualityBaseline: qualityBaselineDefinition(),
+      qualityBaseline: categoryBaseline
+        ? categoryBaseline
+        : geometryBaseline
+        ? {
+            geometry: geometryBaseline,
+            appearance: {
+              version: qualityBaselineDefinition().version,
+              thresholds: qualityBaselineDefinition().appearance[objectId],
+            },
+          }
+        : appearanceBaseline
+          ? {
+              geometry: {
+                version: qualityBaselineDefinition().version,
+                thresholds: qualityBaselineDefinition().geometry[objectId],
+              },
+              appearance: appearanceBaseline,
+            }
+        : qualityBaselineDefinition(),
       manifest,
       captures: {
         expectedCount: EVALUATION_VIEWS.length * passIds.length * 2,
@@ -601,6 +882,7 @@ export async function runObjectEvaluation({
         userAgent: navigator.userAgent,
         platform: navigator.platform,
         captureBackend: "browser-webgl-rgba8",
+        gpu: harness.environment(),
       },
     };
   } finally {

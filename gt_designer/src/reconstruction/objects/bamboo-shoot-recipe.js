@@ -1,0 +1,35 @@
+export const BAMBOO_SHOOT_RECIPE = Object.freeze({
+  id: "island.nature.bamboo-shoot",
+  kind: "tapered-core-axial-layer-families-v1",
+  seed: 0xba6b001,
+  shape: Object.freeze({
+    coreRings: Object.freeze([
+      Object.freeze([0.082, 0, 0.166, 0.961]),
+      Object.freeze([0.162, 0.773, 0.215, 0.936]),
+      Object.freeze([0.253, 2.526, 0.325, 0.79]),
+      Object.freeze([0.289, 4.097, 0.434, 0.677]),
+      Object.freeze([0.238, 6.096, 0.567, 0.41]),
+      Object.freeze([0.118, 7.026, 0.677, 0.233]),
+      Object.freeze([-0.119, 8.193, 0.908, 0.068]),
+    ]),
+    radialSegments: 12,
+    phase: 0.17,
+    sheathFamilies: Object.freeze([
+      Object.freeze([0.68, 1.61, 2.71, 0.63, 0.88, 0.83]),
+      Object.freeze([1.08, -2.06, 0.78, 0.5, 0.99, 0.62]),
+      Object.freeze([0.72, 1.39, -1.16, 0.8, 0.77, 0.98]),
+    ]),
+    heroSheath: Object.freeze([4.78, -1.13, 0.34, 0.89, 1.49]),
+    crownCount: 6,
+    crownLength: 1.01,
+    crownSpread: 0.17,
+    crownRadii: Object.freeze([0.012, 0.025]),
+  }),
+  appearance: Object.freeze({
+    coreColor: 0x675a4b,
+    coreAccent: 0x807260,
+    sheathColor: 0x84b949,
+    roughness: 0.8,
+    metalness: 0,
+  }),
+});

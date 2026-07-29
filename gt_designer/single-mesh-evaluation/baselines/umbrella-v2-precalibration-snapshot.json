@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "umbrella-v2-precalibration-snapshot-v1",
+  "candidateId": "umbrella/radial-parasol-assembly-v1",
+  "artifactRole": "development-only-calibration-quarantine",
+  "productionUse": "prohibited",
+  "freezeCommit": "20044f19b13c1b2e0cf979d50df25c81fc603817",
+  "policy": {
+    "calibrationInputUse": "prohibited",
+    "mutationDuringCalibration": "prohibited",
+    "mutationAfterCalibrationPass": "authorized only by Stage 1.5 resumption Ticket 02",
+    "verification": "sha256-and-byte-length-before-and-after-calibration"
+  },
+  "candidateFiles": [
+    {
+      "path": "gt_designer/src/reconstruction/core/object-generator.js",
+      "byteLength": 2912,
+      "sha256": "efbe8045363fbcb436132d43d174d4b753efae196a35ec2a4d833016da6a4717"
+    },
+    {
+      "path": "gt_designer/src/reconstruction/objects/object-registry.js",
+      "byteLength": 1590,
+      "sha256": "92fec10c439bbe0ad88cb18170a4f74b5e005e4b6be6be302f7b89ff9982aea3"
+    },
+    {
+      "path": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+      "byteLength": 14698,
+      "sha256": "b177028fdfe26c20671ee1103940b22a0b5f8c8a4ecf02061489048356e9b258"
+    },
+    {
+      "path": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+      "byteLength": 2541,
+      "sha256": "5a5306237a064b5b89477e51e4beb6cb29bf28cf3bd84a8b4599499cc6f772e5"
+    },
+    {
+      "path": "package-lock.json",
+      "byteLength": 16902,
+      "sha256": "196401e3ca0ede3e31f80ccacbed2132eb55f6459dbadfb230963a989d337193"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "gt_designer/single-mesh-evaluation/reports/umbrella-acceptance-v1.json",
+      "byteLength": 101090,
+      "sha256": "2bf21de7f209724628b999909a4b42cbaebe8194e4b4448077a502bfbab8ca90"
+    },
+    {
+      "path": "gt_designer/single-mesh-runtime-audit/reports/umbrella-nonvisual-v2.json",
+      "byteLength": 69627,
+      "sha256": "ec4d54a3758138b4579e8d0e9a74fbee6693ecd04a6692676ae8e8d3d9c64449"
+    }
+  ],
+  "baselineFiles": [
+    {
+      "path": "gt_designer/single-mesh-evaluation/baselines/stage-1-quality-calibration-v1.json",
+      "byteLength": 705562,
+      "sha256": "5df7c89e2599a9a788f25a0f0b1874fe8a63568c27cc8f54e3a391f31eb20eb5"
+    },
+    {
+      "path": "tools/evaluation/visual-metrics.mjs",
+      "byteLength": 31800,
+      "sha256": "141a064b405b4b17f74f85e14b8f0d5ce9c76b04ae36b555dd0bb01aff6d5c02"
+    }
+  ]
+}

@@ -1,5 +1,3 @@
-import { generateObject } from "../src/reconstruction/core/object-generator.js";
-import { getObjectDefinition } from "../src/reconstruction/objects/object-registry.js";
 import { createEvaluationHarness } from "./evaluation-harness.js";
 import {
   createEvaluationManifest,
@@ -26,6 +24,9 @@ const state = {
   manifest: null,
   harness: null,
   calibrationReport: null,
+  stoneV2CalibrationRun: null,
+  patternedAppearanceV2CalibrationRun: null,
+  stage2PrecalibrationRun: null,
   objectEvaluationReport: null,
 };
 window.singleMeshEvaluation = state;
@@ -127,6 +128,123 @@ function showError(error) {
 }
 
 async function initialize() {
+  if (parameters.get("calibrate") === "stage2-pre") {
+    for (const control of [
+      elements.mode,
+      elements.pass,
+      elements.view,
+      elements.capture,
+      elements.download,
+    ]) {
+      control.disabled = true;
+    }
+    const runIndex = Number(parameters.get("run"));
+    document.body.dataset.state = "stage2-precalibrating";
+    const { runStage2Precalibration } = await import(
+      "./stage2-precalibration-runner.js"
+    );
+    state.stage2PrecalibrationRun = await runStage2Precalibration({
+      canvas: elements.canvas,
+      objectId: state.unitId,
+      runIndex,
+      onProgress(message) {
+        elements.state.textContent = message;
+        elements.summary.textContent = `Stage 2 pre-calibration\n${message}`;
+      },
+    });
+    state.ready = true;
+    document.body.dataset.state = "stage2-precalibrated";
+    document.body.dataset.objectId = state.unitId;
+    document.body.dataset.calibrationRun = String(runIndex);
+    elements.state.textContent = "Stage 2 reference pre-calibration complete";
+    elements.summary.textContent = [
+      `Object: ${state.unitId}`,
+      `Run: ${runIndex}`,
+      `Scenarios: ${state.stage2PrecalibrationRun.scenarios.length}`,
+      "Candidate imports: prohibited",
+    ].join("\n");
+    return;
+  }
+  if (parameters.get("calibrate") === "patterned-appearance-v2") {
+    for (const control of [
+      elements.mode,
+      elements.pass,
+      elements.view,
+      elements.capture,
+      elements.download,
+    ]) {
+      control.disabled = true;
+    }
+    const runIndex = Number(parameters.get("run"));
+    if (!Number.isInteger(runIndex) || runIndex < 1) {
+      throw new Error(
+        "Patterned appearance v2 calibration requires a positive run index",
+      );
+    }
+    document.body.dataset.state = "patterned-appearance-v2-calibrating";
+    const { runPatternedAppearanceV2ReferenceCalibration } = await import(
+      "./patterned-appearance-v2-calibration-runner.js"
+    );
+    state.patternedAppearanceV2CalibrationRun =
+      await runPatternedAppearanceV2ReferenceCalibration({
+        canvas: elements.canvas,
+        runIndex,
+        onProgress(message) {
+          elements.state.textContent = message;
+          elements.summary.textContent =
+            `Patterned Appearance Baseline v2\n${message}`;
+        },
+      });
+    state.ready = true;
+    document.body.dataset.state = "patterned-appearance-v2-calibrated";
+    document.body.dataset.calibrationRun = String(runIndex);
+    elements.state.textContent =
+      "Patterned appearance v2 reference calibration run complete";
+    elements.summary.textContent = [
+      `Run: ${runIndex}`,
+      `Scenarios: ${state.patternedAppearanceV2CalibrationRun.scenarios.length}`,
+      "Candidate imports: prohibited",
+    ].join("\n");
+    return;
+  }
+  if (parameters.get("calibrate") === "stone-v2") {
+    for (const control of [
+      elements.mode,
+      elements.pass,
+      elements.view,
+      elements.capture,
+      elements.download,
+    ]) {
+      control.disabled = true;
+    }
+    const runIndex = Number(parameters.get("run"));
+    if (!Number.isInteger(runIndex) || runIndex < 1) {
+      throw new Error("Stone v2 calibration requires a positive run index");
+    }
+    document.body.dataset.state = "stone-v2-calibrating";
+    const { runStoneGeometryV2ReferenceCalibration } = await import(
+      "./stone-v2-calibration-runner.js"
+    );
+    state.stoneV2CalibrationRun =
+      await runStoneGeometryV2ReferenceCalibration({
+        canvas: elements.canvas,
+        runIndex,
+        onProgress(message) {
+          elements.state.textContent = message;
+          elements.summary.textContent = `Stone Geometry Baseline v2\n${message}`;
+        },
+      });
+    state.ready = true;
+    document.body.dataset.state = "stone-v2-calibrated";
+    document.body.dataset.calibrationRun = String(runIndex);
+    elements.state.textContent = "Stone v2 reference calibration run complete";
+    elements.summary.textContent = [
+      `Run: ${runIndex}`,
+      `Scenarios: ${state.stoneV2CalibrationRun.scenarios.length}`,
+      "Candidate imports: prohibited",
+    ].join("\n");
+    return;
+  }
   if (parameters.get("calibrate") === "all") {
     for (const control of [
       elements.mode,
@@ -175,9 +293,88 @@ async function initialize() {
     }
     document.body.dataset.state = "evaluating";
     const { runObjectEvaluation } = await import("./calibration-runner.js");
+    const categoryBaselineId = parameters.get("category-baseline");
+    const geometryBaselineId = parameters.get("geometry-baseline");
+    const appearanceBaselineId = parameters.get("appearance-baseline");
+    const appearanceVariant = parameters.get("appearance-variant");
+    let categoryBaseline = null;
+    let geometryBaseline = null;
+    let appearanceBaseline = null;
+    if ([categoryBaselineId, geometryBaselineId, appearanceBaselineId].filter(Boolean).length > 1) {
+      throw new Error("category, geometry, and appearance baselines are exclusive");
+    }
+    if (categoryBaselineId) {
+      if (
+        !["stage2-v1", "stage2-v2"].includes(categoryBaselineId) ||
+        !["bamboo-shoot", "mushroom", "blue-hat", "candle"].includes(state.unitId)
+      ) {
+        throw new Error("unsupported Stage 2 category baseline request");
+      }
+      const response = await fetch("./baselines/stage2-category-baselines-v1.json");
+      if (!response.ok) throw new Error("Stage 2 category baselines could not be loaded");
+      const baselineSet = await response.json();
+      const geometryBaseline = baselineSet.objects[state.unitId];
+      if (!geometryBaseline?.frozen) throw new Error("Stage 2 object baseline is not frozen");
+      if (categoryBaselineId === "stage2-v1") {
+        categoryBaseline = geometryBaseline;
+      } else {
+        const semanticResponse = await fetch(
+          "./baselines/stage2-semantic-appearance-baselines-v2.json",
+        );
+        if (!semanticResponse.ok) {
+          throw new Error("Stage 2 semantic appearance baselines could not be loaded");
+        }
+        const semanticSet = await semanticResponse.json();
+        const semanticAppearance = semanticSet.objects[state.unitId];
+        if (!semanticAppearance?.frozen) {
+          throw new Error("Stage 2 semantic appearance baseline is not frozen");
+        }
+        categoryBaseline = {
+          ...semanticAppearance,
+          hard: [
+            ...geometryBaseline.hard.filter(({ domain }) => domain === "geometry"),
+            ...semanticAppearance.hard,
+          ],
+          geometryBaselineVersion: geometryBaseline.version,
+        };
+      }
+    }
+    if (geometryBaselineId) {
+      if (geometryBaselineId !== "stone-v2" || state.unitId !== "stone") {
+        throw new Error("unsupported category geometry baseline request");
+      }
+      const response = await fetch(
+        "./baselines/stone-geometry-baseline-v2.json",
+      );
+      if (!response.ok) {
+        throw new Error("Stone Geometry Baseline v2 could not be loaded");
+      }
+      geometryBaseline = await response.json();
+    }
+    if (appearanceBaselineId) {
+      if (
+        !["patterned-v2", "patterned-v3"].includes(appearanceBaselineId) ||
+        state.unitId !== "umbrella"
+      ) {
+        throw new Error("unsupported category appearance baseline request");
+      }
+      const response = await fetch(
+        appearanceBaselineId === "patterned-v3"
+          ? "./baselines/patterned-appearance-baseline-v3.json"
+          : "./baselines/patterned-appearance-baseline-v2.json",
+      );
+      if (!response.ok) {
+        throw new Error("Patterned Appearance Baseline could not be loaded");
+      }
+      appearanceBaseline = await response.json();
+    }
     state.objectEvaluationReport = await runObjectEvaluation({
       canvas: elements.canvas,
       objectId: state.unitId,
+      categoryBaseline,
+      geometryBaseline,
+      appearanceBaseline,
+      appearanceVariant,
       onProgress(message) {
         elements.state.textContent = message;
         elements.summary.textContent = `Object acceptance\n${message}`;
@@ -200,6 +397,10 @@ async function initialize() {
     );
     return;
   }
+  const [{ generateObject }, { getObjectDefinition }] = await Promise.all([
+    import("../src/reconstruction/core/object-generator.js"),
+    import("../src/reconstruction/objects/object-registry.js"),
+  ]);
   const reference = await loadAuthoredReference(state.unitId);
   const replacementDefinition = getObjectDefinition(
     parameters.get("replacement") ?? "probe",

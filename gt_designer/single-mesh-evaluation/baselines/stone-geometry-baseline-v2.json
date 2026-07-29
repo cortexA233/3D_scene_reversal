@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "stone-geometry-quality-baseline-v2",
+  "version": "stone-geometry-baseline-v2",
+  "objectId": "stone",
+  "artifactRole": "development-only-quality-baseline",
+  "productionUse": "prohibited",
+  "contractSchemaVersion": "stone-geometry-v2-calibration-contract-v1",
+  "selectionStrategy": "least-permissive-mild-envelope-plus-fixed-allowance",
+  "hard": [
+    {
+      "path": "geometry.bounds.maxAxisRelativeError",
+      "operator": "<=",
+      "threshold": 0.022,
+      "mildEnvelope": 0.019999999999998876,
+      "repeatabilityAllowance": 0.002,
+      "group": "bounds",
+      "destructiveScenarioIds": [
+        "uniform-scale/-0.05",
+        "uniform-scale/+0.05",
+        "anisotropic-x/1.10",
+        "squash-y/0.80"
+      ]
+    },
+    {
+      "path": "geometry.bounds.bottomAnchorErrorCanonical",
+      "operator": "<=",
+      "threshold": 0.030824658817,
+      "mildEnvelope": 0.028824658816565707,
+      "repeatabilityAllowance": 0.002,
+      "group": "bounds",
+      "destructiveScenarioIds": [
+        "pivot-x/0.10"
+      ]
+    },
+    {
+      "path": "geometry.silhouette.meanIou",
+      "operator": ">=",
+      "threshold": 0.844703618056,
+      "mildEnvelope": 0.8467036180562363,
+      "repeatabilityAllowance": 0.002,
+      "group": "silhouette",
+      "destructiveScenarioIds": [
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box"
+      ]
+    },
+    {
+      "path": "geometry.silhouette.worstViewIou",
+      "operator": ">=",
+      "threshold": 0.811907117733,
+      "mildEnvelope": 0.8149071177333546,
+      "repeatabilityAllowance": 0.003,
+      "group": "silhouette",
+      "destructiveScenarioIds": [
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box"
+      ]
+    },
+    {
+      "path": "geometry.silhouette.meanEdgeDistancePixels",
+      "operator": "<=",
+      "threshold": 10.600715268357,
+      "mildEnvelope": 10.350715268357161,
+      "repeatabilityAllowance": 0.25,
+      "group": "silhouette",
+      "destructiveScenarioIds": [
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box"
+      ]
+    },
+    {
+      "path": "geometry.silhouette.edgeDistanceP95Pixels",
+      "operator": "<=",
+      "threshold": 33.557641192199,
+      "mildEnvelope": 32.55764119219941,
+      "repeatabilityAllowance": 1,
+      "group": "silhouette",
+      "destructiveScenarioIds": [
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box"
+      ]
+    },
+    {
+      "path": "geometry.depth.mae",
+      "operator": "<=",
+      "threshold": 0.040584035391,
+      "mildEnvelope": 0.038584035391087596,
+      "repeatabilityAllowance": 0.002,
+      "group": "depth",
+      "destructiveScenarioIds": [
+        "profile-compression/0.80",
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box",
+        "squash-y/0.80"
+      ]
+    },
+    {
+      "path": "geometry.depth.p95",
+      "operator": "<=",
+      "threshold": 0.145860441186,
+      "mildEnvelope": 0.1408604411864631,
+      "repeatabilityAllowance": 0.005,
+      "group": "depth",
+      "destructiveScenarioIds": [
+        "profile-compression/0.80",
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box",
+        "squash-y/0.80"
+      ]
+    }
+  ],
+  "diagnostic": [],
+  "frozen": true
+}

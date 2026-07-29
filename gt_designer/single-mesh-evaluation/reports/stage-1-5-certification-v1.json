@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "single-mesh-stage-1-5-certification-v1",
+  "artifactRole": "development-only-stage-certification",
+  "productionUse": "prohibited",
+  "historicalStage1": {
+    "result": "2/4 FAIL",
+    "baselineVersion": "single-mesh-quality-baseline-v1",
+    "report": "gt_designer/single-mesh-evaluation/reports/stage-1-certification-v1.json",
+    "preserved": true
+  },
+  "gates": {
+    "completeSourceScalars": {
+      "stone-path": {
+        "value": 33,
+        "maximum": 48
+      },
+      "stone": {
+        "value": 31,
+        "maximum": 32
+      },
+      "vase": {
+        "value": 47,
+        "maximum": 48
+      },
+      "umbrella": {
+        "value": 94,
+        "maximum": 96
+      }
+    },
+    "nativeBrowserQualification": {
+      "firefox": {
+        "requiredObjects": [
+          "stone-path",
+          "vase"
+        ],
+        "passed": true,
+        "scope": "browser qualified for subsequent Stone and Umbrella evidence"
+      },
+      "safari": {
+        "requiredObjects": [
+          "stone-path",
+          "vase"
+        ],
+        "passed": true,
+        "scope": "browser qualified for subsequent Stone and Umbrella evidence"
+      }
+    },
+    "stone": {
+      "representation": "bounded-support-polyhedron-v2",
+      "baselineVersion": "single-mesh-quality-baseline-v1",
+      "visualPassed": false,
+      "visualFailures": [
+        {
+          "metric": "geometry.silhouette.meanIou",
+          "actual": 0.8930835067692503,
+          "operator": ">=",
+          "threshold": 0.92
+        },
+        {
+          "metric": "geometry.silhouette.worstViewIou",
+          "actual": 0.8690109301123639,
+          "operator": ">=",
+          "threshold": 0.88
+        },
+        {
+          "metric": "geometry.silhouette.meanEdgeDistancePixels",
+          "actual": 6.868654358146311,
+          "operator": "<=",
+          "threshold": 2.5
+        },
+        {
+          "metric": "geometry.silhouette.edgeDistanceP95Pixels",
+          "actual": 23.769728648009426,
+          "operator": "<=",
+          "threshold": 7
+        },
+        {
+          "metric": "geometry.depth.mae",
+          "actual": 0.029000923376750257,
+          "operator": "<=",
+          "threshold": 0.025
+        },
+        {
+          "metric": "geometry.depth.p95",
+          "actual": 0.10564533088984719,
+          "operator": "<=",
+          "threshold": 0.07
+        }
+      ],
+      "nonvisualPassed": true,
+      "scalars": 31,
+      "budgets": {
+        "scalars": 31,
+        "recipeBytes": 424,
+        "bundleGzipBytes": 1363,
+        "triangles": 80,
+        "drawCalls": 1,
+        "geometryMemoryBytes": 1488,
+        "warmGenerationP95Milliseconds": 0.20000000298023224
+      },
+      "report": "gt_designer/single-mesh-evaluation/reports/stone-acceptance-v2.json"
+    },
+    "laterSteps": {
+      "status": "not-run-after-stone-kill-gate",
+      "tickets": [
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10"
+      ]
+    }
+  },
+  "certification": {
+    "passed": false,
+    "stage2Authorized": false,
+    "outcome": "FAIL — Stone second compact representation missed frozen v1",
+    "stopReason": "stone-second-representation-v1",
+    "checks": [
+      {
+        "id": "historical-stage-1-preserved",
+        "passed": true,
+        "detail": "single-mesh-quality-baseline-v1 remains 2/4 FAIL"
+      },
+      {
+        "id": "complete-source-scalars",
+        "passed": true,
+        "detail": {
+          "stone-path": {
+            "value": 33,
+            "maximum": 48
+          },
+          "stone": {
+            "value": 31,
+            "maximum": 32
+          },
+          "vase": {
+            "value": 47,
+            "maximum": 48
+          },
+          "umbrella": {
+            "value": 94,
+            "maximum": 96
+          }
+        }
+      },
+      {
+        "id": "native-browser-qualification",
+        "passed": true,
+        "detail": {
+          "firefox": {
+            "requiredObjects": [
+              "stone-path",
+              "vase"
+            ],
+            "passed": true,
+            "scope": "browser qualified for subsequent Stone and Umbrella evidence"
+          },
+          "safari": {
+            "requiredObjects": [
+              "stone-path",
+              "vase"
+            ],
+            "passed": true,
+            "scope": "browser qualified for subsequent Stone and Umbrella evidence"
+          }
+        }
+      },
+      {
+        "id": "stone-second-representation-v1",
+        "passed": false,
+        "detail": [
+          {
+            "metric": "geometry.silhouette.meanIou",
+            "actual": 0.8930835067692503,
+            "operator": ">=",
+            "threshold": 0.92
+          },
+          {
+            "metric": "geometry.silhouette.worstViewIou",
+            "actual": 0.8690109301123639,
+            "operator": ">=",
+            "threshold": 0.88
+          },
+          {
+            "metric": "geometry.silhouette.meanEdgeDistancePixels",
+            "actual": 6.868654358146311,
+            "operator": "<=",
+            "threshold": 2.5
+          },
+          {
+            "metric": "geometry.silhouette.edgeDistanceP95Pixels",
+            "actual": 23.769728648009426,
+            "operator": "<=",
+            "threshold": 7
+          },
+          {
+            "metric": "geometry.depth.mae",
+            "actual": 0.029000923376750257,
+            "operator": "<=",
+            "threshold": 0.025
+          },
+          {
+            "metric": "geometry.depth.p95",
+            "actual": 0.10564533088984719,
+            "operator": "<=",
+            "threshold": 0.07
+          }
+        ]
+      }
+    ],
+    "failures": [
+      {
+        "id": "stone-second-representation-v1",
+        "passed": false,
+        "detail": [
+          {
+            "metric": "geometry.silhouette.meanIou",
+            "actual": 0.8930835067692503,
+            "operator": ">=",
+            "threshold": 0.92
+          },
+          {
+            "metric": "geometry.silhouette.worstViewIou",
+            "actual": 0.8690109301123639,
+            "operator": ">=",
+            "threshold": 0.88
+          },
+          {
+            "metric": "geometry.silhouette.meanEdgeDistancePixels",
+            "actual": 6.868654358146311,
+            "operator": "<=",
+            "threshold": 2.5
+          },
+          {
+            "metric": "geometry.silhouette.edgeDistanceP95Pixels",
+            "actual": 23.769728648009426,
+            "operator": "<=",
+            "threshold": 7
+          },
+          {
+            "metric": "geometry.depth.mae",
+            "actual": 0.029000923376750257,
+            "operator": "<=",
+            "threshold": 0.025
+          },
+          {
+            "metric": "geometry.depth.p95",
+            "actual": 0.10564533088984719,
+            "operator": "<=",
+            "threshold": 0.07
+          }
+        ]
+      }
+    ]
+  }
+}

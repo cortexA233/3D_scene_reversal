@@ -1,0 +1,358 @@
+{
+  "schemaVersion": "patterned-appearance-v2-calibration-contract-v1",
+  "baselineVersion": "patterned-appearance-baseline-v2",
+  "objectId": "umbrella",
+  "artifactRole": "development-only-reference-calibration-contract",
+  "productionUse": "prohibited",
+  "candidateUse": "prohibited",
+  "capturePolicy": {
+    "independentRuns": 2,
+    "views": 12,
+    "passes": [
+      "silhouette",
+      "albedo",
+      "lit-rgb"
+    ],
+    "crossRunEvidence": "byte-identical"
+  },
+  "thresholdSelection": {
+    "strategy": "widest-safe-reference-only",
+    "guardBandFractionOfSeparation": 0.05,
+    "shouldPassPolicy": "all scenarios pass the complete hard gate",
+    "mustRejectPolicy": "every scenario fails at least one predeclared applicable hard metric",
+    "candidateFailuresMayRelaxThresholds": false
+  },
+  "calibrationPolicy": {
+    "correctionsUsed": 1,
+    "corrections": [
+      {
+        "id": "reference-perturbation-semantics",
+        "reason": "initial whole-texture transforms overwhelmed mild motif controls and palette clustering was discontinuous",
+        "resolution": "transform motif pixels only; keep palette clustering diagnostic; use measured identity-copy tolerances; add semantic family recall",
+        "candidateEvidenceUsed": false
+      }
+    ],
+    "frozenAfterPassingRun": true
+  },
+  "identityTolerance": {
+    "meanDeltaE00Maximum": 0.002,
+    "p90DeltaE00Maximum": 0,
+    "meanMaskedSsimMinimum": 0.9999,
+    "worstViewSsimMinimum": 0.9998,
+    "paletteCentroidDeltaE00Maximum": 0.01,
+    "paletteCoverageL1Maximum": 0.001,
+    "roughnessAbsoluteErrorMaximum": 0,
+    "metalnessAbsoluteErrorMaximum": 0
+  },
+  "materialThresholds": {
+    "roughnessAbsoluteErrorMaximum": 0.1,
+    "metalnessAbsoluteErrorMaximum": 0.05,
+    "source": "unchanged-single-mesh-quality-baseline-v1"
+  },
+  "metrics": [
+    {
+      "path": "appearance.meanDeltaE00",
+      "operator": "<=",
+      "direction": "maximum",
+      "applicableMustRejectScenarioIds": [
+        "reject-flat-canopy",
+        "reject-wrong-dominant-palette"
+      ],
+      "minimumAbsoluteGuard": 0.1,
+      "classification": "hard"
+    },
+    {
+      "path": "appearance.p90DeltaE00",
+      "operator": "<=",
+      "direction": "maximum",
+      "applicableMustRejectScenarioIds": [
+        "reject-flat-canopy",
+        "reject-wrong-dominant-palette"
+      ],
+      "minimumAbsoluteGuard": 0.1,
+      "classification": "hard"
+    },
+    {
+      "path": "appearance.meanMaskedSsim",
+      "operator": ">=",
+      "direction": "minimum",
+      "applicableMustRejectScenarioIds": [
+        "reject-half-pattern-coverage",
+        "reject-large-negative-phase",
+        "reject-large-positive-phase",
+        "reject-large-scale-down",
+        "reject-large-scale-up"
+      ],
+      "minimumAbsoluteGuard": 0.005,
+      "classification": "hard"
+    },
+    {
+      "path": "appearance.worstViewSsim",
+      "operator": ">=",
+      "direction": "minimum",
+      "applicableMustRejectScenarioIds": [
+        "reject-half-pattern-coverage",
+        "reject-large-negative-phase",
+        "reject-large-positive-phase",
+        "reject-large-scale-down",
+        "reject-large-scale-up"
+      ],
+      "minimumAbsoluteGuard": 0.005,
+      "classification": "hard"
+    },
+    {
+      "path": "patterned.flowerRecall",
+      "operator": ">=",
+      "direction": "minimum",
+      "applicableMustRejectScenarioIds": [
+        "reject-delete-flower-family"
+      ],
+      "minimumAbsoluteGuard": 0.01,
+      "classification": "hard"
+    },
+    {
+      "path": "patterned.leafRecall",
+      "operator": ">=",
+      "direction": "minimum",
+      "applicableMustRejectScenarioIds": [
+        "reject-delete-leaf-family"
+      ],
+      "minimumAbsoluteGuard": 0.01,
+      "classification": "hard"
+    },
+    {
+      "path": "patterned.branchRecall",
+      "operator": ">=",
+      "direction": "minimum",
+      "applicableMustRejectScenarioIds": [
+        "reject-delete-branch-family"
+      ],
+      "minimumAbsoluteGuard": 0.01,
+      "classification": "hard"
+    },
+    {
+      "path": "appearance.paletteCentroidDeltaE00",
+      "operator": "<=",
+      "direction": "maximum",
+      "applicableMustRejectScenarioIds": [
+        "reject-flat-canopy",
+        "reject-wrong-dominant-palette",
+        "reject-delete-flower-family",
+        "reject-delete-leaf-family",
+        "reject-delete-branch-family",
+        "reject-half-pattern-coverage"
+      ],
+      "minimumAbsoluteGuard": 0.1,
+      "classification": "diagnostic",
+      "diagnosticReason": "palette clustering is discontinuous under minor complex-texture color changes"
+    },
+    {
+      "path": "appearance.paletteCoverageL1",
+      "operator": "<=",
+      "direction": "maximum",
+      "applicableMustRejectScenarioIds": [
+        "reject-flat-canopy",
+        "reject-wrong-dominant-palette",
+        "reject-delete-flower-family",
+        "reject-delete-leaf-family",
+        "reject-delete-branch-family",
+        "reject-half-pattern-coverage"
+      ],
+      "minimumAbsoluteGuard": 0.005,
+      "classification": "diagnostic",
+      "diagnosticReason": "palette clustering is discontinuous under minor complex-texture color changes"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "mild-position-negative",
+      "classification": "should-pass",
+      "category": "motif-position",
+      "mutation": {
+        "translatePixels": [
+          -0.25,
+          0
+        ]
+      }
+    },
+    {
+      "id": "mild-position-positive",
+      "classification": "should-pass",
+      "category": "motif-position",
+      "mutation": {
+        "translatePixels": [
+          0.25,
+          0
+        ]
+      }
+    },
+    {
+      "id": "mild-phase-negative",
+      "classification": "should-pass",
+      "category": "pattern-phase",
+      "mutation": {
+        "rotationDegrees": -0.1
+      }
+    },
+    {
+      "id": "mild-phase-positive",
+      "classification": "should-pass",
+      "category": "pattern-phase",
+      "mutation": {
+        "rotationDegrees": 0.1
+      }
+    },
+    {
+      "id": "mild-scale-down",
+      "classification": "should-pass",
+      "category": "pattern-scale",
+      "mutation": {
+        "scale": 0.998
+      }
+    },
+    {
+      "id": "mild-scale-up",
+      "classification": "should-pass",
+      "category": "pattern-scale",
+      "mutation": {
+        "scale": 1.002
+      }
+    },
+    {
+      "id": "mild-layout-negative",
+      "classification": "should-pass",
+      "category": "motif-layout",
+      "mutation": {
+        "shearX": -0.001
+      }
+    },
+    {
+      "id": "mild-layout-positive",
+      "classification": "should-pass",
+      "category": "motif-layout",
+      "mutation": {
+        "shearX": 0.001
+      }
+    },
+    {
+      "id": "mild-palette-warm",
+      "classification": "should-pass",
+      "category": "dominant-palette",
+      "mutation": {
+        "rgbFactors": [
+          1.02,
+          1,
+          0.98
+        ]
+      }
+    },
+    {
+      "id": "mild-palette-cool",
+      "classification": "should-pass",
+      "category": "dominant-palette",
+      "mutation": {
+        "rgbFactors": [
+          0.98,
+          1,
+          1.02
+        ]
+      }
+    },
+    {
+      "id": "reject-flat-canopy",
+      "classification": "must-reject",
+      "category": "flat-appearance",
+      "mutation": {
+        "pixelOperation": "flat-dominant-color"
+      }
+    },
+    {
+      "id": "reject-wrong-dominant-palette",
+      "classification": "must-reject",
+      "category": "wrong-dominant-palette",
+      "mutation": {
+        "pixelOperation": "rotate-rgb-channels"
+      }
+    },
+    {
+      "id": "reject-delete-flower-family",
+      "classification": "must-reject",
+      "category": "major-motif-deletion",
+      "mutation": {
+        "pixelOperation": "delete-flower-family"
+      }
+    },
+    {
+      "id": "reject-delete-leaf-family",
+      "classification": "must-reject",
+      "category": "major-motif-deletion",
+      "mutation": {
+        "pixelOperation": "delete-leaf-family"
+      }
+    },
+    {
+      "id": "reject-delete-branch-family",
+      "classification": "must-reject",
+      "category": "major-motif-deletion",
+      "mutation": {
+        "pixelOperation": "delete-branch-family"
+      }
+    },
+    {
+      "id": "reject-half-pattern-coverage",
+      "classification": "must-reject",
+      "category": "pattern-coverage",
+      "mutation": {
+        "pixelOperation": "delete-half-pattern"
+      }
+    },
+    {
+      "id": "reject-large-negative-phase",
+      "classification": "must-reject",
+      "category": "pattern-phase",
+      "mutation": {
+        "rotationDegrees": -24
+      }
+    },
+    {
+      "id": "reject-large-positive-phase",
+      "classification": "must-reject",
+      "category": "pattern-phase",
+      "mutation": {
+        "rotationDegrees": 24
+      }
+    },
+    {
+      "id": "reject-large-scale-down",
+      "classification": "must-reject",
+      "category": "pattern-scale",
+      "mutation": {
+        "scale": 0.65
+      }
+    },
+    {
+      "id": "reject-large-scale-up",
+      "classification": "must-reject",
+      "category": "pattern-scale",
+      "mutation": {
+        "scale": 1.45
+      }
+    }
+  ],
+  "referenceTextureSemantics": {
+    "source": "Authored Reference base-color texture",
+    "resolutionUse": "development-only-perturbation",
+    "productionTransfer": "prohibited",
+    "motifRegionNormalizedTopLeft": [
+      0.14,
+      0.22,
+      0.46,
+      0.58
+    ],
+    "deletedPixelReplacementSrgb": [
+      132,
+      128,
+      78
+    ]
+  }
+}

@@ -48,6 +48,42 @@ export const OBJECT_BUDGETS = Object.freeze({
     geometryMemoryBytes: 256 * 1024,
     warmGenerationP95Milliseconds: 12,
   }),
+  "bamboo-shoot": Object.freeze({
+    scalars: 64,
+    recipeBytes: 1536,
+    bundleGzipBytes: 6144,
+    triangles: 1536,
+    drawCalls: 2,
+    geometryMemoryBytes: 96 * 1024,
+    warmGenerationP95Milliseconds: 8,
+  }),
+  mushroom: Object.freeze({
+    scalars: 96,
+    recipeBytes: 2048,
+    bundleGzipBytes: 8192,
+    triangles: 3840,
+    drawCalls: 2,
+    geometryMemoryBytes: 192 * 1024,
+    warmGenerationP95Milliseconds: 10,
+  }),
+  "blue-hat": Object.freeze({
+    scalars: 64,
+    recipeBytes: 1536,
+    bundleGzipBytes: 6144,
+    triangles: 1536,
+    drawCalls: 2,
+    geometryMemoryBytes: 96 * 1024,
+    warmGenerationP95Milliseconds: 8,
+  }),
+  candle: Object.freeze({
+    scalars: 96,
+    recipeBytes: 2048,
+    bundleGzipBytes: 8192,
+    triangles: 2048,
+    drawCalls: 3,
+    geometryMemoryBytes: 128 * 1024,
+    warmGenerationP95Milliseconds: 10,
+  }),
 });
 
 export function evaluateObjectBudgets({

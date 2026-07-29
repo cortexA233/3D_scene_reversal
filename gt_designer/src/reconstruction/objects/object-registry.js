@@ -4,12 +4,12 @@ import {
 } from "../testing/probe-generator.js";
 import { generateStonePath } from "./stone-path-generator.js";
 import { STONE_PATH_RECIPE } from "./stone-path-recipe.js";
-import { generateStone } from "./stone-generator.js";
-import { STONE_RECIPE } from "./stone-recipe.js";
 import { generateVase } from "./vase-generator.js";
 import { VASE_RECIPE } from "./vase-recipe.js";
-import { generateUmbrella } from "./umbrella-generator.js";
-import { UMBRELLA_RECIPE } from "./umbrella-recipe.js";
+import { STONE_DEFINITION } from "./stone-definition.js";
+import { UMBRELLA_DEFINITION } from "./umbrella-definition.js";
+import { generateBambooShoot } from "./bamboo-shoot-generator.js";
+import { BAMBOO_SHOOT_RECIPE } from "./bamboo-shoot-recipe.js";
 
 const DEFINITIONS = Object.freeze({
   probe: Object.freeze({
@@ -26,13 +26,7 @@ const DEFINITIONS = Object.freeze({
     generator: generateStonePath,
     fixture: false,
   }),
-  stone: Object.freeze({
-    id: "stone",
-    label: "Stone",
-    recipe: STONE_RECIPE,
-    generator: generateStone,
-    fixture: false,
-  }),
+  stone: STONE_DEFINITION,
   vase: Object.freeze({
     id: "vase",
     label: "Vase",
@@ -40,11 +34,12 @@ const DEFINITIONS = Object.freeze({
     generator: generateVase,
     fixture: false,
   }),
-  umbrella: Object.freeze({
-    id: "umbrella",
-    label: "Umbrella",
-    recipe: UMBRELLA_RECIPE,
-    generator: generateUmbrella,
+  umbrella: UMBRELLA_DEFINITION,
+  "bamboo-shoot": Object.freeze({
+    id: "bamboo-shoot",
+    label: "Bamboo Shoot",
+    recipe: BAMBOO_SHOOT_RECIPE,
+    generator: generateBambooShoot,
     fixture: false,
   }),
 });

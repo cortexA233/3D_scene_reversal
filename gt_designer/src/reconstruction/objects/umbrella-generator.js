@@ -241,49 +241,101 @@ function canopyPatternSource(recipe) {
   const phase = THREE.MathUtils.degToRad(recipe.shape.phaseDegrees);
   const panelAngle = (Math.PI * 2) / recipe.shape.panels;
   const leafCode = recipe.appearance.leaves.map(
-    ([x, z, major, minor], index) => {
-      const angle = Math.atan2(z, x) + (index % 2 === 0 ? 0.55 : -0.45);
-      return `
-        {
-          vec2 delta = data.xy - vec2(${x}, ${z});
-          float cosine = cos(${angle});
-          float sine = sin(${angle});
-          vec2 local = vec2(
-            cosine * delta.x + sine * delta.y,
-            -sine * delta.x + cosine * delta.y
-          );
-          if (dot(local / vec2(${major}, ${minor}),
-                  local / vec2(${major}, ${minor})) < 1.0) {
-            result = leafColor;
-          }
-        }
-      `;
-    },
+    ([x, z, major, minor]) => `
+      paintLeaf(result, data.xy, vec2(${x}, ${z}), vec2(${major}, ${minor}));
+    `,
+  ).join("\n");
+  const branchCode = recipe.appearance.leaves.map(
+    ([x, z, , minor]) => `
+      paintBranch(result, data.xy, vec2(0.0), vec2(${x}, ${z}), ${minor});
+    `,
   ).join("\n");
   const blossomCode = recipe.appearance.blossoms.map(
     ([x, z, radius]) => `
-      {
-        vec2 delta = data.xy - vec2(${x}, ${z});
-        float distance = length(delta);
-        float petal = ${radius * 0.78} +
-          ${radius * 0.22} * cos(atan(delta.y, delta.x) * 8.0);
-        if (distance < petal) result = flowerColor;
-        if (distance < ${radius * 0.18}) result = accentColor;
-      }
+      paintFlower(result, data.xy, vec2(${x}, ${z}), ${radius});
     `,
   ).join("\n");
   return `
+    float segmentDistance(vec2 point, vec2 start, vec2 end) {
+      vec2 segment = end - start;
+      float amount = clamp(
+        dot(point - start, segment) / dot(segment, segment),
+        0.0,
+        1.0
+      );
+      return length(point - mix(start, end, amount));
+    }
+
+    void paintBranch(
+      inout vec3 result,
+      vec2 point,
+      vec2 start,
+      vec2 end,
+      float width
+    ) {
+      if (segmentDistance(point, start, end) < width * 0.5 * 0.5) {
+        result = branchColor;
+      }
+    }
+
+    void paintLeaf(
+      inout vec3 result,
+      vec2 point,
+      vec2 center,
+      vec2 radii
+    ) {
+      float angle = atan(center.y, center.x);
+      vec2 delta = point - center;
+      float cosine = cos(angle);
+      float sine = sin(angle);
+      vec2 local = vec2(
+        cosine * delta.x + sine * delta.y,
+        -sine * delta.x + cosine * delta.y
+      );
+      float ellipse = dot(local / radii, local / radii);
+      if (ellipse < 1.0) {
+        float shade = clamp(local.x / radii.x * 0.5 + 0.5, 0.0, 1.0);
+        result = mix(branchColor, leafColor, shade);
+        if (abs(local.y) < radii.y * 0.01 * 4.0) result = branchColor;
+      }
+    }
+
+    void paintFlower(
+      inout vec3 result,
+      vec2 point,
+      vec2 center,
+      float radius
+    ) {
+      vec2 delta = point - center;
+      float distance = length(delta);
+      float angle = atan(delta.y, delta.x);
+      float lobes = abs(cos(angle * 4.0));
+      float outer = radius * (0.5 + lobes * 0.5);
+      if (distance < outer) {
+        result = mix(flowerColor, canopyColor, distance / radius * 0.5);
+      }
+      float inner = radius * 0.5 * (0.5 + abs(sin(angle * 4.0)) * 0.5);
+      if (distance < inner) result = flowerColor;
+      if (distance < radius * 0.5 * 0.5) result = patternAccentColor;
+      vec2 tangent = normalize(vec2(-center.y, center.x));
+      vec2 child = center + tangent * radius;
+      vec2 childDelta = point - child;
+      float childAngle = atan(childDelta.y, childDelta.x);
+      float childPetal = radius * 0.5 *
+        (0.5 + abs(cos(childAngle * 4.0)) * 0.5);
+      if (length(childDelta) < childPetal) result = flowerColor;
+      if (length(childDelta) < radius * 0.5 * 0.5) result = patternAccentColor;
+    }
+
     vec3 umbrellaCanopyPattern(vec3 data) {
       if (data.z < 0.0) return canopyColor;
       float angle = atan(data.y, data.x);
       float panel = fract((angle - ${phase}) / ${panelAngle});
       float boundary = min(panel, 1.0 - panel);
-      if (boundary < 0.035) return ribColor;
+      if (boundary < 0.01 * 3.0) return ribColor;
 
       vec3 result = canopyColor;
-      float stem = abs(data.y + 0.12 * data.x -
-        0.18 * sin(data.x * 1.7));
-      if (data.x > 0.7 && data.x < 5.2 && stem < 0.055) result = leafColor;
+      ${branchCode}
       ${leafCode}
       ${blossomCode}
       return result;
@@ -297,7 +349,10 @@ function canopyUniforms(recipe) {
     ribColor: { value: new THREE.Color(recipe.appearance.ribColor) },
     flowerColor: { value: new THREE.Color(recipe.appearance.flowerColor) },
     leafColor: { value: new THREE.Color(recipe.appearance.leafColor) },
-    accentColor: { value: new THREE.Color(recipe.appearance.accentColor) },
+    branchColor: { value: new THREE.Color(recipe.appearance.branchColor) },
+    patternAccentColor: {
+      value: new THREE.Color(recipe.appearance.patternAccentColor),
+    },
   };
 }
 
@@ -317,7 +372,8 @@ function makeCanopyAlbedoMaterial(recipe) {
       uniform vec3 ribColor;
       uniform vec3 flowerColor;
       uniform vec3 leafColor;
-      uniform vec3 accentColor;
+      uniform vec3 branchColor;
+      uniform vec3 patternAccentColor;
       varying vec3 vCanopyData;
       ${canopyPatternSource(recipe)}
       void main() {
@@ -332,7 +388,6 @@ function makeCanopyAlbedoMaterial(recipe) {
 
 function makeCanopyMaterial(recipe) {
   const material = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
     roughness: recipe.appearance.roughness,
     metalness: recipe.appearance.metalness,
     side: THREE.DoubleSide,
@@ -356,7 +411,8 @@ function makeCanopyMaterial(recipe) {
          uniform vec3 ribColor;
          uniform vec3 flowerColor;
          uniform vec3 leafColor;
-         uniform vec3 accentColor;
+         uniform vec3 branchColor;
+         uniform vec3 patternAccentColor;
          varying vec3 vCanopyData;
          ${canopyPatternSource(recipe)}`,
       )
@@ -410,7 +466,6 @@ export function generateUmbrella(recipe) {
   );
   const canopyMaterial = makeCanopyMaterial(recipe);
   const hardwareMaterial = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
     vertexColors: true,
     roughness: recipe.appearance.roughness,
     metalness: recipe.appearance.metalness,

@@ -1,0 +1,1203 @@
+{
+  "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+  "artifactRole": "development-only-nonvisual-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "stone",
+  "runtime": {
+    "schemaVersion": "single-mesh-runtime-evidence-v1",
+    "objectId": "stone",
+    "semanticId": "island.nature.stone",
+    "recipe": {
+      "encoding": "canonical-minified-utf8-json",
+      "bytes": 424,
+      "serialized": "{\"id\":\"island.nature.stone\",\"kind\":\"bounded-support-polyhedron-v2\",\"seed\":1459675138,\"shape\":{\"supportDistances\":[7.393372,7.393372,7.474606,0,8.030037,8.030037,6.290965,7.12871,6.531625,7.634384,8.190199,7.418739,7.15722,7.439888,8.006101,8.243552,8.116754,8.177689,8.124639,7.242121,6.972414,7.51558,7.497669,8.018415],\"orientation\":[0,0,0],\"deformation\":0},\"appearance\":{\"linearGray\":0.4918658137321472,\"roughness\":0.78}}"
+    },
+    "recipeScalars": {
+      "definition": "finite numeric leaves in the object-specific recipe",
+      "count": 31
+    },
+    "deterministic": {
+      "repetitions": 3,
+      "byteStable": true,
+      "snapshot": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.nature.stone",
+            "parentSemanticId": null,
+            "type": "Mesh"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.nature.stone",
+            "parentSemanticId": null,
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 126,
+                  "byteLength": 504,
+                  "checksum": "4425f234"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 126,
+                  "byteLength": 504,
+                  "checksum": "d33085c1"
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 240,
+                "byteLength": 480,
+                "checksum": "4abbfb12"
+              },
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 12237498,
+              "emissive": 0,
+              "roughness": 0.78,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 2,
+              "vertexColors": false,
+              "hasRuntimeTexture": false
+            }
+          }
+        ],
+        "bounds": {
+          "min": [
+            -7.393372058868408,
+            0,
+            -8.030036926269531
+          ],
+          "max": [
+            7.393372058868408,
+            7.474606037139893,
+            8.030036926269531
+          ]
+        },
+        "triangles": 80,
+        "drawCalls": 1,
+        "geometryMemoryBytes": 1488,
+        "runtimeTextureCount": 0
+      }
+    },
+    "benchmark": {
+      "warmups": 10,
+      "repetitions": 100,
+      "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+      "minimumMilliseconds": 0,
+      "medianMilliseconds": 0.10000000894069672,
+      "p95Milliseconds": 0.20000000298023224,
+      "maximumMilliseconds": 0.30000001192092896
+    },
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "hardwareConcurrency": 10,
+      "deviceMemoryGiB": 32,
+      "threeRevision": "170",
+      "renderer": {
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "vendor": "Google Inc. (Google)",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+      }
+    }
+  },
+  "sourceScalars": {
+    "definition": "all numeric recipe leaves plus object-specific numeric literals in generators, generated shaders, and explicitly listed object helpers",
+    "exclusionPolicy": "generator literals are excluded only when equal to a frozen universal algorithm/control-flow value; recipe leaves are never excluded",
+    "universalAlgorithmValues": [
+      0,
+      0.01,
+      0.5,
+      1,
+      2,
+      3,
+      4
+    ],
+    "recipe": {
+      "sourceFile": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+      "evidence": {
+        "definition": "JavaScript numeric literals outside comments and string/template literals",
+        "count": 31,
+        "literals": [
+          {
+            "literal": "0x5700e002",
+            "offset": 474
+          },
+          {
+            "literal": "7.393372",
+            "offset": 555
+          },
+          {
+            "literal": "7.393372",
+            "offset": 571
+          },
+          {
+            "literal": "7.474606",
+            "offset": 587
+          },
+          {
+            "literal": "0",
+            "offset": 603
+          },
+          {
+            "literal": "8.030037",
+            "offset": 612
+          },
+          {
+            "literal": "8.030037",
+            "offset": 628
+          },
+          {
+            "literal": "6.290965",
+            "offset": 644
+          },
+          {
+            "literal": "7.12871",
+            "offset": 660
+          },
+          {
+            "literal": "6.531625",
+            "offset": 675
+          },
+          {
+            "literal": "7.634384",
+            "offset": 691
+          },
+          {
+            "literal": "8.190199",
+            "offset": 707
+          },
+          {
+            "literal": "7.418739",
+            "offset": 723
+          },
+          {
+            "literal": "7.15722",
+            "offset": 739
+          },
+          {
+            "literal": "7.439888",
+            "offset": 754
+          },
+          {
+            "literal": "8.006101",
+            "offset": 770
+          },
+          {
+            "literal": "8.243552",
+            "offset": 786
+          },
+          {
+            "literal": "8.116754",
+            "offset": 802
+          },
+          {
+            "literal": "8.177689",
+            "offset": 818
+          },
+          {
+            "literal": "8.124639",
+            "offset": 834
+          },
+          {
+            "literal": "7.242121",
+            "offset": 850
+          },
+          {
+            "literal": "6.972414",
+            "offset": 866
+          },
+          {
+            "literal": "7.51558",
+            "offset": 882
+          },
+          {
+            "literal": "7.497669",
+            "offset": 897
+          },
+          {
+            "literal": "8.018415",
+            "offset": 913
+          },
+          {
+            "literal": "0",
+            "offset": 963
+          },
+          {
+            "literal": "0",
+            "offset": 966
+          },
+          {
+            "literal": "0",
+            "offset": 969
+          },
+          {
+            "literal": "0",
+            "offset": 991
+          },
+          {
+            "literal": "0.4918658137321472",
+            "offset": 1046
+          },
+          {
+            "literal": "0.78",
+            "offset": 1081
+          }
+        ]
+      }
+    },
+    "generators": [
+      {
+        "sourceFile": "gt_designer/src/reconstruction/objects/stone-generator.js",
+        "evidence": {
+          "definition": "numeric literals in generator and generated shader source, excluding only the declared universal algorithm/control-flow values",
+          "universalValues": [
+            0,
+            0.01,
+            0.5,
+            1,
+            2,
+            3,
+            4
+          ],
+          "count": 1,
+          "objectSpecific": [
+            {
+              "literal": "24",
+              "value": 24,
+              "line": 3,
+              "column": 46,
+              "classification": "object-specific"
+            }
+          ],
+          "classifiedLiteralCount": 62,
+          "literals": [
+            {
+              "literal": "24",
+              "value": 24,
+              "line": 3,
+              "column": 46,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 7,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 7,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 7,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 8,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 8,
+              "column": 27,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 8,
+              "column": 30,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 9,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 9,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 9,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 10,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 10,
+              "column": 27,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 10,
+              "column": 30,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 11,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 11,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 11,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 12,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 12,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 12,
+              "column": 30,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 14,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 14,
+              "column": 33,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 15,
+              "column": 20,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "4",
+              "value": 4,
+              "line": 15,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 15,
+              "column": 43,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 16,
+              "column": 45,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "4",
+              "value": 4,
+              "line": 17,
+              "column": 53,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 20,
+              "column": 9,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 25,
+              "column": 20,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "4",
+              "value": 4,
+              "line": 25,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 25,
+              "column": 43,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 26,
+              "column": 45,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "4",
+              "value": 4,
+              "line": 27,
+              "column": 53,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 30,
+              "column": 9,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 37,
+              "column": 44,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 59,
+              "column": 7,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 59,
+              "column": 30,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 59,
+              "column": 34,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 83,
+              "column": 21,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 89,
+              "column": 20,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 89,
+              "column": 47,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 89,
+              "column": 59,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 90,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 90,
+              "column": 59,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 90,
+              "column": 72,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 91,
+              "column": 33,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 91,
+              "column": 68,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 121,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 124,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 125,
+              "column": 46,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 126,
+              "column": 27,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 126,
+              "column": 30,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 126,
+              "column": 33,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 127,
+              "column": 27,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 127,
+              "column": 30,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 127,
+              "column": 33,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 145,
+              "column": 22,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 145,
+              "column": 47,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 145,
+              "column": 59,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 146,
+              "column": 25,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 146,
+              "column": 67,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 168,
+              "column": 7,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 186,
+              "column": 18,
+              "classification": "universal-algorithm-or-control-flow"
+            }
+          ]
+        }
+      }
+    ],
+    "recipeCount": 31,
+    "generatorCount": 1,
+    "count": 32,
+    "maximum": 32,
+    "passed": true
+  },
+  "bundles": {
+    "production": {
+      "bytes": 22514,
+      "gzipBytes": 7789,
+      "minified": true,
+      "sourceMapBytes": 0,
+      "threeExcluded": true
+    },
+    "objectIncrement": {
+      "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+      "bytes": 509,
+      "objectBundleGzipBytes": 336,
+      "combinedBundleGzipBytes": 2329,
+      "sharedFrameworkGzipBytes": 927,
+      "gzipBytes": 1402
+    }
+  },
+  "budgets": {
+    "objectId": "stone",
+    "passed": true,
+    "budget": {
+      "scalars": 32,
+      "recipeBytes": 1024,
+      "bundleGzipBytes": 4096,
+      "triangles": 320,
+      "drawCalls": 1,
+      "geometryMemoryBytes": 24576,
+      "warmGenerationP95Milliseconds": 5
+    },
+    "actual": {
+      "scalars": 32,
+      "recipeBytes": 424,
+      "bundleGzipBytes": 1402,
+      "triangles": 80,
+      "drawCalls": 1,
+      "geometryMemoryBytes": 1488,
+      "warmGenerationP95Milliseconds": 0.20000000298023224
+    },
+    "checks": [
+      {
+        "metric": "scalars",
+        "value": 32,
+        "maximum": 32,
+        "passed": true
+      },
+      {
+        "metric": "recipeBytes",
+        "value": 424,
+        "maximum": 1024,
+        "passed": true
+      },
+      {
+        "metric": "bundleGzipBytes",
+        "value": 1402,
+        "maximum": 4096,
+        "passed": true
+      },
+      {
+        "metric": "triangles",
+        "value": 80,
+        "maximum": 320,
+        "passed": true
+      },
+      {
+        "metric": "drawCalls",
+        "value": 1,
+        "maximum": 1,
+        "passed": true
+      },
+      {
+        "metric": "geometryMemoryBytes",
+        "value": 1488,
+        "maximum": 24576,
+        "passed": true
+      },
+      {
+        "metric": "warmGenerationP95Milliseconds",
+        "value": 0.20000000298023224,
+        "maximum": 5,
+        "passed": true
+      },
+      {
+        "metric": "deterministicCpuBytes",
+        "value": true,
+        "expected": true,
+        "passed": true
+      },
+      {
+        "metric": "runtimeTextureCount",
+        "value": 0,
+        "maximum": 0,
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  "staticAudit": {
+    "passed": true,
+    "productionFiles": [
+      {
+        "file": "gt_designer/single-mesh-replacement/main.js",
+        "bytes": 2488
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/object-generator.js",
+        "bytes": 2912
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/rng.js",
+        "bytes": 976
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+        "bytes": 1590
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+        "bytes": 6043
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+        "bytes": 3222
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+        "bytes": 1545
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+        "bytes": 1097
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+        "bytes": 14698
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+        "bytes": 2541
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+        "bytes": 3882
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+        "bytes": 1609
+      },
+      {
+        "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+        "bytes": 2056
+      }
+    ],
+    "thirdPartyInputs": [],
+    "failures": []
+  },
+  "bundleAudit": {
+    "passed": true,
+    "failures": []
+  },
+  "offline": {
+    "passed": true,
+    "servedFiles": [
+      "bundle.js",
+      "index.html",
+      "three.module.js"
+    ],
+    "authoredDirectoriesAvailableToServer": false,
+    "emptyBrowserProfile": true,
+    "networkResolutionBlocked": true,
+    "localRequestCount": 3
+  },
+  "crossEngine": {
+    "boundsToleranceCanonical": 0.000007,
+    "normative": {
+      "engine": "Chrome/V8",
+      "signature": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.nature.stone",
+            "parentSemanticId": null,
+            "type": "Mesh"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.nature.stone",
+            "parentSemanticId": null,
+            "type": "Mesh",
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 126
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 126
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 240
+              },
+              "groups": []
+            }
+          }
+        ],
+        "bounds": {
+          "min": [
+            -7.393372058868408,
+            0,
+            -8.030036926269531
+          ],
+          "max": [
+            7.393372058868408,
+            7.474606037139893,
+            8.030036926269531
+          ]
+        },
+        "triangles": 80,
+        "drawCalls": 1
+      }
+    },
+    "candidates": [
+      {
+        "engine": "JavaScriptCore (Safari 26.2 system framework)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.nature.stone",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.nature.stone",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 126
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 126
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 240
+                },
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -7.393372058868408,
+              0,
+              -8.030036926269531
+            ],
+            "max": [
+              7.393372058868408,
+              7.474606037139893,
+              8.030036926269531
+            ]
+          },
+          "triangles": 80,
+          "drawCalls": 1
+        }
+      },
+      {
+        "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.nature.stone",
+              "parentSemanticId": null,
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.nature.stone",
+              "parentSemanticId": null,
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 126
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 126
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 240
+                },
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -7.393372058868408,
+              0,
+              -8.030036926269531
+            ],
+            "max": [
+              7.393372058868408,
+              7.474606037139893,
+              8.030036926269531
+            ]
+          },
+          "triangles": 80,
+          "drawCalls": 1
+        }
+      }
+    ],
+    "passed": true
+  },
+  "environment": {
+    "normativeBaseline": {
+      "model": "Apple M5 MacBook Pro",
+      "operatingSystem": "macOS 26.2",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0"
+    },
+    "actual": {
+      "modelName": "MacBook Pro",
+      "modelIdentifier": "Mac17,2",
+      "chip": "Apple M5",
+      "cores": "10 (4 performance and 6 efficiency)",
+      "memory": "32 GB",
+      "operatingSystem": "macOS 26.2",
+      "operatingSystemBuild": "25C56",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0",
+      "powerState": [
+        "Now drawing from 'Battery Power'",
+        "-InternalBattery-0 (id=22610019)\t93%; discharging; 6:32 remaining present: true"
+      ]
+    },
+    "migrationRequired": false
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "complete-source-scalar-audit",
+        "passed": true,
+        "detail": {
+          "value": 32,
+          "maximum": 32
+        }
+      },
+      {
+        "id": "object-budgets",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "static-source-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "minified-bundle-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "isolated-offline-render",
+        "passed": true,
+        "detail": {
+          "passed": true,
+          "servedFiles": [
+            "bundle.js",
+            "index.html",
+            "three.module.js"
+          ],
+          "authoredDirectoriesAvailableToServer": false,
+          "emptyBrowserProfile": true,
+          "networkResolutionBlocked": true,
+          "localRequestCount": 3
+        }
+      },
+      {
+        "id": "cross-engine-structure-and-bounds",
+        "passed": true,
+        "detail": [
+          {
+            "engine": "JavaScriptCore (Safari 26.2 system framework)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          },
+          {
+            "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "normative-environment",
+        "passed": true,
+        "detail": {
+          "modelName": "MacBook Pro",
+          "modelIdentifier": "Mac17,2",
+          "chip": "Apple M5",
+          "cores": "10 (4 performance and 6 efficiency)",
+          "memory": "32 GB",
+          "operatingSystem": "macOS 26.2",
+          "operatingSystemBuild": "25C56",
+          "browser": "Google Chrome 150.0.7871.184",
+          "three": "0.170.0",
+          "powerState": [
+            "Now drawing from 'Battery Power'",
+            "-InternalBattery-0 (id=22610019)\t93%; discharging; 6:32 remaining present: true"
+          ]
+        }
+      }
+    ],
+    "failures": []
+  }
+}

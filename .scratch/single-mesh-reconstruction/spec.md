@@ -296,6 +296,7 @@ After formal six-object exit, the project starts a new full-island `/grill-with-
 12. As a reviewer, I want all source-resolution-dependent data and fitting artifacts isolated to development tools so that a compact-looking recipe cannot conceal copied vertex, texture, point-cloud, or sampling data.
 13. As the full-island project owner, I want the experiment to cover extrusion, organic deformation, lathe, radial compound, open layered, and repeated organic classes before exit so that success meaningfully reduces later scene risk rather than proving only the easiest props.
 14. As the full-island project owner, I want explicit stop and reconsideration rules when multiple objects exceed budgets or need the same missing operation so that external geometry dependencies are adopted from evidence and not from repository popularity or anticipated complexity.
+15. As an integrated-scene reviewer, I want available Procedural Replacements assembled in their corresponding positions in the Eight-slot Lab Reference Layout so that stage delivery preserves the shared reference composition without falling back to per-object scenes or Authored Reference assets.
 
 ## Implementation Decisions
 
@@ -303,6 +304,7 @@ After formal six-object exit, the project starts a new full-island `/grill-with-
 - Implement Stage 0 before fitting Stone Path; freeze the Quality Baseline after one allowed calibration correction.
 - Use the three highest seams described above: Object Generator, Evaluation Harness, and replacement-only production boundary.
 - Preserve the Reconstruction Frame and original scene units inside generators; apply canonical seven-unit normalization only inside evaluation.
+- Keep generators independent of Lab placement, then compose available Procedural Replacements at the delivery boundary using the shared Eight-slot Lab Reference Layout; unfinished slots remain empty.
 - Keep one semantic object root while allowing multiple generated child meshes and optional initialization-time merging.
 - Use direct Three.js and project-owned generators for Stage 1. Do not add production WASM, CSG, SDF, a general operation tree, or a scene DSL.
 - Keep geometry and appearance parameters separate, and require an explicit versioned integer RNG with no ambient randomness.

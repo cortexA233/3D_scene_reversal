@@ -3,41 +3,44 @@
  * @property {string} id
  * @property {string} kind
  * @property {number} seed
- * @property {{footprint: readonly (readonly [number, number])[], bottomPlane: readonly [number, number], topPlane: readonly [number, number], topCenter: readonly [number, number], topScale: number, shoulderProgress: number, shoulderScale: number, height: number, deformation: number}} shape
+ * @property {{supportDistances: readonly number[], orientation: readonly [number, number, number], deformation: number}} shape
  * @property {{linearGray: number, roughness: number}} appearance
  */
 
 /** @type {Readonly<StoneRecipe>} */
 export const STONE_RECIPE = Object.freeze({
   id: "island.nature.stone",
-  kind: "seeded-low-poly-volume-v1",
-  seed: 0x5700e001,
+  kind: "bounded-support-polyhedron-v2",
+  seed: 0x5700e002,
   shape: Object.freeze({
-    footprint: Object.freeze([
-      Object.freeze([-7.393371582, 0.267]),
-      Object.freeze([-6.889, -3.673]),
-      Object.freeze([-2.991, -6.3]),
-      Object.freeze([3.767, -8.030036926]),
-      Object.freeze([5.14, -6.034]),
-      Object.freeze([7.393371582, 2.801]),
-      Object.freeze([4.497, 6.033]),
-      Object.freeze([-3.305, 8.030036926]),
-      Object.freeze([-5.801, 6.989]),
+    supportDistances: Object.freeze([
+      7.393372,
+      7.393372,
+      7.474606,
+      0,
+      8.030037,
+      8.030037,
+      6.290965,
+      7.12871,
+      6.531625,
+      7.634384,
+      8.190199,
+      7.418739,
+      7.15722,
+      7.439888,
+      8.006101,
+      8.243552,
+      8.116754,
+      8.177689,
+      8.124639,
+      7.242121,
+      6.972414,
+      7.51558,
+      7.497669,
+      8.018415,
     ]),
-    bottomPlane: Object.freeze([
-      0.003888225686703514,
-      0.005868557804308738,
-    ]),
-    topPlane: Object.freeze([
-      0.016541144857932216,
-      0.014699659484297966,
-    ]),
-    topCenter: Object.freeze([-0.58, -0.34]),
-    topScale: 0.7,
-    shoulderProgress: 0.78,
-    shoulderScale: 0.78,
-    height: 7.474605560302734,
-    deformation: 0.015,
+    orientation: Object.freeze([0, 0, 0]),
+    deformation: 0,
   }),
   appearance: Object.freeze({
     linearGray: 0.4918658137321472,

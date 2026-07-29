@@ -1,0 +1,2439 @@
+{
+  "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+  "artifactRole": "development-only-nonvisual-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "umbrella",
+  "runtime": {
+    "schemaVersion": "single-mesh-runtime-evidence-v1",
+    "objectId": "umbrella",
+    "semanticId": "island.prop.umbrella",
+    "recipe": {
+      "encoding": "canonical-minified-utf8-json",
+      "bytes": 983,
+      "serialized": "{\"id\":\"island.prop.umbrella\",\"kind\":\"radial-parasol-assembly-v1\",\"seed\":188616961,\"shape\":{\"canopyRadius\":5.614,\"canopySurfaceRadius\":5.34,\"canopyDrop\":2.18,\"rimDrop\":0.107,\"canopyThickness\":0.053,\"panels\":24,\"angularSubdivisions\":8,\"radialBands\":8,\"phaseDegrees\":-7.3233,\"axis\":[-0.2231853,0.6613441,0.7161092],\"shaftLength\":9.349,\"shaftRadius\":0.082,\"runnerCenter\":-2.555,\"runnerLength\":1.075,\"runnerRadius\":0.294,\"gripCenter\":-9.077,\"gripLength\":1.076,\"gripRadius\":0.171,\"ribStart\":0.43,\"ribLayerOffset\":0.122,\"supportRadius\":2.48,\"supportHubHeight\":-2.211,\"supportEndHeight\":-1.282},\"appearance\":{\"canopyColor\":12434877,\"ribColor\":6841924,\"flowerColor\":15065560,\"leafColor\":3233617,\"accentColor\":10386768,\"blossoms\":[[0.3,-1.85,0.55],[1.05,0.15,0.68],[1.55,0.85,0.72],[1.85,-0.45,0.74],[2.27,-2.47,0.7]],\"leaves\":[[2.2,1.6,0.87,0.35],[2.75,-0.35,1.12,0.42],[3.4,0.25,1.15,0.43],[3.45,-2.77,0.98,0.38],[3.85,-0.75,1.12,0.42],[4.25,-2.43,1.01,0.38]],\"roughness\":0.8,\"metalness\":0}}"
+    },
+    "recipeScalars": {
+      "definition": "finite numeric leaves in the object-specific recipe",
+      "count": 72
+    },
+    "deterministic": {
+      "repetitions": 3,
+      "byteStable": true,
+      "snapshot": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.prop.umbrella",
+            "parentSemanticId": null,
+            "type": "Group"
+          },
+          {
+            "semanticId": "island.prop.umbrella/canopy",
+            "parentSemanticId": "island.prop.umbrella",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.prop.umbrella/hardware",
+            "parentSemanticId": "island.prop.umbrella",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.prop.umbrella/ribs",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.prop.umbrella/shaft",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.prop.umbrella/runner",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.prop.umbrella/grip",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.prop.umbrella",
+            "parentSemanticId": null,
+            "type": "Group",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.prop.umbrella/canopy",
+            "parentSemanticId": "island.prop.umbrella",
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 6342,
+                  "byteLength": 25368,
+                  "checksum": "b29f75b7"
+                },
+                "canopyData": {
+                  "constructor": "Float32Array",
+                  "length": 6342,
+                  "byteLength": 25368,
+                  "checksum": "09ade8f5"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 6342,
+                  "byteLength": 25368,
+                  "checksum": "0912243c"
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 12672,
+                "byteLength": 25344,
+                "checksum": "f27af2e9"
+              },
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 16777215,
+              "emissive": 0,
+              "roughness": 0.8,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 2,
+              "vertexColors": false,
+              "hasRuntimeTexture": false
+            }
+          },
+          {
+            "semanticId": "island.prop.umbrella/hardware",
+            "parentSemanticId": "island.prop.umbrella",
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 10008,
+                  "byteLength": 40032,
+                  "checksum": "02be2321"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 10008,
+                  "byteLength": 40032,
+                  "checksum": "500ec6b1"
+                },
+                "color": {
+                  "constructor": "Float32Array",
+                  "length": 10008,
+                  "byteLength": 40032,
+                  "checksum": "ba820c25"
+                }
+              },
+              "index": null,
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 16777215,
+              "emissive": 0,
+              "roughness": 0.8,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 2,
+              "vertexColors": true,
+              "hasRuntimeTexture": false
+            }
+          },
+          {
+            "semanticId": "island.prop.umbrella/ribs",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.prop.umbrella/shaft",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.prop.umbrella/runner",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.prop.umbrella/grip",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          }
+        ],
+        "bounds": {
+          "min": [
+            -5.492154121398926,
+            0,
+            -4.660461902618408
+          ],
+          "max": [
+            5.492154121398926,
+            9.207030296325684,
+            4.660461902618408
+          ]
+        },
+        "triangles": 5336,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 221544,
+        "runtimeTextureCount": 0
+      }
+    },
+    "benchmark": {
+      "warmups": 10,
+      "repetitions": 100,
+      "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+      "minimumMilliseconds": 0.5999999940395355,
+      "medianMilliseconds": 0.7999999970197678,
+      "p95Milliseconds": 1,
+      "maximumMilliseconds": 1.1000000089406967
+    },
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "hardwareConcurrency": 10,
+      "deviceMemoryGiB": 32,
+      "threeRevision": "170",
+      "renderer": {
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "vendor": "Google Inc. (Google)",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+      }
+    }
+  },
+  "sourceScalars": {
+    "definition": "all numeric recipe leaves plus object-specific numeric literals in generators, generated shaders, and explicitly listed object helpers",
+    "exclusionPolicy": "generator literals are excluded only when equal to a frozen universal algorithm/control-flow value; recipe leaves are never excluded",
+    "universalAlgorithmValues": [
+      0,
+      0.01,
+      0.5,
+      1,
+      2,
+      3,
+      4
+    ],
+    "recipe": {
+      "sourceFile": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+      "evidence": {
+        "definition": "JavaScript numeric literals outside comments and string/template literals",
+        "count": 72,
+        "literals": [
+          {
+            "literal": "0x0b3e1101",
+            "offset": 1123
+          },
+          {
+            "literal": "5.614",
+            "offset": 1178
+          },
+          {
+            "literal": "5.34",
+            "offset": 1210
+          },
+          {
+            "literal": "2.18",
+            "offset": 1232
+          },
+          {
+            "literal": "0.107",
+            "offset": 1251
+          },
+          {
+            "literal": "0.053",
+            "offset": 1279
+          },
+          {
+            "literal": "24",
+            "offset": 1298
+          },
+          {
+            "literal": "8",
+            "offset": 1327
+          },
+          {
+            "literal": "8",
+            "offset": 1347
+          },
+          {
+            "literal": "7.3233",
+            "offset": 1369
+          },
+          {
+            "literal": "0.2231853",
+            "offset": 1403
+          },
+          {
+            "literal": "0.6613441",
+            "offset": 1414
+          },
+          {
+            "literal": "0.7161092",
+            "offset": 1425
+          },
+          {
+            "literal": "9.349",
+            "offset": 1455
+          },
+          {
+            "literal": "0.082",
+            "offset": 1479
+          },
+          {
+            "literal": "2.555",
+            "offset": 1505
+          },
+          {
+            "literal": "1.075",
+            "offset": 1530
+          },
+          {
+            "literal": "0.294",
+            "offset": 1555
+          },
+          {
+            "literal": "9.077",
+            "offset": 1579
+          },
+          {
+            "literal": "1.076",
+            "offset": 1602
+          },
+          {
+            "literal": "0.171",
+            "offset": 1625
+          },
+          {
+            "literal": "0.43",
+            "offset": 1646
+          },
+          {
+            "literal": "0.122",
+            "offset": 1672
+          },
+          {
+            "literal": "2.48",
+            "offset": 1698
+          },
+          {
+            "literal": "2.211",
+            "offset": 1727
+          },
+          {
+            "literal": "1.282",
+            "offset": 1757
+          },
+          {
+            "literal": "0xbdbdbd",
+            "offset": 1817
+          },
+          {
+            "literal": "0x686644",
+            "offset": 1841
+          },
+          {
+            "literal": "0xe5e1d8",
+            "offset": 1868
+          },
+          {
+            "literal": "0x315751",
+            "offset": 1893
+          },
+          {
+            "literal": "0x9e7d50",
+            "offset": 1920
+          },
+          {
+            "literal": "0.3",
+            "offset": 1981
+          },
+          {
+            "literal": "1.85",
+            "offset": 1987
+          },
+          {
+            "literal": "0.55",
+            "offset": 1993
+          },
+          {
+            "literal": "1.05",
+            "offset": 2022
+          },
+          {
+            "literal": "0.15",
+            "offset": 2028
+          },
+          {
+            "literal": "0.68",
+            "offset": 2034
+          },
+          {
+            "literal": "1.55",
+            "offset": 2063
+          },
+          {
+            "literal": "0.85",
+            "offset": 2069
+          },
+          {
+            "literal": "0.72",
+            "offset": 2075
+          },
+          {
+            "literal": "1.85",
+            "offset": 2104
+          },
+          {
+            "literal": "0.45",
+            "offset": 2111
+          },
+          {
+            "literal": "0.74",
+            "offset": 2117
+          },
+          {
+            "literal": "2.27",
+            "offset": 2146
+          },
+          {
+            "literal": "2.47",
+            "offset": 2153
+          },
+          {
+            "literal": "0.7",
+            "offset": 2159
+          },
+          {
+            "literal": "2.2",
+            "offset": 2223
+          },
+          {
+            "literal": "1.6",
+            "offset": 2228
+          },
+          {
+            "literal": "0.87",
+            "offset": 2233
+          },
+          {
+            "literal": "0.35",
+            "offset": 2239
+          },
+          {
+            "literal": "2.75",
+            "offset": 2268
+          },
+          {
+            "literal": "0.35",
+            "offset": 2275
+          },
+          {
+            "literal": "1.12",
+            "offset": 2281
+          },
+          {
+            "literal": "0.42",
+            "offset": 2287
+          },
+          {
+            "literal": "3.4",
+            "offset": 2316
+          },
+          {
+            "literal": "0.25",
+            "offset": 2321
+          },
+          {
+            "literal": "1.15",
+            "offset": 2327
+          },
+          {
+            "literal": "0.43",
+            "offset": 2333
+          },
+          {
+            "literal": "3.45",
+            "offset": 2362
+          },
+          {
+            "literal": "2.77",
+            "offset": 2369
+          },
+          {
+            "literal": "0.98",
+            "offset": 2375
+          },
+          {
+            "literal": "0.38",
+            "offset": 2381
+          },
+          {
+            "literal": "3.85",
+            "offset": 2410
+          },
+          {
+            "literal": "0.75",
+            "offset": 2417
+          },
+          {
+            "literal": "1.12",
+            "offset": 2423
+          },
+          {
+            "literal": "0.42",
+            "offset": 2429
+          },
+          {
+            "literal": "4.25",
+            "offset": 2458
+          },
+          {
+            "literal": "2.43",
+            "offset": 2465
+          },
+          {
+            "literal": "1.01",
+            "offset": 2471
+          },
+          {
+            "literal": "0.38",
+            "offset": 2477
+          },
+          {
+            "literal": "0.8",
+            "offset": 2508
+          },
+          {
+            "literal": "0",
+            "offset": 2528
+          }
+        ]
+      }
+    },
+    "generators": [
+      {
+        "sourceFile": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+        "evidence": {
+          "definition": "numeric literals in generator and generated shader source, excluding only the declared universal algorithm/control-flow values",
+          "universalValues": [
+            0,
+            0.01,
+            0.5,
+            1,
+            2,
+            3,
+            4
+          ],
+          "count": 22,
+          "objectSpecific": [
+            {
+              "literal": "8",
+              "value": 8,
+              "line": 173,
+              "column": 7,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "12",
+              "value": 12,
+              "line": 182,
+              "column": 7,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "12",
+              "value": 12,
+              "line": 191,
+              "column": 7,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.032",
+              "value": 0.032,
+              "line": 217,
+              "column": 11,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.025",
+              "value": 0.025,
+              "line": 229,
+              "column": 9,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.23",
+              "value": 0.23,
+              "line": 234,
+              "column": 40,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "12",
+              "value": 12,
+              "line": 234,
+              "column": 46,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "6",
+              "value": 6,
+              "line": 234,
+              "column": 50,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.08",
+              "value": 0.08,
+              "line": 235,
+              "column": 20,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.55",
+              "value": 0.55,
+              "line": 245,
+              "column": 59,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.45",
+              "value": 0.45,
+              "line": 245,
+              "column": 67,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.78",
+              "value": 0.78,
+              "line": 268,
+              "column": 34,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.22",
+              "value": 0.22,
+              "line": 269,
+              "column": 22,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "8.0",
+              "value": 8,
+              "line": 269,
+              "column": 59,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.18",
+              "value": 0.18,
+              "line": 271,
+              "column": 35,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.035",
+              "value": 0.035,
+              "line": 281,
+              "column": 22,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.12",
+              "value": 0.12,
+              "line": 284,
+              "column": 33,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.18",
+              "value": 0.18,
+              "line": 285,
+              "column": 9,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "1.7",
+              "value": 1.7,
+              "line": 285,
+              "column": 29,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.7",
+              "value": 0.7,
+              "line": 286,
+              "column": 20,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "5.2",
+              "value": 5.2,
+              "line": 286,
+              "column": 36,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.055",
+              "value": 0.055,
+              "line": 286,
+              "column": 50,
+              "classification": "object-specific"
+            }
+          ],
+          "classifiedLiteralCount": 128,
+          "literals": [
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 9,
+              "column": 33,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 10,
+              "column": 34,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 16,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 16,
+              "column": 27,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 17,
+              "column": 39,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 18,
+              "column": 20,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 18,
+              "column": 54,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 18,
+              "column": 59,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 19,
+              "column": 21,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 19,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 21,
+              "column": 36,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 21,
+              "column": 60,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 22,
+              "column": 21,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 22,
+              "column": 57,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 25,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 25,
+              "column": 64,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 29,
+              "column": 41,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 30,
+              "column": 50,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 37,
+              "column": 44,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 41,
+              "column": 45,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 41,
+              "column": 49,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 46,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 46,
+              "column": 62,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 50,
+              "column": 39,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 51,
+              "column": 48,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 56,
+              "column": 42,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 64,
+              "column": 41,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 64,
+              "column": 45,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 67,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 67,
+              "column": 62,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 68,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 69,
+              "column": 18,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 69,
+              "column": 48,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 69,
+              "column": 67,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 70,
+              "column": 39,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 70,
+              "column": 55,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 72,
+              "column": 21,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 72,
+              "column": 46,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 72,
+              "column": 57,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 73,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 73,
+              "column": 64,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 74,
+              "column": 33,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 76,
+              "column": 36,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 77,
+              "column": 20,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 93,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 93,
+              "column": 39,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 94,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 94,
+              "column": 42,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 95,
+              "column": 22,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 95,
+              "column": 60,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 96,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 105,
+              "column": 49,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 109,
+              "column": 50,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 116,
+              "column": 63,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 125,
+              "column": 63,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 127,
+              "column": 25,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 127,
+              "column": 28,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 127,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 130,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 130,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 130,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 146,
+              "column": 22,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 146,
+              "column": 58,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 157,
+              "column": 49,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 159,
+              "column": 75,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 160,
+              "column": 73,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 170,
+              "column": 25,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 170,
+              "column": 28,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 170,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 171,
+              "column": 25,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 171,
+              "column": 48,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "8",
+              "value": 8,
+              "line": 173,
+              "column": 7,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 179,
+              "column": 25,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 179,
+              "column": 70,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 179,
+              "column": 75,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 180,
+              "column": 25,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 180,
+              "column": 70,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 180,
+              "column": 75,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "12",
+              "value": 12,
+              "line": 182,
+              "column": 7,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 188,
+              "column": 25,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 188,
+              "column": 66,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 188,
+              "column": 71,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 189,
+              "column": 25,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 189,
+              "column": 66,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 189,
+              "column": 71,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "12",
+              "value": 12,
+              "line": 191,
+              "column": 7,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 196,
+              "column": 20,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 196,
+              "column": 54,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 197,
+              "column": 62,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 203,
+              "column": 32,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 210,
+              "column": 39,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 215,
+              "column": 39,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.032",
+              "value": 0.032,
+              "line": 217,
+              "column": 11,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 224,
+              "column": 27,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 224,
+              "column": 54,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.025",
+              "value": 0.025,
+              "line": 229,
+              "column": 9,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.23",
+              "value": 0.23,
+              "line": 234,
+              "column": 40,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "12",
+              "value": 12,
+              "line": 234,
+              "column": 46,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "6",
+              "value": 6,
+              "line": 234,
+              "column": 50,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 235,
+              "column": 17,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.08",
+              "value": 0.08,
+              "line": 235,
+              "column": 20,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 235,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 242,
+              "column": 33,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 245,
+              "column": 49,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 245,
+              "column": 55,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.55",
+              "value": 0.55,
+              "line": 245,
+              "column": 59,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.45",
+              "value": 0.45,
+              "line": 245,
+              "column": 67,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "1.0",
+              "value": 1,
+              "line": 256,
+              "column": 55,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.78",
+              "value": 0.78,
+              "line": 268,
+              "column": 34,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.22",
+              "value": 0.22,
+              "line": 269,
+              "column": 22,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "8.0",
+              "value": 8,
+              "line": 269,
+              "column": 59,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.18",
+              "value": 0.18,
+              "line": 271,
+              "column": 35,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.0",
+              "value": 0,
+              "line": 277,
+              "column": 20,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1.0",
+              "value": 1,
+              "line": 280,
+              "column": 35,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.035",
+              "value": 0.035,
+              "line": 281,
+              "column": 22,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.12",
+              "value": 0.12,
+              "line": 284,
+              "column": 33,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.18",
+              "value": 0.18,
+              "line": 285,
+              "column": 9,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "1.7",
+              "value": 1.7,
+              "line": 285,
+              "column": 29,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.7",
+              "value": 0.7,
+              "line": 286,
+              "column": 20,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "5.2",
+              "value": 5.2,
+              "line": 286,
+              "column": 36,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.055",
+              "value": 0.055,
+              "line": 286,
+              "column": 50,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "1.0",
+              "value": 1,
+              "line": 312,
+              "column": 75,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1.0",
+              "value": 1,
+              "line": 324,
+              "column": 65,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 376,
+              "column": 23,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 376,
+              "column": 26,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 376,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 386,
+              "column": 38,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 388,
+              "column": 38,
+              "classification": "universal-algorithm-or-control-flow"
+            }
+          ]
+        }
+      }
+    ],
+    "recipeCount": 72,
+    "generatorCount": 22,
+    "count": 94,
+    "maximum": 96,
+    "passed": true
+  },
+  "bundles": {
+    "production": {
+      "bytes": 21807,
+      "gzipBytes": 7672,
+      "minified": true,
+      "sourceMapBytes": 0,
+      "threeExcluded": true
+    },
+    "objectIncrement": {
+      "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+      "bytes": 1165,
+      "objectBundleGzipBytes": 596,
+      "combinedBundleGzipBytes": 4100,
+      "sharedFrameworkGzipBytes": 927,
+      "gzipBytes": 3173
+    }
+  },
+  "budgets": {
+    "objectId": "umbrella",
+    "passed": true,
+    "budget": {
+      "scalars": 96,
+      "recipeBytes": 2048,
+      "bundleGzipBytes": 10240,
+      "triangles": 5760,
+      "drawCalls": 2,
+      "geometryMemoryBytes": 262144,
+      "warmGenerationP95Milliseconds": 12
+    },
+    "actual": {
+      "scalars": 94,
+      "recipeBytes": 983,
+      "bundleGzipBytes": 3173,
+      "triangles": 5336,
+      "drawCalls": 2,
+      "geometryMemoryBytes": 221544,
+      "warmGenerationP95Milliseconds": 1
+    },
+    "checks": [
+      {
+        "metric": "scalars",
+        "value": 94,
+        "maximum": 96,
+        "passed": true
+      },
+      {
+        "metric": "recipeBytes",
+        "value": 983,
+        "maximum": 2048,
+        "passed": true
+      },
+      {
+        "metric": "bundleGzipBytes",
+        "value": 3173,
+        "maximum": 10240,
+        "passed": true
+      },
+      {
+        "metric": "triangles",
+        "value": 5336,
+        "maximum": 5760,
+        "passed": true
+      },
+      {
+        "metric": "drawCalls",
+        "value": 2,
+        "maximum": 2,
+        "passed": true
+      },
+      {
+        "metric": "geometryMemoryBytes",
+        "value": 221544,
+        "maximum": 262144,
+        "passed": true
+      },
+      {
+        "metric": "warmGenerationP95Milliseconds",
+        "value": 1,
+        "maximum": 12,
+        "passed": true
+      },
+      {
+        "metric": "deterministicCpuBytes",
+        "value": true,
+        "expected": true,
+        "passed": true
+      },
+      {
+        "metric": "runtimeTextureCount",
+        "value": 0,
+        "maximum": 0,
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  "staticAudit": {
+    "passed": true,
+    "productionFiles": [
+      {
+        "file": "gt_designer/single-mesh-replacement/main.js",
+        "bytes": 2488
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/object-generator.js",
+        "bytes": 2912
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/rng.js",
+        "bytes": 976
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+        "bytes": 1590
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+        "bytes": 4269
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+        "bytes": 3222
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+        "bytes": 1545
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+        "bytes": 1540
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+        "bytes": 14698
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+        "bytes": 2541
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+        "bytes": 3882
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+        "bytes": 1609
+      },
+      {
+        "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+        "bytes": 2056
+      }
+    ],
+    "thirdPartyInputs": [],
+    "failures": []
+  },
+  "bundleAudit": {
+    "passed": true,
+    "failures": []
+  },
+  "offline": {
+    "passed": true,
+    "servedFiles": [
+      "bundle.js",
+      "index.html",
+      "three.module.js"
+    ],
+    "authoredDirectoriesAvailableToServer": false,
+    "emptyBrowserProfile": true,
+    "networkResolutionBlocked": true,
+    "localRequestCount": 3
+  },
+  "crossEngine": {
+    "boundsToleranceCanonical": 0.000007,
+    "normative": {
+      "engine": "Chrome/V8",
+      "signature": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.prop.umbrella",
+            "parentSemanticId": null,
+            "type": "Group"
+          },
+          {
+            "semanticId": "island.prop.umbrella/canopy",
+            "parentSemanticId": "island.prop.umbrella",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.prop.umbrella/hardware",
+            "parentSemanticId": "island.prop.umbrella",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.prop.umbrella/ribs",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.prop.umbrella/shaft",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.prop.umbrella/runner",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.prop.umbrella/grip",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.prop.umbrella",
+            "parentSemanticId": null,
+            "type": "Group",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.prop.umbrella/canopy",
+            "parentSemanticId": "island.prop.umbrella",
+            "type": "Mesh",
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 6342
+                },
+                "canopyData": {
+                  "constructor": "Float32Array",
+                  "length": 6342
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 6342
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 12672
+              },
+              "groups": []
+            }
+          },
+          {
+            "semanticId": "island.prop.umbrella/hardware",
+            "parentSemanticId": "island.prop.umbrella",
+            "type": "Mesh",
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 10008
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 10008
+                },
+                "color": {
+                  "constructor": "Float32Array",
+                  "length": 10008
+                }
+              },
+              "index": null,
+              "groups": []
+            }
+          },
+          {
+            "semanticId": "island.prop.umbrella/ribs",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.prop.umbrella/shaft",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.prop.umbrella/runner",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.prop.umbrella/grip",
+            "parentSemanticId": "island.prop.umbrella/hardware",
+            "type": "Object3D",
+            "geometry": null
+          }
+        ],
+        "bounds": {
+          "min": [
+            -5.492154121398926,
+            0,
+            -4.660461902618408
+          ],
+          "max": [
+            5.492154121398926,
+            9.207030296325684,
+            4.660461902618408
+          ]
+        },
+        "triangles": 5336,
+        "drawCalls": 2
+      }
+    },
+    "candidates": [
+      {
+        "engine": "JavaScriptCore (Safari 26.2 system framework)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.prop.umbrella",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.prop.umbrella/canopy",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.umbrella/hardware",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.umbrella/ribs",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/shaft",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/runner",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/grip",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.prop.umbrella",
+              "parentSemanticId": null,
+              "type": "Group",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/canopy",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  },
+                  "canopyData": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 12672
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.umbrella/hardware",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  },
+                  "color": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  }
+                },
+                "index": null,
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.umbrella/ribs",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/shaft",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/runner",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/grip",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            }
+          ],
+          "bounds": {
+            "min": [
+              -5.492154121398926,
+              0,
+              -4.660461902618408
+            ],
+            "max": [
+              5.492154121398926,
+              9.207030296325684,
+              4.660461902618408
+            ]
+          },
+          "triangles": 5336,
+          "drawCalls": 2
+        }
+      },
+      {
+        "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.prop.umbrella",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.prop.umbrella/canopy",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.umbrella/hardware",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.umbrella/ribs",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/shaft",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/runner",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.prop.umbrella/grip",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.prop.umbrella",
+              "parentSemanticId": null,
+              "type": "Group",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/canopy",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  },
+                  "canopyData": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 6342
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 12672
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.umbrella/hardware",
+              "parentSemanticId": "island.prop.umbrella",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  },
+                  "color": {
+                    "constructor": "Float32Array",
+                    "length": 10008
+                  }
+                },
+                "index": null,
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.umbrella/ribs",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/shaft",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/runner",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.umbrella/grip",
+              "parentSemanticId": "island.prop.umbrella/hardware",
+              "type": "Object3D",
+              "geometry": null
+            }
+          ],
+          "bounds": {
+            "min": [
+              -5.492154121398926,
+              0,
+              -4.660461902618408
+            ],
+            "max": [
+              5.492154121398926,
+              9.207030296325684,
+              4.660461902618408
+            ]
+          },
+          "triangles": 5336,
+          "drawCalls": 2
+        }
+      }
+    ],
+    "passed": true
+  },
+  "environment": {
+    "normativeBaseline": {
+      "model": "Apple M5 MacBook Pro",
+      "operatingSystem": "macOS 26.2",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0"
+    },
+    "actual": {
+      "modelName": "MacBook Pro",
+      "modelIdentifier": "Mac17,2",
+      "chip": "Apple M5",
+      "cores": "10 (4 performance and 6 efficiency)",
+      "memory": "32 GB",
+      "operatingSystem": "macOS 26.2",
+      "operatingSystemBuild": "25C56",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0",
+      "powerState": [
+        "Now drawing from 'AC Power'",
+        "-InternalBattery-0 (id=22610019)\t38%; charging; 2:27 remaining present: true"
+      ]
+    },
+    "migrationRequired": false
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "complete-source-scalar-audit",
+        "passed": true,
+        "detail": {
+          "value": 94,
+          "maximum": 96
+        }
+      },
+      {
+        "id": "object-budgets",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "static-source-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "minified-bundle-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "isolated-offline-render",
+        "passed": true,
+        "detail": {
+          "passed": true,
+          "servedFiles": [
+            "bundle.js",
+            "index.html",
+            "three.module.js"
+          ],
+          "authoredDirectoriesAvailableToServer": false,
+          "emptyBrowserProfile": true,
+          "networkResolutionBlocked": true,
+          "localRequestCount": 3
+        }
+      },
+      {
+        "id": "cross-engine-structure-and-bounds",
+        "passed": true,
+        "detail": [
+          {
+            "engine": "JavaScriptCore (Safari 26.2 system framework)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          },
+          {
+            "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "normative-environment",
+        "passed": true,
+        "detail": {
+          "modelName": "MacBook Pro",
+          "modelIdentifier": "Mac17,2",
+          "chip": "Apple M5",
+          "cores": "10 (4 performance and 6 efficiency)",
+          "memory": "32 GB",
+          "operatingSystem": "macOS 26.2",
+          "operatingSystemBuild": "25C56",
+          "browser": "Google Chrome 150.0.7871.184",
+          "three": "0.170.0",
+          "powerState": [
+            "Now drawing from 'AC Power'",
+            "-InternalBattery-0 (id=22610019)\t38%; charging; 2:27 remaining present: true"
+          ]
+        }
+      }
+    ],
+    "failures": []
+  }
+}
