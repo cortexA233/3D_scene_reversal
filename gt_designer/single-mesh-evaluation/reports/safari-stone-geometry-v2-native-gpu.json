@@ -1,0 +1,3653 @@
+{
+  "schemaVersion": "single-mesh-native-browser-gates-v1",
+  "artifactRole": "development-only-native-gpu-evidence",
+  "productionUse": "prohibited",
+  "browser": "safari",
+  "geometryBaseline": "stone-v2",
+  "configuration": {
+    "browserBinary": "/Applications/Safari.app/Contents/MacOS/Safari",
+    "driverBinary": "/usr/bin/safaridriver",
+    "requestedRepetitions": 2,
+    "headless": false,
+    "softwareRenderingRequested": false
+  },
+  "objects": [
+    {
+      "objectId": "stone",
+      "runs": [
+        {
+          "repetition": 1,
+          "capabilities": {
+            "safari:platformVersion": "26.2",
+            "safari:automaticInspection": false,
+            "webkit:WebRTC": {
+              "DisableICECandidateFiltering": false,
+              "DisableInsecureMediaCapture": false
+            },
+            "webkit:alwaysAllowAutoplay": false,
+            "browserVersion": "26.2",
+            "strictFileInteractability": false,
+            "browserName": "Safari",
+            "safari:useSimulator": false,
+            "safari:platformBuildVersion": "25C56",
+            "setWindowRect": true,
+            "acceptInsecureCerts": false,
+            "safari:automaticProfiling": false,
+            "safari:experimentalWebSocketUrl": false,
+            "platformName": "macOS",
+            "safari:diagnose": false
+          },
+          "headless": false,
+          "softwareRenderingRequested": false,
+          "report": {
+            "artifactRole": "development-only-object-acceptance",
+            "schemaVersion": "single-mesh-object-evaluation-v1",
+            "evaluationProtocolVersion": "single-mesh-evaluation-v1",
+            "semanticId": "island.nature.stone",
+            "manifest": {
+              "artifactRole": "development-only-evaluation-manifest",
+              "schemaVersion": "single-mesh-evaluation-v1",
+              "unitId": "stone",
+              "passes": [
+                {
+                  "id": "neutral-rgb",
+                  "label": "Neutral RGB",
+                  "encoding": "sRGB display color under frozen lights"
+                },
+                {
+                  "id": "silhouette",
+                  "label": "Silhouette",
+                  "encoding": "white foreground on black background"
+                },
+                {
+                  "id": "linear-depth",
+                  "label": "Linear Depth",
+                  "encoding": "RGB=(viewDistance-near)/(far-near); white background"
+                },
+                {
+                  "id": "world-normal",
+                  "label": "World Normal",
+                  "encoding": "RGB=normalize(worldNormal)*0.5+0.5; black background"
+                },
+                {
+                  "id": "semantic-id",
+                  "label": "Semantic ID",
+                  "encoding": "stable 24-bit semantic color; black background"
+                },
+                {
+                  "id": "albedo",
+                  "label": "Unlit Albedo",
+                  "encoding": "sRGB base color and base-color map without lighting"
+                },
+                {
+                  "id": "lit-rgb",
+                  "label": "Frozen-lighting RGB",
+                  "encoding": "sRGB authored/procedural material under frozen lights"
+                }
+              ],
+              "renderer": {
+                "toneMapping": "ACESFilmic",
+                "threeRevision": "170",
+                "outputColorSpace": "sRGB for color passes; linear RGBA8 for data passes",
+                "toneMappingExposure": 1.05,
+                "lighting": "frozen hemisphere plus directional key"
+              },
+              "framing": {
+                "replacementTransform": {
+                  "translationBeforeScale": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "independentlyFramed": false,
+                  "uniformScale": 0.4358635000232776
+                },
+                "referenceTransform": {
+                  "translationBeforeScale": [
+                    -174.04873657226562,
+                    -12.001924514770508,
+                    -125.59476470947266
+                  ],
+                  "uniformScale": 0.4358635000232776
+                },
+                "camera": {
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "near": 10.704675906082963,
+                  "distance": 16.990573094028875,
+                  "boundingSphereRadius": 5.028717750356729,
+                  "fovDegrees": 38,
+                  "framingMargin": 1.1,
+                  "far": 23.276470281974788
+                },
+                "sourceWorldBounds": {
+                  "min": [
+                    166.65536499023438,
+                    12.001924514770508,
+                    117.56472778320312
+                  ],
+                  "max": [
+                    181.44210815429688,
+                    19.476530075073242,
+                    133.6248016357422
+                  ],
+                  "size": [
+                    14.7867431640625,
+                    7.474605560302734,
+                    16.060073852539062
+                  ]
+                },
+                "reconstructionFrame": {
+                  "sourceWorldBottomCenter": [
+                    174.04873657226562,
+                    12.001924514770508,
+                    125.59476470947266
+                  ],
+                  "sourceWorldAxesPreserved": true
+                },
+                "canonicalBounds": {
+                  "min": [
+                    -3.2225008147167777,
+                    0,
+                    -3.5
+                  ],
+                  "max": [
+                    3.2225008147167777,
+                    3.257907740807002,
+                    3.5
+                  ],
+                  "size": [
+                    6.4450016294335555,
+                    3.257907740807002,
+                    7
+                  ]
+                }
+              },
+              "views": [
+                {
+                  "azimuthDegrees": 0,
+                  "position": [
+                    0,
+                    7.4400721152085065,
+                    15.965916159382534
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-000",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 45,
+                  "position": [
+                    11.289607584155268,
+                    7.4400721152085065,
+                    11.28960758415527
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-045",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 90,
+                  "position": [
+                    15.965916159382534,
+                    7.4400721152085065,
+                    9.77630406002141e-16
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-090",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 135,
+                  "position": [
+                    11.28960758415527,
+                    7.4400721152085065,
+                    -11.289607584155268
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-135",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 180,
+                  "position": [
+                    1.955260812004282e-15,
+                    7.4400721152085065,
+                    -15.965916159382534
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-180",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 225,
+                  "position": [
+                    -11.289607584155268,
+                    7.4400721152085065,
+                    -11.289607584155272
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-225",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 270,
+                  "position": [
+                    -15.965916159382534,
+                    7.4400721152085065,
+                    -2.9328912180064235e-15
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-270",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 315,
+                  "position": [
+                    -11.289607584155272,
+                    7.4400721152085065,
+                    11.289607584155267
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-315",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 45,
+                  "position": [
+                    6.007074725516759,
+                    16.343221794688876,
+                    6.00707472551676
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "high-045",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 60,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 135,
+                  "position": [
+                    6.00707472551676,
+                    16.343221794688876,
+                    -6.007074725516759
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "high-135",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 60,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 225,
+                  "position": [
+                    -6.007074725516759,
+                    16.343221794688876,
+                    -6.007074725516761
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "high-225",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 60,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 315,
+                  "position": [
+                    -6.007074725516761,
+                    16.343221794688876,
+                    6.007074725516758
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "high-315",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 60,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                }
+              ],
+              "captures": [],
+              "capture": {
+                "channels": "RGBA8",
+                "width": 512,
+                "height": 512,
+                "pixelOrigin": "bottom-left"
+              }
+            },
+            "qualityBaseline": {
+              "geometry": {
+                "artifactRole": "development-only-quality-baseline",
+                "schemaVersion": "stone-geometry-quality-baseline-v2",
+                "frozen": true,
+                "selectionStrategy": "least-permissive-mild-envelope-plus-fixed-allowance",
+                "objectId": "stone",
+                "version": "stone-geometry-baseline-v2",
+                "productionUse": "prohibited",
+                "hard": [
+                  {
+                    "destructiveScenarioIds": [
+                      "uniform-scale/-0.05",
+                      "uniform-scale/+0.05",
+                      "anisotropic-x/1.10",
+                      "squash-y/0.80"
+                    ],
+                    "repeatabilityAllowance": 0.002,
+                    "operator": "<=",
+                    "mildEnvelope": 0.019999999999998876,
+                    "path": "geometry.bounds.maxAxisRelativeError",
+                    "group": "bounds",
+                    "threshold": 0.022
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "pivot-x/0.10"
+                    ],
+                    "repeatabilityAllowance": 0.002,
+                    "operator": "<=",
+                    "mildEnvelope": 0.028824658816565707,
+                    "path": "geometry.bounds.bottomAnchorErrorCanonical",
+                    "group": "bounds",
+                    "threshold": 0.030824658817
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box"
+                    ],
+                    "repeatabilityAllowance": 0.002,
+                    "operator": ">=",
+                    "mildEnvelope": 0.8467036180562363,
+                    "path": "geometry.silhouette.meanIou",
+                    "group": "silhouette",
+                    "threshold": 0.844703618056
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box"
+                    ],
+                    "repeatabilityAllowance": 0.003,
+                    "operator": ">=",
+                    "mildEnvelope": 0.8149071177333546,
+                    "path": "geometry.silhouette.worstViewIou",
+                    "group": "silhouette",
+                    "threshold": 0.811907117733
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box"
+                    ],
+                    "repeatabilityAllowance": 0.25,
+                    "operator": "<=",
+                    "mildEnvelope": 10.350715268357161,
+                    "path": "geometry.silhouette.meanEdgeDistancePixels",
+                    "group": "silhouette",
+                    "threshold": 10.600715268357
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box"
+                    ],
+                    "repeatabilityAllowance": 1,
+                    "operator": "<=",
+                    "mildEnvelope": 32.55764119219941,
+                    "path": "geometry.silhouette.edgeDistanceP95Pixels",
+                    "group": "silhouette",
+                    "threshold": 33.557641192199
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "profile-compression/0.80",
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box",
+                      "squash-y/0.80"
+                    ],
+                    "repeatabilityAllowance": 0.002,
+                    "operator": "<=",
+                    "mildEnvelope": 0.038584035391087596,
+                    "path": "geometry.depth.mae",
+                    "group": "depth",
+                    "threshold": 0.040584035391
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "profile-compression/0.80",
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box",
+                      "squash-y/0.80"
+                    ],
+                    "repeatabilityAllowance": 0.005,
+                    "operator": "<=",
+                    "mildEnvelope": 0.1408604411864631,
+                    "path": "geometry.depth.p95",
+                    "group": "depth",
+                    "threshold": 0.145860441186
+                  }
+                ],
+                "contractSchemaVersion": "stone-geometry-v2-calibration-contract-v1",
+                "diagnostic": []
+              },
+              "appearance": {
+                "version": "single-mesh-quality-baseline-v1",
+                "thresholds": {
+                  "meanDeltaE00Maximum": 4,
+                  "worstViewSsimMinimum": 0.92,
+                  "p90DeltaE00Maximum": 8,
+                  "paletteCentroidDeltaE00Maximum": 3,
+                  "paletteCoverageL1Maximum": 0.08,
+                  "meanMaskedSsimMinimum": 0.95
+                }
+              }
+            },
+            "comparison": {
+              "categoryAppearance": {
+                "hard": {
+                  "p90DeltaE00": 0,
+                  "meanMaskedSsim": 1,
+                  "paletteCoverageL1": 0,
+                  "passPolicy": "v1 numeric appearance thresholds over albedo, palette, roughness, and metalness",
+                  "meanDeltaE00": 0,
+                  "roughnessAbsoluteError": 2.8610229518832853e-8,
+                  "worstViewSsim": 1,
+                  "metalnessAbsoluteError": 0,
+                  "paletteCentroidDeltaE00": 0
+                },
+                "diagnostic": {
+                  "p90DeltaE00": 21.436201631469434,
+                  "evidenceClass": "geometry-conditioned-lit-rgb",
+                  "meanDeltaE00": 6.231347202362849,
+                  "meanMaskedSsim": 0.8059527892041324,
+                  "worstViewSsim": 0.7667527475459627
+                }
+              },
+              "perView": [
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 51042,
+                      "unionPixels": 51896,
+                      "symmetricEdgeP95Pixels": 21.840329667841555,
+                      "intersectionPixels": 45258,
+                      "iou": 0.8720903345151843,
+                      "referenceForegroundPixels": 46112,
+                      "symmetricEdgeMeanPixels": 8.038713066769827
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 45258,
+                      "meanDegrees": 12.108767126229923,
+                      "p95Degrees": 35.84257985675382
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 45258,
+                      "mae": 0.026352275166419373,
+                      "p95": 0.07747324265255477
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-000",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 43324,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 8.765045457338664,
+                      "meanDeltaE00": 4.3230904636112735,
+                      "maskedSsim": 0.797785304664275
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 50918,
+                      "unionPixels": 52237,
+                      "symmetricEdgeP95Pixels": 20.8806130178211,
+                      "intersectionPixels": 45400,
+                      "iou": 0.8691157608591611,
+                      "referenceForegroundPixels": 46719,
+                      "symmetricEdgeMeanPixels": 7.98208462693477
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 45400,
+                      "meanDegrees": 11.195263246720687,
+                      "p95Degrees": 30.895063364416572
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 45400,
+                      "mae": 0.03354324578707619,
+                      "p95": 0.10564533088984719
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-045",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 43412,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 8.882651292666191,
+                      "meanDeltaE00": 3.9230475517370498,
+                      "maskedSsim": 0.8137511598408016
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 50323,
+                      "unionPixels": 51021,
+                      "symmetricEdgeP95Pixels": 19,
+                      "intersectionPixels": 45552,
+                      "iou": 0.8928088434174164,
+                      "referenceForegroundPixels": 46250,
+                      "symmetricEdgeMeanPixels": 6.5038984208027095
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 45552,
+                      "meanDegrees": 14.553400485878159,
+                      "p95Degrees": 43.760351134636956
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 45552,
+                      "mae": 0.0332915451965123,
+                      "p95": 0.09155928677120073
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-090",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 43608,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 19.874439175214754,
+                      "meanDeltaE00": 6.505749939707895,
+                      "maskedSsim": 0.8861886780249354
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 50432,
+                      "unionPixels": 51613,
+                      "symmetricEdgeP95Pixels": 21.540659228538015,
+                      "intersectionPixels": 45383,
+                      "iou": 0.8792939763237944,
+                      "referenceForegroundPixels": 46564,
+                      "symmetricEdgeMeanPixels": 7.336834152139133
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 45383,
+                      "meanDegrees": 17.882785588526833,
+                      "p95Degrees": 50.479217821310215
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 45383,
+                      "mae": 0.029429443738802453,
+                      "p95": 0.09155928677120098
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-135",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 43361,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 21.436201631469434,
+                      "meanDeltaE00": 8.08578288337836,
+                      "maskedSsim": 0.7667527475459627
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 53322,
+                      "unionPixels": 53773,
+                      "symmetricEdgeP95Pixels": 16,
+                      "intersectionPixels": 47878,
+                      "iou": 0.8903724917709631,
+                      "referenceForegroundPixels": 48329,
+                      "symmetricEdgeMeanPixels": 7.000949881948513
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 47878,
+                      "meanDegrees": 18.271338609925262,
+                      "p95Degrees": 45.98864920097578
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 47878,
+                      "mae": 0.0324276458034905,
+                      "p95": 0.07747324265255452
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-180",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 45911,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 17.7172318614978,
+                      "meanDeltaE00": 6.418915739740844,
+                      "maskedSsim": 0.777289575509434
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 54399,
+                      "unionPixels": 55772,
+                      "symmetricEdgeP95Pixels": 15.524174696260024,
+                      "intersectionPixels": 50610,
+                      "iou": 0.9074445958545506,
+                      "referenceForegroundPixels": 51983,
+                      "symmetricEdgeMeanPixels": 5.914512292211689
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 50610,
+                      "meanDegrees": 18.329447679097726,
+                      "p95Degrees": 34.62148913967949
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 50610,
+                      "mae": 0.028388764493896212,
+                      "p95": 0.07043022059323155
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-225",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 48484,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 15.014656903900352,
+                      "meanDeltaE00": 5.58094425205228,
+                      "maskedSsim": 0.7847391025071242
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 54420,
+                      "unionPixels": 54650,
+                      "symmetricEdgeP95Pixels": 21.400934559032695,
+                      "intersectionPixels": 49882,
+                      "iou": 0.9127538883806039,
+                      "referenceForegroundPixels": 50112,
+                      "symmetricEdgeMeanPixels": 5.375280993810357
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 49882,
+                      "meanDegrees": 19.464883826241735,
+                      "p95Degrees": 42.755648941363965
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 49882,
+                      "mae": 0.02769033547545019,
+                      "p95": 0.07747324265255477
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-270",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 47846,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 13.528288205370972,
+                      "meanDeltaE00": 5.877757421078283,
+                      "maskedSsim": 0.8229969675631297
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 51456,
+                      "unionPixels": 52564,
+                      "symmetricEdgeP95Pixels": 18.027756377319946,
+                      "intersectionPixels": 47137,
+                      "iou": 0.896754432691576,
+                      "referenceForegroundPixels": 48245,
+                      "symmetricEdgeMeanPixels": 6.273149466837123
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 47137,
+                      "meanDegrees": 16.525677808792175,
+                      "p95Degrees": 41.83402251928972
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 47137,
+                      "mae": 0.030398834906580883,
+                      "p95": 0.10564533088984719
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-315",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 45108,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 12.832185564920412,
+                      "meanDeltaE00": 5.746812432642175,
+                      "maskedSsim": 0.8850692943322955
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 60797,
+                      "unionPixels": 62804,
+                      "symmetricEdgeP95Pixels": 17.204650534085253,
+                      "intersectionPixels": 57254,
+                      "iou": 0.9116298324947456,
+                      "referenceForegroundPixels": 59261,
+                      "symmetricEdgeMeanPixels": 6.068227665225634
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 57254,
+                      "meanDegrees": 13.939762262778153,
+                      "p95Degrees": 38.06990602856923
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 57254,
+                      "mae": 0.026109887835538324,
+                      "p95": 0.05634417647458534
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "high-045",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 54997,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 15.061177271352843,
+                      "meanDeltaE00": 5.791263751684266,
+                      "maskedSsim": 0.7833189131060951
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 60371,
+                      "unionPixels": 62150,
+                      "symmetricEdgeP95Pixels": 22.090722034374522,
+                      "intersectionPixels": 54966,
+                      "iou": 0.8844086886564763,
+                      "referenceForegroundPixels": 56745,
+                      "symmetricEdgeMeanPixels": 8.032670383817226
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 54966,
+                      "meanDegrees": 17.16858726957658,
+                      "p95Degrees": 44.111964555976044
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 54966,
+                      "mae": 0.02776436535055751,
+                      "p95": 0.07747324265255427
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "high-135",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 52709,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 20.600401808832935,
+                      "meanDeltaE00": 8.066090421879972,
+                      "maskedSsim": 0.7915453508556652
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 59764,
+                      "unionPixels": 61733,
+                      "symmetricEdgeP95Pixels": 23.769728648009426,
+                      "intersectionPixels": 54637,
+                      "iou": 0.8850533750182237,
+                      "referenceForegroundPixels": 56606,
+                      "symmetricEdgeMeanPixels": 8.088595101546414
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 54637,
+                      "meanDegrees": 17.74156622974111,
+                      "p95Degrees": 35.88328326626349
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 54637,
+                      "mae": 0.026704367660267164,
+                      "p95": 0.09155928677120073
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "high-225",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 52395,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 18.58554015138284,
+                      "meanDeltaE00": 7.52844367459088,
+                      "maskedSsim": 0.7684134148988712
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 59535,
+                      "unionPixels": 60745,
+                      "symmetricEdgeP95Pixels": 17.204650534085253,
+                      "intersectionPixels": 55624,
+                      "iou": 0.9156967651658573,
+                      "referenceForegroundPixels": 56834,
+                      "symmetricEdgeMeanPixels": 5.782870033430913
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 55624,
+                      "meanDegrees": 15.667044990734361,
+                      "p95Degrees": 37.849208676929436
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 55624,
+                      "mae": 0.025907138240946755,
+                      "p95": 0.08451626471187776
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "high-315",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 53404,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 17.175768129837387,
+                      "meanDeltaE00": 6.928267896250906,
+                      "maskedSsim": 0.793582961600999
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                }
+              ],
+              "diagnostics": {
+                "pointSetDistance": {
+                  "sampling": "position-attribute-vertices-with-duplicates-retained",
+                  "referencePointCount": 324,
+                  "replacementPointCount": 42,
+                  "symmetricChamferMeanCanonical": 0.5143376138993903,
+                  "symmetricHausdorffCanonical": 1.4308097678941285
+                },
+                "units": "canonical",
+                "volume": {
+                  "reference": 69.59260340908982,
+                  "replacement": 74.94292308443657,
+                  "referenceUnavailableReason": null,
+                  "replacementUnavailableReason": null,
+                  "relativeError": 0.07688057944744058
+                },
+                "topology": {
+                  "replacementConnectedComponents": 1,
+                  "referenceClosed": true,
+                  "referenceConnectedComponents": 1,
+                  "replacementClosed": true
+                },
+                "surfaceArea": {
+                  "replacement": 109.6433044793261,
+                  "reference": 102.90757714223119,
+                  "relativeError": 0.0654541436514951
+                }
+              },
+              "captureChecksums": {
+                "low-000/neutral-rgb": "244bae2b",
+                "high-045/linear-depth": "027eac13",
+                "high-135/silhouette": "914bfe84",
+                "low-000/semantic-id": "469bf915",
+                "low-135/albedo": "92f60ef5",
+                "high-315/world-normal": "43476ac0",
+                "low-045/neutral-rgb": "ac402cb1",
+                "low-180/world-normal": "e4ffaee0",
+                "high-225/albedo": "f4c7ff05",
+                "low-270/neutral-rgb": "ed2a0284",
+                "low-315/world-normal": "78ac9207",
+                "high-315/neutral-rgb": "5ab8be38",
+                "high-225/neutral-rgb": "c11697b2",
+                "low-045/semantic-id": "f8ea132d",
+                "high-135/neutral-rgb": "e643e6bd",
+                "high-135/linear-depth": "996bd690",
+                "high-045/neutral-rgb": "41b6a109",
+                "low-270/semantic-id": "49cb39f5",
+                "low-135/world-normal": "94142953",
+                "low-180/linear-depth": "eb47242e",
+                "low-270/albedo": "273bf865",
+                "low-315/linear-depth": "583dd7ce",
+                "high-045/silhouette": "89f5d63c",
+                "low-135/linear-depth": "5079ddfc",
+                "low-180/lit-rgb": "56c8c936",
+                "low-315/lit-rgb": "c3189e38",
+                "high-135/albedo": "c34a4b8a",
+                "low-135/lit-rgb": "34362614",
+                "low-180/neutral-rgb": "ccdc3d87",
+                "low-225/albedo": "e5cbf84a",
+                "low-315/neutral-rgb": "fd4a7f6b",
+                "high-045/world-normal": "7baedc75",
+                "high-225/linear-depth": "616231df",
+                "high-315/silhouette": "849b1124",
+                "low-000/world-normal": "9c3079aa",
+                "low-000/albedo": "70b733c5",
+                "low-180/semantic-id": "cca0b74d",
+                "high-315/lit-rgb": "57cea408",
+                "low-315/semantic-id": "1f841ccd",
+                "low-090/silhouette": "b5dc4e9c",
+                "low-180/silhouette": "1a1ae51d",
+                "low-000/lit-rgb": "bcc68e2f",
+                "low-270/silhouette": "cd2bf3e5",
+                "low-000/linear-depth": "607b414d",
+                "high-045/albedo": "e8d0e922",
+                "high-225/lit-rgb": "994ba93a",
+                "low-270/world-normal": "7a61d47d",
+                "low-000/silhouette": "d6514fe5",
+                "low-045/silhouette": "8e07be3d",
+                "low-090/neutral-rgb": "1a72ea97",
+                "low-090/albedo": "948c3ae2",
+                "low-135/silhouette": "efbffcf5",
+                "low-225/neutral-rgb": "127dbe80",
+                "low-225/silhouette": "a3e18204",
+                "low-315/silhouette": "0ec17ebd",
+                "high-135/world-normal": "72e85cd9",
+                "high-135/lit-rgb": "acc22f17",
+                "high-315/linear-depth": "6161f986",
+                "low-090/world-normal": "b53f8c48",
+                "low-225/world-normal": "dc462a78",
+                "low-090/semantic-id": "69ae3454",
+                "low-270/linear-depth": "9986f89d",
+                "low-315/albedo": "439dd5fd",
+                "low-225/semantic-id": "7cfce1cc",
+                "high-045/semantic-id": "52565f14",
+                "low-045/albedo": "a652ab1d",
+                "high-045/lit-rgb": "788c5ffc",
+                "high-135/semantic-id": "02f7efec",
+                "high-225/silhouette": "e8417605",
+                "low-090/linear-depth": "e368f986",
+                "high-225/semantic-id": "bb79c455",
+                "low-045/world-normal": "dc19bb03",
+                "low-225/linear-depth": "719e55a5",
+                "high-315/semantic-id": "ebedc51c",
+                "low-270/lit-rgb": "07c4efc7",
+                "low-090/lit-rgb": "d26744e3",
+                "high-225/world-normal": "1e308966",
+                "low-135/neutral-rgb": "365663f6",
+                "low-225/lit-rgb": "6b837a1e",
+                "low-045/linear-depth": "7159498f",
+                "low-045/lit-rgb": "7c2982fd",
+                "low-180/albedo": "e248e8fd",
+                "high-315/albedo": "fae3786a",
+                "low-135/semantic-id": "da784275"
+              },
+              "aggregate": {
+                "geometry": {
+                  "silhouette": {
+                    "worstViewIou": 0.8691157608591611,
+                    "edgeDistanceP95Pixels": 23.769728648009426,
+                    "meanIou": 0.8931185820957127,
+                    "meanEdgeDistancePixels": 6.866482173789527
+                  },
+                  "worldNormal": {
+                    "meanDegrees": 16.070710427020224,
+                    "p95Degrees": 50.479217821310215
+                  },
+                  "depth": {
+                    "mae": 0.029000654137961487,
+                    "p95": 0.10564533088984719
+                  },
+                  "bounds": {
+                    "maxAxisRelativeError": 6.449522321993078e-8,
+                    "bottomAnchorErrorCanonical": 0
+                  }
+                },
+                "viewCount": 12,
+                "appearance": {
+                  "p90DeltaE00": 21.436201631469434,
+                  "meanMaskedSsim": 0.8059527892041324,
+                  "paletteCoverageL1": 0,
+                  "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo.",
+                  "meanDeltaE00": 6.231347202362849,
+                  "roughnessAbsoluteError": 2.8610229518832853e-8,
+                  "worstViewSsim": 0.7667527475459627,
+                  "metalnessAbsoluteError": 0,
+                  "paletteCentroidDeltaE00": 0
+                }
+              },
+              "gate": {
+                "passed": true,
+                "baselineVersion": "stone-geometry-baseline-v2",
+                "geometryGate": {
+                  "passed": true,
+                  "failures": []
+                },
+                "objectId": "stone",
+                "failures": [],
+                "baselineVersions": {
+                  "geometry": "stone-geometry-baseline-v2",
+                  "appearance": "single-mesh-quality-baseline-v1"
+                },
+                "appearanceGate": {
+                  "passed": true,
+                  "geometryConditionedLitRgb": {
+                    "p90DeltaE00": 21.436201631469434,
+                    "evidenceClass": "geometry-conditioned-lit-rgb",
+                    "meanDeltaE00": 6.231347202362849,
+                    "meanMaskedSsim": 0.8059527892041324,
+                    "worstViewSsim": 0.7667527475459627
+                  },
+                  "reason": null,
+                  "evaluated": true,
+                  "failures": [],
+                  "evidencePolicy": "uniform-albedo-palette-material-v1"
+                }
+              }
+            },
+            "productionUse": "prohibited",
+            "objectId": "stone",
+            "environment": {
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15",
+              "threeRevision": "170",
+              "gpu": {
+                "vendor": "Apple Inc.",
+                "hardwareAccelerated": true,
+                "shadingLanguageVersion": "WebGL GLSL ES 3.00",
+                "antialias": true,
+                "colorManagement": {
+                  "toneMappingExposure": 1.05,
+                  "outputColorSpace": "srgb",
+                  "toneMapping": 0
+                },
+                "renderer": "Apple GPU",
+                "version": "WebGL 2.0",
+                "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i"
+              },
+              "captureBackend": "browser-webgl-rgba8",
+              "platform": "MacIntel"
+            },
+            "captures": {
+              "referenceChecksums": {
+                "low-000/neutral-rgb": "ece86802",
+                "high-045/linear-depth": "b4c1dcec",
+                "high-135/silhouette": "22694014",
+                "low-000/semantic-id": "b708f165",
+                "low-135/albedo": "b9f71715",
+                "high-315/world-normal": "361c2fd8",
+                "low-045/neutral-rgb": "886c9217",
+                "low-180/world-normal": "6c83f2dd",
+                "high-225/albedo": "dae96785",
+                "low-270/neutral-rgb": "d85ba6ec",
+                "low-315/world-normal": "358c7907",
+                "high-315/neutral-rgb": "ee7b4fa9",
+                "high-225/neutral-rgb": "b033c6fa",
+                "low-045/semantic-id": "3b4dd3d1",
+                "high-135/neutral-rgb": "5516d450",
+                "high-135/linear-depth": "e3d8eeff",
+                "high-045/neutral-rgb": "92109ed8",
+                "low-270/semantic-id": "9ff96d35",
+                "low-135/world-normal": "77bc878f",
+                "low-180/linear-depth": "63ed7020",
+                "low-270/albedo": "e8de4d6d",
+                "low-315/linear-depth": "5d1de396",
+                "high-045/silhouette": "6d1be654",
+                "low-135/linear-depth": "36f3cd60",
+                "low-180/lit-rgb": "7772cbb2",
+                "low-315/lit-rgb": "0233c082",
+                "high-135/albedo": "6a1638ba",
+                "low-135/lit-rgb": "d7461922",
+                "low-180/neutral-rgb": "074b3742",
+                "low-225/albedo": "8cbfc802",
+                "low-315/neutral-rgb": "cdcba1c6",
+                "high-045/world-normal": "1fe09159",
+                "high-225/linear-depth": "7843cdd6",
+                "high-315/silhouette": "2fd17185",
+                "low-000/world-normal": "7196a99a",
+                "low-000/albedo": "96bd9f75",
+                "low-180/semantic-id": "f3d2e7a1",
+                "high-315/lit-rgb": "10b811cb",
+                "low-315/semantic-id": "166be5b1",
+                "low-090/silhouette": "06e4d245",
+                "low-180/silhouette": "565b4514",
+                "low-000/lit-rgb": "61ae74d7",
+                "low-270/silhouette": "a8f2d1ad",
+                "low-000/linear-depth": "769fa86b",
+                "high-045/albedo": "f61ed77a",
+                "high-225/lit-rgb": "b324e6a1",
+                "low-270/world-normal": "be847c65",
+                "low-000/silhouette": "f76a8235",
+                "low-045/silhouette": "3c5b17dc",
+                "low-090/neutral-rgb": "7102abca",
+                "low-090/albedo": "6c8c6a25",
+                "low-135/silhouette": "56682355",
+                "low-225/neutral-rgb": "3a4bc6f0",
+                "low-225/silhouette": "89d2d0bc",
+                "low-315/silhouette": "3702dd9c",
+                "high-135/world-normal": "13a49d8f",
+                "high-135/lit-rgb": "6643ad8b",
+                "high-315/linear-depth": "19b09ea1",
+                "low-090/world-normal": "c78fd256",
+                "low-225/world-normal": "bfe396a0",
+                "low-090/semantic-id": "d6811485",
+                "low-270/linear-depth": "eb50e967",
+                "low-315/albedo": "c8436d02",
+                "low-225/semantic-id": "ba231191",
+                "high-045/semantic-id": "65ac04a1",
+                "low-045/albedo": "b2622ba2",
+                "high-045/lit-rgb": "df7974e0",
+                "high-135/semantic-id": "56983561",
+                "high-225/silhouette": "80daeaa5",
+                "low-090/linear-depth": "0d8e9883",
+                "high-225/semantic-id": "cbaeb345",
+                "low-045/world-normal": "3398e4c4",
+                "low-225/linear-depth": "d77e285d",
+                "high-315/semantic-id": "8c9f4725",
+                "low-270/lit-rgb": "f8b8f5d5",
+                "low-090/lit-rgb": "5c4a991a",
+                "high-225/world-normal": "57d9cca8",
+                "low-135/neutral-rgb": "bd2838d4",
+                "low-225/lit-rgb": "dac42495",
+                "low-045/linear-depth": "eea4000d",
+                "low-045/lit-rgb": "b0f053f3",
+                "low-180/albedo": "b2e78f7a",
+                "high-315/albedo": "319b7c65",
+                "low-135/semantic-id": "cb8911c5"
+              },
+              "expectedCount": 168,
+              "replacementChecksums": {
+                "low-000/neutral-rgb": "244bae2b",
+                "high-045/linear-depth": "027eac13",
+                "high-135/silhouette": "914bfe84",
+                "low-000/semantic-id": "469bf915",
+                "low-135/albedo": "92f60ef5",
+                "high-315/world-normal": "43476ac0",
+                "low-045/neutral-rgb": "ac402cb1",
+                "low-180/world-normal": "e4ffaee0",
+                "high-225/albedo": "f4c7ff05",
+                "low-270/neutral-rgb": "ed2a0284",
+                "low-315/world-normal": "78ac9207",
+                "high-315/neutral-rgb": "5ab8be38",
+                "high-225/neutral-rgb": "c11697b2",
+                "low-045/semantic-id": "f8ea132d",
+                "high-135/neutral-rgb": "e643e6bd",
+                "high-135/linear-depth": "996bd690",
+                "high-045/neutral-rgb": "41b6a109",
+                "low-270/semantic-id": "49cb39f5",
+                "low-135/world-normal": "94142953",
+                "low-180/linear-depth": "eb47242e",
+                "low-270/albedo": "273bf865",
+                "low-315/linear-depth": "583dd7ce",
+                "high-045/silhouette": "89f5d63c",
+                "low-135/linear-depth": "5079ddfc",
+                "low-180/lit-rgb": "56c8c936",
+                "low-315/lit-rgb": "c3189e38",
+                "high-135/albedo": "c34a4b8a",
+                "low-135/lit-rgb": "34362614",
+                "low-180/neutral-rgb": "ccdc3d87",
+                "low-225/albedo": "e5cbf84a",
+                "low-315/neutral-rgb": "fd4a7f6b",
+                "high-045/world-normal": "7baedc75",
+                "high-225/linear-depth": "616231df",
+                "high-315/silhouette": "849b1124",
+                "low-000/world-normal": "9c3079aa",
+                "low-000/albedo": "70b733c5",
+                "low-180/semantic-id": "cca0b74d",
+                "high-315/lit-rgb": "57cea408",
+                "low-315/semantic-id": "1f841ccd",
+                "low-090/silhouette": "b5dc4e9c",
+                "low-180/silhouette": "1a1ae51d",
+                "low-000/lit-rgb": "bcc68e2f",
+                "low-270/silhouette": "cd2bf3e5",
+                "low-000/linear-depth": "607b414d",
+                "high-045/albedo": "e8d0e922",
+                "high-225/lit-rgb": "994ba93a",
+                "low-270/world-normal": "7a61d47d",
+                "low-000/silhouette": "d6514fe5",
+                "low-045/silhouette": "8e07be3d",
+                "low-090/neutral-rgb": "1a72ea97",
+                "low-090/albedo": "948c3ae2",
+                "low-135/silhouette": "efbffcf5",
+                "low-225/neutral-rgb": "127dbe80",
+                "low-225/silhouette": "a3e18204",
+                "low-315/silhouette": "0ec17ebd",
+                "high-135/world-normal": "72e85cd9",
+                "high-135/lit-rgb": "acc22f17",
+                "high-315/linear-depth": "6161f986",
+                "low-090/world-normal": "b53f8c48",
+                "low-225/world-normal": "dc462a78",
+                "low-090/semantic-id": "69ae3454",
+                "low-270/linear-depth": "9986f89d",
+                "low-315/albedo": "439dd5fd",
+                "low-225/semantic-id": "7cfce1cc",
+                "high-045/semantic-id": "52565f14",
+                "low-045/albedo": "a652ab1d",
+                "high-045/lit-rgb": "788c5ffc",
+                "high-135/semantic-id": "02f7efec",
+                "high-225/silhouette": "e8417605",
+                "low-090/linear-depth": "e368f986",
+                "high-225/semantic-id": "bb79c455",
+                "low-045/world-normal": "dc19bb03",
+                "low-225/linear-depth": "719e55a5",
+                "high-315/semantic-id": "ebedc51c",
+                "low-270/lit-rgb": "07c4efc7",
+                "low-090/lit-rgb": "d26744e3",
+                "high-225/world-normal": "1e308966",
+                "low-135/neutral-rgb": "365663f6",
+                "low-225/lit-rgb": "6b837a1e",
+                "low-045/linear-depth": "7159498f",
+                "low-045/lit-rgb": "7c2982fd",
+                "low-180/albedo": "e248e8fd",
+                "high-315/albedo": "fae3786a",
+                "low-135/semantic-id": "da784275"
+              }
+            }
+          }
+        },
+        {
+          "repetition": 2,
+          "capabilities": {
+            "safari:platformVersion": "26.2",
+            "safari:automaticInspection": false,
+            "webkit:WebRTC": {
+              "DisableICECandidateFiltering": false,
+              "DisableInsecureMediaCapture": false
+            },
+            "webkit:alwaysAllowAutoplay": false,
+            "browserVersion": "26.2",
+            "strictFileInteractability": false,
+            "browserName": "Safari",
+            "safari:useSimulator": false,
+            "safari:platformBuildVersion": "25C56",
+            "setWindowRect": true,
+            "acceptInsecureCerts": false,
+            "safari:automaticProfiling": false,
+            "safari:experimentalWebSocketUrl": false,
+            "platformName": "macOS",
+            "safari:diagnose": false
+          },
+          "headless": false,
+          "softwareRenderingRequested": false,
+          "report": {
+            "artifactRole": "development-only-object-acceptance",
+            "schemaVersion": "single-mesh-object-evaluation-v1",
+            "evaluationProtocolVersion": "single-mesh-evaluation-v1",
+            "semanticId": "island.nature.stone",
+            "manifest": {
+              "artifactRole": "development-only-evaluation-manifest",
+              "schemaVersion": "single-mesh-evaluation-v1",
+              "unitId": "stone",
+              "passes": [
+                {
+                  "id": "neutral-rgb",
+                  "label": "Neutral RGB",
+                  "encoding": "sRGB display color under frozen lights"
+                },
+                {
+                  "id": "silhouette",
+                  "label": "Silhouette",
+                  "encoding": "white foreground on black background"
+                },
+                {
+                  "id": "linear-depth",
+                  "label": "Linear Depth",
+                  "encoding": "RGB=(viewDistance-near)/(far-near); white background"
+                },
+                {
+                  "id": "world-normal",
+                  "label": "World Normal",
+                  "encoding": "RGB=normalize(worldNormal)*0.5+0.5; black background"
+                },
+                {
+                  "id": "semantic-id",
+                  "label": "Semantic ID",
+                  "encoding": "stable 24-bit semantic color; black background"
+                },
+                {
+                  "id": "albedo",
+                  "label": "Unlit Albedo",
+                  "encoding": "sRGB base color and base-color map without lighting"
+                },
+                {
+                  "id": "lit-rgb",
+                  "label": "Frozen-lighting RGB",
+                  "encoding": "sRGB authored/procedural material under frozen lights"
+                }
+              ],
+              "renderer": {
+                "toneMapping": "ACESFilmic",
+                "threeRevision": "170",
+                "outputColorSpace": "sRGB for color passes; linear RGBA8 for data passes",
+                "toneMappingExposure": 1.05,
+                "lighting": "frozen hemisphere plus directional key"
+              },
+              "framing": {
+                "replacementTransform": {
+                  "translationBeforeScale": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "independentlyFramed": false,
+                  "uniformScale": 0.4358635000232776
+                },
+                "referenceTransform": {
+                  "translationBeforeScale": [
+                    -174.04873657226562,
+                    -12.001924514770508,
+                    -125.59476470947266
+                  ],
+                  "uniformScale": 0.4358635000232776
+                },
+                "camera": {
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "near": 10.704675906082963,
+                  "distance": 16.990573094028875,
+                  "boundingSphereRadius": 5.028717750356729,
+                  "fovDegrees": 38,
+                  "framingMargin": 1.1,
+                  "far": 23.276470281974788
+                },
+                "sourceWorldBounds": {
+                  "min": [
+                    166.65536499023438,
+                    12.001924514770508,
+                    117.56472778320312
+                  ],
+                  "max": [
+                    181.44210815429688,
+                    19.476530075073242,
+                    133.6248016357422
+                  ],
+                  "size": [
+                    14.7867431640625,
+                    7.474605560302734,
+                    16.060073852539062
+                  ]
+                },
+                "reconstructionFrame": {
+                  "sourceWorldBottomCenter": [
+                    174.04873657226562,
+                    12.001924514770508,
+                    125.59476470947266
+                  ],
+                  "sourceWorldAxesPreserved": true
+                },
+                "canonicalBounds": {
+                  "min": [
+                    -3.2225008147167777,
+                    0,
+                    -3.5
+                  ],
+                  "max": [
+                    3.2225008147167777,
+                    3.257907740807002,
+                    3.5
+                  ],
+                  "size": [
+                    6.4450016294335555,
+                    3.257907740807002,
+                    7
+                  ]
+                }
+              },
+              "views": [
+                {
+                  "azimuthDegrees": 0,
+                  "position": [
+                    0,
+                    7.4400721152085065,
+                    15.965916159382534
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-000",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 45,
+                  "position": [
+                    11.289607584155268,
+                    7.4400721152085065,
+                    11.28960758415527
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-045",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 90,
+                  "position": [
+                    15.965916159382534,
+                    7.4400721152085065,
+                    9.77630406002141e-16
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-090",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 135,
+                  "position": [
+                    11.28960758415527,
+                    7.4400721152085065,
+                    -11.289607584155268
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-135",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 180,
+                  "position": [
+                    1.955260812004282e-15,
+                    7.4400721152085065,
+                    -15.965916159382534
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-180",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 225,
+                  "position": [
+                    -11.289607584155268,
+                    7.4400721152085065,
+                    -11.289607584155272
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-225",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 270,
+                  "position": [
+                    -15.965916159382534,
+                    7.4400721152085065,
+                    -2.9328912180064235e-15
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-270",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 315,
+                  "position": [
+                    -11.289607584155272,
+                    7.4400721152085065,
+                    11.289607584155267
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "low-315",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 20,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 45,
+                  "position": [
+                    6.007074725516759,
+                    16.343221794688876,
+                    6.00707472551676
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "high-045",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 60,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 135,
+                  "position": [
+                    6.00707472551676,
+                    16.343221794688876,
+                    -6.007074725516759
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "high-135",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 60,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 225,
+                  "position": [
+                    -6.007074725516759,
+                    16.343221794688876,
+                    -6.007074725516761
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "high-225",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 60,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                },
+                {
+                  "azimuthDegrees": 315,
+                  "position": [
+                    -6.007074725516761,
+                    16.343221794688876,
+                    6.007074725516758
+                  ],
+                  "target": [
+                    0,
+                    1.628953870403501,
+                    0
+                  ],
+                  "id": "high-315",
+                  "up": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "fovDegrees": 38,
+                  "elevationDegrees": 60,
+                  "near": 10.704675906082963,
+                  "far": 23.276470281974788
+                }
+              ],
+              "captures": [],
+              "capture": {
+                "channels": "RGBA8",
+                "width": 512,
+                "height": 512,
+                "pixelOrigin": "bottom-left"
+              }
+            },
+            "qualityBaseline": {
+              "geometry": {
+                "artifactRole": "development-only-quality-baseline",
+                "schemaVersion": "stone-geometry-quality-baseline-v2",
+                "frozen": true,
+                "selectionStrategy": "least-permissive-mild-envelope-plus-fixed-allowance",
+                "objectId": "stone",
+                "version": "stone-geometry-baseline-v2",
+                "productionUse": "prohibited",
+                "hard": [
+                  {
+                    "destructiveScenarioIds": [
+                      "uniform-scale/-0.05",
+                      "uniform-scale/+0.05",
+                      "anisotropic-x/1.10",
+                      "squash-y/0.80"
+                    ],
+                    "repeatabilityAllowance": 0.002,
+                    "operator": "<=",
+                    "mildEnvelope": 0.019999999999998876,
+                    "path": "geometry.bounds.maxAxisRelativeError",
+                    "group": "bounds",
+                    "threshold": 0.022
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "pivot-x/0.10"
+                    ],
+                    "repeatabilityAllowance": 0.002,
+                    "operator": "<=",
+                    "mildEnvelope": 0.028824658816565707,
+                    "path": "geometry.bounds.bottomAnchorErrorCanonical",
+                    "group": "bounds",
+                    "threshold": 0.030824658817
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box"
+                    ],
+                    "repeatabilityAllowance": 0.002,
+                    "operator": ">=",
+                    "mildEnvelope": 0.8467036180562363,
+                    "path": "geometry.silhouette.meanIou",
+                    "group": "silhouette",
+                    "threshold": 0.844703618056
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box"
+                    ],
+                    "repeatabilityAllowance": 0.003,
+                    "operator": ">=",
+                    "mildEnvelope": 0.8149071177333546,
+                    "path": "geometry.silhouette.worstViewIou",
+                    "group": "silhouette",
+                    "threshold": 0.811907117733
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box"
+                    ],
+                    "repeatabilityAllowance": 0.25,
+                    "operator": "<=",
+                    "mildEnvelope": 10.350715268357161,
+                    "path": "geometry.silhouette.meanEdgeDistancePixels",
+                    "group": "silhouette",
+                    "threshold": 10.600715268357
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box"
+                    ],
+                    "repeatabilityAllowance": 1,
+                    "operator": "<=",
+                    "mildEnvelope": 32.55764119219941,
+                    "path": "geometry.silhouette.edgeDistanceP95Pixels",
+                    "group": "silhouette",
+                    "threshold": 33.557641192199
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "profile-compression/0.80",
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box",
+                      "squash-y/0.80"
+                    ],
+                    "repeatabilityAllowance": 0.002,
+                    "operator": "<=",
+                    "mildEnvelope": 0.038584035391087596,
+                    "path": "geometry.depth.mae",
+                    "group": "depth",
+                    "threshold": 0.040584035391
+                  },
+                  {
+                    "destructiveScenarioIds": [
+                      "profile-compression/0.80",
+                      "support-hull/8",
+                      "substitute/ellipsoid",
+                      "substitute/box",
+                      "squash-y/0.80"
+                    ],
+                    "repeatabilityAllowance": 0.005,
+                    "operator": "<=",
+                    "mildEnvelope": 0.1408604411864631,
+                    "path": "geometry.depth.p95",
+                    "group": "depth",
+                    "threshold": 0.145860441186
+                  }
+                ],
+                "contractSchemaVersion": "stone-geometry-v2-calibration-contract-v1",
+                "diagnostic": []
+              },
+              "appearance": {
+                "version": "single-mesh-quality-baseline-v1",
+                "thresholds": {
+                  "meanDeltaE00Maximum": 4,
+                  "worstViewSsimMinimum": 0.92,
+                  "p90DeltaE00Maximum": 8,
+                  "paletteCentroidDeltaE00Maximum": 3,
+                  "paletteCoverageL1Maximum": 0.08,
+                  "meanMaskedSsimMinimum": 0.95
+                }
+              }
+            },
+            "comparison": {
+              "categoryAppearance": {
+                "hard": {
+                  "p90DeltaE00": 0,
+                  "meanMaskedSsim": 1,
+                  "paletteCoverageL1": 0,
+                  "passPolicy": "v1 numeric appearance thresholds over albedo, palette, roughness, and metalness",
+                  "meanDeltaE00": 0,
+                  "roughnessAbsoluteError": 2.8610229518832853e-8,
+                  "worstViewSsim": 1,
+                  "metalnessAbsoluteError": 0,
+                  "paletteCentroidDeltaE00": 0
+                },
+                "diagnostic": {
+                  "p90DeltaE00": 21.436201631469434,
+                  "evidenceClass": "geometry-conditioned-lit-rgb",
+                  "meanDeltaE00": 6.231347202362849,
+                  "meanMaskedSsim": 0.8059527892041324,
+                  "worstViewSsim": 0.7667527475459627
+                }
+              },
+              "perView": [
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 51042,
+                      "unionPixels": 51896,
+                      "symmetricEdgeP95Pixels": 21.840329667841555,
+                      "intersectionPixels": 45258,
+                      "iou": 0.8720903345151843,
+                      "referenceForegroundPixels": 46112,
+                      "symmetricEdgeMeanPixels": 8.038713066769827
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 45258,
+                      "meanDegrees": 12.108767126229923,
+                      "p95Degrees": 35.84257985675382
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 45258,
+                      "mae": 0.026352275166419373,
+                      "p95": 0.07747324265255477
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-000",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 43324,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 8.765045457338664,
+                      "meanDeltaE00": 4.3230904636112735,
+                      "maskedSsim": 0.797785304664275
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 50918,
+                      "unionPixels": 52237,
+                      "symmetricEdgeP95Pixels": 20.8806130178211,
+                      "intersectionPixels": 45400,
+                      "iou": 0.8691157608591611,
+                      "referenceForegroundPixels": 46719,
+                      "symmetricEdgeMeanPixels": 7.98208462693477
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 45400,
+                      "meanDegrees": 11.195263246720687,
+                      "p95Degrees": 30.895063364416572
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 45400,
+                      "mae": 0.03354324578707619,
+                      "p95": 0.10564533088984719
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-045",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 43412,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 8.882651292666191,
+                      "meanDeltaE00": 3.9230475517370498,
+                      "maskedSsim": 0.8137511598408016
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 50323,
+                      "unionPixels": 51021,
+                      "symmetricEdgeP95Pixels": 19,
+                      "intersectionPixels": 45552,
+                      "iou": 0.8928088434174164,
+                      "referenceForegroundPixels": 46250,
+                      "symmetricEdgeMeanPixels": 6.5038984208027095
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 45552,
+                      "meanDegrees": 14.553400485878159,
+                      "p95Degrees": 43.760351134636956
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 45552,
+                      "mae": 0.0332915451965123,
+                      "p95": 0.09155928677120073
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-090",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 43608,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 19.874439175214754,
+                      "meanDeltaE00": 6.505749939707895,
+                      "maskedSsim": 0.8861886780249354
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 50432,
+                      "unionPixels": 51613,
+                      "symmetricEdgeP95Pixels": 21.540659228538015,
+                      "intersectionPixels": 45383,
+                      "iou": 0.8792939763237944,
+                      "referenceForegroundPixels": 46564,
+                      "symmetricEdgeMeanPixels": 7.336834152139133
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 45383,
+                      "meanDegrees": 17.882785588526833,
+                      "p95Degrees": 50.479217821310215
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 45383,
+                      "mae": 0.029429443738802453,
+                      "p95": 0.09155928677120098
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-135",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 43361,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 21.436201631469434,
+                      "meanDeltaE00": 8.08578288337836,
+                      "maskedSsim": 0.7667527475459627
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 53322,
+                      "unionPixels": 53773,
+                      "symmetricEdgeP95Pixels": 16,
+                      "intersectionPixels": 47878,
+                      "iou": 0.8903724917709631,
+                      "referenceForegroundPixels": 48329,
+                      "symmetricEdgeMeanPixels": 7.000949881948513
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 47878,
+                      "meanDegrees": 18.271338609925262,
+                      "p95Degrees": 45.98864920097578
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 47878,
+                      "mae": 0.0324276458034905,
+                      "p95": 0.07747324265255452
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-180",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 45911,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 17.7172318614978,
+                      "meanDeltaE00": 6.418915739740844,
+                      "maskedSsim": 0.777289575509434
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 54399,
+                      "unionPixels": 55772,
+                      "symmetricEdgeP95Pixels": 15.524174696260024,
+                      "intersectionPixels": 50610,
+                      "iou": 0.9074445958545506,
+                      "referenceForegroundPixels": 51983,
+                      "symmetricEdgeMeanPixels": 5.914512292211689
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 50610,
+                      "meanDegrees": 18.329447679097726,
+                      "p95Degrees": 34.62148913967949
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 50610,
+                      "mae": 0.028388764493896212,
+                      "p95": 0.07043022059323155
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-225",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 48484,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 15.014656903900352,
+                      "meanDeltaE00": 5.58094425205228,
+                      "maskedSsim": 0.7847391025071242
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 54420,
+                      "unionPixels": 54650,
+                      "symmetricEdgeP95Pixels": 21.400934559032695,
+                      "intersectionPixels": 49882,
+                      "iou": 0.9127538883806039,
+                      "referenceForegroundPixels": 50112,
+                      "symmetricEdgeMeanPixels": 5.375280993810357
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 49882,
+                      "meanDegrees": 19.464883826241735,
+                      "p95Degrees": 42.755648941363965
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 49882,
+                      "mae": 0.02769033547545019,
+                      "p95": 0.07747324265255477
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-270",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 47846,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 13.528288205370972,
+                      "meanDeltaE00": 5.877757421078283,
+                      "maskedSsim": 0.8229969675631297
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 51456,
+                      "unionPixels": 52564,
+                      "symmetricEdgeP95Pixels": 18.027756377319946,
+                      "intersectionPixels": 47137,
+                      "iou": 0.896754432691576,
+                      "referenceForegroundPixels": 48245,
+                      "symmetricEdgeMeanPixels": 6.273149466837123
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 47137,
+                      "meanDegrees": 16.525677808792175,
+                      "p95Degrees": 41.83402251928972
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 47137,
+                      "mae": 0.030398834906580883,
+                      "p95": 0.10564533088984719
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "low-315",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 45108,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 12.832185564920412,
+                      "meanDeltaE00": 5.746812432642175,
+                      "maskedSsim": 0.8850692943322955
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 60797,
+                      "unionPixels": 62804,
+                      "symmetricEdgeP95Pixels": 17.204650534085253,
+                      "intersectionPixels": 57254,
+                      "iou": 0.9116298324947456,
+                      "referenceForegroundPixels": 59261,
+                      "symmetricEdgeMeanPixels": 6.068227665225634
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 57254,
+                      "meanDegrees": 13.939762262778153,
+                      "p95Degrees": 38.06990602856923
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 57254,
+                      "mae": 0.026109887835538324,
+                      "p95": 0.05634417647458534
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "high-045",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 54997,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 15.061177271352843,
+                      "meanDeltaE00": 5.791263751684266,
+                      "maskedSsim": 0.7833189131060951
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 60371,
+                      "unionPixels": 62150,
+                      "symmetricEdgeP95Pixels": 22.090722034374522,
+                      "intersectionPixels": 54966,
+                      "iou": 0.8844086886564763,
+                      "referenceForegroundPixels": 56745,
+                      "symmetricEdgeMeanPixels": 8.032670383817226
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 54966,
+                      "meanDegrees": 17.16858726957658,
+                      "p95Degrees": 44.111964555976044
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 54966,
+                      "mae": 0.02776436535055751,
+                      "p95": 0.07747324265255427
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "high-135",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 52709,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 20.600401808832935,
+                      "meanDeltaE00": 8.066090421879972,
+                      "maskedSsim": 0.7915453508556652
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 59764,
+                      "unionPixels": 61733,
+                      "symmetricEdgeP95Pixels": 23.769728648009426,
+                      "intersectionPixels": 54637,
+                      "iou": 0.8850533750182237,
+                      "referenceForegroundPixels": 56606,
+                      "symmetricEdgeMeanPixels": 8.088595101546414
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 54637,
+                      "meanDegrees": 17.74156622974111,
+                      "p95Degrees": 35.88328326626349
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 54637,
+                      "mae": 0.026704367660267164,
+                      "p95": 0.09155928677120073
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "high-225",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 52395,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 18.58554015138284,
+                      "meanDeltaE00": 7.52844367459088,
+                      "maskedSsim": 0.7684134148988712
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                },
+                {
+                  "geometry": {
+                    "silhouette": {
+                      "replacementForegroundPixels": 59535,
+                      "unionPixels": 60745,
+                      "symmetricEdgeP95Pixels": 17.204650534085253,
+                      "intersectionPixels": 55624,
+                      "iou": 0.9156967651658573,
+                      "referenceForegroundPixels": 56834,
+                      "symmetricEdgeMeanPixels": 5.782870033430913
+                    },
+                    "worldNormal": {
+                      "comparedPixels": 55624,
+                      "meanDegrees": 15.667044990734361,
+                      "p95Degrees": 37.849208676929436
+                    },
+                    "depth": {
+                      "normalization": "canonical-max-dimension",
+                      "comparedPixels": 55624,
+                      "mae": 0.025907138240946755,
+                      "p95": 0.08451626471187776
+                    },
+                    "bounds": {
+                      "maxAxisRelativeError": 6.449522321993078e-8,
+                      "referenceSize": [
+                        6.445001629433563,
+                        3.257907740807002,
+                        7
+                      ],
+                      "perAxisRelativeError": [
+                        6.449522321993078e-8,
+                        6.379429052610286e-8,
+                        0
+                      ],
+                      "replacementSize": [
+                        6.445002045105381,
+                        3.2579079486429148,
+                        7
+                      ],
+                      "bottomAnchorErrorCanonical": 0
+                    }
+                  },
+                  "viewId": "high-315",
+                  "appearance": {
+                    "material": {
+                      "metalnessAbsoluteError": 0,
+                      "roughnessAbsoluteError": 2.8610229518832853e-8
+                    },
+                    "comparedPixels": 53404,
+                    "albedo": {
+                      "p90DeltaE00": 0,
+                      "meanDeltaE00": 0,
+                      "maskedSsim": 1
+                    },
+                    "erosionRadiusPixels": 2,
+                    "litRgb": {
+                      "p90DeltaE00": 17.175768129837387,
+                      "meanDeltaE00": 6.928267896250906,
+                      "maskedSsim": 0.793582961600999
+                    },
+                    "palette": {
+                      "centroidDeltaE00": 0,
+                      "coverageL1": 0,
+                      "colorCount": 1
+                    }
+                  }
+                }
+              ],
+              "diagnostics": {
+                "pointSetDistance": {
+                  "sampling": "position-attribute-vertices-with-duplicates-retained",
+                  "referencePointCount": 324,
+                  "replacementPointCount": 42,
+                  "symmetricChamferMeanCanonical": 0.5143376138993903,
+                  "symmetricHausdorffCanonical": 1.4308097678941285
+                },
+                "units": "canonical",
+                "volume": {
+                  "reference": 69.59260340908982,
+                  "replacement": 74.94292308443657,
+                  "referenceUnavailableReason": null,
+                  "replacementUnavailableReason": null,
+                  "relativeError": 0.07688057944744058
+                },
+                "topology": {
+                  "replacementConnectedComponents": 1,
+                  "referenceClosed": true,
+                  "referenceConnectedComponents": 1,
+                  "replacementClosed": true
+                },
+                "surfaceArea": {
+                  "replacement": 109.6433044793261,
+                  "reference": 102.90757714223119,
+                  "relativeError": 0.0654541436514951
+                }
+              },
+              "captureChecksums": {
+                "low-000/neutral-rgb": "244bae2b",
+                "high-045/linear-depth": "027eac13",
+                "high-135/silhouette": "914bfe84",
+                "low-000/semantic-id": "469bf915",
+                "low-135/albedo": "92f60ef5",
+                "high-315/world-normal": "43476ac0",
+                "low-045/neutral-rgb": "ac402cb1",
+                "low-180/world-normal": "e4ffaee0",
+                "high-225/albedo": "f4c7ff05",
+                "low-270/neutral-rgb": "ed2a0284",
+                "low-315/world-normal": "78ac9207",
+                "high-315/neutral-rgb": "5ab8be38",
+                "high-225/neutral-rgb": "c11697b2",
+                "low-045/semantic-id": "f8ea132d",
+                "high-135/neutral-rgb": "e643e6bd",
+                "high-135/linear-depth": "996bd690",
+                "high-045/neutral-rgb": "41b6a109",
+                "low-270/semantic-id": "49cb39f5",
+                "low-135/world-normal": "94142953",
+                "low-180/linear-depth": "eb47242e",
+                "low-270/albedo": "273bf865",
+                "low-315/linear-depth": "583dd7ce",
+                "high-045/silhouette": "89f5d63c",
+                "low-135/linear-depth": "5079ddfc",
+                "low-180/lit-rgb": "56c8c936",
+                "low-315/lit-rgb": "c3189e38",
+                "high-135/albedo": "c34a4b8a",
+                "low-135/lit-rgb": "34362614",
+                "low-180/neutral-rgb": "ccdc3d87",
+                "low-225/albedo": "e5cbf84a",
+                "low-315/neutral-rgb": "fd4a7f6b",
+                "high-045/world-normal": "7baedc75",
+                "high-225/linear-depth": "616231df",
+                "high-315/silhouette": "849b1124",
+                "low-000/world-normal": "9c3079aa",
+                "low-000/albedo": "70b733c5",
+                "low-180/semantic-id": "cca0b74d",
+                "high-315/lit-rgb": "57cea408",
+                "low-315/semantic-id": "1f841ccd",
+                "low-090/silhouette": "b5dc4e9c",
+                "low-180/silhouette": "1a1ae51d",
+                "low-000/lit-rgb": "bcc68e2f",
+                "low-270/silhouette": "cd2bf3e5",
+                "low-000/linear-depth": "607b414d",
+                "high-045/albedo": "e8d0e922",
+                "high-225/lit-rgb": "994ba93a",
+                "low-270/world-normal": "7a61d47d",
+                "low-000/silhouette": "d6514fe5",
+                "low-045/silhouette": "8e07be3d",
+                "low-090/neutral-rgb": "1a72ea97",
+                "low-090/albedo": "948c3ae2",
+                "low-135/silhouette": "efbffcf5",
+                "low-225/neutral-rgb": "127dbe80",
+                "low-225/silhouette": "a3e18204",
+                "low-315/silhouette": "0ec17ebd",
+                "high-135/world-normal": "72e85cd9",
+                "high-135/lit-rgb": "acc22f17",
+                "high-315/linear-depth": "6161f986",
+                "low-090/world-normal": "b53f8c48",
+                "low-225/world-normal": "dc462a78",
+                "low-090/semantic-id": "69ae3454",
+                "low-270/linear-depth": "9986f89d",
+                "low-315/albedo": "439dd5fd",
+                "low-225/semantic-id": "7cfce1cc",
+                "high-045/semantic-id": "52565f14",
+                "low-045/albedo": "a652ab1d",
+                "high-045/lit-rgb": "788c5ffc",
+                "high-135/semantic-id": "02f7efec",
+                "high-225/silhouette": "e8417605",
+                "low-090/linear-depth": "e368f986",
+                "high-225/semantic-id": "bb79c455",
+                "low-045/world-normal": "dc19bb03",
+                "low-225/linear-depth": "719e55a5",
+                "high-315/semantic-id": "ebedc51c",
+                "low-270/lit-rgb": "07c4efc7",
+                "low-090/lit-rgb": "d26744e3",
+                "high-225/world-normal": "1e308966",
+                "low-135/neutral-rgb": "365663f6",
+                "low-225/lit-rgb": "6b837a1e",
+                "low-045/linear-depth": "7159498f",
+                "low-045/lit-rgb": "7c2982fd",
+                "low-180/albedo": "e248e8fd",
+                "high-315/albedo": "fae3786a",
+                "low-135/semantic-id": "da784275"
+              },
+              "aggregate": {
+                "geometry": {
+                  "silhouette": {
+                    "worstViewIou": 0.8691157608591611,
+                    "edgeDistanceP95Pixels": 23.769728648009426,
+                    "meanIou": 0.8931185820957127,
+                    "meanEdgeDistancePixels": 6.866482173789527
+                  },
+                  "worldNormal": {
+                    "meanDegrees": 16.070710427020224,
+                    "p95Degrees": 50.479217821310215
+                  },
+                  "depth": {
+                    "mae": 0.029000654137961487,
+                    "p95": 0.10564533088984719
+                  },
+                  "bounds": {
+                    "maxAxisRelativeError": 6.449522321993078e-8,
+                    "bottomAnchorErrorCanonical": 0
+                  }
+                },
+                "viewCount": 12,
+                "appearance": {
+                  "p90DeltaE00": 21.436201631469434,
+                  "meanMaskedSsim": 0.8059527892041324,
+                  "paletteCoverageL1": 0,
+                  "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo.",
+                  "meanDeltaE00": 6.231347202362849,
+                  "roughnessAbsoluteError": 2.8610229518832853e-8,
+                  "worstViewSsim": 0.7667527475459627,
+                  "metalnessAbsoluteError": 0,
+                  "paletteCentroidDeltaE00": 0
+                }
+              },
+              "gate": {
+                "passed": true,
+                "baselineVersion": "stone-geometry-baseline-v2",
+                "geometryGate": {
+                  "passed": true,
+                  "failures": []
+                },
+                "objectId": "stone",
+                "failures": [],
+                "baselineVersions": {
+                  "geometry": "stone-geometry-baseline-v2",
+                  "appearance": "single-mesh-quality-baseline-v1"
+                },
+                "appearanceGate": {
+                  "passed": true,
+                  "geometryConditionedLitRgb": {
+                    "p90DeltaE00": 21.436201631469434,
+                    "evidenceClass": "geometry-conditioned-lit-rgb",
+                    "meanDeltaE00": 6.231347202362849,
+                    "meanMaskedSsim": 0.8059527892041324,
+                    "worstViewSsim": 0.7667527475459627
+                  },
+                  "reason": null,
+                  "evaluated": true,
+                  "failures": [],
+                  "evidencePolicy": "uniform-albedo-palette-material-v1"
+                }
+              }
+            },
+            "productionUse": "prohibited",
+            "objectId": "stone",
+            "environment": {
+              "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Safari/605.1.15",
+              "threeRevision": "170",
+              "gpu": {
+                "vendor": "Apple Inc.",
+                "hardwareAccelerated": true,
+                "shadingLanguageVersion": "WebGL GLSL ES 3.00",
+                "antialias": true,
+                "colorManagement": {
+                  "toneMappingExposure": 1.05,
+                  "outputColorSpace": "srgb",
+                  "toneMapping": 0
+                },
+                "renderer": "Apple GPU",
+                "version": "WebGL 2.0",
+                "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i"
+              },
+              "captureBackend": "browser-webgl-rgba8",
+              "platform": "MacIntel"
+            },
+            "captures": {
+              "referenceChecksums": {
+                "low-000/neutral-rgb": "ece86802",
+                "high-045/linear-depth": "b4c1dcec",
+                "high-135/silhouette": "22694014",
+                "low-000/semantic-id": "b708f165",
+                "low-135/albedo": "b9f71715",
+                "high-315/world-normal": "361c2fd8",
+                "low-045/neutral-rgb": "886c9217",
+                "low-180/world-normal": "6c83f2dd",
+                "high-225/albedo": "dae96785",
+                "low-270/neutral-rgb": "d85ba6ec",
+                "low-315/world-normal": "358c7907",
+                "high-315/neutral-rgb": "ee7b4fa9",
+                "high-225/neutral-rgb": "b033c6fa",
+                "low-045/semantic-id": "3b4dd3d1",
+                "high-135/neutral-rgb": "5516d450",
+                "high-135/linear-depth": "e3d8eeff",
+                "high-045/neutral-rgb": "92109ed8",
+                "low-270/semantic-id": "9ff96d35",
+                "low-135/world-normal": "77bc878f",
+                "low-180/linear-depth": "63ed7020",
+                "low-270/albedo": "e8de4d6d",
+                "low-315/linear-depth": "5d1de396",
+                "high-045/silhouette": "6d1be654",
+                "low-135/linear-depth": "36f3cd60",
+                "low-180/lit-rgb": "7772cbb2",
+                "low-315/lit-rgb": "0233c082",
+                "high-135/albedo": "6a1638ba",
+                "low-135/lit-rgb": "d7461922",
+                "low-180/neutral-rgb": "074b3742",
+                "low-225/albedo": "8cbfc802",
+                "low-315/neutral-rgb": "cdcba1c6",
+                "high-045/world-normal": "1fe09159",
+                "high-225/linear-depth": "7843cdd6",
+                "high-315/silhouette": "2fd17185",
+                "low-000/world-normal": "7196a99a",
+                "low-000/albedo": "96bd9f75",
+                "low-180/semantic-id": "f3d2e7a1",
+                "high-315/lit-rgb": "10b811cb",
+                "low-315/semantic-id": "166be5b1",
+                "low-090/silhouette": "06e4d245",
+                "low-180/silhouette": "565b4514",
+                "low-000/lit-rgb": "61ae74d7",
+                "low-270/silhouette": "a8f2d1ad",
+                "low-000/linear-depth": "769fa86b",
+                "high-045/albedo": "f61ed77a",
+                "high-225/lit-rgb": "b324e6a1",
+                "low-270/world-normal": "be847c65",
+                "low-000/silhouette": "f76a8235",
+                "low-045/silhouette": "3c5b17dc",
+                "low-090/neutral-rgb": "7102abca",
+                "low-090/albedo": "6c8c6a25",
+                "low-135/silhouette": "56682355",
+                "low-225/neutral-rgb": "3a4bc6f0",
+                "low-225/silhouette": "89d2d0bc",
+                "low-315/silhouette": "3702dd9c",
+                "high-135/world-normal": "13a49d8f",
+                "high-135/lit-rgb": "6643ad8b",
+                "high-315/linear-depth": "19b09ea1",
+                "low-090/world-normal": "c78fd256",
+                "low-225/world-normal": "bfe396a0",
+                "low-090/semantic-id": "d6811485",
+                "low-270/linear-depth": "eb50e967",
+                "low-315/albedo": "c8436d02",
+                "low-225/semantic-id": "ba231191",
+                "high-045/semantic-id": "65ac04a1",
+                "low-045/albedo": "b2622ba2",
+                "high-045/lit-rgb": "df7974e0",
+                "high-135/semantic-id": "56983561",
+                "high-225/silhouette": "80daeaa5",
+                "low-090/linear-depth": "0d8e9883",
+                "high-225/semantic-id": "cbaeb345",
+                "low-045/world-normal": "3398e4c4",
+                "low-225/linear-depth": "d77e285d",
+                "high-315/semantic-id": "8c9f4725",
+                "low-270/lit-rgb": "f8b8f5d5",
+                "low-090/lit-rgb": "5c4a991a",
+                "high-225/world-normal": "57d9cca8",
+                "low-135/neutral-rgb": "bd2838d4",
+                "low-225/lit-rgb": "dac42495",
+                "low-045/linear-depth": "eea4000d",
+                "low-045/lit-rgb": "b0f053f3",
+                "low-180/albedo": "b2e78f7a",
+                "high-315/albedo": "319b7c65",
+                "low-135/semantic-id": "cb8911c5"
+              },
+              "expectedCount": 168,
+              "replacementChecksums": {
+                "low-000/neutral-rgb": "244bae2b",
+                "high-045/linear-depth": "027eac13",
+                "high-135/silhouette": "914bfe84",
+                "low-000/semantic-id": "469bf915",
+                "low-135/albedo": "92f60ef5",
+                "high-315/world-normal": "43476ac0",
+                "low-045/neutral-rgb": "ac402cb1",
+                "low-180/world-normal": "e4ffaee0",
+                "high-225/albedo": "f4c7ff05",
+                "low-270/neutral-rgb": "ed2a0284",
+                "low-315/world-normal": "78ac9207",
+                "high-315/neutral-rgb": "5ab8be38",
+                "high-225/neutral-rgb": "c11697b2",
+                "low-045/semantic-id": "f8ea132d",
+                "high-135/neutral-rgb": "e643e6bd",
+                "high-135/linear-depth": "996bd690",
+                "high-045/neutral-rgb": "41b6a109",
+                "low-270/semantic-id": "49cb39f5",
+                "low-135/world-normal": "94142953",
+                "low-180/linear-depth": "eb47242e",
+                "low-270/albedo": "273bf865",
+                "low-315/linear-depth": "583dd7ce",
+                "high-045/silhouette": "89f5d63c",
+                "low-135/linear-depth": "5079ddfc",
+                "low-180/lit-rgb": "56c8c936",
+                "low-315/lit-rgb": "c3189e38",
+                "high-135/albedo": "c34a4b8a",
+                "low-135/lit-rgb": "34362614",
+                "low-180/neutral-rgb": "ccdc3d87",
+                "low-225/albedo": "e5cbf84a",
+                "low-315/neutral-rgb": "fd4a7f6b",
+                "high-045/world-normal": "7baedc75",
+                "high-225/linear-depth": "616231df",
+                "high-315/silhouette": "849b1124",
+                "low-000/world-normal": "9c3079aa",
+                "low-000/albedo": "70b733c5",
+                "low-180/semantic-id": "cca0b74d",
+                "high-315/lit-rgb": "57cea408",
+                "low-315/semantic-id": "1f841ccd",
+                "low-090/silhouette": "b5dc4e9c",
+                "low-180/silhouette": "1a1ae51d",
+                "low-000/lit-rgb": "bcc68e2f",
+                "low-270/silhouette": "cd2bf3e5",
+                "low-000/linear-depth": "607b414d",
+                "high-045/albedo": "e8d0e922",
+                "high-225/lit-rgb": "994ba93a",
+                "low-270/world-normal": "7a61d47d",
+                "low-000/silhouette": "d6514fe5",
+                "low-045/silhouette": "8e07be3d",
+                "low-090/neutral-rgb": "1a72ea97",
+                "low-090/albedo": "948c3ae2",
+                "low-135/silhouette": "efbffcf5",
+                "low-225/neutral-rgb": "127dbe80",
+                "low-225/silhouette": "a3e18204",
+                "low-315/silhouette": "0ec17ebd",
+                "high-135/world-normal": "72e85cd9",
+                "high-135/lit-rgb": "acc22f17",
+                "high-315/linear-depth": "6161f986",
+                "low-090/world-normal": "b53f8c48",
+                "low-225/world-normal": "dc462a78",
+                "low-090/semantic-id": "69ae3454",
+                "low-270/linear-depth": "9986f89d",
+                "low-315/albedo": "439dd5fd",
+                "low-225/semantic-id": "7cfce1cc",
+                "high-045/semantic-id": "52565f14",
+                "low-045/albedo": "a652ab1d",
+                "high-045/lit-rgb": "788c5ffc",
+                "high-135/semantic-id": "02f7efec",
+                "high-225/silhouette": "e8417605",
+                "low-090/linear-depth": "e368f986",
+                "high-225/semantic-id": "bb79c455",
+                "low-045/world-normal": "dc19bb03",
+                "low-225/linear-depth": "719e55a5",
+                "high-315/semantic-id": "ebedc51c",
+                "low-270/lit-rgb": "07c4efc7",
+                "low-090/lit-rgb": "d26744e3",
+                "high-225/world-normal": "1e308966",
+                "low-135/neutral-rgb": "365663f6",
+                "low-225/lit-rgb": "6b837a1e",
+                "low-045/linear-depth": "7159498f",
+                "low-045/lit-rgb": "7c2982fd",
+                "low-180/albedo": "e248e8fd",
+                "high-315/albedo": "fae3786a",
+                "low-135/semantic-id": "da784275"
+              }
+            }
+          }
+        }
+      ],
+      "acceptance": {
+        "passed": true,
+        "checks": [
+          {
+            "id": "two-stable-fresh-repetitions",
+            "passed": true
+          },
+          {
+            "id": "full-fixed-protocol",
+            "passed": true
+          },
+          {
+            "id": "visual-quality-gate",
+            "passed": true,
+            "detail": [
+              [],
+              []
+            ]
+          },
+          {
+            "id": "versioned-geometry-and-appearance-baselines",
+            "passed": true,
+            "detail": [
+              {
+                "geometry": "stone-geometry-baseline-v2",
+                "appearance": "single-mesh-quality-baseline-v1"
+              },
+              {
+                "geometry": "stone-geometry-baseline-v2",
+                "appearance": "single-mesh-quality-baseline-v1"
+              }
+            ]
+          },
+          {
+            "id": "hardware-accelerated-webgl",
+            "passed": true,
+            "detail": [
+              {
+                "vendor": "Apple Inc.",
+                "hardwareAccelerated": true,
+                "shadingLanguageVersion": "WebGL GLSL ES 3.00",
+                "antialias": true,
+                "colorManagement": {
+                  "toneMappingExposure": 1.05,
+                  "outputColorSpace": "srgb",
+                  "toneMapping": 0
+                },
+                "renderer": "Apple GPU",
+                "version": "WebGL 2.0",
+                "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i"
+              },
+              {
+                "vendor": "Apple Inc.",
+                "hardwareAccelerated": true,
+                "shadingLanguageVersion": "WebGL GLSL ES 3.00",
+                "antialias": true,
+                "colorManagement": {
+                  "toneMappingExposure": 1.05,
+                  "outputColorSpace": "srgb",
+                  "toneMapping": 0
+                },
+                "renderer": "Apple GPU",
+                "version": "WebGL 2.0",
+                "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i"
+              }
+            ]
+          },
+          {
+            "id": "native-headful-vendor-driver",
+            "passed": true
+          }
+        ],
+        "failures": []
+      }
+    }
+  ],
+  "qualification": {
+    "requiredObjects": [
+      "stone-path",
+      "vase"
+    ],
+    "passed": false,
+    "scope": "object evidence only; qualification requires Stone Path and Vase"
+  },
+  "acceptance": {
+    "passed": true,
+    "failures": []
+  }
+}

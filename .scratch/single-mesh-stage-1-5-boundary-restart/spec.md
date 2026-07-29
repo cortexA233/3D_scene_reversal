@@ -1,6 +1,6 @@
 # Single Mesh Lab Stage 1.5 Stone boundary restart
 
-Status: ready-for-agent
+Status: resolved
 
 ## Problem Statement
 
@@ -91,3 +91,16 @@ repeatability allowances are ticket outputs declared before calibration runs.
 - production textures, source geometry, sampled lookup data, WASM, SDF, CSG,
   modeling DSLs, or new Runtime Kernels;
 - another threshold adjustment after the v2 freeze.
+
+## Execution Outcome
+
+Tickets 01–04 pass. The repaired development fitter exactly reproduces the
+existing 24 support distances, the reference-only v2 calibration freezes all
+eight geometry metrics with ten must-reject controls, and the unchanged Stone
+candidate passes Chrome plus two stable native hardware runs in each of
+Firefox and Safari. Every nonvisual ceiling and the candidate quarantine pass.
+
+The historical v1 and original Stage 1.5 negative reports remain unchanged.
+The boundary-restart certification authorizes Stage 1.5 to resume at Patterned
+Appearance Baseline v2 calibration and continues to deny Stage 2 until the
+remaining Stage 1.5 gates pass.

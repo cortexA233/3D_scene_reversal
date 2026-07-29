@@ -5,6 +5,7 @@ import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 
 import { runLocalSceneAutomation } from "./lib/smoke-local-scene.mjs";
+import { verifyCandidateFreeze } from "../tools/evaluation/candidate-freeze.mjs";
 
 const execFile = promisify(execFileCallback);
 const PROJECT_ROOT = path.resolve(
@@ -18,6 +19,7 @@ function parseArguments(args) {
     check: false,
     output: null,
     evidenceVersion: "v1",
+    geometryBaseline: null,
   };
   for (let index = 0; index < args.length; index += 1) {
     if (args[index] === "--check") options.check = true;
@@ -27,6 +29,8 @@ function parseArguments(args) {
       options.output = path.resolve(PROJECT_ROOT, args[++index]);
     } else if (args[index] === "--evidence-version" && args[index + 1]) {
       options.evidenceVersion = args[++index];
+    } else if (args[index] === "--geometry-baseline" && args[index + 1]) {
+      options.geometryBaseline = args[++index];
     } else throw new Error(`Unknown or incomplete argument: ${args[index]}`);
   }
   if (!options.objectId) throw new Error("--object is required");
@@ -42,6 +46,28 @@ function parseArguments(args) {
 
 async function main() {
   const options = parseArguments(process.argv.slice(2));
+  const candidateManifest = options.geometryBaseline === "stone-v2"
+    ? JSON.parse(
+        await readFile(
+          path.join(
+            PROJECT_ROOT,
+            "gt_designer/single-mesh-evaluation/baselines/stone-v2-candidate-freeze.json",
+          ),
+          "utf8",
+        ),
+      )
+    : null;
+  const candidateBefore = candidateManifest
+    ? await verifyCandidateFreeze({
+        projectRoot: PROJECT_ROOT,
+        manifest: candidateManifest,
+      })
+    : { passed: true, failures: [] };
+  if (!candidateBefore.passed) {
+    throw new Error(
+      `candidate quarantine failed before evaluation: ${JSON.stringify(candidateBefore.failures)}`,
+    );
+  }
   const nonvisualOutput = path.join(
     PROJECT_ROOT,
     `gt_designer/single-mesh-runtime-audit/reports/${options.objectId}-nonvisual-${options.evidenceVersion}.json`,
@@ -65,7 +91,11 @@ async function main() {
     label: `${options.objectId}-visual-acceptance`,
     serverFlag: "--evaluation",
     path: "/single-mesh-evaluation/",
-    query: `?evaluate=object&unit=${encodeURIComponent(options.objectId)}`,
+    query: `?evaluate=object&unit=${encodeURIComponent(options.objectId)}${
+      options.geometryBaseline
+        ? `&geometry-baseline=${encodeURIComponent(options.geometryBaseline)}`
+        : ""
+    }`,
     readyState: { state: "evaluated", objectId: options.objectId },
     probeExpression: `({
       state: document.body?.dataset?.state ?? null,
@@ -76,6 +106,12 @@ async function main() {
     port: 8460,
   });
   const visual = browser.state.report;
+  const candidateAfter = candidateManifest
+    ? await verifyCandidateFreeze({
+        projectRoot: PROJECT_ROOT,
+        manifest: candidateManifest,
+      })
+    : { passed: true, failures: [] };
   const checks = [
     {
       id: "visual-quality-gate",
@@ -102,6 +138,23 @@ async function main() {
         false,
       detail: visual.manifest.framing.replacementTransform,
     },
+    {
+      id: "versioned-geometry-and-appearance-baselines",
+      passed: options.geometryBaseline
+        ? visual.comparison.gate.baselineVersions?.geometry ===
+            "stone-geometry-baseline-v2" &&
+          visual.comparison.gate.baselineVersions?.appearance ===
+            "single-mesh-quality-baseline-v1"
+        : visual.comparison.gate.baselineVersion ===
+            "single-mesh-quality-baseline-v1",
+      detail: visual.comparison.gate.baselineVersions ??
+        visual.comparison.gate.baselineVersion,
+    },
+    {
+      id: "candidate-quarantine-before-and-after",
+      passed: candidateBefore.passed && candidateAfter.passed,
+      detail: [...candidateBefore.failures, ...candidateAfter.failures],
+    },
   ];
   const report = {
     schemaVersion: `single-mesh-object-acceptance-${options.evidenceVersion}`,
@@ -109,6 +162,7 @@ async function main() {
     artifactRole: "development-only-object-acceptance",
     productionUse: "prohibited",
     objectId: options.objectId,
+    geometryBaseline: options.geometryBaseline,
     visual,
     nonvisual,
     acceptance: {

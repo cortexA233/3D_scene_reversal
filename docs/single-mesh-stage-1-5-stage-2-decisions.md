@@ -1,6 +1,6 @@
 # Single Mesh Lab Stage 1.5 and Stage 2 Decision Brief
 
-Status: accepted Stone boundary restart; narrow specification ready for agent
+Status: Stone boundary restart passed; Stage 1.5 resumed at patterned appearance v2
 Date: 2026-07-29
 
 ## Objective

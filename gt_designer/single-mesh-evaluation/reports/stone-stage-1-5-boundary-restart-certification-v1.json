@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "stone-stage-1-5-boundary-restart-certification-v1",
+  "artifactRole": "development-only-boundary-restart-certification",
+  "productionUse": "prohibited",
+  "historicalStage1": {
+    "result": "2/4 FAIL",
+    "baselineVersion": "single-mesh-quality-baseline-v1",
+    "preserved": true
+  },
+  "stone": {
+    "representation": "bounded-support-polyhedron-v2",
+    "geometryBaselineVersion": "stone-geometry-baseline-v2",
+    "appearanceBaselineVersion": "single-mesh-quality-baseline-v1",
+    "appearanceEvidencePolicy": "uniform-albedo-palette-material-v1",
+    "geometryConditionedLitRgb": {
+      "evidenceClass": "geometry-conditioned-lit-rgb",
+      "meanDeltaE00": 6.23155388810586,
+      "p90DeltaE00": 21.44916236351166,
+      "meanMaskedSsim": 0.8059274819935122,
+      "worstViewSsim": 0.7665698610010651
+    },
+    "nonvisual": {
+      "passed": true,
+      "checks": [
+        {
+          "id": "complete-source-scalar-audit",
+          "passed": true,
+          "detail": {
+            "value": 32,
+            "maximum": 32
+          }
+        },
+        {
+          "id": "object-budgets",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "static-source-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "minified-bundle-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "isolated-offline-render",
+          "passed": true,
+          "detail": {
+            "passed": true,
+            "servedFiles": [
+              "bundle.js",
+              "index.html",
+              "three.module.js"
+            ],
+            "authoredDirectoriesAvailableToServer": false,
+            "emptyBrowserProfile": true,
+            "networkResolutionBlocked": true,
+            "localRequestCount": 3
+          }
+        },
+        {
+          "id": "cross-engine-structure-and-bounds",
+          "passed": true,
+          "detail": [
+            {
+              "engine": "JavaScriptCore (Safari 26.2 system framework)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            },
+            {
+              "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "normative-environment",
+          "passed": true,
+          "detail": {
+            "modelName": "MacBook Pro",
+            "modelIdentifier": "Mac17,2",
+            "chip": "Apple M5",
+            "cores": "10 (4 performance and 6 efficiency)",
+            "memory": "32 GB",
+            "operatingSystem": "macOS 26.2",
+            "operatingSystemBuild": "25C56",
+            "browser": "Google Chrome 150.0.7871.184",
+            "three": "0.170.0",
+            "powerState": [
+              "Now drawing from 'Battery Power'",
+              "-InternalBattery-0 (id=22610019)\t85%; discharging; 5:45 remaining present: true"
+            ]
+          }
+        }
+      ],
+      "failures": []
+    },
+    "chromeReport": "gt_designer/single-mesh-evaluation/reports/stone-acceptance-v3.json",
+    "firefoxReport": "gt_designer/single-mesh-evaluation/reports/firefox-stone-geometry-v2-native-gpu.json",
+    "safariReport": "gt_designer/single-mesh-evaluation/reports/safari-stone-geometry-v2-native-gpu.json"
+  },
+  "certification": {
+    "passed": true,
+    "stage1_5ResumeAt": "patterned-appearance-v2-calibration",
+    "stage2Authorized": false,
+    "checks": [
+      {
+        "id": "historical-negative-certification-preserved",
+        "passed": true
+      },
+      {
+        "id": "reference-only-v2-calibration",
+        "passed": true
+      },
+      {
+        "id": "candidate-quarantine-intact",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "chrome-versioned-visual-and-nonvisual",
+        "passed": true
+      },
+      {
+        "id": "uniform-appearance-independent-evidence",
+        "passed": true
+      },
+      {
+        "id": "firefox-native-gpu",
+        "passed": true
+      },
+      {
+        "id": "safari-native-gpu",
+        "passed": true
+      }
+    ],
+    "failures": []
+  }
+}

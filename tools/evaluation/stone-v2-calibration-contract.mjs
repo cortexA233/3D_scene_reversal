@@ -367,6 +367,49 @@ export function evaluateStoneGeometryV2Gate({ baseline, aggregate }) {
   };
 }
 
+function mean(values) {
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
+export function stoneUniformAppearanceEvidence(perView) {
+  if (!Array.isArray(perView) || perView.length === 0) {
+    throw new Error("Stone uniform appearance evidence requires per-view records");
+  }
+  const albedo = perView.map((view) => view.appearance.albedo);
+  const litRgb = perView.map((view) => view.appearance.litRgb);
+  const palette = perView.map((view) => view.appearance.palette);
+  const material = perView.map((view) => view.appearance.material);
+  return {
+    hard: {
+      meanDeltaE00: mean(albedo.map((entry) => entry.meanDeltaE00)),
+      p90DeltaE00: Math.max(...albedo.map((entry) => entry.p90DeltaE00)),
+      meanMaskedSsim: mean(albedo.map((entry) => entry.maskedSsim)),
+      worstViewSsim: Math.min(...albedo.map((entry) => entry.maskedSsim)),
+      paletteCentroidDeltaE00: Math.max(
+        ...palette.map((entry) => entry.centroidDeltaE00),
+      ),
+      paletteCoverageL1: Math.max(
+        ...palette.map((entry) => entry.coverageL1),
+      ),
+      roughnessAbsoluteError: Math.max(
+        ...material.map((entry) => entry.roughnessAbsoluteError),
+      ),
+      metalnessAbsoluteError: Math.max(
+        ...material.map((entry) => entry.metalnessAbsoluteError),
+      ),
+      passPolicy:
+        "v1 numeric appearance thresholds over albedo, palette, roughness, and metalness",
+    },
+    diagnostic: {
+      evidenceClass: "geometry-conditioned-lit-rgb",
+      meanDeltaE00: mean(litRgb.map((entry) => entry.meanDeltaE00)),
+      p90DeltaE00: Math.max(...litRgb.map((entry) => entry.p90DeltaE00)),
+      meanMaskedSsim: mean(litRgb.map((entry) => entry.maskedSsim)),
+      worstViewSsim: Math.min(...litRgb.map((entry) => entry.maskedSsim)),
+    },
+  };
+}
+
 export function selectStoneGeometryV2Thresholds({ contract: value, runs }) {
   const validation = validateStoneGeometryV2CalibrationContract(value);
   if (!validation.passed) {

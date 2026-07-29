@@ -9,6 +9,10 @@ import {
   evaluateQualityGate,
   qualityBaselineDefinition,
 } from "/dev-tools/evaluation/visual-metrics.mjs";
+import {
+  evaluateStoneGeometryV2Gate,
+  stoneUniformAppearanceEvidence,
+} from "/dev-tools/evaluation/stone-v2-calibration-contract.mjs";
 import { evaluateGeometricDiagnostics } from "/dev-tools/evaluation/geometric-diagnostics.mjs";
 import {
   createLocalReferenceClone,
@@ -222,10 +226,77 @@ function fullComparison(context, replacementCaptures) {
   });
   const perView = mergeViews(geometry, appearance);
   const aggregate = aggregateVisualEvidence(perView);
+  let categoryAppearance = null;
+  let gate;
+  if (context.geometryBaseline) {
+    const geometryGate = evaluateStoneGeometryV2Gate({
+      baseline: context.geometryBaseline,
+      aggregate,
+    });
+    if (!geometryGate.passed) {
+      gate = {
+        baselineVersion: context.geometryBaseline.version,
+        baselineVersions: {
+          geometry: context.geometryBaseline.version,
+          appearance: qualityBaselineDefinition().version,
+        },
+        objectId: context.objectId,
+        passed: false,
+        failures: geometryGate.failures,
+        geometryGate: {
+          passed: false,
+          failures: geometryGate.failures,
+        },
+        appearanceGate: {
+          evaluated: false,
+          passed: null,
+          reason: "geometry-gate-failed",
+          failures: [],
+        },
+      };
+    } else {
+      categoryAppearance = stoneUniformAppearanceEvidence(perView);
+      const appearanceProbe = evaluateQualityGate(context.objectId, {
+        ...aggregate,
+        appearance: categoryAppearance.hard,
+        geometry: {
+          ...aggregate.geometry,
+          bounds: {
+            maxAxisRelativeError: 0,
+            bottomAnchorErrorCanonical: 0,
+          },
+          silhouette: {
+            meanIou: 1,
+            worstViewIou: 1,
+            meanEdgeDistancePixels: 0,
+            edgeDistanceP95Pixels: 0,
+          },
+          depth: { mae: 0, p95: 0 },
+        },
+      });
+      gate = {
+        ...appearanceProbe,
+        baselineVersion: context.geometryBaseline.version,
+        baselineVersions: {
+          geometry: context.geometryBaseline.version,
+          appearance: qualityBaselineDefinition().version,
+        },
+        geometryGate: { passed: true, failures: [] },
+        appearanceGate: {
+          ...appearanceProbe.appearanceGate,
+          evidencePolicy: "uniform-albedo-palette-material-v1",
+          geometryConditionedLitRgb: categoryAppearance.diagnostic,
+        },
+      };
+    }
+  } else {
+    gate = evaluateQualityGate(context.objectId, aggregate);
+  }
   return {
     perView,
     aggregate,
-    gate: evaluateQualityGate(context.objectId, aggregate),
+    categoryAppearance,
+    gate,
     diagnostics: diagnosticEvidence(
       context.referenceRoot,
       context.replacementRoot,
@@ -546,6 +617,7 @@ export async function runQualityCalibration({ canvas, onProgress = () => {} }) {
 export async function runObjectEvaluation({
   canvas,
   objectId,
+  geometryBaseline = null,
   onProgress = () => {},
 }) {
   onProgress(`Loading ${objectId}`);
@@ -574,6 +646,7 @@ export async function runObjectEvaluation({
       referenceCaptures,
       referenceBounds: boundsOf(reference.root),
       referenceMaterial: materialOf(reference.root),
+      geometryBaseline,
     };
     const comparison = fullComparison(context, replacementCaptures);
     harness.preview({
@@ -588,7 +661,15 @@ export async function runObjectEvaluation({
       objectId,
       semanticId: definition.recipe.id,
       evaluationProtocolVersion: EVALUATION_PROTOCOL_VERSION,
-      qualityBaseline: qualityBaselineDefinition(),
+      qualityBaseline: geometryBaseline
+        ? {
+            geometry: geometryBaseline,
+            appearance: {
+              version: qualityBaselineDefinition().version,
+              thresholds: qualityBaselineDefinition().appearance[objectId],
+            },
+          }
+        : qualityBaselineDefinition(),
       manifest,
       captures: {
         expectedCount: EVALUATION_VIEWS.length * passIds.length * 2,

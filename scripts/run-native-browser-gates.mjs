@@ -16,6 +16,7 @@ function parseArguments(args) {
     objects: [],
     repetitions: 2,
     output: null,
+    geometryBaseline: null,
   };
   for (let index = 0; index < args.length; index += 1) {
     if (args[index] === "--browser" && args[index + 1]) {
@@ -26,6 +27,8 @@ function parseArguments(args) {
       options.repetitions = Number(args[++index]);
     } else if (args[index] === "--output" && args[index + 1]) {
       options.output = path.resolve(PROJECT_ROOT, args[++index]);
+    } else if (args[index] === "--geometry-baseline" && args[index + 1]) {
+      options.geometryBaseline = args[++index];
     } else {
       throw new Error(`Unknown or incomplete argument: ${args[index]}`);
     }
@@ -115,7 +118,11 @@ async function evaluateObject(options, configuration, objectId, objectIndex) {
       driverPort: 8580 + objectIndex * 10 + repetition,
       serverPort: 8680 + objectIndex * 10 + repetition,
       scenePath: "/single-mesh-evaluation/",
-      query: `?evaluate=object&unit=${encodeURIComponent(objectId)}`,
+      query: `?evaluate=object&unit=${encodeURIComponent(objectId)}${
+        options.geometryBaseline
+          ? `&geometry-baseline=${encodeURIComponent(options.geometryBaseline)}`
+          : ""
+      }`,
       readyState: { state: "evaluated", objectId },
       probeExpression: `({
         state: document.body?.dataset?.state ?? null,
@@ -153,6 +160,23 @@ async function evaluateObject(options, configuration, objectId, objectIndex) {
       id: "visual-quality-gate",
       passed: runs.every(({ report }) => report.comparison.gate.passed),
       detail: runs.map(({ report }) => report.comparison.gate.failures),
+    },
+    {
+      id: "versioned-geometry-and-appearance-baselines",
+      passed: options.geometryBaseline
+        ? runs.every(
+            ({ report }) =>
+              report.comparison.gate.baselineVersions?.geometry ===
+                "stone-geometry-baseline-v2" &&
+              report.comparison.gate.baselineVersions?.appearance ===
+                "single-mesh-quality-baseline-v1",
+          )
+        : true,
+      detail: runs.map(
+        ({ report }) =>
+          report.comparison.gate.baselineVersions ??
+          report.comparison.gate.baselineVersion,
+      ),
     },
     {
       id: "hardware-accelerated-webgl",
@@ -198,6 +222,7 @@ async function main() {
     artifactRole: "development-only-native-gpu-evidence",
     productionUse: "prohibited",
     browser: options.browser,
+    geometryBaseline: options.geometryBaseline,
     configuration: {
       browserBinary: configuration.browserBinary,
       driverBinary: configuration.driverBinary,

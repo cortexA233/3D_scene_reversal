@@ -10,6 +10,7 @@ import {
   selectStoneGeometryV2Thresholds,
   stoneGeometryV2CalibrationContractDefinition,
   validateStoneGeometryV2CalibrationContract,
+  stoneUniformAppearanceEvidence,
 } from "../tools/evaluation/stone-v2-calibration-contract.mjs";
 
 const PROJECT_ROOT = path.resolve(
@@ -87,6 +88,31 @@ test("the frozen v2 gate evaluates only its selected hard metrics", () => {
     }).passed,
     false,
   );
+});
+
+test("Stone uniform appearance keeps albedo hard and lit RGB diagnostic", () => {
+  const evidence = stoneUniformAppearanceEvidence([
+    {
+      appearance: {
+        albedo: { meanDeltaE00: 0, p90DeltaE00: 0, maskedSsim: 1 },
+        litRgb: { meanDeltaE00: 8, p90DeltaE00: 20, maskedSsim: 0.7 },
+        palette: { centroidDeltaE00: 0, coverageL1: 0 },
+        material: { roughnessAbsoluteError: 0, metalnessAbsoluteError: 0 },
+      },
+    },
+    {
+      appearance: {
+        albedo: { meanDeltaE00: 0, p90DeltaE00: 0, maskedSsim: 1 },
+        litRgb: { meanDeltaE00: 4, p90DeltaE00: 10, maskedSsim: 0.9 },
+        palette: { centroidDeltaE00: 0, coverageL1: 0 },
+        material: { roughnessAbsoluteError: 0, metalnessAbsoluteError: 0 },
+      },
+    },
+  ]);
+  assert.equal(evidence.hard.meanDeltaE00, 0);
+  assert.equal(evidence.hard.meanMaskedSsim, 1);
+  assert.equal(evidence.diagnostic.meanDeltaE00, 6);
+  assert.equal(evidence.diagnostic.worstViewSsim, 0.7);
 });
 
 test("threshold selection uses only mild envelopes and fixed allowances", () => {

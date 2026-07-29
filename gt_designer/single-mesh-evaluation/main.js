@@ -212,9 +212,24 @@ async function initialize() {
     }
     document.body.dataset.state = "evaluating";
     const { runObjectEvaluation } = await import("./calibration-runner.js");
+    const geometryBaselineId = parameters.get("geometry-baseline");
+    let geometryBaseline = null;
+    if (geometryBaselineId) {
+      if (geometryBaselineId !== "stone-v2" || state.unitId !== "stone") {
+        throw new Error("unsupported category geometry baseline request");
+      }
+      const response = await fetch(
+        "./baselines/stone-geometry-baseline-v2.json",
+      );
+      if (!response.ok) {
+        throw new Error("Stone Geometry Baseline v2 could not be loaded");
+      }
+      geometryBaseline = await response.json();
+    }
     state.objectEvaluationReport = await runObjectEvaluation({
       canvas: elements.canvas,
       objectId: state.unitId,
+      geometryBaseline,
       onProgress(message) {
         elements.state.textContent = message;
         elements.summary.textContent = `Object acceptance\n${message}`;
