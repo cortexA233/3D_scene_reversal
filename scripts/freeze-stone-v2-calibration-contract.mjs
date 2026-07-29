@@ -72,36 +72,55 @@ if (check) {
     `Stone v2 contract: PASS (${manifest.candidateFiles.length} candidate files, ${manifest.evidenceFiles.length} evidence files)\n`,
   );
 } else {
-  const candidateDiff = await execFile(
-    "git",
-    ["diff", "--quiet", "HEAD", "--", ...CANDIDATE_FILES, ...EVIDENCE_FILES, ...BASELINE_FILES],
-    { cwd: PROJECT_ROOT },
-  ).then(() => null, (error) => error);
-  if (candidateDiff) {
-    throw new Error("candidate, evidence, or baseline files must be committed before freeze");
+  let manifest;
+  let writeCandidateManifest = false;
+  try {
+    manifest = JSON.parse(await readFile(CANDIDATE_OUTPUT, "utf8"));
+    const verification = await verifyCandidateFreeze({
+      projectRoot: PROJECT_ROOT,
+      manifest,
+    });
+    if (!verification.passed) {
+      throw new Error(
+        `existing Stone candidate quarantine drifted: ${JSON.stringify(verification.failures)}`,
+      );
+    }
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+    const candidateDiff = await execFile(
+      "git",
+      ["diff", "--quiet", "HEAD", "--", ...CANDIDATE_FILES, ...EVIDENCE_FILES, ...BASELINE_FILES],
+      { cwd: PROJECT_ROOT },
+    ).then(() => null, (diffError) => diffError);
+    if (candidateDiff) {
+      throw new Error("candidate, evidence, or baseline files must be committed before freeze");
+    }
+    const { stdout } = await execFile("git", ["rev-parse", "HEAD"], {
+      cwd: PROJECT_ROOT,
+    });
+    manifest = {
+      schemaVersion: "stone-v2-candidate-freeze-v1",
+      candidateId: "stone/bounded-support-polyhedron-v2",
+      artifactRole: "development-only-candidate-quarantine",
+      productionUse: "prohibited",
+      freezeCommit: stdout.trim(),
+      policy: {
+        mutationAfterFreeze: "prohibited",
+        calibrationInputUse: "prohibited",
+        verification: "sha256-and-byte-length-before-and-after-evaluation",
+      },
+      candidateFiles: await describeFrozenFiles({ projectRoot: PROJECT_ROOT, paths: CANDIDATE_FILES }),
+      evidenceFiles: await describeFrozenFiles({ projectRoot: PROJECT_ROOT, paths: EVIDENCE_FILES }),
+      baselineFiles: await describeFrozenFiles({ projectRoot: PROJECT_ROOT, paths: BASELINE_FILES }),
+    };
+    writeCandidateManifest = true;
   }
-  const { stdout } = await execFile("git", ["rev-parse", "HEAD"], {
-    cwd: PROJECT_ROOT,
-  });
-  const manifest = {
-    schemaVersion: "stone-v2-candidate-freeze-v1",
-    candidateId: "stone/bounded-support-polyhedron-v2",
-    artifactRole: "development-only-candidate-quarantine",
-    productionUse: "prohibited",
-    freezeCommit: stdout.trim(),
-    policy: {
-      mutationAfterFreeze: "prohibited",
-      calibrationInputUse: "prohibited",
-      verification: "sha256-and-byte-length-before-and-after-evaluation",
-    },
-    candidateFiles: await describeFrozenFiles({ projectRoot: PROJECT_ROOT, paths: CANDIDATE_FILES }),
-    evidenceFiles: await describeFrozenFiles({ projectRoot: PROJECT_ROOT, paths: EVIDENCE_FILES }),
-    baselineFiles: await describeFrozenFiles({ projectRoot: PROJECT_ROOT, paths: BASELINE_FILES }),
-  };
   await mkdir(path.dirname(CONTRACT_OUTPUT), { recursive: true });
   await writeFile(CONTRACT_OUTPUT, `${JSON.stringify(contract, null, 2)}\n`);
-  await writeFile(CANDIDATE_OUTPUT, `${JSON.stringify(manifest, null, 2)}\n`);
+  if (writeCandidateManifest) {
+    await writeFile(CANDIDATE_OUTPUT, `${JSON.stringify(manifest, null, 2)}\n`);
+  }
   process.stdout.write(
-    `Stone v2 contract: wrote ${path.relative(PROJECT_ROOT, CONTRACT_OUTPUT)} and ${path.relative(PROJECT_ROOT, CANDIDATE_OUTPUT)}\n`,
+    `Stone v2 contract: wrote ${path.relative(PROJECT_ROOT, CONTRACT_OUTPUT)}; candidate quarantine ${writeCandidateManifest ? "created" : "preserved"}\n`,
   );
 }

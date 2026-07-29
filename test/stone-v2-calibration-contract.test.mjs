@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { verifyCandidateFreeze } from "../tools/evaluation/candidate-freeze.mjs";
 import {
+  evaluateStoneGeometryV2Gate,
   selectStoneGeometryV2Thresholds,
   stoneGeometryV2CalibrationContractDefinition,
   validateStoneGeometryV2CalibrationContract,
@@ -58,6 +59,34 @@ test("Stone v2 calibration contract freezes complete ladders and input policy", 
   assert.ok(contract.inputPolicy.prohibited.includes("known Stone candidate metrics"));
   assert.ok(contract.scenarios.filter(({ severity }) => severity === "mild").length >= 8);
   assert.ok(contract.scenarios.filter(({ mustReject }) => mustReject).length >= 8);
+  assert.equal(contract.orderingPolicies.length, 8);
+});
+
+test("the frozen v2 gate evaluates only its selected hard metrics", () => {
+  const baseline = {
+    version: "stone-geometry-baseline-v2",
+    hard: [
+      {
+        path: "geometry.depth.mae",
+        operator: "<=",
+        threshold: 0.05,
+      },
+    ],
+  };
+  assert.equal(
+    evaluateStoneGeometryV2Gate({
+      baseline,
+      aggregate: { geometry: { depth: { mae: 0.04 } } },
+    }).passed,
+    true,
+  );
+  assert.equal(
+    evaluateStoneGeometryV2Gate({
+      baseline,
+      aggregate: { geometry: { depth: { mae: 0.06 } } },
+    }).passed,
+    false,
+  );
 });
 
 test("threshold selection uses only mild envelopes and fixed allowances", () => {
@@ -122,4 +151,23 @@ test("frozen contract and candidate hashes match the source-controlled files", a
     await verifyCandidateFreeze({ projectRoot: PROJECT_ROOT, manifest }),
     { passed: true, failures: [] },
   );
+});
+
+test("browser reference calibration module has no Stone candidate import", async () => {
+  const runner = await readFile(
+    path.join(
+      PROJECT_ROOT,
+      "gt_designer/single-mesh-evaluation/stone-v2-calibration-runner.js",
+    ),
+    "utf8",
+  );
+  assert.doesNotMatch(runner, /src\/reconstruction/);
+  assert.doesNotMatch(runner, /reports\/stone/);
+  assert.doesNotMatch(runner, /stone-(?:recipe|generator)/);
+
+  const main = await readFile(
+    path.join(PROJECT_ROOT, "gt_designer/single-mesh-evaluation/main.js"),
+    "utf8",
+  );
+  assert.doesNotMatch(main, /^import .*src\/reconstruction/m);
 });

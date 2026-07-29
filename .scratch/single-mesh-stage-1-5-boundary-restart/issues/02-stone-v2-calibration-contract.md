@@ -33,7 +33,7 @@ The candidate quarantine freezes commit
 six candidate/dependency files, three evidence/reproducibility files, and two
 v1 baseline files. `npm run check:stone-v2-contract` fails on any drift.
 
-The separately frozen calibration contract declares 28 reference-only
+The final separately frozen calibration contract declares 29 reference-only
 scenarios: eight mild-envelope cases, complete intermediate/severe ladders,
 and ten must-reject controls. Eight geometry metrics carry fixed
 repeatability allowances and predeclared destructive applicability. Threshold

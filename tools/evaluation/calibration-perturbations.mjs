@@ -165,3 +165,215 @@ export function quantizeRadialResolution(geometry, segmentCount) {
   result.computeBoundingSphere();
   return result;
 }
+
+function stoneSupportDirections(directionCount) {
+  if (![8, 12, 16, 24].includes(directionCount)) {
+    throw new RangeError("Stone calibration support count must be 8, 12, 16, or 24");
+  }
+  const directions = [
+    new THREE.Vector3(1, 0, 0),
+    new THREE.Vector3(-1, 0, 0),
+    new THREE.Vector3(0, 1, 0),
+    new THREE.Vector3(0, -1, 0),
+    new THREE.Vector3(0, 0, 1),
+    new THREE.Vector3(0, 0, -1),
+  ];
+  const phase = -Math.PI / 6;
+  const additional = [];
+  for (let index = 0; index < 4; index += 1) {
+    const angle = phase + index * Math.PI / 2;
+    for (const azimuth of [angle, angle + Math.PI / 4]) {
+      additional.push(
+        new THREE.Vector3(Math.cos(azimuth), 0.5, Math.sin(azimuth)).normalize(),
+      );
+    }
+  }
+  for (let index = 0; index < 4; index += 1) {
+    const angle = phase + index * Math.PI / 2;
+    for (const azimuth of [angle, angle + Math.PI / 4]) {
+      additional.push(
+        new THREE.Vector3(Math.cos(azimuth), 3, Math.sin(azimuth)).normalize(),
+      );
+    }
+  }
+  for (const azimuth of [phase, phase + Math.PI]) {
+    additional.push(
+      new THREE.Vector3(Math.cos(azimuth), 0, Math.sin(azimuth)),
+    );
+  }
+  directions.push(...additional.slice(0, directionCount - directions.length));
+  return directions;
+}
+
+function planeIntersection(first, second, third) {
+  const cross = new THREE.Vector3().crossVectors(second.normal, third.normal);
+  const denominator = first.normal.dot(cross);
+  if (Math.abs(denominator) < 1e-9) return null;
+  return cross
+    .multiplyScalar(first.distance)
+    .add(
+      new THREE.Vector3()
+        .crossVectors(third.normal, first.normal)
+        .multiplyScalar(second.distance),
+    )
+    .add(
+      new THREE.Vector3()
+        .crossVectors(first.normal, second.normal)
+        .multiplyScalar(third.distance),
+    )
+    .multiplyScalar(1 / denominator);
+}
+
+function supportPolyhedronGeometry(planes) {
+  const vertices = [];
+  for (let first = 0; first < planes.length - 2; first += 1) {
+    for (let second = first + 1; second < planes.length - 1; second += 1) {
+      for (let third = second + 1; third < planes.length; third += 1) {
+        const point = planeIntersection(
+          planes[first],
+          planes[second],
+          planes[third],
+        );
+        if (!point) continue;
+        if (planes.some(
+          (plane) => plane.normal.dot(point) > plane.distance + 1e-7,
+        )) continue;
+        if (vertices.some(
+          (entry) => entry.distanceToSquared(point) < 1e-10,
+        )) continue;
+        vertices.push(point);
+      }
+    }
+  }
+  const indices = [];
+  for (const plane of planes) {
+    const face = vertices
+      .map((point, index) => ({ point, index }))
+      .filter(({ point }) =>
+        Math.abs(plane.normal.dot(point) - plane.distance) < 1e-5
+      );
+    if (face.length < 3) continue;
+    const center = face
+      .reduce((sum, entry) => sum.add(entry.point), new THREE.Vector3())
+      .multiplyScalar(1 / face.length);
+    const guide = Math.abs(plane.normal.y) > 0.5
+      ? new THREE.Vector3(1, 0, 0)
+      : new THREE.Vector3(0, 1, 0);
+    const tangent = new THREE.Vector3()
+      .crossVectors(guide, plane.normal)
+      .normalize();
+    const bitangent = new THREE.Vector3()
+      .crossVectors(plane.normal, tangent)
+      .normalize();
+    face.sort((left, right) => {
+      const leftOffset = left.point.clone().sub(center);
+      const rightOffset = right.point.clone().sub(center);
+      return Math.atan2(
+        leftOffset.dot(bitangent),
+        leftOffset.dot(tangent),
+      ) - Math.atan2(
+        rightOffset.dot(bitangent),
+        rightOffset.dot(tangent),
+      );
+    });
+    for (let index = 1; index < face.length - 1; index += 1) {
+      indices.push(face[0].index, face[index].index, face[index + 1].index);
+    }
+  }
+  if (vertices.length < 4 || indices.length < 12) {
+    throw new Error("Stone calibration support hull is degenerate");
+  }
+  const result = new THREE.BufferGeometry();
+  result.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(
+      vertices.flatMap((point) => point.toArray()),
+      3,
+    ),
+  );
+  result.setIndex(indices);
+  result.computeVertexNormals();
+  result.computeBoundingBox();
+  result.computeBoundingSphere();
+  return result;
+}
+
+export function createStoneSupportHull(geometry, directionCount) {
+  const position = geometry.getAttribute("position");
+  if (!position) throw new Error("geometry has no position attribute");
+  const point = new THREE.Vector3();
+  const directions = stoneSupportDirections(directionCount);
+  const distances = directions.map((normal) => {
+    let maximum = -Infinity;
+    for (let index = 0; index < position.count; index += 1) {
+      point.fromBufferAttribute(position, index);
+      maximum = Math.max(maximum, point.dot(normal));
+    }
+    return maximum;
+  });
+  return supportPolyhedronGeometry(
+    directions.map((normal, index) => ({
+      normal,
+      distance: distances[index],
+    })),
+  );
+}
+
+function transformedGeometry(geometry, transform) {
+  const result = geometry.clone();
+  const position = result.getAttribute("position");
+  const point = new THREE.Vector3();
+  const bounds = new THREE.Box3().setFromBufferAttribute(position);
+  for (let index = 0; index < position.count; index += 1) {
+    point.fromBufferAttribute(position, index);
+    transform(point, bounds);
+    position.setXYZ(index, point.x, point.y, point.z);
+  }
+  position.needsUpdate = true;
+  result.computeVertexNormals();
+  result.computeBoundingBox();
+  result.computeBoundingSphere();
+  return result;
+}
+
+export function compressStoneProfile(geometry, exponentDelta) {
+  if (!(exponentDelta > 0)) {
+    throw new RangeError("profile exponent delta must be positive");
+  }
+  return transformedGeometry(geometry, (point, bounds) => {
+    const height = bounds.max.y - bounds.min.y;
+    const progress = (point.y - bounds.min.y) / height;
+    point.y = bounds.min.y + Math.pow(progress, 1 + exponentDelta) * height;
+  });
+}
+
+export function shearStoneGeometry(geometry, factor) {
+  if (!(factor > 0)) throw new RangeError("shear factor must be positive");
+  return transformedGeometry(geometry, (point, bounds) => {
+    const height = bounds.max.y - bounds.min.y;
+    const progress = (point.y - bounds.min.y) / height;
+    point.x += (progress - 0.5) * height * factor;
+  });
+}
+
+export function createStoneStructuralSubstitute(geometry, shape) {
+  const position = geometry.getAttribute("position");
+  if (!position) throw new Error("geometry has no position attribute");
+  const bounds = new THREE.Box3().setFromBufferAttribute(position);
+  const size = bounds.getSize(new THREE.Vector3());
+  const center = bounds.getCenter(new THREE.Vector3());
+  let result;
+  if (shape === "ellipsoid") {
+    result = new THREE.SphereGeometry(0.5, 16, 8);
+  } else if (shape === "box") {
+    result = new THREE.BoxGeometry(1, 1, 1);
+  } else {
+    throw new Error(`unknown Stone structural substitute: ${shape}`);
+  }
+  result.scale(size.x, size.y, size.z);
+  result.translate(center.x, center.y, center.z);
+  result.computeVertexNormals();
+  result.computeBoundingBox();
+  result.computeBoundingSphere();
+  return result;
+}

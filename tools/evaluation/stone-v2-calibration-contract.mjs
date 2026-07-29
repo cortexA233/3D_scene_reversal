@@ -21,7 +21,8 @@ const scenarios = [
   ["anisotropic-x/1.10", "anisotropic-scale", "severe", { xFactor: 1.1 }, true],
   ["profile-compression/0.05", "profile-compression", "mild", { exponentDelta: 0.05 }],
   ["profile-compression/0.15", "profile-compression", "intermediate", { exponentDelta: 0.15 }],
-  ["profile-compression/0.35", "profile-compression", "severe", { exponentDelta: 0.35 }, true],
+  ["profile-compression/0.35", "profile-compression", "severe", { exponentDelta: 0.35 }],
+  ["profile-compression/0.80", "profile-compression", "destructive", { exponentDelta: 0.8 }, true],
   ["support-hull/24", "support-direction-count", "mild", { directionCount: 24 }],
   ["support-hull/16", "support-direction-count", "intermediate", { directionCount: 16 }],
   ["support-hull/12", "support-direction-count", "severe", { directionCount: 12 }],
@@ -70,7 +71,6 @@ const metrics = [
       "support-hull/8",
       "substitute/ellipsoid",
       "substitute/box",
-      "squash-y/0.80",
     ],
   },
   {
@@ -82,7 +82,6 @@ const metrics = [
       "support-hull/8",
       "substitute/ellipsoid",
       "substitute/box",
-      "shear-x-by-y/0.12",
     ],
   },
   {
@@ -94,7 +93,6 @@ const metrics = [
       "support-hull/8",
       "substitute/ellipsoid",
       "substitute/box",
-      "shear-x-by-y/0.12",
     ],
   },
   {
@@ -106,7 +104,6 @@ const metrics = [
       "support-hull/8",
       "substitute/ellipsoid",
       "substitute/box",
-      "shear-x-by-y/0.12",
     ],
   },
   {
@@ -115,7 +112,7 @@ const metrics = [
     repeatabilityAllowance: 0.002,
     group: "depth",
     destructiveScenarioIds: [
-      "profile-compression/0.35",
+      "profile-compression/0.80",
       "support-hull/8",
       "substitute/ellipsoid",
       "substitute/box",
@@ -128,7 +125,7 @@ const metrics = [
     repeatabilityAllowance: 0.005,
     group: "depth",
     destructiveScenarioIds: [
-      "profile-compression/0.35",
+      "profile-compression/0.80",
       "support-hull/8",
       "substitute/ellipsoid",
       "substitute/box",
@@ -172,6 +169,68 @@ const contract = {
       depth: 1,
     },
   },
+  calibrationPolicy: {
+    maximumReferenceOnlyCorrectionsBeforeFreeze: 1,
+    correctionsUsed: 1,
+    correction:
+      "After the first reference-only run, narrow each metric's destructive applicability to controls it is designed to detect, add a materially stronger profile-compression destructive control, and accept <=1e-6 identity depth rasterization error. Candidate evidence was not loaded.",
+    thresholdsFrozenAfterAcceptedReport: true,
+    candidateFailuresMayChangeBaseline: false,
+  },
+  orderingPolicies: [
+    {
+      id: "uniform-scale-negative-ordering",
+      scenarioIds: ["uniform-scale/-0.01", "uniform-scale/-0.02", "uniform-scale/-0.05"],
+      metricPath: "geometry.bounds.maxAxisRelativeError",
+      tolerance: 1e-6,
+    },
+    {
+      id: "uniform-scale-positive-ordering",
+      scenarioIds: ["uniform-scale/+0.01", "uniform-scale/+0.02", "uniform-scale/+0.05"],
+      metricPath: "geometry.bounds.maxAxisRelativeError",
+      tolerance: 1e-6,
+    },
+    {
+      id: "pivot-ordering",
+      scenarioIds: ["pivot-x/0.01", "pivot-x/0.05", "pivot-x/0.10"],
+      metricPath: "geometry.bounds.bottomAnchorErrorCanonical",
+      tolerance: 1e-6,
+    },
+    {
+      id: "rotation-ordering",
+      scenarioIds: ["rotation-y/1", "rotation-y/3", "rotation-y/5"],
+      metricPath: "geometry.silhouette.meanEdgeDistancePixels",
+      tolerance: 0.02,
+    },
+    {
+      id: "anisotropic-scale-ordering",
+      scenarioIds: ["anisotropic-x/1.02", "anisotropic-x/1.05", "anisotropic-x/1.10"],
+      metricPath: "geometry.bounds.maxAxisRelativeError",
+      tolerance: 1e-6,
+    },
+    {
+      id: "profile-compression-ordering",
+      scenarioIds: [
+        "profile-compression/0.05",
+        "profile-compression/0.15",
+        "profile-compression/0.35",
+      ],
+      metricPath: "geometry.depth.mae",
+      tolerance: 1e-4,
+    },
+    {
+      id: "support-direction-ordering",
+      scenarioIds: ["support-hull/24", "support-hull/16", "support-hull/12", "support-hull/8"],
+      metricPath: "geometry.silhouette.meanEdgeDistancePixels",
+      tolerance: 0.02,
+    },
+    {
+      id: "shear-ordering",
+      scenarioIds: ["shear-x-by-y/0.02", "shear-x-by-y/0.06", "shear-x-by-y/0.12"],
+      metricPath: "geometry.silhouette.meanEdgeDistancePixels",
+      tolerance: 0.02,
+    },
+  ],
   metrics,
   scenarios,
 };
@@ -202,6 +261,11 @@ export function validateStoneGeometryV2CalibrationContract(value) {
   if (value?.baselineVersion !== STONE_GEOMETRY_BASELINE_V2_VERSION) {
     failures.push("baseline-version");
   }
+  if (
+    value?.calibrationPolicy?.correctionsUsed >
+      value?.calibrationPolicy?.maximumReferenceOnlyCorrectionsBeforeFreeze ||
+    value?.calibrationPolicy?.candidateFailuresMayChangeBaseline !== false
+  ) failures.push("calibration-correction-policy");
   if (scenarioIds.size !== value?.scenarios?.length) {
     failures.push("unique-scenario-ids");
   }
@@ -237,7 +301,70 @@ export function validateStoneGeometryV2CalibrationContract(value) {
       failures.push(`${metric.path}/destructive-coverage`);
     }
   }
+  for (const policy of value?.orderingPolicies ?? []) {
+    if (
+      policy.scenarioIds?.length < 3 ||
+      policy.scenarioIds.some((id) => !scenarioIds.has(id)) ||
+      !value.metrics.some((metric) => metric.path === policy.metricPath)
+    ) {
+      failures.push(`${policy.id}/invalid-ordering-policy`);
+    }
+  }
   return { passed: failures.length === 0, failures };
+}
+
+export function validateStoneGeometryV2Run({ contract: value, run }) {
+  const failures = [];
+  if (
+    run?.artifactRole !== "development-only-authored-reference-calibration" ||
+    run?.objectId !== value.objectId
+  ) failures.push({ id: "reference-only-run-identity" });
+  const scenarios = new Map(
+    (run?.scenarios ?? []).map((scenario) => [scenario.id, scenario]),
+  );
+  const expectedIds = value.scenarios.map((scenario) => scenario.id);
+  if (
+    scenarios.size !== expectedIds.length ||
+    expectedIds.some((id) => !scenarios.has(id))
+  ) failures.push({ id: "complete-scenario-coverage" });
+  if (
+    JSON.stringify(run?.identity?.baselineCaptureChecksums) !==
+    JSON.stringify(run?.identity?.repeatCaptureChecksums)
+  ) failures.push({ id: "identity-byte-stability" });
+  for (const policy of value.orderingPolicies) {
+    const values = policy.scenarioIds.map((id) =>
+      get(scenarios.get(id)?.aggregate, policy.metricPath),
+    );
+    const ordered = values.every(Number.isFinite) && values.every(
+      (entry, index) =>
+        index === 0 || entry + policy.tolerance >= values[index - 1],
+    ) && values.at(-1) > values[0] + policy.tolerance;
+    if (!ordered) failures.push({ id: policy.id, values });
+  }
+  return { passed: failures.length === 0, failures };
+}
+
+export function evaluateStoneGeometryV2Gate({ baseline, aggregate }) {
+  const failures = baseline.hard.flatMap((metric) => {
+    const actual = get(aggregate, metric.path);
+    const passed = Number.isFinite(actual) && (
+      metric.operator === "<="
+        ? actual <= metric.threshold
+        : actual >= metric.threshold
+    );
+    return passed ? [] : [{
+      metric: metric.path,
+      actual,
+      operator: metric.operator,
+      threshold: metric.threshold,
+    }];
+  });
+  return {
+    baselineVersion: baseline.version ?? baseline.baselineVersion,
+    objectId: "stone",
+    passed: failures.length === 0,
+    failures,
+  };
 }
 
 export function selectStoneGeometryV2Thresholds({ contract: value, runs }) {

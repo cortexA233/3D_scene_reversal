@@ -37,6 +37,96 @@
       "depth": 1
     }
   },
+  "calibrationPolicy": {
+    "maximumReferenceOnlyCorrectionsBeforeFreeze": 1,
+    "correctionsUsed": 1,
+    "correction": "After the first reference-only run, narrow each metric's destructive applicability to controls it is designed to detect, add a materially stronger profile-compression destructive control, and accept <=1e-6 identity depth rasterization error. Candidate evidence was not loaded.",
+    "thresholdsFrozenAfterAcceptedReport": true,
+    "candidateFailuresMayChangeBaseline": false
+  },
+  "orderingPolicies": [
+    {
+      "id": "uniform-scale-negative-ordering",
+      "scenarioIds": [
+        "uniform-scale/-0.01",
+        "uniform-scale/-0.02",
+        "uniform-scale/-0.05"
+      ],
+      "metricPath": "geometry.bounds.maxAxisRelativeError",
+      "tolerance": 0.000001
+    },
+    {
+      "id": "uniform-scale-positive-ordering",
+      "scenarioIds": [
+        "uniform-scale/+0.01",
+        "uniform-scale/+0.02",
+        "uniform-scale/+0.05"
+      ],
+      "metricPath": "geometry.bounds.maxAxisRelativeError",
+      "tolerance": 0.000001
+    },
+    {
+      "id": "pivot-ordering",
+      "scenarioIds": [
+        "pivot-x/0.01",
+        "pivot-x/0.05",
+        "pivot-x/0.10"
+      ],
+      "metricPath": "geometry.bounds.bottomAnchorErrorCanonical",
+      "tolerance": 0.000001
+    },
+    {
+      "id": "rotation-ordering",
+      "scenarioIds": [
+        "rotation-y/1",
+        "rotation-y/3",
+        "rotation-y/5"
+      ],
+      "metricPath": "geometry.silhouette.meanEdgeDistancePixels",
+      "tolerance": 0.02
+    },
+    {
+      "id": "anisotropic-scale-ordering",
+      "scenarioIds": [
+        "anisotropic-x/1.02",
+        "anisotropic-x/1.05",
+        "anisotropic-x/1.10"
+      ],
+      "metricPath": "geometry.bounds.maxAxisRelativeError",
+      "tolerance": 0.000001
+    },
+    {
+      "id": "profile-compression-ordering",
+      "scenarioIds": [
+        "profile-compression/0.05",
+        "profile-compression/0.15",
+        "profile-compression/0.35"
+      ],
+      "metricPath": "geometry.depth.mae",
+      "tolerance": 0.0001
+    },
+    {
+      "id": "support-direction-ordering",
+      "scenarioIds": [
+        "support-hull/24",
+        "support-hull/16",
+        "support-hull/12",
+        "support-hull/8"
+      ],
+      "metricPath": "geometry.silhouette.meanEdgeDistancePixels",
+      "tolerance": 0.02
+    },
+    {
+      "id": "shear-ordering",
+      "scenarioIds": [
+        "shear-x-by-y/0.02",
+        "shear-x-by-y/0.06",
+        "shear-x-by-y/0.12"
+      ],
+      "metricPath": "geometry.silhouette.meanEdgeDistancePixels",
+      "tolerance": 0.02
+    }
+  ],
   "metrics": [
     {
       "path": "geometry.bounds.maxAxisRelativeError",
@@ -67,8 +157,7 @@
       "destructiveScenarioIds": [
         "support-hull/8",
         "substitute/ellipsoid",
-        "substitute/box",
-        "squash-y/0.80"
+        "substitute/box"
       ]
     },
     {
@@ -79,8 +168,7 @@
       "destructiveScenarioIds": [
         "support-hull/8",
         "substitute/ellipsoid",
-        "substitute/box",
-        "shear-x-by-y/0.12"
+        "substitute/box"
       ]
     },
     {
@@ -91,8 +179,7 @@
       "destructiveScenarioIds": [
         "support-hull/8",
         "substitute/ellipsoid",
-        "substitute/box",
-        "shear-x-by-y/0.12"
+        "substitute/box"
       ]
     },
     {
@@ -103,8 +190,7 @@
       "destructiveScenarioIds": [
         "support-hull/8",
         "substitute/ellipsoid",
-        "substitute/box",
-        "shear-x-by-y/0.12"
+        "substitute/box"
       ]
     },
     {
@@ -113,7 +199,7 @@
       "repeatabilityAllowance": 0.002,
       "group": "depth",
       "destructiveScenarioIds": [
-        "profile-compression/0.35",
+        "profile-compression/0.80",
         "support-hull/8",
         "substitute/ellipsoid",
         "substitute/box",
@@ -126,7 +212,7 @@
       "repeatabilityAllowance": 0.005,
       "group": "depth",
       "destructiveScenarioIds": [
-        "profile-compression/0.35",
+        "profile-compression/0.80",
         "support-hull/8",
         "substitute/ellipsoid",
         "substitute/box",
@@ -310,9 +396,19 @@
       "family": "profile-compression",
       "severity": "severe",
       "thresholdRole": "ordering",
-      "mustReject": true,
+      "mustReject": false,
       "parameters": {
         "exponentDelta": 0.35
+      }
+    },
+    {
+      "id": "profile-compression/0.80",
+      "family": "profile-compression",
+      "severity": "destructive",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "exponentDelta": 0.8
       }
     },
     {

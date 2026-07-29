@@ -4,8 +4,12 @@ import test from "node:test";
 import * as THREE from "three";
 
 import {
+  compressStoneProfile,
+  createStoneStructuralSubstitute,
+  createStoneSupportHull,
   quantizeRadialResolution,
   removeMeaningfulComponent,
+  shearStoneGeometry,
 } from "../tools/evaluation/calibration-perturbations.mjs";
 import {
   comparePointSets,
@@ -77,4 +81,37 @@ test("radial quantization uses only the requested angular sectors", () => {
   const position = result.getAttribute("position");
   assert.ok(Math.abs(position.getZ(1) - 1) < 1e-6);
   assert.ok(Math.abs(position.getX(1)) < 1e-6);
+});
+
+test("Stone support controls produce bounded hulls at every declared count", () => {
+  const source = new THREE.SphereGeometry(2, 24, 12);
+  source.scale(1, 0.6, 0.8);
+  for (const directionCount of [8, 12, 16, 24]) {
+    const result = createStoneSupportHull(source, directionCount);
+    assert.ok(result.getAttribute("position").count >= 4);
+    assert.ok(result.index.count >= 12);
+    assert.ok(result.boundingBox.min.y <= -1.19);
+    assert.ok(result.boundingBox.max.y >= 1.19);
+  }
+});
+
+test("Stone profile, shear, and substitute controls preserve valid geometry", () => {
+  const source = new THREE.SphereGeometry(1, 8, 8);
+  source.scale(1, 2, 1.5);
+  const compressed = compressStoneProfile(source, 0.15);
+  const sheared = shearStoneGeometry(source, 0.12);
+  const ellipsoid = createStoneStructuralSubstitute(source, "ellipsoid");
+  const box = createStoneStructuralSubstitute(source, "box");
+  for (const geometry of [compressed, sheared, ellipsoid, box]) {
+    assert.ok(geometry.getAttribute("position").count > 0);
+    assert.ok(geometry.boundingBox.max.y > geometry.boundingBox.min.y);
+  }
+  assert.notDeepEqual(
+    compressed.getAttribute("position").array,
+    source.getAttribute("position").array,
+  );
+  assert.notDeepEqual(
+    sheared.getAttribute("position").array,
+    source.getAttribute("position").array,
+  );
 });
