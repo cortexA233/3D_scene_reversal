@@ -1,0 +1,4361 @@
+{
+  "schemaVersion": "single-mesh-object-acceptance-v2",
+  "evidenceVersion": "v2",
+  "artifactRole": "development-only-object-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "mushroom",
+  "categoryBaseline": "stage2-v3",
+  "geometryBaseline": null,
+  "appearanceBaseline": null,
+  "visual": {
+    "schemaVersion": "single-mesh-object-evaluation-v1",
+    "artifactRole": "development-only-object-acceptance",
+    "productionUse": "prohibited",
+    "objectId": "mushroom",
+    "semanticId": "island.nature.mushroom",
+    "appearanceVariant": null,
+    "evaluationProtocolVersion": "single-mesh-evaluation-v1",
+    "qualityBaseline": {
+      "version": "mushroom-semantic-category-baseline-v2",
+      "objectId": "mushroom",
+      "evidencePolicy": "bounded-semantic-material-roles-v2",
+      "semanticRoles": {
+        "cap": [
+          78,
+          23,
+          16
+        ],
+        "stem": [
+          98,
+          91,
+          75
+        ]
+      },
+      "maximumRoleDistance": 12,
+      "hard": [
+        {
+          "path": "geometry.bounds.maxAxisRelativeError",
+          "operator": "<=",
+          "threshold": 0.050685267497310546,
+          "domain": "geometry",
+          "source": "unchanged-category-v1"
+        },
+        {
+          "path": "geometry.bounds.bottomAnchorErrorCanonical",
+          "operator": "<=",
+          "threshold": 0.047379137823624545,
+          "domain": "geometry",
+          "source": "unchanged-category-v1"
+        },
+        {
+          "path": "geometry.silhouette.meanIou",
+          "operator": ">=",
+          "threshold": 0.82,
+          "domain": "geometry",
+          "source": "compact-family-v2"
+        },
+        {
+          "path": "geometry.silhouette.worstViewIou",
+          "operator": ">=",
+          "threshold": 0.76,
+          "domain": "geometry",
+          "source": "compact-family-v2"
+        },
+        {
+          "path": "geometry.silhouette.meanEdgeDistancePixels",
+          "operator": "<=",
+          "threshold": 3.2,
+          "domain": "geometry",
+          "source": "compact-family-v2"
+        },
+        {
+          "path": "geometry.silhouette.edgeDistanceP95Pixels",
+          "operator": "<=",
+          "threshold": 15,
+          "domain": "geometry",
+          "source": "compact-family-v2"
+        },
+        {
+          "path": "geometry.depth.mae",
+          "operator": "<=",
+          "threshold": 0.025,
+          "domain": "geometry",
+          "source": "compact-family-v2"
+        },
+        {
+          "path": "geometry.depth.p95",
+          "operator": "<=",
+          "threshold": 0.23,
+          "domain": "geometry",
+          "source": "compact-family-v2"
+        },
+        {
+          "path": "semanticPattern.roles.cap.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.3,
+          "domain": "appearance",
+          "source": "reject-deleted-cap-role"
+        },
+        {
+          "path": "semanticPattern.roles.cap.replacementCoverage",
+          "operator": "<=",
+          "threshold": 0.8,
+          "domain": "appearance",
+          "source": "bounded-role-coverage"
+        },
+        {
+          "path": "semanticPattern.roles.stem.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.15,
+          "domain": "appearance",
+          "source": "reject-deleted-stem-role"
+        },
+        {
+          "path": "semanticPattern.roles.stem.replacementCoverage",
+          "operator": "<=",
+          "threshold": 0.7,
+          "domain": "appearance",
+          "source": "bounded-role-coverage"
+        },
+        {
+          "path": "semanticPattern.roles.cap.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "reference-albedo-role"
+        },
+        {
+          "path": "semanticPattern.roles.stem.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "reference-albedo-role"
+        },
+        {
+          "path": "appearance.roughnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.1,
+          "domain": "appearance",
+          "source": "unchanged-stage-2-category-v1"
+        },
+        {
+          "path": "appearance.metalnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.05,
+          "domain": "appearance",
+          "source": "unchanged-stage-2-category-v1"
+        }
+      ],
+      "diagnostic": [
+        "appearance.meanDeltaE00",
+        "appearance.p90DeltaE00",
+        "appearance.meanMaskedSsim",
+        "appearance.worstViewSsim",
+        "appearance.paletteCentroidDeltaE00",
+        "appearance.paletteCoverageL1"
+      ],
+      "requiredDestructiveControls": [
+        "delete-cap-role",
+        "delete-stem-role",
+        "wrong-role-palette"
+      ],
+      "frozen": true,
+      "geometryBaselineVersion": "mushroom-compact-geometry-baseline-v2"
+    },
+    "manifest": {
+      "schemaVersion": "single-mesh-evaluation-v1",
+      "artifactRole": "development-only-evaluation-manifest",
+      "unitId": "mushroom",
+      "capture": {
+        "width": 512,
+        "height": 512,
+        "pixelOrigin": "bottom-left",
+        "channels": "RGBA8"
+      },
+      "renderer": {
+        "threeRevision": "170",
+        "toneMapping": "ACESFilmic",
+        "toneMappingExposure": 1.05,
+        "outputColorSpace": "sRGB for color passes; linear RGBA8 for data passes",
+        "lighting": "frozen hemisphere plus directional key"
+      },
+      "framing": {
+        "sourceWorldBounds": {
+          "min": [
+            235.54061889648438,
+            16.094593048095703,
+            -57.63434982299805
+          ],
+          "max": [
+            239.0134735107422,
+            23.111934661865234,
+            -54.63274383544922
+          ],
+          "size": [
+            3.4728546142578125,
+            7.017341613769531,
+            3.001605987548828
+          ]
+        },
+        "reconstructionFrame": {
+          "sourceWorldBottomCenter": [
+            237.27704620361328,
+            16.094593048095703,
+            -56.13354682922363
+          ],
+          "sourceWorldAxesPreserved": true
+        },
+        "referenceTransform": {
+          "translationBeforeScale": [
+            -237.27704620361328,
+            -16.094593048095703,
+            56.13354682922363
+          ],
+          "uniformScale": 0.9975287488162892
+        },
+        "replacementTransform": {
+          "translationBeforeScale": [
+            0,
+            0,
+            0
+          ],
+          "uniformScale": 0.9975287488162892,
+          "independentlyFramed": false
+        },
+        "canonicalBounds": {
+          "min": [
+            -1.732136159090736,
+            0,
+            -1.4970941325995324
+          ],
+          "max": [
+            1.732136159090736,
+            7,
+            1.4970941325995324
+          ],
+          "size": [
+            3.464272318181472,
+            7,
+            2.994188265199065
+          ]
+        },
+        "camera": {
+          "fovDegrees": 38,
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "boundingSphereRadius": 4.182294408036522,
+          "distance": 14.130755068814887,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054,
+          "framingMargin": 1.1
+        }
+      },
+      "views": [
+        {
+          "id": "low-000",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 0,
+          "position": [
+            0,
+            8.333002873935987,
+            13.278566264298421
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "low-045",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 45,
+          "position": [
+            9.389364249920334,
+            8.333002873935987,
+            9.389364249920336
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "low-090",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 90,
+          "position": [
+            13.278566264298421,
+            8.333002873935987,
+            8.130776836419544e-16
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "low-135",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 135,
+          "position": [
+            9.389364249920336,
+            8.333002873935987,
+            -9.389364249920334
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "low-180",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 180,
+          "position": [
+            1.6261553672839087e-15,
+            8.333002873935987,
+            -13.278566264298421
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "low-225",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 225,
+          "position": [
+            -9.389364249920334,
+            8.333002873935987,
+            -9.389364249920337
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "low-270",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 270,
+          "position": [
+            -13.278566264298421,
+            8.333002873935987,
+            -2.439233050925863e-15
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "low-315",
+          "elevationDegrees": 20,
+          "azimuthDegrees": 315,
+          "position": [
+            -9.389364249920337,
+            8.333002873935987,
+            9.389364249920332
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "high-045",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 45,
+          "position": [
+            4.995976366222593,
+            15.737592864249415,
+            4.995976366222594
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "high-135",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 135,
+          "position": [
+            4.995976366222594,
+            15.737592864249415,
+            -4.995976366222593
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "high-225",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 225,
+          "position": [
+            -4.995976366222593,
+            15.737592864249415,
+            -4.995976366222594
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        },
+        {
+          "id": "high-315",
+          "elevationDegrees": 60,
+          "azimuthDegrees": 315,
+          "position": [
+            -4.995976366222594,
+            15.737592864249415,
+            4.9959763662225924
+          ],
+          "target": [
+            0,
+            3.5,
+            0
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "fovDegrees": 38,
+          "near": 8.902887058769235,
+          "far": 19.35862307886054
+        }
+      ],
+      "passes": [
+        {
+          "id": "neutral-rgb",
+          "label": "Neutral RGB",
+          "encoding": "sRGB display color under frozen lights"
+        },
+        {
+          "id": "silhouette",
+          "label": "Silhouette",
+          "encoding": "white foreground on black background"
+        },
+        {
+          "id": "linear-depth",
+          "label": "Linear Depth",
+          "encoding": "RGB=(viewDistance-near)/(far-near); white background"
+        },
+        {
+          "id": "world-normal",
+          "label": "World Normal",
+          "encoding": "RGB=normalize(worldNormal)*0.5+0.5; black background"
+        },
+        {
+          "id": "semantic-id",
+          "label": "Semantic ID",
+          "encoding": "stable 24-bit semantic color; black background"
+        },
+        {
+          "id": "albedo",
+          "label": "Unlit Albedo",
+          "encoding": "sRGB base color and base-color map without lighting"
+        },
+        {
+          "id": "lit-rgb",
+          "label": "Frozen-lighting RGB",
+          "encoding": "sRGB authored/procedural material under frozen lights"
+        }
+      ],
+      "captures": []
+    },
+    "captures": {
+      "expectedCount": 168,
+      "referenceChecksums": {
+        "low-000/neutral-rgb": "7800076d",
+        "low-000/silhouette": "0fd6ce85",
+        "low-000/linear-depth": "a1b71eaa",
+        "low-000/world-normal": "28504761",
+        "low-000/semantic-id": "83b50019",
+        "low-000/albedo": "e8b37ad1",
+        "low-000/lit-rgb": "6ad2f201",
+        "low-045/neutral-rgb": "232f462c",
+        "low-045/silhouette": "a9e3d88d",
+        "low-045/linear-depth": "c05b8e92",
+        "low-045/world-normal": "35014d36",
+        "low-045/semantic-id": "a08b5989",
+        "low-045/albedo": "1ef4ac44",
+        "low-045/lit-rgb": "77143ac5",
+        "low-090/neutral-rgb": "53cfa82c",
+        "low-090/silhouette": "79d739a5",
+        "low-090/linear-depth": "01124145",
+        "low-090/world-normal": "a30cc2b1",
+        "low-090/semantic-id": "b3ac82a5",
+        "low-090/albedo": "30eb9b1c",
+        "low-090/lit-rgb": "855fc4a4",
+        "low-135/neutral-rgb": "d8cd56fe",
+        "low-135/silhouette": "acec102d",
+        "low-135/linear-depth": "5e548a3a",
+        "low-135/world-normal": "9716bfb9",
+        "low-135/semantic-id": "b8077b91",
+        "low-135/albedo": "ab78d8ac",
+        "low-135/lit-rgb": "58637f22",
+        "low-180/neutral-rgb": "f91e16d5",
+        "low-180/silhouette": "9941470d",
+        "low-180/linear-depth": "5e13964e",
+        "low-180/world-normal": "d74487ad",
+        "low-180/semantic-id": "ad3f6721",
+        "low-180/albedo": "90b5efbd",
+        "low-180/lit-rgb": "bcb9ab6a",
+        "low-225/neutral-rgb": "a81fb829",
+        "low-225/silhouette": "8667453d",
+        "low-225/linear-depth": "7540357c",
+        "low-225/world-normal": "ab5e3411",
+        "low-225/semantic-id": "59505529",
+        "low-225/albedo": "870ea3c5",
+        "low-225/lit-rgb": "24d5026d",
+        "low-270/neutral-rgb": "eb7e9fe9",
+        "low-270/silhouette": "6888cc6d",
+        "low-270/linear-depth": "15de14cb",
+        "low-270/world-normal": "f027cf8d",
+        "low-270/semantic-id": "05a5d82d",
+        "low-270/albedo": "f1100569",
+        "low-270/lit-rgb": "9b5fe111",
+        "low-315/neutral-rgb": "a153cccc",
+        "low-315/silhouette": "ad6ac0ad",
+        "low-315/linear-depth": "b82daf33",
+        "low-315/world-normal": "271d4dce",
+        "low-315/semantic-id": "ff7d8415",
+        "low-315/albedo": "41c97754",
+        "low-315/lit-rgb": "ca8f928d",
+        "high-045/neutral-rgb": "cd74f5ad",
+        "high-045/silhouette": "7d8f4ae4",
+        "high-045/linear-depth": "a5e92145",
+        "high-045/world-normal": "08cfef4b",
+        "high-045/semantic-id": "59a19f52",
+        "high-045/albedo": "8e5598f1",
+        "high-045/lit-rgb": "ba070be9",
+        "high-135/neutral-rgb": "1433ad92",
+        "high-135/silhouette": "5d5370f5",
+        "high-135/linear-depth": "8b333ed9",
+        "high-135/world-normal": "b081438d",
+        "high-135/semantic-id": "cf36e66d",
+        "high-135/albedo": "a6958514",
+        "high-135/lit-rgb": "a374c26c",
+        "high-225/neutral-rgb": "bf8357a5",
+        "high-225/silhouette": "ea99e285",
+        "high-225/linear-depth": "b06f53a6",
+        "high-225/world-normal": "04f0338b",
+        "high-225/semantic-id": "a12a0019",
+        "high-225/albedo": "57b34581",
+        "high-225/lit-rgb": "6bf0f29d",
+        "high-315/neutral-rgb": "c8e5b734",
+        "high-315/silhouette": "1c0415bd",
+        "high-315/linear-depth": "e41ed387",
+        "high-315/world-normal": "b55046ea",
+        "high-315/semantic-id": "b6c0ebed",
+        "high-315/albedo": "46197341",
+        "high-315/lit-rgb": "94a60763"
+      },
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "993fa69c",
+        "low-000/silhouette": "5164391c",
+        "low-000/linear-depth": "ebd7600b",
+        "low-000/world-normal": "3809c6df",
+        "low-000/semantic-id": "af5d91b9",
+        "low-000/albedo": "77f8fb22",
+        "low-000/lit-rgb": "1cbf7ef8",
+        "low-045/neutral-rgb": "7f41847c",
+        "low-045/silhouette": "7dd73464",
+        "low-045/linear-depth": "548df89f",
+        "low-045/world-normal": "3cfbd2b9",
+        "low-045/semantic-id": "bf7da428",
+        "low-045/albedo": "9d1e28d5",
+        "low-045/lit-rgb": "37e806f3",
+        "low-090/neutral-rgb": "7fb9a7ba",
+        "low-090/silhouette": "bc77d6e5",
+        "low-090/linear-depth": "6535c08a",
+        "low-090/world-normal": "619e994f",
+        "low-090/semantic-id": "803ee588",
+        "low-090/albedo": "5feb6372",
+        "low-090/lit-rgb": "79e73ca4",
+        "low-135/neutral-rgb": "25a8f706",
+        "low-135/silhouette": "82537b4c",
+        "low-135/linear-depth": "c7d81632",
+        "low-135/world-normal": "1f27c408",
+        "low-135/semantic-id": "6886dc98",
+        "low-135/albedo": "3bbc3e49",
+        "low-135/lit-rgb": "e9d563d7",
+        "low-180/neutral-rgb": "ce29d25f",
+        "low-180/silhouette": "6f60a52c",
+        "low-180/linear-depth": "edf21be4",
+        "low-180/world-normal": "e9179ae3",
+        "low-180/semantic-id": "34b7e175",
+        "low-180/albedo": "7a3dacae",
+        "low-180/lit-rgb": "c965c9ed",
+        "low-225/neutral-rgb": "39d41d84",
+        "low-225/silhouette": "74745854",
+        "low-225/linear-depth": "ed6422bb",
+        "low-225/world-normal": "d8002081",
+        "low-225/semantic-id": "970a1e4c",
+        "low-225/albedo": "f2602681",
+        "low-225/lit-rgb": "80a0b987",
+        "low-270/neutral-rgb": "9f17ada2",
+        "low-270/silhouette": "5c527bbc",
+        "low-270/linear-depth": "1c1b267f",
+        "low-270/world-normal": "7c0a6fd9",
+        "low-270/semantic-id": "d08692b1",
+        "low-270/albedo": "4aaa038a",
+        "low-270/lit-rgb": "2f36c4ef",
+        "low-315/neutral-rgb": "58c0ba4f",
+        "low-315/silhouette": "76d71024",
+        "low-315/linear-depth": "8914c3e2",
+        "low-315/world-normal": "45e6dbf9",
+        "low-315/semantic-id": "be6d89d8",
+        "low-315/albedo": "6a552a0d",
+        "low-315/lit-rgb": "f7de1d48",
+        "high-045/neutral-rgb": "0c4e4ac1",
+        "high-045/silhouette": "e2261045",
+        "high-045/linear-depth": "0a35712a",
+        "high-045/world-normal": "4c060541",
+        "high-045/semantic-id": "e2d379a4",
+        "high-045/albedo": "c715272e",
+        "high-045/lit-rgb": "efe73bb6",
+        "high-135/neutral-rgb": "16e2e56c",
+        "high-135/silhouette": "b64c3505",
+        "high-135/linear-depth": "948bc9e0",
+        "high-135/world-normal": "bd3900d8",
+        "high-135/semantic-id": "ca426d29",
+        "high-135/albedo": "3fc0ea65",
+        "high-135/lit-rgb": "1f86f93c",
+        "high-225/neutral-rgb": "3da13e88",
+        "high-225/silhouette": "fc3ce904",
+        "high-225/linear-depth": "3b1773fb",
+        "high-225/world-normal": "4de6cee9",
+        "high-225/semantic-id": "84f5ea11",
+        "high-225/albedo": "9a236ada",
+        "high-225/lit-rgb": "38f7088e",
+        "high-315/neutral-rgb": "6fa37b39",
+        "high-315/silhouette": "1774da6d",
+        "high-315/linear-depth": "60340c19",
+        "high-315/world-normal": "bf70b7a4",
+        "high-315/semantic-id": "8f448388",
+        "high-315/albedo": "6e4eac6a",
+        "high-315/lit-rgb": "b2ccf943"
+      }
+    },
+    "comparison": {
+      "perView": [
+        {
+          "viewId": "low-000",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 29094,
+              "replacementForegroundPixels": 31045,
+              "intersectionPixels": 26999,
+              "unionPixels": 33140,
+              "iou": 0.8146952323476162,
+              "symmetricEdgeMeanPixels": 2.7785779179711803,
+              "symmetricEdgeP95Pixels": 7.615773105863909
+            },
+            "depth": {
+              "comparedPixels": 26999,
+              "mae": 0.017829322781866122,
+              "p95": 0.08200577270659817,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 26999,
+              "meanDegrees": 23.382355560978628,
+              "p95Degrees": 78.18760344707441
+            }
+          },
+          "appearance": {
+            "comparedPixels": 21783,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.3231907399340828,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.978097316790744
+            },
+            "litRgb": {
+              "meanDeltaE00": 9.385037740465712,
+              "p90DeltaE00": 25.282846656609095,
+              "maskedSsim": 0.7293255008278818
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 1.9907167359691949,
+              "coverageL1": 0.007023825919294846
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 15672,
+                "replacementPixels": 15625,
+                "referenceCoverage": 0.5386677665498041,
+                "replacementCoverage": 0.5033016588822676,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 13422,
+                "replacementPixels": 15420,
+                "referenceCoverage": 0.4613322334501959,
+                "replacementCoverage": 0.4966983411177323,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623732697
+              }
+            },
+            "total": {
+              "referencePixels": 29094,
+              "replacementPixels": 31045,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 29094,
+              "replacement": 31045
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 15672
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 13422
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 15625
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 15420
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "low-045",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 30582,
+              "replacementForegroundPixels": 31717,
+              "intersectionPixels": 28422,
+              "unionPixels": 33877,
+              "iou": 0.8389762966024146,
+              "symmetricEdgeMeanPixels": 3.1925102855642793,
+              "symmetricEdgeP95Pixels": 10.770329614269007
+            },
+            "depth": {
+              "comparedPixels": 28422,
+              "mae": 0.02307368110387465,
+              "p95": 0.11715110386656948,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 28422,
+              "meanDegrees": 23.67004476243023,
+              "p95Degrees": 75.70275797915528
+            }
+          },
+          "appearance": {
+            "comparedPixels": 23324,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.6357083952393023,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9556893660803627
+            },
+            "litRgb": {
+              "meanDeltaE00": 9.983730167894139,
+              "p90DeltaE00": 23.842875535739616,
+              "maskedSsim": 0.7012735913608062
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 1.9577793111709378,
+              "coverageL1": 0.01646372834848228
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 14901,
+                "replacementPixels": 15714,
+                "referenceCoverage": 0.48724740043162645,
+                "replacementCoverage": 0.4954440836144654,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 15681,
+                "replacementPixels": 16003,
+                "referenceCoverage": 0.5127525995683736,
+                "replacementCoverage": 0.5045559163855345,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623732721
+              }
+            },
+            "total": {
+              "referencePixels": 30582,
+              "replacementPixels": 31717,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 30582,
+              "replacement": 31717
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 15681
+              },
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 14901
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 16003
+              },
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 15714
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "low-090",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 27936,
+              "replacementForegroundPixels": 30112,
+              "intersectionPixels": 26023,
+              "unionPixels": 32025,
+              "iou": 0.8125839188134271,
+              "symmetricEdgeMeanPixels": 3.2048713558266817,
+              "symmetricEdgeP95Pixels": 9.219544457292887
+            },
+            "depth": {
+              "comparedPixels": 26023,
+              "mae": 0.02196960225701293,
+              "p95": 0.10543599347991213,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 26023,
+              "meanDegrees": 23.726848832162563,
+              "p95Degrees": 78.57307829811938
+            }
+          },
+          "appearance": {
+            "comparedPixels": 21491,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.529460270363027,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9629895977769971
+            },
+            "litRgb": {
+              "meanDeltaE00": 11.035422862107993,
+              "p90DeltaE00": 26.257495091598084,
+              "maskedSsim": 0.6373694798805608
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 1.9634013305701927,
+              "coverageL1": 0.008329067981945909
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 13513,
+                "replacementPixels": 15027,
+                "referenceCoverage": 0.4837127720504009,
+                "replacementCoverage": 0.49903692879914985,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 14423,
+                "replacementPixels": 15085,
+                "referenceCoverage": 0.5162872279495991,
+                "replacementCoverage": 0.5009630712008502,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623732683
+              }
+            },
+            "total": {
+              "referencePixels": 27936,
+              "replacementPixels": 30112,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 27936,
+              "replacement": 30112
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 14423
+              },
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 13513
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 15085
+              },
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 15027
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "low-135",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 29594,
+              "replacementForegroundPixels": 31833,
+              "intersectionPixels": 27290,
+              "unionPixels": 34137,
+              "iou": 0.7994258429270293,
+              "symmetricEdgeMeanPixels": 3.1444690673456726,
+              "symmetricEdgeP95Pixels": 8.602325267042627
+            },
+            "depth": {
+              "comparedPixels": 27290,
+              "mae": 0.01660034146764026,
+              "p95": 0.06443310712661317,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 27290,
+              "meanDegrees": 22.722273211848904,
+              "p95Degrees": 72.44437700266296
+            }
+          },
+          "appearance": {
+            "comparedPixels": 21914,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.267152410803454,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9813264368749947
+            },
+            "litRgb": {
+              "meanDeltaE00": 11.126600108252584,
+              "p90DeltaE00": 22.94911481822168,
+              "maskedSsim": 0.5857337686341266
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.004349085265029,
+              "coverageL1": 0.010267408962307212
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 16539,
+                "replacementPixels": 17596,
+                "referenceCoverage": 0.5588632830979252,
+                "replacementCoverage": 0.5527597147614112,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 13055,
+                "replacementPixels": 14237,
+                "referenceCoverage": 0.44113671690207473,
+                "replacementCoverage": 0.4472402852385889,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623732643
+              }
+            },
+            "total": {
+              "referencePixels": 29594,
+              "replacementPixels": 31833,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 29594,
+              "replacement": 31833
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 16539
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 13055
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 17596
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 14237
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "low-180",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 30770,
+              "replacementForegroundPixels": 32375,
+              "intersectionPixels": 27561,
+              "unionPixels": 35584,
+              "iou": 0.7745334982014388,
+              "symmetricEdgeMeanPixels": 2.9114964169350985,
+              "symmetricEdgeP95Pixels": 9
+            },
+            "depth": {
+              "comparedPixels": 27561,
+              "mae": 0.014076962672979835,
+              "p95": 0.052717996739956065,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 27561,
+              "meanDegrees": 22.11825085137286,
+              "p95Degrees": 72.3631860292697
+            }
+          },
+          "appearance": {
+            "comparedPixels": 21882,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.4389356050601694,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9701068193042182
+            },
+            "litRgb": {
+              "meanDeltaE00": 9.641434255940682,
+              "p90DeltaE00": 20.546490966062855,
+              "maskedSsim": 0.5706363204392914
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.0257403020753775,
+              "coverageL1": 0.001965085458367627
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 18254,
+                "replacementPixels": 18527,
+                "referenceCoverage": 0.5932401689957751,
+                "replacementCoverage": 0.5722625482625483,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 12516,
+                "replacementPixels": 13848,
+                "referenceCoverage": 0.4067598310042249,
+                "replacementCoverage": 0.42773745173745176,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623732623
+              }
+            },
+            "total": {
+              "referencePixels": 30770,
+              "replacementPixels": 32375,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 30770,
+              "replacement": 32375
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 18254
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 12516
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 18527
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 13848
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "low-225",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 28642,
+              "replacementForegroundPixels": 27939,
+              "intersectionPixels": 25595,
+              "unionPixels": 30986,
+              "iou": 0.8260182017685407,
+              "symmetricEdgeMeanPixels": 2.9499543578339966,
+              "symmetricEdgeP95Pixels": 9.219544457292887
+            },
+            "depth": {
+              "comparedPixels": 25595,
+              "mae": 0.01871785824211562,
+              "p95": 0.08786332789992686,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 25595,
+              "meanDegrees": 22.03233791573831,
+              "p95Degrees": 72.95049528186031
+            }
+          },
+          "appearance": {
+            "comparedPixels": 20941,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.9076888979247766,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9337441251091225
+            },
+            "litRgb": {
+              "meanDeltaE00": 10.052877187703288,
+              "p90DeltaE00": 21.289113789772145,
+              "maskedSsim": 0.4731767950418192
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.0517348181660373,
+              "coverageL1": 0.004154529392101619
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 19252,
+                "replacementPixels": 18270,
+                "referenceCoverage": 0.6721597653795126,
+                "replacementCoverage": 0.6539246214968324,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 9390,
+                "replacementPixels": 9669,
+                "referenceCoverage": 0.3278402346204874,
+                "replacementCoverage": 0.3460753785031676,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623732315
+              }
+            },
+            "total": {
+              "referencePixels": 28642,
+              "replacementPixels": 27939,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 28642,
+              "replacement": 27939
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 19252
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 9390
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 18270
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 9669
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "low-270",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 26912,
+              "replacementForegroundPixels": 27407,
+              "intersectionPixels": 24438,
+              "unionPixels": 29881,
+              "iou": 0.8178441149894582,
+              "symmetricEdgeMeanPixels": 2.8852386637732215,
+              "symmetricEdgeP95Pixels": 7.280109889280518
+            },
+            "depth": {
+              "comparedPixels": 24438,
+              "mae": 0.018817857462676228,
+              "p95": 0.09957843828658396,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 24438,
+              "meanDegrees": 24.03769806720248,
+              "p95Degrees": 80.78059584383419
+            }
+          },
+          "appearance": {
+            "comparedPixels": 19908,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.7554126159062835,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9467111382427261
+            },
+            "litRgb": {
+              "meanDeltaE00": 10.865107466542645,
+              "p90DeltaE00": 21.04608445443921,
+              "maskedSsim": 0.533371181255036
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.0501580198579266,
+              "coverageL1": 0.013512155917219215
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 17490,
+                "replacementPixels": 17187,
+                "referenceCoverage": 0.6498959571938169,
+                "replacementCoverage": 0.627102565038129,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 9422,
+                "replacementPixels": 10220,
+                "referenceCoverage": 0.3501040428061831,
+                "replacementCoverage": 0.37289743496187105,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.414213562373237
+              }
+            },
+            "total": {
+              "referencePixels": 26912,
+              "replacementPixels": 27407,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 26912,
+              "replacement": 27407
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 17490
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 9422
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 17187
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 10220
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "low-315",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 25848,
+              "replacementForegroundPixels": 26887,
+              "intersectionPixels": 23137,
+              "unionPixels": 29598,
+              "iou": 0.7817082235286168,
+              "symmetricEdgeMeanPixels": 2.78663241893407,
+              "symmetricEdgeP95Pixels": 7.810249675906654
+            },
+            "depth": {
+              "comparedPixels": 23137,
+              "mae": 0.019293197416167647,
+              "p95": 0.09372088309325553,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 23137,
+              "meanDegrees": 25.348848439041546,
+              "p95Degrees": 76.12237947129202
+            }
+          },
+          "appearance": {
+            "comparedPixels": 18356,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.4109192542720232,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.972867332761888
+            },
+            "litRgb": {
+              "meanDeltaE00": 11.506888767248928,
+              "p90DeltaE00": 24.98669993928389,
+              "maskedSsim": 0.4612726972840983
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.0007696302438194,
+              "coverageL1": 0.011603835258226197
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 14093,
+                "replacementPixels": 13692,
+                "referenceCoverage": 0.5452259362426494,
+                "replacementCoverage": 0.5092423847956261,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 11755,
+                "replacementPixels": 13195,
+                "referenceCoverage": 0.4547740637573507,
+                "replacementCoverage": 0.4907576152043739,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623732588
+              }
+            },
+            "total": {
+              "referencePixels": 25848,
+              "replacementPixels": 26887,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 25848,
+              "replacement": 26887
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 14093
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 11755
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 13692
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 13195
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "high-045",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 20407,
+              "replacementForegroundPixels": 20630,
+              "intersectionPixels": 19158,
+              "unionPixels": 21879,
+              "iou": 0.8756341697518168,
+              "symmetricEdgeMeanPixels": 3.3069236563272355,
+              "symmetricEdgeP95Pixels": 12.649110640673518
+            },
+            "depth": {
+              "comparedPixels": 19158,
+              "mae": 0.035230635361805124,
+              "p95": 0.2225870973464816,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 19158,
+              "meanDegrees": 21.457065869783367,
+              "p95Degrees": 78.93484507129268
+            }
+          },
+          "appearance": {
+            "comparedPixels": 16446,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.5769471753531374,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9565428057448165
+            },
+            "litRgb": {
+              "meanDeltaE00": 6.002915263107027,
+              "p90DeltaE00": 10.271091690278775,
+              "maskedSsim": 0.7683150800939957
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.0553730677669155,
+              "coverageL1": 0.02043049981758481
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 13770,
+                "replacementPixels": 14209,
+                "referenceCoverage": 0.6747684618023227,
+                "replacementCoverage": 0.6887542413960253,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 6637,
+                "replacementPixels": 6421,
+                "referenceCoverage": 0.32523153819767725,
+                "replacementCoverage": 0.3112457586039748,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623731797
+              }
+            },
+            "total": {
+              "referencePixels": 20407,
+              "replacementPixels": 20630,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 20407,
+              "replacement": 20630
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 13770
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 6637
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 14209
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 6421
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "high-135",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 27112,
+              "replacementForegroundPixels": 27408,
+              "intersectionPixels": 25468,
+              "unionPixels": 29052,
+              "iou": 0.8766349993115793,
+              "symmetricEdgeMeanPixels": 2.9489786531468005,
+              "symmetricEdgeP95Pixels": 7.0710678118654755
+            },
+            "depth": {
+              "comparedPixels": 25468,
+              "mae": 0.020721319993229088,
+              "p95": 0.07614821751327001,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 25468,
+              "meanDegrees": 19.298712645776472,
+              "p95Degrees": 73.27092260980162
+            }
+          },
+          "appearance": {
+            "comparedPixels": 21901,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.4866544099781644,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9558939225951821
+            },
+            "litRgb": {
+              "meanDeltaE00": 11.256210659811043,
+              "p90DeltaE00": 20.777862678066562,
+              "maskedSsim": 0.4306650062989663
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.10757547064152,
+              "coverageL1": 0.013880644719419202
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 21439,
+                "replacementPixels": 22164,
+                "referenceCoverage": 0.7907568604308055,
+                "replacementCoverage": 0.8086690017513135,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 5673,
+                "replacementPixels": 5244,
+                "referenceCoverage": 0.20924313956919446,
+                "replacementCoverage": 0.19133099824868652,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.414213562373145
+              }
+            },
+            "total": {
+              "referencePixels": 27112,
+              "replacementPixels": 27408,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 27112,
+              "replacement": 27408
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 21439
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 5673
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 22164
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 5244
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "high-225",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 26170,
+              "replacementForegroundPixels": 26115,
+              "intersectionPixels": 24292,
+              "unionPixels": 27993,
+              "iou": 0.867788375665345,
+              "symmetricEdgeMeanPixels": 2.7391785008828844,
+              "symmetricEdgeP95Pixels": 6.4031242374328485
+            },
+            "depth": {
+              "comparedPixels": 24292,
+              "mae": 0.015236346945527966,
+              "p95": 0.04686044154662764,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 24292,
+              "meanDegrees": 16.32414209948594,
+              "p95Degrees": 57.1207790857545
+            }
+          },
+          "appearance": {
+            "comparedPixels": 21049,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.4570042043489075,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9492328026104359
+            },
+            "litRgb": {
+              "meanDeltaE00": 14.266222073685315,
+              "p90DeltaE00": 21.550209274651625,
+              "maskedSsim": 0.3749546662079041
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.144543148239383,
+              "coverageL1": 0.007411278445531827
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 23714,
+                "replacementPixels": 23509,
+                "referenceCoverage": 0.9061520825372564,
+                "replacementCoverage": 0.9002106069308826,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 2456,
+                "replacementPixels": 2606,
+                "referenceCoverage": 0.0938479174627436,
+                "replacementCoverage": 0.09978939306911737,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.414213562373005
+              }
+            },
+            "total": {
+              "referencePixels": 26170,
+              "replacementPixels": 26115,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 26170,
+              "replacement": 26115
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 23714
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 2456
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 23509
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 2606
+              }
+            ]
+          }
+        },
+        {
+          "viewId": "high-315",
+          "geometry": {
+            "bounds": {
+              "referenceSize": [
+                3.464272318181486,
+                7,
+                2.994188265199071
+              ],
+              "replacementSize": [
+                3.4644172751927913,
+                6.980061565916589,
+                2.993983731926326
+              ],
+              "perAxisRelativeError": [
+                0.00004184342280041961,
+                0.0028483477262015405,
+                0.00006831009095934986
+              ],
+              "maxAxisRelativeError": 0.0028483477262015405,
+              "bottomAnchorErrorCanonical": 0.019609223150949318
+            },
+            "silhouette": {
+              "referenceForegroundPixels": 22656,
+              "replacementForegroundPixels": 22934,
+              "intersectionPixels": 21434,
+              "unionPixels": 24156,
+              "iou": 0.8873157807584037,
+              "symmetricEdgeMeanPixels": 2.674562164662672,
+              "symmetricEdgeP95Pixels": 8
+            },
+            "depth": {
+              "comparedPixels": 21434,
+              "mae": 0.027518266314830574,
+              "p95": 0.13472376944655448,
+              "normalization": "canonical-max-dimension"
+            },
+            "worldNormal": {
+              "comparedPixels": 21434,
+              "meanDegrees": 22.58451302008844,
+              "p95Degrees": 80.2701089091513
+            }
+          },
+          "appearance": {
+            "comparedPixels": 18635,
+            "erosionRadiusPixels": 2,
+            "albedo": {
+              "meanDeltaE00": 2.3183746701748382,
+              "p90DeltaE00": 2.1706244363692506,
+              "maskedSsim": 0.9759988802905799
+            },
+            "litRgb": {
+              "meanDeltaE00": 10.2559402841338,
+              "p90DeltaE00": 20.594994230367888,
+              "maskedSsim": 0.6576413708349149
+            },
+            "palette": {
+              "colorCount": 2,
+              "centroidDeltaE00": 2.120326472331321,
+              "coverageL1": 0.006761470351489177
+            },
+            "material": {
+              "roughnessAbsoluteError": 1.1920928910669204e-8,
+              "metalnessAbsoluteError": 0
+            }
+          },
+          "semanticPattern": {
+            "roles": {
+              "cap": {
+                "referencePixels": 18524,
+                "replacementPixels": 18755,
+                "referenceCoverage": 0.8176200564971752,
+                "replacementCoverage": 0.8177814598412837,
+                "replacementCentroid": [
+                  78,
+                  23,
+                  16
+                ],
+                "meanReplacementRoleDistance": 0
+              },
+              "stem": {
+                "referencePixels": 4132,
+                "replacementPixels": 4179,
+                "referenceCoverage": 0.18237994350282485,
+                "replacementCoverage": 0.18221854015871633,
+                "replacementCentroid": [
+                  97,
+                  91,
+                  76
+                ],
+                "meanReplacementRoleDistance": 1.4142135623730971
+              }
+            },
+            "total": {
+              "referencePixels": 22656,
+              "replacementPixels": 22934,
+              "referenceCoverage": 1,
+              "replacementCoverage": 1
+            },
+            "silhouettePixels": {
+              "reference": 22656,
+              "replacement": 22934
+            },
+            "diagnosticReferencePalette": [
+              {
+                "rgb": [
+                  85,
+                  19,
+                  13
+                ],
+                "pixels": 18524
+              },
+              {
+                "rgb": [
+                  99,
+                  90,
+                  73
+                ],
+                "pixels": 4132
+              }
+            ],
+            "diagnosticReplacementPalette": [
+              {
+                "rgb": [
+                  78,
+                  23,
+                  16
+                ],
+                "pixels": 18755
+              },
+              {
+                "rgb": [
+                  97,
+                  91,
+                  76
+                ],
+                "pixels": 4179
+              }
+            ]
+          }
+        }
+      ],
+      "aggregate": {
+        "viewCount": 12,
+        "geometry": {
+          "bounds": {
+            "maxAxisRelativeError": 0.0028483477262015405,
+            "bottomAnchorErrorCanonical": 0.019609223150949318
+          },
+          "silhouette": {
+            "meanIou": 0.8310965545554737,
+            "worstViewIou": 0.7745334982014388,
+            "meanEdgeDistancePixels": 2.960282788266983,
+            "edgeDistanceP95Pixels": 12.649110640673518
+          },
+          "depth": {
+            "mae": 0.020757116001643837,
+            "p95": 0.2225870973464816
+          },
+          "worldNormal": {
+            "meanDegrees": 22.225257606325812,
+            "p95Degrees": 80.78059584383419
+          }
+        },
+        "appearance": {
+          "meanDeltaE00": 10.448198903074429,
+          "p90DeltaE00": 26.257495091598084,
+          "meanMaskedSsim": 0.5769779548466167,
+          "worstViewSsim": 0.3749546662079041,
+          "paletteCentroidDeltaE00": 2.144543148239383,
+          "paletteCoverageL1": 0.02043049981758481,
+          "roughnessAbsoluteError": 1.1920928910669204e-8,
+          "metalnessAbsoluteError": 0,
+          "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+        },
+        "semanticPattern": {
+          "roles": {
+            "cap": {
+              "referenceCoverage": 0.6360035981493477,
+              "replacementCoverage": 0.6250706000558856,
+              "coverageRatio": 0.9828098486780968,
+              "meanReplacementRoleDistance": 0
+            },
+            "stem": {
+              "referenceCoverage": 0.36399640185065224,
+              "replacementCoverage": 0.3749293999441145,
+              "coverageRatio": 1.0300360059546634,
+              "meanReplacementRoleDistance": 1.4142135623732406
+            }
+          },
+          "total": {
+            "referenceCoverage": 1,
+            "replacementCoverage": 1,
+            "coverageRatio": 1
+          }
+        }
+      },
+      "categoryAppearance": null,
+      "gate": {
+        "baselineVersion": "mushroom-semantic-category-baseline-v2",
+        "objectId": "mushroom",
+        "passed": true,
+        "failures": [],
+        "geometryGate": {
+          "passed": true,
+          "failures": []
+        },
+        "appearanceGate": {
+          "evaluated": true,
+          "passed": true,
+          "failures": []
+        },
+        "baselineVersions": {
+          "geometry": "mushroom-compact-geometry-baseline-v2",
+          "appearance": "mushroom-semantic-category-baseline-v2"
+        }
+      },
+      "diagnostics": {
+        "units": "canonical",
+        "surfaceArea": {
+          "reference": 53.29529541696036,
+          "replacement": 50.3070761078488,
+          "relativeError": 0.056069101141723005
+        },
+        "volume": {
+          "reference": 4.940778936017022,
+          "replacement": null,
+          "relativeError": null,
+          "referenceUnavailableReason": null,
+          "replacementUnavailableReason": "open-boundary"
+        },
+        "topology": {
+          "referenceConnectedComponents": 5,
+          "replacementConnectedComponents": 10,
+          "referenceClosed": true,
+          "replacementClosed": false
+        },
+        "pointSetDistance": {
+          "sampling": "position-attribute-vertices-with-duplicates-retained",
+          "referencePointCount": 2051,
+          "replacementPointCount": 895,
+          "symmetricChamferMeanCanonical": 0.1994706974408301,
+          "symmetricHausdorffCanonical": 0.5081796798334403
+        }
+      },
+      "captureChecksums": {
+        "low-000/neutral-rgb": "993fa69c",
+        "low-000/silhouette": "5164391c",
+        "low-000/linear-depth": "ebd7600b",
+        "low-000/world-normal": "3809c6df",
+        "low-000/semantic-id": "af5d91b9",
+        "low-000/albedo": "77f8fb22",
+        "low-000/lit-rgb": "1cbf7ef8",
+        "low-045/neutral-rgb": "7f41847c",
+        "low-045/silhouette": "7dd73464",
+        "low-045/linear-depth": "548df89f",
+        "low-045/world-normal": "3cfbd2b9",
+        "low-045/semantic-id": "bf7da428",
+        "low-045/albedo": "9d1e28d5",
+        "low-045/lit-rgb": "37e806f3",
+        "low-090/neutral-rgb": "7fb9a7ba",
+        "low-090/silhouette": "bc77d6e5",
+        "low-090/linear-depth": "6535c08a",
+        "low-090/world-normal": "619e994f",
+        "low-090/semantic-id": "803ee588",
+        "low-090/albedo": "5feb6372",
+        "low-090/lit-rgb": "79e73ca4",
+        "low-135/neutral-rgb": "25a8f706",
+        "low-135/silhouette": "82537b4c",
+        "low-135/linear-depth": "c7d81632",
+        "low-135/world-normal": "1f27c408",
+        "low-135/semantic-id": "6886dc98",
+        "low-135/albedo": "3bbc3e49",
+        "low-135/lit-rgb": "e9d563d7",
+        "low-180/neutral-rgb": "ce29d25f",
+        "low-180/silhouette": "6f60a52c",
+        "low-180/linear-depth": "edf21be4",
+        "low-180/world-normal": "e9179ae3",
+        "low-180/semantic-id": "34b7e175",
+        "low-180/albedo": "7a3dacae",
+        "low-180/lit-rgb": "c965c9ed",
+        "low-225/neutral-rgb": "39d41d84",
+        "low-225/silhouette": "74745854",
+        "low-225/linear-depth": "ed6422bb",
+        "low-225/world-normal": "d8002081",
+        "low-225/semantic-id": "970a1e4c",
+        "low-225/albedo": "f2602681",
+        "low-225/lit-rgb": "80a0b987",
+        "low-270/neutral-rgb": "9f17ada2",
+        "low-270/silhouette": "5c527bbc",
+        "low-270/linear-depth": "1c1b267f",
+        "low-270/world-normal": "7c0a6fd9",
+        "low-270/semantic-id": "d08692b1",
+        "low-270/albedo": "4aaa038a",
+        "low-270/lit-rgb": "2f36c4ef",
+        "low-315/neutral-rgb": "58c0ba4f",
+        "low-315/silhouette": "76d71024",
+        "low-315/linear-depth": "8914c3e2",
+        "low-315/world-normal": "45e6dbf9",
+        "low-315/semantic-id": "be6d89d8",
+        "low-315/albedo": "6a552a0d",
+        "low-315/lit-rgb": "f7de1d48",
+        "high-045/neutral-rgb": "0c4e4ac1",
+        "high-045/silhouette": "e2261045",
+        "high-045/linear-depth": "0a35712a",
+        "high-045/world-normal": "4c060541",
+        "high-045/semantic-id": "e2d379a4",
+        "high-045/albedo": "c715272e",
+        "high-045/lit-rgb": "efe73bb6",
+        "high-135/neutral-rgb": "16e2e56c",
+        "high-135/silhouette": "b64c3505",
+        "high-135/linear-depth": "948bc9e0",
+        "high-135/world-normal": "bd3900d8",
+        "high-135/semantic-id": "ca426d29",
+        "high-135/albedo": "3fc0ea65",
+        "high-135/lit-rgb": "1f86f93c",
+        "high-225/neutral-rgb": "3da13e88",
+        "high-225/silhouette": "fc3ce904",
+        "high-225/linear-depth": "3b1773fb",
+        "high-225/world-normal": "4de6cee9",
+        "high-225/semantic-id": "84f5ea11",
+        "high-225/albedo": "9a236ada",
+        "high-225/lit-rgb": "38f7088e",
+        "high-315/neutral-rgb": "6fa37b39",
+        "high-315/silhouette": "1774da6d",
+        "high-315/linear-depth": "60340c19",
+        "high-315/world-normal": "bf70b7a4",
+        "high-315/semantic-id": "8f448388",
+        "high-315/albedo": "6e4eac6a",
+        "high-315/lit-rgb": "b2ccf943"
+      }
+    },
+    "environment": {
+      "threeRevision": "170",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "captureBackend": "browser-webgl-rgba8",
+      "gpu": {
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "vendor": "Google Inc. (Google)",
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "antialias": true,
+        "hardwareAccelerated": false,
+        "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i",
+        "colorManagement": {
+          "outputColorSpace": "srgb",
+          "toneMapping": 0,
+          "toneMappingExposure": 1.05
+        }
+      }
+    }
+  },
+  "nonvisual": {
+    "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+    "artifactRole": "development-only-nonvisual-acceptance",
+    "productionUse": "prohibited",
+    "objectId": "mushroom",
+    "runtime": {
+      "schemaVersion": "single-mesh-runtime-evidence-v1",
+      "objectId": "mushroom",
+      "semanticId": "island.nature.mushroom",
+      "recipe": {
+        "encoding": "canonical-minified-utf8-json",
+        "bytes": 658,
+        "serialized": "{\"id\":\"island.nature.mushroom\",\"kind\":\"curved-stem-bell-cap-cluster-v1\",\"seed\":1836413800,\"shape\":{\"radialSegments\":12,\"stemSegments\":8,\"capHeightRatio\":1.4,\"capProfile\":[[0,1],[0.2,0.98],[0.46,0.89],[0.73,0.67],[0.93,0.36]],\"forms\":[[1.25,0.13,1.12,0.74,0.84,0.87,0.4,0.7,7.017,0.815,0.983,0.17],[0.97,0.25,1.32,-0.22,1.25,-0.4,1.044,-0.383,6.034,0.693,1.033,0.16],[0.9,0.36,0.05,0.28,-0.52,0.26,-0.729,0.215,5.129,0.695,1.062,0.19],[0.92,0.37,0.64,-0.45,0.42,-0.5,0.29,-0.538,4.496,0.713,0.977,0.17],[0.95,-0.03,-0.2,-0.44,-1,-0.78,-1.189,-0.927,3.04,0.547,1.048,0.19]]},\"appearance\":{\"stemColor\":10920340,\"capColor\":9852231,\"roughness\":0.8,\"metalness\":0}}"
+      },
+      "recipeScalars": {
+        "definition": "finite numeric leaves in the object-specific recipe",
+        "count": 78
+      },
+      "deterministic": {
+        "repetitions": 3,
+        "byteStable": true,
+        "snapshot": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.nature.mushroom",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.nature.mushroom/stems",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.nature.mushroom/caps",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-1",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-2",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-3",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-4",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-5",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.nature.mushroom",
+              "parentSemanticId": null,
+              "type": "Group",
+              "position": [
+                0,
+                -0.01964641362428665,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.nature.mushroom/stems",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true,
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 1755,
+                    "byteLength": 7020,
+                    "checksum": "4eff181e"
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 1755,
+                    "byteLength": 7020,
+                    "checksum": "85a87f72"
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 2880,
+                  "byteLength": 5760,
+                  "checksum": "9ba9df2b"
+                },
+                "groups": []
+              },
+              "material": {
+                "type": "MeshStandardMaterial",
+                "color": 10920340,
+                "emissive": 0,
+                "roughness": 0.8,
+                "metalness": 0,
+                "opacity": 1,
+                "transparent": false,
+                "side": 0,
+                "vertexColors": false,
+                "hasRuntimeTexture": false
+              }
+            },
+            {
+              "semanticId": "island.nature.mushroom/caps",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true,
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 930,
+                    "byteLength": 3720,
+                    "checksum": "786bff4b"
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 930,
+                    "byteLength": 3720,
+                    "checksum": "09e867e1"
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 1800,
+                  "byteLength": 3600,
+                  "checksum": "0795fe25"
+                },
+                "groups": []
+              },
+              "material": {
+                "type": "MeshStandardMaterial",
+                "color": 9852231,
+                "emissive": 0,
+                "roughness": 0.8,
+                "metalness": 0,
+                "opacity": 1,
+                "transparent": false,
+                "side": 0,
+                "vertexColors": false,
+                "hasRuntimeTexture": false
+              }
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-1",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "position": [
+                0.4,
+                5.876,
+                0.7
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-2",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "position": [
+                1.044,
+                5.0638,
+                -0.383
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-3",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "position": [
+                -0.729,
+                4.156,
+                0.215
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-4",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "position": [
+                0.29,
+                3.4978000000000007,
+                -0.538
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-5",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "position": [
+                -1.189,
+                2.2742,
+                -0.927
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "visible": true
+            }
+          ],
+          "bounds": {
+            "min": [
+              -1.7359999418258667,
+              0,
+              -1.5002559423446655
+            ],
+            "max": [
+              1.7369999885559082,
+              6.997353784739971,
+              1.5011450052261353
+            ]
+          },
+          "triangles": 1560,
+          "drawCalls": 2,
+          "geometryMemoryBytes": 30840,
+          "runtimeTextureCount": 0
+        }
+      },
+      "benchmark": {
+        "warmups": 10,
+        "repetitions": 100,
+        "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+        "minimumMilliseconds": 0.20000001788139343,
+        "medianMilliseconds": 0.4000000059604645,
+        "p95Milliseconds": 0.5,
+        "maximumMilliseconds": 0.5
+      },
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "hardwareConcurrency": 10,
+        "deviceMemoryGiB": 32,
+        "threeRevision": "170",
+        "renderer": {
+          "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "vendor": "Google Inc. (Google)",
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+        }
+      }
+    },
+    "sourceScalars": {
+      "definition": "all numeric recipe leaves plus object-specific numeric literals in generators, generated shaders, and explicitly listed object helpers",
+      "exclusionPolicy": "generator literals are excluded only when equal to a frozen universal algorithm/control-flow value; recipe leaves are never excluded",
+      "universalAlgorithmValues": [
+        0,
+        0.01,
+        0.5,
+        1,
+        2,
+        3,
+        4
+      ],
+      "recipe": {
+        "sourceFile": "gt_designer/src/reconstruction/objects/mushroom-recipe.js",
+        "evidence": {
+          "definition": "JavaScript numeric literals outside comments and string/template literals",
+          "count": 78,
+          "literals": [
+            {
+              "literal": "0x6d757368",
+              "offset": 130
+            },
+            {
+              "literal": "12",
+              "offset": 187
+            },
+            {
+              "literal": "8",
+              "offset": 209
+            },
+            {
+              "literal": "1.4",
+              "offset": 232
+            },
+            {
+              "literal": "0",
+              "offset": 290
+            },
+            {
+              "literal": "1",
+              "offset": 293
+            },
+            {
+              "literal": "0.2",
+              "offset": 319
+            },
+            {
+              "literal": "0.98",
+              "offset": 324
+            },
+            {
+              "literal": "0.46",
+              "offset": 353
+            },
+            {
+              "literal": "0.89",
+              "offset": 359
+            },
+            {
+              "literal": "0.73",
+              "offset": 388
+            },
+            {
+              "literal": "0.67",
+              "offset": 394
+            },
+            {
+              "literal": "0.93",
+              "offset": 423
+            },
+            {
+              "literal": "0.36",
+              "offset": 429
+            },
+            {
+              "literal": "1.25",
+              "offset": 493
+            },
+            {
+              "literal": "0.13",
+              "offset": 499
+            },
+            {
+              "literal": "1.12",
+              "offset": 505
+            },
+            {
+              "literal": "0.74",
+              "offset": 511
+            },
+            {
+              "literal": "0.84",
+              "offset": 517
+            },
+            {
+              "literal": "0.87",
+              "offset": 523
+            },
+            {
+              "literal": "0.4",
+              "offset": 529
+            },
+            {
+              "literal": "0.7",
+              "offset": 534
+            },
+            {
+              "literal": "7.017",
+              "offset": 539
+            },
+            {
+              "literal": "0.815",
+              "offset": 546
+            },
+            {
+              "literal": "0.983",
+              "offset": 553
+            },
+            {
+              "literal": "0.17",
+              "offset": 560
+            },
+            {
+              "literal": "0.97",
+              "offset": 589
+            },
+            {
+              "literal": "0.25",
+              "offset": 595
+            },
+            {
+              "literal": "1.32",
+              "offset": 601
+            },
+            {
+              "literal": "0.22",
+              "offset": 608
+            },
+            {
+              "literal": "1.25",
+              "offset": 614
+            },
+            {
+              "literal": "0.4",
+              "offset": 621
+            },
+            {
+              "literal": "1.044",
+              "offset": 626
+            },
+            {
+              "literal": "0.383",
+              "offset": 634
+            },
+            {
+              "literal": "6.034",
+              "offset": 641
+            },
+            {
+              "literal": "0.693",
+              "offset": 648
+            },
+            {
+              "literal": "1.033",
+              "offset": 655
+            },
+            {
+              "literal": "0.16",
+              "offset": 662
+            },
+            {
+              "literal": "0.9",
+              "offset": 691
+            },
+            {
+              "literal": "0.36",
+              "offset": 696
+            },
+            {
+              "literal": "0.05",
+              "offset": 702
+            },
+            {
+              "literal": "0.28",
+              "offset": 708
+            },
+            {
+              "literal": "0.52",
+              "offset": 715
+            },
+            {
+              "literal": "0.26",
+              "offset": 721
+            },
+            {
+              "literal": "0.729",
+              "offset": 728
+            },
+            {
+              "literal": "0.215",
+              "offset": 735
+            },
+            {
+              "literal": "5.129",
+              "offset": 742
+            },
+            {
+              "literal": "0.695",
+              "offset": 749
+            },
+            {
+              "literal": "1.062",
+              "offset": 756
+            },
+            {
+              "literal": "0.19",
+              "offset": 763
+            },
+            {
+              "literal": "0.92",
+              "offset": 792
+            },
+            {
+              "literal": "0.37",
+              "offset": 798
+            },
+            {
+              "literal": "0.64",
+              "offset": 804
+            },
+            {
+              "literal": "0.45",
+              "offset": 811
+            },
+            {
+              "literal": "0.42",
+              "offset": 817
+            },
+            {
+              "literal": "0.5",
+              "offset": 824
+            },
+            {
+              "literal": "0.29",
+              "offset": 829
+            },
+            {
+              "literal": "0.538",
+              "offset": 836
+            },
+            {
+              "literal": "4.496",
+              "offset": 843
+            },
+            {
+              "literal": "0.713",
+              "offset": 850
+            },
+            {
+              "literal": "0.977",
+              "offset": 857
+            },
+            {
+              "literal": "0.17",
+              "offset": 864
+            },
+            {
+              "literal": "0.95",
+              "offset": 893
+            },
+            {
+              "literal": "0.03",
+              "offset": 900
+            },
+            {
+              "literal": "0.2",
+              "offset": 907
+            },
+            {
+              "literal": "0.44",
+              "offset": 913
+            },
+            {
+              "literal": "1",
+              "offset": 920
+            },
+            {
+              "literal": "0.78",
+              "offset": 924
+            },
+            {
+              "literal": "1.189",
+              "offset": 931
+            },
+            {
+              "literal": "0.927",
+              "offset": 939
+            },
+            {
+              "literal": "3.04",
+              "offset": 946
+            },
+            {
+              "literal": "0.547",
+              "offset": 952
+            },
+            {
+              "literal": "1.048",
+              "offset": 959
+            },
+            {
+              "literal": "0.19",
+              "offset": 966
+            },
+            {
+              "literal": "0xa6a194",
+              "offset": 1033
+            },
+            {
+              "literal": "0x965547",
+              "offset": 1057
+            },
+            {
+              "literal": "0.8",
+              "offset": 1082
+            },
+            {
+              "literal": "0",
+              "offset": 1102
+            }
+          ]
+        }
+      },
+      "generators": [
+        {
+          "sourceFile": "gt_designer/src/reconstruction/objects/mushroom-generator.js",
+          "evidence": {
+            "definition": "numeric literals in generator and generated shader source, excluding only the declared universal algorithm/control-flow values",
+            "universalValues": [
+              0,
+              0.01,
+              0.5,
+              1,
+              2,
+              3,
+              4
+            ],
+            "count": 0,
+            "objectSpecific": [],
+            "classifiedLiteralCount": 25,
+            "literals": [
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 11,
+                "column": 39,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 24,
+                "column": 79,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 25,
+                "column": 75,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 39,
+                "column": 41,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "2",
+                "value": 2,
+                "line": 40,
+                "column": 42,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 40,
+                "column": 46,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 64,
+                "column": 24,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 64,
+                "column": 64,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "2",
+                "value": 2,
+                "line": 65,
+                "column": 58,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 73,
+                "column": 19,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 73,
+                "column": 49,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 73,
+                "column": 60,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 74,
+                "column": 24,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 74,
+                "column": 64,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 75,
+                "column": 31,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 84,
+                "column": 40,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 86,
+                "column": 35,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 88,
+                "column": 40,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "0",
+                "value": 0,
+                "line": 89,
+                "column": 22,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 89,
+                "column": 62,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 90,
+                "column": 29,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "3",
+                "value": 3,
+                "line": 95,
+                "column": 81,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 130,
+                "column": 41,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 131,
+                "column": 78,
+                "classification": "universal-algorithm-or-control-flow"
+              },
+              {
+                "literal": "1",
+                "value": 1,
+                "line": 132,
+                "column": 57,
+                "classification": "universal-algorithm-or-control-flow"
+              }
+            ]
+          }
+        }
+      ],
+      "recipeCount": 78,
+      "generatorCount": 0,
+      "count": 78,
+      "maximum": 96,
+      "passed": true
+    },
+    "bundles": {
+      "production": {
+        "bytes": 34183,
+        "gzipBytes": 10877,
+        "minified": true,
+        "sourceMapBytes": 0,
+        "threeExcluded": true
+      },
+      "objectIncrement": {
+        "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+        "bytes": 833,
+        "objectBundleGzipBytes": 444,
+        "combinedBundleGzipBytes": 2270,
+        "sharedFrameworkGzipBytes": 927,
+        "gzipBytes": 1343
+      }
+    },
+    "budgets": {
+      "objectId": "mushroom",
+      "passed": true,
+      "budget": {
+        "scalars": 96,
+        "recipeBytes": 2048,
+        "bundleGzipBytes": 8192,
+        "triangles": 3840,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 196608,
+        "warmGenerationP95Milliseconds": 10
+      },
+      "actual": {
+        "scalars": 78,
+        "recipeBytes": 658,
+        "bundleGzipBytes": 1343,
+        "triangles": 1560,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 30840,
+        "warmGenerationP95Milliseconds": 0.5
+      },
+      "checks": [
+        {
+          "metric": "scalars",
+          "value": 78,
+          "maximum": 96,
+          "passed": true
+        },
+        {
+          "metric": "recipeBytes",
+          "value": 658,
+          "maximum": 2048,
+          "passed": true
+        },
+        {
+          "metric": "bundleGzipBytes",
+          "value": 1343,
+          "maximum": 8192,
+          "passed": true
+        },
+        {
+          "metric": "triangles",
+          "value": 1560,
+          "maximum": 3840,
+          "passed": true
+        },
+        {
+          "metric": "drawCalls",
+          "value": 2,
+          "maximum": 2,
+          "passed": true
+        },
+        {
+          "metric": "geometryMemoryBytes",
+          "value": 30840,
+          "maximum": 196608,
+          "passed": true
+        },
+        {
+          "metric": "warmGenerationP95Milliseconds",
+          "value": 0.5,
+          "maximum": 10,
+          "passed": true
+        },
+        {
+          "metric": "deterministicCpuBytes",
+          "value": true,
+          "expected": true,
+          "passed": true
+        },
+        {
+          "metric": "runtimeTextureCount",
+          "value": 0,
+          "maximum": 0,
+          "passed": true
+        }
+      ],
+      "failures": []
+    },
+    "staticAudit": {
+      "passed": true,
+      "productionFiles": [
+        {
+          "file": "gt_designer/single-mesh-replacement/main.js",
+          "bytes": 2488
+        },
+        {
+          "file": "gt_designer/src/reconstruction/core/object-generator.js",
+          "bytes": 2912
+        },
+        {
+          "file": "gt_designer/src/reconstruction/core/rng.js",
+          "bytes": 976
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/bamboo-shoot-generator.js",
+          "bytes": 11250
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/bamboo-shoot-recipe.js",
+          "bytes": 1170
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/mushroom-definition.js",
+          "bytes": 287
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/mushroom-generator.js",
+          "bytes": 5013
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/mushroom-recipe.js",
+          "bytes": 1115
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+          "bytes": 1657
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-definition.js",
+          "bytes": 260
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+          "bytes": 6043
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+          "bytes": 3222
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+          "bytes": 1545
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+          "bytes": 1097
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-definition.js",
+          "bytes": 287
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+          "bytes": 16446
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+          "bytes": 2652
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+          "bytes": 3882
+        },
+        {
+          "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+          "bytes": 1609
+        },
+        {
+          "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+          "bytes": 2056
+        }
+      ],
+      "thirdPartyInputs": [],
+      "failures": []
+    },
+    "bundleAudit": {
+      "passed": true,
+      "failures": []
+    },
+    "offline": {
+      "passed": true,
+      "servedFiles": [
+        "bundle.js",
+        "index.html",
+        "three.module.js"
+      ],
+      "authoredDirectoriesAvailableToServer": false,
+      "emptyBrowserProfile": true,
+      "networkResolutionBlocked": true,
+      "localRequestCount": 3
+    },
+    "crossEngine": {
+      "boundsToleranceCanonical": 0.000007,
+      "normative": {
+        "engine": "Chrome/V8",
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.nature.mushroom",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.nature.mushroom/stems",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.nature.mushroom/caps",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-1",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-2",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-3",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-4",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-5",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.nature.mushroom",
+              "parentSemanticId": null,
+              "type": "Group",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/stems",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 1755
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 1755
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 2880
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.nature.mushroom/caps",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 930
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 930
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 1800
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-1",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-2",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-3",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-4",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-5",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            }
+          ],
+          "bounds": {
+            "min": [
+              -1.7359999418258667,
+              0,
+              -1.5002559423446655
+            ],
+            "max": [
+              1.7369999885559082,
+              6.997353784739971,
+              1.5011450052261353
+            ]
+          },
+          "triangles": 1560,
+          "drawCalls": 2
+        }
+      },
+      "candidates": [
+        {
+          "engine": "JavaScriptCore (Safari 26.2 system framework)",
+          "comparison": {
+            "structureMatches": true,
+            "maximumBoundsDifference": 0,
+            "boundsTolerance": 0.000007,
+            "boundsMatch": true,
+            "passed": true
+          },
+          "signature": {
+            "semanticHierarchy": [
+              {
+                "semanticId": "island.nature.mushroom",
+                "parentSemanticId": null,
+                "type": "Group"
+              },
+              {
+                "semanticId": "island.nature.mushroom/stems",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Mesh"
+              },
+              {
+                "semanticId": "island.nature.mushroom/caps",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Mesh"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-1",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-2",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-3",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-4",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-5",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              }
+            ],
+            "objects": [
+              {
+                "semanticId": "island.nature.mushroom",
+                "parentSemanticId": null,
+                "type": "Group",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/stems",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 1755
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 1755
+                    }
+                  },
+                  "index": {
+                    "constructor": "Uint16Array",
+                    "length": 2880
+                  },
+                  "groups": []
+                }
+              },
+              {
+                "semanticId": "island.nature.mushroom/caps",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 930
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 930
+                    }
+                  },
+                  "index": {
+                    "constructor": "Uint16Array",
+                    "length": 1800
+                  },
+                  "groups": []
+                }
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-1",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-2",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-3",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-4",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-5",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              }
+            ],
+            "bounds": {
+              "min": [
+                -1.7359999418258667,
+                0,
+                -1.5002559423446655
+              ],
+              "max": [
+                1.7369999885559082,
+                6.997353784739971,
+                1.5011450052261353
+              ]
+            },
+            "triangles": 1560,
+            "drawCalls": 2
+          }
+        },
+        {
+          "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+          "comparison": {
+            "structureMatches": true,
+            "maximumBoundsDifference": 0,
+            "boundsTolerance": 0.000007,
+            "boundsMatch": true,
+            "passed": true
+          },
+          "signature": {
+            "semanticHierarchy": [
+              {
+                "semanticId": "island.nature.mushroom",
+                "parentSemanticId": null,
+                "type": "Group"
+              },
+              {
+                "semanticId": "island.nature.mushroom/stems",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Mesh"
+              },
+              {
+                "semanticId": "island.nature.mushroom/caps",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Mesh"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-1",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-2",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-3",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-4",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-5",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D"
+              }
+            ],
+            "objects": [
+              {
+                "semanticId": "island.nature.mushroom",
+                "parentSemanticId": null,
+                "type": "Group",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/stems",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 1755
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 1755
+                    }
+                  },
+                  "index": {
+                    "constructor": "Uint16Array",
+                    "length": 2880
+                  },
+                  "groups": []
+                }
+              },
+              {
+                "semanticId": "island.nature.mushroom/caps",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Mesh",
+                "geometry": {
+                  "type": "BufferGeometry",
+                  "attributes": {
+                    "position": {
+                      "constructor": "Float32Array",
+                      "length": 930
+                    },
+                    "normal": {
+                      "constructor": "Float32Array",
+                      "length": 930
+                    }
+                  },
+                  "index": {
+                    "constructor": "Uint16Array",
+                    "length": 1800
+                  },
+                  "groups": []
+                }
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-1",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-2",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-3",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-4",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              },
+              {
+                "semanticId": "island.nature.mushroom/form-5",
+                "parentSemanticId": "island.nature.mushroom",
+                "type": "Object3D",
+                "geometry": null
+              }
+            ],
+            "bounds": {
+              "min": [
+                -1.7359999418258667,
+                0,
+                -1.5002559423446655
+              ],
+              "max": [
+                1.7369999885559082,
+                6.997353784739971,
+                1.5011450052261353
+              ]
+            },
+            "triangles": 1560,
+            "drawCalls": 2
+          }
+        }
+      ],
+      "passed": true
+    },
+    "environment": {
+      "normativeBaseline": {
+        "model": "Apple M5 MacBook Pro",
+        "operatingSystem": "macOS 26.2",
+        "browser": "Google Chrome 150.0.7871.184",
+        "three": "0.170.0"
+      },
+      "actual": {
+        "modelName": "MacBook Pro",
+        "modelIdentifier": "Mac17,2",
+        "chip": "Apple M5",
+        "cores": "10 (4 performance and 6 efficiency)",
+        "memory": "32 GB",
+        "operatingSystem": "macOS 26.2",
+        "operatingSystemBuild": "25C56",
+        "browser": "Google Chrome 150.0.7871.184",
+        "three": "0.170.0",
+        "powerState": [
+          "Now drawing from 'AC Power'",
+          "-InternalBattery-0 (id=22610019)\t100%; charged; 0:00 remaining present: true"
+        ]
+      },
+      "migrationRequired": false
+    },
+    "acceptance": {
+      "passed": true,
+      "checks": [
+        {
+          "id": "complete-source-scalar-audit",
+          "passed": true,
+          "detail": {
+            "value": 78,
+            "maximum": 96
+          }
+        },
+        {
+          "id": "object-budgets",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "static-source-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "minified-bundle-audit",
+          "passed": true,
+          "detail": []
+        },
+        {
+          "id": "isolated-offline-render",
+          "passed": true,
+          "detail": {
+            "passed": true,
+            "servedFiles": [
+              "bundle.js",
+              "index.html",
+              "three.module.js"
+            ],
+            "authoredDirectoriesAvailableToServer": false,
+            "emptyBrowserProfile": true,
+            "networkResolutionBlocked": true,
+            "localRequestCount": 3
+          }
+        },
+        {
+          "id": "cross-engine-structure-and-bounds",
+          "passed": true,
+          "detail": [
+            {
+              "engine": "JavaScriptCore (Safari 26.2 system framework)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            },
+            {
+              "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+              "comparison": {
+                "structureMatches": true,
+                "maximumBoundsDifference": 0,
+                "boundsTolerance": 0.000007,
+                "boundsMatch": true,
+                "passed": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "normative-environment",
+          "passed": true,
+          "detail": {
+            "modelName": "MacBook Pro",
+            "modelIdentifier": "Mac17,2",
+            "chip": "Apple M5",
+            "cores": "10 (4 performance and 6 efficiency)",
+            "memory": "32 GB",
+            "operatingSystem": "macOS 26.2",
+            "operatingSystemBuild": "25C56",
+            "browser": "Google Chrome 150.0.7871.184",
+            "three": "0.170.0",
+            "powerState": [
+              "Now drawing from 'AC Power'",
+              "-InternalBattery-0 (id=22610019)\t100%; charged; 0:00 remaining present: true"
+            ]
+          }
+        }
+      ],
+      "failures": []
+    }
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "visual-quality-gate",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "nonvisual-acceptance",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "complete-fixed-capture-set",
+        "passed": true,
+        "detail": 168
+      },
+      {
+        "id": "reference-derived-framing",
+        "passed": true,
+        "detail": {
+          "translationBeforeScale": [
+            0,
+            0,
+            0
+          ],
+          "uniformScale": 0.9975287488162892,
+          "independentlyFramed": false
+        }
+      },
+      {
+        "id": "versioned-geometry-and-appearance-baselines",
+        "passed": true,
+        "detail": {
+          "geometry": "mushroom-compact-geometry-baseline-v2",
+          "appearance": "mushroom-semantic-category-baseline-v2"
+        }
+      },
+      {
+        "id": "candidate-quarantine-before-and-after",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "umbrella-geometry-freeze-before-and-after",
+        "passed": true,
+        "detail": [
+          null,
+          null
+        ]
+      }
+    ],
+    "failures": []
+  }
+}

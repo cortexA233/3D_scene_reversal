@@ -184,9 +184,11 @@ async function evaluateObject(options, configuration, objectId, objectIndex) {
         ? runs.every(
             ({ report }) =>
               report.comparison.gate.baselineVersions?.geometry ===
-                `${objectId}-category-baseline-v1` &&
+                (options.categoryBaseline === "stage2-v3"
+                  ? `${objectId}-compact-geometry-baseline-v2`
+                  : `${objectId}-category-baseline-v1`) &&
               report.comparison.gate.baselineVersions?.appearance ===
-                (options.categoryBaseline === "stage2-v2"
+                (["stage2-v2", "stage2-v3"].includes(options.categoryBaseline)
                   ? `${objectId}-semantic-category-baseline-v2`
                   : `${objectId}-category-baseline-v1`),
           )

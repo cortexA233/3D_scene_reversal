@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "stage-2-compact-geometry-baselines-v2",
+  "version": "stage-2-compact-geometry-baselines-v2",
+  "artifactRole": "development-only-quality-baseline-set",
+  "productionUse": "prohibited",
+  "policy": {
+    "historicalCategoryV1": "retained without alteration",
+    "scope": "bounded relaxation for compact procedural family expressions",
+    "destructiveSeparation": "all frozen must-reject Stage 2 precalibration scenarios must still reject",
+    "approval": "user-authorized similarity relaxation; versioned, never rewritten"
+  },
+  "objects": {
+    "mushroom": {
+      "schemaVersion": "stage-2-compact-geometry-baseline-v2",
+      "version": "mushroom-compact-geometry-baseline-v2",
+      "objectId": "mushroom",
+      "hard": [
+        {"path":"geometry.bounds.maxAxisRelativeError","operator":"<=","threshold":0.050685267497310546,"domain":"geometry","source":"unchanged-category-v1"},
+        {"path":"geometry.bounds.bottomAnchorErrorCanonical","operator":"<=","threshold":0.047379137823624545,"domain":"geometry","source":"unchanged-category-v1"},
+        {"path":"geometry.silhouette.meanIou","operator":">=","threshold":0.82,"domain":"geometry","source":"compact-family-v2"},
+        {"path":"geometry.silhouette.worstViewIou","operator":">=","threshold":0.76,"domain":"geometry","source":"compact-family-v2"},
+        {"path":"geometry.silhouette.meanEdgeDistancePixels","operator":"<=","threshold":3.2,"domain":"geometry","source":"compact-family-v2"},
+        {"path":"geometry.silhouette.edgeDistanceP95Pixels","operator":"<=","threshold":15,"domain":"geometry","source":"compact-family-v2"},
+        {"path":"geometry.depth.mae","operator":"<=","threshold":0.025,"domain":"geometry","source":"compact-family-v2"},
+        {"path":"geometry.depth.p95","operator":"<=","threshold":0.23,"domain":"geometry","source":"compact-family-v2"}
+      ],
+      "frozen": true
+    }
+  }
+}

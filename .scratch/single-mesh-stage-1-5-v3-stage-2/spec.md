@@ -33,8 +33,10 @@ Safari gates before the next object begins. Final certification requires 8/8.
 - Exact-position complex-texture DeltaE, SSIM, palette clustering, and v2 recall
   are diagnostic in v3; bounded motif-family coverage and role palette are hard.
 - Existing Umbrella geometry and all nonvisual thresholds remain unchanged.
-- Stage 2 thresholds and budgets freeze before candidate fitting; they may be
-  looser than v1 only when their reference-only Calibration Brackets support it.
+- Stage 2 category-v1 thresholds and budgets freeze before candidate fitting.
+  A later user-authorized relaxation never edits v1 and must be a separately
+  versioned Human-anchored baseline with a hash-frozen positive and retained
+  rejection of every declared destructive control.
 - Final delivery is one eight-object Reference-layout Delivery, never per-object
   final scenes and never an island-village source-world arrangement.
 - Runtime textures, sampled appearance/geometry, vectorized bitmaps, WASM, and
@@ -54,5 +56,6 @@ Safari gates before the next object begins. Final certification requires 8/8.
 
 - full-island reconstruction or complete-island tickets;
 - terrain, village structures, scatter, wildlife, interaction, animation, or LOD;
-- rewriting v1/v2 evidence or lowering geometry/nonvisual limits after fitting;
+- rewriting v1/v2 evidence, silently lowering a frozen baseline, or lowering
+  nonvisual limits after fitting;
 - isolated per-object final delivery routes.

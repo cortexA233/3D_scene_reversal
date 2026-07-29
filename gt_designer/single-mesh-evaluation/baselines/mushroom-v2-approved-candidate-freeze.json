@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "stage-2-approved-candidate-freeze-v1",
+  "candidateId": "mushroom/curved-stem-bell-cap-cluster-v1-semantic-v2",
+  "artifactRole": "development-only-semantic-positive-anchor",
+  "productionUse": "prohibited",
+  "freezeCommit": "a91fc67",
+  "policy": {
+    "approvalScope": "versioned compact-family geometry v2 plus measured cap/stem semantic roles",
+    "mutationAfterFreeze": "requires a new positive exemplar version",
+    "verification": "sha256-and-byte-length-before-and-after-controls",
+    "sharedRegistry": "excluded; object-scoped definition and generator sources are frozen"
+  },
+  "candidateFiles": [
+    {"path":"gt_designer/src/reconstruction/core/object-generator.js","byteLength":2912,"sha256":"efbe8045363fbcb436132d43d174d4b753efae196a35ec2a4d833016da6a4717"},
+    {"path":"gt_designer/src/reconstruction/core/rng.js","byteLength":976,"sha256":"3d23fd42233f8988518cc8907db7705f7629770c0ac2b859a97bce82468fa5f5"},
+    {"path":"gt_designer/src/reconstruction/objects/mushroom-definition.js","byteLength":287,"sha256":"47cbac1397db0db1afc30f07ef08615b80f04fa1ad81b49373e94e3ada30ff77"},
+    {"path":"gt_designer/src/reconstruction/objects/mushroom-generator.js","byteLength":5013,"sha256":"d82f717df752cf25d758bcb1f10b2f3541419c1b8b4ce8bc46bbd98bcbd5f584"},
+    {"path":"gt_designer/src/reconstruction/objects/mushroom-recipe.js","byteLength":1115,"sha256":"b05675645a345f13e44c48801debd2f47b283bb7d2b937f28a4c890c1c223af1"}
+  ],
+  "evidenceFiles": [],
+  "baselineFiles": [
+    {"path":"gt_designer/single-mesh-evaluation/baselines/stage2-compact-geometry-baselines-v2.json","byteLength":1912,"sha256":"5f8803fa23cb2d0d08175c9ed9c5793b45ce1aafaebf0ba8d63277b5c4660bf0"},
+    {"path":"gt_designer/single-mesh-evaluation/baselines/stage2-semantic-appearance-baselines-v2.json","byteLength":5115,"sha256":"8c3e3f5fedf177ff75b76d29e341a732f489f2d24ae80b7612c8946dec46a67a"},
+    {"path":"gt_designer/single-mesh-evaluation/mushroom-appearance-variants.js","byteLength":1033,"sha256":"c53a7c134d71be9ffd4c7ca77bb102cc6d5cb461b942526b5ae479f737188b47"}
+  ]
+}

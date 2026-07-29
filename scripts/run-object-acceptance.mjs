@@ -105,6 +105,17 @@ async function main() {
               "utf8",
             ),
           )
+      : options.categoryBaseline === "stage2-v3" &&
+          options.objectId === "mushroom"
+        ? JSON.parse(
+            await readFile(
+              path.join(
+                PROJECT_ROOT,
+                "gt_designer/single-mesh-evaluation/baselines/mushroom-v2-approved-candidate-freeze.json",
+              ),
+              "utf8",
+            ),
+          )
       : null;
   const candidateBefore = candidateManifest
     ? await verifyCandidateFreeze({
@@ -200,11 +211,11 @@ async function main() {
       id: "versioned-geometry-and-appearance-baselines",
       passed: options.categoryBaseline
         ? visual.comparison.gate.baselineVersions?.geometry ===
-            (options.categoryBaseline === "stage2-v2"
-              ? `${options.objectId}-category-baseline-v1`
+            (options.categoryBaseline === "stage2-v3"
+              ? `${options.objectId}-compact-geometry-baseline-v2`
               : `${options.objectId}-category-baseline-v1`) &&
           visual.comparison.gate.baselineVersions?.appearance ===
-            (options.categoryBaseline === "stage2-v2"
+            (["stage2-v2", "stage2-v3"].includes(options.categoryBaseline)
               ? `${options.objectId}-semantic-category-baseline-v2`
               : `${options.objectId}-category-baseline-v1`)
         : options.geometryBaseline

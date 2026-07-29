@@ -305,7 +305,7 @@ async function initialize() {
     }
     if (categoryBaselineId) {
       if (
-        !["stage2-v1", "stage2-v2"].includes(categoryBaselineId) ||
+        !["stage2-v1", "stage2-v2", "stage2-v3"].includes(categoryBaselineId) ||
         !["bamboo-shoot", "mushroom", "blue-hat", "candle"].includes(state.unitId)
       ) {
         throw new Error("unsupported Stage 2 category baseline request");
@@ -313,11 +313,24 @@ async function initialize() {
       const response = await fetch("./baselines/stage2-category-baselines-v1.json");
       if (!response.ok) throw new Error("Stage 2 category baselines could not be loaded");
       const baselineSet = await response.json();
-      const geometryBaseline = baselineSet.objects[state.unitId];
+      let geometryBaseline = baselineSet.objects[state.unitId];
       if (!geometryBaseline?.frozen) throw new Error("Stage 2 object baseline is not frozen");
       if (categoryBaselineId === "stage2-v1") {
         categoryBaseline = geometryBaseline;
       } else {
+        if (categoryBaselineId === "stage2-v3") {
+          const compactResponse = await fetch(
+            "./baselines/stage2-compact-geometry-baselines-v2.json",
+          );
+          if (!compactResponse.ok) {
+            throw new Error("Stage 2 compact geometry baselines could not be loaded");
+          }
+          const compactSet = await compactResponse.json();
+          geometryBaseline = compactSet.objects[state.unitId];
+          if (!geometryBaseline?.frozen) {
+            throw new Error("Stage 2 compact geometry baseline is not frozen");
+          }
+        }
         const semanticResponse = await fetch(
           "./baselines/stage2-semantic-appearance-baselines-v2.json",
         );

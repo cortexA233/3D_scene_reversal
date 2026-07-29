@@ -4,6 +4,8 @@ import test from "node:test";
 
 import { createBambooShootAppearanceVariantRecipe } from "../gt_designer/single-mesh-evaluation/bamboo-shoot-appearance-variants.js";
 import { BAMBOO_SHOOT_RECIPE } from "../gt_designer/src/reconstruction/objects/bamboo-shoot-recipe.js";
+import { createMushroomAppearanceVariantRecipe } from "../gt_designer/single-mesh-evaluation/mushroom-appearance-variants.js";
+import { MUSHROOM_RECIPE } from "../gt_designer/src/reconstruction/objects/mushroom-recipe.js";
 
 test("Bamboo Shoot semantic v2 keeps exact texture diagnostic and role gates hard", async () => {
   const baselineSet = JSON.parse(await readFile(
@@ -33,4 +35,46 @@ test("Bamboo Shoot appearance controls are isolated recipe copies", () => {
     assert.notDeepEqual(damaged.appearance, BAMBOO_SHOOT_RECIPE.appearance);
   }
   assert.equal(JSON.stringify(BAMBOO_SHOOT_RECIPE), original);
+});
+
+test("Mushroom semantic v2 declares measured cap and stem roles", async () => {
+  const baselineSet = JSON.parse(await readFile(
+    new URL("../gt_designer/single-mesh-evaluation/baselines/stage2-semantic-appearance-baselines-v2.json", import.meta.url),
+    "utf8",
+  ));
+  const baseline = baselineSet.objects.mushroom;
+  assert.deepEqual(baseline.semanticRoles.cap, [78, 23, 16]);
+  assert.deepEqual(baseline.semanticRoles.stem, [98, 91, 75]);
+  for (const variant of ["delete-cap-role", "delete-stem-role", "wrong-role-palette"]) {
+    assert.notDeepEqual(
+      createMushroomAppearanceVariantRecipe(MUSHROOM_RECIPE, variant).appearance,
+      MUSHROOM_RECIPE.appearance,
+    );
+  }
+});
+
+test("Mushroom compact geometry v2 keeps all reference destructive controls rejected", async () => {
+  const baselineSet = JSON.parse(await readFile(
+    new URL("../gt_designer/single-mesh-evaluation/baselines/stage2-compact-geometry-baselines-v2.json", import.meta.url),
+    "utf8",
+  ));
+  const report = JSON.parse(await readFile(
+    new URL("../gt_designer/single-mesh-evaluation/reports/stage2-precalibration-v1.json", import.meta.url),
+    "utf8",
+  ));
+  const baseline = baselineSet.objects.mushroom;
+  const valueAt = (root, path) => path.split(".").reduce((value, key) => value?.[key], root);
+  const passes = (metrics) => baseline.hard.every(({ path, operator, threshold }) =>
+    operator === ">="
+      ? valueAt(metrics, path) >= threshold
+      : valueAt(metrics, path) <= threshold
+  );
+  const destructive = report.runs
+    .find(({ objectId, runIndex }) => objectId === "mushroom" && runIndex === 1)
+    .scenarios
+    .filter(({ domain, classification }) =>
+      domain === "geometry" && classification === "must-reject"
+    );
+  assert.ok(destructive.length > 0);
+  assert.ok(destructive.every(({ comparison }) => !passes(comparison.aggregate)));
 });

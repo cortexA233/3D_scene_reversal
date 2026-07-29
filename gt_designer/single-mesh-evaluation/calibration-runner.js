@@ -806,6 +806,14 @@ export async function runObjectEvaluation({
         definition.recipe,
         appearanceVariant,
       );
+    } else if (objectId === "mushroom") {
+      const { createMushroomAppearanceVariantRecipe } = await import(
+        "./mushroom-appearance-variants.js"
+      );
+      replacementRecipe = createMushroomAppearanceVariantRecipe(
+        definition.recipe,
+        appearanceVariant,
+      );
     } else {
       throw new Error("appearance variants are not supported for this object");
     }
