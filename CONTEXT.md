@@ -5,7 +5,7 @@ This context describes the reconstruction of an authored 3D scene as a compact, 
 ## Language
 
 **Authored Reference**:
-An original artist-created scene or object retained as ground truth for measurement and comparison, but excluded from the delivered runtime.
+An original artist-created scene or object, including its models, materials, and textures, retained as development-only ground truth for analysis, measurement, fitting, and comparison, but excluded from the delivered runtime.
 _Avoid_: Source asset, production asset
 
 **Semantic Measurement**:
