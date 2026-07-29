@@ -1,7 +1,7 @@
 # 04 — Certify the resumed Stage 1.5 boundary
 
 Type: task
-Status: ready-for-agent
+Status: wontfix
 Blocked by: 03
 
 Package the complete versioned evidence into one reproducible certification and
@@ -25,3 +25,8 @@ Acceptance:
 
 The result is a Stage 1.5 authorization decision, never a retroactive Stage 1
 four-of-four claim.
+
+Ticket 02 failed before Ticket 03 could start, so the sequential Stage 1.5
+effort stopped without packaging a false complete certification. The blocking
+decision is recorded by ADR-0029 and the Umbrella v3 acceptance report; Stage 2
+is not authorized.

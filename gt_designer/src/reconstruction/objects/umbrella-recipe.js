@@ -4,7 +4,7 @@
  * @property {string} kind
  * @property {number} seed
  * @property {{canopyRadius: number, canopySurfaceRadius: number, canopyDrop: number, rimDrop: number, canopyThickness: number, panels: number, angularSubdivisions: number, radialBands: number, phaseDegrees: number, axis: readonly [number, number, number], shaftLength: number, shaftRadius: number, runnerCenter: number, runnerLength: number, runnerRadius: number, gripCenter: number, gripLength: number, gripRadius: number, ribStart: number, ribLayerOffset: number, supportRadius: number, supportHubHeight: number, supportEndHeight: number}} shape
- * @property {{canopyColor: number, ribColor: number, flowerColor: number, leafColor: number, accentColor: number, blossoms: readonly (readonly [number, number, number])[], leaves: readonly (readonly [number, number, number, number])[], roughness: number, metalness: number}} appearance
+ * @property {{canopyColor: number, ribColor: number, flowerColor: number, leafColor: number, branchColor: number, patternAccentColor: number, accentColor: number, blossoms: readonly (readonly [number, number, number])[], leaves: readonly (readonly [number, number, number, number])[], roughness: number, metalness: number}} appearance
  */
 
 /** @type {Readonly<UmbrellaRecipe>} */
@@ -40,15 +40,17 @@ export const UMBRELLA_RECIPE = Object.freeze({
   appearance: Object.freeze({
     canopyColor: 0xbdbdbd,
     ribColor: 0x686644,
-    flowerColor: 0xe5e1d8,
-    leafColor: 0x315751,
+    flowerColor: 0xe1e4df,
+    leafColor: 0x4b7169,
+    branchColor: 0x344943,
+    patternAccentColor: 0xb78351,
     accentColor: 0x9e7d50,
     blossoms: Object.freeze([
-      Object.freeze([0.3, -1.85, 0.55]),
-      Object.freeze([1.05, 0.15, 0.68]),
-      Object.freeze([1.55, 0.85, 0.72]),
-      Object.freeze([1.85, -0.45, 0.74]),
-      Object.freeze([2.27, -2.47, 0.7]),
+      Object.freeze([0.3, -1.85, 0.82]),
+      Object.freeze([1.05, 0.15, 0.94]),
+      Object.freeze([1.55, 0.85, 0.98]),
+      Object.freeze([1.85, -0.45, 1.02]),
+      Object.freeze([2.27, -2.47, 0.91]),
     ]),
     leaves: Object.freeze([
       Object.freeze([2.2, 1.6, 0.87, 0.35]),

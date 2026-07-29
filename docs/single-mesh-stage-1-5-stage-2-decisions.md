@@ -1,6 +1,6 @@
 # Single Mesh Lab Stage 1.5 and Stage 2 Decision Brief
 
-Status: Stone boundary restart passed; Stage 1.5 resumed at patterned appearance v2
+Status: Stage 1.5 stopped at the Umbrella appearance kill gate; Stage 2 unauthorized
 Date: 2026-07-29
 
 ## Objective
@@ -8,6 +8,28 @@ Date: 2026-07-29
 Stage 1.5 is a blocking evidence-and-recovery phase between the frozen Stage 1 `2/4 FAIL` result and Stage 2. It exists to determine whether the failed Stone and Umbrella classes can satisfy compact code-only reconstruction, complete missing native-browser GPU evidence, repair the scalar-audit contract, and freeze trustworthy Bamboo Shoot and Mushroom acceptance boundaries.
 
 Stage 2 remains a formal Single Mesh Lab exit path. It is not an exploratory branch that may proceed while a Stage 1.5 recovery is red.
+
+## Resumed Stage 1.5 outcome
+
+The reference-only Patterned Appearance Baseline v2 froze successfully, after
+which one geometry-frozen Bounded Semantic Pattern Program was evaluated. It
+passed the unchanged Umbrella geometry gate, the independent two-batch golden
+freeze, all complete-source scalar and nonvisual budgets, determinism, and
+Reference Independence. It failed every patterned-v2 appearance hard metric in
+the normative Chrome run.
+
+The decisive values were mean/P90 DeltaE `10.1431/56.9890` against maxima
+`6.6966/30.8300`, mean/worst SSIM `0.4189/0.2800` against minima
+`0.7287/0.5870`, and flower/leaf/branch Semantic Pattern Recall
+`0.0157/0.0443/0.0100` against minima `0.0451/0.1615/0.5905`. The candidate
+used 83/96 complete-source scalars and generated in 1.30 ms p95, so the result
+isolates semantic appearance fidelity rather than compactness or runtime.
+
+This activates the predeclared kill condition. Native Firefox and Safari
+candidate runs, Bamboo Shoot/Mushroom pre-calibration, final Stage 1.5
+certification, Stage 2 candidate fitting, and full-island tickets do not start.
+No frozen threshold changes, no retroactive Stage 1 pass, and no partial Stage
+2 authorization follow from the negative result.
 
 ## Invariants
 
@@ -190,6 +212,11 @@ Umbrella must pass:
 No appearance-scalar allowance is presumed from the old `86/96` report. Headroom is determined only after the corrected audit measures the frozen geometry and all generated shader constants.
 
 Kill condition: the candidate cannot pass the frozen v2 and unchanged nonvisual boundary. Stage 2 remains closed and the project revisits whether hero patterned identity is compatible with the full-island Code-only Production Runtime target.
+
+Recorded outcome: the bounded program passed geometry and the complete
+nonvisual boundary but failed all seven patterned-v2 appearance hard metrics in
+Chrome. The kill condition is active; the execution stops here without native
+Firefox/Safari candidate runs or Stage 2 pre-calibration.
 
 ### 6. Pre-calibrate Stage 2 objects
 

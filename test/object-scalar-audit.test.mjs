@@ -25,7 +25,7 @@ test("complete-source scalar audit includes recipe and generated-source choices"
   ]);
   assert.ok(
     result.generators[0].evidence.objectSpecific.some(
-      (entry) => entry.value === 1.7,
+      (entry) => entry.value === 0.032,
     ),
   );
 });

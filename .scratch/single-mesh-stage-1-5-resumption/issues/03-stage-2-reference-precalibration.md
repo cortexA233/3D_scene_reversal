@@ -1,7 +1,7 @@
 # 03 — Freeze Bamboo Shoot and Mushroom reference baselines
 
 Type: task
-Status: ready-for-agent
+Status: wontfix
 Blocked by: 02
 
 Run the accepted separate reference-only Calibration Brackets and freeze the
@@ -27,3 +27,7 @@ Acceptance:
 
 This ticket creates evaluation evidence only. It does not create Bamboo Shoot
 or Mushroom production generators, recipes, or implementation tickets.
+
+Ticket 02 resolved with a negative Umbrella kill-gate result. This ticket was
+therefore not executed: no Bamboo Shoot or Mushroom baseline was calibrated or
+frozen, and no candidate fitting was authorized.

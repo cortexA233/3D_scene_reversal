@@ -1,6 +1,7 @@
 # Single Mesh Lab Stage 1.5 resumption
 
-Status: ready-for-agent
+Status: resolved
+Outcome: FAIL — Umbrella kill gate; Stage 2 not authorized
 
 ## Problem Statement
 
@@ -12,6 +13,12 @@ reference-only pre-calibration for Bamboo Shoot and Mushroom.
 
 The historical Stage 1 result remains `2/4 FAIL`. Stage 2 remains unauthorized
 until this successor effort passes every ticket in order.
+
+The effort stopped at kill gate 2. The frozen-geometry Umbrella candidate
+passed geometry and every nonvisual boundary but failed all seven hard
+Patterned Appearance Baseline v2 metrics in Chrome. Per the declared execution
+order, the Bamboo Shoot/Mushroom pre-calibration and final Stage 1.5
+certification tickets did not run.
 
 ## Solution
 
