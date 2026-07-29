@@ -97,15 +97,19 @@ A cross-browser acceptance gate produced by a hardware-accelerated browser rende
 _Avoid_: Browser screenshot, GPU smoke test, engine-shell evidence
 
 **Quality Baseline**:
-The fixed acceptance thresholds calibrated from reference repeatability and controlled reference perturbations before replacement fitting begins.
+The fixed acceptance thresholds calibrated from reference repeatability and controlled reference perturbations before replacement fitting begins, except when a separately recorded Quarantined Rebaseline supplies the stricter candidate-isolation procedure.
 _Avoid_: Target score, tuned threshold, visual bar
 
 **Calibration Bracket**:
 The reference-only evidence interval between declared mild perturbations that an Exact-ish Reconstruction should tolerate and declared structural or appearance damage that it must reject; a threshold is valid only when the two classes remain separable.
 _Avoid_: Sensitivity sweep, threshold tuning range, candidate margin
 
+**Quarantined Rebaseline**:
+A one-time, separately versioned Category-specific Quality Baseline reset authorized after a candidate result is already known; it uses only a predeclared Authored Reference perturbation manifest and threshold-selection rule while the exposed candidate is commit- and hash-frozen and excluded from calibration inputs.
+_Avoid_: Post-fit tuning, candidate-fit tolerance, retroactive pass
+
 **Category-specific Quality Baseline**:
-A Quality Baseline calibrated for one object or shape category before its Procedural Replacement is fitted; it may be looser or stricter than an earlier category's values when sensitivity evidence supports the difference, but it may not be chosen in response to a candidate failure.
+A Quality Baseline calibrated for one object or shape category, normally before its Procedural Replacement is fitted; it may be looser or stricter than an earlier category's values when reference sensitivity evidence supports the difference, but after fitting it may change only through an explicit Quarantined Rebaseline.
 _Avoid_: Inherited threshold, difficulty discount, post-fit adjustment
 
 **Patterned Appearance Baseline**:
@@ -124,6 +128,8 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 
 - Stage 1 uses the frozen `single-mesh-quality-baseline-v1` thresholds for Stone Path, Stone, Vase, and Umbrella. Browser calibration passed 29 repeatability, identity, sensitivity-ordering, diagnostic, and policy checks without using the one permitted pre-fitting correction.
 - Future Category-specific Quality Baselines, including those for Bamboo Shoot and Mushroom, may use looser numerical tolerances than Stage 1 when pre-implementation sensitivity calibration justifies them; the frozen Stage 1 values remain unchanged.
+- Stone's 24-direction Bounded Support-plane Polyhedron is frozen at commit `6ebb70c3f8162aa439377e0da46955f9f294c05f` after its v1 failure. A one-time Quarantined Rebaseline may create `stone-geometry-baseline-v2` from Authored Reference evidence without changing the representation, its nonvisual ceilings, or the historical Stage 1/Stage 1.5 negative reports.
+- `stone-geometry-baseline-v2` must use a predeclared reference-only Calibration Bracket and deterministic threshold-selection rule. The frozen candidate's known metrics are not calibration inputs; if mild and destructive controls cannot be separated, or the unchanged candidate later fails v2, no second threshold relaxation is allowed under this boundary.
 - The Stage 1 `single-mesh-quality-baseline-v1` and its two-of-four result remain historical evidence. Stage 1.5 may evaluate a new Umbrella candidate against a separately pre-calibrated Patterned Appearance Baseline v2 whose appearance tolerances may be materially looser, while Umbrella geometry gates and nonvisual budgets remain unchanged.
 - Patterned Appearance Baseline v2 may be loosened during reference-only pre-calibration, but a flat canopy, wrong dominant palette, deleted major motif family, materially reduced pattern coverage, and large phase or pattern-scale errors must still fail; no further loosening is permitted after candidate fitting begins.
 - Firefox and Safari evidence for an otherwise-qualified candidate requires a Native GPU Visual Gate with two stable full-protocol capture runs, recorded browser/OS/Three.js/GPU/color metadata, and an explicit rejection of software rendering. JavaScriptCore and SpiderMonkey structure/bounds signatures do not satisfy this gate.

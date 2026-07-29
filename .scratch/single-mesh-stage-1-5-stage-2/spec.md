@@ -1,6 +1,6 @@
 # Single Mesh Lab Stage 1.5 and Stage 2
 
-Status: needs-info
+Status: wontfix
 
 ## Problem Statement
 
@@ -10,7 +10,8 @@ The accepted product and architectural decisions are recorded in:
 
 - `docs/single-mesh-stage-1-postmortem.md`;
 - `docs/single-mesh-stage-1-5-stage-2-decisions.md`;
-- ADR-0016 through ADR-0023.
+- ADR-0016 through ADR-0023 for the executed sequence, with ADR-0024 governing
+  the separately tracked boundary restart.
 
 ## Solution
 
@@ -89,3 +90,9 @@ unchanged v1 geometry thresholds. The specification's kill gate therefore
 stops Tickets 04–10 and denies Stage 2 authorization. A new boundary decision
 is required before implementation can resume; candidate evidence did not alter
 any threshold or historical report.
+
+The boundary review is now accepted in ADR-0024. Continuation is intentionally
+tracked as a new, narrow effort under
+`.scratch/single-mesh-stage-1-5-boundary-restart/`; this executed specification
+remains closed so its negative result and stopped Tickets 04–10 are not
+rewritten as though the original v1 gate passed.

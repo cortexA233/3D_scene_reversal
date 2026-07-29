@@ -1,6 +1,6 @@
 # Single Mesh Lab Stage 1.5 and Stage 2 Decision Brief
 
-Status: accepted handoff to `/to-spec`
+Status: accepted Stone boundary restart; narrow specification ready for agent
 Date: 2026-07-29
 
 ## Objective
@@ -12,13 +12,58 @@ Stage 2 remains a formal Single Mesh Lab exit path. It is not an exploratory bra
 ## Invariants
 
 - `single-mesh-quality-baseline-v1` and the historical Stage 1 two-of-four result remain unchanged.
-- Stone remains subject to the complete frozen v1 visual and nonvisual gates.
+- Stone's v1 failure remains frozen historical evidence. The unchanged 24-direction candidate may continue only under the one-time Quarantined Rebaseline defined below; its nonvisual gates remain unchanged.
 - Umbrella geometry and nonvisual ceilings remain unchanged; only its new appearance candidate uses a separately calibrated patterned-appearance v2.
 - New category-specific visual tolerances may be looser than Stage 1 when reference-only Calibration Brackets support the difference.
-- No baseline may be loosened after candidate fitting begins.
+- No ordinary baseline may be loosened after candidate fitting begins. The Stone boundary review authorizes one separately versioned exception with candidate quarantine; it is not a reusable post-fit tuning mechanism.
 - Authored textures, pixels, sampled lookup data, vectorized bitmaps, resolution-scaled paths, source vertices, copied source transforms, runtime textures, WASM, and unapproved Runtime Kernels remain prohibited.
 - A resolved negative experiment does not satisfy a stage gate.
-- This decision cycle creates no implementation code, full-island work, or tickets.
+- This decision cycle creates no implementation code or full-island work; it creates only the three narrow Stone boundary-restart tickets required to reach a new gate decision.
+
+## Stone boundary-review amendment
+
+The Stage 1.5 execution reached its required stop. Stone's 24-direction
+Bounded Support-plane Polyhedron passed every compactness, runtime,
+determinism, and Reference Independence gate but failed six v1 geometry
+thresholds. The negative certification and its metric values remain frozen;
+this amendment does not reinterpret that result as a pass.
+
+The continuation boundary is a one-time **Quarantined Rebaseline**:
+
+- freeze the Stone generator, recipe, and existing evidence at commit
+  `6ebb70c3f8162aa439377e0da46955f9f294c05f` before calibration;
+- create a separately named `stone-geometry-baseline-v2`; never edit or alias
+  `single-mesh-quality-baseline-v1`;
+- declare the complete Authored Reference perturbation manifest, metric set,
+  repeatability allowance, and threshold-selection rule before running the
+  calibration;
+- derive every hard threshold only from fresh Authored Reference identity,
+  mild, intermediate, severe, and destructive controls; the known candidate
+  metrics are prohibited calibration inputs;
+- choose each limit as the least-permissive value that contains the complete
+  mild envelope plus its predeclared repeatability allowance, and retain it
+  only if every applicable destructive control remains outside the limit;
+- replace or demote a non-separating metric before threshold freeze rather
+  than moving its limit toward the candidate;
+- after the machine-readable v2 baseline freezes, evaluate the exact frozen
+  candidate without refitting it, first in Chrome and then through the full
+  native Firefox and Safari GPU gates;
+- preserve the Stone scalar, recipe, gzip, triangle, draw-call, geometry
+  memory, generation-time, determinism, and Reference Independence ceilings.
+
+The Stone-specific bracket must cover the common transform ladders plus
+declared anisotropic-scale, profile-compression, and support-direction
+sensitivity controls. Its destructive side must include materially squashed
+or sheared forms, low-direction hull controls, and simple ellipsoid or box
+substitutes. `/to-spec` must freeze exact perturbation magnitudes and the
+repeatability allowance before calibration.
+
+This is a single restart, not an iterative tolerance search. Calibration stops
+if mild and destructive classes overlap. If the frozen candidate fails v2,
+the project may not lower Stone thresholds again; a new boundary review must
+choose between a larger representation/data budget and ending the formal
+Code-only exit path. If it passes all three browsers and unchanged nonvisual
+gates, Stage 1.5 resumes at patterned-appearance v2 calibration.
 
 ## Stage 1.5 execution order
 
@@ -73,7 +118,9 @@ Stone must pass:
 - deterministic generation and Reference Independence;
 - normative Chrome plus native Firefox and Safari visual gates.
 
-Kill condition: any required gate remains red. This is the second reasonable compact Stone representation failure and triggers a representation/full-island-boundary review; Umbrella v2 work does not begin.
+Recorded outcome: this gate failed and triggered the boundary review. The
+frozen candidate may now proceed only through the Quarantined Rebaseline above;
+Umbrella v2 work still does not begin until that restart passes.
 
 ### 4. Calibrate patterned-appearance v2
 
@@ -193,7 +240,7 @@ The Stage 1.5 certification must state all of the following independently:
 
 - Stage 1 v1 remains `2/4 FAIL`;
 - complete-source scalar audit is trustworthy and all retained candidates meet their ceilings;
-- Stone passes its full v1 contract in Chrome, Firefox, and Safari;
+- Stone's historical v1 failure remains recorded and the frozen candidate passes `stone-geometry-baseline-v2` in Chrome, Firefox, and Safari;
 - Umbrella passes its geometry contract and patterned-appearance v2 in all three browsers;
 - Stone Path and Vase have native Firefox/Safari visual evidence;
 - Bamboo Shoot and Mushroom baselines and budgets are frozen before fitting;
@@ -278,17 +325,21 @@ The next specification may decompose this brief into acceptance operations, but 
 - the distinction between a resolved experiment and a passing gate;
 - the final versioned-category certification report.
 
-The numeric v2 and Stage 2 visual thresholds are calibration outputs, not open product decisions. `/to-spec` must define how they are produced and frozen before fitting; it must not invent them from candidate performance.
+The numeric Stone geometry v2, patterned-appearance v2, and Stage 2 visual
+thresholds are calibration outputs, not open product decisions. `/to-spec`
+must define how they are produced and frozen. Stone v2 additionally requires
+the candidate-quarantine procedure above; the other baselines still freeze
+before fitting. None may be invented from candidate performance.
 
 ## Explicit non-goals
 
 - no implementation in this decision cycle;
 - no change to Stage 1 v1 or its historical reports;
-- no post-fit threshold relaxation;
+- no post-fit threshold relaxation except the single Stone Quarantined Rebaseline explicitly bounded above;
 - no production textures, source pixels, sampled appearance, or serialized source geometry;
 - no new CSG, SDF, WASM, general modeling DSL, or Runtime Kernel authorization;
 - no full-island, terrain, layout, scatter, structure, or compound-object implementation planning;
-- no complete island-village tickets or Stage 1.5/Stage 2 tickets in this cycle.
+- no complete island-village, Umbrella, Bamboo Shoot, Mushroom, or Stage 2 implementation tickets in this boundary cycle.
 
 ## Decision records
 
@@ -301,4 +352,5 @@ The principal accepted ADRs are:
 - [ADR-0020](./adr/0020-freeze-stage-2-nonvisual-budgets-before-fitting.md) — Stage 2 budgets;
 - [ADR-0021](./adr/0021-allow-versioned-category-single-mesh-lab-exit.md) — formal exit semantics;
 - [ADR-0022](./adr/0022-bound-stone-support-polyhedron-to-24-directions.md) — Stone second representation;
-- [ADR-0023](./adr/0023-audit-object-specific-scalars-across-complete-production-source.md) — complete-source scalar evidence.
+- [ADR-0023](./adr/0023-audit-object-specific-scalars-across-complete-production-source.md) — complete-source scalar evidence;
+- [ADR-0024](./adr/0024-quarantine-stone-geometry-v2-rebaseline.md) — one-time Stone geometry v2 boundary restart.
