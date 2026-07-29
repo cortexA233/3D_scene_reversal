@@ -125,10 +125,67 @@ function stonePatternSource(recipe) {
   const [xFrequency, zFrequency, yFrequency] = recipe.appearance.grainFrequency;
   const [darkThreshold, lightThreshold] = recipe.appearance.grainThresholds;
   return `
+    float stoneHash(vec3 cell) {
+      return fract(sin(dot(cell, vec3(2.0, 3.0, 4.0))) * ${recipe.seed}.0);
+    }
+
+    float stoneNoise(vec3 point) {
+      vec3 cell = floor(point);
+      vec3 local = fract(point);
+      vec3 blend = local * local * (3.0 - 2.0 * local);
+      float lowerNear = mix(
+        stoneHash(cell),
+        stoneHash(cell + vec3(1.0, 0.0, 0.0)),
+        blend.x
+      );
+      float lowerFar = mix(
+        stoneHash(cell + vec3(0.0, 0.0, 1.0)),
+        stoneHash(cell + vec3(1.0, 0.0, 1.0)),
+        blend.x
+      );
+      float upperNear = mix(
+        stoneHash(cell + vec3(0.0, 1.0, 0.0)),
+        stoneHash(cell + vec3(1.0, 1.0, 0.0)),
+        blend.x
+      );
+      float upperFar = mix(
+        stoneHash(cell + vec3(0.0, 1.0, 1.0)),
+        stoneHash(cell + vec3(1.0, 1.0, 1.0)),
+        blend.x
+      );
+      float lower = mix(lowerNear, lowerFar, blend.z);
+      float upper = mix(upperNear, upperFar, blend.z);
+      return mix(lower, upper, blend.y);
+    }
+
     vec3 stoneColor(vec3 point) {
-      float grain = sin(point.x * ${xFrequency}.0 + point.z * ${zFrequency}.0 + point.y * ${yFrequency}.0) * 0.5 + 0.5;
-      vec3 color = mix(stoneDark, stoneMid, step(${darkThreshold}, grain));
-      return mix(color, stoneLight, step(${lightThreshold}, grain));
+      vec3 scaledPoint = point * vec3(
+        ${xFrequency}.0,
+        ${yFrequency}.0,
+        ${zFrequency}.0
+      );
+      float broadGrain = stoneNoise(scaledPoint);
+      float detailGrain = stoneNoise(
+        scaledPoint * 2.0 + vec3(1.0, 2.0, 3.0)
+      );
+      float grain = mix(
+        broadGrain,
+        detailGrain,
+        ${recipe.appearance.grainDetailWeight}
+      );
+      float filterWidth = max(fwidth(grain) * 0.5, 0.0001);
+      float middleCoverage = smoothstep(
+        ${darkThreshold} - filterWidth,
+        ${darkThreshold} + filterWidth,
+        grain
+      );
+      float lightCoverage = smoothstep(
+        ${lightThreshold} - filterWidth,
+        ${lightThreshold} + filterWidth,
+        grain
+      );
+      vec3 color = mix(stoneDark, stoneMid, middleCoverage);
+      return mix(color, stoneLight, lightCoverage);
     }
   `;
 }

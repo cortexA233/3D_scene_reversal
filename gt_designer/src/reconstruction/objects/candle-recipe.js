@@ -50,7 +50,8 @@ export const CANDLE_RECIPE = Object.freeze({
     wickColor: 0x292d2d,
     roughness: 0.75,
     metalness: 0,
-    grainFrequency: Object.freeze([23, 31, 17]),
-    grainThresholds: Object.freeze([0.34, 0.78]),
+    grainFrequency: Object.freeze([6, 8, 6]),
+    grainThresholds: Object.freeze([0.18, 0.35]),
+    grainDetailWeight: 0.35,
   }),
 });

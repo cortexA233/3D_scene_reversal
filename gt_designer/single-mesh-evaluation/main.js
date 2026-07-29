@@ -28,6 +28,7 @@ const state = {
   patternedAppearanceV2CalibrationRun: null,
   stage2PrecalibrationRun: null,
   objectEvaluationReport: null,
+  materialAliasingReport: null,
 };
 window.singleMeshEvaluation = state;
 const parameters = new URLSearchParams(window.location.search);
@@ -434,6 +435,28 @@ async function initialize() {
   });
   state.capture = (request) => state.harness.capture(request);
   state.captureAll = captureAll;
+  if (parameters.get("diagnose") === "material-aliasing") {
+    const { runMaterialAliasingCheck } = await import(
+      "./material-aliasing-runner.js"
+    );
+    document.body.dataset.state = "material-aliasing-running";
+    state.materialAliasingReport = await runMaterialAliasingCheck({
+      harness: state.harness,
+    });
+    state.ready = true;
+    document.body.dataset.state = "material-aliasing-complete";
+    document.body.dataset.objectId = state.unitId;
+    elements.state.textContent = state.materialAliasingReport.passed
+      ? "Material scale consistency passed"
+      : "Material scale consistency failed";
+    elements.summary.textContent = JSON.stringify(
+      state.materialAliasingReport,
+      null,
+      2,
+    );
+    selectedPreview();
+    return;
+  }
   state.ready = true;
   document.body.dataset.state = "ready";
   document.body.dataset.captureCount = "0";

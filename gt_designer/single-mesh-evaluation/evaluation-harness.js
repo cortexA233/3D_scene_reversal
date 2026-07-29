@@ -386,6 +386,25 @@ export function createEvaluationHarness({
     };
   }
 
+  function captureAtSize({ viewId, passId, target, size }) {
+    if (!Number.isInteger(size) || size < 32 || size > CAPTURE_SIZE) {
+      throw new RangeError(`capture size must be an integer from 32 to ${CAPTURE_SIZE}`);
+    }
+    const renderTarget = new THREE.WebGLRenderTarget(size, size, {
+      format: THREE.RGBAFormat,
+      type: THREE.UnsignedByteType,
+      depthBuffer: true,
+    });
+    try {
+      renderToTarget({ viewId, passId, target, renderTarget });
+      const pixels = new Uint8Array(size * size * 4);
+      renderer.readRenderTargetPixels(renderTarget, 0, 0, size, size, pixels);
+      return { viewId, passId, target, width: size, height: size, pixels };
+    } finally {
+      renderTarget.dispose();
+    }
+  }
+
   async function captureAll() {
     const captures = [];
     for (const view of manifest.views) {
@@ -486,5 +505,12 @@ export function createEvaluationHarness({
     };
   }
 
-  return Object.freeze({ capture, captureAll, preview, environment, dispose });
+  return Object.freeze({
+    capture,
+    captureAtSize,
+    captureAll,
+    preview,
+    environment,
+    dispose,
+  });
 }
