@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stage 1.5 Reference-layout Scene</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        background: #10202a;
+        color: #edf4f6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        display: block;
+      }
+
+      #panel {
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 10;
+        width: min(330px, calc(100vw - 36px));
+        padding: 16px;
+        border: 1px solid rgb(255 255 255 / 13%);
+        border-radius: 14px;
+        background: rgb(7 17 23 / 84%);
+        box-shadow: 0 18px 48px rgb(0 0 0 / 28%);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        margin: 0 0 6px;
+        font-size: 15px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      #state,
+      .note {
+        margin: 0;
+        color: #aebdc4;
+        font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      .note {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid rgb(255 255 255 / 9%);
+      }
+
+      #focus-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      button {
+        min-height: 36px;
+        border: 1px solid rgb(255 255 255 / 12%);
+        border-radius: 9px;
+        background: #203743;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      button:hover,
+      button[aria-pressed="true"] {
+        border-color: #82c7c5;
+        background: #2c535b;
+      }
+
+      button:first-child {
+        grid-column: 1 / -1;
+      }
+
+      body[data-state="error"] #panel {
+        border-color: #d45562;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/vendor/three/build/three.module.js",
+          "three/addons/": "/vendor/three/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body data-state="loading" data-object-count="0">
+    <section id="panel" aria-live="polite">
+      <h1>Stage 1.5 · Shared World</h1>
+      <p id="state">Assembling procedural replacements…</p>
+      <div id="focus-controls" aria-label="Camera focus"></div>
+      <p class="note">
+        Drag to orbit · wheel to zoom · right-drag to pan<br />
+        Development assembly; current acceptance outcomes are unchanged.
+      </p>
+    </section>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
