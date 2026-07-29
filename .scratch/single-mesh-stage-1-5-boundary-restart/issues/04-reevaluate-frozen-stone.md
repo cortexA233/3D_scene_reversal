@@ -10,7 +10,8 @@ Stone Geometry Baseline v2 without refitting or changing any nonvisual budget.
 Acceptance:
 
 - [ ] Candidate content hashes match Ticket 01 before and after evaluation.
-- [ ] Chrome passes the complete frozen v2 geometry and appearance protocol.
+- [ ] Chrome passes frozen v2 geometry and the ADR-0027 uniform-material v1
+      appearance protocol; lit-RGB remains diagnostic.
 - [ ] Native hardware Firefox and Safari each pass two stable twelve-view,
       seven-pass capture runs with the required GPU and color metadata.
 - [ ] Complete-source scalar, recipe, gzip, triangle, draw, memory, generation,

@@ -13,6 +13,7 @@ Stage 2 remains a formal Single Mesh Lab exit path. It is not an exploratory bra
 
 - `single-mesh-quality-baseline-v1` and the historical Stage 1 two-of-four result remain unchanged.
 - Stone's v1 failure remains frozen historical evidence. The unchanged 24-direction candidate may continue only under the one-time Quarantined Rebaseline defined below; its nonvisual gates remain unchanged.
+- When Stone passes geometry v2, its uniform-material appearance gate retains v1 thresholds over albedo, palette, roughness, and metalness; frozen-lighting RGB is diagnostic Geometry-conditioned Appearance Evidence rather than a second gate over accepted normal differences.
 - Umbrella geometry and nonvisual ceilings remain unchanged; only its new appearance candidate uses a separately calibrated patterned-appearance v2.
 - New category-specific visual tolerances may be looser than Stage 1 when reference-only Calibration Brackets support the difference.
 - No ordinary baseline may be loosened after candidate fitting begins. The Stone boundary review authorizes one separately versioned exception with candidate quarantine; it is not a reusable post-fit tuning mechanism.
@@ -72,6 +73,15 @@ the project may not lower Stone thresholds again; a new boundary review must
 choose between a larger representation/data budget and ending the formal
 Code-only exit path. If it passes all three browsers and unchanged nonvisual
 gates, Stage 1.5 resumes at patterned-appearance v2 calibration.
+
+The first Chrome candidate run after geometry v2 freeze passed every geometry
+threshold and all nonvisual limits. Its twelve albedo views were exact
+(`DeltaE = 0`, `SSIM = 1`), palette coverage matched exactly, and roughness and
+metalness matched within floating-point noise. Only lit-RGB differed because
+the accepted support-polyhedron normals change frozen lighting. Under ADR-0027,
+Stone therefore keeps v1 appearance numbers for independent albedo, palette,
+and material evidence while reporting lit-RGB as a geometry-conditioned
+diagnostic. No v2 geometry threshold changes after this finding.
 
 ## Stage 1.5 execution order
 
@@ -248,7 +258,7 @@ The Stage 1.5 certification must state all of the following independently:
 
 - Stage 1 v1 remains `2/4 FAIL`;
 - complete-source scalar audit is trustworthy and all retained candidates meet their ceilings;
-- Stone's historical v1 failure remains recorded and the frozen candidate passes `stone-geometry-baseline-v2` in Chrome, Firefox, and Safari;
+- Stone's historical v1 failure remains recorded and the frozen candidate passes `stone-geometry-baseline-v2` plus the uniform-material v1 appearance policy in Chrome, Firefox, and Safari;
 - Umbrella passes its geometry contract and patterned-appearance v2 in all three browsers;
 - Stone Path and Vase have native Firefox/Safari visual evidence;
 - Bamboo Shoot and Mushroom baselines and budgets are frozen before fitting;
@@ -363,4 +373,5 @@ The principal accepted ADRs are:
 - [ADR-0023](./adr/0023-audit-object-specific-scalars-across-complete-production-source.md) — complete-source scalar evidence;
 - [ADR-0024](./adr/0024-quarantine-stone-geometry-v2-rebaseline.md) — one-time Stone geometry v2 boundary restart;
 - [ADR-0025](./adr/0025-repair-stone-support-direction-contract-before-rebaseline.md) — superseded representation-validity suspicion;
-- [ADR-0026](./adr/0026-treat-stone-fitter-drift-as-reproducibility-failure.md) — preserve Stone's negative conclusion after the corrected refit reproduces it.
+- [ADR-0026](./adr/0026-treat-stone-fitter-drift-as-reproducibility-failure.md) — preserve Stone's negative conclusion after the corrected refit reproduces it;
+- [ADR-0027](./adr/0027-separate-stone-uniform-appearance-from-accepted-geometry.md) — prevent accepted Stone normal differences from being counted again as material failure.

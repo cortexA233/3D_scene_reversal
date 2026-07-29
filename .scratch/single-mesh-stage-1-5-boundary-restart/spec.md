@@ -52,6 +52,10 @@ boundary-review amendment in
 - The candidate may not be refitted, reoriented, or otherwise changed between
   calibration declaration and evaluation.
 - Failure permits no second Stone threshold relaxation under this boundary.
+- After geometry v2 passes, Stone's v1 appearance thresholds apply to albedo,
+  palette, roughness, and metalness. Lit-RGB remains a reported diagnostic
+  because its difference is conditioned on geometry normals already accepted
+  by v2.
 
 ## Required Calibration Bracket
 

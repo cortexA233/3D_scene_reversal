@@ -116,6 +116,10 @@ _Avoid_: Bad fit, representation failure, threshold problem
 A development-tool defect in which a fitter cannot regenerate a production recipe under the Object Generator's declared semantics, while an independently corrected refit may prove that the existing recipe and generated artifact were already valid.
 _Avoid_: Candidate failure, representation failure, production regression
 
+**Geometry-conditioned Appearance Evidence**:
+An appearance measurement whose value materially changes with surface geometry or normals even when albedo, palette, and material parameters are identical; it is not an independent appearance hard gate after those geometric differences are accepted by a separately calibrated baseline.
+_Avoid_: Texture error, material mismatch, independent appearance score
+
 **Category-specific Quality Baseline**:
 A Quality Baseline calibrated for one object or shape category, normally before its Procedural Replacement is fitted; it may be looser or stricter than an earlier category's values when reference sensitivity evidence supports the difference, but after fitting it may change only through an explicit Quarantined Rebaseline.
 _Avoid_: Inherited threshold, difficulty discount, post-fit adjustment
@@ -138,6 +142,7 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 - Future Category-specific Quality Baselines, including those for Bamboo Shoot and Mushroom, may use looser numerical tolerances than Stage 1 when pre-implementation sensitivity calibration justifies them; the frozen Stage 1 values remain unchanged.
 - A Representation Contract Failure must be repaired and rerun against the currently applicable frozen Quality Baseline before it may trigger a rebaseline or count as one of the representation's permitted negative experiments. A Fitting Reproducibility Failure does not invalidate candidate evidence when the corrected fitter regenerates the frozen recipe exactly.
 - The corrected Stone fitter reproduced all 24 existing support distances exactly, so the v1 negative result remains valid and activates one Quarantined Rebaseline for `stone-geometry-baseline-v2` without changing the representation or its nonvisual ceilings. The candidate's known metrics are not calibration inputs; if reference-only mild and destructive controls cannot be separated, or the unchanged candidate later fails v2, no second threshold relaxation is allowed under this boundary.
+- Under `stone-geometry-baseline-v2`, Stone's uniform-material appearance hard gate retains the v1 thresholds for albedo DeltaE/SSIM, palette, roughness, and metalness. Frozen-lighting RGB remains Geometry-conditioned Appearance Evidence because the accepted support-polyhedron normals alter it even when every independent material measurement is exact.
 - The Stage 1 `single-mesh-quality-baseline-v1` and its two-of-four result remain historical evidence. Stage 1.5 may evaluate a new Umbrella candidate against a separately pre-calibrated Patterned Appearance Baseline v2 whose appearance tolerances may be materially looser, while Umbrella geometry gates and nonvisual budgets remain unchanged.
 - Patterned Appearance Baseline v2 may be loosened during reference-only pre-calibration, but a flat canopy, wrong dominant palette, deleted major motif family, materially reduced pattern coverage, and large phase or pattern-scale errors must still fail; no further loosening is permitted after candidate fitting begins.
 - Firefox and Safari evidence for an otherwise-qualified candidate requires a Native GPU Visual Gate with two stable full-protocol capture runs, recorded browser/OS/Three.js/GPU/color metadata, and an explicit rejection of software rendering. JavaScriptCore and SpiderMonkey structure/bounds signatures do not satisfy this gate.
