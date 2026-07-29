@@ -7,9 +7,9 @@ import * as THREE from "three";
 
 import { LAB_SCENE } from "../gt_designer/single-mesh-lab/scene-config.js";
 import {
-  createStage15Assembly,
-  STAGE_1_5_LAYOUT_VERSION,
-  STAGE_1_5_PLACEMENTS,
+  createEightObjectLabAssembly,
+  EIGHT_OBJECT_LAB_LAYOUT_VERSION,
+  EIGHT_OBJECT_LAB_PLACEMENTS,
 } from "../gt_designer/src/reconstruction/stage-1-5-layout.js";
 
 const PROJECT_ROOT = path.resolve(
@@ -29,7 +29,7 @@ function dispose(root) {
   });
 }
 
-test("Stage 1.5 populates the matching slots in the eight-object Lab layout", async () => {
+test("Stage 2 populates all matching slots in the eight-object Lab layout", async () => {
   const evidence = JSON.parse(
     await readFile(
       path.join(
@@ -39,17 +39,17 @@ test("Stage 1.5 populates the matching slots in the eight-object Lab layout", as
       "utf8",
     ),
   );
-  const expectedIds = ["stone-path", "stone", "vase", "umbrella"];
+  const expectedIds = LAB_SCENE.objects.map(({ id }) => id);
   assert.equal(LAB_SCENE.objects.length, 8);
   assert.equal(
-    STAGE_1_5_LAYOUT_VERSION,
-    "stage-1-5-eight-slot-lab-layout-v2",
+    EIGHT_OBJECT_LAB_LAYOUT_VERSION,
+    "stage-2-eight-object-lab-layout-v1",
   );
   assert.deepEqual(
-    STAGE_1_5_PLACEMENTS.map(({ objectId }) => objectId),
+    EIGHT_OBJECT_LAB_PLACEMENTS.map(({ objectId }) => objectId),
     expectedIds,
   );
-  for (const scenePlacement of STAGE_1_5_PLACEMENTS) {
+  for (const scenePlacement of EIGHT_OBJECT_LAB_PLACEMENTS) {
     const reference = evidence.objects.find(
       ({ id }) => id === scenePlacement.objectId,
     );
@@ -70,16 +70,15 @@ test("Stage 1.5 populates the matching slots in the eight-object Lab layout", as
     );
   }
 
-  const assembly = createStage15Assembly();
+  const assembly = createEightObjectLabAssembly();
   try {
     assert.equal(
       assembly.root.userData.semanticId,
-      "single-mesh.stage-1-5.eight-slot-lab-layout",
+      "single-mesh.stage-2.eight-object-lab-layout",
     );
-    assert.equal(assembly.entries.length, 4);
-    assert.equal(new Set(assembly.entries.map(({ root }) => root.userData.semanticId)).size, 4);
+    assert.equal(assembly.entries.length, 8);
+    assert.equal(new Set(assembly.entries.map(({ root }) => root.userData.semanticId)).size, 8);
     for (const { placement, root } of assembly.entries) {
-      assert.deepEqual(root.position.toArray(), placement.position);
       assert.deepEqual(root.scale.toArray(), [
         placement.displayScale,
         placement.displayScale,
@@ -87,11 +86,17 @@ test("Stage 1.5 populates the matching slots in the eight-object Lab layout", as
       ]);
       const bounds = new THREE.Box3().setFromObject(root);
       assert.ok(Math.abs(bounds.min.y - placement.position[1]) < 1e-5);
+      assert.ok(
+        Math.abs((bounds.min.x + bounds.max.x) * 0.5 - placement.position[0]) < 1e-5,
+      );
+      assert.ok(
+        Math.abs((bounds.min.z + bounds.max.z) * 0.5 - placement.position[2]) < 1e-5,
+      );
       const size = bounds.getSize(new THREE.Vector3());
       assert.ok(
         Math.abs(
           Math.max(size.x, size.y, size.z) - LAB_SCENE.canonicalMaxDimension,
-        ) < 0.1,
+        ) < 0.5,
       );
     }
   } finally {

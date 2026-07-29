@@ -5,8 +5,8 @@ import {
   EIGHT_SLOT_LAB_REFERENCE_LAYOUT,
 } from "../src/reconstruction/eight-slot-lab-layout.js";
 import {
-  createStage15Assembly,
-  STAGE_1_5_LAYOUT_VERSION,
+  createEightObjectLabAssembly,
+  EIGHT_OBJECT_LAB_LAYOUT_VERSION,
 } from "../src/reconstruction/stage-1-5-layout.js";
 
 const ui = {
@@ -19,7 +19,7 @@ const layout = EIGHT_SLOT_LAB_REFERENCE_LAYOUT;
 const state = {
   ready: false,
   error: null,
-  layoutVersion: STAGE_1_5_LAYOUT_VERSION,
+  layoutVersion: EIGHT_OBJECT_LAB_LAYOUT_VERSION,
   layoutKind: layout.id,
   referenceSlotCount: layout.slots.length,
   populatedSlotCount: 0,
@@ -28,7 +28,7 @@ const state = {
   resetCamera: () => {},
   focus: () => {},
 };
-window.stage15Scene = state;
+window.eightObjectLabScene = state;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xcfdce7);
@@ -179,13 +179,13 @@ function showError(error) {
   ui.state.textContent = state.error;
   ui.error.textContent = state.error;
   ui.error.style.display = "block";
-  document.title = "Stage 1.5 Lab Layout · Error";
+  document.title = "Stage 2 Eight-object Lab Delivery · Error";
   console.error(error);
 }
 
 try {
   addEnvironment();
-  const assembly = createStage15Assembly();
+  const assembly = createEightObjectLabAssembly();
   assembly.root.traverse((object) => {
     if (!object.isMesh) return;
     object.castShadow = true;
@@ -217,8 +217,10 @@ try {
   document.body.dataset.layoutKind = state.layoutKind;
   document.body.dataset.referenceSlotCount = String(state.referenceSlotCount);
   document.body.dataset.populatedSlotCount = String(state.populatedSlotCount);
+  document.body.dataset.deliveryStatus = "complete";
+  document.body.dataset.historicalStage1 = "2-of-4-fail";
   ui.state.textContent = `${state.populatedSlotCount} procedural replacements in their matching ${state.referenceSlotCount}-slot Lab positions`;
-  document.title = "Stage 1.5 Eight-slot Lab Layout · Ready";
+  document.title = "Stage 2 Eight-object Lab Delivery · Ready";
 } catch (error) {
   showError(error);
 }

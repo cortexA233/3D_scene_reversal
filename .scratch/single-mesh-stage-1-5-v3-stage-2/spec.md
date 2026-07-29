@@ -1,6 +1,6 @@
 # Single Mesh Lab Stage 1.5 v3 and eight-object Stage 2
 
-Status: active
+Status: complete
 
 ## Problem Statement
 
@@ -60,7 +60,10 @@ Safari gates before the next object begins. Final certification requires 8/8.
   pattern appearance v2; exact-position complex-texture metrics remain
   diagnostic and all four declared role-damage controls reject.
 - Candle: accepted under unchanged category-v1 geometry and semantic compound-
-  material appearance v2; the eight-object exit certification is in progress.
+  material appearance v2.
+- Eight-object exit: certified in the single Eight-slot Lab Reference Layout as
+  `PASS under versioned category-specific baselines (8/8)`; historical Stage 1
+  remains `2/4 FAIL`, and no full-island delivery is claimed.
 
 ## Out of Scope
 
