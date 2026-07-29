@@ -1,119 +1,163 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <base href="/" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Stage 1.5 Reference-context Composite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stage 1.5 Eight-slot Lab Layout</title>
     <link rel="icon" href="data:," />
     <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #27303a;
+        background: #cfdce7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       html,
       body {
-        margin: 0;
+        width: 100%;
         height: 100%;
+        margin: 0;
         overflow: hidden;
-        background: #9fc3e0;
       }
 
       canvas {
         display: block;
       }
 
-      #load {
+      .panel {
         position: fixed;
-        inset: 0;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        justify-content: center;
-        color: #eaf2fb;
-        background: #0d1622;
-        transition: opacity 1.1s;
-        font: 13px/1.5 ui-monospace, Menlo, monospace;
+        z-index: 3;
+        border: 1px solid rgb(50 60 70 / 16%);
+        border-radius: 12px;
+        background: rgb(248 246 238 / 90%);
+        box-shadow: 0 10px 30px rgb(39 48 58 / 10%);
+        backdrop-filter: blur(10px);
       }
 
-      #load .bar {
-        width: 240px;
-        height: 3px;
-        overflow: hidden;
-        border-radius: 2px;
-        background: #22324a;
+      #intro {
+        top: 16px;
+        left: 16px;
+        width: min(420px, calc(100vw - 32px));
+        padding: 14px 16px;
       }
 
-      #load .bar i {
-        display: block;
-        width: 0;
-        height: 100%;
-        background: #7fd0ff;
-      }
-
-      #stage15,
-      #keys {
-        position: fixed;
-        z-index: 4;
-        pointer-events: none;
-        color: #fff;
-        border: 1px solid rgb(255 255 255 / 14%);
-        border-radius: 8px;
-        background: rgb(13 22 34 / 62%);
-        backdrop-filter: blur(4px);
-        text-shadow: 0 1px 2px rgb(0 0 0 / 60%);
-        font: 12px/1.55 ui-monospace, Menlo, monospace;
-      }
-
-      #stage15 {
-        top: 14px;
-        right: 14px;
-        width: min(390px, calc(100vw - 28px));
-        padding: 11px 13px;
-      }
-
-      #stage15 h1 {
+      #intro h1 {
         margin: 0 0 5px;
-        color: #7fd0ff;
-        font-size: 12px;
-        letter-spacing: 0.07em;
+        font-size: 15px;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      #stage15 p {
+      #intro p {
         margin: 0;
+        color: #66717d;
+        font-size: 12px;
+        line-height: 1.5;
       }
 
-      #stage15 .boundary {
+      #intro .boundary {
         margin-top: 6px;
-        color: #cbd6df;
+        color: #7b6e5d;
         font-size: 11px;
       }
 
-      #keys {
-        top: 14px;
-        left: 14px;
-        padding: 9px 12px;
+      #toolbar {
+        top: 16px;
+        right: 16px;
+        display: flex;
+        max-width: calc(100vw - 468px);
+        padding: 7px;
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
       }
 
-      #keys b {
-        display: inline-block;
-        min-width: 46px;
-        color: #7fd0ff;
-        font-weight: 700;
+      button {
+        appearance: none;
+        border: 1px solid rgb(50 60 70 / 13%);
+        border-radius: 8px;
+        padding: 7px 9px;
+        color: #4d5965;
+        background: rgb(255 255 255 / 72%);
+        font: inherit;
+        font-size: 11px;
+        cursor: pointer;
       }
 
-      #err {
+      button:hover,
+      button.active {
+        border-color: #6082a3;
+        color: #20374d;
+        background: #e4edf5;
+      }
+
+      .object-label {
         position: fixed;
-        top: 140px;
-        left: 10px;
-        z-index: 12;
-        max-width: 92vw;
-        color: #ff9a9a;
-        white-space: pre-wrap;
-        font: 11px ui-monospace, monospace;
+        z-index: 2;
+        min-width: 120px;
+        pointer-events: none;
+        transform: translate(-50%, calc(-100% - 8px));
+        color: #303945;
+        text-align: center;
+        text-shadow:
+          0 1px 0 rgb(255 255 255 / 95%),
+          0 0 5px rgb(255 255 255 / 90%);
       }
 
-      body[data-state="error"] #stage15 {
-        border-color: #ff9a9a;
+      .object-label strong,
+      .object-label span {
+        display: block;
+      }
+
+      .object-label strong {
+        font-size: 12px;
+      }
+
+      .object-label span {
+        margin-top: 2px;
+        color: #6a7580;
+        font-size: 10px;
+      }
+
+      #error {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 12;
+        display: none;
+        max-width: min(560px, calc(100vw - 32px));
+        padding: 12px 14px;
+        border-radius: 10px;
+        color: #8e2530;
+        background: #fff0f1;
+        white-space: pre-wrap;
+        font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      body[data-state="error"] #intro {
+        border-color: #c66b73;
+      }
+
+      @media (max-width: 920px) {
+        #toolbar {
+          top: auto;
+          right: 12px;
+          bottom: 12px;
+          left: 12px;
+          max-width: none;
+          justify-content: center;
+        }
+
+        .object-label span {
+          display: none;
+        }
       }
     </style>
     <script type="importmap">
@@ -126,41 +170,17 @@
     </script>
   </head>
   <body data-state="loading" data-object-count="0">
-    <div id="load">
-      <div id="loadmsg">loading the authored reference context…</div>
-      <div class="bar"><i id="loadbar"></i></div>
-    </div>
-    <section id="stage15" aria-live="polite">
-      <h1>Stage 1.5 · Reference-context Composite</h1>
-      <p id="state">Loading the island and mounting replacements in place…</p>
+    <section id="intro" class="panel" aria-live="polite">
+      <h1>Stage 1.5 · Eight-slot Lab Layout</h1>
+      <p id="state">Assembling procedural replacements…</p>
       <p class="boundary">
-        Development evidence only: the environment is the authored reference GLB;
-        the four named source meshes are replaced with procedural geometry.
+        Matches the eight-object Single Mesh Lab arrangement. Four current
+        replacement slots are populated; unfinished slots remain empty.
       </p>
     </section>
-    <div id="keys">
-      <b>WASD</b>move<br /><b>Mouse</b>look<br /><b>Q / E</b>up / down<br /><b>Esc</b>release mouse
-    </div>
-    <div id="err"></div>
-    <script>
-      window.island = { ready: false, error: null };
-      window.addEventListener("error", (event) => {
-        document.title = "SCENE_ERROR";
-        const message = event.message || event.error;
-        document.getElementById("err").textContent += message + "\n";
-        document.getElementById("state").textContent = message;
-        document.body.dataset.state = "error";
-        window.island.error = (window.island.error || "") + message + "\n";
-      });
-      window.addEventListener("unhandledrejection", (event) => {
-        const message =
-          "promise: " + ((event.reason && event.reason.message) || event.reason);
-        document.getElementById("err").textContent += message + "\n";
-        document.getElementById("state").textContent = message;
-        document.body.dataset.state = "error";
-        window.island.error = (window.island.error || "") + message + "\n";
-      });
-    </script>
-    <script type="module" src="/main.js?v=20260729.stage15-composite-1"></script>
+    <nav id="toolbar" class="panel" aria-label="Camera focus"></nav>
+    <div id="labels"></div>
+    <div id="error"></div>
+    <script type="module" src="./main.js?v=20260729.eight-slot-1"></script>
   </body>
 </html>

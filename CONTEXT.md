@@ -65,11 +65,15 @@ A general-purpose algorithmic dependency executed by the Production Runtime that
 _Avoid_: Generated asset, embedded model
 
 **Single Mesh Lab**:
-The development-only object experiment that tests reconstruction representations, workflow, and quality gates before full-scene reconstruction; its isolated scenes are evaluation surfaces, never final deliverables.
+The development-only object experiment that tests reconstruction representations, workflow, and quality gates before full-scene reconstruction; its Authored Reference and Evaluation Harness surfaces are not final deliverables.
 _Avoid_: Island MVP, full-scene prototype
 
+**Eight-slot Lab Reference Layout**:
+The fixed shared arrangement established by Single Mesh Lab for its eight Reconstruction Units, including their canonical comparison slots, normalized display scale, orientation, and common viewing context.
+_Avoid_: Island-village layout, source-world layout, authored-world restoration
+
 **Reference-layout Delivery**:
-The final integrated scene in which accepted Procedural Replacements share one world and preserve the corresponding positions, orientations, scales, and spatial relationships of the Authored Reference; per-object Lab, gallery, and evaluation scenes are excluded from delivery.
+The integrated Code-only scene that places available Procedural Replacements in their corresponding positions within the Eight-slot Lab Reference Layout; unavailable slots remain empty, and per-object scenes are excluded from delivery.
 _Avoid_: Per-object deliverable, object showcase scene, isolated final scene
 
 **Stage 1.5 Decision Gate**:
@@ -146,6 +150,7 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 
 ## Shared facts
 
+- Reference-layout Delivery means the Eight-slot Lab Reference Layout, not island-village source-world placement. A stage populates only the slots for its available Procedural Replacements and never fills unfinished slots with Authored Reference assets.
 - Stage 1 uses the frozen `single-mesh-quality-baseline-v1` thresholds for Stone Path, Stone, Vase, and Umbrella. Browser calibration passed 29 repeatability, identity, sensitivity-ordering, diagnostic, and policy checks without using the one permitted pre-fitting correction.
 - Future Category-specific Quality Baselines, including those for Bamboo Shoot and Mushroom, may use looser numerical tolerances than Stage 1 when pre-implementation sensitivity calibration justifies them; the frozen Stage 1 values remain unchanged.
 - A Representation Contract Failure must be repaired and rerun against the currently applicable frozen Quality Baseline before it may trigger a rebaseline or count as one of the representation's permitted negative experiments. A Fitting Reproducibility Failure does not invalidate candidate evidence when the corrected fitter regenerates the frozen recipe exactly.

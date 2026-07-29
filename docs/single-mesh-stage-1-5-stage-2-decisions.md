@@ -402,3 +402,4 @@ The principal accepted ADRs are:
 - [ADR-0025](./adr/0025-repair-stone-support-direction-contract-before-rebaseline.md) — superseded representation-validity suspicion;
 - [ADR-0026](./adr/0026-treat-stone-fitter-drift-as-reproducibility-failure.md) — preserve Stone's negative conclusion after the corrected refit reproduces it;
 - [ADR-0027](./adr/0027-separate-stone-uniform-appearance-from-accepted-geometry.md) — prevent accepted Stone normal differences from being counted again as material failure.
+- [ADR-0031](./adr/0031-deliver-the-eight-slot-lab-reference-layout.md) — assemble stage deliverables in the fixed eight-object Lab arrangement without Authored Reference fallback.

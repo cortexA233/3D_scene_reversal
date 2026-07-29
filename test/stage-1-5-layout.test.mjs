@@ -5,6 +5,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import * as THREE from "three";
 
+import { LAB_SCENE } from "../gt_designer/single-mesh-lab/scene-config.js";
 import {
   createStage15Assembly,
   STAGE_1_5_LAYOUT_VERSION,
@@ -28,7 +29,7 @@ function dispose(root) {
   });
 }
 
-test("Stage 1.5 assembles four replacements at reference world positions", async () => {
+test("Stage 1.5 populates the matching slots in the eight-object Lab layout", async () => {
   const evidence = JSON.parse(
     await readFile(
       path.join(
@@ -39,7 +40,11 @@ test("Stage 1.5 assembles four replacements at reference world positions", async
     ),
   );
   const expectedIds = ["stone-path", "stone", "vase", "umbrella"];
-  assert.equal(STAGE_1_5_LAYOUT_VERSION, "stage-1-5-reference-layout-v1");
+  assert.equal(LAB_SCENE.objects.length, 8);
+  assert.equal(
+    STAGE_1_5_LAYOUT_VERSION,
+    "stage-1-5-eight-slot-lab-layout-v2",
+  );
   assert.deepEqual(
     STAGE_1_5_PLACEMENTS.map(({ objectId }) => objectId),
     expectedIds,
@@ -48,18 +53,46 @@ test("Stage 1.5 assembles four replacements at reference world positions", async
     const reference = evidence.objects.find(
       ({ id }) => id === scenePlacement.objectId,
     );
-    assert.deepEqual(scenePlacement.position, reference.sourceWorldBounds.bottomCenter);
+    const labSpec = LAB_SCENE.objects.find(
+      ({ id }) => id === scenePlacement.objectId,
+    );
+    assert.deepEqual(scenePlacement.position, [
+      labSpec.slot[0],
+      labSpec.slot[1] + 0.01,
+      labSpec.slot[2],
+    ]);
+    assert.ok(
+      Math.abs(
+        scenePlacement.displayScale -
+          LAB_SCENE.canonicalMaxDimension /
+            reference.sourceWorldBounds.largestDimension,
+      ) < 1e-12,
+    );
   }
 
   const assembly = createStage15Assembly();
   try {
-    assert.equal(assembly.root.userData.semanticId, "island.stage-1-5.reference-layout");
+    assert.equal(
+      assembly.root.userData.semanticId,
+      "single-mesh.stage-1-5.eight-slot-lab-layout",
+    );
     assert.equal(assembly.entries.length, 4);
     assert.equal(new Set(assembly.entries.map(({ root }) => root.userData.semanticId)).size, 4);
     for (const { placement, root } of assembly.entries) {
       assert.deepEqual(root.position.toArray(), placement.position);
+      assert.deepEqual(root.scale.toArray(), [
+        placement.displayScale,
+        placement.displayScale,
+        placement.displayScale,
+      ]);
       const bounds = new THREE.Box3().setFromObject(root);
       assert.ok(Math.abs(bounds.min.y - placement.position[1]) < 1e-5);
+      const size = bounds.getSize(new THREE.Vector3());
+      assert.ok(
+        Math.abs(
+          Math.max(size.x, size.y, size.z) - LAB_SCENE.canonicalMaxDimension,
+        ) < 0.1,
+      );
     }
   } finally {
     dispose(assembly.root);

@@ -4,7 +4,7 @@
 #   ./run.sh --lab          → open the isolated single-mesh reference scene
 #   ./run.sh --replacement  → open the reference-independent procedural scene
 #   ./run.sh --evaluation   → open the fixed-view Evaluation Harness
-#   ./run.sh --stage-1-5    → open the Stage 1.5 reference-context composite
+#   ./run.sh --stage-1-5    → open replacements in the eight-slot Lab layout
 #   ./run.sh --local-three  → use an installed three package instead; works offline
 #   ./run.sh --port 5173    → pick the port
 #   ./run.sh --no-open      → don't open a browser

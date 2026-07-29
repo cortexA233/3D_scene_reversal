@@ -306,39 +306,12 @@ function makeWater(ctx) {
   const { scene, loadingManager, sunDir } = ctx;
   const w = STYLE.water;
   const geo = new THREE.PlaneGeometry(20000, 20000);
-  let normals;
-  if (STAGE_1_5_REFERENCE_COMPOSITE) {
-    const size = 64;
-    const pixels = new Uint8Array(size * size * 4);
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        const offset = (y * size + x) * 4;
-        const nx = Math.sin((x + y * 0.37) * 0.54) * 0.24;
-        const ny = Math.cos((y - x * 0.29) * 0.47) * 0.24;
-        const nz = Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
-        pixels[offset] = Math.round((nx * 0.5 + 0.5) * 255);
-        pixels[offset + 1] = Math.round((ny * 0.5 + 0.5) * 255);
-        pixels[offset + 2] = Math.round((nz * 0.5 + 0.5) * 255);
-        pixels[offset + 3] = 255;
-      }
-    }
-    normals = new THREE.DataTexture(
-      pixels,
-      size,
-      size,
-      THREE.RGBAFormat,
-      THREE.UnsignedByteType,
-    );
-    normals.needsUpdate = true;
-    normals.wrapS = normals.wrapT = THREE.RepeatWrapping;
-  } else {
-    normals = new THREE.TextureLoader(loadingManager).load(
-      TEX_CDN + "waternormals.jpg",
-      (texture) => {
-        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-      },
-    );
-  }
+  const normals = new THREE.TextureLoader(loadingManager).load(
+    TEX_CDN + "waternormals.jpg",
+    (t) => {
+      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    },
+  );
   const water = new Water(geo, {
     textureWidth: 512,
     textureHeight: 512,
@@ -1171,8 +1144,6 @@ function scatterGrass(ctx) {
 const qs = new URLSearchParams(location.search);
 const BARE = qs.has("bare");
 const SPECTATE = qs.has("cam");
-const STAGE_1_5_REFERENCE_COMPOSITE =
-  location.pathname.replace(/\/+$/, "") === "/stage-1-5-scene";
 const runtime = window.island;
 
 init().catch((e) => {
@@ -1180,11 +1151,6 @@ init().catch((e) => {
   const el = document.getElementById("err");
   if (el) el.textContent += m;
   runtime.error = (runtime.error || "") + m;
-  if (STAGE_1_5_REFERENCE_COMPOSITE) {
-    document.body.dataset.state = "error";
-    const state = document.getElementById("state");
-    if (state) state.textContent = e.message;
-  }
 });
 
 async function init() {
@@ -1299,24 +1265,12 @@ async function init() {
   await tick("dressing the scene…", 0.5);
   decorate(ctx);
 
-  let stage15Composite = null;
-
   // ── models (default ON — the whole point is to see them seated here) ──
   if (!BARE) {
     await tick("placing the village…", 0.6);
     await loadCharactersAndLights(scene, ctx);
     await loadAuthoredVillage(scene, ctx);
     scatterGrass(ctx);
-    if (STAGE_1_5_REFERENCE_COMPOSITE) {
-      await tick("replacing Stage 1.5 meshes in place…", 0.72);
-      const { mountStage15Composite } = await import(
-        "./stage-1-5-scene/composite.js"
-      );
-      stage15Composite = mountStage15Composite({
-        scene,
-        authoredVillage: ctx.authoredVillage,
-      });
-    }
   }
 
   // ── post ──
@@ -1373,35 +1327,6 @@ async function init() {
     scene,
     camera,
   });
-  if (stage15Composite) {
-    const stage15State = {
-      ready: true,
-      referenceContext: true,
-      layoutVersion: stage15Composite.layoutVersion,
-      objectCount: stage15Composite.assembly.entries.length,
-      sourceMeshesHidden: stage15Composite.hiddenSourceMeshes.length,
-      placements: stage15Composite.assembly.entries.map(
-        ({ placement, root }) => ({
-          objectId: placement.objectId,
-          position: root.position.toArray(),
-          semanticId: root.userData.semanticId,
-        }),
-      ),
-    };
-    runtime.stage15Composite = stage15State;
-    window.stage15Scene = stage15State;
-    document.body.dataset.state = "ready";
-    document.body.dataset.objectCount = String(stage15State.objectCount);
-    document.body.dataset.layoutVersion = stage15State.layoutVersion;
-    document.body.dataset.referenceContext = "true";
-    document.body.dataset.sourceMeshesHidden = String(
-      stage15State.sourceMeshesHidden,
-    );
-    const state = document.getElementById("state");
-    if (state) {
-      state.textContent = `${stage15State.objectCount} procedural replacements mounted · ${stage15State.sourceMeshesHidden} authored meshes hidden`;
-    }
-  }
   runtime.bounds = {
     center: C,
     groundY: WORLD.groundY,

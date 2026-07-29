@@ -9,7 +9,7 @@ connections so the 70 MB of assets don't load one at a time.
     ./serve.py --lab          # open the isolated single-mesh reference scene
     ./serve.py --replacement  # open the reference-independent procedural scene
     ./serve.py --evaluation   # open the fixed-view Evaluation Harness
-    ./serve.py --stage-1-5    # open the Stage 1.5 reference-context composite
+    ./serve.py --stage-1-5    # open replacements in the eight-slot Lab layout
     ./serve.py --port 5173    # pick the port
     ./serve.py --no-open      # don't launch a browser
     ./serve.py --quiet        # only log errors (default logs errors + slow/large hits)
@@ -228,7 +228,7 @@ def main() -> None:
     scene_group.add_argument(
         "--stage-1-5",
         action="store_true",
-        help="open the Stage 1.5 reference-context composite",
+        help="open Stage 1.5 replacements in the eight-slot Lab layout",
     )
     scene_group.add_argument(
         "--production-audit-root",

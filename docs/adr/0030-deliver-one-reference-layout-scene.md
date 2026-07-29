@@ -1,5 +1,5 @@
 ---
-status: accepted
+status: superseded by ADR-0031
 ---
 
 # Deliver one reference-layout scene
