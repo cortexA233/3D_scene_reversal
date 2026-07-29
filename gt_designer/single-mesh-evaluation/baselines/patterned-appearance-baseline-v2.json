@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "patterned-appearance-quality-baseline-v2",
+  "version": "patterned-appearance-baseline-v2",
+  "objectId": "umbrella",
+  "artifactRole": "development-only-quality-baseline",
+  "productionUse": "prohibited",
+  "contractSchemaVersion": "patterned-appearance-v2-calibration-contract-v1",
+  "selectionStrategy": "widest-safe-reference-only",
+  "hard": [
+    {
+      "path": "appearance.meanDeltaE00",
+      "operator": "<=",
+      "threshold": 6.696608074214216,
+      "mildBoundary": 3.3135742255575367,
+      "destructiveBoundary": 6.874662487301411,
+      "guardBand": 0.17805441308719372,
+      "applicableMustRejectScenarioIds": [
+        "reject-flat-canopy",
+        "reject-wrong-dominant-palette"
+      ],
+      "source": "reference-only-widest-safe-selection"
+    },
+    {
+      "path": "appearance.p90DeltaE00",
+      "operator": "<=",
+      "threshold": 30.829966721768592,
+      "mildBoundary": 4.75608825235186,
+      "destructiveBoundary": 32.20227611489579,
+      "guardBand": 1.3723093931271966,
+      "applicableMustRejectScenarioIds": [
+        "reject-flat-canopy",
+        "reject-wrong-dominant-palette"
+      ],
+      "source": "reference-only-widest-safe-selection"
+    },
+    {
+      "path": "appearance.meanMaskedSsim",
+      "operator": ">=",
+      "threshold": 0.7287047098746052,
+      "mildBoundary": 0.9940776093369025,
+      "destructiveBoundary": 0.7147377151660632,
+      "guardBand": 0.013966994708541965,
+      "applicableMustRejectScenarioIds": [
+        "reject-half-pattern-coverage",
+        "reject-large-negative-phase",
+        "reject-large-positive-phase",
+        "reject-large-scale-down",
+        "reject-large-scale-up"
+      ],
+      "source": "reference-only-widest-safe-selection"
+    },
+    {
+      "path": "appearance.worstViewSsim",
+      "operator": ">=",
+      "threshold": 0.5869556747392216,
+      "mildBoundary": 0.9897220814578074,
+      "destructiveBoundary": 0.5657574428066645,
+      "guardBand": 0.021198231932557144,
+      "applicableMustRejectScenarioIds": [
+        "reject-half-pattern-coverage",
+        "reject-large-negative-phase",
+        "reject-large-positive-phase",
+        "reject-large-scale-down",
+        "reject-large-scale-up"
+      ],
+      "source": "reference-only-widest-safe-selection"
+    },
+    {
+      "path": "patterned.flowerRecall",
+      "operator": ">=",
+      "threshold": 0.0451188986232791,
+      "mildBoundary": 0.9023779724655819,
+      "destructiveBoundary": 0,
+      "guardBand": 0.0451188986232791,
+      "applicableMustRejectScenarioIds": [
+        "reject-delete-flower-family"
+      ],
+      "source": "reference-only-widest-safe-selection"
+    },
+    {
+      "path": "patterned.leafRecall",
+      "operator": ">=",
+      "threshold": 0.16149904167291135,
+      "mildBoundary": 0.946534121440086,
+      "destructiveBoundary": 0.12018140589569161,
+      "guardBand": 0.041317635777219724,
+      "applicableMustRejectScenarioIds": [
+        "reject-delete-leaf-family"
+      ],
+      "source": "reference-only-widest-safe-selection"
+    },
+    {
+      "path": "patterned.branchRecall",
+      "operator": ">=",
+      "threshold": 0.5905244741341603,
+      "mildBoundary": 0.8995983935742972,
+      "destructiveBoundary": 0.5742574257425742,
+      "guardBand": 0.016267048391586148,
+      "applicableMustRejectScenarioIds": [
+        "reject-delete-branch-family"
+      ],
+      "source": "reference-only-widest-safe-selection"
+    },
+    {
+      "path": "appearance.roughnessAbsoluteError",
+      "operator": "<=",
+      "threshold": 0.1,
+      "source": "unchanged-single-mesh-quality-baseline-v1"
+    },
+    {
+      "path": "appearance.metalnessAbsoluteError",
+      "operator": "<=",
+      "threshold": 0.05,
+      "source": "unchanged-single-mesh-quality-baseline-v1"
+    }
+  ],
+  "diagnostic": [
+    {
+      "path": "appearance.paletteCentroidDeltaE00",
+      "reason": "palette clustering is discontinuous under minor complex-texture color changes",
+      "source": "reference-only-correction-before-candidate-fitting"
+    },
+    {
+      "path": "appearance.paletteCoverageL1",
+      "reason": "palette clustering is discontinuous under minor complex-texture color changes",
+      "source": "reference-only-correction-before-candidate-fitting"
+    }
+  ],
+  "frozen": true
+}

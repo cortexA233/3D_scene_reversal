@@ -25,6 +25,7 @@ const state = {
   harness: null,
   calibrationReport: null,
   stoneV2CalibrationRun: null,
+  patternedAppearanceV2CalibrationRun: null,
   objectEvaluationReport: null,
 };
 window.singleMeshEvaluation = state;
@@ -126,6 +127,48 @@ function showError(error) {
 }
 
 async function initialize() {
+  if (parameters.get("calibrate") === "patterned-appearance-v2") {
+    for (const control of [
+      elements.mode,
+      elements.pass,
+      elements.view,
+      elements.capture,
+      elements.download,
+    ]) {
+      control.disabled = true;
+    }
+    const runIndex = Number(parameters.get("run"));
+    if (!Number.isInteger(runIndex) || runIndex < 1) {
+      throw new Error(
+        "Patterned appearance v2 calibration requires a positive run index",
+      );
+    }
+    document.body.dataset.state = "patterned-appearance-v2-calibrating";
+    const { runPatternedAppearanceV2ReferenceCalibration } = await import(
+      "./patterned-appearance-v2-calibration-runner.js"
+    );
+    state.patternedAppearanceV2CalibrationRun =
+      await runPatternedAppearanceV2ReferenceCalibration({
+        canvas: elements.canvas,
+        runIndex,
+        onProgress(message) {
+          elements.state.textContent = message;
+          elements.summary.textContent =
+            `Patterned Appearance Baseline v2\n${message}`;
+        },
+      });
+    state.ready = true;
+    document.body.dataset.state = "patterned-appearance-v2-calibrated";
+    document.body.dataset.calibrationRun = String(runIndex);
+    elements.state.textContent =
+      "Patterned appearance v2 reference calibration run complete";
+    elements.summary.textContent = [
+      `Run: ${runIndex}`,
+      `Scenarios: ${state.patternedAppearanceV2CalibrationRun.scenarios.length}`,
+      "Candidate imports: prohibited",
+    ].join("\n");
+    return;
+  }
   if (parameters.get("calibrate") === "stone-v2") {
     for (const control of [
       elements.mode,

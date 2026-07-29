@@ -128,6 +128,10 @@ _Avoid_: Inherited threshold, difficulty discount, post-fit adjustment
 A Category-specific Quality Baseline for hero patterned objects, calibrated from Authored Reference pattern perturbations before candidate fitting and versioned separately from historical baselines; it remains valid only while materially wrong palette, motif-family, coverage, and phase controls still fail.
 _Avoid_: Texture discount, Umbrella exception, retroactive pass
 
+**Semantic Pattern Recall**:
+A reference-side appearance measurement for a declared motif family, such as flower, leaf, or branch, that measures same-position albedo retention separately from permissive global color and SSIM gates; it prevents a compact candidate from buying a global similarity pass by deleting identity-bearing motifs.
+_Avoid_: Texture mask score, candidate motif bonus, palette cluster count
+
 **Ground Truth Extractor**:
 The development-only tool that derives object-independent geometric, topology, transform, and material facts from Authored References without attempting to invent an Object Generator.
 _Avoid_: Mesh decompiler, automatic model converter
@@ -146,6 +150,7 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 - The unchanged 24-direction Stone candidate passes `stone-geometry-baseline-v2`, the uniform-material v1 appearance policy, all nonvisual ceilings, and two stable hardware-GPU runs in Chrome, Firefox, and Safari. Stage 1.5 resumes at Patterned Appearance Baseline v2 calibration; Stage 2 remains unauthorized.
 - The Stage 1 `single-mesh-quality-baseline-v1` and its two-of-four result remain historical evidence. Stage 1.5 may evaluate a new Umbrella candidate against a separately pre-calibrated Patterned Appearance Baseline v2 whose appearance tolerances may be materially looser, while Umbrella geometry gates and nonvisual budgets remain unchanged.
 - Patterned Appearance Baseline v2 may be loosened during reference-only pre-calibration, but a flat canopy, wrong dominant palette, deleted major motif family, materially reduced pattern coverage, and large phase or pattern-scale errors must still fail; no further loosening is permitted after candidate fitting begins.
+- `patterned-appearance-baseline-v2` is frozen from two byte-stable reference-only runs with global limits of mean DeltaE <= 6.6967, P90 DeltaE <= 30.8300, mean SSIM >= 0.7287, and worst-view SSIM >= 0.5870 plus flower/leaf/branch Semantic Pattern Recall minima of 0.0451/0.1615/0.5905. Palette centroid and coverage clustering are diagnostic because minor complex-texture palette changes made them discontinuous; flat, wrong-palette, three family-deletion, half-coverage, and large phase/scale controls still fail.
 - Firefox and Safari evidence for an otherwise-qualified candidate requires a Native GPU Visual Gate with two stable full-protocol capture runs, recorded browser/OS/Three.js/GPU/color metadata, and an explicit rejection of software rendering. JavaScriptCore and SpiderMonkey structure/bounds signatures do not satisfy this gate.
 - Bamboo Shoot and Mushroom receive separate Category-specific Quality Baselines and separate compactness/runtime budgets, calibrated and frozen together during Stage 1.5 before either Stage 2 candidate is fitted. They share the evaluation protocol and cross-browser gates, but a failure or later finding for one cannot change the other's frozen values.
 - Every new Category-specific Quality Baseline requires a Calibration Bracket: identity and declared mild perturbations pass, declared destructive controls fail, and a metric that cannot separate the two before candidate fitting is revised or made diagnostic rather than loosened until both pass.
