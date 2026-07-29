@@ -30,7 +30,7 @@ function addProceduralColors(geometry, recipe, height, profileLength, outerCount
   const base = new THREE.Color(recipe.appearance.baseColor);
   const top = new THREE.Color(recipe.appearance.topColor);
   const innerBase = base.clone().lerp(top, 0.15);
-  const innerTop = top.clone().lerp(new THREE.Color(0xffffff), 0.5);
+  const innerTop = top.clone().lerp(new THREE.Color(), 0.5);
   const color = new THREE.Color();
   for (let index = 0; index < position.count; index += 1) {
     const progress = THREE.MathUtils.clamp(position.getY(index) / height, 0, 1);
@@ -101,7 +101,6 @@ export function generateVase(recipe) {
   const mesh = new THREE.Mesh(
     geometry,
     new THREE.MeshStandardMaterial({
-      color: 0xffffff,
       vertexColors: true,
       roughness: recipe.appearance.roughness,
       metalness: recipe.appearance.metalness,

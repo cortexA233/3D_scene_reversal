@@ -30,10 +30,10 @@ import {
   compareCrossEngineSignatures,
   crossEngineSignature,
 } from "../tools/acceptance/runtime-evidence.mjs";
+import { auditObjectScalars } from "../tools/acceptance/object-scalar-audit.mjs";
 import {
   auditProductionGraph,
   auditSourceText,
-  numericLiteralEvidence,
 } from "../tools/acceptance/static-audit.mjs";
 
 const execFile = promisify(execFileCallback);
@@ -59,18 +59,12 @@ const OBJECT_CONFIGS = Object.freeze({
       "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
       "gt_designer/src/reconstruction/objects/stone-path-generator.js",
     ],
-    scalarFiles: [
-      "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
-    ],
   }),
   stone: Object.freeze({
     semanticId: "island.nature.stone",
     sourceFiles: [
       "gt_designer/src/reconstruction/objects/stone-recipe.js",
       "gt_designer/src/reconstruction/objects/stone-generator.js",
-    ],
-    scalarFiles: [
-      "gt_designer/src/reconstruction/objects/stone-recipe.js",
     ],
   }),
   vase: Object.freeze({
@@ -79,18 +73,12 @@ const OBJECT_CONFIGS = Object.freeze({
       "gt_designer/src/reconstruction/objects/vase-recipe.js",
       "gt_designer/src/reconstruction/objects/vase-generator.js",
     ],
-    scalarFiles: [
-      "gt_designer/src/reconstruction/objects/vase-recipe.js",
-    ],
   }),
   umbrella: Object.freeze({
     semanticId: "island.prop.umbrella",
     sourceFiles: [
       "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
       "gt_designer/src/reconstruction/objects/umbrella-generator.js",
-    ],
-    scalarFiles: [
-      "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
     ],
   }),
 });
@@ -285,24 +273,10 @@ async function main() {
       ),
     },
   );
-  const scalarFiles = objectConfig.scalarFiles ?? objectConfig.sourceFiles;
-  const scalarEvidence = await Promise.all(
-    scalarFiles.map(async (sourceFile) => ({
-      sourceFile,
-      evidence: numericLiteralEvidence(
-        await readFile(path.join(PROJECT_ROOT, sourceFile), "utf8"),
-      ),
-    })),
-  );
-  const sourceScalars = {
-    definition:
-      "JavaScript numeric literals in object-specific semantic recipe sources, excluding generator control-flow literals",
-    count: scalarEvidence.reduce(
-      (sum, entry) => sum + entry.evidence.count,
-      0,
-    ),
-    files: scalarEvidence,
-  };
+  const sourceScalars = await auditObjectScalars({
+    projectRoot: PROJECT_ROOT,
+    objectId: options.objectId,
+  });
   const budgets = evaluateObjectBudgets({
     objectId: options.objectId,
     sourceScalarCount: sourceScalars.count,
@@ -352,6 +326,14 @@ async function main() {
     environment.actual.three === "0.170.0"
   );
   const checks = [
+    {
+      id: "complete-source-scalar-audit",
+      passed: sourceScalars.passed,
+      detail: {
+        value: sourceScalars.count,
+        maximum: sourceScalars.maximum,
+      },
+    },
     { id: "object-budgets", passed: budgets.passed, detail: budgets.failures },
     { id: "static-source-audit", passed: staticAudit.passed, detail: staticAudit.failures },
     { id: "minified-bundle-audit", passed: bundleAudit.passed, detail: bundleAudit.failures },

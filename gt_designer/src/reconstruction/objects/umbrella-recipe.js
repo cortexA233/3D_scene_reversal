@@ -49,8 +49,6 @@ export const UMBRELLA_RECIPE = Object.freeze({
       Object.freeze([1.55, 0.85, 0.72]),
       Object.freeze([1.85, -0.45, 0.74]),
       Object.freeze([2.27, -2.47, 0.7]),
-      Object.freeze([2.3, 1.97, 0.46]),
-      Object.freeze([3.4, -0.1, 0.45]),
     ]),
     leaves: Object.freeze([
       Object.freeze([2.2, 1.6, 0.87, 0.35]),
@@ -59,8 +57,6 @@ export const UMBRELLA_RECIPE = Object.freeze({
       Object.freeze([3.45, -2.77, 0.98, 0.38]),
       Object.freeze([3.85, -0.75, 1.12, 0.42]),
       Object.freeze([4.25, -2.43, 1.01, 0.38]),
-      Object.freeze([4.53, -0.92, 0.92, 0.35]),
-      Object.freeze([4.98, -0.36, 0.81, 0.32]),
     ]),
     roughness: 0.8,
     metalness: 0,

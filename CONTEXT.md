@@ -12,6 +12,10 @@ _Avoid_: Source asset, production asset
 A compact value derived from an Authored Reference that names a generator-relevant property and whose representation size is independent of source mesh, texture, or sampling resolution.
 _Avoid_: Extracted mesh data, compressed vertex data, baked sample array
 
+**Object-specific Scalar**:
+A numeric choice that encodes one Reconstruction Unit's geometry or appearance, regardless of whether it appears in a recipe, Object Generator, generated shader source, or object-specific helper; documented universal algorithm and control-flow constants are excluded.
+_Avoid_: Recipe scalar, exposed parameter, JSON number
+
 **Procedural Replacement**:
 A compact, semantic, parameterized reconstruction generated without loading its Authored Reference.
 _Avoid_: Generated copy, converted mesh
@@ -21,8 +25,16 @@ A deterministic, object-specific program that builds a Procedural Replacement fr
 _Avoid_: Mesh converter, universal modeler
 
 **Bounded Support-plane Polyhedron**:
-A compact closed-volume representation formed by intersecting a fixed maximum number of semantic support planes, with representation size independent of Authored Reference face or vertex count.
+A compact closed-volume representation formed by intersecting a fixed maximum number of canonical-direction semantic support planes, with representation size independent of Authored Reference face or vertex count.
 _Avoid_: Source-face replica, sampled hull, expanded loft
+
+**Axial Layer Family**:
+A compact generative group of open surface elements that share a semantic profile and vary through bounded axial progression, spacing, taper, phase, tilt, or twist controls rather than copied per-component transforms.
+_Avoid_: Component array, copied sheath set, open-mesh samples
+
+**Repeated Organic Form**:
+A semantic member of a compact generated group that shares one organic-form generator while retaining bounded editable variation in placement, scale, proportion, orientation, lean, and seed.
+_Avoid_: Mesh copy, cloned source component, identical scatter instance
 
 **Deterministic Generation**:
 Generation whose recipe and explicit versioned seed fully determine semantic IDs, structural choices, topology, and CPU-side geometry without ambient randomness, time, device state, or GPU results.
@@ -59,6 +71,10 @@ _Avoid_: Island MVP, full-scene prototype
 **Stage 1.5 Decision Gate**:
 A blocking evidence phase between the frozen Stage 1 result and Stage 2 implementation that resolves the failed representation and browser-evidence decisions without counting further exploration as Stage 2 progress.
 _Avoid_: Stage 2 preview, cleanup sprint, evidence backlog
+
+**Versioned Category Exit**:
+A formal Single Mesh Lab exit in which every required Reconstruction Unit passes its declared Category-specific Quality Baseline and the report preserves each baseline version without rewriting an earlier tranche's result.
+_Avoid_: Mixed-baseline score, retroactive Stage 1 pass, aggregate recovery
 
 **Reconstruction Unit**:
 An object-level evaluation pair consisting of one Authored Reference and its Procedural Replacement in the same canonical comparison slot; the replacement is one semantic object but may contain multiple generated render parts.
@@ -114,11 +130,15 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 - Bamboo Shoot and Mushroom receive separate Category-specific Quality Baselines and separate compactness/runtime budgets, calibrated and frozen together during Stage 1.5 before either Stage 2 candidate is fitted. They share the evaluation protocol and cross-browser gates, but a failure or later finding for one cannot change the other's frozen values.
 - Every new Category-specific Quality Baseline requires a Calibration Bracket: identity and declared mild perturbations pass, declared destructive controls fail, and a metric that cannot separate the two before candidate fitting is revised or made diagnostic rather than loosened until both pass.
 - Bamboo Shoot's Calibration Bracket uses the common scale, pivot, and rotation ladders plus taper, sheath tilt/twist, and axial-spacing ladders at mild/intermediate/severe levels. Its destructive controls delete a major sheath, reduce visible layering, collapse the open separated construction into a closed cone, remove the dominant flared silhouette element, flatten the appearance, corrupt the dominant palette, delete a major motif family, or halve pattern coverage.
+- Bamboo Shoot's first Stage 2 representation uses a compact tapered asymmetric core plus separate lateral-sheath and crown-leaf Axial Layer Families with stable semantic identities and preserved open boundaries. The 17 source components inform those families but do not become 17 copied production transforms; a second representation is chosen only from first-candidate failure evidence.
 - Mushroom's five closed source components are five complete repeated organic forms with similar topology but materially different height, scale, orientation, and placement. Its Calibration Bracket perturbs per-form size, cap/stem proportion, lean, placement, and cap resolution, while destructive controls delete a visible member or major part, collapse the group to one form, erase inter-form variation, swap dominant scale/layout roles, flatten appearance, corrupt the palette, delete a motif family, or halve pattern coverage.
+- Mushroom's first Stage 2 representation uses one shared stem-and-radial-cap generator to produce five Repeated Organic Forms with compact per-form placement, proportion, orientation, lean, and seed controls, stable semantic identities, and no more than two compatible render batches. A second representation is chosen only from first-candidate failure evidence.
+- Formal Single Mesh Lab exit may be claimed as a Versioned Category Exit when six required references, including Bamboo Shoot and Mushroom, pass their declared baseline versions and all shared gates. The historical Stage 1 v1 result remains two of four and is never restated as a retroactive four-of-four pass.
+- The reported Umbrella `86/96` scalar pass counted recipe literals but excluded Object Generator and generated-shader constants, so it is incomplete evidence against the declared Object-specific Scalar definition. Stage 1.5 must re-audit every Stage 1 object across its complete production source before relying on scalar headroom or nonvisual acceptance.
 - The frozen calibration report is development-only evidence. Its per-view metrics, checksums, source topology diagnostics, and perturbation results are prohibited from the Code-only Production Runtime just like other Ground Truth measurements.
 - The frozen Stage 1 certification result is negative: Stone Path and Vase pass every object gate, Stone fails contour and depth-tail geometry gates, and Umbrella passes geometry but fails procedural-appearance gates. The required core-hypothesis result is therefore two of four, and formal Single Mesh Lab exit is not claimed.
 - Stage 1's combined production constraints pass independently of its visual failures: the four-object bundle is 7,714 bytes gzip excluding Three.js, sequential warm generation is 1.6 ms p95 on the normative machine, and the replacement runtime has no WASM or runtime textures and renders in the isolated offline audit.
 - Stage 1 does not trigger a shared geometry layer or third-party Runtime Kernel. No missing geometry operation recurred across two generators, and all four generators met their compactness and runtime budgets. Umbrella instead triggers a future review of compact procedural appearance and the Code-only Production Runtime boundary for hero patterned objects.
 - Stone Path's footprint extrusion and Vase's hollow lathe/procedural gradient are accepted production candidates. Stone's compact loft and Umbrella's radial assembly/procedural flower shader are retained negative experiments, not accepted Exact-ish Procedural Replacements.
-- Stone's sole second compact representation candidate is a Bounded Support-plane Polyhedron under the frozen Stone quality and nonvisual budgets; adding more rings to the retained compact loft does not count as a distinct representation.
+- Stone's sole second compact representation candidate is a Bounded Support-plane Polyhedron with at most 24 canonical-direction support distances under the frozen Stone quality and nonvisual budgets; adding more rings, arbitrary source-derived plane normals, or more support directions does not count as another permitted representation.
 - A Bounded Semantic Pattern Program is permitted within the Code-only Production Runtime for hero patterned objects. Its object-specific controls count against the existing scalar and bundle budgets, while textures, pixel or sample tables, resolution-scaled paths, and sampled appearance disguised as shader constants remain prohibited.

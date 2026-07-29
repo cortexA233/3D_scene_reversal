@@ -457,5 +457,34 @@ export function createEvaluationHarness({
     renderer.dispose();
   }
 
-  return Object.freeze({ capture, captureAll, preview, dispose });
+  function environment() {
+    const context = renderer.getContext();
+    const debugRenderer = context.getExtension("WEBGL_debug_renderer_info");
+    const rendererName = debugRenderer
+      ? context.getParameter(debugRenderer.UNMASKED_RENDERER_WEBGL)
+      : context.getParameter(context.RENDERER);
+    const vendorName = debugRenderer
+      ? context.getParameter(debugRenderer.UNMASKED_VENDOR_WEBGL)
+      : context.getParameter(context.VENDOR);
+    const softwarePattern = /swiftshader|llvmpipe|software|softpipe/i;
+    return {
+      renderer: rendererName,
+      vendor: vendorName,
+      version: context.getParameter(context.VERSION),
+      shadingLanguageVersion: context.getParameter(
+        context.SHADING_LANGUAGE_VERSION,
+      ),
+      antialias: Boolean(context.getContextAttributes()?.antialias),
+      hardwareAccelerated:
+        typeof rendererName === "string" && !softwarePattern.test(rendererName),
+      rejectedSoftwareRendererPattern: String(softwarePattern),
+      colorManagement: {
+        outputColorSpace: renderer.outputColorSpace,
+        toneMapping: renderer.toneMapping,
+        toneMappingExposure: renderer.toneMappingExposure,
+      },
+    };
+  }
+
+  return Object.freeze({ capture, captureAll, preview, environment, dispose });
 }

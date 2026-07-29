@@ -332,7 +332,6 @@ function makeCanopyAlbedoMaterial(recipe) {
 
 function makeCanopyMaterial(recipe) {
   const material = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
     roughness: recipe.appearance.roughness,
     metalness: recipe.appearance.metalness,
     side: THREE.DoubleSide,
@@ -410,7 +409,6 @@ export function generateUmbrella(recipe) {
   );
   const canopyMaterial = makeCanopyMaterial(recipe);
   const hardwareMaterial = new THREE.MeshStandardMaterial({
-    color: 0xffffff,
     vertexColors: true,
     roughness: recipe.appearance.roughness,
     metalness: recipe.appearance.metalness,

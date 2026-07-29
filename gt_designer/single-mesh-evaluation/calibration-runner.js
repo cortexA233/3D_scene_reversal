@@ -601,6 +601,7 @@ export async function runObjectEvaluation({
         userAgent: navigator.userAgent,
         platform: navigator.platform,
         captureBackend: "browser-webgl-rgba8",
+        gpu: harness.environment(),
       },
     };
   } finally {

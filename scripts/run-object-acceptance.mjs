@@ -13,19 +13,29 @@ const PROJECT_ROOT = path.resolve(
 );
 
 function parseArguments(args) {
-  const options = { objectId: null, check: false, output: null };
+  const options = {
+    objectId: null,
+    check: false,
+    output: null,
+    evidenceVersion: "v1",
+  };
   for (let index = 0; index < args.length; index += 1) {
     if (args[index] === "--check") options.check = true;
     else if (args[index] === "--object" && args[index + 1]) {
       options.objectId = args[++index];
     } else if (args[index] === "--output" && args[index + 1]) {
       options.output = path.resolve(PROJECT_ROOT, args[++index]);
+    } else if (args[index] === "--evidence-version" && args[index + 1]) {
+      options.evidenceVersion = args[++index];
     } else throw new Error(`Unknown or incomplete argument: ${args[index]}`);
   }
   if (!options.objectId) throw new Error("--object is required");
+  if (!/^v\d+$/.test(options.evidenceVersion)) {
+    throw new Error("--evidence-version must use the form v<number>");
+  }
   options.output ??= path.join(
     PROJECT_ROOT,
-    `gt_designer/single-mesh-evaluation/reports/${options.objectId}-acceptance-v1.json`,
+    `gt_designer/single-mesh-evaluation/reports/${options.objectId}-acceptance-${options.evidenceVersion}.json`,
   );
   return options;
 }
@@ -34,7 +44,7 @@ async function main() {
   const options = parseArguments(process.argv.slice(2));
   const nonvisualOutput = path.join(
     PROJECT_ROOT,
-    `gt_designer/single-mesh-runtime-audit/reports/${options.objectId}-nonvisual-v1.json`,
+    `gt_designer/single-mesh-runtime-audit/reports/${options.objectId}-nonvisual-${options.evidenceVersion}.json`,
   );
   const nonvisualArguments = [
     "scripts/run-nonvisual-acceptance.mjs",
@@ -94,7 +104,8 @@ async function main() {
     },
   ];
   const report = {
-    schemaVersion: "single-mesh-object-acceptance-v1",
+    schemaVersion: `single-mesh-object-acceptance-${options.evidenceVersion}`,
+    evidenceVersion: options.evidenceVersion,
     artifactRole: "development-only-object-acceptance",
     productionUse: "prohibited",
     objectId: options.objectId,

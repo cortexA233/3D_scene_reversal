@@ -53,6 +53,46 @@ function maskCommentsAndStrings(source) {
   return result;
 }
 
+function maskComments(source) {
+  let result = "";
+  let state = "code";
+  for (let index = 0; index < source.length; index += 1) {
+    const character = source[index];
+    const next = source[index + 1];
+    if (state === "code") {
+      if (character === "/" && next === "/") {
+        state = "line-comment";
+        result += "  ";
+        index += 1;
+      } else if (character === "/" && next === "*") {
+        state = "block-comment";
+        result += "  ";
+        index += 1;
+      } else {
+        result += character;
+      }
+    } else if (state === "line-comment") {
+      if (character === "\n") {
+        state = "code";
+        result += "\n";
+      } else {
+        result += " ";
+      }
+    } else if (character === "*" && next === "/") {
+      state = "code";
+      result += "  ";
+      index += 1;
+    } else {
+      result += character === "\n" ? "\n" : " ";
+    }
+  }
+  return result;
+}
+
+function numericValue(literal) {
+  return Number(literal.replaceAll("_", ""));
+}
+
 export function numericLiteralEvidence(source) {
   const masked = maskCommentsAndStrings(source);
   const literals = [...masked.matchAll(NUMERIC_LITERAL)].map((match) => ({
@@ -63,6 +103,46 @@ export function numericLiteralEvidence(source) {
     definition:
       "JavaScript numeric literals outside comments and string/template literals",
     count: literals.length,
+    literals,
+  };
+}
+
+/**
+ * Find numeric choices outside recipe data, including literals embedded in
+ * generated shader/template source. Only explicitly declared universal
+ * algorithm and control-flow values are excluded.
+ */
+export function objectSpecificLiteralEvidence(
+  source,
+  { universalValues = [0, 0.01, 0.5, 1, 2, 3, 4] } = {},
+) {
+  const universal = new Set(universalValues);
+  const visible = maskComments(source);
+  const literals = [...visible.matchAll(NUMERIC_LITERAL)].map((match) => {
+    const before = visible.slice(0, match.index);
+    const line = before.split("\n").length;
+    const lineStart = before.lastIndexOf("\n") + 1;
+    const value = numericValue(match[0]);
+    return {
+      literal: match[0],
+      value,
+      line,
+      column: match.index - lineStart + 1,
+      classification: universal.has(value)
+        ? "universal-algorithm-or-control-flow"
+        : "object-specific",
+    };
+  });
+  const objectSpecific = literals.filter(
+    (entry) => entry.classification === "object-specific",
+  );
+  return {
+    definition:
+      "numeric literals in generator and generated shader source, excluding only the declared universal algorithm/control-flow values",
+    universalValues: [...universal].sort((a, b) => a - b),
+    count: objectSpecific.length,
+    objectSpecific,
+    classifiedLiteralCount: literals.length,
     literals,
   };
 }

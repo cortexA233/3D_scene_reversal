@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   auditSourceText,
   numericLiteralEvidence,
+  objectSpecificLiteralEvidence,
 } from "../tools/acceptance/static-audit.mjs";
 
 test("numeric literal evidence ignores comments and strings", () => {
@@ -18,6 +19,20 @@ test("numeric literal evidence ignores comments and strings", () => {
     result.literals.map((entry) => entry.literal),
     ["2.5", "0xff"],
   );
+});
+
+test("object-specific literal evidence scans generated shader templates", () => {
+  const result = objectSpecificLiteralEvidence(`
+    for (let index = 0; index < values.length; index += 1) {
+      shader += \`float branch = 0.18 * sin(x * 1.7);\`;
+    }
+    const radius = 0.032;
+  `);
+  assert.deepEqual(
+    result.objectSpecific.map((entry) => entry.value),
+    [0.18, 1.7, 0.032],
+  );
+  assert.deepEqual(result.universalValues, [0, 0.01, 0.5, 1, 2, 3, 4]);
 });
 
 test("static audit rejects authored, random, WASM, and dense payload patterns", () => {

@@ -1,107 +1,170 @@
 import * as THREE from "three";
 
-function planeHeight(plane, x, z, elevation) {
-  return plane[0] * x + plane[1] * z + elevation;
+function canonicalSupportDirections(supportCount) {
+  const directions = [
+    new THREE.Vector3(1, 0, 0),
+    new THREE.Vector3(-1, 0, 0),
+    new THREE.Vector3(0, 1, 0),
+    new THREE.Vector3(0, -1, 0),
+    new THREE.Vector3(0, 0, 1),
+    new THREE.Vector3(0, 0, -1),
+  ];
+  const phase = -Math.PI / (2 * 3);
+  for (let index = 0; index < 4; index += 1) {
+    const angle = phase + index * Math.PI / 2;
+    for (const azimuth of [angle, angle + Math.PI / 4]) {
+      directions.push(new THREE.Vector3(
+        Math.cos(azimuth),
+        0.5,
+        Math.sin(azimuth),
+      ).normalize());
+    }
+  }
+  for (let index = 0; index < 4; index += 1) {
+    const angle = phase + index * Math.PI / 2;
+    for (const azimuth of [angle, angle + Math.PI / 4]) {
+      directions.push(new THREE.Vector3(
+        Math.cos(azimuth),
+        3,
+        Math.sin(azimuth),
+      ).normalize());
+    }
+  }
+  for (const azimuth of [phase, phase + Math.PI]) {
+    directions.push(
+      new THREE.Vector3(Math.cos(azimuth), 0, Math.sin(azimuth)),
+    );
+  }
+  if (directions.length !== supportCount) {
+    throw new RangeError("stone canonical support count is incomplete");
+  }
+  return directions;
+}
+
+function supportPlanes(recipe, rng) {
+  const rotation = new THREE.Quaternion().setFromEuler(
+    new THREE.Euler(...recipe.shape.orientation),
+  );
+  return canonicalSupportDirections(recipe.shape.supportDistances.length)
+    .map((normal, index) => ({
+    normal: normal.applyQuaternion(rotation),
+    distance: recipe.shape.supportDistances[index] * (
+      1 + (rng.nextFloat() * 2 - 1) * recipe.shape.deformation
+    ),
+    }));
+}
+
+function intersection(first, second, third) {
+  const secondCrossThird = new THREE.Vector3().crossVectors(
+    second.normal,
+    third.normal,
+  );
+  const denominator = first.normal.dot(secondCrossThird);
+  if (Math.abs(denominator) <= Number.EPSILON) return null;
+  return secondCrossThird
+    .multiplyScalar(first.distance)
+    .add(
+      new THREE.Vector3()
+        .crossVectors(third.normal, first.normal)
+        .multiplyScalar(second.distance),
+    )
+    .add(
+      new THREE.Vector3()
+        .crossVectors(first.normal, second.normal)
+        .multiplyScalar(third.distance),
+    )
+    .multiplyScalar(1 / denominator);
+}
+
+function polyhedronVertices(planes) {
+  const vertices = [];
+  const tolerance = Math.sqrt(Number.EPSILON);
+  for (let first = 0; first < planes.length - 2; first += 1) {
+    for (let second = first + 1; second < planes.length - 1; second += 1) {
+      for (let third = second + 1; third < planes.length; third += 1) {
+        const point = intersection(
+          planes[first],
+          planes[second],
+          planes[third],
+        );
+        if (!point) continue;
+        const inside = planes.every(
+          (plane) => plane.normal.dot(point) <= plane.distance + tolerance,
+        );
+        const duplicate = vertices.some(
+          (vertex) => vertex.distanceToSquared(point) < tolerance * tolerance,
+        );
+        if (inside && !duplicate) vertices.push(point);
+      }
+    }
+  }
+  return vertices;
+}
+
+function triangulatePlanes(planes, vertices) {
+  const indices = [];
+  const tolerance = Math.sqrt(Number.EPSILON);
+  for (const plane of planes) {
+    const face = vertices
+      .map((point, index) => ({ point, index }))
+      .filter(
+        ({ point }) =>
+          Math.abs(plane.normal.dot(point) - plane.distance) < tolerance,
+      );
+    if (face.length < 3) continue;
+    const center = face
+      .reduce((sum, entry) => sum.add(entry.point), new THREE.Vector3())
+      .multiplyScalar(1 / face.length);
+    const guide = Math.abs(plane.normal.y) > 0.5
+      ? new THREE.Vector3(1, 0, 0)
+      : new THREE.Vector3(0, 1, 0);
+    const tangent = new THREE.Vector3()
+      .crossVectors(guide, plane.normal)
+      .normalize();
+    const bitangent = new THREE.Vector3()
+      .crossVectors(plane.normal, tangent)
+      .normalize();
+    face.sort((left, right) => {
+      const leftOffset = left.point.clone().sub(center);
+      const rightOffset = right.point.clone().sub(center);
+      return Math.atan2(
+        leftOffset.dot(bitangent),
+        leftOffset.dot(tangent),
+      ) - Math.atan2(
+        rightOffset.dot(bitangent),
+        rightOffset.dot(tangent),
+      );
+    });
+    for (let index = 1; index < face.length - 1; index += 1) {
+      indices.push(face[0].index, face[index].index, face[index + 1].index);
+    }
+  }
+  return indices;
 }
 
 /**
+ * Intersect one fixed canonical set of support planes. The recipe stores only
+ * their distances plus a whole-form orientation and bounded seeded variation.
+ *
  * @param {import("./stone-recipe.js").StoneRecipe} recipe
  * @param {import("../core/object-generator.js").SeededRng} rng
  */
 export function generateStone(recipe, rng) {
-  const shape = recipe.shape;
-  const rings = [0, shape.shoulderProgress, 1].map((progress) => {
-    const scale =
-      progress === 0
-        ? 1
-        : progress === 1
-          ? shape.topScale
-          : shape.shoulderScale;
-    return shape.footprint.map(([baseX, baseZ]) => {
-      const seededScale =
-        1 + (rng.nextFloat() * 2 - 1) * shape.deformation * progress;
-      const x =
-        baseX * scale * seededScale + shape.topCenter[0] * progress;
-      const z =
-        baseZ * scale * seededScale + shape.topCenter[1] * progress;
-      const bottomY = planeHeight(shape.bottomPlane, x, z, 0);
-      const topY = planeHeight(shape.topPlane, x, z, 1);
-      return new THREE.Vector3(
-        x,
-        THREE.MathUtils.lerp(bottomY, topY, progress),
-        z,
-      );
-    });
-  });
-  const positions = rings.flatMap((ring) => ring.flatMap((point) => point.toArray()));
-  const indices = [];
-  const segments = shape.footprint.length;
-  for (let ring = 0; ring < rings.length - 1; ring += 1) {
-    for (let segment = 0; segment < segments; segment += 1) {
-      const next = (segment + 1) % segments;
-      const lower = ring * segments;
-      const upper = (ring + 1) * segments;
-      indices.push(
-        lower + segment,
-        upper + segment,
-        lower + next,
-        upper + segment,
-        upper + next,
-        lower + next,
-      );
-    }
+  const planes = supportPlanes(recipe, rng);
+  if (planes.length !== recipe.shape.supportDistances.length) {
+    throw new RangeError("stone support distance count is incomplete");
   }
-
-  const addCap = (ringIndex, reverse) => {
-    const ring = rings[ringIndex];
-    const center = ring
-      .reduce((sum, point) => sum.add(point), new THREE.Vector3())
-      .multiplyScalar(1 / ring.length);
-    const centerIndex = positions.length / 3;
-    positions.push(...center);
-    const offset = positions.length / 3;
-    for (const point of ring) positions.push(...point);
-    for (let segment = 0; segment < segments; segment += 1) {
-      const next = (segment + 1) % segments;
-      if (reverse) indices.push(centerIndex, offset + next, offset + segment);
-      else indices.push(centerIndex, offset + segment, offset + next);
-    }
-  };
-  addCap(0, true);
-  addCap(rings.length - 1, false);
-
+  const vertices = polyhedronVertices(planes);
+  const indices = triangulatePlanes(planes, vertices);
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute(
     "position",
-    new THREE.Float32BufferAttribute(positions, 3),
+    new THREE.Float32BufferAttribute(
+      vertices.flatMap((point) => point.toArray()),
+      3,
+    ),
   );
   geometry.setIndex(indices);
-  const position = geometry.getAttribute("position");
-  geometry.computeBoundingBox();
-  const bounds = geometry.boundingBox;
-  const generatedSize = bounds.getSize(new THREE.Vector3());
-  const bottomCenter = new THREE.Vector3(
-    (bounds.min.x + bounds.max.x) * 0.5,
-    bounds.min.y,
-    (bounds.min.z + bounds.max.z) * 0.5,
-  );
-  const targetWidth =
-    Math.max(...shape.footprint.map((entry) => entry[0])) -
-    Math.min(...shape.footprint.map((entry) => entry[0]));
-  const targetDepth =
-    Math.max(...shape.footprint.map((entry) => entry[1])) -
-    Math.min(...shape.footprint.map((entry) => entry[1]));
-  const point = new THREE.Vector3();
-  for (let index = 0; index < position.count; index += 1) {
-    point.fromBufferAttribute(position, index).sub(bottomCenter);
-    point.set(
-      (point.x / generatedSize.x) * targetWidth,
-      (point.y / generatedSize.y) * shape.height,
-      (point.z / generatedSize.z) * targetDepth,
-    );
-    position.setXYZ(index, point.x, point.y, point.z);
-  }
-  position.needsUpdate = true;
   geometry.computeVertexNormals();
   geometry.computeBoundingBox();
   geometry.computeBoundingSphere();
