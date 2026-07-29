@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "single-mesh-material-aliasing-evidence-v1",
+  "artifactRole": "development-only-material-scale-consistency-evidence",
+  "productionUse": "prohibited",
+  "objectId": "candle",
+  "referenceAssetPolicy": "development-only comparison; no asset bytes or sampled derivatives in Production Runtime",
+  "acceptance": {
+    "passed": true,
+    "failures": []
+  },
+  "scaleConsistency": {
+    "schemaVersion": "material-scale-consistency-v1",
+    "captureSizes": {
+      "high": 512,
+      "low": 128
+    },
+    "thresholds": {
+      "maximumMeanAbsoluteChannelError": 2.5,
+      "maximumP95AbsoluteChannelError": 8
+    },
+    "views": [
+      {
+        "viewId": "low-045",
+        "comparedPixels": 1428,
+        "meanAbsoluteChannelError": 1.1942110177404295,
+        "p95AbsoluteChannelError": 7
+      },
+      {
+        "viewId": "low-135",
+        "comparedPixels": 1431,
+        "meanAbsoluteChannelError": 1.4765897973445143,
+        "p95AbsoluteChannelError": 7
+      },
+      {
+        "viewId": "high-045",
+        "comparedPixels": 1794,
+        "meanAbsoluteChannelError": 1.2545522110739502,
+        "p95AbsoluteChannelError": 7
+      }
+    ],
+    "aggregate": {
+      "worstMeanAbsoluteChannelError": 1.4765897973445143,
+      "worstP95AbsoluteChannelError": 7
+    },
+    "passed": true,
+    "failures": []
+  }
+}

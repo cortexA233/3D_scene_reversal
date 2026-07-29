@@ -14,7 +14,7 @@ import { verifyCandidateFreeze } from "../tools/evaluation/candidate-freeze.mjs"
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUTPUT = path.join(
   PROJECT_ROOT,
-  "gt_designer/single-mesh-evaluation/reports/stage-2-eight-object-certification-v1.json",
+  "gt_designer/single-mesh-evaluation/reports/stage-2-eight-object-certification-v2.json",
 );
 const OBJECTS = Object.freeze([
   {
@@ -54,10 +54,10 @@ const OBJECTS = Object.freeze([
   },
   {
     objectId: "candle",
-    acceptance: "candle-acceptance-v2.json",
+    acceptance: "candle-acceptance-v3.json",
     geometry: "candle-category-baseline-v1",
     appearance: "candle-semantic-category-baseline-v2",
-    native: "candle-native-gpu-v2",
+    native: "candle-native-gpu-v3",
   },
   {
     objectId: "mushroom",
@@ -80,14 +80,14 @@ const FREEZES = Object.freeze([
   "bamboo-shoot-v2-approved-candidate-freeze.json",
   "mushroom-v2-approved-candidate-freeze.json",
   "blue-hat-v2-approved-candidate-freeze.json",
-  "candle-v2-approved-candidate-freeze.json",
+  "candle-v3-approved-candidate-freeze.json",
 ]);
 const COMPLEX_CONTROLS = Object.freeze([
   "patterned-appearance-v3-human-anchor.json",
   "bamboo-shoot-semantic-appearance-v2-controls.json",
   "mushroom-semantic-appearance-v2-controls.json",
   "blue-hat-semantic-appearance-v2-controls.json",
-  "candle-semantic-appearance-v2-controls.json",
+  "candle-semantic-appearance-v3-controls.json",
 ]);
 
 async function readJson(relativePath) {
@@ -151,6 +151,9 @@ async function main() {
   })));
   const controlReports = await Promise.all(
     COMPLEX_CONTROLS.map((file) => readJson(`${reportRoot}/${file}`)),
+  );
+  const materialAliasing = await readJson(
+    `${reportRoot}/candle-material-aliasing-v1.json`,
   );
   const freezeChecks = await Promise.all(FREEZES.map(async (file) => {
     const manifest = await readJson(`${baselineRoot}/${file}`);
@@ -242,6 +245,12 @@ async function main() {
       passed: controlReports.every((report) => report.acceptance?.passed === true),
     },
     {
+      id: "candle-multiscale-material-aliasing-gate",
+      passed:
+        materialAliasing.objectId === "candle" &&
+        materialAliasing.acceptance?.passed === true,
+    },
+    {
       id: "all-versioned-positive-candidate-freezes-current",
       passed: freezeChecks.every((freeze) => freeze.passed === true),
     },
@@ -259,7 +268,7 @@ async function main() {
   ];
   const passed = checks.every((entry) => entry.passed);
   const report = {
-    schemaVersion: "single-mesh-stage-2-eight-object-certification-v1",
+    schemaVersion: "single-mesh-stage-2-eight-object-certification-v2",
     artifactRole: "development-only-versioned-category-exit-certification",
     productionUse: "prohibited",
     result: passed
@@ -269,6 +278,10 @@ async function main() {
       result: "2/4 FAIL",
       rewritten: false,
       sourceSchemaVersion: stage1.schemaVersion,
+    },
+    previousStage2Certification: {
+      schemaVersion: "single-mesh-stage-2-eight-object-certification-v1",
+      preserved: true,
     },
     delivery: {
       kind: "Reference-layout Delivery",
@@ -286,6 +299,12 @@ async function main() {
       schemaVersion: control.schemaVersion,
       passed: control.acceptance.passed,
     })),
+    materialAliasing: {
+      objectId: materialAliasing.objectId,
+      schemaVersion: materialAliasing.schemaVersion,
+      passed: materialAliasing.acceptance.passed,
+      aggregate: materialAliasing.scaleConsistency.aggregate,
+    },
     candidateFreezes: freezeChecks.map((freeze) => ({
       candidateId: freeze.candidateId,
       passed: freeze.passed,

@@ -41,6 +41,12 @@ Safari gates before the next object begins. Final certification requires 8/8.
   final scenes and never an island-village source-world arrangement.
 - Runtime textures, sampled appearance/geometry, vectorized bitmaps, WASM, and
   unapproved Runtime Kernels remain prohibited.
+- Development-only analysis, fitting, and evaluation may read original models,
+  materials, and textures, but asset bytes and resolution-dependent derivatives
+  may never enter an Object Generator or the final Production Runtime.
+- Candle material acceptance includes a 512-to-128 scale-consistency gate over
+  Unlit Albedo; the high-resolution box-filtered result and direct low-resolution
+  render must stay within mean/P95 absolute channel error `2.5/8`.
 
 ## Acceptance
 
@@ -59,9 +65,13 @@ Safari gates before the next object begins. Final certification requires 8/8.
 - Blue Hat: accepted under unchanged category-v1 geometry and semantic panel-
   pattern appearance v2; exact-position complex-texture metrics remain
   diagnostic and all four declared role-damage controls reject.
-- Candle: accepted under unchanged category-v1 geometry and semantic compound-
-  material appearance v2.
-- Eight-object exit: certified in the single Eight-slot Lab Reference Layout as
+- Candle: the historical v2 positive is retained; the current v3 positive uses
+  reference-informed but asset-free deterministic value noise with derivative
+  filtering, passes unchanged category-v1 geometry and semantic compound-
+  material v2, rejects all four existing damage controls, and passes Chrome,
+  Firefox, Safari, and the multi-scale material gate.
+- Eight-object exit: certification v2 preserves v1 and re-certifies the single
+  Eight-slot Lab Reference Layout with Candle v3 as
   `PASS under versioned category-specific baselines (8/8)`; historical Stage 1
   remains `2/4 FAIL`, and no full-island delivery is claimed.
 

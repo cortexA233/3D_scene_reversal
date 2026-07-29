@@ -6,10 +6,6 @@ import { runLocalSceneAutomation } from "./lib/smoke-local-scene.mjs";
 import { verifyCandidateFreeze } from "../tools/evaluation/candidate-freeze.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const OUTPUT = path.join(
-  PROJECT_ROOT,
-  "gt_designer/single-mesh-evaluation/reports/candle-semantic-appearance-v2-controls.json",
-);
 const SCENARIOS = Object.freeze([
   { id: "approved-candle-v2", variant: null, expected: "pass" },
   { id: "flatten-stone-system", variant: "flatten-stone-system", expected: "reject" },
@@ -24,8 +20,15 @@ async function readJson(relativePath) {
 
 async function main() {
   const check = process.argv.slice(2).includes("--check");
+  const candidateVersion = process.argv.slice(2).includes("--candidate-v3")
+    ? "v3"
+    : "v2";
+  const output = path.join(
+    PROJECT_ROOT,
+    `gt_designer/single-mesh-evaluation/reports/candle-semantic-appearance-${candidateVersion}-controls.json`,
+  );
   const candidateFreeze = await readJson(
-    "gt_designer/single-mesh-evaluation/baselines/candle-v2-approved-candidate-freeze.json",
+    `gt_designer/single-mesh-evaluation/baselines/candle-${candidateVersion}-approved-candidate-freeze.json`,
   );
   const before = await verifyCandidateFreeze({ projectRoot: PROJECT_ROOT, manifest: candidateFreeze });
   if (!before.passed) throw new Error(`Candle positive freeze failed before controls: ${JSON.stringify(before.failures)}`);
@@ -73,7 +76,7 @@ async function main() {
     { id: "candidate-freeze-before-and-after", passed: before.passed && after.passed },
   ];
   const report = {
-    schemaVersion: "candle-semantic-appearance-controls-v2",
+    schemaVersion: `candle-semantic-appearance-controls-${candidateVersion}`,
     artifactRole: "development-only-semantic-appearance-evidence",
     productionUse: "prohibited",
     objectId: "candle",
@@ -91,13 +94,13 @@ async function main() {
   };
   if (!report.acceptance.passed) throw new Error(`Candle semantic controls failed: ${JSON.stringify(report.acceptance.failures)}`);
   if (check) {
-    const frozen = JSON.parse(await readFile(OUTPUT, "utf8"));
+    const frozen = JSON.parse(await readFile(output, "utf8"));
     if (frozen.schemaVersion !== report.schemaVersion || frozen.scenarios.length !== report.scenarios.length) {
       throw new Error("frozen Candle semantic controls identity differs");
     }
   } else {
-    await mkdir(path.dirname(OUTPUT), { recursive: true });
-    await writeFile(OUTPUT, `${JSON.stringify(report, null, 2)}\n`);
+    await mkdir(path.dirname(output), { recursive: true });
+    await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);
   }
   process.stdout.write("Candle semantic appearance controls: PASS (1 positive, 4 rejected)\n");
 }

@@ -21,3 +21,11 @@ and Safari hardware-GPU evidence for every object, every declared complex-
 appearance damage bracket, and the integrated layout. The result is `PASS under
 versioned category-specific baselines (8/8)`. Historical Stage 1 remains `2/4
 FAIL`; no full-island result is claimed.
+
+## Certification v2
+
+`single-mesh-stage-2-eight-object-certification-v2` preserves the v1 report and
+replaces only the current Candle evidence with its band-limited v3 freeze,
+unchanged geometry/semantic acceptance, material scale-consistency gate, damage
+controls, and fresh Firefox/Safari evidence. The unified delivery remains 8/8,
+asset-free at runtime, and explicitly not a full-island result.

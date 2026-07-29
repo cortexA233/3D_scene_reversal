@@ -23,3 +23,17 @@ deleted wax, deleted wick, and wrong-palette controls reject while geometry
 continues to pass. Chrome acceptance and two stable full-protocol native
 hardware-GPU repetitions in Firefox and Safari pass. The eight-object exit is
 now unblocked.
+
+## Post-certification v3 material refinement
+
+Development-only comparison with the original 512-pixel base-color texture
+showed irregular low-contrast stone mottling rather than the v2 candidate's
+periodic bands. Candle v3 replaces those bands with deterministic code-only
+value noise and derivative-filtered role transitions. No original texture,
+pixel, sample table, or encoded derivative enters production.
+
+The unchanged geometry and semantic v2 gates pass, all four existing damage
+controls still reject, and the 512-to-128 material scale-consistency result is
+`1.4766` mean / `7` P95 under hard maxima `2.5/8`. Chrome plus two fresh native
+hardware-GPU repetitions in Firefox and Safari pass. The v2 candidate and its
+evidence remain historical.

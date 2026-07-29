@@ -122,7 +122,9 @@ async function main() {
             await readFile(
               path.join(
                 PROJECT_ROOT,
-                "gt_designer/single-mesh-evaluation/baselines/candle-v2-approved-candidate-freeze.json",
+                options.evidenceVersion === "v3"
+                  ? "gt_designer/single-mesh-evaluation/baselines/candle-v3-approved-candidate-freeze.json"
+                  : "gt_designer/single-mesh-evaluation/baselines/candle-v2-approved-candidate-freeze.json",
               ),
               "utf8",
             ),
