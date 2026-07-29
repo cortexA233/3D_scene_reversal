@@ -8,9 +8,133 @@ This context describes the reconstruction of an authored 3D scene as a compact, 
 An original artist-created scene or object retained as ground truth for measurement and comparison, but excluded from the delivered runtime.
 _Avoid_: Source asset, production asset
 
+**Immutable Reference Capture**:
+An authoritative rendering produced by observing the Authored Reference through its frozen public camera controls without changing its code, scene graph, materials, lighting, atmosphere, or post-processing.
+_Avoid_: Normalized reference render, corrected reference, shared-lighting render
+
+**Assembled Authored Scene**:
+The ready, fully composed reference scene whose final world transforms, visibility, geometry, materials, lights, procedural environment, and overrides are authoritative for scene measurement.
+_Avoid_: Raw GLB coordinates, offline asset layout, extractor reconstruction
+
+**Reference Source Evidence**:
+Development-only use of the Authored Reference implementation source to interpret, measure, and fit the Assembled Authored Scene; audited general algorithms and compact semantic parameters may be promoted into independent production modules, but production may not import or inspect the reference implementation.
+_Avoid_: Runtime source extraction, reference-code dependency, source-as-recipe
+
+**Frozen Observation Clock**:
+The development-side browser time control that advances and pauses an otherwise unmodified scene at declared moments so dynamic Immutable Reference Captures and replacement captures are repeatable.
+_Avoid_: Animation patch, fixed screenshot delay, scene time override
+
+**Reference Analysis Projection**:
+A development-only analytical representation derived by read-only inspection of Authored Reference geometry for auxiliary geometry evidence; it is separate from, and never presented as, an Immutable Reference Capture.
+_Avoid_: Modified reference scene, neutral reference, production proxy
+
+**Candidate Adapter**:
+The evaluation-side read-only exposure of the actual generated production scene and its semantic index without transient normalization, reframing, fitting, hidden transform correction, or replacement-specific content.
+_Avoid_: Comparison normalizer, evaluation fixup, fitted candidate scene
+
+**Reference-guided Fitting Loop**:
+The development-only iteration that reads an immutable reference, measures candidate error, persists permitted corrections into the Scene Recipe or production generator implementation, regenerates through the real production path, and evaluates the new result.
+_Avoid_: Candidate Adapter correction, runtime ground truth, evaluation-only fit
+
+**Semantic Coverage Manifest**:
+The development-only accounting that classifies every renderable reference geometry, light, and visible environment layer into a declared scene semantic role or an explicitly justified exclusion, with entity, surface-area, and Normative Scene Capture visibility coverage.
+_Avoid_: Extractor allowlist, recognized mesh count, ignored nodes
+
 **Semantic Measurement**:
 A compact value derived from an Authored Reference that names a generator-relevant property and whose representation size is independent of source mesh, texture, or sampling resolution.
 _Avoid_: Extracted mesh data, compressed vertex data, baked sample array
+
+**Identity-bearing Scene Entity**:
+A scene element whose individual identity and world-space relationship are meaningful enough to require one-to-one correspondence between the Authored Reference and Procedural Replacement.
+_Avoid_: Layout item, matched mesh, scene instance
+
+**Scene Semantic ID**:
+The stable production-safe identity that joins one Identity-bearing Scene Entity across its Scene Recipe, generated hierarchy, semantic capture, and evaluation history without exposing Authored Reference node identifiers or depending on array order.
+_Avoid_: Source node ID, array index, generated UUID
+
+**Distributed Scene Cover**:
+A dense population of small scene elements without meaningful individual identity, reconstructed and compared by semantic occupancy and spatial distribution rather than arbitrary instance pairing.
+_Avoid_: Unmatched objects, random clutter, background assets
+
+**Scene Geometry Evidence**:
+Development-only evidence obtained by directly comparing reference and replacement geometry in their shared world frame, including semantic placement, surface distance, terrain, coastline, sea-plane, and horizon measurements.
+_Avoid_: Screenshot score, retained geometry sample, production measurement data
+
+**Scene Surface Parity**:
+Topology-independent equivalence between reference and replacement surfaces, evaluated by deterministic bidirectional world-space distance together with visible geometry and explicitly declared semantic-structure checks.
+_Avoid_: Vertex match, triangle-topology copy, bounds-only fit
+
+**Scene Placement Anchor**:
+The world-space location of an Identity-bearing Scene Entity's Reconstruction Frame origin: the bottom-center of the entity's complete reference-geometry axis-aligned bounding box. A generator reproduces this origin without hidden placement offsets or empirical scale corrections.
+_Avoid_: Object position, authored pivot, visual center, ground point
+
+**Scene Anchor**:
+The fixed world-space island datum at `[86,26,-24]` used for terrain and coastline semantics, spatial statistics, the top-down evaluation frame, and the normative Horizon Profile independently of any camera target.
+_Avoid_: Overview target, island bounds center, camera focus
+
+**Scene Recipe**:
+The sole production-safe scene-specific artifact that defines world layout, semantic grouping, generator selection, placement contracts, material-family references, environment parameters, and bounded population or terrain programs without retaining Authored Reference content.
+_Avoid_: Extracted layout, scene manifest, generator registry
+
+**Scene Generator**:
+The production module that composes local Object Generator results, terrain, ocean, horizon, environment, and distributed populations into the world-space Procedural Replacement according to a Scene Recipe.
+_Avoid_: Object factory, evaluation builder, reference adapter
+
+**Target AABB Extent**:
+The complete final world-axis-aligned bounding-box dimensions an Identity-bearing Scene Entity must reproduce after generation and placement. It is a hard output target rather than a generator scale hint or a semantic part dimension.
+_Avoid_: Size, approximate bounds, model scale
+
+**Scene Orientation**:
+An entity's declared orientation semantics in the shared `+Y`-up world frame: directed `heading` uses local `+Z` as forward, undirected `axis` is equivalent modulo 180 degrees, `radial` has no yaw gate, and `surface-aligned` adds a support-normal relationship to a heading or axis.
+_Avoid_: PCA yaw, rotation hint, visual direction
+
+**Scene Evaluation Camera Set**:
+The fixed, reference-framed cameras used to evaluate full-scene layout and visible parity: one authored overview, one top-down layout view, and four opposing oblique views. The set is never reframed from the Procedural Replacement.
+_Avoid_: Screenshot angles, candidate-fitted cameras, free-fly views
+
+**Normative Scene Capture**:
+The `1440x810` CSS-pixel and framebuffer capture at device scale factor 1 under Three.js r170 used for blocking scene-render evidence across the Scene Evaluation Camera Set.
+_Avoid_: Current browser window, Retina screenshot, diagnostic render
+
+**Scene Render Contract**:
+The versioned, machine-verifiable camera, renderer, global and local lighting, shadow, atmosphere, sky, ocean, cloud, post-processing, URL-option, and observation-time conditions that define an Immutable Reference Capture and the appearance target for the independent Procedural Replacement.
+_Avoid_: Screenshot settings, shared lighting, visual preset
+
+**Environment Recipe**:
+The production-side semantic parameters that independently reproduce the scene's global sun, hemispheric and ambient illumination, atmosphere, sky, ocean environment, shadows, and post-processing under the Scene Render Contract.
+_Avoid_: Shared evaluation lighting, renderer preset, baked look
+
+**Semantic Light**:
+An identity-bearing local scene light with stable placement, color, intensity, range, shadow behavior, and an explicit relationship to its emissive source entity.
+_Avoid_: Lighting JSON record, baked glow, anonymous point light
+
+**Scene Parity Gate Stack**:
+The non-compensating acceptance hierarchy of structural correspondence, world-space geometry, fixed-camera geometry, and native appearance evidence, each retaining aggregate and worst-case results under a pre-calibrated Quality Baseline.
+_Avoid_: Similarity score, weighted visual grade, average screenshot metric
+
+**Scene Parity Foundation**:
+The milestone that freezes immutable reference observation and scene semantics, establishes calibrated deterministic 3D and rendered comparison, and records an honest candidate baseline without requiring the current Procedural Replacement to pass final parity gates.
+_Avoid_: Full-island completion, visual tuning pass, green baseline
+
+**Human Parity Review**:
+The final visual assessment performed only after the Scene Parity Gate Stack passes; it cannot waive an automated failure, and any clear residual mismatch it finds must become explicit evidence and a separately calibrated gate revision rather than an unexplained exception.
+_Avoid_: Eyeballing, approval override, subjective screenshot sign-off
+
+**Horizon Profile**:
+The world-space elevation angle of visible distant geometry as a function of azimuth around a fixed reference-defined scene anchor.
+_Avoid_: Mountain screenshot, skyline pixels, camera crop
+
+**Horizon Group**:
+An Identity-bearing Scene Entity representing one authored distant-mountain group with its own placement, bounds, orientation, and compact multi-form controls; all groups jointly determine the Horizon Profile.
+_Avoid_: Background ring, enlarged Stone, random mountain cone
+
+**Semantic Sea Level**:
+The static world-space plane that defines the scene's canonical water elevation, land/sea classification, and vertical layout relationships independently of animated surface waves.
+_Avoid_: Water mesh height, wave surface, ocean shader position
+
+**Ocean Appearance Surface**:
+The independently generated visible water layer whose frozen phase, displacement, shading, transparency, and reflections reproduce the Authored Reference without redefining the Semantic Sea Level.
+_Avoid_: Sea plane, coastline datum, animated sea level
 
 **Procedural Replacement**:
 A compact, semantic, parameterized reconstruction generated without loading its Authored Reference.
@@ -28,6 +152,10 @@ _Avoid_: Source-face replica, sampled hull, expanded loft
 Generation whose recipe and explicit versioned seed fully determine semantic IDs, structural choices, topology, and CPU-side geometry without ambient randomness, time, device state, or GPU results.
 _Avoid_: Visually stable, mostly repeatable, fixed `Math.random`
 
+**Scene Seed Derivation**:
+The stateless derivation of isolated geometry, material, distribution, and environment random streams from one versioned root scene seed plus a stable semantic identity and purpose label.
+_Avoid_: Global sequential RNG, per-entity seed inventory, array-order randomness
+
 **Exact-ish Reconstruction**:
 A Procedural Replacement that is observationally equivalent to its Authored Reference within declared tolerances across fixed multi-view evaluation passes while also meeting compactness, editability, determinism, and performance constraints; it need not reproduce source topology, UVs, vertices, or authoring history.
 _Avoid_: Exact copy, pixel match, looks similar
@@ -43,6 +171,14 @@ _Avoid_: Pure code, no-GLB runtime, asset-free runtime
 **Bounded Semantic Pattern Program**:
 A resolution-independent appearance representation that computes a hero prop's pattern from semantic surface coordinates using a fixed-cap composition of analytic motifs, compact vector controls, layers, symmetry, repetition, and domain transforms.
 _Avoid_: Procedural texture, vectorized bitmap, sampled shader table
+
+**Bounded Semantic Terrain Program**:
+A fixed-cap, resolution-independent description of coastline curves, named analytic landforms, deterministic noise, and their composition that generates terrain without retaining height samples or source-resolution geometry.
+_Avoid_: Procedural heightfield, sampled coastline, encoded terrain mesh
+
+**Material Family**:
+A stable semantic surface category whose code-generated parameters and bounded pattern variants preserve meaningful authored color, roughness, transparency, emission, and motif differences without retaining source textures.
+_Avoid_: Flat palette slot, source material ID, texture clone
 
 **Reference Independence**:
 The property that the Production Runtime builds and runs offline when Authored References and their loaders, manifests, and measurement artifacts are absent.
