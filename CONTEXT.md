@@ -49,7 +49,7 @@ Everything required to run the delivered scene offline, including executable dep
 _Avoid_: Final code, browser code
 
 **Code-only Production Runtime**:
-A Production Runtime whose scene-specific content consists of executable code, shaders, deterministic seeds, and compact semantic parameters; approved general-purpose Runtime Kernels are allowed, but Authored References and object-specific serialized geometry or sampled appearance data are not.
+A Production Runtime whose scene-specific content consists only of executable code, shaders, deterministic seeds, and compact semantic parameters. Its Object Generators and runtime never access, load, or embed ready-made artistic assets of any origin, including Authored References, textures, images, vector artwork, serialized geometry, material assets, or sampled and encoded derivatives. Approved general-purpose Runtime Kernels are allowed only when they contain no artistic content.
 _Avoid_: Pure code, no-GLB runtime, asset-free runtime
 
 **Bounded Semantic Pattern Program**:
