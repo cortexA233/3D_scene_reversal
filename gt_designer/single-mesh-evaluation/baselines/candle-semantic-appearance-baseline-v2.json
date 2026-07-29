@@ -1,0 +1,35 @@
+{
+  "version": "candle-semantic-category-baseline-v2",
+  "objectId": "candle",
+  "evidencePolicy": "bounded-semantic-material-roles-v2",
+  "semanticRoles": {
+    "stoneDark": [57, 51, 37],
+    "stoneMid": [69, 76, 61],
+    "stoneLight": [103, 111, 93],
+    "wax": [80, 12, 9],
+    "wick": [6, 7, 7]
+  },
+  "maximumRoleDistance": 18,
+  "hard": [
+    {"path":"semanticPattern.roles.stoneDark.replacementCoverage","operator":">=","threshold":0.04,"domain":"appearance","source":"reject-flattened-stone-system"},
+    {"path":"semanticPattern.roles.stoneDark.replacementCoverage","operator":"<=","threshold":0.55,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.stoneMid.replacementCoverage","operator":">=","threshold":0.08,"domain":"appearance","source":"retain-stone-mid-role"},
+    {"path":"semanticPattern.roles.stoneMid.replacementCoverage","operator":"<=","threshold":0.75,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.stoneLight.replacementCoverage","operator":">=","threshold":0.04,"domain":"appearance","source":"reject-flattened-stone-system"},
+    {"path":"semanticPattern.roles.stoneLight.replacementCoverage","operator":"<=","threshold":0.55,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.wax.replacementCoverage","operator":">=","threshold":0.04,"domain":"appearance","source":"reject-deleted-wax-role"},
+    {"path":"semanticPattern.roles.wax.replacementCoverage","operator":"<=","threshold":0.5,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.wick.replacementCoverage","operator":">=","threshold":0.0001,"domain":"appearance","source":"reject-deleted-wick-role"},
+    {"path":"semanticPattern.roles.wick.replacementCoverage","operator":"<=","threshold":0.02,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.stoneDark.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"measured-reference-role"},
+    {"path":"semanticPattern.roles.stoneMid.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"measured-reference-role"},
+    {"path":"semanticPattern.roles.stoneLight.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"measured-reference-role"},
+    {"path":"semanticPattern.roles.wax.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"measured-reference-role"},
+    {"path":"semanticPattern.roles.wick.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"measured-reference-role"},
+    {"path":"appearance.roughnessAbsoluteError","operator":"<=","threshold":0.1,"domain":"appearance","source":"unchanged-stage-2-category-v1"},
+    {"path":"appearance.metalnessAbsoluteError","operator":"<=","threshold":0.05,"domain":"appearance","source":"unchanged-stage-2-category-v1"}
+  ],
+  "diagnostic": ["appearance.meanDeltaE00","appearance.p90DeltaE00","appearance.meanMaskedSsim","appearance.worstViewSsim","appearance.paletteCentroidDeltaE00","appearance.paletteCoverageL1"],
+  "requiredDestructiveControls": ["flatten-stone-system","delete-wax-role","delete-wick-role","wrong-role-palette"],
+  "frozen": true
+}

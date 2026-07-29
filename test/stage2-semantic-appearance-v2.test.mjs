@@ -6,6 +6,8 @@ import { createBambooShootAppearanceVariantRecipe } from "../gt_designer/single-
 import { BAMBOO_SHOOT_RECIPE } from "../gt_designer/src/reconstruction/objects/bamboo-shoot-recipe.js";
 import { createBlueHatAppearanceVariantRecipe } from "../gt_designer/single-mesh-evaluation/blue-hat-appearance-variants.js";
 import { BLUE_HAT_RECIPE } from "../gt_designer/src/reconstruction/objects/blue-hat-recipe.js";
+import { createCandleAppearanceVariantRecipe } from "../gt_designer/single-mesh-evaluation/candle-appearance-variants.js";
+import { CANDLE_RECIPE } from "../gt_designer/src/reconstruction/objects/candle-recipe.js";
 import { createMushroomAppearanceVariantRecipe } from "../gt_designer/single-mesh-evaluation/mushroom-appearance-variants.js";
 import { MUSHROOM_RECIPE } from "../gt_designer/src/reconstruction/objects/mushroom-recipe.js";
 
@@ -64,6 +66,21 @@ test("Blue Hat semantic v2 keeps panel and motif damage observable", async () =>
     assert.notDeepEqual(
       createBlueHatAppearanceVariantRecipe(BLUE_HAT_RECIPE, variant).appearance,
       BLUE_HAT_RECIPE.appearance,
+    );
+  }
+});
+
+test("Candle semantic v2 separates stone, wax, and wick damage", async () => {
+  const baseline = JSON.parse(await readFile(
+    new URL("../gt_designer/single-mesh-evaluation/baselines/candle-semantic-appearance-baseline-v2.json", import.meta.url),
+    "utf8",
+  ));
+  assert.deepEqual(Object.keys(baseline.semanticRoles), ["stoneDark", "stoneMid", "stoneLight", "wax", "wick"]);
+  assert.ok(baseline.diagnostic.includes("appearance.meanMaskedSsim"));
+  for (const variant of baseline.requiredDestructiveControls) {
+    assert.notDeepEqual(
+      createCandleAppearanceVariantRecipe(CANDLE_RECIPE, variant).appearance,
+      CANDLE_RECIPE.appearance,
     );
   }
 });

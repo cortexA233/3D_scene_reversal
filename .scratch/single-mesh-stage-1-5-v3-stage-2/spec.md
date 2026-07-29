@@ -59,7 +59,8 @@ Safari gates before the next object begins. Final certification requires 8/8.
 - Blue Hat: accepted under unchanged category-v1 geometry and semantic panel-
   pattern appearance v2; exact-position complex-texture metrics remain
   diagnostic and all four declared role-damage controls reject.
-- Candle: in progress; the eight-object exit is not yet claimed.
+- Candle: accepted under unchanged category-v1 geometry and semantic compound-
+  material appearance v2; the eight-object exit certification is in progress.
 
 ## Out of Scope
 

@@ -822,6 +822,14 @@ export async function runObjectEvaluation({
         definition.recipe,
         appearanceVariant,
       );
+    } else if (objectId === "candle") {
+      const { createCandleAppearanceVariantRecipe } = await import(
+        "./candle-appearance-variants.js"
+      );
+      replacementRecipe = createCandleAppearanceVariantRecipe(
+        definition.recipe,
+        appearanceVariant,
+      );
     } else {
       throw new Error("appearance variants are not supported for this object");
     }

@@ -1,7 +1,7 @@
 # 09 — Eight-object Versioned Category Exit
 
 Type: task
-Status: ready-for-agent
+Status: claimed
 Blocked by: 08
 
 Populate all eight fixed Lab slots, run integrated and per-unit certification,

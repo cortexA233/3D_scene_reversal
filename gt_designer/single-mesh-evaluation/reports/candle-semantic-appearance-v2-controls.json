@@ -1,0 +1,1002 @@
+{
+  "schemaVersion": "candle-semantic-appearance-controls-v2",
+  "artifactRole": "development-only-semantic-appearance-evidence",
+  "productionUse": "prohibited",
+  "objectId": "candle",
+  "baselineVersions": {
+    "geometry": "candle-category-baseline-v1",
+    "appearance": "candle-semantic-category-baseline-v2"
+  },
+  "historicalEvidence": {
+    "categoryV1Result": "FAIL retained without alteration"
+  },
+  "scenarios": [
+    {
+      "id": "approved-candle-v2",
+      "variant": null,
+      "expected": "pass",
+      "actual": "pass",
+      "passed": true,
+      "geometryPassed": true,
+      "semanticPattern": {
+        "roles": {
+          "stoneDark": {
+            "referenceCoverage": 0.015291718042383527,
+            "replacementCoverage": 0.2964609638982749,
+            "coverageRatio": 19.38702787198824,
+            "meanReplacementRoleDistance": 0
+          },
+          "stoneMid": {
+            "referenceCoverage": 0.34097535117943284,
+            "replacementCoverage": 0.22253934015248433,
+            "coverageRatio": 0.6526552121222878,
+            "meanReplacementRoleDistance": 0
+          },
+          "stoneLight": {
+            "referenceCoverage": 0.2055163115500294,
+            "replacementCoverage": 0.24221371899973038,
+            "coverageRatio": 1.178562018619956,
+            "meanReplacementRoleDistance": 0
+          },
+          "wax": {
+            "referenceCoverage": 0.2303178188271356,
+            "replacementCoverage": 0.2367494105431035,
+            "coverageRatio": 1.0279248550924978,
+            "meanReplacementRoleDistance": 0
+          },
+          "wick": {
+            "referenceCoverage": 0.0011004966639394324,
+            "replacementCoverage": 0.0020365664064068657,
+            "coverageRatio": 1.8505884416919518,
+            "meanReplacementRoleDistance": 0
+          }
+        },
+        "total": {
+          "referenceCoverage": 0.7932016962629207,
+          "replacementCoverage": 0.9999999999999999,
+          "coverageRatio": 1.2607133906941776
+        }
+      },
+      "diagnosticExactPosition": {
+        "meanDeltaE00": 8.873530920137735,
+        "p90DeltaE00": 22.077753988878165,
+        "meanMaskedSsim": 0.48527045728293855,
+        "worstViewSsim": 0.44423226262616616,
+        "paletteCentroidDeltaE00": 10.148511730540076,
+        "paletteCoverageL1": 0.3190990455431157,
+        "roughnessAbsoluteError": 0,
+        "metalnessAbsoluteError": 0,
+        "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+      },
+      "gateFailures": [],
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "a4aeb755",
+        "low-000/silhouette": "c16f983d",
+        "low-000/linear-depth": "5dd387f3",
+        "low-000/world-normal": "b3e212d0",
+        "low-000/semantic-id": "4f5b0484",
+        "low-000/albedo": "13317d3c",
+        "low-000/lit-rgb": "36918157",
+        "low-045/neutral-rgb": "05b05480",
+        "low-045/silhouette": "74cd17b4",
+        "low-045/linear-depth": "0bfb771b",
+        "low-045/world-normal": "26015414",
+        "low-045/semantic-id": "5e6b2ada",
+        "low-045/albedo": "c8b8fe9f",
+        "low-045/lit-rgb": "56d82913",
+        "low-090/neutral-rgb": "d32baffa",
+        "low-090/silhouette": "99bfa625",
+        "low-090/linear-depth": "272f59e2",
+        "low-090/world-normal": "16e5ad2d",
+        "low-090/semantic-id": "dcd68259",
+        "low-090/albedo": "2f68e19a",
+        "low-090/lit-rgb": "97a0ad71",
+        "low-135/neutral-rgb": "45ed1806",
+        "low-135/silhouette": "aa80c1ed",
+        "low-135/linear-depth": "6c77bb41",
+        "low-135/world-normal": "27ad1d40",
+        "low-135/semantic-id": "d7ac3fb4",
+        "low-135/albedo": "9b5a4afb",
+        "low-135/lit-rgb": "9af03a1b",
+        "low-180/neutral-rgb": "b007e00a",
+        "low-180/silhouette": "9719eaac",
+        "low-180/linear-depth": "b1eff7c0",
+        "low-180/world-normal": "18cdd91a",
+        "low-180/semantic-id": "308f3a2e",
+        "low-180/albedo": "f1f7d4da",
+        "low-180/lit-rgb": "653aa102",
+        "low-225/neutral-rgb": "0c97d97a",
+        "low-225/silhouette": "0282d83d",
+        "low-225/linear-depth": "3f95c86a",
+        "low-225/world-normal": "39f3ca1a",
+        "low-225/semantic-id": "8b916ec1",
+        "low-225/albedo": "e605e70b",
+        "low-225/lit-rgb": "1f0d8527",
+        "low-270/neutral-rgb": "58d48d85",
+        "low-270/silhouette": "636997cc",
+        "low-270/linear-depth": "507f87ba",
+        "low-270/world-normal": "6746df31",
+        "low-270/semantic-id": "b341332e",
+        "low-270/albedo": "eb835992",
+        "low-270/lit-rgb": "b05a8ca7",
+        "low-315/neutral-rgb": "60b9a518",
+        "low-315/silhouette": "a900dfdd",
+        "low-315/linear-depth": "b4df8202",
+        "low-315/world-normal": "0d7f942b",
+        "low-315/semantic-id": "c5a68b94",
+        "low-315/albedo": "b9c00505",
+        "low-315/lit-rgb": "ca2ea0b3",
+        "high-045/neutral-rgb": "0a06dea0",
+        "high-045/silhouette": "7b343094",
+        "high-045/linear-depth": "6b08bcde",
+        "high-045/world-normal": "0c3006b7",
+        "high-045/semantic-id": "bffea996",
+        "high-045/albedo": "708fa200",
+        "high-045/lit-rgb": "030c46d6",
+        "high-135/neutral-rgb": "2d31ba1e",
+        "high-135/silhouette": "d816a774",
+        "high-135/linear-depth": "0ab8af44",
+        "high-135/world-normal": "f48419d2",
+        "high-135/semantic-id": "cd6e665b",
+        "high-135/albedo": "befb08cd",
+        "high-135/lit-rgb": "07927090",
+        "high-225/neutral-rgb": "460e4a5b",
+        "high-225/silhouette": "046b7484",
+        "high-225/linear-depth": "3b3b11f8",
+        "high-225/world-normal": "1ecd79e0",
+        "high-225/semantic-id": "83a3143f",
+        "high-225/albedo": "16a102ad",
+        "high-225/lit-rgb": "5033d283",
+        "high-315/neutral-rgb": "6225ccdc",
+        "high-315/silhouette": "981ee86d",
+        "high-315/linear-depth": "21bbd47e",
+        "high-315/world-normal": "560fdac5",
+        "high-315/semantic-id": "ccf6ee59",
+        "high-315/albedo": "8cb7f9a9",
+        "high-315/lit-rgb": "35874f2e"
+      },
+      "environment": {
+        "threeRevision": "170",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "captureBackend": "browser-webgl-rgba8",
+        "gpu": {
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "antialias": true,
+          "hardwareAccelerated": false,
+          "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i",
+          "colorManagement": {
+            "outputColorSpace": "srgb",
+            "toneMapping": 0,
+            "toneMappingExposure": 1.05
+          }
+        }
+      }
+    },
+    {
+      "id": "flatten-stone-system",
+      "variant": "flatten-stone-system",
+      "expected": "reject",
+      "actual": "reject",
+      "passed": true,
+      "geometryPassed": true,
+      "semanticPattern": {
+        "roles": {
+          "stoneDark": {
+            "referenceCoverage": 0.015291718042383527,
+            "replacementCoverage": 0,
+            "coverageRatio": 0,
+            "meanReplacementRoleDistance": null
+          },
+          "stoneMid": {
+            "referenceCoverage": 0.34097535117943284,
+            "replacementCoverage": 0.7612140230504897,
+            "coverageRatio": 2.232460558856974,
+            "meanReplacementRoleDistance": 0
+          },
+          "stoneLight": {
+            "referenceCoverage": 0.2055163115500294,
+            "replacementCoverage": 0,
+            "coverageRatio": 0,
+            "meanReplacementRoleDistance": null
+          },
+          "wax": {
+            "referenceCoverage": 0.2303178188271356,
+            "replacementCoverage": 0.2367494105431035,
+            "coverageRatio": 1.0279248550924978,
+            "meanReplacementRoleDistance": 0
+          },
+          "wick": {
+            "referenceCoverage": 0.0011004966639394324,
+            "replacementCoverage": 0.0020365664064068657,
+            "coverageRatio": 1.8505884416919518,
+            "meanReplacementRoleDistance": 0
+          }
+        },
+        "total": {
+          "referenceCoverage": 0.7932016962629207,
+          "replacementCoverage": 1,
+          "coverageRatio": 1.2607133906941776
+        }
+      },
+      "diagnosticExactPosition": {
+        "meanDeltaE00": 6.7529869961875555,
+        "p90DeltaE00": 18.51305850311113,
+        "meanMaskedSsim": 0.6615196917668552,
+        "worstViewSsim": 0.5849986758778155,
+        "paletteCentroidDeltaE00": 13.179542400014375,
+        "paletteCoverageL1": 0.47170260931728825,
+        "roughnessAbsoluteError": 0,
+        "metalnessAbsoluteError": 0,
+        "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+      },
+      "gateFailures": [
+        {
+          "path": "semanticPattern.roles.stoneDark.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.04,
+          "domain": "appearance",
+          "source": "reject-flattened-stone-system",
+          "actual": 0
+        },
+        {
+          "path": "semanticPattern.roles.stoneMid.replacementCoverage",
+          "operator": "<=",
+          "threshold": 0.75,
+          "domain": "appearance",
+          "source": "bounded-role-coverage",
+          "actual": 0.7612140230504897
+        },
+        {
+          "path": "semanticPattern.roles.stoneLight.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.04,
+          "domain": "appearance",
+          "source": "reject-flattened-stone-system",
+          "actual": 0
+        },
+        {
+          "path": "semanticPattern.roles.stoneDark.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "measured-reference-role",
+          "actual": null
+        },
+        {
+          "path": "semanticPattern.roles.stoneLight.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "measured-reference-role",
+          "actual": null
+        }
+      ],
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "a4aeb755",
+        "low-000/silhouette": "c16f983d",
+        "low-000/linear-depth": "5dd387f3",
+        "low-000/world-normal": "b3e212d0",
+        "low-000/semantic-id": "4f5b0484",
+        "low-000/albedo": "e21f0001",
+        "low-000/lit-rgb": "4936d24a",
+        "low-045/neutral-rgb": "05b05480",
+        "low-045/silhouette": "74cd17b4",
+        "low-045/linear-depth": "0bfb771b",
+        "low-045/world-normal": "26015414",
+        "low-045/semantic-id": "5e6b2ada",
+        "low-045/albedo": "a20bb6b0",
+        "low-045/lit-rgb": "c2d1e22a",
+        "low-090/neutral-rgb": "d32baffa",
+        "low-090/silhouette": "99bfa625",
+        "low-090/linear-depth": "272f59e2",
+        "low-090/world-normal": "16e5ad2d",
+        "low-090/semantic-id": "dcd68259",
+        "low-090/albedo": "8bc861ad",
+        "low-090/lit-rgb": "9677d0e9",
+        "low-135/neutral-rgb": "45ed1806",
+        "low-135/silhouette": "aa80c1ed",
+        "low-135/linear-depth": "6c77bb41",
+        "low-135/world-normal": "27ad1d40",
+        "low-135/semantic-id": "d7ac3fb4",
+        "low-135/albedo": "5137d72c",
+        "low-135/lit-rgb": "dc878e9e",
+        "low-180/neutral-rgb": "b007e00a",
+        "low-180/silhouette": "9719eaac",
+        "low-180/linear-depth": "b1eff7c0",
+        "low-180/world-normal": "18cdd91a",
+        "low-180/semantic-id": "308f3a2e",
+        "low-180/albedo": "f77b2778",
+        "low-180/lit-rgb": "a4324d32",
+        "low-225/neutral-rgb": "0c97d97a",
+        "low-225/silhouette": "0282d83d",
+        "low-225/linear-depth": "3f95c86a",
+        "low-225/world-normal": "39f3ca1a",
+        "low-225/semantic-id": "8b916ec1",
+        "low-225/albedo": "baa029bd",
+        "low-225/lit-rgb": "5171ff58",
+        "low-270/neutral-rgb": "58d48d85",
+        "low-270/silhouette": "636997cc",
+        "low-270/linear-depth": "507f87ba",
+        "low-270/world-normal": "6746df31",
+        "low-270/semantic-id": "b341332e",
+        "low-270/albedo": "ce761b4d",
+        "low-270/lit-rgb": "47ca0e08",
+        "low-315/neutral-rgb": "60b9a518",
+        "low-315/silhouette": "a900dfdd",
+        "low-315/linear-depth": "b4df8202",
+        "low-315/world-normal": "0d7f942b",
+        "low-315/semantic-id": "c5a68b94",
+        "low-315/albedo": "12c84841",
+        "low-315/lit-rgb": "496c6410",
+        "high-045/neutral-rgb": "0a06dea0",
+        "high-045/silhouette": "7b343094",
+        "high-045/linear-depth": "6b08bcde",
+        "high-045/world-normal": "0c3006b7",
+        "high-045/semantic-id": "bffea996",
+        "high-045/albedo": "5f1ca918",
+        "high-045/lit-rgb": "f93d8aca",
+        "high-135/neutral-rgb": "2d31ba1e",
+        "high-135/silhouette": "d816a774",
+        "high-135/linear-depth": "0ab8af44",
+        "high-135/world-normal": "f48419d2",
+        "high-135/semantic-id": "cd6e665b",
+        "high-135/albedo": "d3ad2461",
+        "high-135/lit-rgb": "fbaed4f2",
+        "high-225/neutral-rgb": "460e4a5b",
+        "high-225/silhouette": "046b7484",
+        "high-225/linear-depth": "3b3b11f8",
+        "high-225/world-normal": "1ecd79e0",
+        "high-225/semantic-id": "83a3143f",
+        "high-225/albedo": "0b4df76c",
+        "high-225/lit-rgb": "915d73db",
+        "high-315/neutral-rgb": "6225ccdc",
+        "high-315/silhouette": "981ee86d",
+        "high-315/linear-depth": "21bbd47e",
+        "high-315/world-normal": "560fdac5",
+        "high-315/semantic-id": "ccf6ee59",
+        "high-315/albedo": "4bf4ff45",
+        "high-315/lit-rgb": "f441e6aa"
+      },
+      "environment": {
+        "threeRevision": "170",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "captureBackend": "browser-webgl-rgba8",
+        "gpu": {
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "antialias": true,
+          "hardwareAccelerated": false,
+          "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i",
+          "colorManagement": {
+            "outputColorSpace": "srgb",
+            "toneMapping": 0,
+            "toneMappingExposure": 1.05
+          }
+        }
+      }
+    },
+    {
+      "id": "delete-wax-role",
+      "variant": "delete-wax-role",
+      "expected": "reject",
+      "actual": "reject",
+      "passed": true,
+      "geometryPassed": true,
+      "semanticPattern": {
+        "roles": {
+          "stoneDark": {
+            "referenceCoverage": 0.015291718042383527,
+            "replacementCoverage": 0.2964609638982749,
+            "coverageRatio": 19.38702787198824,
+            "meanReplacementRoleDistance": 0
+          },
+          "stoneMid": {
+            "referenceCoverage": 0.34097535117943284,
+            "replacementCoverage": 0.45928875069558783,
+            "coverageRatio": 1.3469851973373126,
+            "meanReplacementRoleDistance": 0
+          },
+          "stoneLight": {
+            "referenceCoverage": 0.2055163115500294,
+            "replacementCoverage": 0.24221371899973038,
+            "coverageRatio": 1.178562018619956,
+            "meanReplacementRoleDistance": 0
+          },
+          "wax": {
+            "referenceCoverage": 0.2303178188271356,
+            "replacementCoverage": 0,
+            "coverageRatio": 0,
+            "meanReplacementRoleDistance": null
+          },
+          "wick": {
+            "referenceCoverage": 0.0011004966639394324,
+            "replacementCoverage": 0.0020365664064068657,
+            "coverageRatio": 1.8505884416919518,
+            "meanReplacementRoleDistance": 0
+          }
+        },
+        "total": {
+          "referenceCoverage": 0.7932016962629207,
+          "replacementCoverage": 1,
+          "coverageRatio": 1.2607133906941776
+        }
+      },
+      "diagnosticExactPosition": {
+        "meanDeltaE00": 15.126896375182652,
+        "p90DeltaE00": 32.574703124065266,
+        "meanMaskedSsim": 0.27773666643652345,
+        "worstViewSsim": 0.26395992145569164,
+        "paletteCentroidDeltaE00": 11.18594420675159,
+        "paletteCoverageL1": 0.31511613960740414,
+        "roughnessAbsoluteError": 0,
+        "metalnessAbsoluteError": 0,
+        "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+      },
+      "gateFailures": [
+        {
+          "path": "semanticPattern.roles.wax.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.04,
+          "domain": "appearance",
+          "source": "reject-deleted-wax-role",
+          "actual": 0
+        },
+        {
+          "path": "semanticPattern.roles.wax.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "measured-reference-role",
+          "actual": null
+        }
+      ],
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "a4aeb755",
+        "low-000/silhouette": "c16f983d",
+        "low-000/linear-depth": "5dd387f3",
+        "low-000/world-normal": "b3e212d0",
+        "low-000/semantic-id": "4f5b0484",
+        "low-000/albedo": "88cee37c",
+        "low-000/lit-rgb": "c7adcb57",
+        "low-045/neutral-rgb": "05b05480",
+        "low-045/silhouette": "74cd17b4",
+        "low-045/linear-depth": "0bfb771b",
+        "low-045/world-normal": "26015414",
+        "low-045/semantic-id": "5e6b2ada",
+        "low-045/albedo": "85984d2e",
+        "low-045/lit-rgb": "1ff6aaf8",
+        "low-090/neutral-rgb": "d32baffa",
+        "low-090/silhouette": "99bfa625",
+        "low-090/linear-depth": "272f59e2",
+        "low-090/world-normal": "16e5ad2d",
+        "low-090/semantic-id": "dcd68259",
+        "low-090/albedo": "0f646cca",
+        "low-090/lit-rgb": "863a8ebe",
+        "low-135/neutral-rgb": "45ed1806",
+        "low-135/silhouette": "aa80c1ed",
+        "low-135/linear-depth": "6c77bb41",
+        "low-135/world-normal": "27ad1d40",
+        "low-135/semantic-id": "d7ac3fb4",
+        "low-135/albedo": "448f220a",
+        "low-135/lit-rgb": "30a757f4",
+        "low-180/neutral-rgb": "b007e00a",
+        "low-180/silhouette": "9719eaac",
+        "low-180/linear-depth": "b1eff7c0",
+        "low-180/world-normal": "18cdd91a",
+        "low-180/semantic-id": "308f3a2e",
+        "low-180/albedo": "aad0840b",
+        "low-180/lit-rgb": "035c8453",
+        "low-225/neutral-rgb": "0c97d97a",
+        "low-225/silhouette": "0282d83d",
+        "low-225/linear-depth": "3f95c86a",
+        "low-225/world-normal": "39f3ca1a",
+        "low-225/semantic-id": "8b916ec1",
+        "low-225/albedo": "42f2aaa3",
+        "low-225/lit-rgb": "5eb01779",
+        "low-270/neutral-rgb": "58d48d85",
+        "low-270/silhouette": "636997cc",
+        "low-270/linear-depth": "507f87ba",
+        "low-270/world-normal": "6746df31",
+        "low-270/semantic-id": "b341332e",
+        "low-270/albedo": "03635c3a",
+        "low-270/lit-rgb": "b17bf324",
+        "low-315/neutral-rgb": "60b9a518",
+        "low-315/silhouette": "a900dfdd",
+        "low-315/linear-depth": "b4df8202",
+        "low-315/world-normal": "0d7f942b",
+        "low-315/semantic-id": "c5a68b94",
+        "low-315/albedo": "9775952d",
+        "low-315/lit-rgb": "b85504d0",
+        "high-045/neutral-rgb": "0a06dea0",
+        "high-045/silhouette": "7b343094",
+        "high-045/linear-depth": "6b08bcde",
+        "high-045/world-normal": "0c3006b7",
+        "high-045/semantic-id": "bffea996",
+        "high-045/albedo": "97397521",
+        "high-045/lit-rgb": "9caf5ec4",
+        "high-135/neutral-rgb": "2d31ba1e",
+        "high-135/silhouette": "d816a774",
+        "high-135/linear-depth": "0ab8af44",
+        "high-135/world-normal": "f48419d2",
+        "high-135/semantic-id": "cd6e665b",
+        "high-135/albedo": "48d8a245",
+        "high-135/lit-rgb": "0730b266",
+        "high-225/neutral-rgb": "460e4a5b",
+        "high-225/silhouette": "046b7484",
+        "high-225/linear-depth": "3b3b11f8",
+        "high-225/world-normal": "1ecd79e0",
+        "high-225/semantic-id": "83a3143f",
+        "high-225/albedo": "5985650c",
+        "high-225/lit-rgb": "16d0f589",
+        "high-315/neutral-rgb": "6225ccdc",
+        "high-315/silhouette": "981ee86d",
+        "high-315/linear-depth": "21bbd47e",
+        "high-315/world-normal": "560fdac5",
+        "high-315/semantic-id": "ccf6ee59",
+        "high-315/albedo": "edc8d4e1",
+        "high-315/lit-rgb": "231dd453"
+      },
+      "environment": {
+        "threeRevision": "170",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "captureBackend": "browser-webgl-rgba8",
+        "gpu": {
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "antialias": true,
+          "hardwareAccelerated": false,
+          "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i",
+          "colorManagement": {
+            "outputColorSpace": "srgb",
+            "toneMapping": 0,
+            "toneMappingExposure": 1.05
+          }
+        }
+      }
+    },
+    {
+      "id": "delete-wick-role",
+      "variant": "delete-wick-role",
+      "expected": "reject",
+      "actual": "reject",
+      "passed": true,
+      "geometryPassed": true,
+      "semanticPattern": {
+        "roles": {
+          "stoneDark": {
+            "referenceCoverage": 0.015291718042383527,
+            "replacementCoverage": 0.2964609638982749,
+            "coverageRatio": 19.38702787198824,
+            "meanReplacementRoleDistance": 0
+          },
+          "stoneMid": {
+            "referenceCoverage": 0.34097535117943284,
+            "replacementCoverage": 0.22253934015248433,
+            "coverageRatio": 0.6526552121222878,
+            "meanReplacementRoleDistance": 0
+          },
+          "stoneLight": {
+            "referenceCoverage": 0.2055163115500294,
+            "replacementCoverage": 0.24221371899973038,
+            "coverageRatio": 1.178562018619956,
+            "meanReplacementRoleDistance": 0
+          },
+          "wax": {
+            "referenceCoverage": 0.2303178188271356,
+            "replacementCoverage": 0.23878597694951037,
+            "coverageRatio": 1.0367672730034427,
+            "meanReplacementRoleDistance": 0
+          },
+          "wick": {
+            "referenceCoverage": 0.0011004966639394324,
+            "replacementCoverage": 0,
+            "coverageRatio": 0,
+            "meanReplacementRoleDistance": null
+          }
+        },
+        "total": {
+          "referenceCoverage": 0.7932016962629207,
+          "replacementCoverage": 1,
+          "coverageRatio": 1.2607133906941776
+        }
+      },
+      "diagnosticExactPosition": {
+        "meanDeltaE00": 8.872011981294122,
+        "p90DeltaE00": 22.044918088342058,
+        "meanMaskedSsim": 0.48507016871568026,
+        "worstViewSsim": 0.44366271459990314,
+        "paletteCentroidDeltaE00": 5.055251314273047,
+        "paletteCoverageL1": 0.08457399399201135,
+        "roughnessAbsoluteError": 0,
+        "metalnessAbsoluteError": 0,
+        "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+      },
+      "gateFailures": [
+        {
+          "path": "semanticPattern.roles.wick.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.0001,
+          "domain": "appearance",
+          "source": "reject-deleted-wick-role",
+          "actual": 0
+        },
+        {
+          "path": "semanticPattern.roles.wick.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "measured-reference-role",
+          "actual": null
+        }
+      ],
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "a4aeb755",
+        "low-000/silhouette": "c16f983d",
+        "low-000/linear-depth": "5dd387f3",
+        "low-000/world-normal": "b3e212d0",
+        "low-000/semantic-id": "4f5b0484",
+        "low-000/albedo": "34190bb1",
+        "low-000/lit-rgb": "bbd2f367",
+        "low-045/neutral-rgb": "05b05480",
+        "low-045/silhouette": "74cd17b4",
+        "low-045/linear-depth": "0bfb771b",
+        "low-045/world-normal": "26015414",
+        "low-045/semantic-id": "5e6b2ada",
+        "low-045/albedo": "0aa54307",
+        "low-045/lit-rgb": "e9b04df6",
+        "low-090/neutral-rgb": "d32baffa",
+        "low-090/silhouette": "99bfa625",
+        "low-090/linear-depth": "272f59e2",
+        "low-090/world-normal": "16e5ad2d",
+        "low-090/semantic-id": "dcd68259",
+        "low-090/albedo": "2acfb562",
+        "low-090/lit-rgb": "fe2eeb1a",
+        "low-135/neutral-rgb": "45ed1806",
+        "low-135/silhouette": "aa80c1ed",
+        "low-135/linear-depth": "6c77bb41",
+        "low-135/world-normal": "27ad1d40",
+        "low-135/semantic-id": "d7ac3fb4",
+        "low-135/albedo": "29a35a83",
+        "low-135/lit-rgb": "39794117",
+        "low-180/neutral-rgb": "b007e00a",
+        "low-180/silhouette": "9719eaac",
+        "low-180/linear-depth": "b1eff7c0",
+        "low-180/world-normal": "18cdd91a",
+        "low-180/semantic-id": "308f3a2e",
+        "low-180/albedo": "faf8c482",
+        "low-180/lit-rgb": "55e6b12c",
+        "low-225/neutral-rgb": "0c97d97a",
+        "low-225/silhouette": "0282d83d",
+        "low-225/linear-depth": "3f95c86a",
+        "low-225/world-normal": "39f3ca1a",
+        "low-225/semantic-id": "8b916ec1",
+        "low-225/albedo": "184b0be3",
+        "low-225/lit-rgb": "66f12ce3",
+        "low-270/neutral-rgb": "58d48d85",
+        "low-270/silhouette": "636997cc",
+        "low-270/linear-depth": "507f87ba",
+        "low-270/world-normal": "6746df31",
+        "low-270/semantic-id": "b341332e",
+        "low-270/albedo": "2c3870bb",
+        "low-270/lit-rgb": "15d53a8a",
+        "low-315/neutral-rgb": "60b9a518",
+        "low-315/silhouette": "a900dfdd",
+        "low-315/linear-depth": "b4df8202",
+        "low-315/world-normal": "0d7f942b",
+        "low-315/semantic-id": "c5a68b94",
+        "low-315/albedo": "56b33e98",
+        "low-315/lit-rgb": "9089fa4d",
+        "high-045/neutral-rgb": "0a06dea0",
+        "high-045/silhouette": "7b343094",
+        "high-045/linear-depth": "6b08bcde",
+        "high-045/world-normal": "0c3006b7",
+        "high-045/semantic-id": "bffea996",
+        "high-045/albedo": "48667b90",
+        "high-045/lit-rgb": "d2bb32f0",
+        "high-135/neutral-rgb": "2d31ba1e",
+        "high-135/silhouette": "d816a774",
+        "high-135/linear-depth": "0ab8af44",
+        "high-135/world-normal": "f48419d2",
+        "high-135/semantic-id": "cd6e665b",
+        "high-135/albedo": "ae603b4d",
+        "high-135/lit-rgb": "01a0ec03",
+        "high-225/neutral-rgb": "460e4a5b",
+        "high-225/silhouette": "046b7484",
+        "high-225/linear-depth": "3b3b11f8",
+        "high-225/world-normal": "1ecd79e0",
+        "high-225/semantic-id": "83a3143f",
+        "high-225/albedo": "923cdd64",
+        "high-225/lit-rgb": "805f7ff2",
+        "high-315/neutral-rgb": "6225ccdc",
+        "high-315/silhouette": "981ee86d",
+        "high-315/linear-depth": "21bbd47e",
+        "high-315/world-normal": "560fdac5",
+        "high-315/semantic-id": "ccf6ee59",
+        "high-315/albedo": "66cdbae5",
+        "high-315/lit-rgb": "6ad4178e"
+      },
+      "environment": {
+        "threeRevision": "170",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "captureBackend": "browser-webgl-rgba8",
+        "gpu": {
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "antialias": true,
+          "hardwareAccelerated": false,
+          "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i",
+          "colorManagement": {
+            "outputColorSpace": "srgb",
+            "toneMapping": 0,
+            "toneMappingExposure": 1.05
+          }
+        }
+      }
+    },
+    {
+      "id": "wrong-role-palette",
+      "variant": "wrong-role-palette",
+      "expected": "reject",
+      "actual": "reject",
+      "passed": true,
+      "geometryPassed": true,
+      "semanticPattern": {
+        "roles": {
+          "stoneDark": {
+            "referenceCoverage": 0.015291718042383527,
+            "replacementCoverage": 0,
+            "coverageRatio": 0,
+            "meanReplacementRoleDistance": null
+          },
+          "stoneMid": {
+            "referenceCoverage": 0.34097535117943284,
+            "replacementCoverage": 0,
+            "coverageRatio": 0,
+            "meanReplacementRoleDistance": null
+          },
+          "stoneLight": {
+            "referenceCoverage": 0.2055163115500294,
+            "replacementCoverage": 0,
+            "coverageRatio": 0,
+            "meanReplacementRoleDistance": null
+          },
+          "wax": {
+            "referenceCoverage": 0.2303178188271356,
+            "replacementCoverage": 0,
+            "coverageRatio": 0,
+            "meanReplacementRoleDistance": null
+          },
+          "wick": {
+            "referenceCoverage": 0.0011004966639394324,
+            "replacementCoverage": 0.0020365664064068657,
+            "coverageRatio": 1.8505884416919518,
+            "meanReplacementRoleDistance": 1.4142135623730936
+          }
+        },
+        "total": {
+          "referenceCoverage": 0.7932016962629207,
+          "replacementCoverage": 0.0020365664064068657,
+          "coverageRatio": 0.0025675265395950562
+        }
+      },
+      "diagnosticExactPosition": {
+        "meanDeltaE00": 26.84478162913157,
+        "p90DeltaE00": 36.080567636825805,
+        "meanMaskedSsim": 0.47735622167481867,
+        "worstViewSsim": 0.44416839319627816,
+        "paletteCentroidDeltaE00": 26.35814737264774,
+        "paletteCoverageL1": 0.31909904554311574,
+        "roughnessAbsoluteError": 0,
+        "metalnessAbsoluteError": 0,
+        "passPolicy": "Color and SSIM use the worse aggregate of albedo and frozen-lighting RGB; palette uses albedo."
+      },
+      "gateFailures": [
+        {
+          "path": "semanticPattern.roles.stoneDark.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.04,
+          "domain": "appearance",
+          "source": "reject-flattened-stone-system",
+          "actual": 0
+        },
+        {
+          "path": "semanticPattern.roles.stoneMid.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.08,
+          "domain": "appearance",
+          "source": "retain-stone-mid-role",
+          "actual": 0
+        },
+        {
+          "path": "semanticPattern.roles.stoneLight.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.04,
+          "domain": "appearance",
+          "source": "reject-flattened-stone-system",
+          "actual": 0
+        },
+        {
+          "path": "semanticPattern.roles.wax.replacementCoverage",
+          "operator": ">=",
+          "threshold": 0.04,
+          "domain": "appearance",
+          "source": "reject-deleted-wax-role",
+          "actual": 0
+        },
+        {
+          "path": "semanticPattern.roles.stoneDark.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "measured-reference-role",
+          "actual": null
+        },
+        {
+          "path": "semanticPattern.roles.stoneMid.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "measured-reference-role",
+          "actual": null
+        },
+        {
+          "path": "semanticPattern.roles.stoneLight.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "measured-reference-role",
+          "actual": null
+        },
+        {
+          "path": "semanticPattern.roles.wax.meanReplacementRoleDistance",
+          "operator": "<=",
+          "threshold": 4,
+          "domain": "appearance",
+          "source": "measured-reference-role",
+          "actual": null
+        }
+      ],
+      "replacementChecksums": {
+        "low-000/neutral-rgb": "a4aeb755",
+        "low-000/silhouette": "c16f983d",
+        "low-000/linear-depth": "5dd387f3",
+        "low-000/world-normal": "b3e212d0",
+        "low-000/semantic-id": "4f5b0484",
+        "low-000/albedo": "82d15434",
+        "low-000/lit-rgb": "d88a283c",
+        "low-045/neutral-rgb": "05b05480",
+        "low-045/silhouette": "74cd17b4",
+        "low-045/linear-depth": "0bfb771b",
+        "low-045/world-normal": "26015414",
+        "low-045/semantic-id": "5e6b2ada",
+        "low-045/albedo": "5ff4ab5f",
+        "low-045/lit-rgb": "9248da63",
+        "low-090/neutral-rgb": "d32baffa",
+        "low-090/silhouette": "99bfa625",
+        "low-090/linear-depth": "272f59e2",
+        "low-090/world-normal": "16e5ad2d",
+        "low-090/semantic-id": "dcd68259",
+        "low-090/albedo": "caa33e08",
+        "low-090/lit-rgb": "a9d1eabd",
+        "low-135/neutral-rgb": "45ed1806",
+        "low-135/silhouette": "aa80c1ed",
+        "low-135/linear-depth": "6c77bb41",
+        "low-135/world-normal": "27ad1d40",
+        "low-135/semantic-id": "d7ac3fb4",
+        "low-135/albedo": "3ea138a9",
+        "low-135/lit-rgb": "0454df1b",
+        "low-180/neutral-rgb": "b007e00a",
+        "low-180/silhouette": "9719eaac",
+        "low-180/linear-depth": "b1eff7c0",
+        "low-180/world-normal": "18cdd91a",
+        "low-180/semantic-id": "308f3a2e",
+        "low-180/albedo": "9034c5d8",
+        "low-180/lit-rgb": "e96d57a9",
+        "low-225/neutral-rgb": "0c97d97a",
+        "low-225/silhouette": "0282d83d",
+        "low-225/linear-depth": "3f95c86a",
+        "low-225/world-normal": "39f3ca1a",
+        "low-225/semantic-id": "8b916ec1",
+        "low-225/albedo": "1990a7f7",
+        "low-225/lit-rgb": "52692e2e",
+        "low-270/neutral-rgb": "58d48d85",
+        "low-270/silhouette": "636997cc",
+        "low-270/linear-depth": "507f87ba",
+        "low-270/world-normal": "6746df31",
+        "low-270/semantic-id": "b341332e",
+        "low-270/albedo": "ff6d92ac",
+        "low-270/lit-rgb": "6030d686",
+        "low-315/neutral-rgb": "60b9a518",
+        "low-315/silhouette": "a900dfdd",
+        "low-315/linear-depth": "b4df8202",
+        "low-315/world-normal": "0d7f942b",
+        "low-315/semantic-id": "c5a68b94",
+        "low-315/albedo": "6eea7ca7",
+        "low-315/lit-rgb": "14bb32a5",
+        "high-045/neutral-rgb": "0a06dea0",
+        "high-045/silhouette": "7b343094",
+        "high-045/linear-depth": "6b08bcde",
+        "high-045/world-normal": "0c3006b7",
+        "high-045/semantic-id": "bffea996",
+        "high-045/albedo": "42b1f2ea",
+        "high-045/lit-rgb": "ba1d7363",
+        "high-135/neutral-rgb": "2d31ba1e",
+        "high-135/silhouette": "d816a774",
+        "high-135/linear-depth": "0ab8af44",
+        "high-135/world-normal": "f48419d2",
+        "high-135/semantic-id": "cd6e665b",
+        "high-135/albedo": "ab5b4543",
+        "high-135/lit-rgb": "d843bce0",
+        "high-225/neutral-rgb": "460e4a5b",
+        "high-225/silhouette": "046b7484",
+        "high-225/linear-depth": "3b3b11f8",
+        "high-225/world-normal": "1ecd79e0",
+        "high-225/semantic-id": "83a3143f",
+        "high-225/albedo": "54111f53",
+        "high-225/lit-rgb": "617739bd",
+        "high-315/neutral-rgb": "6225ccdc",
+        "high-315/silhouette": "981ee86d",
+        "high-315/linear-depth": "21bbd47e",
+        "high-315/world-normal": "560fdac5",
+        "high-315/semantic-id": "ccf6ee59",
+        "high-315/albedo": "af6a4e95",
+        "high-315/lit-rgb": "279baa92"
+      },
+      "environment": {
+        "threeRevision": "170",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "platform": "MacIntel",
+        "captureBackend": "browser-webgl-rgba8",
+        "gpu": {
+          "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+          "vendor": "Google Inc. (Google)",
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+          "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+          "antialias": true,
+          "hardwareAccelerated": false,
+          "rejectedSoftwareRendererPattern": "/swiftshader|llvmpipe|software|softpipe/i",
+          "colorManagement": {
+            "outputColorSpace": "srgb",
+            "toneMapping": 0,
+            "toneMappingExposure": 1.05
+          }
+        }
+      }
+    }
+  ],
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "approved-positive-passes",
+        "passed": true
+      },
+      {
+        "id": "all-role-damage-controls-reject",
+        "passed": true
+      },
+      {
+        "id": "geometry-gate-unchanged",
+        "passed": true
+      },
+      {
+        "id": "candidate-freeze-before-and-after",
+        "passed": true
+      }
+    ],
+    "failures": []
+  }
+}

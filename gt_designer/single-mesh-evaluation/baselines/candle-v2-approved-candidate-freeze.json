@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "stage-2-approved-candidate-freeze-v1",
+  "candidateId": "candle/profiled-pedestal-wax-wick-v1-semantic-v2",
+  "artifactRole": "development-only-semantic-positive-anchor",
+  "productionUse": "prohibited",
+  "freezeCommit": "488b4f5",
+  "policy": {
+    "approvalScope": "measured pedestal geometry plus bounded stone, wax, and wick material roles",
+    "mutationAfterFreeze": "requires a new positive exemplar version",
+    "verification": "sha256-and-byte-length-before-and-after-controls",
+    "sharedRegistry": "excluded; object-scoped definition and generator sources are frozen"
+  },
+  "candidateFiles": [
+    {"path":"gt_designer/src/reconstruction/core/object-generator.js","byteLength":2912,"sha256":"efbe8045363fbcb436132d43d174d4b753efae196a35ec2a4d833016da6a4717"},
+    {"path":"gt_designer/src/reconstruction/core/rng.js","byteLength":976,"sha256":"3d23fd42233f8988518cc8907db7705f7629770c0ac2b859a97bce82468fa5f5"},
+    {"path":"gt_designer/src/reconstruction/objects/candle-definition.js","byteLength":269,"sha256":"310d2fc12538e284e758a189bc752c6031e74e971d3889557a20102f6261045f"},
+    {"path":"gt_designer/src/reconstruction/objects/candle-generator.js","byteLength":8221,"sha256":"840122e65af9ab7f92f34316397a02bdbbbf06316e3b2bb53746ad7e9cca4e33"},
+    {"path":"gt_designer/src/reconstruction/objects/candle-recipe.js","byteLength":1935,"sha256":"bc71463a760e5cb0b1e3dd8087c97a7cf822de96db91de4371bbb1cc32dc0a05"}
+  ],
+  "evidenceFiles": [],
+  "baselineFiles": [
+    {"path":"gt_designer/single-mesh-evaluation/baselines/candle-semantic-appearance-baseline-v2.json","byteLength":3333,"sha256":"906b196a136806db786377af053ca6c421a82c224134869242bae0b8f55c5588"},
+    {"path":"gt_designer/single-mesh-evaluation/candle-appearance-variants.js","byteLength":1380,"sha256":"e443625801b4866d1d3db52ea3527d0cd72b2e9e1b4dcd313c89f4124cbb94a4"}
+  ]
+}

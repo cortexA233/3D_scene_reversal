@@ -1,0 +1,1810 @@
+{
+  "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+  "artifactRole": "development-only-nonvisual-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "candle",
+  "runtime": {
+    "schemaVersion": "single-mesh-runtime-evidence-v1",
+    "objectId": "candle",
+    "semanticId": "island.prop.candle",
+    "recipe": {
+      "encoding": "canonical-minified-utf8-json",
+      "bytes": 1012,
+      "serialized": "{\"id\":\"island.prop.candle\",\"kind\":\"profiled-pedestal-wax-wick-v1\",\"seed\":13266206,\"shape\":{\"radialSegments\":12,\"axisLean\":[0.009477,-0.001246],\"baseOffset\":[-0.017855,0.002345],\"pedestalProfile\":[[0.36943,0.003699],[0.328078,0.051574],[0.220566,0.114125],[0.220285,0.362623],[0.21946,1.074148],[0.218955,1.512575],[0.40783,1.533347],[0.68284,1.641984],[0.77117,1.745633],[0.855943,1.885989],[0.897765,1.885989],[0.810377,1.718154],[0.71074,1.602571],[0.419572,1.487562],[0.267279,1.487562],[0.267276,1.221042],[0.267274,0.376067],[0.267275,0.141439],[0.36082,0.087001],[0.408812,0.003699]],\"wax\":[1.51021,2.806612,0.2155,0.012,0.37],\"wick\":{\"radius\":0.014,\"tubularSegments\":8,\"radialSegments\":6,\"points\":[[0.002,2.758,-0.004],[0.007,2.801,-0.006],[0.015,2.85,-0.003],[0.012,2.9,0.012],[-0.002,2.94,0.024]]}},\"appearance\":{\"stoneDark\":8551274,\"stoneMid\":9344134,\"stoneLight\":11186339,\"waxColor\":9977141,\"wickColor\":2698541,\"roughness\":0.75,\"metalness\":0,\"grainFrequency\":[23,31,17],\"grainThresholds\":[0.34,0.78]}}"
+    },
+    "recipeScalars": {
+      "definition": "finite numeric leaves in the object-specific recipe",
+      "count": 81
+    },
+    "deterministic": {
+      "repetitions": 3,
+      "byteStable": true,
+      "snapshot": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.prop.candle",
+            "parentSemanticId": null,
+            "type": "Group"
+          },
+          {
+            "semanticId": "island.prop.candle/pedestal",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.prop.candle/wax",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.prop.candle/wick",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.prop.candle",
+            "parentSemanticId": null,
+            "type": "Group",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.prop.candle/pedestal",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 720,
+                  "byteLength": 2880,
+                  "checksum": "cbaeaf03"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 720,
+                  "byteLength": 2880,
+                  "checksum": "eba95f84"
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 1440,
+                "byteLength": 2880,
+                "checksum": "9ce43a25"
+              },
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 16777215,
+              "emissive": 0,
+              "roughness": 0.75,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 2,
+              "vertexColors": false,
+              "hasRuntimeTexture": false
+            }
+          },
+          {
+            "semanticId": "island.prop.candle/wax",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 150,
+                  "byteLength": 600,
+                  "checksum": "dc08e05d"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 150,
+                  "byteLength": 600,
+                  "checksum": "92500ba5"
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 288,
+                "byteLength": 576,
+                "checksum": "8cfce875"
+              },
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 9977141,
+              "emissive": 0,
+              "roughness": 0.75,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 0,
+              "vertexColors": false,
+              "hasRuntimeTexture": false
+            }
+          },
+          {
+            "semanticId": "island.prop.candle/wick",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "TubeGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 189,
+                  "byteLength": 756,
+                  "checksum": "ce078e39"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 189,
+                  "byteLength": 756,
+                  "checksum": "2a2c92a9"
+                },
+                "uv": {
+                  "constructor": "Float32Array",
+                  "length": 126,
+                  "byteLength": 504,
+                  "checksum": "e3394032"
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 288,
+                "byteLength": 576,
+                "checksum": "23f21ee5"
+              },
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 2698541,
+              "emissive": 0,
+              "roughness": 0.75,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 0,
+              "vertexColors": false,
+              "hasRuntimeTexture": false
+            }
+          }
+        ],
+        "bounds": {
+          "min": [
+            -0.8977069854736328,
+            0,
+            -0.8977691531181335
+          ],
+          "max": [
+            0.8977423906326294,
+            2.945833444595337,
+            0.8977594971656799
+          ]
+        },
+        "triangles": 672,
+        "drawCalls": 3,
+        "geometryMemoryBytes": 13008,
+        "runtimeTextureCount": 0
+      }
+    },
+    "benchmark": {
+      "warmups": 10,
+      "repetitions": 100,
+      "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+      "minimumMilliseconds": 0,
+      "medianMilliseconds": 0.19999998807907104,
+      "p95Milliseconds": 0.30000001192092896,
+      "maximumMilliseconds": 0.4000000059604645
+    },
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "hardwareConcurrency": 10,
+      "deviceMemoryGiB": 32,
+      "threeRevision": "170",
+      "renderer": {
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "vendor": "Google Inc. (Google)",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+      }
+    }
+  },
+  "sourceScalars": {
+    "definition": "all numeric recipe leaves plus object-specific numeric literals in generators, generated shaders, and explicitly listed object helpers",
+    "exclusionPolicy": "generator literals are excluded only when equal to a frozen universal algorithm/control-flow value; recipe leaves are never excluded",
+    "universalAlgorithmValues": [
+      0,
+      0.01,
+      0.5,
+      1,
+      2,
+      3,
+      4
+    ],
+    "recipe": {
+      "sourceFile": "gt_designer/src/reconstruction/objects/candle-recipe.js",
+      "evidence": {
+        "definition": "JavaScript numeric literals outside comments and string/template literals",
+        "count": 81,
+        "literals": [
+          {
+            "literal": "0xca6d1e",
+            "offset": 122
+          },
+          {
+            "literal": "12",
+            "offset": 177
+          },
+          {
+            "literal": "0.009477",
+            "offset": 210
+          },
+          {
+            "literal": "0.001246",
+            "offset": 221
+          },
+          {
+            "literal": "0.017855",
+            "offset": 265
+          },
+          {
+            "literal": "0.002345",
+            "offset": 275
+          },
+          {
+            "literal": "0.36943",
+            "offset": 345
+          },
+          {
+            "literal": "0.003699",
+            "offset": 354
+          },
+          {
+            "literal": "0.328078",
+            "offset": 387
+          },
+          {
+            "literal": "0.051574",
+            "offset": 397
+          },
+          {
+            "literal": "0.220566",
+            "offset": 430
+          },
+          {
+            "literal": "0.114125",
+            "offset": 440
+          },
+          {
+            "literal": "0.220285",
+            "offset": 473
+          },
+          {
+            "literal": "0.362623",
+            "offset": 483
+          },
+          {
+            "literal": "0.21946",
+            "offset": 516
+          },
+          {
+            "literal": "1.074148",
+            "offset": 525
+          },
+          {
+            "literal": "0.218955",
+            "offset": 558
+          },
+          {
+            "literal": "1.512575",
+            "offset": 568
+          },
+          {
+            "literal": "0.40783",
+            "offset": 601
+          },
+          {
+            "literal": "1.533347",
+            "offset": 610
+          },
+          {
+            "literal": "0.68284",
+            "offset": 643
+          },
+          {
+            "literal": "1.641984",
+            "offset": 652
+          },
+          {
+            "literal": "0.77117",
+            "offset": 685
+          },
+          {
+            "literal": "1.745633",
+            "offset": 694
+          },
+          {
+            "literal": "0.855943",
+            "offset": 727
+          },
+          {
+            "literal": "1.885989",
+            "offset": 737
+          },
+          {
+            "literal": "0.897765",
+            "offset": 770
+          },
+          {
+            "literal": "1.885989",
+            "offset": 780
+          },
+          {
+            "literal": "0.810377",
+            "offset": 813
+          },
+          {
+            "literal": "1.718154",
+            "offset": 823
+          },
+          {
+            "literal": "0.71074",
+            "offset": 856
+          },
+          {
+            "literal": "1.602571",
+            "offset": 865
+          },
+          {
+            "literal": "0.419572",
+            "offset": 898
+          },
+          {
+            "literal": "1.487562",
+            "offset": 908
+          },
+          {
+            "literal": "0.267279",
+            "offset": 941
+          },
+          {
+            "literal": "1.487562",
+            "offset": 951
+          },
+          {
+            "literal": "0.267276",
+            "offset": 984
+          },
+          {
+            "literal": "1.221042",
+            "offset": 994
+          },
+          {
+            "literal": "0.267274",
+            "offset": 1027
+          },
+          {
+            "literal": "0.376067",
+            "offset": 1037
+          },
+          {
+            "literal": "0.267275",
+            "offset": 1070
+          },
+          {
+            "literal": "0.141439",
+            "offset": 1080
+          },
+          {
+            "literal": "0.36082",
+            "offset": 1113
+          },
+          {
+            "literal": "0.087001",
+            "offset": 1122
+          },
+          {
+            "literal": "0.408812",
+            "offset": 1155
+          },
+          {
+            "literal": "0.003699",
+            "offset": 1165
+          },
+          {
+            "literal": "1.51021",
+            "offset": 1209
+          },
+          {
+            "literal": "2.806612",
+            "offset": 1218
+          },
+          {
+            "literal": "0.2155",
+            "offset": 1228
+          },
+          {
+            "literal": "0.012",
+            "offset": 1236
+          },
+          {
+            "literal": "0.37",
+            "offset": 1243
+          },
+          {
+            "literal": "0.014",
+            "offset": 1291
+          },
+          {
+            "literal": "8",
+            "offset": 1321
+          },
+          {
+            "literal": "6",
+            "offset": 1346
+          },
+          {
+            "literal": "0.002",
+            "offset": 1402
+          },
+          {
+            "literal": "2.758",
+            "offset": 1409
+          },
+          {
+            "literal": "0.004",
+            "offset": 1417
+          },
+          {
+            "literal": "0.007",
+            "offset": 1449
+          },
+          {
+            "literal": "2.801",
+            "offset": 1456
+          },
+          {
+            "literal": "0.006",
+            "offset": 1464
+          },
+          {
+            "literal": "0.015",
+            "offset": 1496
+          },
+          {
+            "literal": "2.85",
+            "offset": 1503
+          },
+          {
+            "literal": "0.003",
+            "offset": 1510
+          },
+          {
+            "literal": "0.012",
+            "offset": 1542
+          },
+          {
+            "literal": "2.9",
+            "offset": 1549
+          },
+          {
+            "literal": "0.012",
+            "offset": 1554
+          },
+          {
+            "literal": "0.002",
+            "offset": 1587
+          },
+          {
+            "literal": "2.94",
+            "offset": 1594
+          },
+          {
+            "literal": "0.024",
+            "offset": 1600
+          },
+          {
+            "literal": "0x827b6a",
+            "offset": 1678
+          },
+          {
+            "literal": "0x8e9486",
+            "offset": 1702
+          },
+          {
+            "literal": "0xaab0a3",
+            "offset": 1728
+          },
+          {
+            "literal": "0x983d35",
+            "offset": 1752
+          },
+          {
+            "literal": "0x292d2d",
+            "offset": 1777
+          },
+          {
+            "literal": "0.75",
+            "offset": 1802
+          },
+          {
+            "literal": "0",
+            "offset": 1823
+          },
+          {
+            "literal": "23",
+            "offset": 1861
+          },
+          {
+            "literal": "31",
+            "offset": 1865
+          },
+          {
+            "literal": "17",
+            "offset": 1869
+          },
+          {
+            "literal": "0.34",
+            "offset": 1911
+          },
+          {
+            "literal": "0.78",
+            "offset": 1917
+          }
+        ]
+      }
+    },
+    "generators": [
+      {
+        "sourceFile": "gt_designer/src/reconstruction/objects/candle-generator.js",
+        "evidence": {
+          "definition": "numeric literals in generator and generated shader source, excluding only the declared universal algorithm/control-flow values",
+          "universalValues": [
+            0,
+            0.01,
+            0.5,
+            1,
+            2,
+            3,
+            4
+          ],
+          "count": 2,
+          "objectSpecific": [
+            {
+              "literal": "0.084",
+              "value": 0.084,
+              "line": 73,
+              "column": 39,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.17",
+              "value": 0.17,
+              "line": 73,
+              "column": 56,
+              "classification": "object-specific"
+            }
+          ],
+          "classifiedLiteralCount": 59,
+          "literals": [
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 7,
+              "column": 27,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 8,
+              "column": 5,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 9,
+              "column": 27,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 11,
+              "column": 37,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 11,
+              "column": 40,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 11,
+              "column": 43,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 16,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 17,
+              "column": 5,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 18,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 37,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 37,
+              "column": 64,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 38,
+              "column": 58,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 42,
+              "column": 19,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 42,
+              "column": 53,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 43,
+              "column": 30,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 44,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 44,
+              "column": 64,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 45,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 55,
+              "column": 81,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 63,
+              "column": 67,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 65,
+              "column": 22,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 65,
+              "column": 35,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 65,
+              "column": 41,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.084",
+              "value": 0.084,
+              "line": 73,
+              "column": 39,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0.17",
+              "value": 0.17,
+              "line": 73,
+              "column": 56,
+              "classification": "object-specific"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 77,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 77,
+              "column": 64,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 82,
+              "column": 46,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 86,
+              "column": 40,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 87,
+              "column": 22,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 87,
+              "column": 62,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 92,
+              "column": 44,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 95,
+              "column": 43,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 96,
+              "column": 41,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 96,
+              "column": 53,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 97,
+              "column": 40,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 98,
+              "column": 41,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.01",
+              "value": 0.01,
+              "line": 98,
+              "column": 54,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 98,
+              "column": 60,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 99,
+              "column": 19,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 99,
+              "column": 53,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 101,
+              "column": 45,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 103,
+              "column": 17,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 104,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 104,
+              "column": 64,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 105,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 112,
+              "column": 22,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 112,
+              "column": 62,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 113,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 118,
+              "column": 81,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": ".0",
+              "value": 0,
+              "line": 129,
+              "column": 48,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": ".0",
+              "value": 0,
+              "line": 129,
+              "column": 76,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": ".0",
+              "value": 0,
+              "line": 129,
+              "column": 104,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 129,
+              "column": 110,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0.5",
+              "value": 0.5,
+              "line": 129,
+              "column": 116,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1.0",
+              "value": 1,
+              "line": 147,
+              "column": 127,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1.0",
+              "value": 1,
+              "line": 148,
+              "column": 189,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 216,
+              "column": 69,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 216,
+              "column": 84,
+              "classification": "universal-algorithm-or-control-flow"
+            }
+          ]
+        }
+      }
+    ],
+    "recipeCount": 81,
+    "generatorCount": 2,
+    "count": 83,
+    "maximum": 96,
+    "passed": true
+  },
+  "bundles": {
+    "production": {
+      "bytes": 44961,
+      "gzipBytes": 13354,
+      "minified": true,
+      "sourceMapBytes": 0,
+      "threeExcluded": true
+    },
+    "objectIncrement": {
+      "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+      "bytes": 1487,
+      "objectBundleGzipBytes": 613,
+      "combinedBundleGzipBytes": 3124,
+      "sharedFrameworkGzipBytes": 927,
+      "gzipBytes": 2197
+    }
+  },
+  "budgets": {
+    "objectId": "candle",
+    "passed": true,
+    "budget": {
+      "scalars": 96,
+      "recipeBytes": 2048,
+      "bundleGzipBytes": 8192,
+      "triangles": 2048,
+      "drawCalls": 3,
+      "geometryMemoryBytes": 131072,
+      "warmGenerationP95Milliseconds": 10
+    },
+    "actual": {
+      "scalars": 83,
+      "recipeBytes": 1012,
+      "bundleGzipBytes": 2197,
+      "triangles": 672,
+      "drawCalls": 3,
+      "geometryMemoryBytes": 13008,
+      "warmGenerationP95Milliseconds": 0.30000001192092896
+    },
+    "checks": [
+      {
+        "metric": "scalars",
+        "value": 83,
+        "maximum": 96,
+        "passed": true
+      },
+      {
+        "metric": "recipeBytes",
+        "value": 1012,
+        "maximum": 2048,
+        "passed": true
+      },
+      {
+        "metric": "bundleGzipBytes",
+        "value": 2197,
+        "maximum": 8192,
+        "passed": true
+      },
+      {
+        "metric": "triangles",
+        "value": 672,
+        "maximum": 2048,
+        "passed": true
+      },
+      {
+        "metric": "drawCalls",
+        "value": 3,
+        "maximum": 3,
+        "passed": true
+      },
+      {
+        "metric": "geometryMemoryBytes",
+        "value": 13008,
+        "maximum": 131072,
+        "passed": true
+      },
+      {
+        "metric": "warmGenerationP95Milliseconds",
+        "value": 0.30000001192092896,
+        "maximum": 10,
+        "passed": true
+      },
+      {
+        "metric": "deterministicCpuBytes",
+        "value": true,
+        "expected": true,
+        "passed": true
+      },
+      {
+        "metric": "runtimeTextureCount",
+        "value": 0,
+        "maximum": 0,
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  "staticAudit": {
+    "passed": true,
+    "productionFiles": [
+      {
+        "file": "gt_designer/single-mesh-replacement/main.js",
+        "bytes": 2488
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/object-generator.js",
+        "bytes": 2912
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/rng.js",
+        "bytes": 976
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/bamboo-shoot-generator.js",
+        "bytes": 11250
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/bamboo-shoot-recipe.js",
+        "bytes": 1170
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/blue-hat-definition.js",
+        "bytes": 285
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/blue-hat-generator.js",
+        "bytes": 6261
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/blue-hat-recipe.js",
+        "bytes": 1434
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/candle-definition.js",
+        "bytes": 269
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/candle-generator.js",
+        "bytes": 8221
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/candle-recipe.js",
+        "bytes": 1935
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/mushroom-definition.js",
+        "bytes": 287
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/mushroom-generator.js",
+        "bytes": 5013
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/mushroom-recipe.js",
+        "bytes": 1115
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+        "bytes": 1845
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-definition.js",
+        "bytes": 260
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+        "bytes": 6043
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+        "bytes": 3222
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+        "bytes": 1545
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+        "bytes": 1097
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-definition.js",
+        "bytes": 287
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+        "bytes": 16446
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+        "bytes": 2652
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+        "bytes": 3882
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+        "bytes": 1609
+      },
+      {
+        "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+        "bytes": 2056
+      }
+    ],
+    "thirdPartyInputs": [],
+    "failures": []
+  },
+  "bundleAudit": {
+    "passed": true,
+    "failures": []
+  },
+  "offline": {
+    "passed": true,
+    "servedFiles": [
+      "bundle.js",
+      "index.html",
+      "three.module.js"
+    ],
+    "authoredDirectoriesAvailableToServer": false,
+    "emptyBrowserProfile": true,
+    "networkResolutionBlocked": true,
+    "localRequestCount": 3
+  },
+  "crossEngine": {
+    "boundsToleranceCanonical": 0.000007,
+    "normative": {
+      "engine": "Chrome/V8",
+      "signature": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.prop.candle",
+            "parentSemanticId": null,
+            "type": "Group"
+          },
+          {
+            "semanticId": "island.prop.candle/pedestal",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.prop.candle/wax",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.prop.candle/wick",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.prop.candle",
+            "parentSemanticId": null,
+            "type": "Group",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.prop.candle/pedestal",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh",
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 720
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 720
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 1440
+              },
+              "groups": []
+            }
+          },
+          {
+            "semanticId": "island.prop.candle/wax",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh",
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 150
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 150
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 288
+              },
+              "groups": []
+            }
+          },
+          {
+            "semanticId": "island.prop.candle/wick",
+            "parentSemanticId": "island.prop.candle",
+            "type": "Mesh",
+            "geometry": {
+              "type": "TubeGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 189
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 189
+                },
+                "uv": {
+                  "constructor": "Float32Array",
+                  "length": 126
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 288
+              },
+              "groups": []
+            }
+          }
+        ],
+        "bounds": {
+          "min": [
+            -0.8977069854736328,
+            0,
+            -0.8977691531181335
+          ],
+          "max": [
+            0.8977423906326294,
+            2.945833444595337,
+            0.8977594971656799
+          ]
+        },
+        "triangles": 672,
+        "drawCalls": 3
+      }
+    },
+    "candidates": [
+      {
+        "engine": "JavaScriptCore (Safari 26.2 system framework)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.prop.candle",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.prop.candle/pedestal",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.candle/wax",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.candle/wick",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.prop.candle",
+              "parentSemanticId": null,
+              "type": "Group",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.candle/pedestal",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 720
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 720
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 1440
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.candle/wax",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 150
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 150
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 288
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.candle/wick",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh",
+              "geometry": {
+                "type": "TubeGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 189
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 189
+                  },
+                  "uv": {
+                    "constructor": "Float32Array",
+                    "length": 126
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 288
+                },
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -0.8977069854736328,
+              0,
+              -0.8977691531181335
+            ],
+            "max": [
+              0.8977423906326294,
+              2.945833444595337,
+              0.8977594971656799
+            ]
+          },
+          "triangles": 672,
+          "drawCalls": 3
+        }
+      },
+      {
+        "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.prop.candle",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.prop.candle/pedestal",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.candle/wax",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.prop.candle/wick",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.prop.candle",
+              "parentSemanticId": null,
+              "type": "Group",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.prop.candle/pedestal",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 720
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 720
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 1440
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.candle/wax",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 150
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 150
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 288
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.prop.candle/wick",
+              "parentSemanticId": "island.prop.candle",
+              "type": "Mesh",
+              "geometry": {
+                "type": "TubeGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 189
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 189
+                  },
+                  "uv": {
+                    "constructor": "Float32Array",
+                    "length": 126
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 288
+                },
+                "groups": []
+              }
+            }
+          ],
+          "bounds": {
+            "min": [
+              -0.8977069854736328,
+              0,
+              -0.8977691531181335
+            ],
+            "max": [
+              0.8977423906326294,
+              2.945833444595337,
+              0.8977594971656799
+            ]
+          },
+          "triangles": 672,
+          "drawCalls": 3
+        }
+      }
+    ],
+    "passed": true
+  },
+  "environment": {
+    "normativeBaseline": {
+      "model": "Apple M5 MacBook Pro",
+      "operatingSystem": "macOS 26.2",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0"
+    },
+    "actual": {
+      "modelName": "MacBook Pro",
+      "modelIdentifier": "Mac17,2",
+      "chip": "Apple M5",
+      "cores": "10 (4 performance and 6 efficiency)",
+      "memory": "32 GB",
+      "operatingSystem": "macOS 26.2",
+      "operatingSystemBuild": "25C56",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0",
+      "powerState": [
+        "Now drawing from 'AC Power'",
+        "-InternalBattery-0 (id=22610019)\t100%; charged; 0:00 remaining present: true"
+      ]
+    },
+    "migrationRequired": false
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "complete-source-scalar-audit",
+        "passed": true,
+        "detail": {
+          "value": 83,
+          "maximum": 96
+        }
+      },
+      {
+        "id": "object-budgets",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "static-source-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "minified-bundle-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "isolated-offline-render",
+        "passed": true,
+        "detail": {
+          "passed": true,
+          "servedFiles": [
+            "bundle.js",
+            "index.html",
+            "three.module.js"
+          ],
+          "authoredDirectoriesAvailableToServer": false,
+          "emptyBrowserProfile": true,
+          "networkResolutionBlocked": true,
+          "localRequestCount": 3
+        }
+      },
+      {
+        "id": "cross-engine-structure-and-bounds",
+        "passed": true,
+        "detail": [
+          {
+            "engine": "JavaScriptCore (Safari 26.2 system framework)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          },
+          {
+            "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "normative-environment",
+        "passed": true,
+        "detail": {
+          "modelName": "MacBook Pro",
+          "modelIdentifier": "Mac17,2",
+          "chip": "Apple M5",
+          "cores": "10 (4 performance and 6 efficiency)",
+          "memory": "32 GB",
+          "operatingSystem": "macOS 26.2",
+          "operatingSystemBuild": "25C56",
+          "browser": "Google Chrome 150.0.7871.184",
+          "three": "0.170.0",
+          "powerState": [
+            "Now drawing from 'AC Power'",
+            "-InternalBattery-0 (id=22610019)\t100%; charged; 0:00 remaining present: true"
+          ]
+        }
+      }
+    ],
+    "failures": []
+  }
+}
