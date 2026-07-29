@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "umbrella-geometry-freeze-v1",
+  "objectId": "umbrella",
+  "semanticId": "island.prop.umbrella",
+  "generatorKind": "radial-parasol-assembly-v1",
+  "artifactRole": "development-only-geometry-and-semantic-golden-contract",
+  "productionUse": "prohibited",
+  "frozenShapeRecipe": {
+    "canopyRadius": 5.614,
+    "canopySurfaceRadius": 5.34,
+    "canopyDrop": 2.18,
+    "rimDrop": 0.107,
+    "canopyThickness": 0.053,
+    "panels": 24,
+    "angularSubdivisions": 8,
+    "radialBands": 8,
+    "phaseDegrees": -7.3233,
+    "axis": [
+      -0.2231853,
+      0.6613441,
+      0.7161092
+    ],
+    "shaftLength": 9.349,
+    "shaftRadius": 0.082,
+    "runnerCenter": -2.555,
+    "runnerLength": 1.075,
+    "runnerRadius": 0.294,
+    "gripCenter": -9.077,
+    "gripLength": 1.076,
+    "gripRadius": 0.171,
+    "ribStart": 0.43,
+    "ribLayerOffset": 0.122,
+    "supportRadius": 2.48,
+    "supportHubHeight": -2.211,
+    "supportEndHeight": -1.282
+  },
+  "rootTransform": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "scale": [
+      1,
+      1,
+      1
+    ]
+  },
+  "drawBatchCount": 2,
+  "semanticHierarchy": [
+    {
+      "name": "Umbrella",
+      "semanticId": "island.prop.umbrella",
+      "parentSemanticId": null,
+      "kind": "Group",
+      "childCount": 2
+    },
+    {
+      "name": "Canopy",
+      "semanticId": "island.prop.umbrella/canopy",
+      "parentSemanticId": "island.prop.umbrella",
+      "kind": "mesh",
+      "childCount": 0
+    },
+    {
+      "name": "Merged Umbrella Hardware",
+      "semanticId": "island.prop.umbrella/hardware",
+      "parentSemanticId": "island.prop.umbrella",
+      "kind": "mesh",
+      "childCount": 4
+    },
+    {
+      "name": "ribs semantic handle",
+      "semanticId": "island.prop.umbrella/ribs",
+      "parentSemanticId": "island.prop.umbrella/hardware",
+      "kind": "Object3D",
+      "childCount": 0
+    },
+    {
+      "name": "shaft semantic handle",
+      "semanticId": "island.prop.umbrella/shaft",
+      "parentSemanticId": "island.prop.umbrella/hardware",
+      "kind": "Object3D",
+      "childCount": 0
+    },
+    {
+      "name": "runner semantic handle",
+      "semanticId": "island.prop.umbrella/runner",
+      "parentSemanticId": "island.prop.umbrella/hardware",
+      "kind": "Object3D",
+      "childCount": 0
+    },
+    {
+      "name": "grip semantic handle",
+      "semanticId": "island.prop.umbrella/grip",
+      "parentSemanticId": "island.prop.umbrella/hardware",
+      "kind": "Object3D",
+      "childCount": 0
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Canopy",
+      "semanticId": "island.prop.umbrella/canopy",
+      "geometry": {
+        "indexed": true,
+        "vertexCount": 2114,
+        "triangleCount": 4224,
+        "attributes": {
+          "canopyData": {
+            "itemSize": 3,
+            "count": 2114,
+            "normalized": false,
+            "arrayType": "Float32Array",
+            "sha256": "6abf01fa6a9988f841fe4f38296654aa193a6d4a9a9d7b019ee58cddc0bfe115"
+          },
+          "normal": {
+            "itemSize": 3,
+            "count": 2114,
+            "normalized": false,
+            "arrayType": "Float32Array",
+            "sha256": "339d487e6a49cd935df926dd2bdeaa133fcaa0a378253d61ed9850ef26e6c19d"
+          },
+          "position": {
+            "itemSize": 3,
+            "count": 2114,
+            "normalized": false,
+            "arrayType": "Float32Array",
+            "sha256": "0c632c2c08ed126286d309367979889a49d9ba97fcb5efe3260b50541277bf92"
+          }
+        },
+        "index": {
+          "count": 12672,
+          "arrayType": "Uint16Array",
+          "sha256": "21c09e390d7beb162b71fd6cb0903285408409317201763b7ed3012f0d63c7d7"
+        },
+        "bounds": {
+          "min": [
+            -5.4782819747924805,
+            0.7614269256591797,
+            -3.2318663597106934
+          ],
+          "max": [
+            5.471578598022461,
+            9.181493759155273,
+            4.642671585083008
+          ]
+        }
+      }
+    },
+    {
+      "name": "Merged Umbrella Hardware",
+      "semanticId": "island.prop.umbrella/hardware",
+      "geometry": {
+        "indexed": false,
+        "vertexCount": 3336,
+        "triangleCount": 1112,
+        "attributes": {
+          "color": {
+            "itemSize": 3,
+            "count": 3336,
+            "normalized": false,
+            "arrayType": "Float32Array",
+            "sha256": "de621e6d62b69182e8ec75b0dc5a7c862e0ca91d36500e20bc5525b5c367cca8"
+          },
+          "normal": {
+            "itemSize": 3,
+            "count": 3336,
+            "normalized": false,
+            "arrayType": "Float32Array",
+            "sha256": "41bf3459f7b646f18f9a30824ec461ee43bc9c564938cbe1f39f90520a5b4d7c"
+          },
+          "position": {
+            "itemSize": 3,
+            "count": 3336,
+            "normalized": false,
+            "arrayType": "Float32Array",
+            "sha256": "4c18b12ebd5d90657ff850332ba3c6c5c3766b948831450fcc3136a013db5ef0"
+          }
+        },
+        "index": null,
+        "bounds": {
+          "min": [
+            -5.492154121398926,
+            0,
+            -4.660461902618408
+          ],
+          "max": [
+            5.492154121398926,
+            9.207030296325684,
+            4.660461902618408
+          ]
+        }
+      }
+    }
+  ]
+}

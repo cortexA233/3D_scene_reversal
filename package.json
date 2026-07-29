@@ -34,6 +34,8 @@
     "freeze:patterned-appearance-v2": "node scripts/freeze-patterned-appearance-v2-contract.mjs",
     "check:patterned-appearance-v2-contract": "node scripts/freeze-patterned-appearance-v2-contract.mjs --check",
     "calibrate:patterned-appearance-v2": "node scripts/run-patterned-appearance-v2-calibration.mjs",
+    "freeze:umbrella-geometry": "node scripts/freeze-umbrella-geometry.mjs",
+    "check:umbrella-geometry": "node scripts/freeze-umbrella-geometry.mjs --check",
     "accept:ticket-01": "npm test && npm run smoke:replacement",
     "accept:ticket-02": "npm test && npm run check:ground-truth",
     "accept:ticket-03": "npm test && npm run check:ground-truth && npm run smoke:replacement && npm run smoke:evaluation",
