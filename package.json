@@ -45,6 +45,7 @@
     "check:stage2-pre": "node scripts/run-stage2-precalibration.mjs --check",
     "certify:stage-1-5-v3": "node scripts/run-stage-1-5-v3-certification.mjs",
     "check:stage-1-5-v3": "node scripts/run-stage-1-5-v3-certification.mjs --check",
+    "measure:stage2-components": "node tools/development/measure-stage2-components.mjs",
     "accept:ticket-01": "npm test && npm run smoke:replacement",
     "accept:ticket-02": "npm test && npm run check:ground-truth",
     "accept:ticket-03": "npm test && npm run check:ground-truth && npm run smoke:replacement && npm run smoke:evaluation",

@@ -81,6 +81,13 @@ const OBJECT_CONFIGS = Object.freeze({
       "gt_designer/src/reconstruction/objects/umbrella-generator.js",
     ],
   }),
+  "bamboo-shoot": Object.freeze({
+    semanticId: "island.nature.bamboo-shoot",
+    sourceFiles: [
+      "gt_designer/src/reconstruction/objects/bamboo-shoot-recipe.js",
+      "gt_designer/src/reconstruction/objects/bamboo-shoot-generator.js",
+    ],
+  }),
 });
 
 function parseArguments(args) {

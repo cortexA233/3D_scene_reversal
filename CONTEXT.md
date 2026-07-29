@@ -148,6 +148,14 @@ _Avoid_: Texture mask score, candidate motif bonus, palette cluster count
 A position-tolerant rendered measurement that checks whether declared motif families retain bounded visible coverage and their declared role palette without requiring source and replacement pixels to occupy identical image coordinates.
 _Avoid_: Pixel recall, texture match, unbounded motif presence
 
+**Semantic Material Role Coverage**:
+A position-tolerant rendered measurement for a procedurally mottled object that checks bounded visible coverage and evaluation-space color distance for declared material roles, such as a brown core and green sheaths, while exact texel position remains diagnostic.
+_Avoid_: Texture discount, dominant-color-only pass, unconstrained palette similarity
+
+**Object-scoped Candidate Freeze**:
+A candidate quarantine whose hashed binding surface is the Reconstruction Unit's object definition, recipe, generator, and shared generation kernel rather than an aggregate registry that also changes for unrelated objects.
+_Avoid_: Registry freeze, mutable candidate alias, repository-wide candidate hash
+
 **Ground Truth Extractor**:
 The development-only tool that derives object-independent geometric, topology, transform, and material facts from Authored References without attempting to invent an Object Generator.
 _Avoid_: Mesh decompiler, automatic model converter
@@ -191,3 +199,7 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 - The hash-frozen approved Umbrella candidate passes patterned-v3 plus unchanged geometry and nonvisual gates in Chrome and two stable full-protocol hardware-GPU repetitions in Firefox and Safari. The v2 FAIL remains unchanged; Stage 1.5 continues with pre-calibration for Bamboo Shoot, Mushroom, Blue Hat, and Candle before Stage 2 fitting is authorized.
 - `stage-2-category-baselines-v1` freezes separate Bamboo Shoot, Mushroom, Blue Hat, and Candle visual gates and nonvisual budgets from two reference-only runs per object before any candidate is fitted. All mild controls pass and every severe structure/appearance control fails; Candle palette-coverage clustering is diagnostic because it is non-monotone, while its remaining hard appearance metrics still reject wrong-palette and flat controls.
 - `single-mesh-stage-1-5-v3-certification-v1` passes every boundary check and authorizes Stage 2 fitting. It preserves historical Stage 1 as `2/4 FAIL`, accepts Stone under geometry-v2 and Umbrella under patterned-v3, and does not claim the formal eight-object exit.
+- Stone v2 and Umbrella v3 use Object-scoped Candidate Freezes. Their object-definition hashes preserve the exact recipe-to-generator binding, while additive registrations for later Reconstruction Units no longer create false candidate drift.
+- Bamboo Shoot's 64-scalar Axial Layer Family replacement uses a seven-ring tapered core, three bounded sheath families, one hero sheath, and a six-branch crown in two render batches. It passes the unchanged `bamboo-shoot-category-baseline-v1` geometry metrics in Chrome, including mean/worst silhouette IoU `0.93124/0.89656` and edge P95 `5.0991` pixels.
+- Bamboo Shoot retains its category-v1 exact-position appearance FAIL as historical evidence. `bamboo-shoot-semantic-category-baseline-v2` instead hard-gates brown-core and green-sheath Semantic Material Role Coverage plus unchanged material and geometry gates; the approved candidate covers `0.96795/0.03205` with reference coverage `0.91683/0.03370`, and delete-sheath, wrong-palette, and flat-single-role controls all reject.
+- The hash-frozen Bamboo Shoot candidate passes its semantic appearance v2, nonvisual ceilings, Reference Independence, determinism, Chrome acceptance, and two stable native hardware-GPU repetitions in Firefox and Safari. This resolves only Bamboo Shoot; the eight-object exit remains blocked on Mushroom, Blue Hat, and Candle.

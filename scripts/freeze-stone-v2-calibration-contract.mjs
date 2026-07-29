@@ -29,7 +29,7 @@ const CANDIDATE_OUTPUT = path.join(
 const CANDIDATE_FILES = [
   "gt_designer/src/reconstruction/core/object-generator.js",
   "gt_designer/src/reconstruction/core/rng.js",
-  "gt_designer/src/reconstruction/objects/object-registry.js",
+  "gt_designer/src/reconstruction/objects/stone-definition.js",
   "gt_designer/src/reconstruction/objects/stone-generator.js",
   "gt_designer/src/reconstruction/objects/stone-recipe.js",
   "package-lock.json",

@@ -19,6 +19,7 @@ function parseArguments(args) {
     check: false,
     output: null,
     evidenceVersion: "v1",
+    categoryBaseline: null,
     geometryBaseline: null,
     appearanceBaseline: null,
   };
@@ -30,6 +31,8 @@ function parseArguments(args) {
       options.output = path.resolve(PROJECT_ROOT, args[++index]);
     } else if (args[index] === "--evidence-version" && args[index + 1]) {
       options.evidenceVersion = args[++index];
+    } else if (args[index] === "--category-baseline" && args[index + 1]) {
+      options.categoryBaseline = args[++index];
     } else if (args[index] === "--geometry-baseline" && args[index + 1]) {
       options.geometryBaseline = args[++index];
     } else if (args[index] === "--appearance-baseline" && args[index + 1]) {
@@ -40,8 +43,8 @@ function parseArguments(args) {
   if (!/^v\d+$/.test(options.evidenceVersion)) {
     throw new Error("--evidence-version must use the form v<number>");
   }
-  if (options.geometryBaseline && options.appearanceBaseline) {
-    throw new Error("category geometry and appearance baselines are exclusive");
+  if ([options.categoryBaseline, options.geometryBaseline, options.appearanceBaseline].filter(Boolean).length > 1) {
+    throw new Error("category, geometry, and appearance baselines are exclusive");
   }
   options.output ??= path.join(
     PROJECT_ROOT,
@@ -81,7 +84,7 @@ async function main() {
           "utf8",
         ),
       )
-    : options.appearanceBaseline === "patterned-v3"
+      : options.appearanceBaseline === "patterned-v3"
       ? JSON.parse(
           await readFile(
             path.join(
@@ -91,6 +94,17 @@ async function main() {
             "utf8",
           ),
         )
+      : options.categoryBaseline === "stage2-v2" &&
+          options.objectId === "bamboo-shoot"
+        ? JSON.parse(
+            await readFile(
+              path.join(
+                PROJECT_ROOT,
+                "gt_designer/single-mesh-evaluation/baselines/bamboo-shoot-v2-approved-candidate-freeze.json",
+              ),
+              "utf8",
+            ),
+          )
       : null;
   const candidateBefore = candidateManifest
     ? await verifyCandidateFreeze({
@@ -127,6 +141,10 @@ async function main() {
     serverFlag: "--evaluation",
     path: "/single-mesh-evaluation/",
     query: `?evaluate=object&unit=${encodeURIComponent(options.objectId)}${
+      options.categoryBaseline
+        ? `&category-baseline=${encodeURIComponent(options.categoryBaseline)}`
+        : ""
+    }${
       options.geometryBaseline
         ? `&geometry-baseline=${encodeURIComponent(options.geometryBaseline)}`
         : ""
@@ -180,7 +198,16 @@ async function main() {
     },
     {
       id: "versioned-geometry-and-appearance-baselines",
-      passed: options.geometryBaseline
+      passed: options.categoryBaseline
+        ? visual.comparison.gate.baselineVersions?.geometry ===
+            (options.categoryBaseline === "stage2-v2"
+              ? `${options.objectId}-category-baseline-v1`
+              : `${options.objectId}-category-baseline-v1`) &&
+          visual.comparison.gate.baselineVersions?.appearance ===
+            (options.categoryBaseline === "stage2-v2"
+              ? `${options.objectId}-semantic-category-baseline-v2`
+              : `${options.objectId}-category-baseline-v1`)
+        : options.geometryBaseline
         ? visual.comparison.gate.baselineVersions?.geometry ===
             "stone-geometry-baseline-v2" &&
           visual.comparison.gate.baselineVersions?.appearance ===
@@ -214,6 +241,7 @@ async function main() {
     artifactRole: "development-only-object-acceptance",
     productionUse: "prohibited",
     objectId: options.objectId,
+    categoryBaseline: options.categoryBaseline,
     geometryBaseline: options.geometryBaseline,
     appearanceBaseline: options.appearanceBaseline,
     visual,

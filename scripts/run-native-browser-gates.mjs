@@ -16,6 +16,7 @@ function parseArguments(args) {
     objects: [],
     repetitions: 2,
     output: null,
+    categoryBaseline: null,
     geometryBaseline: null,
     appearanceBaseline: null,
   };
@@ -28,6 +29,8 @@ function parseArguments(args) {
       options.repetitions = Number(args[++index]);
     } else if (args[index] === "--output" && args[index + 1]) {
       options.output = path.resolve(PROJECT_ROOT, args[++index]);
+    } else if (args[index] === "--category-baseline" && args[index + 1]) {
+      options.categoryBaseline = args[++index];
     } else if (args[index] === "--geometry-baseline" && args[index + 1]) {
       options.geometryBaseline = args[++index];
     } else if (args[index] === "--appearance-baseline" && args[index + 1]) {
@@ -42,8 +45,8 @@ function parseArguments(args) {
   if (options.objects.length === 0) {
     options.objects = [...QUALIFICATION_OBJECTS];
   }
-  if (options.geometryBaseline && options.appearanceBaseline) {
-    throw new Error("category geometry and appearance baselines are exclusive");
+  if ([options.categoryBaseline, options.geometryBaseline, options.appearanceBaseline].filter(Boolean).length > 1) {
+    throw new Error("category, geometry, and appearance baselines are exclusive");
   }
   if (!Number.isInteger(options.repetitions) || options.repetitions < 2) {
     throw new Error("--repetitions must be an integer of at least 2");
@@ -125,6 +128,10 @@ async function evaluateObject(options, configuration, objectId, objectIndex) {
       serverPort: 8680 + objectIndex * 10 + repetition,
       scenePath: "/single-mesh-evaluation/",
       query: `?evaluate=object&unit=${encodeURIComponent(objectId)}${
+        options.categoryBaseline
+          ? `&category-baseline=${encodeURIComponent(options.categoryBaseline)}`
+          : ""
+      }${
         options.geometryBaseline
           ? `&geometry-baseline=${encodeURIComponent(options.geometryBaseline)}`
           : ""
@@ -173,7 +180,17 @@ async function evaluateObject(options, configuration, objectId, objectIndex) {
     },
     {
       id: "versioned-geometry-and-appearance-baselines",
-      passed: options.geometryBaseline
+      passed: options.categoryBaseline
+        ? runs.every(
+            ({ report }) =>
+              report.comparison.gate.baselineVersions?.geometry ===
+                `${objectId}-category-baseline-v1` &&
+              report.comparison.gate.baselineVersions?.appearance ===
+                (options.categoryBaseline === "stage2-v2"
+                  ? `${objectId}-semantic-category-baseline-v2`
+                  : `${objectId}-category-baseline-v1`),
+          )
+        : options.geometryBaseline
         ? runs.every(
             ({ report }) =>
               report.comparison.gate.baselineVersions?.geometry ===
@@ -242,6 +259,7 @@ async function main() {
     artifactRole: "development-only-native-gpu-evidence",
     productionUse: "prohibited",
     browser: options.browser,
+    categoryBaseline: options.categoryBaseline,
     geometryBaseline: options.geometryBaseline,
     appearanceBaseline: options.appearanceBaseline,
     configuration: {

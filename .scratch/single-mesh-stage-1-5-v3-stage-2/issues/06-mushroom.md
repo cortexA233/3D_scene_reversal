@@ -1,7 +1,7 @@
 # 06 — Mushroom Procedural Replacement
 
 Type: task
-Status: ready-for-agent
+Status: claimed
 Blocked by: 05
 
 Implement five Repeated Organic Forms from one shared stem/cap generator and

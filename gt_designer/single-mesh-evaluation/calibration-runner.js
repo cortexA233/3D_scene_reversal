@@ -21,6 +21,7 @@ import {
 } from "/dev-tools/evaluation/patterned-appearance-metrics.mjs";
 import { evaluatePatternedAppearanceV2Gate } from "/dev-tools/evaluation/patterned-appearance-v2-contract.mjs";
 import { evaluatePatternedAppearanceV3Gate } from "/dev-tools/evaluation/patterned-appearance-v3-contract.mjs";
+import { evaluateStage2CategoryGate } from "/dev-tools/evaluation/stage2-precalibration-contract.mjs";
 import { evaluateGeometricDiagnostics } from "/dev-tools/evaluation/geometric-diagnostics.mjs";
 import {
   createLocalReferenceClone,
@@ -236,7 +237,12 @@ function patternedAppearanceEvidence(context, replacementCaptures) {
   };
 }
 
-function semanticPatternCoverageEvidence(context, replacementCaptures) {
+function semanticPatternCoverageEvidence(
+  context,
+  replacementCaptures,
+  roles = undefined,
+  maximumRoleDistance = undefined,
+) {
   const views = EVALUATION_VIEWS.map((view) => ({
     viewId: view.id,
     semanticPattern: evaluateSemanticPatternCoverageView({
@@ -254,6 +260,8 @@ function semanticPatternCoverageEvidence(context, replacementCaptures) {
       replacementAlbedo: replacementCaptures.get(
         captureKey(view.id, "albedo"),
       ),
+      roles,
+      maximumRoleDistance,
     }),
   }));
   return {
@@ -286,10 +294,12 @@ function fullComparison(context, replacementCaptures) {
   });
   const perView = mergeViews(geometry, appearance);
   const aggregate = aggregateVisualEvidence(perView);
-  if (context.objectId === "umbrella") {
+  if (context.objectId === "umbrella" || context.categoryBaseline?.semanticRoles) {
     const semantic = semanticPatternCoverageEvidence(
       context,
       replacementCaptures,
+      context.categoryBaseline?.semanticRoles,
+      context.categoryBaseline?.maximumRoleDistance,
     );
     perView.forEach((view, index) => {
       view.semanticPattern = semantic.views[index].semanticPattern;
@@ -298,7 +308,17 @@ function fullComparison(context, replacementCaptures) {
   }
   let categoryAppearance = null;
   let gate;
-  if (context.appearanceBaseline) {
+  if (context.categoryBaseline) {
+    gate = evaluateStage2CategoryGate({
+      baseline: context.categoryBaseline,
+      aggregate,
+    });
+    gate.baselineVersions = {
+      geometry: context.categoryBaseline.geometryBaselineVersion ??
+        context.categoryBaseline.version,
+      appearance: context.categoryBaseline.version,
+    };
+  } else if (context.appearanceBaseline) {
     const patterned = patternedAppearanceEvidence(
       context,
       replacementCaptures,
@@ -759,6 +779,7 @@ export async function runQualityCalibration({ canvas, onProgress = () => {} }) {
 export async function runObjectEvaluation({
   canvas,
   objectId,
+  categoryBaseline = null,
   geometryBaseline = null,
   appearanceBaseline = null,
   appearanceVariant = null,
@@ -769,16 +790,25 @@ export async function runObjectEvaluation({
   const definition = getObjectDefinition(objectId);
   let replacementRecipe = definition.recipe;
   if (appearanceVariant) {
-    if (objectId !== "umbrella") {
-      throw new Error("appearance variants are supported only for Umbrella");
+    if (objectId === "umbrella") {
+      const { createUmbrellaAppearanceVariantRecipe } = await import(
+        "./umbrella-v3-appearance-variants.js"
+      );
+      replacementRecipe = createUmbrellaAppearanceVariantRecipe(
+        definition.recipe,
+        appearanceVariant,
+      );
+    } else if (objectId === "bamboo-shoot") {
+      const { createBambooShootAppearanceVariantRecipe } = await import(
+        "./bamboo-shoot-appearance-variants.js"
+      );
+      replacementRecipe = createBambooShootAppearanceVariantRecipe(
+        definition.recipe,
+        appearanceVariant,
+      );
+    } else {
+      throw new Error("appearance variants are not supported for this object");
     }
-    const { createUmbrellaAppearanceVariantRecipe } = await import(
-      "./umbrella-v3-appearance-variants.js"
-    );
-    replacementRecipe = createUmbrellaAppearanceVariantRecipe(
-      definition.recipe,
-      appearanceVariant,
-    );
   }
   const replacementRoot = generateObject(replacementRecipe, definition.generator);
   const manifest = createEvaluationManifest(objectId, reference.worldBounds);
@@ -803,6 +833,7 @@ export async function runObjectEvaluation({
       referenceCaptures,
       referenceBounds: boundsOf(reference.root),
       referenceMaterial: materialOf(reference.root),
+      categoryBaseline,
       geometryBaseline,
       appearanceBaseline,
     };
@@ -820,7 +851,9 @@ export async function runObjectEvaluation({
       semanticId: definition.recipe.id,
       appearanceVariant,
       evaluationProtocolVersion: EVALUATION_PROTOCOL_VERSION,
-      qualityBaseline: geometryBaseline
+      qualityBaseline: categoryBaseline
+        ? categoryBaseline
+        : geometryBaseline
         ? {
             geometry: geometryBaseline,
             appearance: {

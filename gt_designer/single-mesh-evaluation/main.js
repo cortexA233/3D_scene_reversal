@@ -293,13 +293,51 @@ async function initialize() {
     }
     document.body.dataset.state = "evaluating";
     const { runObjectEvaluation } = await import("./calibration-runner.js");
+    const categoryBaselineId = parameters.get("category-baseline");
     const geometryBaselineId = parameters.get("geometry-baseline");
     const appearanceBaselineId = parameters.get("appearance-baseline");
     const appearanceVariant = parameters.get("appearance-variant");
+    let categoryBaseline = null;
     let geometryBaseline = null;
     let appearanceBaseline = null;
-    if (geometryBaselineId && appearanceBaselineId) {
-      throw new Error("geometry and appearance category baselines are exclusive");
+    if ([categoryBaselineId, geometryBaselineId, appearanceBaselineId].filter(Boolean).length > 1) {
+      throw new Error("category, geometry, and appearance baselines are exclusive");
+    }
+    if (categoryBaselineId) {
+      if (
+        !["stage2-v1", "stage2-v2"].includes(categoryBaselineId) ||
+        !["bamboo-shoot", "mushroom", "blue-hat", "candle"].includes(state.unitId)
+      ) {
+        throw new Error("unsupported Stage 2 category baseline request");
+      }
+      const response = await fetch("./baselines/stage2-category-baselines-v1.json");
+      if (!response.ok) throw new Error("Stage 2 category baselines could not be loaded");
+      const baselineSet = await response.json();
+      const geometryBaseline = baselineSet.objects[state.unitId];
+      if (!geometryBaseline?.frozen) throw new Error("Stage 2 object baseline is not frozen");
+      if (categoryBaselineId === "stage2-v1") {
+        categoryBaseline = geometryBaseline;
+      } else {
+        const semanticResponse = await fetch(
+          "./baselines/stage2-semantic-appearance-baselines-v2.json",
+        );
+        if (!semanticResponse.ok) {
+          throw new Error("Stage 2 semantic appearance baselines could not be loaded");
+        }
+        const semanticSet = await semanticResponse.json();
+        const semanticAppearance = semanticSet.objects[state.unitId];
+        if (!semanticAppearance?.frozen) {
+          throw new Error("Stage 2 semantic appearance baseline is not frozen");
+        }
+        categoryBaseline = {
+          ...semanticAppearance,
+          hard: [
+            ...geometryBaseline.hard.filter(({ domain }) => domain === "geometry"),
+            ...semanticAppearance.hard,
+          ],
+          geometryBaselineVersion: geometryBaseline.version,
+        };
+      }
     }
     if (geometryBaselineId) {
       if (geometryBaselineId !== "stone-v2" || state.unitId !== "stone") {
@@ -333,6 +371,7 @@ async function initialize() {
     state.objectEvaluationReport = await runObjectEvaluation({
       canvas: elements.canvas,
       objectId: state.unitId,
+      categoryBaseline,
       geometryBaseline,
       appearanceBaseline,
       appearanceVariant,

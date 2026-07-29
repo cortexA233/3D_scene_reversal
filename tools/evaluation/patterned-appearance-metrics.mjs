@@ -133,10 +133,17 @@ export function aggregatePatternedAppearanceEvidence(views) {
   );
 }
 
-function nearestPatternRole(red, green, blue, roles, maximumRoleDistance) {
+function nearestPatternRole(
+  red,
+  green,
+  blue,
+  roles,
+  maximumRoleDistance,
+  families,
+) {
   let nearest = null;
   let nearestDistance = Number.POSITIVE_INFINITY;
-  for (const family of FAMILIES) {
+  for (const family of families) {
     const role = roles[family];
     const distance = Math.hypot(
       red - role[0],
@@ -153,9 +160,9 @@ function nearestPatternRole(red, green, blue, roles, maximumRoleDistance) {
     : null;
 }
 
-function emptyCoverageCounts() {
+function emptyCoverageCounts(families) {
   return Object.fromEntries(
-    FAMILIES.map((family) => [
+    families.map((family) => [
       family,
       {
         referencePixels: 0,
@@ -191,7 +198,10 @@ export function evaluateSemanticPatternCoverageView({
   ]) {
     requireRgba(buffer, width, height, label);
   }
-  const counts = emptyCoverageCounts();
+  const familyNames = Object.keys(roles);
+  if (familyNames.length === 0) throw new TypeError("semantic roles are required");
+  const counts = emptyCoverageCounts(familyNames);
+  const referencePaletteCounts = new Map();
   const replacementPaletteCounts = new Map();
   let referenceSilhouettePixels = 0;
   let replacementSilhouettePixels = 0;
@@ -199,12 +209,18 @@ export function evaluateSemanticPatternCoverageView({
     const offset = pixelIndex * 4;
     if (silhouetteAt(referenceSilhouette, pixelIndex)) {
       referenceSilhouettePixels += 1;
+      const paletteKey = `${referenceAlbedo[offset]},${referenceAlbedo[offset + 1]},${referenceAlbedo[offset + 2]}`;
+      referencePaletteCounts.set(
+        paletteKey,
+        (referencePaletteCounts.get(paletteKey) ?? 0) + 1,
+      );
       const role = nearestPatternRole(
         referenceAlbedo[offset],
         referenceAlbedo[offset + 1],
         referenceAlbedo[offset + 2],
         roles,
         maximumRoleDistance,
+        familyNames,
       );
       if (role) counts[role.family].referencePixels += 1;
     }
@@ -221,6 +237,7 @@ export function evaluateSemanticPatternCoverageView({
         replacementAlbedo[offset + 2],
         roles,
         maximumRoleDistance,
+        familyNames,
       );
       if (role) {
         const evidence = counts[role.family];
@@ -232,8 +249,8 @@ export function evaluateSemanticPatternCoverageView({
       }
     }
   }
-  const families = Object.fromEntries(
-    FAMILIES.map((family) => {
+  const roleEvidence = Object.fromEntries(
+    familyNames.map((family) => {
       const evidence = counts[family];
       return [
         family,
@@ -256,16 +273,16 @@ export function evaluateSemanticPatternCoverageView({
       ];
     }),
   );
-  const referencePatternPixels = FAMILIES.reduce(
+  const referencePatternPixels = familyNames.reduce(
     (sum, family) => sum + counts[family].referencePixels,
     0,
   );
-  const replacementPatternPixels = FAMILIES.reduce(
+  const replacementPatternPixels = familyNames.reduce(
     (sum, family) => sum + counts[family].replacementPixels,
     0,
   );
   return {
-    roles: families,
+    roles: roleEvidence,
     total: {
       referencePixels: referencePatternPixels,
       replacementPixels: replacementPatternPixels,
@@ -280,9 +297,16 @@ export function evaluateSemanticPatternCoverageView({
       reference: referenceSilhouettePixels,
       replacement: replacementSilhouettePixels,
     },
+    diagnosticReferencePalette: [...referencePaletteCounts]
+      .sort((left, right) => right[1] - left[1])
+      .slice(0, 64)
+      .map(([rgb, pixels]) => ({
+        rgb: rgb.split(",").map(Number),
+        pixels,
+      })),
     diagnosticReplacementPalette: [...replacementPaletteCounts]
       .sort((left, right) => right[1] - left[1])
-      .slice(0, 12)
+      .slice(0, 64)
       .map(([rgb, pixels]) => ({
         rgb: rgb.split(",").map(Number),
         pixels,
@@ -294,6 +318,7 @@ export function aggregateSemanticPatternCoverageEvidence(views) {
   if (!Array.isArray(views) || views.length === 0) {
     throw new TypeError("semantic pattern coverage views are required");
   }
+  const families = Object.keys(views[0].semanticPattern.roles);
   const aggregateRole = (family) => {
     const totals = views.reduce(
       (result, view) => {
@@ -334,13 +359,13 @@ export function aggregateSemanticPatternCoverageEvidence(views) {
     };
   };
   const roles = Object.fromEntries(
-    FAMILIES.map((family) => [family, aggregateRole(family)]),
+    families.map((family) => [family, aggregateRole(family)]),
   );
-  const referenceCoverage = FAMILIES.reduce(
+  const referenceCoverage = families.reduce(
     (sum, family) => sum + (roles[family].referenceCoverage ?? 0),
     0,
   );
-  const replacementCoverage = FAMILIES.reduce(
+  const replacementCoverage = families.reduce(
     (sum, family) => sum + (roles[family].replacementCoverage ?? 0),
     0,
   );
