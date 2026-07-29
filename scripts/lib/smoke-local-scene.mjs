@@ -253,7 +253,7 @@ async function inspectPage({
           ].includes(parsed.hostname) && !["about:", "data:", "blob:"].includes(parsed.protocol);
         });
         assert.deepEqual(externalRequests, []);
-        return { state: lastState, requestCount: requests.length };
+        return { state: lastState, requestCount: requests.length, requests };
       }
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
