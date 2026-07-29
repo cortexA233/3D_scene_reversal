@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
+import { createHash } from "node:crypto";
 import { access, mkdtemp, readFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -152,6 +153,13 @@ async function inspectPage({
   readyState,
   timeoutMs,
   probeExpression,
+  preloadScript,
+  viewport,
+  blockExternalNetwork,
+  allowedExternalRequestUrls,
+  browserArguments,
+  postReadyExpression,
+  runtimeObjectAttachment,
 }) {
   let browserStderr = "";
   const browser = spawn(
@@ -167,10 +175,21 @@ async function inspectPage({
       "--no-report-upload",
       "--use-angle=swiftshader",
       "--enable-unsafe-swiftshader",
-      "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost",
+      ...(blockExternalNetwork
+        ? [
+            "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1, EXCLUDE localhost",
+          ]
+        : []),
       "--remote-debugging-port=0",
       "--remote-allow-origins=*",
       `--user-data-dir=${profile}`,
+      ...(viewport
+        ? [
+            `--window-size=${viewport.width},${viewport.height}`,
+            `--force-device-scale-factor=${viewport.deviceScaleFactor}`,
+          ]
+        : []),
+      ...browserArguments,
       "about:blank",
     ],
     {
@@ -215,16 +234,82 @@ async function inspectPage({
     await session.send("Log.enable");
     await session.send("Network.enable");
     await session.send("Page.enable");
+    if (viewport) {
+      await session.send("Emulation.setDeviceMetricsOverride", {
+        width: viewport.width,
+        height: viewport.height,
+        deviceScaleFactor: viewport.deviceScaleFactor,
+        mobile: false,
+      });
+    }
+    if (preloadScript) {
+      await session.send("Page.addScriptToEvaluateOnNewDocument", {
+        source: preloadScript,
+      });
+    }
     await session.send("Page.navigate", { url });
 
     const deadline = Date.now() + timeoutMs;
     let lastState = null;
+    let runtimeObjectsAttached = false;
     while (Date.now() < deadline) {
       const result = await session.send("Runtime.evaluate", {
         expression: probeExpression ?? DEFAULT_PAGE_PROBE,
         returnByValue: true,
+        awaitPromise: true,
+        includeCommandLineAPI: true,
       });
+      if (result.exceptionDetails) {
+        throw new Error(`page probe failed: ${result.exceptionDetails.text}`);
+      }
       lastState = result.result.value;
+      if (
+        runtimeObjectAttachment &&
+        !runtimeObjectsAttached &&
+        Object.entries(runtimeObjectAttachment.whenState).every(
+          ([key, value]) => lastState?.[key] === value,
+        )
+      ) {
+        const prototypeObjects = [];
+        const queriedObjects = [];
+        for (const expression of runtimeObjectAttachment.prototypeExpressions) {
+          const prototype = await session.send("Runtime.evaluate", { expression });
+          assert.ok(
+            prototype.result.objectId,
+            `runtime prototype was not found: ${expression}`,
+          );
+          prototypeObjects.push(prototype.result.objectId);
+          const queried = await session.send("Runtime.queryObjects", {
+            prototypeObjectId: prototype.result.objectId,
+          });
+          queriedObjects.push(queried.objects.objectId);
+        }
+        const target = await session.send("Runtime.evaluate", {
+          expression: runtimeObjectAttachment.targetExpression,
+        });
+        assert.ok(target.result.objectId, "runtime attachment target was not found");
+        const attachment = await session.send("Runtime.callFunctionOn", {
+          objectId: target.result.objectId,
+          functionDeclaration: runtimeObjectAttachment.functionDeclaration,
+          arguments: queriedObjects.map((objectId) => ({ objectId })),
+          awaitPromise: true,
+          returnByValue: true,
+        });
+        if (attachment.exceptionDetails) {
+          throw new Error(
+            `runtime object attachment failed: ${attachment.exceptionDetails.text}`,
+          );
+        }
+        runtimeObjectsAttached = true;
+        for (const objectId of [
+          ...prototypeObjects,
+          ...queriedObjects,
+          target.result.objectId,
+        ]) {
+          await session.send("Runtime.releaseObject", { objectId });
+        }
+        continue;
+      }
       if (lastState?.state === "error") {
         throw new Error(`page entered error state: ${lastState.statusText}`);
       }
@@ -236,8 +321,9 @@ async function inspectPage({
         const screenshot = await session.send("Page.captureScreenshot", {
           format: "png",
         });
+        const screenshotBuffer = Buffer.from(screenshot.data, "base64");
         assert.ok(
-          Buffer.from(screenshot.data, "base64").byteLength > 1000,
+          screenshotBuffer.byteLength > 1000,
           "browser screenshot is unexpectedly empty",
         );
         const actionableErrors = errors.filter(
@@ -252,8 +338,35 @@ async function inspectPage({
             "localhost",
           ].includes(parsed.hostname) && !["about:", "data:", "blob:"].includes(parsed.protocol);
         });
-        assert.deepEqual(externalRequests, []);
-        return { state: lastState, requestCount: requests.length, requests };
+        const unexpectedExternalRequests = externalRequests.filter(
+          (requestUrl) => !allowedExternalRequestUrls.includes(requestUrl),
+        );
+        assert.deepEqual(unexpectedExternalRequests, []);
+        let finalState = lastState;
+        if (postReadyExpression) {
+          const postReadyResult = await session.send("Runtime.evaluate", {
+            expression: postReadyExpression,
+            returnByValue: true,
+            awaitPromise: true,
+          });
+          if (postReadyResult.exceptionDetails) {
+            throw new Error(
+              `post-ready expression failed: ${postReadyResult.exceptionDetails.text}`,
+            );
+          }
+          finalState = postReadyResult.result.value;
+        }
+        return {
+          state: finalState,
+          primaryState: lastState,
+          requestCount: requests.length,
+          requests,
+          externalRequests,
+          screenshotByteLength: screenshotBuffer.byteLength,
+          screenshotPngSha256: createHash("sha256")
+            .update(screenshotBuffer)
+            .digest("hex"),
+        };
       }
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
@@ -277,6 +390,13 @@ export async function runLocalSceneAutomation({
   probeExpression = DEFAULT_PAGE_PROBE,
   serverArguments = [],
   threeProbePath = "/vendor/three/build/three.module.js",
+  preloadScript = null,
+  viewport = null,
+  blockExternalNetwork = true,
+  allowedExternalRequestUrls = [],
+  browserArguments = [],
+  postReadyExpression = null,
+  runtimeObjectAttachment = null,
 }) {
   const chrome = await firstExisting([
     process.env.CHROME_BIN,
@@ -319,6 +439,13 @@ export async function runLocalSceneAutomation({
       readyState,
       timeoutMs,
       probeExpression,
+      preloadScript,
+      viewport,
+      blockExternalNetwork,
+      allowedExternalRequestUrls,
+      browserArguments,
+      postReadyExpression,
+      runtimeObjectAttachment,
     });
     return { ...result, url };
   } finally {

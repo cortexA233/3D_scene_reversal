@@ -10,6 +10,7 @@ connections so the 70 MB of assets don't load one at a time.
     ./serve.py --replacement  # open the reference-independent procedural scene
     ./serve.py --evaluation   # open the fixed-view Evaluation Harness
     ./serve.py --stage-1-5    # open replacements in the eight-slot Lab layout
+    ./serve.py --reference-observation  # open the read-only authored reference adapter
     ./serve.py --port 5173    # pick the port
     ./serve.py --no-open      # don't launch a browser
     ./serve.py --quiet        # only log errors (default logs errors + slow/large hits)
@@ -231,6 +232,11 @@ def main() -> None:
         help="open Stage 1.5 replacements in the eight-slot Lab layout",
     )
     scene_group.add_argument(
+        "--reference-observation",
+        action="store_true",
+        help="open the read-only authored-reference observation adapter",
+    )
+    scene_group.add_argument(
         "--production-audit-root",
         type=Path,
         help="serve an isolated generated production package as the web root",
@@ -252,14 +258,23 @@ def main() -> None:
     if not (ROOT / "index.html").is_file():
         sys.exit(f"can't find {ROOT / 'index.html'} — run this script from its own directory")
 
-    if args.replacement or args.evaluation or args.runtime_audit or args.stage_1_5:
+    requires_exact_three = any(
+        (
+            args.replacement,
+            args.evaluation,
+            args.runtime_audit,
+            args.stage_1_5,
+            args.reference_observation,
+        )
+    )
+    if requires_exact_three:
         args.local_three = True
 
     port = pick_port(args.port)
     SceneHandler.quiet = args.quiet
     if args.local_three:
         SceneHandler.three_dir = find_three()
-        if args.replacement or args.evaluation or args.runtime_audit or args.stage_1_5:
+        if requires_exact_three:
             version = three_version(SceneHandler.three_dir)
             if version != TARGET_THREE:
                 sys.exit(
@@ -282,6 +297,9 @@ def main() -> None:
     elif args.stage_1_5:
         url_path = "/stage-1-5-scene/"
         scene_name = "Stage 1.5 Reference-layout Scene"
+    elif args.reference_observation:
+        url_path = "/authored-reference.html"
+        scene_name = "Read-only Authored Reference Observation"
     elif args.production_audit_root:
         url_path = "/"
         scene_name = "Isolated Production Audit Package"
@@ -307,7 +325,12 @@ def main() -> None:
             controls_help = "static deterministic fixture"
         elif args.stage_1_5:
             controls_help = "orbit · zoom · pan · focus controls"
-        elif args.evaluation or args.runtime_audit or args.production_audit_root:
+        elif (
+            args.evaluation
+            or args.runtime_audit
+            or args.production_audit_root
+            or args.reference_observation
+        ):
             controls_help = "fixed protocol controls"
         else:
             controls_help = "WASD move · mouse look · Q/E up-down · Esc release"
