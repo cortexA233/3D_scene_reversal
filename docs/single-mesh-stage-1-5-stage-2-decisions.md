@@ -22,16 +22,25 @@ Stage 2 remains a formal Single Mesh Lab exit path. It is not an exploratory bra
 
 ## Stone boundary-review amendment
 
-The Stage 1.5 execution reached its required stop. Stone's 24-direction
+The Stage 1.5 execution reached its required stop. The recorded Stone artifact's 24-direction
 Bounded Support-plane Polyhedron passed every compactness, runtime,
 determinism, and Reference Independence gate but failed six v1 geometry
 thresholds. The negative certification and its metric values remain frozen;
 this amendment does not reinterpret that result as a pass.
 
-The continuation boundary is a one-time **Quarantined Rebaseline**:
+Subsequent code review found that the fitting tool and production generator
+assign different normals to ten support-distance positions. This is a
+Representation Contract Failure, so the metric report is factual for the
+artifact but the conclusion that a second reasonable representation failed is
+suspended. The fitter must consume the production direction definition, refit
+only the existing 24 distances, and rerun the corrected candidate against
+unchanged v1 before any threshold calibration.
 
-- freeze the Stone generator, recipe, and existing evidence at commit
-  `6ebb70c3f8162aa439377e0da46955f9f294c05f` before calibration;
+Only if the contract-corrected candidate still fails v1 does the continuation
+boundary become a one-time **Quarantined Rebaseline**:
+
+- freeze the corrected Stone generator, recipe, and new evidence at its repair
+  commit before calibration;
 - create a separately named `stone-geometry-baseline-v2`; never edit or alias
   `single-mesh-quality-baseline-v1`;
 - declare the complete Authored Reference perturbation manifest, metric set,
@@ -118,9 +127,9 @@ Stone must pass:
 - deterministic generation and Reference Independence;
 - normative Chrome plus native Firefox and Safari visual gates.
 
-Recorded outcome: this gate failed and triggered the boundary review. The
-frozen candidate may now proceed only through the Quarantined Rebaseline above;
-Umbrella v2 work still does not begin until that restart passes.
+Recorded outcome: the first artifact failed, but its support-direction contract
+is invalid. Repair and v1 reevaluation now precede the Quarantined Rebaseline;
+Umbrella v2 work still does not begin until Stone has a valid passing result.
 
 ### 4. Calibrate patterned-appearance v2
 
@@ -353,4 +362,5 @@ The principal accepted ADRs are:
 - [ADR-0021](./adr/0021-allow-versioned-category-single-mesh-lab-exit.md) — formal exit semantics;
 - [ADR-0022](./adr/0022-bound-stone-support-polyhedron-to-24-directions.md) — Stone second representation;
 - [ADR-0023](./adr/0023-audit-object-specific-scalars-across-complete-production-source.md) — complete-source scalar evidence;
-- [ADR-0024](./adr/0024-quarantine-stone-geometry-v2-rebaseline.md) — one-time Stone geometry v2 boundary restart.
+- [ADR-0024](./adr/0024-quarantine-stone-geometry-v2-rebaseline.md) — one-time Stone geometry v2 boundary restart;
+- [ADR-0025](./adr/0025-repair-stone-support-direction-contract-before-rebaseline.md) — representation-validity repair before any Stone rebaseline.

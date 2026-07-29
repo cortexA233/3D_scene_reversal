@@ -1,8 +1,8 @@
-# 02 — Calibrate and freeze Stone Geometry Baseline v2
+# 03 — Calibrate and freeze Stone Geometry Baseline v2
 
 Type: task
 Status: ready-for-agent
-Blocked by: 01
+Blocked by: 02
 
 Run the frozen Authored Reference-only contract and emit the separately
 versioned `stone-geometry-baseline-v2` artifacts.

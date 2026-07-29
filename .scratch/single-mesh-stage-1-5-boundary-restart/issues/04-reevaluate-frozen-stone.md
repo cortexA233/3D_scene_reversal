@@ -1,8 +1,8 @@
-# 03 — Reevaluate the frozen Stone candidate
+# 04 — Reevaluate the frozen Stone candidate
 
 Type: task
 Status: ready-for-agent
-Blocked by: 02
+Blocked by: 03
 
 Evaluate the commit- and hash-frozen 24-direction candidate against the frozen
 Stone Geometry Baseline v2 without refitting or changing any nonvisual budget.

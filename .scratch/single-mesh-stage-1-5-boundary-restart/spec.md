@@ -5,33 +5,38 @@ Status: ready-for-agent
 ## Problem Statement
 
 The original Stage 1.5 specification stopped correctly after Stone's second
-compact representation failed six frozen v1 geometry thresholds. The current
-candidate nevertheless passes every nonvisual budget, determinism, and
-Reference Independence gate. The product boundary now permits a one-time,
-candidate-quarantined category rebaseline so that intentionally looser Stone
-geometry tolerances can be justified without fitting thresholds to the known
-result or rewriting Stage 1.
+compact artifact failed six frozen v1 geometry thresholds. Code review then
+found that the fitting tool and production generator assign different normals
+to ten support-distance positions. The artifact passes every nonvisual budget,
+but this Representation Contract Failure prevents it from proving that the
+representation failed. The contract must be repaired and v1 rerun before the
+product's one-time, candidate-quarantined rebaseline may activate.
 
-The governing decisions are ADR-0024 and the Stone boundary-review amendment
-in `docs/single-mesh-stage-1-5-stage-2-decisions.md`.
+The governing decisions are ADR-0024, ADR-0025, and the Stone boundary-review
+amendment in `docs/single-mesh-stage-1-5-stage-2-decisions.md`.
 
 ## Solution
 
-1. Freeze the Stone candidate and existing evidence at commit
-   `6ebb70c3f8162aa439377e0da46955f9f294c05f`.
-2. Declare and run a reference-only Stone Geometry Baseline v2 Calibration
+1. Make the development fitter consume the production canonical-direction
+   definition, refit only the existing 24 distances, and rerun all unchanged
+   v1 gates.
+2. If v1 still fails, freeze the corrected candidate and evidence at the
+   repair commit.
+3. Declare and run a reference-only Stone Geometry Baseline v2 Calibration
    Bracket under a deterministic threshold-selection rule.
-3. Freeze `stone-geometry-baseline-v2` only if mild and destructive classes
+4. Freeze `stone-geometry-baseline-v2` only if mild and destructive classes
    are separable.
-4. Evaluate the unchanged candidate without refitting in Chrome, native
+5. Evaluate the unchanged candidate without refitting in Chrome, native
    Firefox, and native Safari, while rerunning all unchanged nonvisual gates.
-5. Resume the prior Stage 1.5 sequence at Patterned Appearance Baseline v2
+6. Resume the prior Stage 1.5 sequence at Patterned Appearance Baseline v2
    only if the Stone restart passes.
 
 ## Fixed Contracts
 
 - `single-mesh-quality-baseline-v1`, Stage 1 `2/4 FAIL`, and the Stage 1.5
   negative certification are immutable historical evidence.
+- A v1 pass by the contract-corrected candidate cancels Tickets 02–04 and
+  resumes Stage 1.5 without creating a Stone v2 baseline.
 - Candidate calibration inputs contain Authored Reference captures and
   perturbations only. Known replacement metrics are never read by threshold
   selection.
@@ -75,7 +80,10 @@ repeatability allowances are ticket outputs declared before calibration runs.
 
 ## Out of Scope
 
-- Stone generator, recipe, support-direction, or budget changes;
+- Stone generator, recipe, support-direction, or budget changes other than
+  making the fitter consume the already
+  frozen production definition, and recipe changes other than refitting the
+  same 24 support distances during Ticket 01;
 - Umbrella, Bamboo Shoot, Mushroom, Stage 2, or full-island implementation;
 - production textures, source geometry, sampled lookup data, WASM, SDF, CSG,
   modeling DSLs, or new Runtime Kernels;

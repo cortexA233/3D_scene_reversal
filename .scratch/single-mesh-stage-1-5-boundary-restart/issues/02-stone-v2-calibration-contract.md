@@ -1,7 +1,8 @@
-# 01 — Freeze the Stone v2 calibration contract
+# 02 — Freeze the Stone v2 calibration contract
 
 Type: task
 Status: ready-for-agent
+Blocked by: 01
 
 Declare the candidate quarantine and the complete reference-only Stone
 Geometry Baseline v2 calibration contract before running calibration.
@@ -20,6 +21,6 @@ Acceptance:
 
 ## Comments
 
-Created by ADR-0024 after the original Stage 1.5 Stone kill gate. This ticket
-defines evidence and policy only; it does not change thresholds or production
-code.
+Created by ADR-0024 and deferred by ADR-0025 until a contract-corrected Stone
+candidate still fails v1. This ticket defines evidence and policy only; it
+does not change thresholds or production code.

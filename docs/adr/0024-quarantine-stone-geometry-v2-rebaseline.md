@@ -4,13 +4,13 @@ status: accepted
 
 # Quarantine Stone's geometry v2 rebaseline
 
-Stone's frozen 24-direction Bounded Support-plane Polyhedron may receive one
-separately versioned `stone-geometry-baseline-v2` after failing v1, without
+After the Representation Contract validity gate added by ADR-0025 passes,
+Stone's corrected 24-direction Bounded Support-plane Polyhedron may receive one
+separately versioned `stone-geometry-baseline-v2` if it still fails v1, without
 changing `single-mesh-quality-baseline-v1`, the historical negative reports,
 the representation, or any nonvisual ceiling. Because the candidate metrics
-are already known, this is a Quarantined Rebaseline: the generator, recipe,
-and evidence are frozen at commit
-`6ebb70c3f8162aa439377e0da46955f9f294c05f`; a complete Authored Reference-only
+would then be known, this is a Quarantined Rebaseline: the corrected generator,
+recipe, and evidence are commit- and hash-frozen; a complete Authored Reference-only
 perturbation manifest and deterministic threshold-selection rule freeze before
 calibration; and the candidate is excluded until the new limits are immutable.
 
