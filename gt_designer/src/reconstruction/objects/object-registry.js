@@ -12,6 +12,7 @@ import { generateBambooShoot } from "./bamboo-shoot-generator.js";
 import { BAMBOO_SHOOT_RECIPE } from "./bamboo-shoot-recipe.js";
 import { MUSHROOM_DEFINITION } from "./mushroom-definition.js";
 import { BLUE_HAT_DEFINITION } from "./blue-hat-definition.js";
+import { CANDLE_DEFINITION } from "./candle-definition.js";
 
 const DEFINITIONS = Object.freeze({
   probe: Object.freeze({
@@ -46,6 +47,7 @@ const DEFINITIONS = Object.freeze({
   }),
   mushroom: MUSHROOM_DEFINITION,
   "blue-hat": BLUE_HAT_DEFINITION,
+  candle: CANDLE_DEFINITION,
 });
 
 export function getObjectDefinition(id) {

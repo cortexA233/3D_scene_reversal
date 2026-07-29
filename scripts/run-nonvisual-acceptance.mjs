@@ -102,6 +102,13 @@ const OBJECT_CONFIGS = Object.freeze({
       "gt_designer/src/reconstruction/objects/blue-hat-generator.js",
     ],
   }),
+  candle: Object.freeze({
+    semanticId: "island.prop.candle",
+    sourceFiles: [
+      "gt_designer/src/reconstruction/objects/candle-recipe.js",
+      "gt_designer/src/reconstruction/objects/candle-generator.js",
+    ],
+  }),
 });
 
 function parseArguments(args) {

@@ -64,6 +64,12 @@ export const OBJECT_SCALAR_SOURCES = Object.freeze({
       "gt_designer/src/reconstruction/objects/blue-hat-generator.js",
     ]),
   }),
+  candle: Object.freeze({
+    recipe: "gt_designer/src/reconstruction/objects/candle-recipe.js",
+    generators: Object.freeze([
+      "gt_designer/src/reconstruction/objects/candle-generator.js",
+    ]),
+  }),
 });
 
 async function readEvidence(projectRoot, sourceFile, evidenceFactory) {
