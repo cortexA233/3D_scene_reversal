@@ -95,6 +95,13 @@ const OBJECT_CONFIGS = Object.freeze({
       "gt_designer/src/reconstruction/objects/mushroom-generator.js",
     ],
   }),
+  "blue-hat": Object.freeze({
+    semanticId: "island.wearable.blue-hat",
+    sourceFiles: [
+      "gt_designer/src/reconstruction/objects/blue-hat-recipe.js",
+      "gt_designer/src/reconstruction/objects/blue-hat-generator.js",
+    ],
+  }),
 });
 
 function parseArguments(args) {
