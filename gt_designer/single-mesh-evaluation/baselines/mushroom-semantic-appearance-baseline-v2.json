@@ -1,0 +1,20 @@
+{
+  "version": "mushroom-semantic-category-baseline-v2",
+  "objectId": "mushroom",
+  "evidencePolicy": "bounded-semantic-material-roles-v2",
+  "semanticRoles": {"cap":[78,23,16],"stem":[98,91,75]},
+  "maximumRoleDistance": 12,
+  "hard": [
+    {"path":"semanticPattern.roles.cap.replacementCoverage","operator":">=","threshold":0.3,"domain":"appearance","source":"reject-deleted-cap-role"},
+    {"path":"semanticPattern.roles.cap.replacementCoverage","operator":"<=","threshold":0.8,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.stem.replacementCoverage","operator":">=","threshold":0.15,"domain":"appearance","source":"reject-deleted-stem-role"},
+    {"path":"semanticPattern.roles.stem.replacementCoverage","operator":"<=","threshold":0.7,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.cap.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"reference-albedo-role"},
+    {"path":"semanticPattern.roles.stem.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"reference-albedo-role"},
+    {"path":"appearance.roughnessAbsoluteError","operator":"<=","threshold":0.1,"domain":"appearance","source":"unchanged-stage-2-category-v1"},
+    {"path":"appearance.metalnessAbsoluteError","operator":"<=","threshold":0.05,"domain":"appearance","source":"unchanged-stage-2-category-v1"}
+  ],
+  "diagnostic": ["appearance.meanDeltaE00","appearance.p90DeltaE00","appearance.meanMaskedSsim","appearance.worstViewSsim","appearance.paletteCentroidDeltaE00","appearance.paletteCoverageL1"],
+  "requiredDestructiveControls": ["delete-cap-role","delete-stem-role","wrong-role-palette"],
+  "frozen": true
+}

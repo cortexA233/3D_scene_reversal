@@ -105,6 +105,17 @@ async function main() {
               "utf8",
             ),
           )
+      : options.categoryBaseline === "stage2-v2" &&
+          options.objectId === "blue-hat"
+        ? JSON.parse(
+            await readFile(
+              path.join(
+                PROJECT_ROOT,
+                "gt_designer/single-mesh-evaluation/baselines/blue-hat-v2-approved-candidate-freeze.json",
+              ),
+              "utf8",
+            ),
+          )
       : options.categoryBaseline === "stage2-v3" &&
           options.objectId === "mushroom"
         ? JSON.parse(

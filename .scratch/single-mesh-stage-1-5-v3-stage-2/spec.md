@@ -52,6 +52,15 @@ Safari gates before the next object begins. Final certification requires 8/8.
 - The final report says `PASS under versioned category-specific baselines (8/8)`
   and retains Stage 1 as a separate `2/4 FAIL` historical result.
 
+## Stage 2 Progress
+
+- Bamboo Shoot: accepted under semantic appearance v2.
+- Mushroom: accepted under compact geometry v2 and semantic appearance v2.
+- Blue Hat: accepted under unchanged category-v1 geometry and semantic panel-
+  pattern appearance v2; exact-position complex-texture metrics remain
+  diagnostic and all four declared role-damage controls reject.
+- Candle: in progress; the eight-object exit is not yet claimed.
+
 ## Out of Scope
 
 - full-island reconstruction or complete-island tickets;

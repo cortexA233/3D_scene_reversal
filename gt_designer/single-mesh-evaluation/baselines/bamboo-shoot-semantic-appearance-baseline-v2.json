@@ -1,0 +1,20 @@
+{
+  "version": "bamboo-shoot-semantic-category-baseline-v2",
+  "objectId": "bamboo-shoot",
+  "evidencePolicy": "bounded-semantic-material-roles-v2",
+  "semanticRoles": {"core":[45,34,24],"sheath":[59,125,17]},
+  "maximumRoleDistance": 20,
+  "hard": [
+    {"path":"semanticPattern.roles.core.replacementCoverage","operator":">=","threshold":0.75,"domain":"appearance","source":"candidate-informed-positive-with-destructive-separation"},
+    {"path":"semanticPattern.roles.core.replacementCoverage","operator":"<=","threshold":1,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.sheath.replacementCoverage","operator":">=","threshold":0.003,"domain":"appearance","source":"reject-deleted-sheath-role"},
+    {"path":"semanticPattern.roles.sheath.replacementCoverage","operator":"<=","threshold":0.05,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.core.meanReplacementRoleDistance","operator":"<=","threshold":16,"domain":"appearance","source":"declared-role-palette"},
+    {"path":"semanticPattern.roles.sheath.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"declared-role-palette"},
+    {"path":"appearance.roughnessAbsoluteError","operator":"<=","threshold":0.1,"domain":"appearance","source":"unchanged-stage-2-category-v1"},
+    {"path":"appearance.metalnessAbsoluteError","operator":"<=","threshold":0.05,"domain":"appearance","source":"unchanged-stage-2-category-v1"}
+  ],
+  "diagnostic": ["appearance.meanDeltaE00","appearance.p90DeltaE00","appearance.meanMaskedSsim","appearance.worstViewSsim","appearance.paletteCentroidDeltaE00","appearance.paletteCoverageL1"],
+  "requiredDestructiveControls": ["delete-sheath-role","wrong-role-palette","flat-single-role"],
+  "frozen": true
+}

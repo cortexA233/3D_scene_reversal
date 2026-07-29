@@ -1,0 +1,31 @@
+{
+  "version": "blue-hat-semantic-category-baseline-v2",
+  "objectId": "blue-hat",
+  "evidencePolicy": "bounded-semantic-pattern-and-material-roles-v2",
+  "semanticRoles": {
+    "brim": [10,10,10],
+    "darkPanel": [30,49,108],
+    "lightPanel": [76,100,128],
+    "motif": [43,64,114]
+  },
+  "maximumRoleDistance": 18,
+  "hard": [
+    {"path":"semanticPattern.roles.brim.replacementCoverage","operator":">=","threshold":0.08,"domain":"appearance","source":"reject-deleted-brim-role"},
+    {"path":"semanticPattern.roles.brim.replacementCoverage","operator":"<=","threshold":0.5,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.darkPanel.replacementCoverage","operator":">=","threshold":0.1,"domain":"appearance","source":"reject-flattened-panel-system"},
+    {"path":"semanticPattern.roles.darkPanel.replacementCoverage","operator":"<=","threshold":0.65,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.lightPanel.replacementCoverage","operator":">=","threshold":0.08,"domain":"appearance","source":"reject-flattened-panel-system"},
+    {"path":"semanticPattern.roles.lightPanel.replacementCoverage","operator":"<=","threshold":0.6,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.motif.replacementCoverage","operator":">=","threshold":0.005,"domain":"appearance","source":"reject-deleted-motif-role"},
+    {"path":"semanticPattern.roles.motif.replacementCoverage","operator":"<=","threshold":0.15,"domain":"appearance","source":"bounded-role-coverage"},
+    {"path":"semanticPattern.roles.brim.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"measured-reference-role"},
+    {"path":"semanticPattern.roles.darkPanel.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"measured-reference-role"},
+    {"path":"semanticPattern.roles.lightPanel.meanReplacementRoleDistance","operator":"<=","threshold":4,"domain":"appearance","source":"measured-reference-role"},
+    {"path":"semanticPattern.roles.motif.meanReplacementRoleDistance","operator":"<=","threshold":6,"domain":"appearance","source":"analytic-motif-role"},
+    {"path":"appearance.roughnessAbsoluteError","operator":"<=","threshold":0.1,"domain":"appearance","source":"unchanged-stage-2-category-v1"},
+    {"path":"appearance.metalnessAbsoluteError","operator":"<=","threshold":0.05,"domain":"appearance","source":"unchanged-stage-2-category-v1"}
+  ],
+  "diagnostic": ["appearance.meanDeltaE00","appearance.p90DeltaE00","appearance.meanMaskedSsim","appearance.worstViewSsim","appearance.paletteCentroidDeltaE00","appearance.paletteCoverageL1"],
+  "requiredDestructiveControls": ["delete-brim-role","flatten-panel-system","delete-motif-role","wrong-role-palette"],
+  "frozen": true
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "stage-2-approved-candidate-freeze-v1",
+  "candidateId": "blue-hat/profiled-shell-analytic-panel-pattern-v1-semantic-v2",
+  "artifactRole": "development-only-semantic-positive-anchor",
+  "productionUse": "prohibited",
+  "freezeCommit": "fbc42cd",
+  "policy": {
+    "approvalScope": "profiled shell geometry plus bounded brim, panel, and motif semantic roles",
+    "mutationAfterFreeze": "requires a new positive exemplar version",
+    "verification": "sha256-and-byte-length-before-and-after-controls",
+    "sharedRegistry": "excluded; object-scoped definition and generator sources are frozen"
+  },
+  "candidateFiles": [
+    {"path":"gt_designer/src/reconstruction/core/object-generator.js","byteLength":2912,"sha256":"efbe8045363fbcb436132d43d174d4b753efae196a35ec2a4d833016da6a4717"},
+    {"path":"gt_designer/src/reconstruction/core/rng.js","byteLength":976,"sha256":"3d23fd42233f8988518cc8907db7705f7629770c0ac2b859a97bce82468fa5f5"},
+    {"path":"gt_designer/src/reconstruction/objects/blue-hat-definition.js","byteLength":285,"sha256":"3e1e45b4832512c08a47f5517c20779de1f66dcf7d1e138fa5acc97dfadef492"},
+    {"path":"gt_designer/src/reconstruction/objects/blue-hat-generator.js","byteLength":6261,"sha256":"7d79fe64b9fe84fb2902404dcbdd00216cf4d5568321657b499a8e1ff8e8e68e"},
+    {"path":"gt_designer/src/reconstruction/objects/blue-hat-recipe.js","byteLength":1434,"sha256":"7958561fa0882a4b467fe76f11581d37a85aae8a287ca81f1295b4c7d6e7ad85"}
+  ],
+  "evidenceFiles": [],
+  "baselineFiles": [
+    {"path":"gt_designer/single-mesh-evaluation/baselines/blue-hat-semantic-appearance-baseline-v2.json","byteLength":2850,"sha256":"51c11a25978e27ca94162c351608a2bf5e5971e62b1706c47a934f979797af5f"},
+    {"path":"gt_designer/single-mesh-evaluation/blue-hat-appearance-variants.js","byteLength":1336,"sha256":"00dc013fc56e0d983f50d687d34a2c43ba8d40692db58553186c40bfd599da5a"}
+  ]
+}

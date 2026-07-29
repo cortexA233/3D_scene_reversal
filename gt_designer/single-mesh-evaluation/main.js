@@ -332,13 +332,12 @@ async function initialize() {
           }
         }
         const semanticResponse = await fetch(
-          "./baselines/stage2-semantic-appearance-baselines-v2.json",
+          `./baselines/${state.unitId}-semantic-appearance-baseline-v2.json`,
         );
         if (!semanticResponse.ok) {
           throw new Error("Stage 2 semantic appearance baselines could not be loaded");
         }
-        const semanticSet = await semanticResponse.json();
-        const semanticAppearance = semanticSet.objects[state.unitId];
+        const semanticAppearance = await semanticResponse.json();
         if (!semanticAppearance?.frozen) {
           throw new Error("Stage 2 semantic appearance baseline is not frozen");
         }

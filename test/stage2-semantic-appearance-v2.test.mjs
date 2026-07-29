@@ -4,15 +4,16 @@ import test from "node:test";
 
 import { createBambooShootAppearanceVariantRecipe } from "../gt_designer/single-mesh-evaluation/bamboo-shoot-appearance-variants.js";
 import { BAMBOO_SHOOT_RECIPE } from "../gt_designer/src/reconstruction/objects/bamboo-shoot-recipe.js";
+import { createBlueHatAppearanceVariantRecipe } from "../gt_designer/single-mesh-evaluation/blue-hat-appearance-variants.js";
+import { BLUE_HAT_RECIPE } from "../gt_designer/src/reconstruction/objects/blue-hat-recipe.js";
 import { createMushroomAppearanceVariantRecipe } from "../gt_designer/single-mesh-evaluation/mushroom-appearance-variants.js";
 import { MUSHROOM_RECIPE } from "../gt_designer/src/reconstruction/objects/mushroom-recipe.js";
 
 test("Bamboo Shoot semantic v2 keeps exact texture diagnostic and role gates hard", async () => {
-  const baselineSet = JSON.parse(await readFile(
-    new URL("../gt_designer/single-mesh-evaluation/baselines/stage2-semantic-appearance-baselines-v2.json", import.meta.url),
+  const baseline = JSON.parse(await readFile(
+    new URL("../gt_designer/single-mesh-evaluation/baselines/bamboo-shoot-semantic-appearance-baseline-v2.json", import.meta.url),
     "utf8",
   ));
-  const baseline = baselineSet.objects["bamboo-shoot"];
   assert.equal(baseline.frozen, true);
   assert.equal(baseline.version, "bamboo-shoot-semantic-category-baseline-v2");
   assert.ok(baseline.hard.some(({ path }) =>
@@ -38,17 +39,31 @@ test("Bamboo Shoot appearance controls are isolated recipe copies", () => {
 });
 
 test("Mushroom semantic v2 declares measured cap and stem roles", async () => {
-  const baselineSet = JSON.parse(await readFile(
-    new URL("../gt_designer/single-mesh-evaluation/baselines/stage2-semantic-appearance-baselines-v2.json", import.meta.url),
+  const baseline = JSON.parse(await readFile(
+    new URL("../gt_designer/single-mesh-evaluation/baselines/mushroom-semantic-appearance-baseline-v2.json", import.meta.url),
     "utf8",
   ));
-  const baseline = baselineSet.objects.mushroom;
   assert.deepEqual(baseline.semanticRoles.cap, [78, 23, 16]);
   assert.deepEqual(baseline.semanticRoles.stem, [98, 91, 75]);
   for (const variant of ["delete-cap-role", "delete-stem-role", "wrong-role-palette"]) {
     assert.notDeepEqual(
       createMushroomAppearanceVariantRecipe(MUSHROOM_RECIPE, variant).appearance,
       MUSHROOM_RECIPE.appearance,
+    );
+  }
+});
+
+test("Blue Hat semantic v2 keeps panel and motif damage observable", async () => {
+  const baseline = JSON.parse(await readFile(
+    new URL("../gt_designer/single-mesh-evaluation/baselines/blue-hat-semantic-appearance-baseline-v2.json", import.meta.url),
+    "utf8",
+  ));
+  assert.deepEqual(Object.keys(baseline.semanticRoles), ["brim", "darkPanel", "lightPanel", "motif"]);
+  assert.ok(baseline.diagnostic.includes("appearance.meanMaskedSsim"));
+  for (const variant of baseline.requiredDestructiveControls) {
+    assert.notDeepEqual(
+      createBlueHatAppearanceVariantRecipe(BLUE_HAT_RECIPE, variant).appearance,
+      BLUE_HAT_RECIPE.appearance,
     );
   }
 });

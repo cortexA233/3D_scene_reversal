@@ -814,6 +814,14 @@ export async function runObjectEvaluation({
         definition.recipe,
         appearanceVariant,
       );
+    } else if (objectId === "blue-hat") {
+      const { createBlueHatAppearanceVariantRecipe } = await import(
+        "./blue-hat-appearance-variants.js"
+      );
+      replacementRecipe = createBlueHatAppearanceVariantRecipe(
+        definition.recipe,
+        appearanceVariant,
+      );
     } else {
       throw new Error("appearance variants are not supported for this object");
     }

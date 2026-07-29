@@ -45,6 +45,7 @@
     "check:stage2-pre": "node scripts/run-stage2-precalibration.mjs --check",
     "accept:mushroom-v2": "node scripts/run-object-acceptance.mjs --object mushroom --evidence-version v2 --category-baseline stage2-v3",
     "check:mushroom-semantic-v2": "node scripts/run-mushroom-semantic-appearance-controls.mjs --check",
+    "check:blue-hat-semantic-v2": "node scripts/run-blue-hat-semantic-appearance-controls.mjs --check",
     "certify:stage-1-5-v3": "node scripts/run-stage-1-5-v3-certification.mjs",
     "check:stage-1-5-v3": "node scripts/run-stage-1-5-v3-certification.mjs --check",
     "measure:stage2-components": "node tools/development/measure-stage2-components.mjs",
