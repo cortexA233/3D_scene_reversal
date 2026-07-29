@@ -5,6 +5,8 @@
   "scripts": {
     "prototype:island": "./run.sh --local-three",
     "check:prototype:island": "node scripts/smoke-full-island-prototype.mjs",
+    "extract:full-island-layout": "node tools/ground-truth/extract-full-island-layout.mjs",
+    "check:full-island-layout": "node tools/ground-truth/extract-full-island-layout.mjs --check",
     "test": "node --test",
     "smoke:replacement": "node scripts/smoke-single-mesh-replacement.mjs",
     "smoke:evaluation": "node scripts/smoke-single-mesh-evaluation.mjs",

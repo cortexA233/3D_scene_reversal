@@ -9,6 +9,7 @@
 // manifests, and textures are deliberately absent from this runtime.
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { REFERENCE_LAYOUT } from "./full-island-layout.generated.js";
 
 const query = new URLSearchParams(location.search);
 const variantKey = ["A", "B", "C"].includes(query.get("variant"))
@@ -88,13 +89,14 @@ const VARIANTS = {
 };
 
 const config = VARIANTS[variantKey];
+const measuredWorld = REFERENCE_LAYOUT.world;
 const WORLD = {
-  center: new THREE.Vector2(86, -24),
-  coast: new THREE.Vector2(322, 290),
-  flat: new THREE.Vector2(255, 228),
-  seaY: 16,
-  groundY: 26,
-  oceanFloor: -40,
+  center: new THREE.Vector2(...measuredWorld.center),
+  coast: new THREE.Vector2(...measuredWorld.coast),
+  flat: new THREE.Vector2(...measuredWorld.flat),
+  seaY: measuredWorld.seaY,
+  groundY: measuredWorld.groundY,
+  oceanFloor: measuredWorld.oceanFloor,
 };
 
 const runtime = window.island;
@@ -113,6 +115,8 @@ const stats = {
   rocks: 0,
   buildings: 0,
   mountains: 0,
+  decorations: 0,
+  wildlife: 0,
 };
 
 function tick(message, progress) {
@@ -182,21 +186,22 @@ function gaussian(x, z, cx, cz, rx, rz) {
   return Math.exp(-(dx * dx + dz * dz) * 2.2);
 }
 
-function coastField(x, z) {
-  const center = WORLD.center;
-  const wobble = 1 + 0.115 * fbm(x * 0.004 + 3, z * 0.004 + 7, 3);
-  const dx = (x - center.x) / (WORLD.coast.x * wobble);
-  const dz = (z - center.y) / (WORLD.coast.y * wobble);
-  let field = 1 - Math.hypot(dx, dz);
+function measuredCoastRadius(angle) {
+  const radii = REFERENCE_LAYOUT.terrain.coastlineRadii;
+  const normalized = ((angle / TAU) % 1 + 1) % 1;
+  const sample = normalized * radii.length;
+  const index = Math.floor(sample);
+  const next = (index + 1) % radii.length;
+  return lerp(radii[index], radii[next], sample - index);
+}
 
-  // The reference island has a broad water mouth in the foreground that narrows
-  // into the central garden. This subtractive field keeps that composition.
-  const forward = smooth(30, 175, z - center.y);
-  const mouth = Math.exp(-Math.pow((x - (center.x + 2)) / 44, 2)) * forward;
-  const lagoon = gaussian(x, z, center.x + 14, center.y + 67, 92, 76);
-  field -= mouth * 0.92;
-  field -= lagoon * 0.13;
-  return field;
+function coastField(x, z) {
+  const dx = x - WORLD.center.x;
+  const dz = z - WORLD.center.y;
+  const distance = Math.hypot(dx, dz);
+  const radius = measuredCoastRadius(Math.atan2(dz, dx));
+  const edgeNoise = fbm(x * 0.012, z * 0.012, 2) * 2.2;
+  return 1 - distance / Math.max(24, radius + edgeNoise);
 }
 
 function flatField(x, z) {
@@ -214,13 +219,23 @@ function islandHeight(x, z) {
   );
   height = lerp(height, WORLD.groundY, smooth(-0.015, 0.2, field));
 
-  const rim = (1 - flatField(x, z)) * smooth(0.05, 0.38, field);
-  const dune = (fbm(x * 0.012, z * 0.012, 4) * 0.5 + 0.5) * 10;
-  const hill =
-    Math.pow(clamp(fbm(x * 0.004 + 19, z * 0.004 - 8, 4) * 0.5 + 0.58, 0, 1), 2) *
-    42;
-  height += rim * (dune + hill);
-  height += flatField(x, z) * fbm(x * 0.035, z * 0.035, 2) * 0.42;
+  const land = smooth(0.02, 0.16, field);
+  let relief = 0;
+  for (const feature of REFERENCE_LAYOUT.terrain.relief) {
+    relief = Math.max(
+      relief,
+      feature.height * gaussian(
+        x,
+        z,
+        feature.position[0],
+        feature.position[1],
+        feature.radius,
+        feature.radius,
+      ),
+    );
+  }
+  height += land * relief;
+  height += land * fbm(x * 0.035, z * 0.035, 2) * 0.34;
   return height;
 }
 
@@ -256,6 +271,7 @@ const materials = {
   roof: material(config.palette.roof, { roughness: 0.82 }),
   roofDark: material(0x6f332d, { roughness: 0.85 }),
   stone: material(0xa9a48d, { roughness: 1, flatShading: true }),
+  plaza: material(0xb98b69, { roughness: 1 }),
   bridge: material(0xb9332e, { roughness: 0.8 }),
   bridgeDark: material(0x772923, { roughness: 0.86 }),
   leaf: material(0x284b28, { roughness: 0.98, side: THREE.DoubleSide }),
@@ -264,6 +280,14 @@ const materials = {
   blossomLight: material(0xf5c0c4, { roughness: 0.95, flatShading: true }),
   bamboo: material(0x81a45e, { roughness: 0.95 }),
   bambooLeaf: material(0x729757, { roughness: 0.98, flatShading: true }),
+  pandaWhite: material(0xe8e4d7, { roughness: 0.96 }),
+  pandaBlack: material(0x1f2522, { roughness: 0.92 }),
+  lanternGlow: material(0xffc15c, {
+    roughness: 0.6,
+    emissive: 0xff7b24,
+    emissiveIntensity: 0.85,
+  }),
+  mushroom: material(0xd7644f, { roughness: 0.9 }),
 };
 
 function setShadow(object, cast = true, receive = true) {
@@ -433,14 +457,36 @@ function makeTerrain(scene) {
 }
 
 function makeMountainRing(scene) {
-  const count = Math.round(62 * config.meshDetail);
-  const baseGeometry = new THREE.ConeGeometry(1, 1, variantKey === "C" ? 4 : 5, 1);
-  const peakGeometry = new THREE.ConeGeometry(1, 1, variantKey === "B" ? 6 : 5, 1);
+  const records = REFERENCE_LAYOUT.mountains;
+  const lobes = [];
+  for (const [mountainIndex, record] of records.entries()) {
+    const [width, height, depth] = record.size;
+    const alongX = width >= depth;
+    const major = Math.max(width, depth);
+    const minor = Math.min(width, depth);
+    const count = clamp(Math.round(major / 250), 2, variantKey === "C" ? 4 : 7);
+    const rng = mulberry32(config.seed + 9001 + mountainIndex * 97);
+    for (let index = 0; index < count; index++) {
+      const t = count === 1 ? 0 : index / (count - 1) - 0.5;
+      const offset = t * major * 0.72;
+      lobes.push({
+        x: record.position[0] + (alongX ? offset : 0),
+        z: record.position[2] + (alongX ? 0 : offset),
+        y: record.position[1],
+        width: Math.max(90, (major / count) * (0.92 + rng() * 0.35)),
+        depth: Math.max(90, minor * (0.43 + rng() * 0.2)),
+        height: height * (0.62 + rng() * 0.38),
+        yaw: record.yaw + (rng() - 0.5) * 0.16,
+      });
+    }
+  }
+  const count = lobes.length;
+  const baseGeometry = new THREE.ConeGeometry(1, 1, variantKey === "C" ? 5 : 7, 1);
+  const peakGeometry = new THREE.ConeGeometry(1, 1, variantKey === "B" ? 8 : 6, 1);
   const baseMaterial = material(0x718664, { roughness: 1, flatShading: true });
   const peakMaterial = material(0xb9aa88, { roughness: 1, flatShading: true });
   const bases = new THREE.InstancedMesh(baseGeometry, baseMaterial, count);
   const peaks = new THREE.InstancedMesh(peakGeometry, peakMaterial, count);
-  const rng = mulberry32(config.seed + 9001);
   const matrix = new THREE.Matrix4();
   const position = new THREE.Vector3();
   const quaternion = new THREE.Quaternion();
@@ -448,32 +494,29 @@ function makeMountainRing(scene) {
   const green = new THREE.Color();
   const stone = new THREE.Color();
   for (let i = 0; i < count; i++) {
-    const angle = (i / count) * TAU + (rng() - 0.5) * 0.1;
-    const radius = 1120 + rng() * 460;
-    const mountainRadius = 58 + rng() * 74;
-    const height = 78 + Math.pow(rng(), 1.55) * 112;
+    const lobe = lobes[i];
     position.set(
-      WORLD.center.x + Math.cos(angle) * radius,
-      WORLD.seaY + height * 0.5 - 2,
-      WORLD.center.y + Math.sin(angle) * radius,
+      lobe.x,
+      lobe.y + lobe.height * 0.5,
+      lobe.z,
     );
-    quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rng() * TAU);
-    scale.set(mountainRadius, height, mountainRadius * (0.72 + rng() * 0.4));
+    quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), lobe.yaw);
+    scale.set(lobe.width * 0.58, lobe.height, lobe.depth * 0.58);
     matrix.compose(position, quaternion, scale);
     bases.setMatrixAt(i, matrix);
     bases.setColorAt(
       i,
-      green.setHSL(0.24 + rng() * 0.035, 0.19, 0.39 + rng() * 0.08),
+      green.setHSL(0.24 + (i % 5) * 0.006, 0.19, 0.39 + (i % 4) * 0.018),
     );
 
-    const peakHeight = height * (0.56 + rng() * 0.12);
-    position.y = WORLD.seaY + height * 0.58;
-    scale.set(mountainRadius * 0.72, peakHeight, mountainRadius * 0.7);
+    const peakHeight = lobe.height * 0.5;
+    position.y = lobe.y + lobe.height * 0.68;
+    scale.set(lobe.width * 0.38, peakHeight, lobe.depth * 0.38);
     matrix.compose(position, quaternion, scale);
     peaks.setMatrixAt(i, matrix);
     peaks.setColorAt(
       i,
-      stone.setHSL(0.11 + rng() * 0.03, 0.23, 0.67 + rng() * 0.1),
+      stone.setHSL(0.11 + (i % 3) * 0.01, 0.23, 0.67 + (i % 4) * 0.025),
     );
   }
   bases.instanceMatrix.needsUpdate = true;
@@ -483,7 +526,7 @@ function makeMountainRing(scene) {
   bases.receiveShadow = peaks.receiveShadow = true;
   bases.castShadow = peaks.castShadow = true;
   scene.add(bases, peaks);
-  stats.mountains = count;
+  stats.mountains = records.length;
 }
 
 function canvasCloudTexture() {
@@ -557,73 +600,6 @@ function placeOnGround(group, x, z, yOffset = 0) {
   return group;
 }
 
-function makeHouse(scene, x, z, scale = 1, rotation = 0, levels = 1) {
-  const group = new THREE.Group();
-  group.name = "Procedural Village House";
-  const width = 18 * scale;
-  const depth = 14 * scale;
-  const floorHeight = 10 * scale;
-  const base = makeBox(width + 2, 1.6 * scale, depth + 2, materials.stone);
-  base.position.y = 0.8 * scale;
-  group.add(base);
-
-  for (let level = 0; level < levels; level++) {
-    const shrink = 1 - level * 0.16;
-    const wall = makeBox(
-      width * shrink,
-      floorHeight,
-      depth * shrink,
-      materials.plaster,
-    );
-    wall.position.y = 1.6 * scale + floorHeight * (level + 0.5);
-    group.add(wall);
-    const beamFront = makeBox(width * shrink + 0.8, 0.65 * scale, 0.55, materials.darkTimber);
-    beamFront.position.set(0, wall.position.y + floorHeight * 0.25, depth * shrink * 0.51);
-    group.add(beamFront);
-    const beamBack = beamFront.clone();
-    beamBack.position.z *= -1;
-    group.add(beamBack);
-    for (const side of [-1, 1]) {
-      const post = makeBox(0.75 * scale, floorHeight * 0.9, 0.75 * scale, materials.timber);
-      post.position.set(side * width * shrink * 0.45, wall.position.y, depth * shrink * 0.48);
-      group.add(post);
-    }
-    const roof = new THREE.Mesh(
-      new THREE.ConeGeometry(1, 0.48, 4, 1),
-      level === levels - 1 ? materials.roof : materials.roofDark,
-    );
-    roof.rotation.y = Math.PI / 4;
-    roof.scale.set(width * shrink * 0.82, 11 * scale, depth * shrink * 0.95);
-    roof.position.y = wall.position.y + floorHeight * 0.57;
-    roof.castShadow = true;
-    roof.receiveShadow = true;
-    group.add(roof);
-  }
-
-  const door = makeBox(3.2 * scale, 5.4 * scale, 0.45, materials.darkTimber);
-  door.position.set(0, 4.4 * scale, depth * 0.53);
-  group.add(door);
-  const lanternMaterial = material(0xffd28d, {
-    emissive: 0xff9e4d,
-    emissiveIntensity: 0.65,
-    roughness: 0.65,
-  });
-  for (const side of [-1, 1]) {
-    const lantern = new THREE.Mesh(
-      new THREE.SphereGeometry(0.75 * scale, 8, 6),
-      lanternMaterial,
-    );
-    lantern.position.set(side * width * 0.28, 6.5 * scale, depth * 0.56);
-    group.add(lantern);
-  }
-
-  group.rotation.y = rotation;
-  placeOnGround(group, x, z, 0.15);
-  scene.add(setShadow(group));
-  stats.buildings++;
-  return group;
-}
-
 function makePagoda(scene, x, z, scale = 1, levels = 3) {
   const group = new THREE.Group();
   group.name = "Procedural Pagoda";
@@ -687,112 +663,144 @@ function makePavilion(scene, x, z, scale = 1) {
   placeOnGround(group, x, z, 0.15);
   scene.add(setShadow(group));
   stats.buildings++;
+  return group;
 }
 
-function makeTorii(scene, x, z, scale = 1, rotation = 0) {
+function makeMeasuredHouse(scene, record) {
+  const [width, height, depth] = record.size;
   const group = new THREE.Group();
-  const postHeight = 14 * scale;
-  for (const side of [-1, 1]) {
-    const post = makeBox(1.7 * scale, postHeight, 1.7 * scale, materials.bridge);
-    post.position.set(side * 6 * scale, postHeight * 0.5, 0);
-    group.add(post);
+  group.name = `Measured procedural ${record.kind}`;
+  const booth = record.kind === "ring-booth" || record.kind === "tea-booth";
+  const baseHeight = Math.max(0.8, height * 0.06);
+  const wallHeight = height * (booth ? 0.42 : 0.58);
+  const wall = makeBox(
+    width * (booth ? 0.62 : 0.82),
+    wallHeight,
+    depth * (booth ? 0.5 : 0.78),
+    materials.plaster,
+  );
+  wall.position.y = baseHeight + wallHeight * 0.5;
+  group.add(wall);
+  const base = makeBox(width * 0.94, baseHeight, depth * 0.9, materials.stone);
+  base.position.y = baseHeight * 0.5;
+  group.add(base);
+  for (const sideX of [-1, 1]) {
+    for (const sideZ of booth ? [-1, 1] : [1]) {
+      const post = makeBox(
+        Math.max(0.45, width * 0.035),
+        wallHeight * 0.95,
+        Math.max(0.45, depth * 0.035),
+        materials.darkTimber,
+      );
+      post.position.set(sideX * width * 0.36, wall.position.y, sideZ * depth * 0.34);
+      group.add(post);
+    }
   }
-  const beam = makeBox(17 * scale, 1.8 * scale, 2 * scale, materials.bridge);
-  beam.position.y = postHeight;
-  group.add(beam);
-  const top = makeBox(20 * scale, 1.3 * scale, 2.6 * scale, materials.bridgeDark);
-  top.position.y = postHeight + 2.2 * scale;
-  group.add(top);
-  group.rotation.y = rotation;
-  placeOnGround(group, x, z, 0.1);
+  const roof = new THREE.Mesh(new THREE.ConeGeometry(1, 0.5, 4, 1), materials.roof);
+  roof.rotation.y = Math.PI / 4;
+  roof.scale.set(width * 0.58, Math.max(5, height * (booth ? 0.62 : 0.52)), depth * 0.62);
+  roof.position.y = height * 0.73;
+  group.add(roof);
+  const door = makeBox(width * 0.17, wallHeight * 0.52, 0.5, materials.darkTimber);
+  door.position.set(0, baseHeight + wallHeight * 0.27, depth * 0.4);
+  group.add(door);
+  group.rotation.y = record.yaw;
+  group.position.set(...record.position);
   scene.add(setShadow(group));
+  stats.buildings += 1;
+  return group;
+}
+
+function makeMeasuredLandmarkTree(scene, record) {
+  const [width, height, depth] = record.size;
+  const group = new THREE.Group();
+  const trunkHeight = height * 0.62;
+  const trunk = new THREE.Mesh(
+    new THREE.CylinderGeometry(width * 0.055, width * 0.1, trunkHeight, 7),
+    materials.trunk,
+  );
+  trunk.position.y = trunkHeight * 0.5;
+  group.add(trunk);
+  const crownMaterial = record.kind === "wish-tree" ? materials.blossom : materials.leaf;
+  const rng = mulberry32(config.seed + Math.round(record.position[0] * 17));
+  const puffs = variantKey === "C" ? 5 : 9;
+  for (let index = 0; index < puffs; index++) {
+    const angle = (index / puffs) * TAU;
+    const crown = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1, variantKey === "B" ? 2 : 1),
+      crownMaterial,
+    );
+    const radius = width * (0.23 + rng() * 0.09);
+    crown.scale.set(radius, height * (0.17 + rng() * 0.05), depth * 0.26);
+    crown.position.set(
+      Math.cos(angle) * width * 0.22,
+      height * (0.68 + rng() * 0.12),
+      Math.sin(angle) * depth * 0.22,
+    );
+    group.add(crown);
+  }
+  group.rotation.y = record.yaw;
+  group.position.set(...record.position);
+  scene.add(setShadow(group));
+  stats.buildings += 1;
 }
 
 function makeVillage(scene) {
-  const cx = WORLD.center.x;
-  const cz = WORLD.center.y;
-  const houses = [
-    [-104, -8, 1.05, 0.32, 1],
-    [-72, 22, 0.9, -0.18, 1],
-    [-48, -45, 0.92, 0.62, 1],
-    [-20, 10, 1.12, -0.42, 1],
-    [18, -15, 0.88, 0.2, 1],
-    [54, -76, 0.92, -0.34, 1],
-    [95, 6, 0.82, 0.52, 1],
-    [124, -62, 0.88, -0.5, 1],
-    [156, 8, 1.02, 0.28, 2],
-    [-124, 66, 0.82, 0.78, 1],
-    [-62, 82, 0.84, -0.5, 1],
-  ];
-  const count = variantKey === "C" ? 8 : variantKey === "B" ? houses.length : 10;
-  for (let i = 0; i < count; i++) {
-    const [dx, dz, scale, rotation, levels] = houses[i];
-    makeHouse(scene, cx + dx, cz + dz, scale, rotation, levels);
+  for (const record of REFERENCE_LAYOUT.structures) {
+    if (["shop", "dessert-shop", "dumpling-house", "fruit-shop", "ring-booth", "tea-booth"].includes(record.kind)) {
+      makeMeasuredHouse(scene, record);
+    } else if (record.kind === "pavilion-tower") {
+      const scale = record.size[1] / 34;
+      const group = makePagoda(scene, record.position[0], record.position[2], scale, variantKey === "C" ? 2 : 3);
+      group.position.y = record.position[1];
+      group.rotation.y = record.yaw;
+    } else if (record.kind === "pavilion") {
+      const group = makePavilion(scene, record.position[0], record.position[2], record.size[1] / 24);
+      group.position.y = record.position[1];
+      group.rotation.y = record.yaw;
+    } else {
+      makeMeasuredLandmarkTree(scene, record);
+    }
   }
-  makePagoda(scene, cx + 5, cz - 135, 1.05, variantKey === "C" ? 2 : 3);
-  makePagoda(scene, cx + 190, cz - 50, 0.9, 2);
-  makePavilion(scene, cx - 168, cz - 95, 0.86);
-  makeTorii(scene, cx - 155, cz + 35, 0.86, Math.PI / 2.5);
-  makeTorii(scene, cx + 20, cz - 92, 0.75, 0.1);
-}
-
-function makeStonePath(scene, points, width = 7, count = 42) {
-  const curve = new THREE.CatmullRomCurve3(
-    points.map(([x, z]) => new THREE.Vector3(x, 0, z)),
-  );
-  const geometry = new THREE.BoxGeometry(width, 0.72, width * 0.75);
-  const path = new THREE.InstancedMesh(geometry, materials.stone, count);
-  const matrix = new THREE.Matrix4();
-  const quaternion = new THREE.Quaternion();
-  const scale = new THREE.Vector3();
-  const rng = mulberry32(config.seed + count + Math.round(points[0][0]));
-  for (let i = 0; i < count; i++) {
-    const t = i / Math.max(1, count - 1);
-    const point = curve.getPoint(t);
-    const tangent = curve.getTangent(t);
-    const y = islandHeight(point.x, point.z) + 0.6;
-    quaternion.setFromEuler(
-      new THREE.Euler(0, Math.atan2(tangent.x, tangent.z) + (rng() - 0.5) * 0.12, 0),
-    );
-    scale.set(0.78 + rng() * 0.35, 1, 0.72 + rng() * 0.32);
-    matrix.compose(new THREE.Vector3(point.x, y, point.z), quaternion, scale);
-    path.setMatrixAt(i, matrix);
-  }
-  path.instanceMatrix.needsUpdate = true;
-  path.castShadow = true;
-  path.receiveShadow = true;
-  scene.add(path);
 }
 
 function makePaths(scene) {
-  const cx = WORLD.center.x;
-  const cz = WORLD.center.y;
-  makeStonePath(scene, [
-    [cx - 3, cz + 245],
-    [cx - 34, cz + 150],
-    [cx - 72, cz + 70],
-    [cx - 54, cz + 12],
-    [cx + 8, cz - 40],
-    [cx + 8, cz - 120],
-  ], 8.5, 58);
-  makeStonePath(scene, [
-    [cx - 130, cz + 35],
-    [cx - 72, cz + 20],
-    [cx, cz + 5],
-    [cx + 85, cz + 18],
-    [cx + 170, cz - 25],
-  ], 7.5, 50);
-  makeStonePath(scene, [
-    [cx - 90, cz - 70],
-    [cx - 24, cz - 48],
-    [cx + 45, cz - 80],
-    [cx + 110, cz - 60],
-  ], 6.8, 34);
+  for (const record of REFERENCE_LAYOUT.plazas) {
+    const plaza = makeBox(record.size[0], Math.max(0.45, record.size[1]), record.size[2], materials.plaza);
+    plaza.position.set(
+      record.position[0],
+      record.position[1] + Math.max(0.45, record.size[1]) * 0.5,
+      record.position[2],
+    );
+    plaza.rotation.y = record.yaw;
+    scene.add(plaza);
+  }
+
+  const stones = REFERENCE_LAYOUT.pathStones;
+  const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const mesh = new THREE.InstancedMesh(geometry, materials.stone, stones.length);
+  const matrix = new THREE.Matrix4();
+  const quaternion = new THREE.Quaternion();
+  for (const [index, record] of stones.entries()) {
+    quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), record.yaw);
+    matrix.compose(
+      new THREE.Vector3(
+        record.position[0],
+        record.position[1] + Math.max(0.32, record.size[1]) * 0.5,
+        record.position[2],
+      ),
+      quaternion,
+      new THREE.Vector3(record.size[0], Math.max(0.32, record.size[1]), record.size[2]),
+    );
+    mesh.setMatrixAt(index, matrix);
+  }
+  mesh.instanceMatrix.needsUpdate = true;
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  scene.add(mesh);
 }
 
 function makeWaterGarden(scene) {
-  const cx = WORLD.center.x;
-  const cz = WORLD.center.y;
   const waterMaterial = material(0x92bec0, {
     roughness: 0.32,
     metalness: 0.02,
@@ -800,17 +808,37 @@ function makeWaterGarden(scene) {
     opacity: 0.86,
     side: THREE.DoubleSide,
   });
-  const pond = new THREE.Mesh(new THREE.CircleGeometry(70, 48), waterMaterial);
+  const radii = REFERENCE_LAYOUT.terrain.coastlineRadii;
+  const inletIndex = radii.indexOf(Math.min(...radii));
+  const inletAngle = (inletIndex / radii.length) * TAU;
+  const inletDirection = new THREE.Vector2(Math.cos(inletAngle), Math.sin(inletAngle));
+  const innerInlet = new THREE.Vector2(
+    WORLD.center.x + inletDirection.x * radii[inletIndex],
+    WORLD.center.y + inletDirection.y * radii[inletIndex],
+  );
+  const outerInlet = new THREE.Vector2(
+    WORLD.center.x + inletDirection.x * 390,
+    WORLD.center.y + inletDirection.y * 390,
+  );
+  const bridgeCenters = REFERENCE_LAYOUT.bridges.map(
+    (record) => new THREE.Vector2(record.position[0], record.position[2]),
+  );
+  const pondCenter = bridgeCenters[0] ?? innerInlet;
+  const pond = new THREE.Mesh(new THREE.CircleGeometry(54, 48), waterMaterial);
   pond.rotation.x = -Math.PI / 2;
-  pond.scale.set(1.24, 0.85, 1);
-  pond.position.set(cx + 22, WORLD.groundY + 0.32, cz + 47);
+  pond.scale.set(1.18, 0.82, 1);
+  pond.position.set(pondCenter.x, WORLD.seaY + 0.22, pondCenter.y);
   scene.add(pond);
 
   const streamPoints = [
-    new THREE.Vector3(cx + 6, WORLD.seaY + 0.16, cz + 282),
-    new THREE.Vector3(cx - 8, 19, cz + 205),
-    new THREE.Vector3(cx + 5, 23, cz + 130),
-    new THREE.Vector3(cx + 20, WORLD.groundY + 0.25, cz + 70),
+    new THREE.Vector3(outerInlet.x, WORLD.seaY + 0.12, outerInlet.y),
+    new THREE.Vector3(pondCenter.x, WORLD.seaY + 0.18, pondCenter.y),
+    new THREE.Vector3(innerInlet.x, WORLD.seaY + 0.2, innerInlet.y),
+    new THREE.Vector3(
+      bridgeCenters[1]?.x ?? WORLD.center.x,
+      WORLD.seaY + 0.22,
+      bridgeCenters[1]?.y ?? WORLD.center.y - 70,
+    ),
   ];
   const curve = new THREE.CatmullRomCurve3(streamPoints);
   const positions = [];
@@ -821,7 +849,7 @@ function makeWaterGarden(scene) {
     const point = curve.getPoint(t);
     const tangent = curve.getTangent(t).normalize();
     const side = new THREE.Vector3(-tangent.z, 0, tangent.x);
-    const width = lerp(27, 16, t);
+    const width = lerp(36, 15, t);
     for (const direction of [-1, 1]) {
       const edge = point.clone().addScaledVector(side, width * direction);
       positions.push(edge.x, edge.y, edge.z);
@@ -852,48 +880,50 @@ function makeWaterGarden(scene) {
   for (let i = 0; i < padCount; i++) {
     const angle = rng() * TAU;
     const radius = Math.sqrt(rng());
-    const x = cx + 22 + Math.cos(angle) * radius * 76;
-    const z = cz + 47 + Math.sin(angle) * radius * 50;
+    const x = pondCenter.x + Math.cos(angle) * radius * 58;
+    const z = pondCenter.y + Math.sin(angle) * radius * 44;
     quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rng() * TAU);
     const size = 0.8 + rng() * 2.2;
     scale.set(size, size, size);
-    matrix.compose(new THREE.Vector3(x, WORLD.groundY + 0.48, z), quaternion, scale);
+    matrix.compose(new THREE.Vector3(x, WORLD.seaY + 0.42, z), quaternion, scale);
     pads.setMatrixAt(i, matrix);
   }
   pads.instanceMatrix.needsUpdate = true;
   scene.add(pads);
 }
 
-function makeBridge(scene, x, z, rotation = 0, scale = 1) {
+function makeBridge(scene, record) {
   const group = new THREE.Group();
-  const plankCount = 17;
+  const span = Math.max(record.size[0], record.size[2]) * 0.78;
+  const width = Math.min(record.size[0], record.size[2]) * 0.2;
+  const archHeight = Math.max(4, record.size[1] * 0.42);
+  const plankCount = variantKey === "C" ? 15 : 23;
   for (let i = 0; i < plankCount; i++) {
     const t = i / (plankCount - 1);
-    const localX = lerp(-19, 19, t) * scale;
-    const y = (2.2 + Math.sin(t * Math.PI) * 7) * scale;
-    const plank = makeBox(3 * scale, 0.8 * scale, 11 * scale, materials.bridge);
+    const localX = lerp(-span * 0.5, span * 0.5, t);
+    const y = 0.8 + Math.sin(t * Math.PI) * archHeight;
+    const plank = makeBox(span / plankCount * 1.2, 0.75, width, materials.bridge);
     plank.position.set(localX, y, 0);
     plank.rotation.z = -Math.cos(t * Math.PI) * 0.24;
     group.add(plank);
     if (i % 2 === 0) {
       for (const side of [-1, 1]) {
-        const post = makeBox(0.65 * scale, 5 * scale, 0.65 * scale, materials.bridgeDark);
-        post.position.set(localX, y + 2.4 * scale, side * 6 * scale);
+        const post = makeBox(0.6, 4.4, 0.6, materials.bridgeDark);
+        post.position.set(localX, y + 2.2, side * width * 0.56);
         group.add(post);
       }
     }
   }
   for (const side of [-1, 1]) {
     const rail = new THREE.Mesh(
-      new THREE.TorusGeometry(20 * scale, 0.55 * scale, 6, 32, Math.PI),
+      new THREE.TorusGeometry(span * 0.5, 0.5, 6, 40, Math.PI),
       materials.bridge,
     );
-    rail.rotation.set(0, 0, 0);
-    rail.position.set(0, 4.2 * scale, side * 6 * scale);
+    rail.position.set(0, 2.9, side * width * 0.56);
     group.add(rail);
   }
-  group.rotation.y = rotation;
-  group.position.set(x, WORLD.groundY + 0.2, z);
+  group.rotation.y = record.yaw;
+  group.position.set(...record.position);
   scene.add(setShadow(group));
 }
 
@@ -912,7 +942,10 @@ function palmLeafGeometry() {
 }
 
 function makePalmRing(scene) {
-  const count = Math.round(164 * config.foliage);
+  const records = variantKey === "C"
+    ? REFERENCE_LAYOUT.palms.filter((_, index) => index % 2 === 0)
+    : REFERENCE_LAYOUT.palms;
+  const count = records.length;
   const leavesPerPalm = variantKey === "C" ? 6 : 8;
   const trunkGeometry = new THREE.CylinderGeometry(0.55, 1.15, 1, 6);
   const leafGeometry = palmLeafGeometry();
@@ -930,27 +963,22 @@ function makePalmRing(scene) {
   const quaternion = new THREE.Quaternion();
   const scale = new THREE.Vector3();
   const leafColor = new THREE.Color();
-  let palmIndex = 0;
   let leafIndex = 0;
-  let attempts = 0;
-  while (palmIndex < count && attempts++ < count * 20) {
-    const angle = rng() * TAU;
-    const radial = 0.76 + rng() * 0.2;
-    const x = WORLD.center.x + Math.cos(angle) * WORLD.coast.x * radial;
-    const z = WORLD.center.y + Math.sin(angle) * WORLD.coast.y * radial;
-    if (coastField(x, z) < 0.04) continue;
-    // Keep the reference's open foreground mouth visible.
-    if (z > WORLD.center.y + 125 && Math.abs(x - WORLD.center.x) < 78) continue;
-    const y = islandHeight(x, z);
-    const height = 18 + rng() * 15;
+  for (const [palmIndex, record] of records.entries()) {
+    const x = record.position[0];
+    const y = record.position[1];
+    const z = record.position[2];
+    const width = Math.max(12, Math.max(record.size[0], record.size[2]));
+    const height = Math.max(18, record.size[1] * 0.78);
     position.set(x, y + height * 0.5, z);
-    quaternion.setFromEuler(new THREE.Euler((rng() - 0.5) * 0.12, rng() * TAU, (rng() - 0.5) * 0.12));
-    scale.set(1, height, 1);
+    quaternion.setFromEuler(new THREE.Euler((rng() - 0.5) * 0.08, record.yaw, (rng() - 0.5) * 0.08));
+    const trunkRadius = clamp(width * 0.045, 0.7, 1.6);
+    scale.set(trunkRadius, height, trunkRadius);
     matrix.compose(position, quaternion, scale);
     trunks.setMatrixAt(palmIndex, matrix);
-    const crownSize = 3.4 + rng() * 2.3;
+    const crownSize = width * 0.18;
     matrix.compose(
-      new THREE.Vector3(x, y + height * 0.95, z),
+      new THREE.Vector3(x, y + height * 0.96, z),
       quaternion,
       new THREE.Vector3(crownSize * 1.45, crownSize * 0.62, crownSize * 1.45),
     );
@@ -961,7 +989,7 @@ function makePalmRing(scene) {
       quaternion.setFromEuler(
         new THREE.Euler(-0.08 + rng() * 0.2, leafAngle, (rng() - 0.5) * 0.18),
       );
-      const length = 1.18 + rng() * 0.5;
+      const length = width / 14 * (0.9 + rng() * 0.18);
       scale.set(length, length, length);
       matrix.compose(position, quaternion, scale);
       leaves.setMatrixAt(leafIndex, matrix);
@@ -971,10 +999,7 @@ function makePalmRing(scene) {
       );
       leafIndex++;
     }
-    palmIndex++;
   }
-  trunks.count = palmIndex;
-  crowns.count = palmIndex;
   leaves.count = leafIndex;
   trunks.instanceMatrix.needsUpdate = true;
   crowns.instanceMatrix.needsUpdate = true;
@@ -983,11 +1008,14 @@ function makePalmRing(scene) {
   trunks.castShadow = crowns.castShadow = leaves.castShadow = true;
   trunks.receiveShadow = crowns.receiveShadow = leaves.receiveShadow = true;
   scene.add(trunks, crowns, leaves);
-  stats.palms = palmIndex;
+  stats.palms = records.length;
 }
 
 function makeBlossomGrove(scene) {
-  const treeCount = Math.round(76 * config.foliage);
+  const records = variantKey === "C"
+    ? REFERENCE_LAYOUT.blossoms.filter((_, index) => index % 2 === 0)
+    : REFERENCE_LAYOUT.blossoms;
+  const treeCount = records.length;
   const puffsPerTree = variantKey === "C" ? 2 : 3;
   const trunkGeometry = new THREE.CylinderGeometry(0.45, 0.75, 1, 6);
   const crownGeometry = new THREE.IcosahedronGeometry(1, variantKey === "B" ? 2 : 1);
@@ -1003,21 +1031,22 @@ function makeBlossomGrove(scene) {
   const scale = new THREE.Vector3();
   const color = new THREE.Color();
   let crownIndex = 0;
-  for (let tree = 0; tree < treeCount; tree++) {
-    const x = WORLD.center.x - 25 + (rng() * 2 - 1) * 172;
-    const z = WORLD.center.y - 104 + (rng() * 2 - 1) * 88;
-    const y = islandHeight(x, z);
-    const height = 10 + rng() * 9;
-    quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), rng() * TAU);
+  for (const [tree, record] of records.entries()) {
+    const x = record.position[0];
+    const y = record.position[1];
+    const z = record.position[2];
+    const height = Math.max(10, record.size[1] * 0.7);
+    const width = Math.max(10, Math.max(record.size[0], record.size[2]));
+    quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), record.yaw);
     matrix.compose(
       new THREE.Vector3(x, y + height * 0.5, z),
       quaternion,
-      new THREE.Vector3(1, height, 1),
+      new THREE.Vector3(clamp(width * 0.035, 0.5, 1.2), height, clamp(width * 0.035, 0.5, 1.2)),
     );
     trunks.setMatrixAt(tree, matrix);
     for (let puff = 0; puff < puffsPerTree; puff++) {
       const puffAngle = (puff / puffsPerTree) * TAU + rng();
-      const size = 4.5 + rng() * 3.6;
+      const size = width * (0.2 + rng() * 0.08);
       matrix.compose(
         new THREE.Vector3(
           x + Math.cos(puffAngle) * size * 0.45,
@@ -1044,7 +1073,11 @@ function makeBlossomGrove(scene) {
 }
 
 function makeBambooBank(scene) {
-  const count = Math.round(145 * config.foliage);
+  const records = variantKey === "C"
+    ? REFERENCE_LAYOUT.bamboo.filter((_, index) => index % 2 === 0)
+    : REFERENCE_LAYOUT.bamboo;
+  const stemsPerClump = variantKey === "B" ? 4 : variantKey === "C" ? 2 : 3;
+  const count = records.length * stemsPerClump;
   const stemGeometry = new THREE.CylinderGeometry(0.22, 0.34, 1, 6);
   const leafGeometry = new THREE.IcosahedronGeometry(1, 0);
   const stems = new THREE.InstancedMesh(stemGeometry, materials.bamboo, count);
@@ -1054,12 +1087,11 @@ function makeBambooBank(scene) {
   const quaternion = new THREE.Quaternion();
   const color = new THREE.Color();
   for (let i = 0; i < count; i++) {
-    const angle = rng() * TAU;
-    const radius = Math.sqrt(rng());
-    const x = WORLD.center.x + 145 + Math.cos(angle) * radius * 82;
-    const z = WORLD.center.y + 75 + Math.sin(angle) * radius * 112;
-    const y = islandHeight(x, z);
-    const height = 13 + rng() * 18;
+    const record = records[Math.floor(i / stemsPerClump)];
+    const x = record.position[0] + (rng() - 0.5) * Math.min(record.size[0] * 0.45, 7);
+    const z = record.position[2] + (rng() - 0.5) * Math.min(record.size[2] * 0.45, 7);
+    const y = record.position[1];
+    const height = Math.max(12, record.size[1] * (0.72 + rng() * 0.22));
     quaternion.setFromEuler(new THREE.Euler((rng() - 0.5) * 0.06, rng() * TAU, (rng() - 0.5) * 0.06));
     matrix.compose(
       new THREE.Vector3(x, y + height * 0.5, z),
@@ -1080,11 +1112,14 @@ function makeBambooBank(scene) {
   leaves.instanceColor.needsUpdate = true;
   stems.castShadow = leaves.castShadow = true;
   scene.add(stems, leaves);
-  stats.bamboo = count;
+  stats.bamboo = records.length;
 }
 
 function makeShoreRocks(scene) {
-  const count = Math.round(900 * config.foliage);
+  const records = variantKey === "C"
+    ? REFERENCE_LAYOUT.rocks.filter((_, index) => index % 2 === 0)
+    : REFERENCE_LAYOUT.rocks;
+  const count = records.length;
   const geometry = new THREE.IcosahedronGeometry(1, variantKey === "B" ? 1 : 0);
   const rockMaterial = material(0xa9a18a, { roughness: 1, flatShading: true });
   const rocks = new THREE.InstancedMesh(geometry, rockMaterial, count);
@@ -1093,60 +1128,214 @@ function makeShoreRocks(scene) {
   const quaternion = new THREE.Quaternion();
   const scale = new THREE.Vector3();
   const color = new THREE.Color();
-  let placed = 0;
-  let attempts = 0;
-  while (placed < count && attempts++ < count * 30) {
-    const angle = rng() * TAU;
-    const radius = Math.sqrt(rng());
-    const x = WORLD.center.x + Math.cos(angle) * WORLD.coast.x * radius;
-    const z = WORLD.center.y + Math.sin(angle) * WORLD.coast.y * radius;
-    const field = coastField(x, z);
-    if (field < 0.015 || field > 0.22) continue;
-    const y = islandHeight(x, z);
-    const size = 0.25 + Math.pow(rng(), 2.2) * 2.2;
-    quaternion.setFromEuler(new THREE.Euler(rng(), rng() * TAU, rng()));
-    scale.set(size * (0.6 + rng()), size * (0.45 + rng() * 0.5), size * (0.6 + rng()));
-    matrix.compose(new THREE.Vector3(x, y + size * 0.2, z), quaternion, scale);
-    rocks.setMatrixAt(placed, matrix);
-    rocks.setColorAt(placed, color.setHSL(0.1 + rng() * 0.04, 0.12, 0.55 + rng() * 0.28));
-    placed++;
+  for (const [index, record] of records.entries()) {
+    quaternion.setFromEuler(new THREE.Euler(rng() * 0.3, record.yaw, rng() * 0.3));
+    scale.set(record.size[0] * 0.58, record.size[1] * 0.58, record.size[2] * 0.58);
+    matrix.compose(
+      new THREE.Vector3(
+        record.position[0],
+        record.position[1] + record.size[1] * 0.5,
+        record.position[2],
+      ),
+      quaternion,
+      scale,
+    );
+    rocks.setMatrixAt(index, matrix);
+    rocks.setColorAt(index, color.setHSL(0.1 + rng() * 0.04, 0.12, 0.55 + rng() * 0.28));
   }
-  rocks.count = placed;
   rocks.instanceMatrix.needsUpdate = true;
   rocks.instanceColor.needsUpdate = true;
   rocks.castShadow = true;
   rocks.receiveShadow = true;
   scene.add(rocks);
-  stats.rocks = placed;
+  stats.rocks = records.length;
 }
 
-function makeFlowerBeds(scene) {
-  const count = Math.round(480 * config.foliage);
-  const geometry = new THREE.IcosahedronGeometry(0.55, 0);
-  const flowerMaterial = material(0xdf504d, { roughness: 0.9, emissive: 0x2a0303, emissiveIntensity: 0.1 });
-  const flowers = new THREE.InstancedMesh(geometry, flowerMaterial, count);
-  const rng = mulberry32(config.seed + 612);
-  const matrix = new THREE.Matrix4();
-  const color = new THREE.Color();
-  for (let i = 0; i < count; i++) {
-    const cluster = i % 2;
-    const cx = WORLD.center.x + (cluster ? 72 : -72);
-    const cz = WORLD.center.y + (cluster ? 54 : 8);
-    const x = cx + (rng() * 2 - 1) * (cluster ? 55 : 78);
-    const z = cz + (rng() * 2 - 1) * (cluster ? 82 : 54);
-    const y = islandHeight(x, z);
-    const size = 0.45 + rng() * 0.75;
-    matrix.compose(
-      new THREE.Vector3(x, y + 1 + rng() * 1.5, z),
-      new THREE.Quaternion(),
-      new THREE.Vector3(size, size, size),
-    );
-    flowers.setMatrixAt(i, matrix);
-    flowers.setColorAt(i, color.setHSL((0.97 + rng() * 0.11) % 1, 0.62, 0.48 + rng() * 0.2));
+function makeDecorations(scene) {
+  const records = variantKey === "C"
+    ? REFERENCE_LAYOUT.decorations.filter((_, index) => index % 2 === 0)
+    : REFERENCE_LAYOUT.decorations;
+  const rng = mulberry32(config.seed + 811);
+  for (const record of records) {
+    const [width, height, depth] = record.size;
+    const group = new THREE.Group();
+    if (record.kind === "umbrella") {
+      const pole = new THREE.Mesh(
+        new THREE.CylinderGeometry(Math.max(0.18, width * 0.018), Math.max(0.2, width * 0.022), height * 0.75, 8),
+        materials.darkTimber,
+      );
+      pole.position.y = height * 0.375;
+      const canopy = new THREE.Mesh(
+        new THREE.ConeGeometry(width * 0.5, height * 0.18, variantKey === "C" ? 10 : 18),
+        materials.roof,
+      );
+      canopy.position.y = height * 0.82;
+      canopy.scale.z = depth / Math.max(width, 0.1);
+      group.add(pole, canopy);
+    } else if (record.kind === "lantern") {
+      const post = new THREE.Mesh(
+        new THREE.CylinderGeometry(Math.max(0.12, width * 0.04), Math.max(0.16, width * 0.055), height * 0.82, 7),
+        materials.darkTimber,
+      );
+      post.position.y = height * 0.41;
+      const glow = new THREE.Mesh(
+        new THREE.SphereGeometry(Math.max(0.5, width * 0.24), 9, 7),
+        materials.lanternGlow,
+      );
+      glow.scale.y = 1.25;
+      glow.position.y = height * 0.78;
+      group.add(post, glow);
+    } else if (record.kind === "mushroom") {
+      const stem = new THREE.Mesh(
+        new THREE.CylinderGeometry(width * 0.14, width * 0.2, height * 0.62, 8),
+        materials.plaster,
+      );
+      stem.position.y = height * 0.31;
+      const cap = new THREE.Mesh(
+        new THREE.SphereGeometry(1, 10, 6, 0, TAU, 0, Math.PI * 0.52),
+        materials.mushroom,
+      );
+      cap.scale.set(width * 0.52, height * 0.28, depth * 0.52);
+      cap.position.y = height * 0.58;
+      group.add(stem, cap);
+    } else if (record.kind === "grass-clump") {
+      const blades = variantKey === "C" ? 4 : 8;
+      for (let index = 0; index < blades; index++) {
+        const blade = new THREE.Mesh(
+          new THREE.ConeGeometry(width * 0.04, height * (0.48 + rng() * 0.42), 3),
+          materials.leaf,
+        );
+        blade.position.set((rng() - 0.5) * width * 0.7, blade.geometry.parameters.height * 0.5, (rng() - 0.5) * depth * 0.7);
+        blade.rotation.z = (rng() - 0.5) * 0.35;
+        group.add(blade);
+      }
+    } else if (record.kind === "stone-platform") {
+      const platform = makeBox(width, Math.max(0.45, height), depth, materials.stone);
+      platform.position.y = Math.max(0.45, height) * 0.5;
+      group.add(platform);
+    } else if (record.kind === "campfire") {
+      for (const angle of [Math.PI * 0.25, -Math.PI * 0.25]) {
+        const log = new THREE.Mesh(
+          new THREE.CylinderGeometry(height * 0.12, height * 0.12, width * 0.8, 7),
+          materials.darkTimber,
+        );
+        log.rotation.z = Math.PI * 0.5;
+        log.rotation.y = angle;
+        log.position.y = height * 0.16;
+        group.add(log);
+      }
+      const flame = new THREE.Mesh(
+        new THREE.ConeGeometry(width * 0.22, height * 0.7, 8),
+        materials.lanternGlow,
+      );
+      flame.position.y = height * 0.42;
+      group.add(flame);
+    } else if (record.kind === "stone-table") {
+      const top = new THREE.Mesh(
+        new THREE.CylinderGeometry(width * 0.48, width * 0.48, height * 0.16, 12),
+        materials.stone,
+      );
+      top.position.y = height * 0.72;
+      const leg = new THREE.Mesh(
+        new THREE.CylinderGeometry(width * 0.13, width * 0.18, height * 0.7, 10),
+        materials.stone,
+      );
+      leg.position.y = height * 0.35;
+      group.add(top, leg);
+    } else if (record.kind === "willow") {
+      const trunk = new THREE.Mesh(
+        new THREE.CylinderGeometry(width * 0.05, width * 0.09, height * 0.7, 7),
+        materials.trunk,
+      );
+      trunk.position.y = height * 0.35;
+      group.add(trunk);
+      for (let index = 0; index < 9; index++) {
+        const crown = new THREE.Mesh(
+          new THREE.IcosahedronGeometry(1, 1),
+          materials.leaf,
+        );
+        const angle = (index / 9) * TAU;
+        crown.scale.set(width * 0.2, height * 0.27, depth * 0.2);
+        crown.position.set(Math.cos(angle) * width * 0.25, height * (0.63 + rng() * 0.12), Math.sin(angle) * depth * 0.25);
+        group.add(crown);
+      }
+    } else if (record.kind === "bamboo-pile" || record.kind === "bamboo-shoot") {
+      const stemCount = record.kind === "bamboo-pile" ? 6 : 3;
+      for (let index = 0; index < stemCount; index++) {
+        const stem = new THREE.Mesh(
+          new THREE.CylinderGeometry(width * 0.035, width * 0.05, height * (0.7 + rng() * 0.3), 6),
+          materials.bamboo,
+        );
+        stem.position.set((rng() - 0.5) * width * 0.6, stem.geometry.parameters.height * 0.5, (rng() - 0.5) * depth * 0.6);
+        group.add(stem);
+      }
+    } else if (record.kind === "panda-statue") {
+      const body = new THREE.Mesh(new THREE.SphereGeometry(1, 10, 8), materials.stone);
+      body.scale.set(width * 0.35, height * 0.36, depth * 0.34);
+      body.position.y = height * 0.34;
+      const head = body.clone();
+      head.scale.set(width * 0.28, height * 0.25, depth * 0.28);
+      head.position.y = height * 0.72;
+      group.add(body, head);
+    } else if (record.kind === "flower-bed") {
+      const count = variantKey === "C" ? 12 : 28;
+      for (let index = 0; index < count; index++) {
+        const flower = new THREE.Mesh(
+          new THREE.IcosahedronGeometry(Math.max(0.18, height * 0.12), 0),
+          index % 3 === 0 ? materials.blossomLight : materials.mushroom,
+        );
+        flower.position.set(
+          (rng() - 0.5) * width,
+          height * (0.35 + rng() * 0.45),
+          (rng() - 0.5) * depth,
+        );
+        group.add(flower);
+      }
+    }
+    group.rotation.y = record.yaw;
+    group.position.set(...record.position);
+    scene.add(setShadow(group));
   }
-  flowers.instanceMatrix.needsUpdate = true;
-  flowers.instanceColor.needsUpdate = true;
-  scene.add(flowers);
+  stats.decorations = records.length;
+}
+
+function makeWildlife(scene) {
+  const sphere = new THREE.SphereGeometry(1, variantKey === "C" ? 8 : 12, variantKey === "C" ? 6 : 9);
+  for (const record of REFERENCE_LAYOUT.wildlife) {
+    const group = new THREE.Group();
+    const scale = record.scale / 2;
+    const body = new THREE.Mesh(sphere, materials.pandaWhite);
+    body.scale.set(1.55 * scale, 1.9 * scale, 1.3 * scale);
+    body.position.y = 2.05 * scale;
+    const head = new THREE.Mesh(sphere, materials.pandaWhite);
+    head.scale.set(1.22 * scale, 1.1 * scale, 1.05 * scale);
+    head.position.set(0, 4.1 * scale, 0.15 * scale);
+    group.add(body, head);
+    for (const side of [-1, 1]) {
+      const ear = new THREE.Mesh(sphere, materials.pandaBlack);
+      ear.scale.setScalar(0.4 * scale);
+      ear.position.set(side * 0.82 * scale, 4.92 * scale, 0.08 * scale);
+      const eye = new THREE.Mesh(sphere, materials.pandaBlack);
+      eye.scale.set(0.28 * scale, 0.4 * scale, 0.16 * scale);
+      eye.position.set(side * 0.47 * scale, 4.25 * scale, 1.0 * scale);
+      const arm = new THREE.Mesh(sphere, materials.pandaBlack);
+      arm.scale.set(0.46 * scale, 1.0 * scale, 0.48 * scale);
+      arm.position.set(side * 1.27 * scale, 2.5 * scale, 0);
+      arm.rotation.z = side * 0.32;
+      const leg = new THREE.Mesh(sphere, materials.pandaBlack);
+      leg.scale.set(0.6 * scale, 0.72 * scale, 0.7 * scale);
+      leg.position.set(side * 0.8 * scale, 0.65 * scale, 0.12 * scale);
+      group.add(ear, eye, arm, leg);
+    }
+    group.rotation.y = record.yaw;
+    group.position.set(
+      record.position[0],
+      islandHeight(record.position[0], record.position[2]) + 0.12,
+      record.position[2],
+    );
+    scene.add(setShadow(group));
+  }
+  stats.wildlife = REFERENCE_LAYOUT.wildlife.length;
 }
 
 function makeBirds(scene) {
@@ -1214,9 +1403,9 @@ async function init() {
   document.body.prepend(renderer.domElement);
 
   const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 1, 8000);
-  camera.position.set(WORLD.center.x + 520, 330, WORLD.center.y + 650);
+  camera.position.set(390, 190, 410);
   const controls = new OrbitControls(camera, renderer.domElement);
-  controls.target.set(WORLD.center.x + 5, WORLD.groundY + 12, WORLD.center.y - 8);
+  controls.target.set(80, 26, -20);
   controls.enableDamping = true;
   controls.dampingFactor = 0.055;
   controls.minDistance = 95;
@@ -1224,6 +1413,11 @@ async function init() {
   controls.maxPolarAngle = Math.PI * 0.49;
   controls.autoRotate = query.get("tour") === "1";
   controls.autoRotateSpeed = 0.38;
+  const cameraValues = (query.get("campos") ?? "").split(",").map(Number);
+  if (cameraValues.length === 6 && cameraValues.every(Number.isFinite)) {
+    camera.position.set(...cameraValues.slice(0, 3));
+    controls.target.set(...cameraValues.slice(3));
+  }
   controls.update();
 
   const hemi = new THREE.HemisphereLight(0xddebf2, 0x947747, 1.55);
@@ -1253,17 +1447,17 @@ async function init() {
   await tick("Laying out the water garden, paths and bridges…", 0.42);
   makeWaterGarden(scene);
   makePaths(scene);
-  makeBridge(scene, WORLD.center.x + 36, WORLD.center.y + 54, 0.08, 1.08);
-  makeBridge(scene, WORLD.center.x - 26, WORLD.center.y + 125, -0.18, 0.72);
+  for (const bridge of REFERENCE_LAYOUT.bridges) makeBridge(scene, bridge);
 
   await tick("Rebuilding village silhouettes and landmarks…", 0.58);
   makeVillage(scene);
+  makeDecorations(scene);
+  makeWildlife(scene);
 
   await tick("Growing palms, blossoms and bamboo…", 0.74);
   makePalmRing(scene);
   makeBlossomGrove(scene);
   makeBambooBank(scene);
-  makeFlowerBeds(scene);
 
   await tick("Scattering the beach and finishing atmosphere…", 0.9);
   makeShoreRocks(scene);
@@ -1301,6 +1495,8 @@ async function init() {
       `${stats.palms} palms`,
       `${stats.blossoms} blossom trees`,
       `${stats.bamboo} bamboo`,
+      `${stats.decorations} measured props`,
+      `${stats.wildlife} pandas`,
       `${stats.mountains} horizon peaks`,
     ].map((value) => `<span>${value}</span>`).join("");
   };
@@ -1315,6 +1511,7 @@ async function init() {
     renderer,
     controls,
     stats,
+    semanticLayoutVersion: REFERENCE_LAYOUT.schemaVersion,
     referenceIndependent: true,
     setCamera(px, py, pz, lx, ly, lz) {
       camera.position.set(px, py, pz);
