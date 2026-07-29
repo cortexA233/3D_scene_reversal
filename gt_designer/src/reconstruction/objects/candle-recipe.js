@@ -51,7 +51,7 @@ export const CANDLE_RECIPE = Object.freeze({
     roughness: 0.75,
     metalness: 0,
     grainFrequency: Object.freeze([6, 8, 6]),
-    grainThresholds: Object.freeze([0.18, 0.35]),
+    grainThresholds: Object.freeze([0.18, 0.28]),
     grainDetailWeight: 0.35,
   }),
 });
