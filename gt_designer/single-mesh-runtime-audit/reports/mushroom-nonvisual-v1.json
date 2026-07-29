@@ -1,0 +1,1652 @@
+{
+  "schemaVersion": "single-mesh-nonvisual-acceptance-v1",
+  "artifactRole": "development-only-nonvisual-acceptance",
+  "productionUse": "prohibited",
+  "objectId": "mushroom",
+  "runtime": {
+    "schemaVersion": "single-mesh-runtime-evidence-v1",
+    "objectId": "mushroom",
+    "semanticId": "island.nature.mushroom",
+    "recipe": {
+      "encoding": "canonical-minified-utf8-json",
+      "bytes": 658,
+      "serialized": "{\"id\":\"island.nature.mushroom\",\"kind\":\"curved-stem-bell-cap-cluster-v1\",\"seed\":1836413800,\"shape\":{\"radialSegments\":12,\"stemSegments\":8,\"capHeightRatio\":1.4,\"capProfile\":[[0,1],[0.2,0.98],[0.46,0.89],[0.73,0.67],[0.93,0.36]],\"forms\":[[1.25,0.13,1.12,0.74,0.84,0.87,0.4,0.7,7.017,0.815,0.983,0.17],[0.97,0.25,1.32,-0.22,1.25,-0.4,1.044,-0.383,6.034,0.693,1.033,0.16],[0.9,0.36,0.05,0.28,-0.52,0.26,-0.729,0.215,5.129,0.695,1.062,0.19],[0.92,0.37,0.64,-0.45,0.42,-0.5,0.29,-0.538,4.496,0.713,0.977,0.17],[0.95,-0.03,-0.2,-0.44,-1,-0.78,-1.189,-0.927,3.04,0.547,1.048,0.19]]},\"appearance\":{\"stemColor\":10920340,\"capColor\":9852231,\"roughness\":0.8,\"metalness\":0}}"
+    },
+    "recipeScalars": {
+      "definition": "finite numeric leaves in the object-specific recipe",
+      "count": 78
+    },
+    "deterministic": {
+      "repetitions": 3,
+      "byteStable": true,
+      "snapshot": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.nature.mushroom",
+            "parentSemanticId": null,
+            "type": "Group"
+          },
+          {
+            "semanticId": "island.nature.mushroom/stems",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.nature.mushroom/caps",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-1",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-2",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-3",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-4",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-5",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.nature.mushroom",
+            "parentSemanticId": null,
+            "type": "Group",
+            "position": [
+              0,
+              -0.01964641362428665,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.nature.mushroom/stems",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 1755,
+                  "byteLength": 7020,
+                  "checksum": "4eff181e"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 1755,
+                  "byteLength": 7020,
+                  "checksum": "85a87f72"
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 2880,
+                "byteLength": 5760,
+                "checksum": "9ba9df2b"
+              },
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 10920340,
+              "emissive": 0,
+              "roughness": 0.8,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 0,
+              "vertexColors": false,
+              "hasRuntimeTexture": false
+            }
+          },
+          {
+            "semanticId": "island.nature.mushroom/caps",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Mesh",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true,
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 930,
+                  "byteLength": 3720,
+                  "checksum": "786bff4b"
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 930,
+                  "byteLength": 3720,
+                  "checksum": "09e867e1"
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 1800,
+                "byteLength": 3600,
+                "checksum": "0795fe25"
+              },
+              "groups": []
+            },
+            "material": {
+              "type": "MeshStandardMaterial",
+              "color": 9852231,
+              "emissive": 0,
+              "roughness": 0.8,
+              "metalness": 0,
+              "opacity": 1,
+              "transparent": false,
+              "side": 0,
+              "vertexColors": false,
+              "hasRuntimeTexture": false
+            }
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-1",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "position": [
+              0.4,
+              5.876,
+              0.7
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-2",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "position": [
+              1.044,
+              5.0638,
+              -0.383
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-3",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "position": [
+              -0.729,
+              4.156,
+              0.215
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-4",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "position": [
+              0.29,
+              3.4978000000000007,
+              -0.538
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-5",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "position": [
+              -1.189,
+              2.2742,
+              -0.927
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ],
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "visible": true
+          }
+        ],
+        "bounds": {
+          "min": [
+            -1.7359999418258667,
+            0,
+            -1.5002559423446655
+          ],
+          "max": [
+            1.7369999885559082,
+            6.997353784739971,
+            1.5011450052261353
+          ]
+        },
+        "triangles": 1560,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 30840,
+        "runtimeTextureCount": 0
+      }
+    },
+    "benchmark": {
+      "warmups": 10,
+      "repetitions": 100,
+      "measurement": "semantic root, geometry attributes, generator normals/bounds, and final bounds; excludes download, shader compile, GPU upload, and disposal",
+      "minimumMilliseconds": 0.19999998807907104,
+      "medianMilliseconds": 0.3999999761581421,
+      "p95Milliseconds": 0.5,
+      "maximumMilliseconds": 0.5999999940395355
+    },
+    "environment": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+      "platform": "MacIntel",
+      "hardwareConcurrency": 10,
+      "deviceMemoryGiB": 32,
+      "threeRevision": "170",
+      "renderer": {
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "vendor": "Google Inc. (Google)",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)"
+      }
+    }
+  },
+  "sourceScalars": {
+    "definition": "all numeric recipe leaves plus object-specific numeric literals in generators, generated shaders, and explicitly listed object helpers",
+    "exclusionPolicy": "generator literals are excluded only when equal to a frozen universal algorithm/control-flow value; recipe leaves are never excluded",
+    "universalAlgorithmValues": [
+      0,
+      0.01,
+      0.5,
+      1,
+      2,
+      3,
+      4
+    ],
+    "recipe": {
+      "sourceFile": "gt_designer/src/reconstruction/objects/mushroom-recipe.js",
+      "evidence": {
+        "definition": "JavaScript numeric literals outside comments and string/template literals",
+        "count": 78,
+        "literals": [
+          {
+            "literal": "0x6d757368",
+            "offset": 130
+          },
+          {
+            "literal": "12",
+            "offset": 187
+          },
+          {
+            "literal": "8",
+            "offset": 209
+          },
+          {
+            "literal": "1.4",
+            "offset": 232
+          },
+          {
+            "literal": "0",
+            "offset": 290
+          },
+          {
+            "literal": "1",
+            "offset": 293
+          },
+          {
+            "literal": "0.2",
+            "offset": 319
+          },
+          {
+            "literal": "0.98",
+            "offset": 324
+          },
+          {
+            "literal": "0.46",
+            "offset": 353
+          },
+          {
+            "literal": "0.89",
+            "offset": 359
+          },
+          {
+            "literal": "0.73",
+            "offset": 388
+          },
+          {
+            "literal": "0.67",
+            "offset": 394
+          },
+          {
+            "literal": "0.93",
+            "offset": 423
+          },
+          {
+            "literal": "0.36",
+            "offset": 429
+          },
+          {
+            "literal": "1.25",
+            "offset": 493
+          },
+          {
+            "literal": "0.13",
+            "offset": 499
+          },
+          {
+            "literal": "1.12",
+            "offset": 505
+          },
+          {
+            "literal": "0.74",
+            "offset": 511
+          },
+          {
+            "literal": "0.84",
+            "offset": 517
+          },
+          {
+            "literal": "0.87",
+            "offset": 523
+          },
+          {
+            "literal": "0.4",
+            "offset": 529
+          },
+          {
+            "literal": "0.7",
+            "offset": 534
+          },
+          {
+            "literal": "7.017",
+            "offset": 539
+          },
+          {
+            "literal": "0.815",
+            "offset": 546
+          },
+          {
+            "literal": "0.983",
+            "offset": 553
+          },
+          {
+            "literal": "0.17",
+            "offset": 560
+          },
+          {
+            "literal": "0.97",
+            "offset": 589
+          },
+          {
+            "literal": "0.25",
+            "offset": 595
+          },
+          {
+            "literal": "1.32",
+            "offset": 601
+          },
+          {
+            "literal": "0.22",
+            "offset": 608
+          },
+          {
+            "literal": "1.25",
+            "offset": 614
+          },
+          {
+            "literal": "0.4",
+            "offset": 621
+          },
+          {
+            "literal": "1.044",
+            "offset": 626
+          },
+          {
+            "literal": "0.383",
+            "offset": 634
+          },
+          {
+            "literal": "6.034",
+            "offset": 641
+          },
+          {
+            "literal": "0.693",
+            "offset": 648
+          },
+          {
+            "literal": "1.033",
+            "offset": 655
+          },
+          {
+            "literal": "0.16",
+            "offset": 662
+          },
+          {
+            "literal": "0.9",
+            "offset": 691
+          },
+          {
+            "literal": "0.36",
+            "offset": 696
+          },
+          {
+            "literal": "0.05",
+            "offset": 702
+          },
+          {
+            "literal": "0.28",
+            "offset": 708
+          },
+          {
+            "literal": "0.52",
+            "offset": 715
+          },
+          {
+            "literal": "0.26",
+            "offset": 721
+          },
+          {
+            "literal": "0.729",
+            "offset": 728
+          },
+          {
+            "literal": "0.215",
+            "offset": 735
+          },
+          {
+            "literal": "5.129",
+            "offset": 742
+          },
+          {
+            "literal": "0.695",
+            "offset": 749
+          },
+          {
+            "literal": "1.062",
+            "offset": 756
+          },
+          {
+            "literal": "0.19",
+            "offset": 763
+          },
+          {
+            "literal": "0.92",
+            "offset": 792
+          },
+          {
+            "literal": "0.37",
+            "offset": 798
+          },
+          {
+            "literal": "0.64",
+            "offset": 804
+          },
+          {
+            "literal": "0.45",
+            "offset": 811
+          },
+          {
+            "literal": "0.42",
+            "offset": 817
+          },
+          {
+            "literal": "0.5",
+            "offset": 824
+          },
+          {
+            "literal": "0.29",
+            "offset": 829
+          },
+          {
+            "literal": "0.538",
+            "offset": 836
+          },
+          {
+            "literal": "4.496",
+            "offset": 843
+          },
+          {
+            "literal": "0.713",
+            "offset": 850
+          },
+          {
+            "literal": "0.977",
+            "offset": 857
+          },
+          {
+            "literal": "0.17",
+            "offset": 864
+          },
+          {
+            "literal": "0.95",
+            "offset": 893
+          },
+          {
+            "literal": "0.03",
+            "offset": 900
+          },
+          {
+            "literal": "0.2",
+            "offset": 907
+          },
+          {
+            "literal": "0.44",
+            "offset": 913
+          },
+          {
+            "literal": "1",
+            "offset": 920
+          },
+          {
+            "literal": "0.78",
+            "offset": 924
+          },
+          {
+            "literal": "1.189",
+            "offset": 931
+          },
+          {
+            "literal": "0.927",
+            "offset": 939
+          },
+          {
+            "literal": "3.04",
+            "offset": 946
+          },
+          {
+            "literal": "0.547",
+            "offset": 952
+          },
+          {
+            "literal": "1.048",
+            "offset": 959
+          },
+          {
+            "literal": "0.19",
+            "offset": 966
+          },
+          {
+            "literal": "0xa6a194",
+            "offset": 1033
+          },
+          {
+            "literal": "0x965547",
+            "offset": 1057
+          },
+          {
+            "literal": "0.8",
+            "offset": 1082
+          },
+          {
+            "literal": "0",
+            "offset": 1102
+          }
+        ]
+      }
+    },
+    "generators": [
+      {
+        "sourceFile": "gt_designer/src/reconstruction/objects/mushroom-generator.js",
+        "evidence": {
+          "definition": "numeric literals in generator and generated shader source, excluding only the declared universal algorithm/control-flow values",
+          "universalValues": [
+            0,
+            0.01,
+            0.5,
+            1,
+            2,
+            3,
+            4
+          ],
+          "count": 0,
+          "objectSpecific": [],
+          "classifiedLiteralCount": 25,
+          "literals": [
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 11,
+              "column": 39,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 24,
+              "column": 79,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 25,
+              "column": 75,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 39,
+              "column": 41,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 40,
+              "column": 42,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 40,
+              "column": 46,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 64,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 64,
+              "column": 64,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "2",
+              "value": 2,
+              "line": 65,
+              "column": 58,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 73,
+              "column": 19,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 73,
+              "column": 49,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 73,
+              "column": 60,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 74,
+              "column": 24,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 74,
+              "column": 64,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 75,
+              "column": 31,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 84,
+              "column": 40,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 86,
+              "column": 35,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 88,
+              "column": 40,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "0",
+              "value": 0,
+              "line": 89,
+              "column": 22,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 89,
+              "column": 62,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 90,
+              "column": 29,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "3",
+              "value": 3,
+              "line": 95,
+              "column": 81,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 130,
+              "column": 41,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 131,
+              "column": 78,
+              "classification": "universal-algorithm-or-control-flow"
+            },
+            {
+              "literal": "1",
+              "value": 1,
+              "line": 132,
+              "column": 57,
+              "classification": "universal-algorithm-or-control-flow"
+            }
+          ]
+        }
+      }
+    ],
+    "recipeCount": 78,
+    "generatorCount": 0,
+    "count": 78,
+    "maximum": 96,
+    "passed": true
+  },
+  "bundles": {
+    "production": {
+      "bytes": 34183,
+      "gzipBytes": 10877,
+      "minified": true,
+      "sourceMapBytes": 0,
+      "threeExcluded": true
+    },
+    "objectIncrement": {
+      "measurement": "gzip difference between the minified source-map-free object bundle and shared Object Generator/RNG bundle, with Three.js external",
+      "bytes": 833,
+      "objectBundleGzipBytes": 444,
+      "combinedBundleGzipBytes": 2270,
+      "sharedFrameworkGzipBytes": 927,
+      "gzipBytes": 1343
+    }
+  },
+  "budgets": {
+    "objectId": "mushroom",
+    "passed": true,
+    "budget": {
+      "scalars": 96,
+      "recipeBytes": 2048,
+      "bundleGzipBytes": 8192,
+      "triangles": 3840,
+      "drawCalls": 2,
+      "geometryMemoryBytes": 196608,
+      "warmGenerationP95Milliseconds": 10
+    },
+    "actual": {
+      "scalars": 78,
+      "recipeBytes": 658,
+      "bundleGzipBytes": 1343,
+      "triangles": 1560,
+      "drawCalls": 2,
+      "geometryMemoryBytes": 30840,
+      "warmGenerationP95Milliseconds": 0.5
+    },
+    "checks": [
+      {
+        "metric": "scalars",
+        "value": 78,
+        "maximum": 96,
+        "passed": true
+      },
+      {
+        "metric": "recipeBytes",
+        "value": 658,
+        "maximum": 2048,
+        "passed": true
+      },
+      {
+        "metric": "bundleGzipBytes",
+        "value": 1343,
+        "maximum": 8192,
+        "passed": true
+      },
+      {
+        "metric": "triangles",
+        "value": 1560,
+        "maximum": 3840,
+        "passed": true
+      },
+      {
+        "metric": "drawCalls",
+        "value": 2,
+        "maximum": 2,
+        "passed": true
+      },
+      {
+        "metric": "geometryMemoryBytes",
+        "value": 30840,
+        "maximum": 196608,
+        "passed": true
+      },
+      {
+        "metric": "warmGenerationP95Milliseconds",
+        "value": 0.5,
+        "maximum": 10,
+        "passed": true
+      },
+      {
+        "metric": "deterministicCpuBytes",
+        "value": true,
+        "expected": true,
+        "passed": true
+      },
+      {
+        "metric": "runtimeTextureCount",
+        "value": 0,
+        "maximum": 0,
+        "passed": true
+      }
+    ],
+    "failures": []
+  },
+  "staticAudit": {
+    "passed": true,
+    "productionFiles": [
+      {
+        "file": "gt_designer/single-mesh-replacement/main.js",
+        "bytes": 2488
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/object-generator.js",
+        "bytes": 2912
+      },
+      {
+        "file": "gt_designer/src/reconstruction/core/rng.js",
+        "bytes": 976
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/bamboo-shoot-generator.js",
+        "bytes": 11250
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/bamboo-shoot-recipe.js",
+        "bytes": 1170
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/mushroom-definition.js",
+        "bytes": 287
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/mushroom-generator.js",
+        "bytes": 5013
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/mushroom-recipe.js",
+        "bytes": 1115
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/object-registry.js",
+        "bytes": 1657
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-definition.js",
+        "bytes": 260
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-generator.js",
+        "bytes": 6043
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-generator.js",
+        "bytes": 3222
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-path-recipe.js",
+        "bytes": 1545
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+        "bytes": 1097
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-definition.js",
+        "bytes": 287
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-generator.js",
+        "bytes": 16446
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/umbrella-recipe.js",
+        "bytes": 2652
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-generator.js",
+        "bytes": 3882
+      },
+      {
+        "file": "gt_designer/src/reconstruction/objects/vase-recipe.js",
+        "bytes": 1609
+      },
+      {
+        "file": "gt_designer/src/reconstruction/testing/probe-generator.js",
+        "bytes": 2056
+      }
+    ],
+    "thirdPartyInputs": [],
+    "failures": []
+  },
+  "bundleAudit": {
+    "passed": true,
+    "failures": []
+  },
+  "offline": {
+    "passed": true,
+    "servedFiles": [
+      "bundle.js",
+      "index.html",
+      "three.module.js"
+    ],
+    "authoredDirectoriesAvailableToServer": false,
+    "emptyBrowserProfile": true,
+    "networkResolutionBlocked": true,
+    "localRequestCount": 3
+  },
+  "crossEngine": {
+    "boundsToleranceCanonical": 0.000007,
+    "normative": {
+      "engine": "Chrome/V8",
+      "signature": {
+        "semanticHierarchy": [
+          {
+            "semanticId": "island.nature.mushroom",
+            "parentSemanticId": null,
+            "type": "Group"
+          },
+          {
+            "semanticId": "island.nature.mushroom/stems",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.nature.mushroom/caps",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Mesh"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-1",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-2",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-3",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-4",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-5",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D"
+          }
+        ],
+        "objects": [
+          {
+            "semanticId": "island.nature.mushroom",
+            "parentSemanticId": null,
+            "type": "Group",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.nature.mushroom/stems",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Mesh",
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 1755
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 1755
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 2880
+              },
+              "groups": []
+            }
+          },
+          {
+            "semanticId": "island.nature.mushroom/caps",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Mesh",
+            "geometry": {
+              "type": "BufferGeometry",
+              "attributes": {
+                "position": {
+                  "constructor": "Float32Array",
+                  "length": 930
+                },
+                "normal": {
+                  "constructor": "Float32Array",
+                  "length": 930
+                }
+              },
+              "index": {
+                "constructor": "Uint16Array",
+                "length": 1800
+              },
+              "groups": []
+            }
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-1",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-2",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-3",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-4",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "geometry": null
+          },
+          {
+            "semanticId": "island.nature.mushroom/form-5",
+            "parentSemanticId": "island.nature.mushroom",
+            "type": "Object3D",
+            "geometry": null
+          }
+        ],
+        "bounds": {
+          "min": [
+            -1.7359999418258667,
+            0,
+            -1.5002559423446655
+          ],
+          "max": [
+            1.7369999885559082,
+            6.997353784739971,
+            1.5011450052261353
+          ]
+        },
+        "triangles": 1560,
+        "drawCalls": 2
+      }
+    },
+    "candidates": [
+      {
+        "engine": "JavaScriptCore (Safari 26.2 system framework)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.nature.mushroom",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.nature.mushroom/stems",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.nature.mushroom/caps",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-1",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-2",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-3",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-4",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-5",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.nature.mushroom",
+              "parentSemanticId": null,
+              "type": "Group",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/stems",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 1755
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 1755
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 2880
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.nature.mushroom/caps",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 930
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 930
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 1800
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-1",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-2",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-3",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-4",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-5",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            }
+          ],
+          "bounds": {
+            "min": [
+              -1.7359999418258667,
+              0,
+              -1.5002559423446655
+            ],
+            "max": [
+              1.7369999885559082,
+              6.997353784739971,
+              1.5011450052261353
+            ]
+          },
+          "triangles": 1560,
+          "drawCalls": 2
+        }
+      },
+      {
+        "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+        "comparison": {
+          "structureMatches": true,
+          "maximumBoundsDifference": 0,
+          "boundsTolerance": 0.000007,
+          "boundsMatch": true,
+          "passed": true
+        },
+        "signature": {
+          "semanticHierarchy": [
+            {
+              "semanticId": "island.nature.mushroom",
+              "parentSemanticId": null,
+              "type": "Group"
+            },
+            {
+              "semanticId": "island.nature.mushroom/stems",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.nature.mushroom/caps",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-1",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-2",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-3",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-4",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-5",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D"
+            }
+          ],
+          "objects": [
+            {
+              "semanticId": "island.nature.mushroom",
+              "parentSemanticId": null,
+              "type": "Group",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/stems",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 1755
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 1755
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 2880
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.nature.mushroom/caps",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Mesh",
+              "geometry": {
+                "type": "BufferGeometry",
+                "attributes": {
+                  "position": {
+                    "constructor": "Float32Array",
+                    "length": 930
+                  },
+                  "normal": {
+                    "constructor": "Float32Array",
+                    "length": 930
+                  }
+                },
+                "index": {
+                  "constructor": "Uint16Array",
+                  "length": 1800
+                },
+                "groups": []
+              }
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-1",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-2",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-3",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-4",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            },
+            {
+              "semanticId": "island.nature.mushroom/form-5",
+              "parentSemanticId": "island.nature.mushroom",
+              "type": "Object3D",
+              "geometry": null
+            }
+          ],
+          "bounds": {
+            "min": [
+              -1.7359999418258667,
+              0,
+              -1.5002559423446655
+            ],
+            "max": [
+              1.7369999885559082,
+              6.997353784739971,
+              1.5011450052261353
+            ]
+          },
+          "triangles": 1560,
+          "drawCalls": 2
+        }
+      }
+    ],
+    "passed": true
+  },
+  "environment": {
+    "normativeBaseline": {
+      "model": "Apple M5 MacBook Pro",
+      "operatingSystem": "macOS 26.2",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0"
+    },
+    "actual": {
+      "modelName": "MacBook Pro",
+      "modelIdentifier": "Mac17,2",
+      "chip": "Apple M5",
+      "cores": "10 (4 performance and 6 efficiency)",
+      "memory": "32 GB",
+      "operatingSystem": "macOS 26.2",
+      "operatingSystemBuild": "25C56",
+      "browser": "Google Chrome 150.0.7871.184",
+      "three": "0.170.0",
+      "powerState": [
+        "Now drawing from 'AC Power'",
+        "-InternalBattery-0 (id=22610019)\t100%; charged; 0:00 remaining present: true"
+      ]
+    },
+    "migrationRequired": false
+  },
+  "acceptance": {
+    "passed": true,
+    "checks": [
+      {
+        "id": "complete-source-scalar-audit",
+        "passed": true,
+        "detail": {
+          "value": 78,
+          "maximum": 96
+        }
+      },
+      {
+        "id": "object-budgets",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "static-source-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "minified-bundle-audit",
+        "passed": true,
+        "detail": []
+      },
+      {
+        "id": "isolated-offline-render",
+        "passed": true,
+        "detail": {
+          "passed": true,
+          "servedFiles": [
+            "bundle.js",
+            "index.html",
+            "three.module.js"
+          ],
+          "authoredDirectoriesAvailableToServer": false,
+          "emptyBrowserProfile": true,
+          "networkResolutionBlocked": true,
+          "localRequestCount": 3
+        }
+      },
+      {
+        "id": "cross-engine-structure-and-bounds",
+        "passed": true,
+        "detail": [
+          {
+            "engine": "JavaScriptCore (Safari 26.2 system framework)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          },
+          {
+            "engine": "SpiderMonkey (Firefox 153.0 official shell)",
+            "comparison": {
+              "structureMatches": true,
+              "maximumBoundsDifference": 0,
+              "boundsTolerance": 0.000007,
+              "boundsMatch": true,
+              "passed": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "normative-environment",
+        "passed": true,
+        "detail": {
+          "modelName": "MacBook Pro",
+          "modelIdentifier": "Mac17,2",
+          "chip": "Apple M5",
+          "cores": "10 (4 performance and 6 efficiency)",
+          "memory": "32 GB",
+          "operatingSystem": "macOS 26.2",
+          "operatingSystemBuild": "25C56",
+          "browser": "Google Chrome 150.0.7871.184",
+          "three": "0.170.0",
+          "powerState": [
+            "Now drawing from 'AC Power'",
+            "-InternalBattery-0 (id=22610019)\t100%; charged; 0:00 remaining present: true"
+          ]
+        }
+      }
+    ],
+    "failures": []
+  }
+}

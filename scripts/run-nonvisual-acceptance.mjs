@@ -88,6 +88,13 @@ const OBJECT_CONFIGS = Object.freeze({
       "gt_designer/src/reconstruction/objects/bamboo-shoot-generator.js",
     ],
   }),
+  mushroom: Object.freeze({
+    semanticId: "island.nature.mushroom",
+    sourceFiles: [
+      "gt_designer/src/reconstruction/objects/mushroom-recipe.js",
+      "gt_designer/src/reconstruction/objects/mushroom-generator.js",
+    ],
+  }),
 });
 
 function parseArguments(args) {

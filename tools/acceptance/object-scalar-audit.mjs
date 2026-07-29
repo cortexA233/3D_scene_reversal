@@ -52,6 +52,12 @@ export const OBJECT_SCALAR_SOURCES = Object.freeze({
       "gt_designer/src/reconstruction/objects/bamboo-shoot-generator.js",
     ]),
   }),
+  mushroom: Object.freeze({
+    recipe: "gt_designer/src/reconstruction/objects/mushroom-recipe.js",
+    generators: Object.freeze([
+      "gt_designer/src/reconstruction/objects/mushroom-generator.js",
+    ]),
+  }),
 });
 
 async function readEvidence(projectRoot, sourceFile, evidenceFactory) {

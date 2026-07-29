@@ -126,6 +126,32 @@ function componentMeasurements({ positions, indices }) {
     }
     if (area > 0) areaCentroid.multiplyScalar(1 / area);
     const componentSize = componentBounds.getSize(new THREE.Vector3());
+    const upperBounds = [0.55, 0.65, 0.72, 0.78, 0.84, 0.9].map((minimumYFraction) => {
+      const slice = new THREE.Box3();
+      const minimumY = componentBounds.min.y + componentSize.y * minimumYFraction;
+      [...componentVertices.values()].forEach((point) => {
+        if (point.y >= minimumY) slice.expandByPoint(point);
+      });
+      return {
+        minimumYFraction,
+        bounds: {
+          min: slice.min.toArray(),
+          max: slice.max.toArray(),
+          size: slice.getSize(new THREE.Vector3()).toArray(),
+        },
+      };
+    });
+    const centerlineSamples = [0.05, 0.2, 0.4, 0.6].map((heightFraction) => {
+      const targetY = componentBounds.min.y + componentSize.y * heightFraction;
+      const nearest = [...componentVertices.values()]
+        .sort((left, right) => Math.abs(left.y - targetY) - Math.abs(right.y - targetY))
+        .slice(0, 20);
+      const center = nearest.reduce(
+        (sum, point) => sum.add(point),
+        new THREE.Vector3(),
+      ).multiplyScalar(1 / nearest.length);
+      return { heightFraction, center: center.toArray() };
+    });
     const measurement = {
       triangleCount: faces.length,
       vertexCount: componentVertices.size,
@@ -137,6 +163,8 @@ function componentMeasurements({ positions, indices }) {
         size: componentSize.toArray(),
       },
       areaCentroid: areaCentroid.toArray(),
+      upperBounds,
+      centerlineSamples,
     };
     if (faces.length === 4) {
       measurement.vertices = [...componentVertices.values()]
