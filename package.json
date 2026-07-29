@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check:scene-foundation-reconciliation": "node --test test/object-generator.test.mjs test/rng.test.mjs test/calibration-contract.test.mjs test/calibration-geometry.test.mjs test/visual-metrics.test.mjs test/runtime-evidence.test.mjs test/static-audit.test.mjs test/scene-foundation-reconciliation.test.mjs && npm run smoke:replacement",
+    "check:scene-foundation-reconciliation": "node --test test/object-generator.test.mjs test/rng.test.mjs test/calibration-contract.test.mjs test/calibration-geometry.test.mjs test/visual-metrics.test.mjs test/runtime-evidence.test.mjs test/static-audit.test.mjs test/scene-foundation-reconciliation.test.mjs && npm run smoke:replacement && npm run check:prototype:island",
     "prototype:island": "./run.sh --local-three",
     "check:prototype:island": "node scripts/smoke-full-island-prototype.mjs",
     "extract:full-island-layout": "node tools/ground-truth/extract-full-island-layout.mjs",
