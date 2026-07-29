@@ -1,0 +1,419 @@
+{
+  "schemaVersion": "stone-geometry-v2-calibration-contract-v1",
+  "baselineVersion": "stone-geometry-baseline-v2",
+  "objectId": "stone",
+  "artifactRole": "development-only-reference-calibration-contract",
+  "productionUse": "prohibited",
+  "inputPolicy": {
+    "allowed": [
+      "Authored Reference geometry",
+      "fresh Authored Reference captures",
+      "declared reference perturbations"
+    ],
+    "prohibited": [
+      "Stone replacement imports",
+      "Stone replacement captures",
+      "known Stone candidate metrics",
+      "candidate-dependent threshold overrides"
+    ]
+  },
+  "capturePolicy": {
+    "independentRuns": 2,
+    "viewsPerRun": 12,
+    "geometryPasses": [
+      "silhouette",
+      "linear-depth",
+      "world-normal"
+    ],
+    "requireByteStableIdentityCaptures": true
+  },
+  "thresholdSelection": {
+    "strategy": "least-permissive-mild-envelope-plus-fixed-allowance",
+    "numericPrecisionDigits": 12,
+    "nonSeparatingAction": "demote-to-diagnostic",
+    "minimumHardMetricsByGroup": {
+      "bounds": 2,
+      "silhouette": 2,
+      "depth": 1
+    }
+  },
+  "metrics": [
+    {
+      "path": "geometry.bounds.maxAxisRelativeError",
+      "operator": "<=",
+      "repeatabilityAllowance": 0.002,
+      "group": "bounds",
+      "destructiveScenarioIds": [
+        "uniform-scale/-0.05",
+        "uniform-scale/+0.05",
+        "anisotropic-x/1.10",
+        "squash-y/0.80"
+      ]
+    },
+    {
+      "path": "geometry.bounds.bottomAnchorErrorCanonical",
+      "operator": "<=",
+      "repeatabilityAllowance": 0.002,
+      "group": "bounds",
+      "destructiveScenarioIds": [
+        "pivot-x/0.10"
+      ]
+    },
+    {
+      "path": "geometry.silhouette.meanIou",
+      "operator": ">=",
+      "repeatabilityAllowance": 0.002,
+      "group": "silhouette",
+      "destructiveScenarioIds": [
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box",
+        "squash-y/0.80"
+      ]
+    },
+    {
+      "path": "geometry.silhouette.worstViewIou",
+      "operator": ">=",
+      "repeatabilityAllowance": 0.003,
+      "group": "silhouette",
+      "destructiveScenarioIds": [
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box",
+        "shear-x-by-y/0.12"
+      ]
+    },
+    {
+      "path": "geometry.silhouette.meanEdgeDistancePixels",
+      "operator": "<=",
+      "repeatabilityAllowance": 0.25,
+      "group": "silhouette",
+      "destructiveScenarioIds": [
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box",
+        "shear-x-by-y/0.12"
+      ]
+    },
+    {
+      "path": "geometry.silhouette.edgeDistanceP95Pixels",
+      "operator": "<=",
+      "repeatabilityAllowance": 1,
+      "group": "silhouette",
+      "destructiveScenarioIds": [
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box",
+        "shear-x-by-y/0.12"
+      ]
+    },
+    {
+      "path": "geometry.depth.mae",
+      "operator": "<=",
+      "repeatabilityAllowance": 0.002,
+      "group": "depth",
+      "destructiveScenarioIds": [
+        "profile-compression/0.35",
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box",
+        "squash-y/0.80"
+      ]
+    },
+    {
+      "path": "geometry.depth.p95",
+      "operator": "<=",
+      "repeatabilityAllowance": 0.005,
+      "group": "depth",
+      "destructiveScenarioIds": [
+        "profile-compression/0.35",
+        "support-hull/8",
+        "substitute/ellipsoid",
+        "substitute/box",
+        "squash-y/0.80"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "uniform-scale/-0.01",
+      "family": "uniform-scale",
+      "severity": "mild",
+      "thresholdRole": "mild-envelope",
+      "mustReject": false,
+      "parameters": {
+        "factor": 0.99
+      }
+    },
+    {
+      "id": "uniform-scale/+0.01",
+      "family": "uniform-scale",
+      "severity": "mild",
+      "thresholdRole": "mild-envelope",
+      "mustReject": false,
+      "parameters": {
+        "factor": 1.01
+      }
+    },
+    {
+      "id": "uniform-scale/-0.02",
+      "family": "uniform-scale",
+      "severity": "intermediate",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "factor": 0.98
+      }
+    },
+    {
+      "id": "uniform-scale/+0.02",
+      "family": "uniform-scale",
+      "severity": "intermediate",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "factor": 1.02
+      }
+    },
+    {
+      "id": "uniform-scale/-0.05",
+      "family": "uniform-scale",
+      "severity": "severe",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "factor": 0.95
+      }
+    },
+    {
+      "id": "uniform-scale/+0.05",
+      "family": "uniform-scale",
+      "severity": "severe",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "factor": 1.05
+      }
+    },
+    {
+      "id": "pivot-x/0.01",
+      "family": "canonical-pivot-offset",
+      "severity": "mild",
+      "thresholdRole": "mild-envelope",
+      "mustReject": false,
+      "parameters": {
+        "offset": 0.01
+      }
+    },
+    {
+      "id": "pivot-x/0.05",
+      "family": "canonical-pivot-offset",
+      "severity": "intermediate",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "offset": 0.05
+      }
+    },
+    {
+      "id": "pivot-x/0.10",
+      "family": "canonical-pivot-offset",
+      "severity": "severe",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "offset": 0.1
+      }
+    },
+    {
+      "id": "rotation-y/1",
+      "family": "rotation-y",
+      "severity": "mild",
+      "thresholdRole": "mild-envelope",
+      "mustReject": false,
+      "parameters": {
+        "degrees": 1
+      }
+    },
+    {
+      "id": "rotation-y/3",
+      "family": "rotation-y",
+      "severity": "intermediate",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "degrees": 3
+      }
+    },
+    {
+      "id": "rotation-y/5",
+      "family": "rotation-y",
+      "severity": "severe",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "degrees": 5
+      }
+    },
+    {
+      "id": "anisotropic-x/1.02",
+      "family": "anisotropic-scale",
+      "severity": "mild",
+      "thresholdRole": "mild-envelope",
+      "mustReject": false,
+      "parameters": {
+        "xFactor": 1.02
+      }
+    },
+    {
+      "id": "anisotropic-x/1.05",
+      "family": "anisotropic-scale",
+      "severity": "intermediate",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "xFactor": 1.05
+      }
+    },
+    {
+      "id": "anisotropic-x/1.10",
+      "family": "anisotropic-scale",
+      "severity": "severe",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "xFactor": 1.1
+      }
+    },
+    {
+      "id": "profile-compression/0.05",
+      "family": "profile-compression",
+      "severity": "mild",
+      "thresholdRole": "mild-envelope",
+      "mustReject": false,
+      "parameters": {
+        "exponentDelta": 0.05
+      }
+    },
+    {
+      "id": "profile-compression/0.15",
+      "family": "profile-compression",
+      "severity": "intermediate",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "exponentDelta": 0.15
+      }
+    },
+    {
+      "id": "profile-compression/0.35",
+      "family": "profile-compression",
+      "severity": "severe",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "exponentDelta": 0.35
+      }
+    },
+    {
+      "id": "support-hull/24",
+      "family": "support-direction-count",
+      "severity": "mild",
+      "thresholdRole": "mild-envelope",
+      "mustReject": false,
+      "parameters": {
+        "directionCount": 24
+      }
+    },
+    {
+      "id": "support-hull/16",
+      "family": "support-direction-count",
+      "severity": "intermediate",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "directionCount": 16
+      }
+    },
+    {
+      "id": "support-hull/12",
+      "family": "support-direction-count",
+      "severity": "severe",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "directionCount": 12
+      }
+    },
+    {
+      "id": "support-hull/8",
+      "family": "support-direction-count",
+      "severity": "destructive",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "directionCount": 8
+      }
+    },
+    {
+      "id": "shear-x-by-y/0.02",
+      "family": "shear-x-by-y",
+      "severity": "mild",
+      "thresholdRole": "mild-envelope",
+      "mustReject": false,
+      "parameters": {
+        "factor": 0.02
+      }
+    },
+    {
+      "id": "shear-x-by-y/0.06",
+      "family": "shear-x-by-y",
+      "severity": "intermediate",
+      "thresholdRole": "ordering",
+      "mustReject": false,
+      "parameters": {
+        "factor": 0.06
+      }
+    },
+    {
+      "id": "shear-x-by-y/0.12",
+      "family": "shear-x-by-y",
+      "severity": "destructive",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "factor": 0.12
+      }
+    },
+    {
+      "id": "substitute/ellipsoid",
+      "family": "structural-substitute",
+      "severity": "destructive",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "shape": "ellipsoid"
+      }
+    },
+    {
+      "id": "substitute/box",
+      "family": "structural-substitute",
+      "severity": "destructive",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "shape": "box"
+      }
+    },
+    {
+      "id": "squash-y/0.80",
+      "family": "squash-y",
+      "severity": "destructive",
+      "thresholdRole": "ordering",
+      "mustReject": true,
+      "parameters": {
+        "yFactor": 0.8
+      }
+    }
+  ]
+}

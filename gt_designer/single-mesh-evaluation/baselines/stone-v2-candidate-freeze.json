@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "stone-v2-candidate-freeze-v1",
+  "candidateId": "stone/bounded-support-polyhedron-v2",
+  "artifactRole": "development-only-candidate-quarantine",
+  "productionUse": "prohibited",
+  "freezeCommit": "e2d3b5e70a985abffa69a7faaf8dc38dc9b2fc35",
+  "policy": {
+    "mutationAfterFreeze": "prohibited",
+    "calibrationInputUse": "prohibited",
+    "verification": "sha256-and-byte-length-before-and-after-evaluation"
+  },
+  "candidateFiles": [
+    {
+      "path": "gt_designer/src/reconstruction/core/object-generator.js",
+      "byteLength": 2912,
+      "sha256": "efbe8045363fbcb436132d43d174d4b753efae196a35ec2a4d833016da6a4717"
+    },
+    {
+      "path": "gt_designer/src/reconstruction/core/rng.js",
+      "byteLength": 976,
+      "sha256": "3d23fd42233f8988518cc8907db7705f7629770c0ac2b859a97bce82468fa5f5"
+    },
+    {
+      "path": "gt_designer/src/reconstruction/objects/object-registry.js",
+      "byteLength": 1590,
+      "sha256": "92fec10c439bbe0ad88cb18170a4f74b5e005e4b6be6be302f7b89ff9982aea3"
+    },
+    {
+      "path": "gt_designer/src/reconstruction/objects/stone-generator.js",
+      "byteLength": 6043,
+      "sha256": "8a5459f6d3ef101014c02676a9448adca0af9c12eed11422106246bab474e172"
+    },
+    {
+      "path": "gt_designer/src/reconstruction/objects/stone-recipe.js",
+      "byteLength": 1097,
+      "sha256": "d5db42eae1cfd20b37459ea6996cec995a037ff096791a8d0d7dd3edda16850a"
+    },
+    {
+      "path": "package-lock.json",
+      "byteLength": 16902,
+      "sha256": "196401e3ca0ede3e31f80ccacbed2132eb55f6459dbadfb230963a989d337193"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "gt_designer/single-mesh-evaluation/reports/stone-acceptance-v2.json",
+      "byteLength": 94356,
+      "sha256": "a6a6674fd37ca9cca07cf460708a3ed3bf05581e248480c6da93c592f058e947"
+    },
+    {
+      "path": "gt_designer/single-mesh-runtime-audit/reports/stone-nonvisual-v2.json",
+      "byteLength": 33467,
+      "sha256": "13546af4402bd01d891b4ed98201c950fdfeb1d6c001f1d95f32621e78c19c3f"
+    },
+    {
+      "path": "tools/development/fit-stone-supports.mjs",
+      "byteLength": 9587,
+      "sha256": "fafae446b89453d46d05fa36b52d09e2f64765ed5c204e1b409bf1fa3ef45f34"
+    }
+  ],
+  "baselineFiles": [
+    {
+      "path": "gt_designer/single-mesh-evaluation/baselines/stage-1-quality-calibration-v1.json",
+      "byteLength": 705562,
+      "sha256": "5df7c89e2599a9a788f25a0f0b1874fe8a63568c27cc8f54e3a391f31eb20eb5"
+    },
+    {
+      "path": "tools/evaluation/visual-metrics.mjs",
+      "byteLength": 31800,
+      "sha256": "141a064b405b4b17f74f85e14b8f0d5ce9c76b04ae36b555dd0bb01aff6d5c02"
+    }
+  ]
+}
