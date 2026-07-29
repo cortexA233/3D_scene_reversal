@@ -9,6 +9,7 @@ import {
   createStoneSupportHull,
   quantizeRadialResolution,
   removeMeaningfulComponent,
+  removeMeaningfulComponentFamily,
   shearStoneGeometry,
 } from "../tools/evaluation/calibration-perturbations.mjs";
 import {
@@ -64,6 +65,32 @@ test("component deletion removes the largest non-dominant closed component", () 
   assert.equal(result.metadata.removedTriangleCount, 12);
   assert.equal(result.metadata.retainedTriangleCount, 12);
   assert.equal(result.geometry.getAttribute("position").count, 36);
+});
+
+test("component-family deletion removes a significant non-dominant area", () => {
+  const parts = [0, 3, 6].map((offset) => {
+    const part = new THREE.BoxGeometry(1, 1, 1).toNonIndexed();
+    part.translate(offset, 0, 0);
+    return part;
+  });
+  const values = new Float32Array(
+    parts.reduce(
+      (sum, part) => sum + part.getAttribute("position").array.length,
+      0,
+    ),
+  );
+  let offset = 0;
+  for (const part of parts) {
+    values.set(part.getAttribute("position").array, offset);
+    offset += part.getAttribute("position").array.length;
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.BufferAttribute(values, 3));
+  const result = removeMeaningfulComponentFamily(geometry, 0.2);
+  assert.equal(result.metadata.sourceComponentCount, 3);
+  assert.equal(result.metadata.removedComponentCount, 1);
+  assert.ok(result.metadata.removedSurfaceAreaFraction >= 0.2);
+  assert.equal(result.metadata.removedTriangleCount, 12);
 });
 
 test("radial quantization uses only the requested angular sectors", () => {

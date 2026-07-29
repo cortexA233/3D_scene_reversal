@@ -143,6 +143,61 @@ export function removeMeaningfulComponent(geometry) {
   };
 }
 
+export function removeMeaningfulComponentFamily(
+  geometry,
+  minimumSurfaceAreaFraction = 0.2,
+) {
+  if (
+    minimumSurfaceAreaFraction !== null &&
+    !(minimumSurfaceAreaFraction > 0 && minimumSurfaceAreaFraction < 1)
+  ) {
+    throw new RangeError("component-family deletion fraction must be between zero and one");
+  }
+  const { faces, components } = faceRecords(geometry);
+  if (components.length < 3) {
+    throw new Error("component-family deletion requires at least three connected components");
+  }
+  const ordered = [...components].sort(
+    (first, second) =>
+      second.area - first.area ||
+      second.faceIndices.length - first.faceIndices.length,
+  );
+  const totalArea = ordered.reduce((sum, component) => sum + component.area, 0);
+  const selected = [];
+  let removedArea = 0;
+  for (const component of ordered.slice(1)) {
+    selected.push(component);
+    removedArea += component.area;
+    if (
+      minimumSurfaceAreaFraction !== null &&
+      removedArea / totalArea >= minimumSurfaceAreaFraction
+    ) break;
+  }
+  if (
+    minimumSurfaceAreaFraction !== null &&
+    removedArea / totalArea < minimumSurfaceAreaFraction
+  ) {
+    throw new Error("non-dominant component family is below the requested area fraction");
+  }
+  const removed = new Set(
+    selected.flatMap((component) => component.faceIndices),
+  );
+  return {
+    geometry: geometryWithoutFaces(geometry, faces, removed),
+    metadata: {
+      strategy: "largest-non-dominant-component-family",
+      sourceComponentCount: components.length,
+      removedComponentCount: selected.length,
+      removedTriangleCount: removed.size,
+      retainedTriangleCount: faces.length - removed.size,
+      removedSurfaceArea: removedArea,
+      removedSurfaceAreaFraction: removedArea / totalArea,
+      minimumSurfaceAreaFraction,
+      removedAllNonDominantComponents: minimumSurfaceAreaFraction === null,
+    },
+  };
+}
+
 export function quantizeRadialResolution(geometry, segmentCount) {
   if (!Number.isInteger(segmentCount) || segmentCount < 3) {
     throw new RangeError("segmentCount must be an integer of at least three");

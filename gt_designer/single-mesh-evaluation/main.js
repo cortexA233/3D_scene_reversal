@@ -26,6 +26,7 @@ const state = {
   calibrationReport: null,
   stoneV2CalibrationRun: null,
   patternedAppearanceV2CalibrationRun: null,
+  stage2PrecalibrationRun: null,
   objectEvaluationReport: null,
 };
 window.singleMeshEvaluation = state;
@@ -127,6 +128,43 @@ function showError(error) {
 }
 
 async function initialize() {
+  if (parameters.get("calibrate") === "stage2-pre") {
+    for (const control of [
+      elements.mode,
+      elements.pass,
+      elements.view,
+      elements.capture,
+      elements.download,
+    ]) {
+      control.disabled = true;
+    }
+    const runIndex = Number(parameters.get("run"));
+    document.body.dataset.state = "stage2-precalibrating";
+    const { runStage2Precalibration } = await import(
+      "./stage2-precalibration-runner.js"
+    );
+    state.stage2PrecalibrationRun = await runStage2Precalibration({
+      canvas: elements.canvas,
+      objectId: state.unitId,
+      runIndex,
+      onProgress(message) {
+        elements.state.textContent = message;
+        elements.summary.textContent = `Stage 2 pre-calibration\n${message}`;
+      },
+    });
+    state.ready = true;
+    document.body.dataset.state = "stage2-precalibrated";
+    document.body.dataset.objectId = state.unitId;
+    document.body.dataset.calibrationRun = String(runIndex);
+    elements.state.textContent = "Stage 2 reference pre-calibration complete";
+    elements.summary.textContent = [
+      `Object: ${state.unitId}`,
+      `Run: ${runIndex}`,
+      `Scenarios: ${state.stage2PrecalibrationRun.scenarios.length}`,
+      "Candidate imports: prohibited",
+    ].join("\n");
+    return;
+  }
   if (parameters.get("calibrate") === "patterned-appearance-v2") {
     for (const control of [
       elements.mode,

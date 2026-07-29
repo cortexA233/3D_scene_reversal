@@ -1,0 +1,728 @@
+{
+  "schemaVersion": "stage-2-category-quality-baselines-v1",
+  "version": "stage-2-category-baselines-v1",
+  "artifactRole": "development-only-quality-baseline-set",
+  "productionUse": "prohibited",
+  "candidateUse": "prohibited-during-calibration",
+  "objectIds": [
+    "bamboo-shoot",
+    "mushroom",
+    "blue-hat",
+    "candle"
+  ],
+  "calibrationPolicy": {
+    "independentRuns": 2,
+    "referenceOnly": true,
+    "candidatesFittedBeforeFreeze": false,
+    "replacementFailuresMayRelaxThresholds": false,
+    "inseparableMetrics": "diagnostic"
+  },
+  "objects": {
+    "bamboo-shoot": {
+      "schemaVersion": "stage-2-category-quality-baseline-v1",
+      "version": "bamboo-shoot-category-baseline-v1",
+      "objectId": "bamboo-shoot",
+      "artifactRole": "development-only-quality-baseline",
+      "productionUse": "prohibited",
+      "candidateUse": "prohibited-during-calibration",
+      "selectionStrategy": "two-run-reference-only-separated-quarter-guard",
+      "hard": [
+        {
+          "path": "geometry.bounds.maxAxisRelativeError",
+          "operator": "<=",
+          "threshold": 0.06444504163117752,
+          "domain": "geometry",
+          "mildBoundary": 0.03592672217490302,
+          "destructiveBoundary": 0.15000000000000105,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.bounds.bottomAnchorErrorCanonical",
+          "operator": "<=",
+          "threshold": 0.04875,
+          "domain": "geometry",
+          "mildBoundary": 0.015000000000000013,
+          "destructiveBoundary": 0.14999999999999997,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.meanIou",
+          "operator": ">=",
+          "threshold": 0.8862460459207883,
+          "domain": "geometry",
+          "mildBoundary": 0.9191889157769354,
+          "destructiveBoundary": 0.7874174363523467,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.worstViewIou",
+          "operator": ">=",
+          "threshold": 0.8592531497223016,
+          "domain": "geometry",
+          "mildBoundary": 0.9014609571788413,
+          "destructiveBoundary": 0.7326297273526825,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.meanEdgeDistancePixels",
+          "operator": "<=",
+          "threshold": 1.644927078996141,
+          "domain": "geometry",
+          "mildBoundary": 1.3315223910951282,
+          "destructiveBoundary": 2.5851411426991793,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.edgeDistanceP95Pixels",
+          "operator": "<=",
+          "threshold": 6.212214450449026,
+          "domain": "geometry",
+          "mildBoundary": 5,
+          "destructiveBoundary": 9.848857801796104,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.depth.mae",
+          "operator": "<=",
+          "threshold": 0.00935322756389121,
+          "domain": "geometry",
+          "mildBoundary": 0.005868033553914402,
+          "destructiveBoundary": 0.01980880959382163,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.depth.p95",
+          "operator": "<=",
+          "threshold": 0.03805716462078073,
+          "domain": "geometry",
+          "mildBoundary": 0.020997056342499678,
+          "destructiveBoundary": 0.08923748945562389,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.meanDeltaE00",
+          "operator": "<=",
+          "threshold": 3.624563039356491,
+          "domain": "appearance",
+          "mildBoundary": 0.6231657598959743,
+          "destructiveBoundary": 12.628754877738041,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.p90DeltaE00",
+          "operator": "<=",
+          "threshold": 5.0125449227280905,
+          "domain": "appearance",
+          "mildBoundary": 1.0256738968399992,
+          "destructiveBoundary": 16.973158000392363,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.meanMaskedSsim",
+          "operator": ">=",
+          "threshold": 0.8666466585029049,
+          "domain": "appearance",
+          "mildBoundary": 0.9992254107398179,
+          "destructiveBoundary": 0.4689104017921663,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.worstViewSsim",
+          "operator": ">=",
+          "threshold": 0.826978982016899,
+          "domain": "appearance",
+          "mildBoundary": 0.9986871575929325,
+          "destructiveBoundary": 0.3118544552887987,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.paletteCentroidDeltaE00",
+          "operator": "<=",
+          "threshold": 11.768301030548113,
+          "domain": "appearance",
+          "mildBoundary": 11.130030815239952,
+          "destructiveBoundary": 13.683111676472597,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.paletteCoverageL1",
+          "operator": "<=",
+          "threshold": 0.36925471525361653,
+          "domain": "appearance",
+          "mildBoundary": 0.2975035097357016,
+          "destructiveBoundary": 0.5845083318073613,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.roughnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.1,
+          "domain": "appearance",
+          "source": "unchanged-shared-material-gate"
+        },
+        {
+          "path": "appearance.metalnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.05,
+          "domain": "appearance",
+          "source": "unchanged-shared-material-gate"
+        }
+      ],
+      "diagnostic": [],
+      "budget": {
+        "objectSpecificScalarsMaximum": 64,
+        "recipeBytesMaximum": 1536,
+        "gzipBytesMaximum": 6144,
+        "trianglesMaximum": 1536,
+        "drawCallsMaximum": 2,
+        "geometryBytesMaximum": 98304,
+        "warmP95MillisecondsMaximum": 8
+      },
+      "frozen": true,
+      "calibrationFailures": []
+    },
+    "mushroom": {
+      "schemaVersion": "stage-2-category-quality-baseline-v1",
+      "version": "mushroom-category-baseline-v1",
+      "objectId": "mushroom",
+      "artifactRole": "development-only-quality-baseline",
+      "productionUse": "prohibited",
+      "candidateUse": "prohibited-during-calibration",
+      "selectionStrategy": "two-run-reference-only-separated-quarter-guard",
+      "hard": [
+        {
+          "path": "geometry.bounds.maxAxisRelativeError",
+          "operator": "<=",
+          "threshold": 0.050685267497310546,
+          "domain": "geometry",
+          "mildBoundary": 0.03976950385453341,
+          "destructiveBoundary": 0.08343255842564196,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.bounds.bottomAnchorErrorCanonical",
+          "operator": "<=",
+          "threshold": 0.047379137823624545,
+          "domain": "geometry",
+          "mildBoundary": 0.014999999999999902,
+          "destructiveBoundary": 0.14451655129449847,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.meanIou",
+          "operator": ">=",
+          "threshold": 0.8550270178705264,
+          "domain": "geometry",
+          "mildBoundary": 0.8646922369632005,
+          "destructiveBoundary": 0.8260313605925037,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.worstViewIou",
+          "operator": ">=",
+          "threshold": 0.8239555433992831,
+          "domain": "geometry",
+          "mildBoundary": 0.8382666790386936,
+          "destructiveBoundary": 0.7810221364810516,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.meanEdgeDistancePixels",
+          "operator": "<=",
+          "threshold": 2.1821142768253674,
+          "domain": "geometry",
+          "mildBoundary": 2.1113421901441485,
+          "destructiveBoundary": 2.3944305368690237,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.edgeDistanceP95Pixels",
+          "operator": "<=",
+          "threshold": 12.5,
+          "domain": "geometry",
+          "mildBoundary": 10,
+          "destructiveBoundary": 20,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.depth.mae",
+          "operator": "<=",
+          "threshold": 0.02168289818450094,
+          "domain": "geometry",
+          "mildBoundary": 0.018466934933189284,
+          "destructiveBoundary": 0.03133078793843592,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.depth.p95",
+          "operator": "<=",
+          "threshold": 0.14790326863154363,
+          "domain": "geometry",
+          "mildBoundary": 0.11715110386656923,
+          "destructiveBoundary": 0.24015976292646687,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.meanDeltaE00",
+          "operator": "<=",
+          "threshold": 3.8377088661621968,
+          "domain": "appearance",
+          "mildBoundary": 0.7127991537268542,
+          "destructiveBoundary": 13.212438003468224,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.p90DeltaE00",
+          "operator": "<=",
+          "threshold": 8.467854555012945,
+          "domain": "appearance",
+          "mildBoundary": 1.2570963965849313,
+          "destructiveBoundary": 30.100129030296987,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.meanMaskedSsim",
+          "operator": ">=",
+          "threshold": 0.8174449444481896,
+          "domain": "appearance",
+          "mildBoundary": 0.998329343132431,
+          "destructiveBoundary": 0.2747917483954652,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.worstViewSsim",
+          "operator": ">=",
+          "threshold": 0.79818197678035,
+          "domain": "appearance",
+          "mildBoundary": 0.9981653371172753,
+          "destructiveBoundary": 0.19823189576957426,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.paletteCentroidDeltaE00",
+          "operator": "<=",
+          "threshold": 4.830299618924689,
+          "domain": "appearance",
+          "mildBoundary": 0.8426246136092348,
+          "destructiveBoundary": 16.793324634871055,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.paletteCoverageL1",
+          "operator": "<=",
+          "threshold": 0.2140117129812882,
+          "domain": "appearance",
+          "mildBoundary": 0.000039453957231899706,
+          "destructiveBoundary": 0.8559284900534572,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.roughnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.1,
+          "domain": "appearance",
+          "source": "unchanged-shared-material-gate"
+        },
+        {
+          "path": "appearance.metalnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.05,
+          "domain": "appearance",
+          "source": "unchanged-shared-material-gate"
+        }
+      ],
+      "diagnostic": [],
+      "budget": {
+        "objectSpecificScalarsMaximum": 96,
+        "recipeBytesMaximum": 2048,
+        "gzipBytesMaximum": 8192,
+        "trianglesMaximum": 3840,
+        "drawCallsMaximum": 2,
+        "geometryBytesMaximum": 196608,
+        "warmP95MillisecondsMaximum": 10
+      },
+      "frozen": true,
+      "calibrationFailures": []
+    },
+    "blue-hat": {
+      "schemaVersion": "stage-2-category-quality-baseline-v1",
+      "version": "blue-hat-category-baseline-v1",
+      "objectId": "blue-hat",
+      "artifactRole": "development-only-quality-baseline",
+      "productionUse": "prohibited",
+      "candidateUse": "prohibited-during-calibration",
+      "selectionStrategy": "two-run-reference-only-separated-quarter-guard",
+      "hard": [
+        {
+          "path": "geometry.bounds.maxAxisRelativeError",
+          "operator": "<=",
+          "threshold": 0.04823156660927942,
+          "domain": "geometry",
+          "mildBoundary": 0.03441376410972413,
+          "destructiveBoundary": 0.08968497410794528,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.bounds.bottomAnchorErrorCanonical",
+          "operator": "<=",
+          "threshold": 0.04875000000000007,
+          "domain": "geometry",
+          "mildBoundary": 0.015000000000000124,
+          "destructiveBoundary": 0.1499999999999999,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.meanIou",
+          "operator": ">=",
+          "threshold": 0.9163024887743573,
+          "domain": "geometry",
+          "mildBoundary": 0.947185458854833,
+          "destructiveBoundary": 0.8236535785329303,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.worstViewIou",
+          "operator": ">=",
+          "threshold": 0.9462234193545142,
+          "domain": "geometry",
+          "mildBoundary": 0.946770154343463,
+          "destructiveBoundary": 0.9445832143876677,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.meanEdgeDistancePixels",
+          "operator": "<=",
+          "threshold": 5.430085192673615,
+          "domain": "geometry",
+          "mildBoundary": 3.31945956055305,
+          "destructiveBoundary": 11.76196208903531,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.edgeDistanceP95Pixels",
+          "operator": "<=",
+          "threshold": 5.25,
+          "domain": "geometry",
+          "mildBoundary": 5,
+          "destructiveBoundary": 6,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.depth.mae",
+          "operator": "<=",
+          "threshold": 0.039023740377965646,
+          "domain": "geometry",
+          "mildBoundary": 0.023479157701561032,
+          "destructiveBoundary": 0.0856574884071795,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.depth.p95",
+          "operator": "<=",
+          "threshold": 0.055582170209747365,
+          "domain": "geometry",
+          "mildBoundary": 0.05366554365079068,
+          "destructiveBoundary": 0.06133204988661741,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.meanDeltaE00",
+          "operator": "<=",
+          "threshold": 6.556258711916433,
+          "domain": "appearance",
+          "mildBoundary": 0.5745727978063767,
+          "destructiveBoundary": 24.501316454246602,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.p90DeltaE00",
+          "operator": "<=",
+          "threshold": 13.543758096266078,
+          "domain": "appearance",
+          "mildBoundary": 1.2402755899878133,
+          "destructiveBoundary": 50.45420561510087,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.meanMaskedSsim",
+          "operator": ">=",
+          "threshold": 0.7869060763620481,
+          "domain": "appearance",
+          "mildBoundary": 0.9983636050573219,
+          "destructiveBoundary": 0.15253349027622662,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.worstViewSsim",
+          "operator": ">=",
+          "threshold": 0.7826723773395636,
+          "domain": "appearance",
+          "mildBoundary": 0.9982036513429953,
+          "destructiveBoundary": 0.13607855532926844,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.paletteCentroidDeltaE00",
+          "operator": "<=",
+          "threshold": 9.056982803834199,
+          "domain": "appearance",
+          "mildBoundary": 2.429894803188473,
+          "destructiveBoundary": 28.938246805771374,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.paletteCoverageL1",
+          "operator": "<=",
+          "threshold": 0.2282328318583743,
+          "domain": "appearance",
+          "mildBoundary": 0.19869261735051888,
+          "destructiveBoundary": 0.31685347538194064,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.roughnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.1,
+          "domain": "appearance",
+          "source": "unchanged-shared-material-gate"
+        },
+        {
+          "path": "appearance.metalnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.05,
+          "domain": "appearance",
+          "source": "unchanged-shared-material-gate"
+        }
+      ],
+      "diagnostic": [],
+      "budget": {
+        "objectSpecificScalarsMaximum": 64,
+        "recipeBytesMaximum": 1536,
+        "gzipBytesMaximum": 6144,
+        "trianglesMaximum": 1536,
+        "drawCallsMaximum": 2,
+        "geometryBytesMaximum": 98304,
+        "warmP95MillisecondsMaximum": 8
+      },
+      "frozen": true,
+      "calibrationFailures": []
+    },
+    "candle": {
+      "schemaVersion": "stage-2-category-quality-baseline-v1",
+      "version": "candle-category-baseline-v1",
+      "objectId": "candle",
+      "artifactRole": "development-only-quality-baseline",
+      "productionUse": "prohibited",
+      "candidateUse": "prohibited-during-calibration",
+      "selectionStrategy": "two-run-reference-only-separated-quarter-guard",
+      "hard": [
+        {
+          "path": "geometry.bounds.maxAxisRelativeError",
+          "operator": "<=",
+          "threshold": 0.0632190566289111,
+          "domain": "geometry",
+          "mildBoundary": 0.034292075505214764,
+          "destructiveBoundary": 0.1500000000000001,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.bounds.bottomAnchorErrorCanonical",
+          "operator": "<=",
+          "threshold": 0.04874999999999652,
+          "domain": "geometry",
+          "mildBoundary": 0.014999999999996572,
+          "destructiveBoundary": 0.14999999999999636,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.meanIou",
+          "operator": ">=",
+          "threshold": 0.9206175589191302,
+          "domain": "geometry",
+          "mildBoundary": 0.9283259897757535,
+          "destructiveBoundary": 0.8974922663492602,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.worstViewIou",
+          "operator": ">=",
+          "threshold": 0.9000138886400514,
+          "domain": "geometry",
+          "mildBoundary": 0.9185024378091747,
+          "destructiveBoundary": 0.8445482411326813,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.meanEdgeDistancePixels",
+          "operator": "<=",
+          "threshold": 2.7211746228308895,
+          "domain": "geometry",
+          "mildBoundary": 2.428715078207866,
+          "destructiveBoundary": 3.5985532566999603,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.silhouette.edgeDistanceP95Pixels",
+          "operator": "<=",
+          "threshold": 6.546192127984564,
+          "domain": "geometry",
+          "mildBoundary": 6.324555320336759,
+          "destructiveBoundary": 7.211102550927978,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.depth.mae",
+          "operator": "<=",
+          "threshold": 0.025822990246922126,
+          "domain": "geometry",
+          "mildBoundary": 0.02441457528640842,
+          "destructiveBoundary": 0.03004823512846325,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "geometry.depth.p95",
+          "operator": "<=",
+          "threshold": 0.2364161250622988,
+          "domain": "geometry",
+          "mildBoundary": 0.1943146233388757,
+          "destructiveBoundary": 0.3627206302325681,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.meanDeltaE00",
+          "operator": "<=",
+          "threshold": 6.511578179626923,
+          "domain": "appearance",
+          "mildBoundary": 0.8904491976717042,
+          "destructiveBoundary": 23.37496512549258,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.p90DeltaE00",
+          "operator": "<=",
+          "threshold": 10.60498659744322,
+          "domain": "appearance",
+          "mildBoundary": 1.3100569977801206,
+          "destructiveBoundary": 38.48977539643252,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.meanMaskedSsim",
+          "operator": ">=",
+          "threshold": 0.8009462554387513,
+          "domain": "appearance",
+          "mildBoundary": 0.9983144630145269,
+          "destructiveBoundary": 0.20884163271142475,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.worstViewSsim",
+          "operator": ">=",
+          "threshold": 0.7981474013514372,
+          "domain": "appearance",
+          "mildBoundary": 0.9982274715777952,
+          "destructiveBoundary": 0.19790719067236334,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.paletteCentroidDeltaE00",
+          "operator": "<=",
+          "threshold": 7.578909576751598,
+          "domain": "appearance",
+          "mildBoundary": 2.3344167766716355,
+          "destructiveBoundary": 23.312387976991484,
+          "guardFraction": 0.25,
+          "source": "two-run-reference-only-calibration-bracket"
+        },
+        {
+          "path": "appearance.roughnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.1,
+          "domain": "appearance",
+          "source": "unchanged-shared-material-gate"
+        },
+        {
+          "path": "appearance.metalnessAbsoluteError",
+          "operator": "<=",
+          "threshold": 0.05,
+          "domain": "appearance",
+          "source": "unchanged-shared-material-gate"
+        }
+      ],
+      "diagnostic": [
+        {
+          "path": "appearance.paletteCoverageL1",
+          "domain": "appearance",
+          "reason": "reference controls did not produce a monotone separating boundary"
+        }
+      ],
+      "budget": {
+        "objectSpecificScalarsMaximum": 96,
+        "recipeBytesMaximum": 2048,
+        "gzipBytesMaximum": 8192,
+        "trianglesMaximum": 2048,
+        "drawCallsMaximum": 3,
+        "geometryBytesMaximum": 131072,
+        "warmP95MillisecondsMaximum": 10
+      },
+      "frozen": true,
+      "calibrationFailures": []
+    }
+  },
+  "frozen": true,
+  "failures": []
+}

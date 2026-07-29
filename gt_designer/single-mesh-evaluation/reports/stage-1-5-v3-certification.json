@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "single-mesh-stage-1-5-v3-certification-v1",
+  "artifactRole": "development-only-stage-boundary-certification",
+  "productionUse": "prohibited",
+  "historicalStage1": {
+    "result": "2/4 FAIL",
+    "rewritten": false,
+    "sourceSchemaVersion": "single-mesh-stage-1-certification-v1"
+  },
+  "acceptedVersionedObjects": [
+    {
+      "objectId": "stone-path",
+      "baseline": "single-mesh-quality-baseline-v1"
+    },
+    {
+      "objectId": "stone",
+      "baseline": "stone-geometry-baseline-v2"
+    },
+    {
+      "objectId": "vase",
+      "baseline": "single-mesh-quality-baseline-v1"
+    },
+    {
+      "objectId": "umbrella",
+      "baseline": "patterned-appearance-baseline-v3"
+    }
+  ],
+  "prefittedStage2Baselines": {
+    "bamboo-shoot": {
+      "baseline": "bamboo-shoot-category-baseline-v1",
+      "budget": {
+        "objectSpecificScalarsMaximum": 64,
+        "recipeBytesMaximum": 1536,
+        "gzipBytesMaximum": 6144,
+        "trianglesMaximum": 1536,
+        "drawCallsMaximum": 2,
+        "geometryBytesMaximum": 98304,
+        "warmP95MillisecondsMaximum": 8
+      }
+    },
+    "mushroom": {
+      "baseline": "mushroom-category-baseline-v1",
+      "budget": {
+        "objectSpecificScalarsMaximum": 96,
+        "recipeBytesMaximum": 2048,
+        "gzipBytesMaximum": 8192,
+        "trianglesMaximum": 3840,
+        "drawCallsMaximum": 2,
+        "geometryBytesMaximum": 196608,
+        "warmP95MillisecondsMaximum": 10
+      }
+    },
+    "blue-hat": {
+      "baseline": "blue-hat-category-baseline-v1",
+      "budget": {
+        "objectSpecificScalarsMaximum": 64,
+        "recipeBytesMaximum": 1536,
+        "gzipBytesMaximum": 6144,
+        "trianglesMaximum": 1536,
+        "drawCallsMaximum": 2,
+        "geometryBytesMaximum": 98304,
+        "warmP95MillisecondsMaximum": 8
+      }
+    },
+    "candle": {
+      "baseline": "candle-category-baseline-v1",
+      "budget": {
+        "objectSpecificScalarsMaximum": 96,
+        "recipeBytesMaximum": 2048,
+        "gzipBytesMaximum": 8192,
+        "trianglesMaximum": 2048,
+        "drawCallsMaximum": 3,
+        "geometryBytesMaximum": 131072,
+        "warmP95MillisecondsMaximum": 10
+      }
+    }
+  },
+  "certification": {
+    "passed": true,
+    "stage2Authorized": true,
+    "formalEightObjectExitClaimed": false,
+    "checks": [
+      {
+        "id": "historical-stage-1-retained-as-two-of-four-fail",
+        "passed": true
+      },
+      {
+        "id": "stone-v2-complete-acceptance",
+        "passed": true
+      },
+      {
+        "id": "umbrella-v3-complete-acceptance",
+        "passed": true
+      },
+      {
+        "id": "patterned-v3-positive-and-destructive-bracket",
+        "passed": true
+      },
+      {
+        "id": "native-firefox-and-safari-qualified",
+        "passed": true
+      },
+      {
+        "id": "stone-native-three-browser-boundary",
+        "passed": true
+      },
+      {
+        "id": "umbrella-native-three-browser-boundary",
+        "passed": true
+      },
+      {
+        "id": "four-stage-2-reference-only-baselines-and-budgets-frozen",
+        "passed": true
+      }
+    ],
+    "failures": []
+  }
+}
