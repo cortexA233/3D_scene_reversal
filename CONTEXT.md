@@ -65,8 +65,12 @@ A general-purpose algorithmic dependency executed by the Production Runtime that
 _Avoid_: Generated asset, embedded model
 
 **Single Mesh Lab**:
-The object-level experiment that tests reconstruction representations, workflow, and quality gates before full-scene reconstruction; “single mesh” describes each selected Authored Reference, not the required render-tree structure of its Procedural Replacement.
+The development-only object experiment that tests reconstruction representations, workflow, and quality gates before full-scene reconstruction; its isolated scenes are evaluation surfaces, never final deliverables.
 _Avoid_: Island MVP, full-scene prototype
+
+**Reference-layout Delivery**:
+The final integrated scene in which accepted Procedural Replacements share one world and preserve the corresponding positions, orientations, scales, and spatial relationships of the Authored Reference; per-object Lab, gallery, and evaluation scenes are excluded from delivery.
+_Avoid_: Per-object deliverable, object showcase scene, isolated final scene
 
 **Stage 1.5 Decision Gate**:
 A blocking evidence phase between the frozen Stage 1 result and Stage 2 implementation that resolves the failed representation and browser-evidence decisions without counting further exploration as Stage 2 progress.
