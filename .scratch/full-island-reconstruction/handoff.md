@@ -468,13 +468,17 @@ Tickets 02 atmosphere, 03 terrain, 05 horizon ridges, and onward. Tickets 03 and
 05 depend only on 3D evidence and are unaffected by the camera and calibration
 work, so they can proceed in parallel.
 
-- Ticket 03: terrain budget is 32 coastline controls, 40 landforms, 4 noise
-  octaves; the recipe uses 28 coast nodes, 40 landforms, 3 octaves, so there is
-  headroom in coast nodes and octaves but none in landforms. The coastline
-  already passes — symmetric p95 15.7475 against 22.02965 and area error 1.97 per
-  cent against 10.55. The failure is elevation and the shore band: the
-  classification confusion is shore->land 395, land->shore 147, shore->sea 161,
-  sea->shore 123.
+- Ticket 03 is **diagnosed**; the diagnosis is in its ticket file and it overturns
+  the obvious reading. `sea->land` is 765 probes and the confusion matrix suggests
+  the island is too big. It is not: 979 of the land/sea disagreements sit at
+  normalized coastal radius 0.2 to 0.6, *inside* the coastline, and the mean height
+  error beyond n = 1.4 is 0.24 units. Two defects, neither of them the coastline:
+  the reference has water inside the island and the program cannot go below the
+  Semantic Sea Level anywhere, so every interior pool reads as land; and the shore
+  shelf drops too early, giving 220 land->sea probes at n ~ 0.8. Budget: 28 of 32
+  coast nodes and 3 of 4 octaves are spare, but all 40 landforms are in use, so
+  inner water has to be fitted by re-allocating landforms — and spending the spare
+  coast nodes or octaves would be spending budget where the residual is not.
 - Ticket 05: the Horizon Profile already covers all 720 azimuth bins with none
   missing, so the failure is purely angular accuracy — p95 5.6658 deg against a
   0.945 deg threshold, worst azimuth 7.1609 deg at 162 deg.
