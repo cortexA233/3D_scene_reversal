@@ -184,29 +184,40 @@ The red check exists and is red: `node --test test/camera-appearance-calibration
 vacuous-pass control, so they stay green throughout. Supporting declaration is
 `tools/acceptance/camera-appearance-layers.mjs`.
 
-Red evidence, which enumerates the remaining work:
+**Measurement half is done and pushed** (`bfcbfc3`). Per-Material-Family
+appearance and the worst semantic confusion are now measured, so
+"the passes evidence supplies every path the two layers gate" is green. What it
+found:
+
+| family | mean DeltaE |
+| --- | --- |
+| palm-foliage | 61.61 |
+| blossom-foliage | 35.32 |
+| painted-timber | 34.38 |
+| paving-stone | 33.83 |
+| creature-fur | 32.99 |
+| ocean-surface | 29.03 |
+| shore-rock | 26.91 |
+| terrain-ground | 22.68 |
+| bamboo-foliage | 22.35 |
+| distant-rock | 16.24 |
+
+Global mean is 26.17, so `palm-foliage` is the single largest appearance
+residual in the scene and was invisible at group level. Worst semantic confusion
+is `geography->horizon` on `oblique-north` at 4.17 per cent.
+
+**Calibration half remains.** Red evidence, all three about missing thresholds:
 
 1. `fixedCameraGeometry` and `nativeAppearance` hold no thresholds.
    `run-scene-calibration.mjs` hard-codes both as `[]` at lines 369-370.
 2. `fixedCameraGeometry` leaves six metric families ungated: per-group
    silhouette, contour distance, linear depth, world normal, semantic occupancy,
    semantic confusion.
-3. Three evidence paths are not measured at all and must be added to
-   `tools/evaluation/browser-scene-passes.mjs`, after which the passes must be
-   re-captured: `aggregate.semanticConfusion.worstFraction`,
-   `aggregate.appearanceByMaterialFamily.meanMean`,
-   `aggregate.appearanceByMaterialFamily.worst.value`.
-4. Appearance is measured per semantic *group* in `view.appearance.regions`, not
-   per Material Family. The recipe declares 10 families — distant-rock,
-   painted-timber, paving-stone, shore-rock, palm-foliage, blossom-foliage,
-   bamboo-foliage, terrain-ground, ocean-surface, creature-fur — and zero are
-   measured. The ticket requires per-Material-Family appearance.
+3. `fixedCameraGeometry` therefore cannot be evaluated at all.
 
 Order to finish it:
 
-1. Extend `browser-scene-passes.mjs` with per-Material-Family appearance and a
-   semantic-confusion worst fraction; re-capture passes.
-2. Build the calibration harness that renders the reference against declared
+1. Build the calibration harness that renders the reference against declared
    perturbed clones of itself through all six frozen cameras, using scene-space
    damage rather than image-space approximation. Existing control families are
    `SCENE_CONTROLS`, `GEOGRAPHY_CONTROLS`, `HORIZON_CONTROLS` in
@@ -219,6 +230,25 @@ Order to finish it:
    move; the red check pins all 13 by value.
 4. Demote rather than loosen any metric that cannot separate its bracket, and
    prove every declared control is caught by at least one gating metric.
+
+Measured cost of the calibration harness, which decides its shape. The last full
+pass capture was 72 renders in about 10 minutes, so a 1440x810 render plus
+readPixels costs roughly 8 seconds under SwiftShader. Per control the damaged
+side alone is 6 cameras times 6 passes, about 5 minutes, and the undamaged
+baseline renders once and is reused. With a dozen controls that is roughly 40 to
+60 minutes total, and a single run of all of them would exceed the ten-minute
+kill. The harness therefore has to take a `--control <id>` flag, write one
+partial evidence file per control, and aggregate at the end. Geometry controls
+can skip the lit-RGB composer pass and appearance controls need only that pass,
+which is where most of the saving is.
+
+Scene-space damage applies to the reference's placement roots — the children of
+`Authored Village` — as `position`, `scale`, `rotation.y`, `visible`, a cloned
+root, or a material override, each returning a restore function. Mutate, render,
+restore; no deep scene clone is needed. `selectThreshold` in
+`tools/evaluation/scene-calibration.mjs` already implements the required
+demote-rather-than-loosen rule, returning `separable: false` with a reason when
+mild and severe overlap, so the new layers can reuse it unchanged.
 
 Two things not to get wrong here:
 
