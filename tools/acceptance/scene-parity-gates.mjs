@@ -76,6 +76,18 @@ function checkMetric(evidence, definition) {
 }
 
 function evaluateLayer(name, evidence, definitions) {
+  // An empty layer is an uncalibrated layer. Letting it pass vacuously would
+  // let the stack certify a subject nothing has actually been measured against.
+  if (!Array.isArray(definitions) || definitions.length === 0) {
+    return {
+      layer: name,
+      evaluated: false,
+      passed: false,
+      metrics: [],
+      failures: [],
+      reason: "no frozen thresholds are calibrated for this layer, so it cannot pass",
+    };
+  }
   const metrics = definitions.map((definition) => checkMetric(evidence, definition));
   const failures = metrics.filter((metric) => !metric.passed);
   return {

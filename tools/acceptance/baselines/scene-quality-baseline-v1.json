@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "scene-quality-baseline-v1",
+  "version": "scene-quality-baseline-v1",
+  "calibratedFrom": "scene-calibration-v1",
+  "note": "Calibrated from reference repeatability and declared reference-only perturbations before any candidate result was consulted. Changing a value requires an explicit migration and full recalibration.",
+  "knownProperties": [
+    "Placement and surface limits are absolute world units, and the mild controls apply to every entity including the 1.4 km horizon groups, so those limits are dominated by the largest objects. A small entity can therefore pass a limit that is generous for its own scale. Scale-relative placement evidence is the declared next refinement."
+  ],
+  "layers": {
+    "structuralCorrespondence": [
+      {
+        "name": "missing entities",
+        "scope": "aggregate",
+        "path": "correspondence.structural.missing.length",
+        "direction": "atMost",
+        "threshold": 0
+      },
+      {
+        "name": "extra entities",
+        "scope": "aggregate",
+        "path": "correspondence.structural.extra.length",
+        "direction": "atMost",
+        "threshold": 0
+      },
+      {
+        "name": "anchor error p95",
+        "scope": "aggregate",
+        "path": "correspondence.placement.anchorError.p95",
+        "direction": "atMost",
+        "threshold": 4.0149
+      },
+      {
+        "name": "worst entity anchor error",
+        "scope": "worst-entity",
+        "path": "correspondence.placement.anchorError.max",
+        "direction": "atMost",
+        "threshold": 4.763775
+      },
+      {
+        "name": "worst entity extent error",
+        "scope": "worst-entity",
+        "path": "correspondence.placement.extentRelative.max",
+        "direction": "atMost",
+        "threshold": 0.12
+      },
+      {
+        "name": "worst entity orientation error",
+        "scope": "worst-entity",
+        "path": "correspondence.placement.orientationError.max",
+        "direction": "atMost",
+        "threshold": 0.24
+      }
+    ],
+    "worldGeometry": [
+      {
+        "name": "surface p95",
+        "scope": "aggregate",
+        "path": "correspondence.surface.p95.mean",
+        "direction": "atMost",
+        "threshold": 2.3479
+      },
+      {
+        "name": "worst entity surface p95",
+        "scope": "worst-entity",
+        "path": "correspondence.surface.p95.max",
+        "direction": "atMost",
+        "threshold": 13.758675
+      },
+      {
+        "name": "over-tolerance surface fraction",
+        "scope": "aggregate",
+        "path": "correspondence.surface.overToleranceFraction.mean",
+        "direction": "atMost",
+        "threshold": 0.11835
+      },
+      {
+        "name": "worst neighbourhood distance error",
+        "scope": "worst-entity",
+        "path": "correspondence.relational.distanceError.max",
+        "direction": "atMost",
+        "threshold": 12.990425
+      },
+      {
+        "name": "worst zone occupancy delta",
+        "scope": "worst-zone",
+        "path": "correspondence.zones.delta.max",
+        "direction": "atMost",
+        "threshold": 5.25
+      },
+      {
+        "name": "worst component delta",
+        "scope": "worst-entity",
+        "path": "correspondence.semanticStructure.componentDelta.max",
+        "direction": "atMost",
+        "threshold": 3.5
+      },
+      {
+        "name": "terrain height p95",
+        "scope": "aggregate",
+        "path": "geography.height.full.p95",
+        "direction": "atMost",
+        "threshold": 5.26875
+      },
+      {
+        "name": "shore height p95",
+        "scope": "worst-region",
+        "path": "geography.height.shore.p95",
+        "direction": "atMost",
+        "threshold": 2.85035
+      },
+      {
+        "name": "coastline symmetric p95",
+        "scope": "aggregate",
+        "path": "geography.coastline.symmetricDistance.p95",
+        "direction": "atMost",
+        "threshold": 22.02965
+      },
+      {
+        "name": "coastline area error",
+        "scope": "aggregate",
+        "path": "geography.coastline.areaRelativeError",
+        "direction": "atMost",
+        "threshold": 0.105515
+      },
+      {
+        "name": "land and sea agreement",
+        "scope": "aggregate",
+        "path": "geography.classification.agreementFraction",
+        "direction": "atLeast",
+        "threshold": 0.931361
+      },
+      {
+        "name": "horizon profile p95",
+        "scope": "aggregate",
+        "path": "horizon.profile.angularError.p95",
+        "direction": "atMost",
+        "threshold": 0.0165
+      },
+      {
+        "name": "worst azimuth horizon error",
+        "scope": "worst-azimuth",
+        "path": "horizon.profile.angularError.max",
+        "direction": "atMost",
+        "threshold": 0.0165
+      }
+    ],
+    "fixedCameraGeometry": [],
+    "nativeAppearance": []
+  },
+  "diagnostic": []
+}

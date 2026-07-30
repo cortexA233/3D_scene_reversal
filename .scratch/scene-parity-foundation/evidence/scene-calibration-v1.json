@@ -1,0 +1,654 @@
+{
+  "schemaVersion": "scene-calibration-v1",
+  "inputs": [
+    "scene-inventory-v1.json",
+    "scene-surface-samples-v1.json",
+    "terrain-elevation-v1.json",
+    "horizon-reference-v1.json",
+    "reference-observation-v1.json"
+  ],
+  "candidateArtifactsRead": [],
+  "controls": {
+    "scene": [
+      {
+        "id": "identity",
+        "class": "identity"
+      },
+      {
+        "id": "translate-0.15",
+        "class": "mild"
+      },
+      {
+        "id": "extent-1pct",
+        "class": "mild"
+      },
+      {
+        "id": "yaw-0.02",
+        "class": "mild"
+      },
+      {
+        "id": "translate-1.2",
+        "class": "intermediate"
+      },
+      {
+        "id": "extent-8pct",
+        "class": "intermediate"
+      },
+      {
+        "id": "delete-structures",
+        "class": "severe"
+      },
+      {
+        "id": "duplicate-structure",
+        "class": "severe"
+      },
+      {
+        "id": "swap-structures",
+        "class": "severe"
+      },
+      {
+        "id": "translate-12",
+        "class": "severe"
+      },
+      {
+        "id": "extent-45pct",
+        "class": "severe"
+      },
+      {
+        "id": "yaw-0.9",
+        "class": "severe"
+      },
+      {
+        "id": "vegetation-collapse",
+        "class": "severe"
+      },
+      {
+        "id": "strip-components",
+        "class": "severe"
+      }
+    ],
+    "geography": [
+      {
+        "id": "identity",
+        "class": "identity"
+      },
+      {
+        "id": "raise-0.3",
+        "class": "mild"
+      },
+      {
+        "id": "coast-1pct",
+        "class": "mild"
+      },
+      {
+        "id": "raise-2",
+        "class": "intermediate"
+      },
+      {
+        "id": "raise-12",
+        "class": "severe"
+      },
+      {
+        "id": "coast-20pct",
+        "class": "severe"
+      },
+      {
+        "id": "flatten-relief",
+        "class": "severe"
+      }
+    ],
+    "horizon": [
+      {
+        "id": "identity",
+        "class": "identity"
+      },
+      {
+        "id": "elevation-0.002",
+        "class": "mild"
+      },
+      {
+        "id": "elevation-0.01",
+        "class": "intermediate"
+      },
+      {
+        "id": "elevation-0.06",
+        "class": "severe"
+      },
+      {
+        "id": "flatten-peaks",
+        "class": "severe"
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "name": "missing entities",
+      "scope": "aggregate",
+      "path": "correspondence.structural.missing.length",
+      "direction": "atMost",
+      "detectedControls": [
+        "delete-structures"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "severe": [
+          39
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0,
+        "exact": true,
+        "mildWorst": 0,
+        "severeBest": 39
+      }
+    },
+    {
+      "name": "extra entities",
+      "scope": "aggregate",
+      "path": "correspondence.structural.extra.length",
+      "direction": "atMost",
+      "detectedControls": [
+        "duplicate-structure"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "severe": [
+          1
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0,
+        "exact": true,
+        "mildWorst": 0,
+        "severeBest": 1
+      }
+    },
+    {
+      "name": "anchor error p95",
+      "scope": "aggregate",
+      "path": "correspondence.placement.anchorError.p95",
+      "direction": "atMost",
+      "detectedControls": [
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.1803,
+          0.3532,
+          0
+        ],
+        "severe": [
+          15
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 4.0149,
+        "mildWorst": 0.3532,
+        "severeBest": 15,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "worst entity anchor error",
+      "scope": "worst-entity",
+      "path": "correspondence.placement.anchorError.max",
+      "direction": "atMost",
+      "detectedControls": [
+        "swap-structures",
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.1803,
+          1.3517,
+          0
+        ],
+        "severe": [
+          50.8919,
+          15
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 4.763775,
+        "mildWorst": 1.3517,
+        "severeBest": 15,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "worst entity extent error",
+      "scope": "worst-entity",
+      "path": "correspondence.placement.extentRelative.max",
+      "direction": "atMost",
+      "detectedControls": [
+        "extent-45pct",
+        "vegetation-collapse"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0,
+          0.01,
+          0
+        ],
+        "severe": [
+          0.45,
+          0.6
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.12,
+        "mildWorst": 0.01,
+        "severeBest": 0.45,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "worst entity orientation error",
+      "scope": "worst-entity",
+      "path": "correspondence.placement.orientationError.max",
+      "direction": "atMost",
+      "detectedControls": [
+        "yaw-0.9"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0,
+          0,
+          0.02
+        ],
+        "severe": [
+          0.9
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.24,
+        "mildWorst": 0.02,
+        "severeBest": 0.9,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "surface p95",
+      "scope": "aggregate",
+      "path": "correspondence.surface.p95.mean",
+      "direction": "atMost",
+      "detectedControls": [
+        "translate-12",
+        "extent-45pct"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.1803,
+          0.2228,
+          0.2481
+        ],
+        "severe": [
+          14.6905,
+          8.6473
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 2.3479,
+        "mildWorst": 0.2481,
+        "severeBest": 8.6473,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "worst entity surface p95",
+      "scope": "worst-entity",
+      "path": "correspondence.surface.p95.max",
+      "direction": "atMost",
+      "detectedControls": [
+        "swap-structures",
+        "translate-12",
+        "extent-45pct"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.1803,
+          6.7849,
+          13.3449
+        ],
+        "severe": [
+          50.7372,
+          15,
+          275.5663
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 13.758675,
+        "mildWorst": 13.3449,
+        "severeBest": 15,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "over-tolerance surface fraction",
+      "scope": "aggregate",
+      "path": "correspondence.surface.overToleranceFraction.mean",
+      "direction": "atMost",
+      "detectedControls": [
+        "translate-12",
+        "extent-45pct",
+        "vegetation-collapse"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0,
+          0.0204,
+          0.0245
+        ],
+        "severe": [
+          0.9972,
+          0.5698,
+          0.3999
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.11835,
+        "mildWorst": 0.0245,
+        "severeBest": 0.3999,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "worst neighbourhood distance error",
+      "scope": "worst-entity",
+      "path": "correspondence.relational.distanceError.max",
+      "direction": "atMost",
+      "detectedControls": [
+        "swap-structures"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0,
+          0.3613,
+          0
+        ],
+        "severe": [
+          50.8778
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 12.990425,
+        "mildWorst": 0.3613,
+        "severeBest": 50.8778,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "worst zone occupancy delta",
+      "scope": "worst-zone",
+      "path": "correspondence.zones.delta.max",
+      "direction": "atMost",
+      "detectedControls": [
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "severe": [
+          18
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 5.25,
+        "mildWorst": 1,
+        "severeBest": 18,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "worst component delta",
+      "scope": "worst-entity",
+      "path": "correspondence.semanticStructure.componentDelta.max",
+      "direction": "atMost",
+      "detectedControls": [
+        "strip-components"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "severe": [
+          14
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 3.5,
+        "mildWorst": 0,
+        "severeBest": 14,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "terrain height p95",
+      "scope": "aggregate",
+      "path": "geography.height.full.p95",
+      "direction": "atMost",
+      "detectedControls": [
+        "raise-12",
+        "flatten-relief"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.3,
+          3.025
+        ],
+        "severe": [
+          12,
+          61.4
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 5.26875,
+        "mildWorst": 3.025,
+        "severeBest": 12,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "shore height p95",
+      "scope": "worst-region",
+      "path": "geography.height.shore.p95",
+      "direction": "atMost",
+      "detectedControls": [
+        "raise-12",
+        "flatten-relief"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.3,
+          1.3738
+        ],
+        "severe": [
+          12,
+          7.28
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 2.85035,
+        "mildWorst": 1.3738,
+        "severeBest": 7.28,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "coastline symmetric p95",
+      "scope": "aggregate",
+      "path": "geography.coastline.symmetricDistance.p95",
+      "direction": "atMost",
+      "detectedControls": [
+        "coast-20pct"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          1.5666,
+          3.8732
+        ],
+        "severe": [
+          76.499
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 22.02965,
+        "mildWorst": 3.8732,
+        "severeBest": 76.499,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "coastline area error",
+      "scope": "aggregate",
+      "path": "geography.coastline.areaRelativeError",
+      "direction": "atMost",
+      "detectedControls": [
+        "coast-20pct"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.009344,
+          0.020425
+        ],
+        "severe": [
+          0.360783
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.105515,
+        "mildWorst": 0.020425,
+        "severeBest": 0.360783,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "land and sea agreement",
+      "scope": "aggregate",
+      "path": "geography.classification.agreementFraction",
+      "direction": "atLeast",
+      "detectedControls": [
+        "raise-12",
+        "coast-20pct"
+      ],
+      "samples": {
+        "mild": [
+          1,
+          0.986982,
+          0.978462
+        ],
+        "severe": [
+          0.790059,
+          0.776568
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.931361,
+        "mildWorst": 0.978462,
+        "severeBest": 0.790059,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "horizon profile p95",
+      "scope": "aggregate",
+      "path": "horizon.profile.angularError.p95",
+      "direction": "atMost",
+      "detectedControls": [
+        "elevation-0.06",
+        "flatten-peaks"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.002
+        ],
+        "severe": [
+          0.06,
+          0.086325
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.0165,
+        "mildWorst": 0.002,
+        "severeBest": 0.06,
+        "margin": 0.25
+      }
+    },
+    {
+      "name": "worst azimuth horizon error",
+      "scope": "worst-azimuth",
+      "path": "horizon.profile.angularError.max",
+      "direction": "atMost",
+      "detectedControls": [
+        "elevation-0.06",
+        "flatten-peaks"
+      ],
+      "samples": {
+        "mild": [
+          0,
+          0.002
+        ],
+        "severe": [
+          0.06,
+          0.101425
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.0165,
+        "mildWorst": 0.002,
+        "severeBest": 0.06,
+        "margin": 0.25
+      }
+    }
+  ],
+  "undetectedControls": []
+}

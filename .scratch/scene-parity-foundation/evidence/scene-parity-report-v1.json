@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "scene-parity-gate-stack-v1",
+  "baselineVersion": "scene-quality-baseline-v1",
+  "infrastructure": {
+    "passed": true,
+    "failures": []
+  },
+  "layers": {
+    "structuralCorrespondence": {
+      "layer": "structuralCorrespondence",
+      "evaluated": true,
+      "passed": true,
+      "metrics": [
+        {
+          "name": "missing entities",
+          "scope": "aggregate",
+          "value": 0,
+          "threshold": 0,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "extra entities",
+          "scope": "aggregate",
+          "value": 0,
+          "threshold": 0,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "anchor error p95",
+          "scope": "aggregate",
+          "value": 0,
+          "threshold": 4.0149,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "worst entity anchor error",
+          "scope": "worst-entity",
+          "value": 0,
+          "threshold": 4.763775,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "worst entity extent error",
+          "scope": "worst-entity",
+          "value": 0,
+          "threshold": 0.12,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "worst entity orientation error",
+          "scope": "worst-entity",
+          "value": 0,
+          "threshold": 0.24,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        }
+      ],
+      "failures": []
+    },
+    "worldGeometry": {
+      "layer": "worldGeometry",
+      "evaluated": true,
+      "passed": false,
+      "metrics": [
+        {
+          "name": "surface p95",
+          "scope": "aggregate",
+          "value": 11.2159,
+          "threshold": 2.3479,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "worst entity surface p95",
+          "scope": "worst-entity",
+          "value": 165.6694,
+          "threshold": 13.758675,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "over-tolerance surface fraction",
+          "scope": "aggregate",
+          "value": 0.6155,
+          "threshold": 0.11835,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "worst neighbourhood distance error",
+          "scope": "worst-entity",
+          "value": 0,
+          "threshold": 12.990425,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "worst zone occupancy delta",
+          "scope": "worst-zone",
+          "value": 0,
+          "threshold": 5.25,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "worst component delta",
+          "scope": "worst-entity",
+          "value": 9,
+          "threshold": 3.5,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "terrain height p95",
+          "scope": "aggregate",
+          "value": 16.2617,
+          "threshold": 5.26875,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "shore height p95",
+          "scope": "worst-region",
+          "value": 12.4923,
+          "threshold": 2.85035,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "coastline symmetric p95",
+          "scope": "aggregate",
+          "value": 15.7475,
+          "threshold": 22.02965,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "coastline area error",
+          "scope": "aggregate",
+          "value": 0.019657,
+          "threshold": 0.105515,
+          "direction": "atMost",
+          "passed": true,
+          "missing": false
+        },
+        {
+          "name": "land and sea agreement",
+          "scope": "aggregate",
+          "value": 0.903491,
+          "threshold": 0.931361,
+          "direction": "atLeast",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "horizon profile p95",
+          "scope": "aggregate",
+          "value": 0.098887,
+          "threshold": 0.0165,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "worst azimuth horizon error",
+          "scope": "worst-azimuth",
+          "value": 0.124982,
+          "threshold": 0.0165,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        }
+      ],
+      "failures": [
+        "surface p95: 11.2159 is not <= 2.3479",
+        "worst entity surface p95: 165.6694 is not <= 13.758675",
+        "over-tolerance surface fraction: 0.6155 is not <= 0.11835",
+        "worst component delta: 9 is not <= 3.5",
+        "terrain height p95: 16.2617 is not <= 5.26875",
+        "shore height p95: 12.4923 is not <= 2.85035",
+        "land and sea agreement: 0.903491 is not >= 0.931361",
+        "horizon profile p95: 0.098887 is not <= 0.0165",
+        "worst azimuth horizon error: 0.124982 is not <= 0.0165"
+      ]
+    },
+    "fixedCameraGeometry": {
+      "layer": "fixedCameraGeometry",
+      "evaluated": false,
+      "passed": false,
+      "metrics": [],
+      "failures": [],
+      "reason": "no frozen thresholds are calibrated for this layer, so it cannot pass"
+    },
+    "nativeAppearance": {
+      "layer": "nativeAppearance",
+      "evaluated": false,
+      "passed": false,
+      "metrics": [],
+      "failures": [],
+      "blockedBy": [
+        "worldGeometry",
+        "fixedCameraGeometry"
+      ],
+      "reason": "native appearance is not evaluated until every geometry layer passes, because a material result over the wrong shape is not evidence"
+    }
+  },
+  "candidate": {
+    "passed": false,
+    "failedLayers": [
+      "worldGeometry",
+      "fixedCameraGeometry",
+      "nativeAppearance"
+    ]
+  },
+  "trendIndex": {
+    "authoritative": false,
+    "note": "diagnostic only; no gate decision reads this value",
+    "value": 0.6538
+  },
+  "exitStatus": "candidate-failure",
+  "subject": {
+    "recipeVersion": "island-scene-recipe-v1",
+    "generatorVersion": "island-scene-generator-v1",
+    "rngVersion": "mulberry32-v1",
+    "seedVersion": "scene-seed-fnv1a-mulberry32-v1",
+    "sceneSeed": 20260729,
+    "entities": 672,
+    "populations": 6,
+    "semanticLights": 32,
+    "terrainProgram": "bounded-semantic-terrain-v1"
+  },
+  "observation": {
+    "host": {
+      "platform": "MacIntel",
+      "userAgentPlatform": "macOS"
+    },
+    "environment": {
+      "browser": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36",
+        "userAgentData": {
+          "brands": [
+            {
+              "brand": "Not;A=Brand",
+              "version": "8"
+            },
+            {
+              "brand": "Chromium",
+              "version": "150"
+            },
+            {
+              "brand": "Google Chrome",
+              "version": "150"
+            }
+          ],
+          "mobile": false,
+          "platform": "macOS"
+        }
+      },
+      "os": {
+        "platform": "MacIntel",
+        "userAgentPlatform": "macOS"
+      },
+      "gpu": {
+        "vendor": "Google Inc. (Google)",
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+        "acceleration": "software"
+      },
+      "color": {
+        "colorGamut": "srgb",
+        "dynamicRangeHigh": false,
+        "drawingBufferColorSpace": "srgb"
+      },
+      "threeRevision": "170"
+    },
+    "capture": {
+      "cssViewport": [
+        1440,
+        810
+      ],
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "deviceScaleFactor": 1,
+      "momentMs": 12000
+    }
+  },
+  "evidenceVersions": {
+    "coverage": "semantic-coverage-manifest-v2",
+    "correspondence": "scene-correspondence-v1",
+    "geography": "geography-evidence-v1",
+    "horizon": "horizon-comparison-v1",
+    "passes": "scene-pass-evidence-v1"
+  }
+}
