@@ -172,6 +172,13 @@ function buildEnvironment(recipe, materials) {
   return root;
 }
 
+/**
+ * How many places an instance may try before it settles for the highest ground
+ * it found. Bounded so generation stays deterministic in cost as well as in
+ * result: a region that is mostly water must not turn into an unbounded search.
+ */
+const COVER_PLACEMENT_ATTEMPTS = 24;
+
 function buildPopulations(recipe, materials, elevationAt) {
   const root = new THREE.Group();
   root.userData.semanticId = "cover";
@@ -189,25 +196,64 @@ function buildPopulations(recipe, materials, elevationAt) {
     const material = materials.family(population.materialFamily);
     const mesh = new THREE.InstancedMesh(geometry, material, population.count);
     const matrix = new THREE.Matrix4();
+    // A ground population's own measured floor. Its region is an ellipse over
+    // the island, and an ellipse over an island is mostly water: settling every
+    // instance on whatever the terrain is under it planted five of the six
+    // populations down the seabed, to 50 units below the surface against
+    // authored floors at 13 to 25. `cover` became the worst group in the
+    // fixed-camera layer by two orders of magnitude — not because the scatter is
+    // wrong, but because most of it is underwater.
+    const sky = population.region.shape === "sky-shell";
+    // Dry land is the whole rule, and deliberately the whole rule.
+    //
+    // A population's region is an ellipse over the island, and an ellipse over an
+    // island is mostly water. Settling every instance on whatever terrain was
+    // under it planted five of the six populations down the seabed — to 50 units
+    // below the surface against authored floors at 13 to 25 — and made `cover`
+    // the worst group in the fixed-camera layer by two orders of magnitude.
+    //
+    // The authored floor is *not* used as a second filter, though the recipe
+    // carries it. It is where the reference's own instances start, which is a
+    // consequence of where the reference's terrain is: under the three small
+    // inland ellipses the candidate's terrain tops out around 28 against floors
+    // of 23.7 to 25.3, so only 17 to 27 per cent of each ellipse clears its
+    // floor. Filtering on it rejected four draws in five and piled the survivors
+    // onto local high ground, collapsing density ratios from 0.9 to 0.19. That is
+    // a terrain residual — ticket 03's — being paid for out of a cover statistic.
+    const waterline = recipe.world.semanticSeaLevel - 2;
     for (let index = 0; index < population.count; index += 1) {
-      const angle = rng.nextFloat() * Math.PI * 2;
-      const radial =
-        population.region.innerRadius +
-        rng.nextFloat() *
-          (population.region.outerRadius - population.region.innerRadius);
+      // The first draw on dry land, or the highest seen if the region offers
+      // none. Taking the *first* dry draw rather than the best of the batch is
+      // what keeps the scatter spread out: preferring the highest turns every
+      // instance into a search for local high ground and collapses the region.
+      let dry = null;
+      let highest = null;
+      for (let attempt = 0; attempt < COVER_PLACEMENT_ATTEMPTS; attempt += 1) {
+        const angle = rng.nextFloat() * Math.PI * 2;
+        const radial =
+          population.region.innerRadius +
+          rng.nextFloat() *
+            (population.region.outerRadius - population.region.innerRadius);
+        const sample = [
+          population.region.center[0] + Math.cos(angle) * radial * population.region.radii[0],
+          sky
+            ? population.region.minHeight +
+              rng.nextFloat() *
+                (population.region.maxHeight - population.region.minHeight)
+            : 0,
+          population.region.center[1] + Math.sin(angle) * radial * population.region.radii[1],
+        ];
+        if (!sky) sample[1] = elevationAt(sample[0], sample[2]);
+        if (!highest || sample[1] > highest[1]) highest = sample;
+        if (sky || sample[1] >= waterline) {
+          dry = sample;
+          break;
+        }
+      }
+      const [x, y, z] = dry ?? highest;
       const scale =
         population.scaleRange[0] +
         rng.nextFloat() * (population.scaleRange[1] - population.scaleRange[0]);
-      // Populations are placed inside their own measured region and settled on
-      // the generated terrain rather than on a flat nominal ground plane.
-      const x = population.region.center[0] + Math.cos(angle) * radial * population.region.radii[0];
-      const z = population.region.center[1] + Math.sin(angle) * radial * population.region.radii[1];
-      const y =
-        population.region.shape === "sky-shell"
-          ? population.region.minHeight +
-            rng.nextFloat() *
-              (population.region.maxHeight - population.region.minHeight)
-          : elevationAt(x, z);
       matrix.makeRotationY(rng.nextFloat() * Math.PI * 2);
       matrix.scale(new THREE.Vector3(scale, scale, scale));
       matrix.setPosition(x, y, z);

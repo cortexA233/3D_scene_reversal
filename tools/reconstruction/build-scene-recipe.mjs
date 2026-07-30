@@ -83,6 +83,33 @@ const MATERIAL_FAMILIES = [
 ];
 
 /**
+ * How large a population's instances actually are, from the reference's own
+ * measured surface area rather than from a number chosen once for all of them.
+ *
+ * `scaleRange` used to be a hardcoded `[0.6, 1.6]` for every population, and it
+ * was wrong by between 1.6 and 2.7 times on four of the five — area goes as the
+ * square, so the candidate drew 5,302 cover pixels on the authored overview
+ * against the reference's 128. What is measured is the population's total world
+ * surface area; dividing by its instance count and by the unit generator form's
+ * own area gives the scale that reproduces it.
+ *
+ * The spread stays a declared shape rule, because a total area does not describe
+ * a distribution. The ratio between the ends is the one the hardcoded range
+ * used, so only the magnitude has changed hands from invented to measured, and
+ * the range still has the same root-mean-square as the area it came from.
+ */
+const UNIT_FORM_AREA = 9.5745; // THREE.IcosahedronGeometry(1, 0)
+const SCALE_SPREAD = 1.6 / 0.6;
+const SCALE_RMS = Math.sqrt((1 + SCALE_SPREAD + SCALE_SPREAD ** 2) / 3);
+
+function measuredScaleRange(item) {
+  const areaPerInstance = item.worldSurfaceArea / item.instanceCount;
+  const rms = Math.sqrt(areaPerInstance / UNIT_FORM_AREA);
+  const low = rms / SCALE_RMS;
+  return [round(low, 4), round(low * SCALE_SPREAD, 4)];
+}
+
+/**
  * Merges a group's fitted ridge controls onto its measured summits. Where a
  * summit sits stays measured; the loop only supplies how tall and how broad it
  * is and how the ridge through it behaves.
@@ -187,7 +214,7 @@ function buildPopulations(inventory) {
         outerRadius: 1,
       },
       heightRange: [round(item.bounds.min[1]), round(item.bounds.max[1])],
-      scaleRange: [0.6, 1.6],
+      scaleRange: measuredScaleRange(item),
       orientation: "radial",
       materialFamily: kind === "grass-tuft" ? "terrain-ground" : "shore-rock",
     };

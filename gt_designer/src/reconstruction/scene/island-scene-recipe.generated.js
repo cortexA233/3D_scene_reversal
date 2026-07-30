@@ -14724,8 +14724,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         54.04
       ],
       "scaleRange": [
-        0.6,
-        1.6
+        0.2669,
+        0.7116
       ],
       "orientation": "radial",
       "materialFamily": "shore-rock"
@@ -14752,8 +14752,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         30.65
       ],
       "scaleRange": [
-        0.6,
-        1.6
+        0.3671,
+        0.9788
       ],
       "orientation": "radial",
       "materialFamily": "shore-rock"
@@ -14780,8 +14780,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         54.8
       ],
       "scaleRange": [
-        0.6,
-        1.6
+        0.7093,
+        1.8915
       ],
       "orientation": "radial",
       "materialFamily": "shore-rock"
@@ -14808,8 +14808,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         31.49
       ],
       "scaleRange": [
-        0.6,
-        1.6
+        0.3719,
+        0.9917
       ],
       "orientation": "radial",
       "materialFamily": "shore-rock"
@@ -14836,8 +14836,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         27.61
       ],
       "scaleRange": [
-        0.6,
-        1.6
+        0.2217,
+        0.5912
       ],
       "orientation": "radial",
       "materialFamily": "shore-rock"
