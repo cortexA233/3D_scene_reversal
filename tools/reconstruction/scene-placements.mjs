@@ -47,7 +47,7 @@ export function orientationFor(declared, evidence) {
   return { type: "heading", radians: yaw };
 }
 
-function placementKey(path) {
+export function placementKey(path) {
   const parts = path.split("/");
   const villageIndex = parts.findIndex((part) => part.includes(VILLAGE_MARKER));
   if (villageIndex >= 0 && parts.length > villageIndex + 1) {
@@ -68,6 +68,24 @@ const WILDLIFE = Object.freeze({
   material: "creature-fur",
   orientation: "heading",
 });
+
+/**
+ * One renderable's semantics, by the same rule the placement resolution uses.
+ *
+ * Exported because a second resolution is how a family ends up measured against
+ * itself wrongly. An authored family lives on the *placement group*, not on the mesh:
+ * a palm frond is `PalmTree__palmtree_5__0001/0000:Mesh:Mesh_79036`, so keying off the
+ * mesh's own name yields "Mesh" and a wildlife rig's unnamed mesh yields "(unnamed)".
+ * A development tool that resolved families per mesh therefore reached 38 per cent of
+ * `palm-foliage` and 13 per cent of `creature-fur` and had no way to know.
+ */
+export function resolveRenderableSemantics(path, extent) {
+  const resolved = placementKey(path);
+  if (!resolved) return null;
+  return resolved.family === "wildlife-rig"
+    ? WILDLIFE
+    : resolveFamily(resolved.family, extent);
+}
 
 /**
  * @returns {{placements: object[], members: Map<string, string>}}

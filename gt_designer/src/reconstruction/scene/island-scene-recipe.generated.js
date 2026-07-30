@@ -758,9 +758,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "distant-rock",
       "role": "horizon",
       "albedo": [
-        0.42,
-        0.46,
-        0.52
+        0.1777,
+        0.2505,
+        0.2188
       ],
       "roughness": 0.96
     },
@@ -768,9 +768,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "painted-timber",
       "role": "architecture",
       "albedo": [
-        0.68,
-        0.36,
-        0.28
+        0.2658,
+        0.204,
+        0.1757
       ],
       "roughness": 0.72
     },
@@ -778,9 +778,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "paving-stone",
       "role": "ground",
       "albedo": [
-        0.66,
-        0.62,
-        0.55
+        0.2295,
+        0.2507,
+        0.2451
       ],
       "roughness": 0.88
     },
@@ -788,9 +788,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "shore-rock",
       "role": "terrain-detail",
       "albedo": [
-        0.52,
-        0.5,
-        0.47
+        0.4965,
+        0.4874,
+        0.4822
       ],
       "roughness": 0.93
     },
@@ -798,9 +798,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "palm-foliage",
       "role": "vegetation",
       "albedo": [
-        0.29,
-        0.47,
-        0.24
+        0.1883,
+        0.176,
+        0.0541
       ],
       "roughness": 0.78
     },
@@ -808,9 +808,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "blossom-foliage",
       "role": "vegetation",
       "albedo": [
-        0.85,
-        0.6,
-        0.7
+        0.6044,
+        0.2572,
+        0.3019
       ],
       "roughness": 0.74
     },
@@ -818,9 +818,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "bamboo-foliage",
       "role": "vegetation",
       "albedo": [
-        0.44,
-        0.58,
-        0.29
+        0.3592,
+        0.4594,
+        0.1858
       ],
       "roughness": 0.7
     },
@@ -828,9 +828,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "terrain-ground",
       "role": "terrain",
       "albedo": [
-        0.5,
-        0.55,
-        0.33
+        0.1325,
+        0.14,
+        0.0679
       ],
       "roughness": 0.95
     },
@@ -848,9 +848,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "id": "creature-fur",
       "role": "wildlife",
       "albedo": [
-        0.86,
-        0.85,
-        0.84
+        0.3313,
+        0.3205,
+        0.3123
       ],
       "roughness": 0.85
     }

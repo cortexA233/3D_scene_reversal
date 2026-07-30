@@ -21,7 +21,8 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 08 — vegetation canopies | re-opened; bamboo was left behind, beds fixed, stands blocked on a sampler defect |
 | Reconstruction 03 | boundary recorded (ADR-0054); one in-budget attempt named |
 | Reconstruction 09 — distributed cover | landed; the reference measurement was wrong and is fixed (ADR-0053) |
-| Reconstruction 06, 07, 10-16 | ready-for-agent; 06 is next and `paths` is its dominant term |
+| Reconstruction 11 — material families | in progress; every albedo is measured, distant-rock converged |
+| Reconstruction 06, 07, 10, 12-16 | ready-for-agent; 06's paths is blocked on 03 |
 
 ## Read this before trusting any number below
 
@@ -735,14 +736,30 @@ earlier was measured against the wrong thing.
   117.19 on the authored overview, and its pixel ratio is 0.90 — the buildings are
   roughly the right size and the wrong depth, which is a massing problem rather
   than a footprint one.
-- Ticket 11: `palm-foliage` at DeltaE 51.87 averaged over the six cameras is by
-  some way the largest appearance residual left.
-- Before 06, 07 and 11, build the browser-in-the-loop fitting harness ticket 04
-  did without. All three are appearance tickets measurable only through a
-  rendered capture, and the existing Reference-guided Fitting Loop is Node-side
-  and measures geometry. Ticket 09 was pushed through with three 2-minute capture
-  round trips per parameter change, which was affordable only because its
-  corrections were measured rather than searched.
+- **Ticket 11 is part done and its remaining half is geometry's.** Every family's
+  albedo was hand-written, and the authored materials cannot correct one directly
+  because the colour is in maps: all 236 palm placements are 0xffffff with a texture.
+  `tools/development/measure-material-albedo.mjs` measures each family's area-weighted
+  mean linear reflectance from those maps and from base colours where there is no map,
+  and the recipe carries the result — global appearance DeltaE 13.168 to 12.504,
+  `palm-foliage` 54.84 to 38.87, and `distant-rock` converged at [179 177 163] against
+  a reference [179 176 161].
+  `palm-foliage`'s remaining 2.9-fold brightness gap is **not** colour. Its material is
+  measured and its render is still bright because a dense authored canopy shadows
+  itself and the candidate's does not. `measure-appearance-direction.mjs` reports that
+  residual and is deliberately report-only: it began as a fitting loop, and the albedo
+  it wanted was darker than the authored material actually is, which is material
+  standing in for geometry.
+  Still open: roughness, transparency and emission are declared rather than measured
+  although the authored materials record roughness as a scalar, and there are no
+  bounded semantic pattern programs at all — every family is one flat colour.
+- The browser-in-the-loop harness this file kept asking for exists, and the lesson from
+  building it is that a loop was the wrong instinct for appearance. What 06, 07 and 11
+  needed was not a faster search but the *direction* of each residual, which the pass
+  did not record, and then a measurement of the authored material rather than a fit
+  against the render. Anything the direction still wants once a family's material is
+  measured is geometry, and fitting it would buy the appearance layer with the geometry
+  layers.
 
 ## Things that are easy to get wrong
 

@@ -75,11 +75,43 @@ const FITTED_HORIZON_RIDGE_PATH = path.join(
   PROJECT_ROOT,
   "tools/reconstruction/fitted/horizon-ridge-v1.json",
 );
+/**
+ * Per-family albedo measured from the authored base colour maps and base colours by
+ * `tools/development/measure-material-albedo.mjs`. Absent on a clean checkout, in
+ * which case the declared albedos below stand as they are.
+ */
+const MATERIAL_ALBEDO_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/full-island-reconstruction/evidence/material-albedo-v1.json",
+);
 
 /** One stable root identity for the whole island. */
 const SCENE_SEED = 20260729;
 
-const MATERIAL_FAMILIES = [
+/**
+ * The declared Material Families, and where their numbers come from.
+ *
+ * The albedos written here are a fallback, not the answer. An authored material's base
+ * colour cannot supply them on its own: measured from the assembled scene, the authored
+ * surfaces are overwhelmingly textured with white base colours, which is why ADR-0051's
+ * `desaturate-albedo` control registered a DeltaE of 0.057 — less than a one per cent
+ * mild control — and had to be replaced. The colour lives in maps the Production Runtime
+ * may not load, so carrying each family's mean is a Material Family's whole job.
+ *
+ * `measure-material-albedo.mjs` measures it: the area-weighted mean linear reflectance
+ * of every surface that resolves to the family, from its map where it has one and from
+ * its base colour where it does not, alpha-weighted so a leaf card's transparent field
+ * does not dilute the leaf. Three numbers per family, merged below, so a clean
+ * generation reproduces them without the tool.
+ *
+ * It is measured rather than fitted through a render on purpose. The authored canopy
+ * renders dark partly because it is dense and self-shadowing, and a sparser candidate
+ * that matched the rendered mean by lowering its albedo would be standing material in
+ * for missing geometry — which is what ADR-0040's ordering rule exists to prevent.
+ * Measuring separates them: the albedo is the authored material's own reflectance, and
+ * whatever rendered difference remains is honestly geometry's.
+ */
+const DECLARED_MATERIAL_FAMILIES = [
   { id: "distant-rock", role: "horizon", albedo: [0.42, 0.46, 0.52], roughness: 0.96 },
   { id: "painted-timber", role: "architecture", albedo: [0.68, 0.36, 0.28], roughness: 0.72 },
   { id: "paving-stone", role: "ground", albedo: [0.66, 0.62, 0.55], roughness: 0.88 },
@@ -91,6 +123,19 @@ const MATERIAL_FAMILIES = [
   { id: "ocean-surface", role: "water", albedo: [0.31, 0.72, 0.72], roughness: 0.15 },
   { id: "creature-fur", role: "wildlife", albedo: [0.86, 0.85, 0.84], roughness: 0.85 },
 ];
+
+function materialFamilies(measuredAlbedo) {
+  const measured = new Map(
+    (measuredAlbedo?.families ?? []).map((family) => [family.id, family]),
+  );
+  return DECLARED_MATERIAL_FAMILIES.map((family) => {
+    const row = measured.get(family.id);
+    // `usable` is the tool's own statement that it reached enough of the family for
+    // the number to mean anything. A family it did not reach keeps the declared
+    // albedo, and the tool's evidence file records which and why.
+    return row?.usable && row.albedo ? { ...family, albedo: row.albedo } : family;
+  });
+}
 
 /**
  * How large a population's instances actually are, and how they sit in the
@@ -464,7 +509,7 @@ function buildTerrain(elevation, world) {
   });
 }
 
-function buildRecipe(inventory, elevation, horizonEvidence, fittedRidges, coverInstances) {
+function buildRecipe(inventory, elevation, horizonEvidence, fittedRidges, coverInstances, measuredAlbedo) {
   const entities = buildEntities(inventory, horizonEvidence, fittedRidges);
   return {
     schemaVersion: SCENE_RECIPE_SCHEMA_VERSION,
@@ -483,7 +528,7 @@ function buildRecipe(inventory, elevation, horizonEvidence, fittedRidges, coverI
     },
     environment: ENVIRONMENT,
     terrain: buildTerrain(elevation, REFERENCE_LAYOUT.world),
-    materialFamilies: MATERIAL_FAMILIES,
+    materialFamilies: materialFamilies(measuredAlbedo),
     entities,
     populations: buildPopulations(inventory, coverInstances),
     semanticLights: buildSemanticLights(inventory, entities),
@@ -519,12 +564,21 @@ async function main() {
     if (error.code !== "ENOENT") throw error;
   }
 
+  let measuredAlbedo = null;
+  try {
+    measuredAlbedo = JSON.parse(await readFile(MATERIAL_ALBEDO_PATH, "utf8"));
+    assert.equal(measuredAlbedo.schemaVersion, "material-albedo-v1");
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+
   const recipe = buildRecipe(
     inventory,
     elevation,
     horizonEvidence,
     fittedRidges,
     coverInstances,
+    measuredAlbedo,
   );
   assert.deepEqual(
     validateSceneRecipe(recipe),

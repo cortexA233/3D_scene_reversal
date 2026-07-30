@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "material-albedo-v1",
+  "authority": "Assembled Authored Scene",
+  "note": "Area-weighted mean linear albedo per Material Family, measured from the Assembled Authored Scene's own base colour maps and base colours. The authored surfaces are almost all white with a texture, so this is where a family's colour actually lives, and an untextured surface contributes its base colour so a family is measured whole. Nothing sampled is retained: three numbers per family. `usable` is false where the scene walk reached less than half the family's authored surface, in which case the declared albedo stands.",
+  "minimumReached": 0.5,
+  "families": [
+    {
+      "id": "distant-rock",
+      "meshes": 16,
+      "texturedMeshes": 16,
+      "surfaceArea": 9503289.88,
+      "texturedSurfaceArea": 9503289.88,
+      "texturedFraction": 1,
+      "albedo": [
+        0.1777,
+        0.2505,
+        0.2188
+      ],
+      "opaqueTexelFraction": 1,
+      "authoredBaseColours": [
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 10436236.82,
+      "reached": 0.9106,
+      "usable": true
+    },
+    {
+      "id": "blossom-foliage",
+      "meshes": 144,
+      "texturedMeshes": 42,
+      "surfaceArea": 648849.57,
+      "texturedSurfaceArea": 631618.2,
+      "texturedFraction": 0.9734,
+      "albedo": [
+        0.6044,
+        0.2572,
+        0.3019
+      ],
+      "opaqueTexelFraction": 0.4274,
+      "authoredBaseColours": [
+        "619253",
+        "784d36",
+        "cacaca",
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 654247.39,
+      "reached": 0.9917,
+      "usable": true
+    },
+    {
+      "id": "palm-foliage",
+      "meshes": 236,
+      "texturedMeshes": 236,
+      "surfaceArea": 265032.18,
+      "texturedSurfaceArea": 265032.18,
+      "texturedFraction": 1,
+      "albedo": [
+        0.1883,
+        0.176,
+        0.0541
+      ],
+      "opaqueTexelFraction": 0.3758,
+      "authoredBaseColours": [
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 267394.24,
+      "reached": 0.9912,
+      "usable": true
+    },
+    {
+      "id": "painted-timber",
+      "meshes": 80,
+      "texturedMeshes": 61,
+      "surfaceArea": 125704.75,
+      "texturedSurfaceArea": 113670.77,
+      "texturedFraction": 0.9043,
+      "albedo": [
+        0.2658,
+        0.204,
+        0.1757
+      ],
+      "opaqueTexelFraction": 0.9993,
+      "authoredBaseColours": [
+        "619253",
+        "7c5333",
+        "bababa",
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 121159.1,
+      "reached": 1.0375,
+      "usable": true
+    },
+    {
+      "id": "paving-stone",
+      "meshes": 74,
+      "texturedMeshes": 66,
+      "surfaceArea": 48131.09,
+      "texturedSurfaceArea": 47158.42,
+      "texturedFraction": 0.9798,
+      "albedo": [
+        0.2295,
+        0.2507,
+        0.2451
+      ],
+      "opaqueTexelFraction": 0.6338,
+      "authoredBaseColours": [
+        "cacaca",
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 40804.43,
+      "reached": 1.1796,
+      "usable": true
+    },
+    {
+      "id": "bamboo-foliage",
+      "meshes": 132,
+      "texturedMeshes": 76,
+      "surfaceArea": 44398.19,
+      "texturedSurfaceArea": 39413.77,
+      "texturedFraction": 0.8877,
+      "albedo": [
+        0.3592,
+        0.4594,
+        0.1858
+      ],
+      "opaqueTexelFraction": 1,
+      "authoredBaseColours": [
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 57172.01,
+      "reached": 0.7766,
+      "usable": true
+    },
+    {
+      "id": "shore-rock",
+      "meshes": 44,
+      "texturedMeshes": 9,
+      "surfaceArea": 26779.3,
+      "texturedSurfaceArea": 585.94,
+      "texturedFraction": 0.0219,
+      "albedo": [
+        0.4965,
+        0.4874,
+        0.4822
+      ],
+      "opaqueTexelFraction": 1,
+      "authoredBaseColours": [
+        "bababa",
+        "cacaca",
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 26727.53,
+      "reached": 1.0019,
+      "usable": true
+    },
+    {
+      "id": "terrain-ground",
+      "meshes": 10,
+      "texturedMeshes": 10,
+      "surfaceArea": 4357.37,
+      "texturedSurfaceArea": 4357.37,
+      "texturedFraction": 1,
+      "albedo": [
+        0.1325,
+        0.14,
+        0.0679
+      ],
+      "opaqueTexelFraction": 0.3824,
+      "authoredBaseColours": [
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 4341.03,
+      "reached": 1.0038,
+      "usable": true
+    },
+    {
+      "id": "creature-fur",
+      "meshes": 212,
+      "texturedMeshes": 212,
+      "surfaceArea": 1841.67,
+      "texturedSurfaceArea": 1841.67,
+      "texturedFraction": 1,
+      "albedo": [
+        0.3313,
+        0.3205,
+        0.3123
+      ],
+      "opaqueTexelFraction": 1,
+      "authoredBaseColours": [
+        "ffffff"
+      ],
+      "authoredSurfaceArea": 1841.65,
+      "reached": 1,
+      "usable": true
+    }
+  ],
+  "unmappedFamilies": []
+}

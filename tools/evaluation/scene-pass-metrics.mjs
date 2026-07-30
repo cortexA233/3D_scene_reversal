@@ -395,7 +395,19 @@ export function appearanceEvidence(
   // per-pixel loop allocates an array for every mask for every pixel, which at
   // scene scale costs more than the CIELAB conversion the loop exists for.
   const bucketsFor = (masks) =>
-    Object.entries(masks).map(([name, mask]) => ({ name, mask, values: [] }));
+    Object.entries(masks).map(([name, mask]) => ({
+      name,
+      mask,
+      values: [],
+      // Each subject's own mean channel over this label's pixels, accumulated in the
+      // same pass as the difference. A per-label DeltaE says how wrong a family is;
+      // it cannot say in which direction, so nothing could be fitted from it — the
+      // Reference-guided Fitting Loop needs to know that a foliage family is too dark
+      // rather than merely far away. Both means are over the *same* pixels, so the
+      // ratio between them is a correction the loop can apply.
+      reference: [0, 0, 0],
+      candidate: [0, 0, 0],
+    }));
   const regionBuckets = bucketsFor(regions);
   const familyBuckets = bucketsFor(materialFamilies);
 
@@ -406,10 +418,20 @@ export function appearanceEvidence(
     const delta = deltaE76(left, right);
     global.push(delta);
     for (let bucket = 0; bucket < regionBuckets.length; bucket += 1) {
-      if (regionBuckets[bucket].mask[index]) regionBuckets[bucket].values.push(delta);
+      if (!regionBuckets[bucket].mask[index]) continue;
+      regionBuckets[bucket].values.push(delta);
+      for (let channel = 0; channel < 3; channel += 1) {
+        regionBuckets[bucket].reference[channel] += referenceRgba[offset + channel];
+        regionBuckets[bucket].candidate[channel] += candidateRgba[offset + channel];
+      }
     }
     for (let bucket = 0; bucket < familyBuckets.length; bucket += 1) {
-      if (familyBuckets[bucket].mask[index]) familyBuckets[bucket].values.push(delta);
+      if (!familyBuckets[bucket].mask[index]) continue;
+      familyBuckets[bucket].values.push(delta);
+      for (let channel = 0; channel < 3; channel += 1) {
+        familyBuckets[bucket].reference[channel] += referenceRgba[offset + channel];
+        familyBuckets[bucket].candidate[channel] += candidateRgba[offset + channel];
+      }
     }
   }
 
@@ -439,7 +461,21 @@ function summarizeBuckets(buckets) {
   return Object.fromEntries(
     buckets
       .filter((bucket) => bucket.values.length > 0)
-      .map((bucket) => [bucket.name, summarize(bucket.values)]),
+      .map((bucket) => [
+        bucket.name,
+        {
+          ...summarize(bucket.values),
+          // Additive, and deliberately so: the aggregate reads only the difference
+          // statistics, so adding a direction alongside them leaves every stored
+          // capture's gated numbers exactly as they were.
+          referenceChannelMeans: bucket.reference.map((sum) =>
+            Number((sum / bucket.values.length).toFixed(4)),
+          ),
+          candidateChannelMeans: bucket.candidate.map((sum) =>
+            Number((sum / bucket.values.length).toFixed(4)),
+          ),
+        },
+      ]),
   );
 }
 
