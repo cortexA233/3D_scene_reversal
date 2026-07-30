@@ -273,8 +273,96 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           286.45,
           138.86
         ],
-        "radius": 40,
+        "radius": 96,
         "height": 68.19,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          311.5,
+          126.34
+        ],
+        "radius": 48,
+        "height": -58.13,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          248.86,
+          101.28
+        ],
+        "radius": 24,
+        "height": -42.05,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          248.86,
+          113.81
+        ],
+        "radius": 12,
+        "height": 38.11,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          198.75,
+          76.22
+        ],
+        "radius": 12,
+        "height": 37.33,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          198.75,
+          101.28
+        ],
+        "radius": 48,
+        "height": 36.84,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          211.28,
+          76.22
+        ],
+        "radius": 24,
+        "height": -52.64,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          173.7,
+          113.81
+        ],
+        "radius": 24,
+        "height": -38.53,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          211.28,
+          88.75
+        ],
+        "radius": 12,
+        "height": 36.96,
         "direction": 0,
         "elongation": 1
       },
@@ -284,63 +372,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           223.81,
           176.45
         ],
-        "radius": 40,
-        "height": 56.51,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          148.64,
-          38.64
-        ],
-        "radius": 40,
-        "height": 51.21,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          161.17,
-          38.64
-        ],
-        "radius": 40,
-        "height": -61.71,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          161.17,
-          51.17
-        ],
-        "radius": 40,
-        "height": 62.69,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          148.64,
-          63.7
-        ],
-        "radius": 40,
-        "height": -56.9,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          186.22,
-          101.28
-        ],
-        "radius": 40,
-        "height": 50.33,
+        "radius": 48,
+        "height": 32.38,
         "direction": 0,
         "elongation": 1
       },
@@ -348,76 +381,32 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "hill",
         "position": [
           248.86,
+          251.62
+        ],
+        "radius": 48,
+        "height": 31.25,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          273.92,
           113.81
         ],
-        "radius": 40,
-        "height": 48.02,
+        "radius": 24,
+        "height": -31.23,
         "direction": 0,
         "elongation": 1
       },
       {
         "type": "channel",
         "position": [
-          248.86,
-          101.28
+          223.81,
+          276.67
         ],
-        "radius": 40,
-        "height": -48.18,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          173.7,
-          113.81
-        ],
-        "radius": 40,
-        "height": -47.88,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          198.75,
-          126.34
-        ],
-        "radius": 40,
-        "height": 47.02,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          161.17,
-          63.7
-        ],
-        "radius": 40,
-        "height": 46.87,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          173.7,
-          51.17
-        ],
-        "radius": 40,
-        "height": -61.07,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          161.17,
-          51.17
-        ],
-        "radius": 40,
-        "height": 50.87,
+        "radius": 48,
+        "height": -28.74,
         "direction": 0,
         "elongation": 1
       },
@@ -425,219 +414,87 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "channel",
         "position": [
           161.17,
-          38.64
+          88.75
         ],
-        "radius": 40,
-        "height": -52.11,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          148.64,
-          38.64
-        ],
-        "radius": 40,
-        "height": 49.48,
+        "radius": 12,
+        "height": -28.56,
         "direction": 0,
         "elongation": 1
       },
       {
         "type": "channel",
         "position": [
-          136.11,
-          38.64
+          273.92,
+          76.22
         ],
-        "radius": 40,
-        "height": -63.23,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          148.64,
-          38.64
-        ],
-        "radius": 40,
-        "height": 53,
+        "radius": 48,
+        "height": -25.98,
         "direction": 0,
         "elongation": 1
       },
       {
         "type": "channel",
         "position": [
-          148.64,
-          51.17
-        ],
-        "radius": 40,
-        "height": -56.94,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          148.64,
-          38.64
-        ],
-        "radius": 40,
-        "height": 47.72,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          148.64,
-          26.11
-        ],
-        "radius": 40,
-        "height": -57.98,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          148.64,
-          38.64
-        ],
-        "radius": 40,
-        "height": 48.59,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          161.17,
-          38.64
-        ],
-        "radius": 40,
-        "height": -54.69,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          161.17,
-          51.17
-        ],
-        "radius": 40,
-        "height": 47.71,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          148.64,
-          51.17
-        ],
-        "radius": 40,
-        "height": -53.68,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          148.64,
-          38.64
-        ],
-        "radius": 40,
-        "height": 57.31,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          161.17,
-          38.64
-        ],
-        "radius": 40,
-        "height": -50.31,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          161.17,
-          51.17
-        ],
-        "radius": 40,
-        "height": 46.9,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          148.64,
-          51.17
-        ],
-        "radius": 40,
-        "height": -52,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          148.64,
-          38.64
-        ],
-        "radius": 40,
-        "height": 52.8,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          136.11,
-          38.64
-        ],
-        "radius": 40,
-        "height": -49.79,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          324.03,
+          374.14,
           163.92
         ],
-        "radius": 40,
-        "height": 42.7,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "channel",
-        "position": [
-          298.98,
-          126.34
-        ],
-        "radius": 40,
-        "height": -44.64,
+        "radius": 48,
+        "height": -25.96,
         "direction": 0,
         "elongation": 1
       },
       {
         "type": "hill",
         "position": [
-          148.64,
-          38.64
+          349.09,
+          176.45
         ],
-        "radius": 40,
-        "height": 41.73,
+        "radius": 48,
+        "height": 30.75,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          349.09,
+          151.39
+        ],
+        "radius": 48,
+        "height": -26.62,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          136.11,
+          176.45
+        ],
+        "radius": 48,
+        "height": 25.54,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          186.22,
+          138.86
+        ],
+        "radius": 24,
+        "height": -25.86,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          186.22,
+          51.17
+        ],
+        "radius": 24,
+        "height": -24.88,
         "direction": 0,
         "elongation": 1
       },
@@ -645,21 +502,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "channel",
         "position": [
           161.17,
-          38.64
+          -199.39
         ],
-        "radius": 40,
-        "height": -57.44,
-        "direction": 0,
-        "elongation": 1
-      },
-      {
-        "type": "hill",
-        "position": [
-          148.64,
-          38.64
-        ],
-        "radius": 40,
-        "height": 48.14,
+        "radius": 96,
+        "height": -21.31,
         "direction": 0,
         "elongation": 1
       },
@@ -667,43 +513,197 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "channel",
         "position": [
           136.11,
-          38.64
+          88.75
         ],
-        "radius": 40,
-        "height": -46.98,
+        "radius": 48,
+        "height": -20.32,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          261.39,
+          176.45
+        ],
+        "radius": 48,
+        "height": -20.13,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          161.17,
+          276.67
+        ],
+        "radius": 48,
+        "height": -20.12,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          223.81,
+          88.75
+        ],
+        "radius": 12,
+        "height": -19.95,
         "direction": 0,
         "elongation": 1
       },
       {
         "type": "hill",
         "position": [
-          123.58,
-          51.17
+          -64.34,
+          -161.81
         ],
-        "radius": 40,
-        "height": 40.63,
+        "radius": 48,
+        "height": 19.85,
         "direction": 0,
         "elongation": 1
       },
       {
         "type": "hill",
         "position": [
-          248.86,
-          113.81
+          286.45,
+          151.39
         ],
-        "radius": 40,
-        "height": 40.34,
+        "radius": 48,
+        "height": 19.71,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          73.47,
+          138.86
+        ],
+        "radius": 96,
+        "height": -19.48,
         "direction": 0,
         "elongation": 1
       },
       {
         "type": "hill",
         "position": [
-          248.86,
-          239.09
+          86,
+          188.98
         ],
-        "radius": 40,
-        "height": 37.69,
+        "radius": 48,
+        "height": 23.08,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          173.7,
+          13.58
+        ],
+        "radius": 48,
+        "height": -19.03,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          173.7,
+          88.75
+        ],
+        "radius": 48,
+        "height": 18.99,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          173.7,
+          101.28
+        ],
+        "radius": 12,
+        "height": -19,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          136.11,
+          -74.11
+        ],
+        "radius": 96,
+        "height": -18.69,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          -39.28,
+          -99.17
+        ],
+        "radius": 48,
+        "height": -18.57,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          261.39,
+          -99.17
+        ],
+        "radius": 48,
+        "height": -17.76,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          35.89,
+          -186.86
+        ],
+        "radius": 48,
+        "height": 17.26,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          198.75,
+          63.7
+        ],
+        "radius": 12,
+        "height": -17.1,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          -64.34,
+          -36.53
+        ],
+        "radius": 48,
+        "height": -16.88,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          211.28,
+          -211.92
+        ],
+        "radius": 48,
+        "height": 16,
         "direction": 0,
         "elongation": 1
       }

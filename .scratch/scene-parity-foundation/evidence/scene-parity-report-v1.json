@@ -130,7 +130,7 @@
         {
           "name": "terrain height p95",
           "scope": "aggregate",
-          "value": 16.2617,
+          "value": 8.532,
           "threshold": 5.26875,
           "direction": "atMost",
           "passed": false,
@@ -139,7 +139,7 @@
         {
           "name": "shore height p95",
           "scope": "worst-region",
-          "value": 12.4923,
+          "value": 7.9996,
           "threshold": 2.85035,
           "direction": "atMost",
           "passed": false,
@@ -148,7 +148,7 @@
         {
           "name": "coastline symmetric p95",
           "scope": "aggregate",
-          "value": 15.7475,
+          "value": 20.1984,
           "threshold": 22.02965,
           "direction": "atMost",
           "passed": true,
@@ -157,7 +157,7 @@
         {
           "name": "coastline area error",
           "scope": "aggregate",
-          "value": 0.019657,
+          "value": 0.035736,
           "threshold": 0.105515,
           "direction": "atMost",
           "passed": true,
@@ -166,7 +166,7 @@
         {
           "name": "land and sea agreement",
           "scope": "aggregate",
-          "value": 0.903491,
+          "value": 0.922721,
           "threshold": 0.931361,
           "direction": "atLeast",
           "passed": false,
@@ -196,9 +196,9 @@
         "worst entity surface p95: 165.6694 is not <= 13.758675",
         "over-tolerance surface fraction: 0.6018 is not <= 0.11835",
         "worst component deficit: 9 is not <= 3.5",
-        "terrain height p95: 16.2617 is not <= 5.26875",
-        "shore height p95: 12.4923 is not <= 2.85035",
-        "land and sea agreement: 0.903491 is not >= 0.931361",
+        "terrain height p95: 8.532 is not <= 5.26875",
+        "shore height p95: 7.9996 is not <= 2.85035",
+        "land and sea agreement: 0.922721 is not >= 0.931361",
         "horizon profile p95: 0.098887 is not <= 0.0165",
         "worst azimuth horizon error: 0.124982 is not <= 0.0165"
       ]
@@ -211,7 +211,7 @@
         {
           "name": "group silhouette IoU",
           "scope": "aggregate",
-          "value": 0.421857,
+          "value": 0.437679,
           "threshold": 0.745598,
           "direction": "atLeast",
           "passed": false,
@@ -220,7 +220,7 @@
         {
           "name": "worst group silhouette IoU",
           "scope": "worst-group",
-          "value": 0.000709,
+          "value": 0.001371,
           "threshold": 0.302569,
           "direction": "atLeast",
           "passed": false,
@@ -229,7 +229,7 @@
         {
           "name": "group contour distance p95",
           "scope": "aggregate",
-          "value": 74.531695,
+          "value": 62.141443,
           "threshold": 5.874122,
           "direction": "atMost",
           "passed": false,
@@ -238,7 +238,7 @@
         {
           "name": "worst group contour distance",
           "scope": "worst-group",
-          "value": 391.562,
+          "value": 416.3016,
           "threshold": 39.2559,
           "direction": "atMost",
           "passed": false,
@@ -247,7 +247,7 @@
         {
           "name": "group depth p95",
           "scope": "aggregate",
-          "value": 29.810676,
+          "value": 30.406117,
           "threshold": 7.644414,
           "direction": "atMost",
           "passed": false,
@@ -265,7 +265,7 @@
         {
           "name": "group world normal p95",
           "scope": "aggregate",
-          "value": 71.994121,
+          "value": 74.976377,
           "threshold": 49.456982,
           "direction": "atMost",
           "passed": false,
@@ -274,7 +274,7 @@
         {
           "name": "semantic agreement",
           "scope": "aggregate",
-          "value": 0.921404,
+          "value": 0.920705,
           "threshold": 0.987474,
           "direction": "atLeast",
           "passed": false,
@@ -283,7 +283,7 @@
         {
           "name": "worst camera semantic agreement",
           "scope": "worst-camera",
-          "value": 0.885508,
+          "value": 0.885143,
           "threshold": 0.974085,
           "direction": "atLeast",
           "passed": false,
@@ -300,15 +300,15 @@
         }
       ],
       "failures": [
-        "group silhouette IoU: 0.421857 is not >= 0.745598",
-        "worst group silhouette IoU: 0.000709 is not >= 0.302569",
-        "group contour distance p95: 74.531695 is not <= 5.874122",
-        "worst group contour distance: 391.562 is not <= 39.2559",
-        "group depth p95: 29.810676 is not <= 7.644414",
+        "group silhouette IoU: 0.437679 is not >= 0.745598",
+        "worst group silhouette IoU: 0.001371 is not >= 0.302569",
+        "group contour distance p95: 62.141443 is not <= 5.874122",
+        "worst group contour distance: 416.3016 is not <= 39.2559",
+        "group depth p95: 30.406117 is not <= 7.644414",
         "worst group depth p95: 202.4158 is not <= 22.354947",
-        "group world normal p95: 71.994121 is not <= 49.456982",
-        "semantic agreement: 0.921404 is not >= 0.987474",
-        "worst camera semantic agreement: 0.885508 is not >= 0.974085",
+        "group world normal p95: 74.976377 is not <= 49.456982",
+        "semantic agreement: 0.920705 is not >= 0.987474",
+        "worst camera semantic agreement: 0.885143 is not >= 0.974085",
         "worst semantic confusion fraction: 0.041653 is not <= 0.007092"
       ]
     },

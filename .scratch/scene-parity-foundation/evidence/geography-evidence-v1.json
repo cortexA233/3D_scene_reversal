@@ -11,197 +11,197 @@
   "height": {
     "full": {
       "count": 16641,
-      "mean": 3.1735,
-      "rmse": 6.2721,
-      "p50": 0.5691,
-      "p95": 16.2617,
-      "max": 38.2462
+      "mean": 2.1655,
+      "rmse": 4.1648,
+      "p50": 0.5981,
+      "p95": 8.532,
+      "max": 59.9787
     },
     "interior": {
       "count": 3173,
-      "mean": 3.8873,
-      "rmse": 6.1259,
-      "p50": 2.1607,
-      "p95": 14.1582,
-      "max": 36.2774
+      "mean": 3.2391,
+      "rmse": 4.4158,
+      "p50": 2.3905,
+      "p95": 8.7434,
+      "max": 29.9143
     },
     "shore": {
       "count": 1111,
-      "mean": 4.2057,
-      "rmse": 6.4168,
-      "p50": 1.7664,
-      "p95": 12.4923,
-      "max": 32.4264
+      "mean": 2.6172,
+      "rmse": 3.7037,
+      "p50": 1.7479,
+      "p95": 7.9996,
+      "max": 24.4614
     }
   },
   "slope": {
     "full": {
       "count": 16641,
-      "mean": 0.1493,
-      "rmse": 0.4877,
-      "p50": 0.0444,
-      "p95": 0.5107,
-      "max": 19.3628
+      "mean": 0.1294,
+      "rmse": 0.4476,
+      "p50": 0.0423,
+      "p95": 0.412,
+      "max": 20.8901
     },
     "interior": {
       "count": 3173,
-      "mean": 0.2168,
-      "rmse": 0.3949,
-      "p50": 0.1456,
-      "p95": 0.6361,
-      "max": 7.0198
+      "mean": 0.1858,
+      "rmse": 0.3391,
+      "p50": 0.1378,
+      "p95": 0.4345,
+      "max": 5.9632
     },
     "shore": {
       "count": 1111,
-      "mean": 0.2547,
-      "rmse": 0.6234,
-      "p50": 0.1522,
-      "p95": 0.5985,
-      "max": 8.4516
+      "mean": 0.2098,
+      "rmse": 0.5187,
+      "p50": 0.1277,
+      "p95": 0.465,
+      "max": 6.5086
     }
   },
   "classification": {
-    "agree": 15035,
-    "disagree": 1606,
-    "agreementFraction": 0.903491,
+    "agree": 15355,
+    "disagree": 1286,
+    "agreementFraction": 0.922721,
     "confusion": {
-      "sea->sea": 11469,
-      "shore->sea": 161,
-      "shore->shore": 555,
-      "sea->shore": 123,
-      "land->shore": 147,
-      "shore->land": 395,
-      "land->land": 3011,
-      "sea->land": 765,
-      "land->sea": 15
+      "sea->sea": 12039,
+      "shore->sea": 364,
+      "shore->shore": 587,
+      "land->sea": 103,
+      "land->shore": 341,
+      "sea->shore": 253,
+      "land->land": 2729,
+      "sea->land": 65,
+      "shore->land": 160
     }
   },
   "coastline": {
     "symmetricDistance": {
       "count": 1440,
-      "mean": 7.4654,
-      "rmse": 9.6257,
-      "p50": 6.6012,
-      "p95": 15.7475,
-      "max": 73.517
+      "mean": 8.637,
+      "rmse": 11.1828,
+      "p50": 7.5064,
+      "p95": 20.1984,
+      "max": 79.4054
     },
     "referenceArea": 245096.19,
-    "candidateArea": 240278.26,
-    "areaError": 4817.93,
-    "areaRelativeError": 0.019657,
+    "candidateArea": 236337.32,
+    "areaError": 8758.87,
+    "areaRelativeError": 0.035736,
     "referencePerimeter": 2166.82,
-    "candidatePerimeter": 2521.68,
-    "perimeterRelativeError": 0.163768,
+    "candidatePerimeter": 2445.33,
+    "perimeterRelativeError": 0.12853,
     "radiusError": {
       "count": 720,
-      "mean": 10.5158,
-      "rmse": 21.973,
-      "p50": 6.9152,
-      "p95": 27.5272,
-      "max": 179.9396
+      "mean": 11.8624,
+      "rmse": 24.8877,
+      "p50": 7.9238,
+      "p95": 24.2075,
+      "max": 218.8689
     },
     "worstAzimuths": [
       {
         "azimuth": 0.7679,
-        "error": 179.94
+        "error": 218.869
       },
       {
         "azimuth": 0.7767,
-        "error": 169.232
+        "error": 208.629
       },
       {
         "azimuth": 0.7854,
-        "error": 163.242
-      },
-      {
-        "azimuth": 0.9338,
-        "error": 160.628
+        "error": 202.636
       },
       {
         "azimuth": 0.7941,
-        "error": 156.91
+        "error": 196.586
       },
       {
         "azimuth": 0.8029,
-        "error": 147.846
+        "error": 189.994
       },
       {
-        "azimuth": 0.8465,
-        "error": 123.415
+        "azimuth": 0.8116,
+        "error": 184.037
       },
       {
-        "azimuth": 0.8552,
-        "error": 123.271
+        "azimuth": 0.8203,
+        "error": 178.495
+      },
+      {
+        "azimuth": 0.829,
+        "error": 172.799
       }
     ]
   },
   "inlets": {
     "reference": 9,
-    "candidate": 52,
+    "candidate": 50,
     "matched": 9,
     "rows": [
       {
         "azimuth": 0.7679,
         "depth": 244.78,
         "matched": true,
-        "azimuthError": 0.0437,
-        "depthError": 15.763
+        "azimuthError": 0.061,
+        "depthError": 98.558
       },
       {
         "azimuth": 1.6842,
         "depth": 25.521,
         "matched": true,
-        "azimuthError": 0.0175,
-        "depthError": 32.891
+        "azimuthError": 0.0786,
+        "depthError": 15.781
       },
       {
         "azimuth": 1.9722,
         "depth": 23.119,
         "matched": true,
-        "azimuthError": 0.0087,
-        "depthError": 2.764
+        "azimuthError": 0,
+        "depthError": 2.8
       },
       {
         "azimuth": 1.9984,
         "depth": 24.117,
         "matched": true,
-        "azimuthError": 0.0349,
-        "depthError": 1.766
+        "azimuthError": 0.0262,
+        "depthError": 1.802
       },
       {
         "azimuth": 2.0333,
         "depth": 25.099,
         "matched": true,
-        "azimuthError": 0,
-        "depthError": 7.662
+        "azimuthError": 0.0087,
+        "depthError": 10.44
       },
       {
         "azimuth": 2.0595,
         "depth": 25.947,
         "matched": true,
-        "azimuthError": 0.0262,
-        "depthError": 6.814
+        "azimuthError": 0.0349,
+        "depthError": 9.592
       },
       {
         "azimuth": 4.3982,
         "depth": 28.577,
         "matched": true,
-        "azimuthError": 0,
-        "depthError": 2.737
+        "azimuthError": 0.0088,
+        "depthError": 5.661
       },
       {
         "azimuth": 4.5989,
         "depth": 31.597,
         "matched": true,
-        "azimuthError": 0.0786,
-        "depthError": 13.636
+        "azimuthError": 0.0873,
+        "depthError": 2.378
       },
       {
         "azimuth": 4.6862,
         "depth": 32.336,
         "matched": true,
-        "azimuthError": 0.0087,
-        "depthError": 12.897
+        "azimuthError": 0,
+        "depthError": 1.639
       }
     ]
   },

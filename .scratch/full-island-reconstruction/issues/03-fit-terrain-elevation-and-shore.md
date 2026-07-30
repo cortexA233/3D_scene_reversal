@@ -4,71 +4,99 @@
 
 **Blocked by:** None.
 
-**Status:** ready-for-agent — diagnosed, not yet fitted
+**Status:** in-progress — the landform fit is multi-scale; height p95 fell 16.26 to 8.53
 
-## Where the residual actually is
+- [ ] Add one non-interactive check that is red until terrain height and shore height evidence are inside their frozen thresholds.
+- [x] Improve the landform fit within the frozen budget of 32 coastline controls, 40 landforms, and 4 noise octaves.
+- [ ] Fit the shore controls against the measured shoreline band rather than hand-picking them.
+      They already are fitted, by `fitShoreControls`. What is not fitted is the shelf's *shape*: `shelfFraction`, `beachHeight`, and `shelfDrop` are three numbers for a transition the reference varies by azimuth.
+- [ ] Report height and slope separately over full, interior, and shore regions, keeping the worst region.
+      Height is reported over all three. Slope is not reported at all yet.
+- [x] Keep coastline symmetric distance, enclosed area, perimeter, and inlet matching inside their thresholds.
+- [ ] Keep land, shore, and sea classification agreement above its threshold.
+- [x] Retain no elevation grid, regular sample array, per-vertex height, or distance field in production.
+- [ ] If the frozen budget cannot reach the threshold, record that as a representation-boundary result with an ADR rather than growing the budget.
+
+## Where the residual is
 
 Measured by sampling the reference elevation field and the generated program over the
-same 129 by 129 probe grid the geography evidence uses, then binning by normalized
+same 129 by 129 probe grid the geography evidence uses, then binning by normalised
 coastal radius. This overturns the obvious reading of the confusion matrix.
 
-`sea->land` is 765 probes, and the confusion matrix alone suggests the island is too
-big. It is not. Almost all of it is **inside** the coastline:
+`sea->land` was 765 probes, which suggests an island that is too big. It was not.
+Almost all of it was **inside** the coastline:
 
-| normalized radius | misclassification | count |
+| normalised radius | misclassification | count |
 | --- | --- | --- |
 | n ~ 0.2 to 0.6 | sea->land | 979 |
 | n ~ 0.8 | land->sea | 220 |
 | n ~ 1.0 and beyond | either direction | 89 |
 
-Mean absolute height error by band tells the same story:
+Mean absolute height error by band said the same: 7.84 at n ~ 0.2, 8.26 at 0.4, 7.06
+at 0.6, then 0.24 beyond n = 1.4. The coastline already passed its own thresholds and
+was never the defect. The interior was.
 
-| n | probes | mean error | max |
+**One correction to an earlier reading of this.** The program is not incapable of going
+below the Semantic Sea Level: `channel` landforms carry negative height and the fit had
+already allocated 17 of them, down to -63.23. The defect was not a missing feature
+class. It was scale.
+
+## What was changed
+
+The fitter gave every landform the same radius, `max(spacing * 2.2, 40)`, so all 40
+were 40-unit blobs and matching pursuit spent them part-explaining features that are
+not 40 units across. `radius` is already a per-landform control in the Bounded
+Semantic Terrain Program, so nothing about the budget changed: each landform now picks
+its scale from four declared multiples of the base radius, chosen by which one actually
+removes the most squared residual. The fit now uses radii 12, 24, 48, and 96.
+
+Two constraints came out of measuring rather than from theory, and both are worth
+keeping in mind before touching this again:
+
+1. **Fine scales are interior-only.** Letting every scale go anywhere brought height
+   p95 to 12.84 but pushed coastline symmetric p95 from 15.75 to 27.85, past its
+   frozen threshold of 22.03 — buying one gate with another, which the milestone
+   forbids. The coastline is where the terrain crosses the Semantic Sea Level, so a
+   small sharp landform on the shore band moves the shoreline. Scales finer than the
+   base radius are refused beyond normalised coastal radius 0.8.
+2. **A peak no allowed scale can improve is skipped, not fatal.** The first version of
+   the constraint ended the whole pursuit at such a peak and placed 2 landforms of 40,
+   leaving the island unfitted at height p95 17.21 — worse than before the change.
+
+## Result
+
+| metric | before | after | threshold |
 | --- | --- | --- | --- |
-| 0.0 | 226 | 4.24 | 18.50 |
-| 0.2 | 678 | 7.84 | 29.85 |
-| 0.4 | 1120 | 8.26 | 26.03 |
-| 0.6 | 1581 | 7.06 | 33.14 |
-| 0.8 | 2019 | 3.83 | 37.04 |
-| 1.0 | 2481 | 4.83 | 35.08 |
-| 1.2 | 2923 | 4.13 | 33.16 |
-| 1.4 | 2537 | 0.24 | 34.68 |
+| terrain height p95 (full) | 16.2617 | **8.5320** | 5.26875 |
+| height p95 (interior) | 14.1582 | **8.7434** | — |
+| shore height p95 | 12.4923 | **7.9996** | 2.85035 |
+| land and sea agreement | 0.903491 | **0.922721** | 0.931361 |
+| coastline symmetric p95 | 15.7475 | 20.1984 | 22.02965, still passes |
+| coastline area error | 1.97% | 3.57% | 10.55%, still passes |
+| inlets matched | 9/9 | 9/9 | 9/9 |
 
-So two distinct defects, and the coastline is not one of them — it already passes its
-own thresholds and the error outside n = 1.4 is 0.24 units.
+World layout is untouched: 672/672 entities at anchor p95 0, extent p95 0, orientation
+p95 0.
 
-1. **The reference has water inside the island and the candidate does not.** The
-   program's interior is a flat `groundY` plateau plus summed landforms, with nothing
-   that goes below the Semantic Sea Level. Every interior pool, lagoon, or stream bed
-   reads as land. This is the single largest contributor to both the height residual
-   and the classification failure, and it is where ticket 04's "any inner water"
-   overlaps this ticket.
-2. **The shore shelf drops too early.** At n ~ 0.8, 220 probes are land in the
-   reference and sea in the candidate. `shore.shelfFraction` is 0.12, so the shelf
-   begins at n = 0.88 and the ground has already started falling towards
-   `seaLevel + beachHeight` before the reference's does.
+Interior and shore are now within a unit of each other, so what is left is the general
+fidelity of a 40-landform representation rather than one missing feature class.
 
-## What the budget allows
+**Honest note on side effects.** The terrain surface is more detailed now, and four
+fixed-camera metrics moved the wrong way inside a layer that was already failing all
+ten: worst group contour distance 391.562 to 416.302, group world normal p95 71.994 to
+74.976, group depth p95 29.811 to 30.406, semantic agreement 0.921404 to 0.920705.
+Three moved the right way: per-group silhouette IoU 0.421857 to 0.437679, worst group
+IoU 0.000709 to 0.001371, group contour p95 74.532 to 62.141. No layer changed state
+and no passing metric started failing, but the trade is real and should not be called
+a clean win.
 
-Inner water is expressible without growing the budget: `channel` landforms already
-contribute negative height. But all 40 landforms are in use, so inner water has to be
-fitted by **re-allocating** landforms rather than adding them. Coast nodes have
-headroom, 28 of 32, and noise octaves have headroom, 3 of 4 — but neither is where
-this residual lives, so spending them would be spending the wrong budget.
+## What to try next
 
-That makes this a genuine fitting problem for the Reference-guided Fitting Loop:
-choose which landforms earn their place against the measured field, rather than
-hand-picking them. If 40 landforms plus one shore triple genuinely cannot express the
-interior, that is the representation-boundary result the last checkbox asks for, and
-it needs an ADR rather than a bigger budget.
-
-- [ ] Add one non-interactive check that is red until terrain height and shore height evidence are inside their frozen thresholds.
-
-- [ ] Add one non-interactive check that is red until terrain height and shore height evidence are inside their frozen thresholds.
-- [ ] Improve the landform fit within the frozen budget of 32 coastline controls, 40 landforms, and 4 noise octaves.
-- [ ] Fit the shore controls against the measured shoreline band rather than hand-picking them.
-- [ ] Report height and slope separately over full, interior, and shore regions, keeping the worst region.
-- [ ] Keep coastline symmetric distance, enclosed area, perimeter, and inlet matching inside their thresholds.
-- [ ] Keep land, shore, and sea classification agreement above its threshold.
-- [ ] Retain no elevation grid, regular sample array, per-vertex height, or distance field in production.
-- [ ] If the frozen budget cannot reach the threshold, record that as a representation-boundary result with an ADR rather than growing the budget.
+- The shore triple is three numbers for a transition the reference varies by azimuth.
+  `shelfFraction` alone cannot describe a beach that is wide on one side and steep on
+  the other, and shore height p95 is 7.9996 against a threshold of 2.85035. Per-node
+  shore controls on the coastline curve would cost coast-node budget, of which 4 of 32
+  are spare.
+- The noise has an octave spare, 3 of 4, but noise is not where this residual lives.
+- Slope is not measured at all. The ticket asks for it, and a height fit that is right
+  on average while wrong in gradient would look like this.

@@ -468,17 +468,19 @@ Tickets 02 atmosphere, 03 terrain, 05 horizon ridges, and onward. Tickets 03 and
 05 depend only on 3D evidence and are unaffected by the camera and calibration
 work, so they can proceed in parallel.
 
-- Ticket 03 is **diagnosed**; the diagnosis is in its ticket file and it overturns
-  the obvious reading. `sea->land` is 765 probes and the confusion matrix suggests
-  the island is too big. It is not: 979 of the land/sea disagreements sit at
-  normalized coastal radius 0.2 to 0.6, *inside* the coastline, and the mean height
-  error beyond n = 1.4 is 0.24 units. Two defects, neither of them the coastline:
-  the reference has water inside the island and the program cannot go below the
-  Semantic Sea Level anywhere, so every interior pool reads as land; and the shore
-  shelf drops too early, giving 220 land->sea probes at n ~ 0.8. Budget: 28 of 32
-  coast nodes and 3 of 4 octaves are spare, but all 40 landforms are in use, so
-  inner water has to be fitted by re-allocating landforms — and spending the spare
-  coast nodes or octaves would be spending budget where the residual is not.
+- Ticket 03 is **in progress**; details in its ticket file. The landform fitter gave
+  every one of its 40 landforms the same 40-unit radius, so matching pursuit spent
+  them part-explaining features that are not 40 units across. `radius` is already a
+  per-landform control, so making the fit multi-scale spent no budget: height p95 fell
+  16.2617 to 8.5320, interior 14.1582 to 8.7434, shore 12.4923 to 7.9996, and
+  classification 0.9035 to 0.9227. All three still fail, all three are closer.
+  Two things learned by measuring: fine scales on the shore band pushed coastline
+  symmetric p95 from 15.75 past its 22.03 threshold, so they are interior-only now;
+  and a peak that no allowed scale can improve must be skipped rather than ending the
+  pursuit, which had left 2 landforms of 40 placed. Four fixed-camera metrics moved
+  the wrong way as a side effect, inside a layer already failing all ten — recorded in
+  the ticket rather than glossed. Next: the shore triple is three numbers for a
+  transition the reference varies by azimuth, and slope is not measured at all.
 - Ticket 05: the Horizon Profile already covers all 720 azimuth bins with none
   missing, so the failure is purely angular accuracy — p95 5.6658 deg against a
   0.945 deg threshold, worst azimuth 7.1609 deg at 162 deg.

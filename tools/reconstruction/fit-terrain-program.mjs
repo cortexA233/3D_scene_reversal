@@ -153,35 +153,102 @@ function fitLandforms(sampler, base, centre, radii, budget) {
   }
 
   const spacing = (2 * reach) / (LANDFORM_PROBE_GRID - 1);
-  // Radius is the reference's own relief scale: wide enough to be a landform,
-  // narrow enough that neighbours stay distinguishable.
-  const radius = Math.max(spacing * 2.2, 40);
+  // The base relief scale: wide enough to be a landform, narrow enough that
+  // neighbours stay distinguishable.
+  const baseRadius = Math.max(spacing * 2.2, 40);
+  // Each landform picks its own scale. `radius` is already a per-landform control
+  // in the Bounded Semantic Terrain Program, so this spends no extra budget — it
+  // stops wasting the budget it has. With one fixed radius every landform was a
+  // 40-unit blob, and matching pursuit then spent landforms part-explaining
+  // features that are not 40 units across: measured, the interior carried a mean
+  // absolute height error of 7 to 8 units between normalised coastal radius 0.2
+  // and 0.6 while the field outside the shore was already within 0.24.
+  const scales = [2.4, 1.2, 0.6, 0.3];
+  const landformRadii = scales.map((scale) => Math.max(spacing * 0.75, baseRadius * scale));
   const landforms = [];
 
-  for (let step = 0; step < budget; step += 1) {
+  // Fine scales are for the interior only.
+  //
+  // The coastline is where the terrain crosses the Semantic Sea Level, so a small
+  // sharp landform sitting on the shore band moves the shoreline. Measured: letting
+  // every scale go anywhere brought height p95 down from 16.26 to 12.84 but pushed
+  // coastline symmetric p95 from 15.75 to 27.85, past its frozen threshold of
+  // 22.03 — buying one gate with another, which the milestone forbids. The
+  // shoreline's own shape is already inside its thresholds and is not the residual;
+  // the interior is.
+  const SHORE_BAND_START = 0.8;
+  const COARSE_SCALE_COUNT = 2;
+  const sweep = radii.length;
+  const normalizedRadius = (x, z) => {
+    const dx = x - centre[0];
+    const dz = z - centre[1];
+    const azimuth = Math.atan2(dz, dx);
+    const turns = ((azimuth / (Math.PI * 2)) % 1 + 1) % 1;
+    const shoreRadius = radii[Math.min(sweep - 1, Math.round(turns * sweep) % sweep)];
+    return Math.hypot(dx, dz) / Math.max(1e-3, shoreRadius);
+  };
+
+  const squaredResidual = () => {
+    let total = 0;
+    for (const probe of probes) total += probe.residual * probe.residual;
+    return total;
+  };
+
+  // A peak no allowed scale can improve is skipped, not fatal. Breaking out of the
+  // fit on the first such peak spent 2 landforms of 40 and left the rest of the
+  // island unfitted, because one shore-band residual that the coarse kernels could
+  // not reduce ended the whole pursuit.
+  let placed = 0;
+  const attempts = budget + probes.length;
+  for (let step = 0; step < attempts && placed < budget; step += 1) {
     let peak = null;
     for (const probe of probes) {
+      if (probe.blocked) continue;
       if (!peak || Math.abs(probe.residual) > Math.abs(peak.residual)) peak = probe;
     }
     if (!peak || Math.abs(peak.residual) < 1.5) break;
 
-    const height = peak.residual;
-    landforms.push({
-      type: height >= 0 ? "hill" : "channel",
-      position: [Number(peak.x.toFixed(2)), Number(peak.z.toFixed(2))],
-      radius: Number(radius.toFixed(2)),
-      height: Number(height.toFixed(2)),
-      direction: 0,
-      elongation: 1,
-    });
+    // Choose the scale by how much squared residual it actually removes, rather
+    // than by a constant. A wide kernel over a narrow feature adds error to every
+    // neighbour it covers, and that shows up here as a smaller gain.
+    const allowed =
+      normalizedRadius(peak.x, peak.z) >= SHORE_BAND_START
+        ? landformRadii.slice(0, COARSE_SCALE_COUNT)
+        : landformRadii;
+    let best = null;
+    for (const radius of allowed) {
+      const candidate = {
+        type: peak.residual >= 0 ? "hill" : "channel",
+        position: [Number(peak.x.toFixed(2)), Number(peak.z.toFixed(2))],
+        radius: Number(radius.toFixed(2)),
+        height: Number(peak.residual.toFixed(2)),
+        direction: 0,
+        elongation: 1,
+      };
+      let gain = 0;
+      for (const probe of probes) {
+        const contribution = landformContribution(candidate, probe.x, probe.z);
+        if (contribution === 0) continue;
+        const after = probe.residual - contribution;
+        gain += probe.residual * probe.residual - after * after;
+      }
+      if (!best || gain > best.gain) best = { candidate, gain };
+    }
+    // A landform that does not reduce the residual is budget spent on nothing.
+    if (!best || best.gain <= 0) {
+      peak.blocked = true;
+      continue;
+    }
+
+    placed += 1;
+    landforms.push(best.candidate);
     // Subtract exactly what the program will later add, so the fit and the
     // generator can never drift apart.
-    const landform = landforms.at(-1);
     for (const probe of probes) {
-      probe.residual -= landformContribution(landform, probe.x, probe.z);
+      probe.residual -= landformContribution(best.candidate, probe.x, probe.z);
     }
   }
-  return landforms;
+  return { landforms, residualSquared: squaredResidual() };
 }
 
 /**
@@ -270,7 +337,7 @@ export function fitTerrainProgram(evidence, { center, groundY, oceanFloor, scene
     oceanFloor,
   };
   const base = createTerrainProgramField(coastOnly);
-  const landforms = fitLandforms(
+  const { landforms } = fitLandforms(
     sampler,
     base,
     center,
