@@ -191,11 +191,16 @@ export function compareScenes(reference, candidate, options = {}) {
 
     // Meaningful semantic structure: a bounds-accurate but single-blob
     // replacement of a multi-part authored object must be visible here.
+    //
+    // The deficit is one-sided on purpose. Missing structure is the failure;
+    // a procedural form that decomposes differently is not, and penalising
+    // extra parts would push every generator toward a single mass.
     structureRows.push({
       semanticId: id,
       kind: left.kind,
       referenceComponents: left.componentCount,
       candidateComponents: right.componentCount,
+      componentDeficit: Math.max(0, left.componentCount - right.componentCount),
       componentDelta: Math.abs(left.componentCount - right.componentCount),
       referenceTriangles: left.triangles,
       candidateTriangles: right.triangles,
@@ -364,10 +369,12 @@ export function compareScenes(reference, candidate, options = {}) {
       byKind: summarizeByKind(surfaceRows, "p95"),
     },
     semanticStructure: {
+      componentDeficit: statistics(structureRows.map((row) => row.componentDeficit)),
       componentDelta: statistics(structureRows.map((row) => row.componentDelta)),
       entitiesMissingComponents: structureRows.filter(
         (row) => row.candidateComponents < row.referenceComponents,
       ).length,
+      worstComponentDeficit: worst(structureRows, "componentDeficit"),
       worstComponentDelta: worst(structureRows, "componentDelta"),
     },
     distributedCover: {

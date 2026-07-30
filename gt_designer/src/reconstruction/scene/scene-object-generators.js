@@ -22,6 +22,51 @@ function part(object, id) {
   return object;
 }
 
+/**
+ * Merges a set of local meshes into one geometry under a single semantic part.
+ *
+ * A canopy is one semantic thing made of many blades. Emitting a mesh per blade
+ * would multiply draw calls by two orders of magnitude and would also claim far
+ * more semantic parts than the authored object has. Merging keeps the form and
+ * the accounting honest.
+ */
+function mergeParts(meshes, id) {
+  const positions = [];
+  const normals = [];
+  const vertex = new THREE.Vector3();
+  const normal = new THREE.Vector3();
+  const normalMatrix = new THREE.Matrix3();
+
+  for (const mesh of meshes) {
+    mesh.updateMatrix();
+    normalMatrix.getNormalMatrix(mesh.matrix);
+    const geometry = mesh.geometry.index
+      ? mesh.geometry.toNonIndexed()
+      : mesh.geometry;
+    const position = geometry.attributes.position;
+    const sourceNormal = geometry.attributes.normal;
+    for (let index = 0; index < position.count; index += 1) {
+      vertex.fromBufferAttribute(position, index).applyMatrix4(mesh.matrix);
+      positions.push(vertex.x, vertex.y, vertex.z);
+      if (sourceNormal) {
+        normal.fromBufferAttribute(sourceNormal, index).applyMatrix3(normalMatrix).normalize();
+        normals.push(normal.x, normal.y, normal.z);
+      }
+    }
+  }
+  const merged = new THREE.BufferGeometry();
+  merged.setAttribute(
+    "position",
+    new THREE.BufferAttribute(new Float32Array(positions), 3),
+  );
+  if (normals.length === positions.length) {
+    merged.setAttribute("normal", new THREE.BufferAttribute(new Float32Array(normals), 3));
+  } else {
+    merged.computeVertexNormals();
+  }
+  return part(new THREE.Mesh(merged), id);
+}
+
 function group(parts) {
   const root = new THREE.Group();
   for (const child of parts) root.add(child);
@@ -219,55 +264,263 @@ function horizonGroup(rng, shape) {
   return group(parts);
 }
 
-function palm(rng) {
-  const parts = [];
-  const trunkHeight = 0.72;
-  const trunk = part(cylinder(0.026, 0.05, trunkHeight, 7, trunkHeight / 2), "trunk");
-  trunk.rotation.z = (rng.nextFloat() - 0.5) * 0.12;
-  parts.push(trunk);
-  const fronds = 7 + Math.floor(rng.nextFloat() * 3);
-  for (let index = 0; index < fronds; index += 1) {
-    const azimuth = (index / fronds) * Math.PI * 2 + rng.nextFloat() * 0.2;
-    const frond = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.2, 3, 1));
-    frond.position.set(
-      Math.cos(azimuth) * 0.24,
-      trunkHeight + 0.1,
-      Math.sin(azimuth) * 0.24,
-    );
-    frond.rotation.set(-0.5 - rng.nextFloat() * 0.3, -azimuth, 0);
-    parts.push(part(frond, `frond-${index}`));
+/**
+ * A curved tapered ribbon: the shared blade form behind a palm frond and a
+ * bamboo leaf. It follows an arc and narrows along its length, so a canopy
+ * reads as foliage rather than as a fan of flat cards.
+ */
+function bladeGeometry({ length, width, droop, segments = 6, curl = 0.35 }) {
+  const positions = [];
+  const normals = [];
+  const point = (t, side) => {
+    const bend = droop * t * t;
+    const halfWidth = (width / 2) * Math.sin(Math.PI * Math.min(1, t * 1.05)) ** 0.7;
+    // Curl lifts the blade's edges, which is what gives a frond its section.
+    const lift = curl * halfWidth * (1 - t * 0.4);
+    return [t * length, -bend + Math.abs(side) * lift, side * halfWidth];
+  };
+  for (let segment = 0; segment < segments; segment += 1) {
+    const t0 = segment / segments;
+    const t1 = (segment + 1) / segments;
+    for (const [a, b, c] of [
+      [point(t0, -1), point(t0, 0), point(t1, 0)],
+      [point(t0, -1), point(t1, 0), point(t1, -1)],
+      [point(t0, 0), point(t0, 1), point(t1, 1)],
+      [point(t0, 0), point(t1, 1), point(t1, 0)],
+    ]) {
+      positions.push(...a, ...b, ...c);
+      normals.push(0, 1, 0, 0, 1, 0, 0, 1, 0);
+    }
   }
-  return group(parts);
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(new Float32Array(positions), 3),
+  );
+  geometry.setAttribute("normal", new THREE.BufferAttribute(new Float32Array(normals), 3));
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+/** A leaning tapered trunk built from a short chain of segments. */
+function trunkColumn(rng, { height, baseRadius, topRadius, lean, segments = 4 }) {
+  const column = new THREE.Group();
+  let y = 0;
+  let offset = 0;
+  for (let segment = 0; segment < segments; segment += 1) {
+    const t0 = segment / segments;
+    const t1 = (segment + 1) / segments;
+    const segmentHeight = height / segments;
+    const lower = baseRadius + (topRadius - baseRadius) * t0;
+    const upper = baseRadius + (topRadius - baseRadius) * t1;
+    const piece = cylinder(upper, lower, segmentHeight, 7, y + segmentHeight / 2);
+    offset += lean * (t1 - t0) * height;
+    piece.position.x = offset;
+    column.add(part(piece, `trunk-${segment}`));
+    y += segmentHeight;
+  }
+  return { column, top: [offset, height, 0] };
+}
+
+function palm(rng) {
+  const trunkHeight = 0.62;
+  const lean = (rng.nextFloat() - 0.5) * 0.22;
+  const { column, top } = trunkColumn(rng, {
+    height: trunkHeight,
+    baseRadius: 0.055,
+    topRadius: 0.028,
+    lean,
+  });
+  const frondMeshes = [];
+  const fruitMeshes = [];
+
+  // A palm's crown is layered: long outer fronds droop, short inner ones lift.
+  const layers = [
+    { count: 7, length: 0.52, width: 0.3, droop: 0.34, pitch: -0.15 },
+    { count: 6, length: 0.4, width: 0.26, droop: 0.16, pitch: 0.16 },
+    { count: 4, length: 0.26, width: 0.2, droop: 0.04, pitch: 0.44 },
+  ];
+  let index = 0;
+  for (const [layerIndex, layer] of layers.entries()) {
+    const phase = rng.nextFloat() * Math.PI * 2;
+    for (let frond = 0; frond < layer.count; frond += 1) {
+      const azimuth = phase + (frond / layer.count) * Math.PI * 2;
+      const blade = new THREE.Mesh(
+        bladeGeometry({
+          length: layer.length * (0.86 + rng.nextFloat() * 0.28),
+          width: layer.width,
+          droop: layer.droop,
+        }),
+      );
+      blade.position.set(top[0], top[1] - 0.02, top[2]);
+      blade.rotation.set(0, -azimuth, layer.pitch + (rng.nextFloat() - 0.5) * 0.12);
+      frondMeshes.push(blade);
+      index += 1;
+    }
+    void layerIndex;
+  }
+  // Fruit sits under the crown and reads at overview distance.
+  for (let fruit = 0; fruit < 3; fruit += 1) {
+    const node = sphere(0.035, 6, 5, top[1] - 0.05);
+    node.position.x = top[0] + Math.cos(fruit * 2.1) * 0.05;
+    node.position.z = Math.sin(fruit * 2.1) * 0.05;
+    fruitMeshes.push(node);
+  }
+  return group([
+    mergeParts(column.children, "trunk"),
+    mergeParts(frondMeshes, "crown"),
+    mergeParts(fruitMeshes, "fruit"),
+  ]);
+}
+
+/**
+ * A broadleaf canopy: a short trunk, a few branches, and a bounded cluster of
+ * flattened organic masses. The cluster is what makes the crown read as dense
+ * foliage instead of a handful of separate balls.
+ */
+function broadleaf(rng, { trunkFraction = 0.34, clusters = 9, spread = 0.42 } = {}) {
+  const branchMeshes = [];
+  const canopyMeshes = [];
+  const trunkHeight = trunkFraction;
+  const { column, top } = trunkColumn(rng, {
+    height: trunkHeight,
+    baseRadius: 0.07,
+    topRadius: 0.045,
+    lean: (rng.nextFloat() - 0.5) * 0.14,
+    segments: 3,
+  });
+
+  const branches = 3 + Math.floor(rng.nextFloat() * 2);
+  for (let branch = 0; branch < branches; branch += 1) {
+    const azimuth = (branch / branches) * Math.PI * 2 + rng.nextFloat() * 0.4;
+    const limb = cylinder(0.02, 0.035, 0.26, 5, 0);
+    limb.position.set(top[0], top[1] + 0.06, top[2]);
+    limb.rotation.set(0, -azimuth, 0.7);
+    branchMeshes.push(limb);
+  }
+
+  const crownBase = trunkHeight + 0.06;
+  const crownHeight = 1 - crownBase;
+  for (let index = 0; index < clusters; index += 1) {
+    const azimuth = (index / clusters) * Math.PI * 2 * 1.618;
+    const radial = spread * Math.sqrt((index + 0.6) / clusters);
+    const lobe = supportSolid(rng, { rings: 3, sides: 8, roughness: 0.5 });
+    const size = 0.2 + rng.nextFloat() * 0.14;
+    lobe.scale.set(size, size * 0.72, size);
+    lobe.position.set(
+      top[0] + Math.cos(azimuth) * radial,
+      crownBase + crownHeight * (0.32 + rng.nextFloat() * 0.55),
+      Math.sin(azimuth) * radial,
+    );
+    canopyMeshes.push(lobe);
+  }
+  return group([
+    mergeParts(column.children, "trunk"),
+    mergeParts(branchMeshes, "branches"),
+    mergeParts(canopyMeshes, "canopy"),
+  ]);
 }
 
 function blossom(rng) {
-  const parts = [part(cylinder(0.035, 0.06, 0.44, 7, 0.22), "trunk")];
-  const lobes = 4 + Math.floor(rng.nextFloat() * 3);
-  for (let index = 0; index < lobes; index += 1) {
-    const azimuth = (index / lobes) * Math.PI * 2;
-    const lobe = sphere(0.24 + rng.nextFloat() * 0.08, 8, 6, 0.7);
-    lobe.position.x = Math.cos(azimuth) * 0.2;
-    lobe.position.z = Math.sin(azimuth) * 0.2;
-    parts.push(part(lobe, `canopy-${index}`));
-  }
-  return group(parts);
+  return broadleaf(rng, { trunkFraction: 0.3, clusters: 10, spread: 0.44 });
 }
 
+/**
+ * A bamboo stand: segmented culms with node rings and leaf blades near the top,
+ * built as an axial layer family rather than as bare cylinders.
+ */
 function bambooClump(rng) {
-  const parts = [];
-  const culms = 3 + Math.floor(rng.nextFloat() * 4);
+  const culmMeshes = [];
+  const leafMeshes = [];
+  const culms = 4 + Math.floor(rng.nextFloat() * 4);
   for (let index = 0; index < culms; index += 1) {
-    const height = 0.7 + rng.nextFloat() * 0.3;
-    const culm = part(cylinder(0.03, 0.04, height, 6, height / 2), `culm-${index}`);
-    culm.position.set(
-      (rng.nextFloat() - 0.5) * 0.5,
-      height / 2,
-      (rng.nextFloat() - 0.5) * 0.5,
-    );
-    culm.rotation.z = (rng.nextFloat() - 0.5) * 0.16;
-    parts.push(culm);
+    const height = 0.72 + rng.nextFloat() * 0.28;
+    const x = (rng.nextFloat() - 0.5) * 0.44;
+    const z = (rng.nextFloat() - 0.5) * 0.44;
+    const tilt = (rng.nextFloat() - 0.5) * 0.14;
+
+    const segments = 5;
+    for (let segment = 0; segment < segments; segment += 1) {
+      const segmentHeight = height / segments;
+      const y = segment * segmentHeight + segmentHeight / 2;
+      const culm = cylinder(0.022, 0.026, segmentHeight * 0.94, 6, y);
+      culm.position.x = x + tilt * y;
+      culm.position.z = z;
+      culmMeshes.push(culm);
+      if (segment > 0) {
+        const node = cylinder(0.03, 0.03, 0.012, 6, segment * segmentHeight);
+        node.position.x = x + tilt * segment * segmentHeight;
+        node.position.z = z;
+        culmMeshes.push(node);
+      }
+    }
+
+    // Foliage lives on the upper third, which is what gives a stand its mass.
+    const leaves = 5 + Math.floor(rng.nextFloat() * 4);
+    for (let leaf = 0; leaf < leaves; leaf += 1) {
+      const t = 0.62 + (leaf / leaves) * 0.38;
+      const azimuth = rng.nextFloat() * Math.PI * 2;
+      const blade = new THREE.Mesh(
+        bladeGeometry({
+          length: 0.16 + rng.nextFloat() * 0.1,
+          width: 0.055,
+          droop: 0.1,
+          segments: 3,
+          curl: 0.2,
+        }),
+      );
+      blade.position.set(x + tilt * height * t, height * t, z);
+      blade.rotation.set(0, -azimuth, -0.35 - rng.nextFloat() * 0.4);
+      leafMeshes.push(blade);
+    }
   }
-  return group(parts);
+  return group([mergeParts(culmMeshes, "culms"), mergeParts(leafMeshes, "foliage")]);
+}
+
+/** A weeping crown: trailing blades hung from a compact canopy. */
+function willow(rng) {
+  const base = broadleaf(rng, { trunkFraction: 0.28, clusters: 6, spread: 0.3 });
+  const strandMeshes = [];
+  const strands = 12;
+  for (let index = 0; index < strands; index += 1) {
+    const azimuth = (index / strands) * Math.PI * 2;
+    const blade = new THREE.Mesh(
+      bladeGeometry({
+        length: 0.46 + rng.nextFloat() * 0.16,
+        width: 0.1,
+        droop: 0.9,
+        segments: 5,
+        curl: 0.15,
+      }),
+    );
+    blade.position.set(Math.cos(azimuth) * 0.26, 0.82, Math.sin(azimuth) * 0.26);
+    blade.rotation.set(0, -azimuth, -1.1);
+    strandMeshes.push(blade);
+  }
+  return group([...base.children, mergeParts(strandMeshes, "strands")]);
+}
+
+/** A grass tussock: a radial fan of short blades. */
+function grassClump(rng) {
+  const bladeMeshes = [];
+  const blades = 14 + Math.floor(rng.nextFloat() * 8);
+  for (let index = 0; index < blades; index += 1) {
+    const azimuth = (index / blades) * Math.PI * 2 * 1.618;
+    const radial = 0.3 * Math.sqrt((index + 0.5) / blades);
+    const blade = new THREE.Mesh(
+      bladeGeometry({
+        length: 0.6 + rng.nextFloat() * 0.35,
+        width: 0.08,
+        droop: 0.42,
+        segments: 3,
+        curl: 0.3,
+      }),
+    );
+    blade.position.set(Math.cos(azimuth) * radial, 0.02, Math.sin(azimuth) * radial);
+    blade.rotation.set(0, -azimuth, -0.95 - rng.nextFloat() * 0.35);
+    bladeMeshes.push(blade);
+  }
+  return group([mergeParts(bladeMeshes, "blades")]);
 }
 
 function lantern() {
@@ -365,9 +618,9 @@ const GENERATORS = Object.freeze({
   "fruit-shop": (rng) => architecture(rng, { levels: 1 }),
   "tea-booth": (rng) => architecture(rng, { levels: 1, eaves: 1.26 }),
   "dessert-shop": (rng) => architecture(rng, { levels: 1 }),
-  "swing-tree": blossom,
-  "wish-tree": blossom,
-  willow: blossom,
+  "swing-tree": (rng) => broadleaf(rng, { trunkFraction: 0.4, clusters: 8, spread: 0.4 }),
+  "wish-tree": (rng) => broadleaf(rng, { trunkFraction: 0.32, clusters: 11, spread: 0.46 }),
+  willow,
   bridge,
 
   // Ground surfaces
@@ -429,7 +682,7 @@ const GENERATORS = Object.freeze({
   palm,
   blossom,
   bamboo: bambooClump,
-  "grass-clump": (rng) => bambooClump(rng),
+  "grass-clump": grassClump,
 });
 
 export function listSceneGeneratorKinds() {

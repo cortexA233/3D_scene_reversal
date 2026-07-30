@@ -181,7 +181,7 @@ test("an uncalibrated layer cannot pass vacuously", () => {
         surface: { p95: { mean: 0, max: 0 }, overToleranceFraction: { mean: 0 } },
         relational: { distanceError: { max: 0 } },
         zones: { delta: { max: 0 } },
-        semanticStructure: { componentDelta: { max: 0 } },
+        semanticStructure: { componentDeficit: { max: 0 }, componentDelta: { max: 0 } },
       },
       geography: {
         schemaVersion: "geography-evidence-v1",

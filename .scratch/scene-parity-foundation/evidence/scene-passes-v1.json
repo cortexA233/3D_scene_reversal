@@ -128,9 +128,9 @@
         "comparedPixels": 896048,
         "worldUnits": {
           "count": 896048,
-          "mean": 102.152247,
-          "p50": 0.253912,
-          "p95": 168.899473,
+          "mean": 100.462479,
+          "p50": 0.252123,
+          "p95": 159.497592,
           "max": 28046.612472
         }
       },
@@ -138,21 +138,21 @@
         "comparedPixels": 896048,
         "degrees": {
           "count": 896048,
-          "mean": 20.896978,
+          "mean": 17.644549,
           "p50": 0,
-          "p95": 90.36756,
-          "max": 179.425798
+          "p95": 82.775976,
+          "max": 178.903193
         }
       },
       "semantic": {
         "comparedPixels": 925140,
-        "agreementFraction": 0.877569,
+        "agreementFraction": 0.885508,
         "occupancy": [
           {
             "label": "geography",
             "referencePixels": 678277,
-            "candidatePixels": 662557,
-            "relativeError": 0.023176
+            "candidatePixels": 655204,
+            "relativeError": 0.034017
           },
           {
             "label": "horizon",
@@ -163,106 +163,106 @@
           {
             "label": "vegetation",
             "referencePixels": 86780,
-            "candidatePixels": 83346,
-            "relativeError": 0.039571
+            "candidatePixels": 95670,
+            "relativeError": 0.102443
           },
           {
             "label": "structures",
             "referencePixels": 12457,
-            "candidatePixels": 14215,
-            "relativeError": 0.141125
+            "candidatePixels": 14146,
+            "relativeError": 0.135586
           },
           {
             "label": "plazas",
             "referencePixels": 11326,
-            "candidatePixels": 11472,
-            "relativeError": 0.012891
+            "candidatePixels": 8939,
+            "relativeError": 0.210754
           },
           {
             "label": "decorations",
             "referencePixels": 3271,
-            "candidatePixels": 5070,
-            "relativeError": 0.549985
+            "candidatePixels": 4804,
+            "relativeError": 0.468664
           },
           {
             "label": "bridges",
             "referencePixels": 2714,
-            "candidatePixels": 4988,
-            "relativeError": 0.837878
+            "candidatePixels": 3587,
+            "relativeError": 0.321665
           },
           {
             "label": "rocks",
             "referencePixels": 962,
-            "candidatePixels": 165,
-            "relativeError": 0.828482
+            "candidatePixels": 106,
+            "relativeError": 0.889813
           },
           {
             "label": "wildlife",
             "referencePixels": 217,
-            "candidatePixels": 148,
-            "relativeError": 0.317972
+            "candidatePixels": 123,
+            "relativeError": 0.43318
           },
           {
             "label": "cover",
             "referencePixels": 128,
-            "candidatePixels": 6135,
-            "relativeError": 46.929688
+            "candidatePixels": 5519,
+            "relativeError": 42.117188
           },
           {
             "label": "paths",
             "referencePixels": 70,
-            "candidatePixels": 31,
-            "relativeError": 0.557143
+            "candidatePixels": 29,
+            "relativeError": 0.585714
           }
         ],
         "confusion": {
           "0->horizon": 26066,
           "geography->horizon": 16448,
-          "geography->vegetation": 12717,
-          "vegetation->geography": 10443,
+          "geography->vegetation": 14440,
           "horizon->geography": 6747,
-          "plazas->geography": 5620,
-          "geography->plazas": 4863,
-          "geography->cover": 4373,
-          "vegetation->plazas": 3098,
-          "vegetation->structures": 2456,
-          "geography->bridges": 1785,
-          "geography->structures": 1736,
+          "plazas->geography": 5416,
+          "vegetation->geography": 4749,
+          "geography->plazas": 4521,
+          "geography->cover": 4260,
+          "vegetation->structures": 2007,
+          "geography->structures": 1905,
+          "structures->vegetation": 1658,
           "0->geography": 1626,
-          "vegetation->bridges": 1413,
+          "geography->bridges": 1587,
+          "plazas->vegetation": 1560,
           "horizon->0": 1400,
-          "structures->vegetation": 1315
+          "vegetation->plazas": 1251
         }
       },
       "byGroup": {
         "geography": {
           "referencePixels": 678277,
-          "candidatePixels": 662557,
-          "intersectionOverUnion": 0.899804,
+          "candidatePixels": 655204,
+          "intersectionOverUnion": 0.905972,
           "contourDistance": {
-            "count": 43256,
-            "mean": 7.374336,
-            "p50": 2.8284,
-            "p95": 32.071,
+            "count": 42824,
+            "mean": 7.313509,
+            "p50": 2.4142,
+            "p95": 33,
             "max": 108
           },
           "depth": {
-            "comparedPixels": 635059,
+            "comparedPixels": 633848,
             "worldUnits": {
-              "count": 635059,
-              "mean": 2.241654,
+              "count": 633848,
+              "mean": 2.146552,
               "p50": 0.153777,
-              "p95": 12.699155,
+              "p95": 12.033978,
               "max": 117.232045
             }
           },
           "worldNormal": {
-            "comparedPixels": 635059,
+            "comparedPixels": 633848,
             "degrees": {
-              "count": 635059,
-              "mean": 4.223638,
+              "count": 633848,
+              "mean": 4.21186,
               "p50": 0,
-              "p95": 33.845448,
+              "p95": 34.003262,
               "max": 89.457242
             }
           }
@@ -301,62 +301,62 @@
         },
         "structures": {
           "referencePixels": 12457,
-          "candidatePixels": 14215,
-          "intersectionOverUnion": 0.541378,
+          "candidatePixels": 14146,
+          "intersectionOverUnion": 0.534375,
           "contourDistance": {
-            "count": 5756,
-            "mean": 6.49086,
-            "p50": 3.8284,
-            "p95": 22.6272,
-            "max": 41.355
+            "count": 5870,
+            "mean": 6.175325,
+            "p50": 3.4142,
+            "p95": 22.3136,
+            "max": 41.8994
           },
           "depth": {
-            "comparedPixels": 9368,
+            "comparedPixels": 9265,
             "worldUnits": {
-              "count": 9368,
-              "mean": 26.285652,
-              "p50": 12.320075,
-              "p95": 124.523956,
-              "max": 253.938392
+              "count": 9265,
+              "mean": 26.002983,
+              "p50": 13.088963,
+              "p95": 117.194494,
+              "max": 255.424311
             }
           },
           "worldNormal": {
-            "comparedPixels": 9368,
+            "comparedPixels": 9265,
             "degrees": {
-              "count": 9368,
-              "mean": 65.715629,
-              "p50": 65.866869,
-              "p95": 128.410702,
-              "max": 177.120191
+              "count": 9265,
+              "mean": 66.59839,
+              "p50": 68.358734,
+              "p95": 132.66528,
+              "max": 176.732586
             }
           }
         },
         "bridges": {
           "referencePixels": 2714,
-          "candidatePixels": 4988,
-          "intersectionOverUnion": 0.284095,
+          "candidatePixels": 3587,
+          "intersectionOverUnion": 0.264246,
           "contourDistance": {
-            "count": 1503,
-            "mean": 7.267687,
-            "p50": 5.4142,
-            "p95": 17.4142,
+            "count": 1540,
+            "mean": 7.052196,
+            "p50": 5.6568,
+            "p95": 16.5562,
             "max": 38.2426
           },
           "depth": {
-            "comparedPixels": 1704,
+            "comparedPixels": 1317,
             "worldUnits": {
-              "count": 1704,
-              "mean": 14.428987,
-              "p50": 10.886012,
-              "p95": 35.810472,
-              "max": 44.473863
+              "count": 1317,
+              "mean": 15.958417,
+              "p50": 15.781856,
+              "p95": 35.595899,
+              "max": 43.427819
             }
           },
           "worldNormal": {
-            "comparedPixels": 1704,
+            "comparedPixels": 1317,
             "degrees": {
-              "count": 1704,
-              "mean": 49.888213,
+              "count": 1317,
+              "mean": 53.108258,
               "p50": 43.508963,
               "p95": 89.783244,
               "max": 169.50597
@@ -365,46 +365,46 @@
         },
         "plazas": {
           "referencePixels": 11326,
-          "candidatePixels": 11472,
-          "intersectionOverUnion": 0.1582,
+          "candidatePixels": 8939,
+          "intersectionOverUnion": 0.16566,
           "contourDistance": {
-            "count": 8797,
-            "mean": 45.476556,
-            "p50": 10.8284,
-            "p95": 216.5324,
+            "count": 8658,
+            "mean": 46.240323,
+            "p50": 10.4852,
+            "p95": 217.8638,
             "max": 385.284
           },
           "depth": {
-            "comparedPixels": 3114,
+            "comparedPixels": 2880,
             "worldUnits": {
-              "count": 3114,
-              "mean": 2.678754,
+              "count": 2880,
+              "mean": 2.601575,
               "p50": 1.500224,
-              "p95": 8.48458,
+              "p95": 8.05901,
               "max": 39.672789
             }
           },
           "worldNormal": {
-            "comparedPixels": 3114,
+            "comparedPixels": 2880,
             "degrees": {
-              "count": 3114,
-              "mean": 11.037403,
-              "p50": 0.898718,
-              "p95": 89.999119,
+              "count": 2880,
+              "mean": 11.494695,
+              "p50": 0.635511,
+              "p95": 90.000881,
               "max": 154.979164
             }
           }
         },
         "paths": {
           "referencePixels": 70,
-          "candidatePixels": 31,
-          "intersectionOverUnion": 0.10989,
+          "candidatePixels": 29,
+          "intersectionOverUnion": 0.11236,
           "contourDistance": {
-            "count": 97,
-            "mean": 48.548268,
-            "p50": 8.4852,
-            "p95": 190.0414,
-            "max": 352.852
+            "count": 95,
+            "mean": 73.178175,
+            "p50": 42.1834,
+            "p95": 154.8816,
+            "max": 160.1124
           },
           "depth": {
             "comparedPixels": 10,
@@ -429,161 +429,161 @@
         },
         "rocks": {
           "referencePixels": 962,
-          "candidatePixels": 165,
-          "intersectionOverUnion": 0.098441,
+          "candidatePixels": 106,
+          "intersectionOverUnion": 0.050147,
           "contourDistance": {
-            "count": 528,
-            "mean": 71.638541,
-            "p50": 32,
-            "p95": 220.9112,
+            "count": 510,
+            "mean": 75.226954,
+            "p50": 38.071,
+            "p95": 221.1538,
             "max": 232.1538
           },
           "depth": {
-            "comparedPixels": 101,
+            "comparedPixels": 51,
             "worldUnits": {
-              "count": 101,
-              "mean": 1.674644,
-              "p50": 1.303532,
-              "p95": 3.853376,
-              "max": 8.826109
+              "count": 51,
+              "mean": 1.490512,
+              "p50": 1.462674,
+              "p95": 3.561914,
+              "max": 4.14305
             }
           },
           "worldNormal": {
-            "comparedPixels": 101,
+            "comparedPixels": 51,
             "degrees": {
-              "count": 101,
-              "mean": 38.367826,
-              "p50": 36.521792,
-              "p95": 72.503647,
+              "count": 51,
+              "mean": 41.011993,
+              "p50": 37.415334,
+              "p95": 84.216016,
               "max": 103.009598
             }
           }
         },
         "decorations": {
           "referencePixels": 3271,
-          "candidatePixels": 5070,
-          "intersectionOverUnion": 0.269559,
+          "candidatePixels": 4804,
+          "intersectionOverUnion": 0.271053,
           "contourDistance": {
-            "count": 1896,
-            "mean": 10.202965,
+            "count": 1798,
+            "mean": 10.749702,
             "p50": 3.4142,
-            "p95": 36.5562,
+            "p95": 40,
             "max": 113.4556
           },
           "depth": {
-            "comparedPixels": 1771,
+            "comparedPixels": 1722,
             "worldUnits": {
-              "count": 1771,
-              "mean": 8.783186,
-              "p50": 4.554315,
-              "p95": 27.755038,
+              "count": 1722,
+              "mean": 9.116713,
+              "p50": 4.906573,
+              "p95": 30.195808,
               "max": 66.637482
             }
           },
           "worldNormal": {
-            "comparedPixels": 1771,
+            "comparedPixels": 1722,
             "degrees": {
-              "count": 1771,
-              "mean": 47.807754,
+              "count": 1722,
+              "mean": 47.740982,
               "p50": 43.499098,
-              "p95": 96.176891,
+              "p95": 95.865847,
               "max": 168.6146
             }
           }
         },
         "vegetation": {
           "referencePixels": 86780,
-          "candidatePixels": 83346,
-          "intersectionOverUnion": 0.65831,
+          "candidatePixels": 95670,
+          "intersectionOverUnion": 0.729204,
           "contourDistance": {
-            "count": 21813,
-            "mean": 6.537689,
-            "p50": 3.8284,
-            "p95": 23.7278,
-            "max": 47.7278
+            "count": 23036,
+            "mean": 6.109251,
+            "p50": 2.8284,
+            "p95": 23.071,
+            "max": 68.213
           },
           "depth": {
-            "comparedPixels": 67536,
+            "comparedPixels": 76939,
             "worldUnits": {
-              "count": 67536,
-              "mean": 18.907479,
-              "p50": 9.385788,
-              "p95": 70.084958,
-              "max": 238.921847
+              "count": 76939,
+              "mean": 14.245888,
+              "p50": 6.830579,
+              "p95": 54.176146,
+              "max": 306.603585
             }
           },
           "worldNormal": {
-            "comparedPixels": 67536,
+            "comparedPixels": 76939,
             "degrees": {
-              "count": 67536,
-              "mean": 78.65834,
-              "p50": 75.041538,
-              "p95": 136.548642,
-              "max": 179.425798
+              "count": 76939,
+              "mean": 41.159459,
+              "p50": 29.312869,
+              "p95": 112.737276,
+              "max": 178.903193
             }
           }
         },
         "wildlife": {
           "referencePixels": 217,
-          "candidatePixels": 148,
-          "intersectionOverUnion": 0.332117,
+          "candidatePixels": 123,
+          "intersectionOverUnion": 0.328125,
           "contourDistance": {
-            "count": 236,
-            "mean": 36.554265,
+            "count": 234,
+            "mean": 16.930507,
             "p50": 1,
-            "p95": 226.5206,
-            "max": 231.1064
+            "p95": 120.355,
+            "max": 123.9408
           },
           "depth": {
-            "comparedPixels": 91,
+            "comparedPixels": 84,
             "worldUnits": {
-              "count": 91,
-              "mean": 0.69807,
+              "count": 84,
+              "mean": 0.684527,
               "p50": 0.445239,
-              "p95": 2.4211,
+              "p95": 2.426465,
               "max": 2.955745
             }
           },
           "worldNormal": {
-            "comparedPixels": 91,
+            "comparedPixels": 84,
             "degrees": {
-              "count": 91,
-              "mean": 49.217344,
-              "p50": 41.677236,
-              "p95": 100.734071,
+              "count": 84,
+              "mean": 49.033071,
+              "p50": 42.806284,
+              "p95": 98.306415,
               "max": 133.589652
             }
           }
         },
         "cover": {
           "referencePixels": 128,
-          "candidatePixels": 6135,
-          "intersectionOverUnion": 0.003364,
+          "candidatePixels": 5519,
+          "intersectionOverUnion": 0.000709,
           "contourDistance": {
-            "count": 5152,
-            "mean": 144.440175,
-            "p50": 113.4082,
-            "p95": 392.562,
+            "count": 4636,
+            "mean": 140.735788,
+            "p50": 112.639,
+            "p95": 391.562,
             "max": 457.9466
           },
           "depth": {
-            "comparedPixels": 21,
+            "comparedPixels": 4,
             "worldUnits": {
-              "count": 21,
-              "mean": 4.257574,
-              "p50": 3.896291,
-              "p95": 11.349132,
+              "count": 4,
+              "mean": 7.654897,
+              "p50": 11.349132,
+              "p95": 12.016097,
               "max": 12.016097
             }
           },
           "worldNormal": {
-            "comparedPixels": 21,
+            "comparedPixels": 4,
             "degrees": {
-              "count": 21,
-              "mean": 14.923572,
-              "p50": 14.555836,
-              "p95": 21.749565,
-              "max": 22.11819
+              "count": 4,
+              "mean": 17.133855,
+              "p50": 20.1647,
+              "p95": 20.977762,
+              "max": 20.977762
             }
           }
         }
@@ -591,20 +591,20 @@
       "appearance": {
         "deltaE": {
           "count": 1166400,
-          "mean": 36.702569,
-          "p50": 30.21977,
+          "mean": 36.773461,
+          "p50": 30.229291,
           "p95": 71.890563,
-          "max": 94.161151
+          "max": 91.615372
         },
         "referenceChannelMeans": [
-          169.5406,
-          176.9855,
-          167.7969
+          169.5405,
+          176.9851,
+          167.7968
         ],
         "candidateChannelMeans": [
-          95.1651,
-          143.2687,
-          141.1381
+          95.6034,
+          143.5466,
+          140.8353
         ],
         "regions": {
           "horizon": {
@@ -616,72 +616,72 @@
           },
           "geography": {
             "count": 678277,
-            "mean": 28.221753,
-            "p50": 29.458575,
-            "p95": 36.817048,
-            "max": 53.236135
+            "mean": 28.220885,
+            "p50": 29.462966,
+            "p95": 36.874659,
+            "max": 54.964638
           },
           "vegetation": {
             "count": 86780,
-            "mean": 50.609023,
-            "p50": 55.59312,
-            "p95": 75.550628,
-            "max": 84.988885
+            "mean": 51.419942,
+            "p50": 57.566526,
+            "p95": 75.827075,
+            "max": 84.492868
           },
           "structures": {
             "count": 12457,
-            "mean": 39.1561,
-            "p50": 40.525336,
-            "p95": 57.971887,
-            "max": 94.161151
+            "mean": 39.617684,
+            "p50": 41.008077,
+            "p95": 58.34414,
+            "max": 91.615372
           },
           "plazas": {
             "count": 11326,
-            "mean": 27.49251,
-            "p50": 24.983538,
-            "p95": 47.693006,
-            "max": 62.578757
+            "mean": 27.634123,
+            "p50": 24.736787,
+            "p95": 48.011287,
+            "max": 63.096543
           },
           "wildlife": {
             "count": 217,
-            "mean": 33.92978,
-            "p50": 24.808902,
-            "p95": 79.082021,
+            "mean": 33.049613,
+            "p50": 22.886344,
+            "p95": 78.521325,
             "max": 81.326172
           },
           "paths": {
             "count": 70,
-            "mean": 25.160029,
-            "p50": 24.122153,
+            "mean": 24.956515,
+            "p50": 23.701171,
             "p95": 37.415428,
             "max": 37.873536
           },
           "decorations": {
             "count": 3271,
-            "mean": 27.828187,
-            "p50": 25.059123,
-            "p95": 53.765102,
-            "max": 71.525706
+            "mean": 27.878574,
+            "p50": 25.112523,
+            "p95": 53.870265,
+            "max": 76.305713
           },
           "rocks": {
             "count": 962,
-            "mean": 23.873588,
-            "p50": 23.851783,
+            "mean": 24.246527,
+            "p50": 23.887024,
             "p95": 49.595318,
-            "max": 66.016462
+            "max": 74.665011
           },
           "cover": {
             "count": 128,
-            "mean": 39.584662,
-            "p50": 43.323351,
-            "p95": 48.801406,
+            "mean": 46.926631,
+            "p50": 50.699734,
+            "p95": 52.216098,
             "max": 57.753104
           },
           "bridges": {
             "count": 2714,
-            "mean": 39.565418,
-            "p50": 40.769195,
-            "p95": 58.914992,
+            "mean": 41.147364,
+            "p50": 42.854701,
+            "p95": 59.31648,
             "max": 72.406322
           }
         }
@@ -706,7 +706,7 @@
         "comparedPixels": 1166400,
         "worldUnits": {
           "count": 1166400,
-          "mean": 12.485633,
+          "mean": 12.469806,
           "p50": 0,
           "p95": 129.108669,
           "max": 235.840934
@@ -716,21 +716,21 @@
         "comparedPixels": 1166400,
         "degrees": {
           "count": 1166400,
-          "mean": 6.276488,
+          "mean": 6.23212,
           "p50": 0,
-          "p95": 63.08098,
+          "p95": 62.892426,
           "max": 180
         }
       },
       "semantic": {
         "comparedPixels": 1166400,
-        "agreementFraction": 0.952665,
+        "agreementFraction": 0.952984,
         "occupancy": [
           {
             "label": "geography",
             "referencePixels": 1101148,
-            "candidatePixels": 1050727,
-            "relativeError": 0.045789
+            "candidatePixels": 1050179,
+            "relativeError": 0.046287
           },
           {
             "label": "horizon",
@@ -741,14 +741,14 @@
           {
             "label": "vegetation",
             "referencePixels": 2054,
-            "candidatePixels": 1522,
-            "relativeError": 0.259007
+            "candidatePixels": 2137,
+            "relativeError": 0.040409
           },
           {
             "label": "plazas",
             "referencePixels": 822,
-            "candidatePixels": 975,
-            "relativeError": 0.186131
+            "candidatePixels": 934,
+            "relativeError": 0.136253
           },
           {
             "label": "structures",
@@ -771,77 +771,77 @@
           {
             "label": "decorations",
             "referencePixels": 96,
-            "candidatePixels": 103,
-            "relativeError": 0.072917
+            "candidatePixels": 105,
+            "relativeError": 0.09375
           },
           {
             "label": "wildlife",
             "referencePixels": 8,
-            "candidatePixels": 8,
-            "relativeError": 0
+            "candidatePixels": 5,
+            "relativeError": 0.375
           },
           {
             "label": "cover",
             "referencePixels": 7,
-            "candidatePixels": 379,
-            "relativeError": 53.142857
+            "candidatePixels": 358,
+            "relativeError": 50.142857
           },
           {
             "label": "paths",
             "referencePixels": 6,
-            "candidatePixels": 13,
-            "relativeError": 1.166667
+            "candidatePixels": 9,
+            "relativeError": 0.5
           }
         ],
         "confusion": {
           "geography->horizon": 51598,
           "horizon->geography": 1150,
-          "vegetation->geography": 685,
-          "geography->plazas": 399,
-          "geography->vegetation": 238,
-          "plazas->geography": 220,
-          "geography->cover": 220,
+          "geography->plazas": 393,
+          "geography->vegetation": 360,
+          "vegetation->geography": 246,
+          "plazas->geography": 218,
+          "geography->cover": 210,
           "geography->bridges": 108,
           "plazas->cover": 102,
-          "structures->geography": 72,
+          "structures->geography": 71,
           "structures->plazas": 59,
+          "geography->structures": 52,
           "rocks->geography": 50,
-          "geography->structures": 50,
-          "vegetation->plazas": 49,
-          "vegetation->cover": 33,
-          "plazas->decorations": 26
+          "plazas->decorations": 26,
+          "decorations->geography": 25,
+          "structures->rocks": 24
         }
       },
       "byGroup": {
         "geography": {
           "referencePixels": 1101148,
-          "candidatePixels": 1050727,
-          "intersectionOverUnion": 0.950295,
+          "candidatePixels": 1050179,
+          "intersectionOverUnion": 0.950579,
           "contourDistance": {
-            "count": 19868,
-            "mean": 5.344929,
+            "count": 19589,
+            "mean": 5.396632,
             "p50": 0,
-            "p95": 24.5562,
+            "p95": 24.8284,
             "max": 45.8402
           },
           "depth": {
-            "comparedPixels": 1048516,
+            "comparedPixels": 1048410,
             "worldUnits": {
-              "count": 1048516,
-              "mean": 0.017201,
+              "count": 1048410,
+              "mean": 0.016732,
               "p50": 0,
               "p95": 0,
               "max": 36.337964
             }
           },
           "worldNormal": {
-            "comparedPixels": 1048516,
+            "comparedPixels": 1048410,
             "degrees": {
-              "count": 1048516,
-              "mean": 0.051929,
+              "count": 1048410,
+              "mean": 0.050589,
               "p50": 0,
               "p95": 0,
-              "max": 77.557924
+              "max": 174.888734
             }
           }
         },
@@ -883,7 +883,7 @@
           "intersectionOverUnion": 0.477876,
           "contourDistance": {
             "count": 369,
-            "mean": 1.046134,
+            "mean": 1.053415,
             "p50": 1,
             "p95": 2.4142,
             "max": 3
@@ -892,18 +892,18 @@
             "comparedPixels": 216,
             "worldUnits": {
               "count": 216,
-              "mean": 13.521578,
-              "p50": 9.031742,
-              "p95": 44.085843,
-              "max": 78.097477
+              "mean": 12.204875,
+              "p50": 6.8574,
+              "p95": 39.213245,
+              "max": 76.168107
             }
           },
           "worldNormal": {
             "comparedPixels": 216,
             "degrees": {
               "count": 216,
-              "mean": 67.684695,
-              "p50": 41.870833,
+              "mean": 67.876486,
+              "p50": 43.046643,
               "p95": 167.802782,
               "max": 178.729056
             }
@@ -943,30 +943,30 @@
         },
         "plazas": {
           "referencePixels": 822,
-          "candidatePixels": 975,
-          "intersectionOverUnion": 0.342046,
+          "candidatePixels": 934,
+          "intersectionOverUnion": 0.349731,
           "contourDistance": {
-            "count": 1102,
-            "mean": 2.82656,
+            "count": 1101,
+            "mean": 2.834679,
             "p50": 1,
-            "p95": 16.7278,
+            "p95": 16.8994,
             "max": 44.213
           },
           "depth": {
-            "comparedPixels": 458,
+            "comparedPixels": 455,
             "worldUnits": {
-              "count": 458,
-              "mean": 1.086054,
-              "p50": 0.600805,
+              "count": 455,
+              "mean": 1.089992,
+              "p50": 0.604381,
               "p95": 4.849353,
               "max": 9.198036
             }
           },
           "worldNormal": {
-            "comparedPixels": 458,
+            "comparedPixels": 455,
             "degrees": {
-              "count": 458,
-              "mean": 94.007618,
+              "count": 455,
+              "mean": 94.215787,
               "p50": 161.666392,
               "p95": 180,
               "max": 180
@@ -975,31 +975,31 @@
         },
         "paths": {
           "referencePixels": 6,
-          "candidatePixels": 13,
-          "intersectionOverUnion": 0.461538,
+          "candidatePixels": 9,
+          "intersectionOverUnion": 0.5,
           "contourDistance": {
-            "count": 19,
-            "mean": 7.318589,
+            "count": 15,
+            "mean": 6.14556,
             "p50": 0,
             "p95": 43.3846,
             "max": 43.3846
           },
           "depth": {
-            "comparedPixels": 6,
+            "comparedPixels": 5,
             "worldUnits": {
-              "count": 6,
-              "mean": 0.724184,
+              "count": 5,
+              "mean": 0.859723,
               "p50": 0.118015,
               "p95": 3.66026,
               "max": 3.66026
             }
           },
           "worldNormal": {
-            "comparedPixels": 6,
+            "comparedPixels": 5,
             "degrees": {
-              "count": 6,
-              "mean": 4.346226,
-              "p50": 5.435037,
+              "count": 5,
+              "mean": 4.098472,
+              "p50": 5.009906,
               "p95": 5.710383,
               "max": 5.710383
             }
@@ -1020,10 +1020,10 @@
             "comparedPixels": 45,
             "worldUnits": {
               "count": 45,
-              "mean": 1.213093,
+              "mean": 1.19855,
               "p50": 1.035315,
               "p95": 2.775146,
-              "max": 4.168084
+              "max": 4.016094
             }
           },
           "worldNormal": {
@@ -1039,109 +1039,109 @@
         },
         "decorations": {
           "referencePixels": 96,
-          "candidatePixels": 103,
-          "intersectionOverUnion": 0.442029,
+          "candidatePixels": 105,
+          "intersectionOverUnion": 0.446043,
           "contourDistance": {
-            "count": 141,
-            "mean": 0.998657,
+            "count": 142,
+            "mean": 0.981665,
             "p50": 1,
             "p95": 3.8284,
             "max": 9.2426
           },
           "depth": {
-            "comparedPixels": 61,
+            "comparedPixels": 62,
             "worldUnits": {
-              "count": 61,
-              "mean": 3.744096,
+              "count": 62,
+              "mean": 3.683535,
               "p50": 2.533751,
               "p95": 7.585161,
               "max": 26.565945
             }
           },
           "worldNormal": {
-            "comparedPixels": 61,
+            "comparedPixels": 62,
             "degrees": {
-              "count": 61,
-              "mean": 81.790491,
-              "p50": 54.975573,
-              "p95": 175.515189,
-              "max": 179.364489
+              "count": 62,
+              "mean": 83.436263,
+              "p50": 55.109379,
+              "p95": 175.581272,
+              "max": 179.364518
             }
           }
         },
         "vegetation": {
           "referencePixels": 2054,
-          "candidatePixels": 1522,
-          "intersectionOverUnion": 0.55141,
+          "candidatePixels": 2137,
+          "intersectionOverUnion": 0.720443,
           "contourDistance": {
-            "count": 2158,
-            "mean": 0.865018,
-            "p50": 1,
-            "p95": 2,
-            "max": 15.7278
+            "count": 2171,
+            "mean": 0.564921,
+            "p50": 0,
+            "p95": 1.4142,
+            "max": 9.4142
           },
           "depth": {
-            "comparedPixels": 1271,
+            "comparedPixels": 1755,
             "worldUnits": {
-              "count": 1271,
-              "mean": 7.400097,
-              "p50": 6.567727,
-              "p95": 16.391601,
-              "max": 58.548074
+              "count": 1755,
+              "mean": 6.041846,
+              "p50": 4.75816,
+              "p95": 16.699156,
+              "max": 45.280301
             }
           },
           "worldNormal": {
-            "comparedPixels": 1271,
+            "comparedPixels": 1755,
             "degrees": {
-              "count": 1271,
-              "mean": 88.782323,
-              "p50": 89.462769,
-              "p95": 138.836955,
-              "max": 178.579061
+              "count": 1755,
+              "mean": 49.35827,
+              "p50": 28.367381,
+              "p95": 138.663789,
+              "max": 179.550627
             }
           }
         },
         "wildlife": {
           "referencePixels": 8,
-          "candidatePixels": 8,
-          "intersectionOverUnion": 0.6,
+          "candidatePixels": 5,
+          "intersectionOverUnion": 0.444444,
           "contourDistance": {
-            "count": 16,
-            "mean": 1.47855,
+            "count": 13,
+            "mean": 3.303138,
             "p50": 0,
-            "p95": 15.8284,
-            "max": 15.8284
+            "p95": 29.284,
+            "max": 29.284
           },
           "depth": {
-            "comparedPixels": 6,
+            "comparedPixels": 4,
             "worldUnits": {
-              "count": 6,
-              "mean": 1.889138,
-              "p50": 1.20161,
+              "count": 4,
+              "mean": 1.750112,
+              "p50": 1.228431,
               "p95": 3.67993,
               "max": 3.67993
             }
           },
           "worldNormal": {
-            "comparedPixels": 6,
+            "comparedPixels": 4,
             "degrees": {
-              "count": 6,
-              "mean": 91.348834,
-              "p50": 98.176052,
-              "p95": 127.198791,
-              "max": 127.198791
+              "count": 4,
+              "mean": 60.690998,
+              "p50": 54.042678,
+              "p95": 98.176052,
+              "max": 98.176052
             }
           }
         },
         "cover": {
           "referencePixels": 7,
-          "candidatePixels": 379,
-          "intersectionOverUnion": 0.005208,
+          "candidatePixels": 358,
+          "intersectionOverUnion": 0.00551,
           "contourDistance": {
-            "count": 383,
-            "mean": 20.620521,
-            "p50": 16.4142,
-            "p95": 49.4142,
+            "count": 362,
+            "mean": 19.838071,
+            "p50": 16.142,
+            "p95": 47.284,
             "max": 58.8698
           },
           "depth": {
@@ -1284,7 +1284,7 @@
         "comparedPixels": 952232,
         "worldUnits": {
           "count": 952232,
-          "mean": 8.667604,
+          "mean": 8.652668,
           "p50": 0.88869,
           "p95": 2.244078,
           "max": 524.275537
@@ -1294,7 +1294,7 @@
         "comparedPixels": 952232,
         "degrees": {
           "count": 952232,
-          "mean": 2.369512,
+          "mean": 2.350749,
           "p50": 0,
           "p95": 0,
           "max": 180
@@ -1302,13 +1302,13 @@
       },
       "semantic": {
         "comparedPixels": 1107360,
-        "agreementFraction": 0.845071,
+        "agreementFraction": 0.845191,
         "occupancy": [
           {
             "label": "geography",
             "referencePixels": 929786,
-            "candidatePixels": 1070176,
-            "relativeError": 0.150992
+            "candidatePixels": 1069997,
+            "relativeError": 0.150799
           },
           {
             "label": "horizon",
@@ -1319,44 +1319,44 @@
           {
             "label": "vegetation",
             "referencePixels": 757,
-            "candidatePixels": 629,
-            "relativeError": 0.169089
+            "candidatePixels": 824,
+            "relativeError": 0.088507
           },
           {
             "label": "plazas",
             "referencePixels": 170,
-            "candidatePixels": 240,
-            "relativeError": 0.411765
+            "candidatePixels": 229,
+            "relativeError": 0.347059
           },
           {
             "label": "structures",
             "referencePixels": 130,
-            "candidatePixels": 118,
-            "relativeError": 0.092308
+            "candidatePixels": 114,
+            "relativeError": 0.123077
           },
           {
             "label": "decorations",
             "referencePixels": 33,
-            "candidatePixels": 51,
-            "relativeError": 0.545455
+            "candidatePixels": 53,
+            "relativeError": 0.606061
           },
           {
             "label": "bridges",
             "referencePixels": 28,
-            "candidatePixels": 52,
-            "relativeError": 0.857143
+            "candidatePixels": 53,
+            "relativeError": 0.892857
           },
           {
             "label": "rocks",
             "referencePixels": 7,
-            "candidatePixels": 8,
-            "relativeError": 0.142857
+            "candidatePixels": 7,
+            "relativeError": 0
           },
           {
             "label": "cover",
             "referencePixels": 5,
-            "candidatePixels": 77,
-            "relativeError": 14.4
+            "candidatePixels": 75,
+            "relativeError": 14
           },
           {
             "label": "wildlife",
@@ -1367,7 +1367,7 @@
           {
             "label": "paths",
             "referencePixels": 0,
-            "candidatePixels": 3,
+            "candidatePixels": 2,
             "relativeError": null
           }
         ],
@@ -1375,48 +1375,48 @@
           "0->geography": 155128,
           "geography->horizon": 15206,
           "horizon->geography": 515,
-          "vegetation->geography": 212,
-          "geography->vegetation": 108,
-          "geography->plazas": 93,
-          "geography->cover": 50,
-          "plazas->geography": 32,
-          "geography->bridges": 25,
-          "geography->structures": 24,
+          "geography->vegetation": 138,
+          "geography->plazas": 88,
+          "vegetation->geography": 63,
+          "geography->cover": 53,
+          "plazas->geography": 31,
+          "geography->structures": 26,
+          "geography->bridges": 26,
           "structures->plazas": 21,
-          "vegetation->structures": 14,
           "geography->decorations": 13,
-          "vegetation->cover": 12,
-          "vegetation->plazas": 10,
-          "structures->vegetation": 10
+          "plazas->cover": 11,
+          "structures->decorations": 10,
+          "plazas->vegetation": 9,
+          "vegetation->structures": 9
         }
       },
       "byGroup": {
         "geography": {
           "referencePixels": 929786,
-          "candidatePixels": 1070176,
-          "intersectionOverUnion": 0.842101,
+          "candidatePixels": 1069997,
+          "intersectionOverUnion": 0.842188,
           "contourDistance": {
-            "count": 13373,
-            "mean": 26.111673,
+            "count": 13296,
+            "mean": 26.249991,
             "p50": 1,
-            "p95": 106,
+            "p95": 106.2426,
             "max": 176.8284
           },
           "depth": {
-            "comparedPixels": 914266,
+            "comparedPixels": 914235,
             "worldUnits": {
-              "count": 914266,
-              "mean": 1.021886,
+              "count": 914235,
+              "mean": 1.021767,
               "p50": 0.865445,
               "p95": 1.954404,
               "max": 63.653127
             }
           },
           "worldNormal": {
-            "comparedPixels": 914266,
+            "comparedPixels": 914235,
             "degrees": {
-              "count": 914266,
-              "mean": 0.012988,
+              "count": 914235,
+              "mean": 0.012532,
               "p50": 0,
               "p95": 0,
               "max": 156.444521
@@ -1457,62 +1457,62 @@
         },
         "structures": {
           "referencePixels": 130,
-          "candidatePixels": 118,
-          "intersectionOverUnion": 0.417143,
+          "candidatePixels": 114,
+          "intersectionOverUnion": 0.410405,
           "contourDistance": {
-            "count": 188,
-            "mean": 0.806748,
+            "count": 184,
+            "mean": 0.830653,
             "p50": 1,
-            "p95": 2.4142,
-            "max": 2.8284
+            "p95": 2,
+            "max": 4.4142
           },
           "depth": {
-            "comparedPixels": 73,
+            "comparedPixels": 71,
             "worldUnits": {
-              "count": 73,
-              "mean": 14.991879,
-              "p50": 10.530178,
-              "p95": 38.179717,
-              "max": 45.788124
+              "count": 71,
+              "mean": 13.780432,
+              "p50": 7.674567,
+              "p95": 36.286109,
+              "max": 44.77963
             }
           },
           "worldNormal": {
-            "comparedPixels": 73,
+            "comparedPixels": 71,
             "degrees": {
-              "count": 73,
-              "mean": 78.196731,
-              "p50": 80.336895,
-              "p95": 179.101392,
+              "count": 71,
+              "mean": 75.736134,
+              "p50": 67.461197,
+              "p95": 179.364489,
               "max": 179.364489
             }
           }
         },
         "bridges": {
           "referencePixels": 28,
-          "candidatePixels": 52,
-          "intersectionOverUnion": 0.355932,
+          "candidatePixels": 53,
+          "intersectionOverUnion": 0.372881,
           "contourDistance": {
-            "count": 51,
-            "mean": 1.219863,
+            "count": 50,
+            "mean": 1.247692,
             "p50": 1,
             "p95": 2.4142,
             "max": 3.4142
           },
           "depth": {
-            "comparedPixels": 21,
+            "comparedPixels": 22,
             "worldUnits": {
-              "count": 21,
-              "mean": 8.236799,
-              "p50": 5.857847,
-              "p95": 16.978101,
-              "max": 19.588741
+              "count": 22,
+              "mean": 9.509248,
+              "p50": 6.46044,
+              "p95": 19.588741,
+              "max": 35.445698
             }
           },
           "worldNormal": {
-            "comparedPixels": 21,
+            "comparedPixels": 22,
             "degrees": {
-              "count": 21,
-              "mean": 91.30537,
+              "count": 22,
+              "mean": 90.084714,
               "p50": 90.093898,
               "p95": 178.995248,
               "max": 179.364489
@@ -1521,30 +1521,30 @@
         },
         "plazas": {
           "referencePixels": 170,
-          "candidatePixels": 240,
-          "intersectionOverUnion": 0.380471,
+          "candidatePixels": 229,
+          "intersectionOverUnion": 0.380623,
           "contourDistance": {
-            "count": 301,
-            "mean": 1.733039,
+            "count": 296,
+            "mean": 1.962457,
             "p50": 1,
-            "p95": 11.8994,
-            "max": 20.3846
+            "p95": 13,
+            "max": 23.5562
           },
           "depth": {
-            "comparedPixels": 113,
+            "comparedPixels": 110,
             "worldUnits": {
-              "count": 113,
-              "mean": 1.007592,
-              "p50": 0.489942,
+              "count": 110,
+              "mean": 1.034308,
+              "p50": 0.531069,
               "p95": 2.641038,
               "max": 15.84444
             }
           },
           "worldNormal": {
-            "comparedPixels": 113,
+            "comparedPixels": 110,
             "degrees": {
-              "count": 113,
-              "mean": 80.173023,
+              "count": 110,
+              "mean": 79.093311,
               "p50": 6.06949,
               "p95": 179.550655,
               "max": 180
@@ -1553,10 +1553,10 @@
         },
         "paths": {
           "referencePixels": 0,
-          "candidatePixels": 3,
+          "candidatePixels": 2,
           "intersectionOverUnion": 0,
           "contourDistance": {
-            "count": 3,
+            "count": 2,
             "mean": 1000000000,
             "p50": 1000000000,
             "p95": 1000000000,
@@ -1567,14 +1567,14 @@
         },
         "rocks": {
           "referencePixels": 7,
-          "candidatePixels": 8,
-          "intersectionOverUnion": 0.071429,
+          "candidatePixels": 7,
+          "intersectionOverUnion": 0.076923,
           "contourDistance": {
-            "count": 15,
-            "mean": 9.024453,
-            "p50": 2.8284,
-            "p95": 21.3136,
-            "max": 21.3136
+            "count": 14,
+            "mean": 8.247671,
+            "p50": 3.4142,
+            "p95": 21.213,
+            "max": 21.213
           },
           "depth": {
             "comparedPixels": 1,
@@ -1599,14 +1599,14 @@
         },
         "decorations": {
           "referencePixels": 33,
-          "candidatePixels": 51,
-          "intersectionOverUnion": 0.377049,
+          "candidatePixels": 53,
+          "intersectionOverUnion": 0.365079,
           "contourDistance": {
-            "count": 71,
-            "mean": 0.882073,
+            "count": 73,
+            "mean": 0.857907,
             "p50": 1,
             "p95": 2,
-            "max": 8.6568
+            "max": 7.6568
           },
           "depth": {
             "comparedPixels": 23,
@@ -1631,33 +1631,33 @@
         },
         "vegetation": {
           "referencePixels": 757,
-          "candidatePixels": 629,
-          "intersectionOverUnion": 0.567873,
+          "candidatePixels": 824,
+          "intersectionOverUnion": 0.735456,
           "contourDistance": {
-            "count": 786,
-            "mean": 0.816583,
-            "p50": 1,
+            "count": 780,
+            "mean": 0.618745,
+            "p50": 0,
             "p95": 2,
-            "max": 6
+            "max": 5.6568
           },
           "depth": {
-            "comparedPixels": 502,
+            "comparedPixels": 670,
             "worldUnits": {
-              "count": 502,
-              "mean": 15.765111,
-              "p50": 10.188649,
-              "p95": 51.529744,
-              "max": 101.053229
+              "count": 670,
+              "mean": 10.070327,
+              "p50": 6.383551,
+              "p95": 35.663847,
+              "max": 82.063504
             }
           },
           "worldNormal": {
-            "comparedPixels": 502,
+            "comparedPixels": 670,
             "degrees": {
-              "count": 502,
-              "mean": 86.03701,
-              "p50": 83.645984,
-              "p95": 142.321562,
-              "max": 172.931752
+              "count": 670,
+              "mean": 50.092745,
+              "p50": 31.898194,
+              "p95": 141.245719,
+              "max": 178.152229
             }
           }
         },
@@ -1677,13 +1677,13 @@
         },
         "cover": {
           "referencePixels": 5,
-          "candidatePixels": 77,
+          "candidatePixels": 75,
           "intersectionOverUnion": 0,
           "contourDistance": {
-            "count": 82,
-            "mean": 13.389734,
-            "p50": 11.4852,
-            "p95": 30.8994,
+            "count": 80,
+            "mean": 12.541637,
+            "p50": 10,
+            "p95": 28.3136,
             "max": 38
           },
           "depth": null,
@@ -1801,7 +1801,7 @@
         "comparedPixels": 951166,
         "worldUnits": {
           "count": 951166,
-          "mean": 8.606944,
+          "mean": 8.60043,
           "p50": 0.761735,
           "p95": 1.316049,
           "max": 546.796778
@@ -1811,7 +1811,7 @@
         "comparedPixels": 951166,
         "degrees": {
           "count": 951166,
-          "mean": 2.463195,
+          "mean": 2.434573,
           "p50": 0,
           "p95": 0,
           "max": 180
@@ -1819,13 +1819,13 @@
       },
       "semantic": {
         "comparedPixels": 1107360,
-        "agreementFraction": 0.843395,
+        "agreementFraction": 0.843442,
         "occupancy": [
           {
             "label": "geography",
             "referencePixels": 925514,
-            "candidatePixels": 1067889,
-            "relativeError": 0.153833
+            "candidatePixels": 1067817,
+            "relativeError": 0.153756
           },
           {
             "label": "horizon",
@@ -1836,20 +1836,20 @@
           {
             "label": "vegetation",
             "referencePixels": 841,
-            "candidatePixels": 850,
-            "relativeError": 0.010702
+            "candidatePixels": 941,
+            "relativeError": 0.118906
           },
           {
             "label": "plazas",
             "referencePixels": 183,
-            "candidatePixels": 189,
-            "relativeError": 0.032787
+            "candidatePixels": 172,
+            "relativeError": 0.060109
           },
           {
             "label": "structures",
             "referencePixels": 140,
-            "candidatePixels": 126,
-            "relativeError": 0.1
+            "candidatePixels": 125,
+            "relativeError": 0.107143
           },
           {
             "label": "bridges",
@@ -1860,20 +1860,20 @@
           {
             "label": "decorations",
             "referencePixels": 37,
-            "candidatePixels": 52,
-            "relativeError": 0.405405
+            "candidatePixels": 53,
+            "relativeError": 0.432432
           },
           {
             "label": "rocks",
             "referencePixels": 21,
-            "candidatePixels": 18,
-            "relativeError": 0.142857
+            "candidatePixels": 17,
+            "relativeError": 0.190476
           },
           {
             "label": "cover",
             "referencePixels": 4,
-            "candidatePixels": 108,
-            "relativeError": 26
+            "candidatePixels": 106,
+            "relativeError": 25.5
           },
           {
             "label": "paths",
@@ -1884,7 +1884,7 @@
           {
             "label": "wildlife",
             "referencePixels": 0,
-            "candidatePixels": 1,
+            "candidatePixels": 2,
             "relativeError": null
           }
         ],
@@ -1892,48 +1892,48 @@
           "0->geography": 156194,
           "geography->horizon": 15102,
           "horizon->geography": 1422,
-          "geography->vegetation": 144,
-          "vegetation->geography": 128,
-          "geography->cover": 78,
-          "geography->plazas": 73,
-          "plazas->geography": 49,
+          "geography->vegetation": 167,
+          "geography->cover": 81,
+          "vegetation->geography": 74,
+          "geography->plazas": 70,
+          "plazas->geography": 50,
           "geography->bridges": 23,
-          "structures->vegetation": 19,
-          "vegetation->plazas": 17,
           "plazas->cover": 16,
           "plazas->structures": 14,
           "plazas->decorations": 13,
           "structures->plazas": 13,
-          "geography->structures": 12
+          "structures->geography": 12,
+          "structures->vegetation": 11,
+          "plazas->vegetation": 10
         }
       },
       "byGroup": {
         "geography": {
           "referencePixels": 925514,
-          "candidatePixels": 1067889,
-          "intersectionOverUnion": 0.840065,
+          "candidatePixels": 1067817,
+          "intersectionOverUnion": 0.840085,
           "contourDistance": {
-            "count": 13845,
-            "mean": 25.523459,
+            "count": 13811,
+            "mean": 25.581614,
             "p50": 1.4142,
-            "p95": 104.4142,
+            "p95": 104.8284,
             "max": 179.4142
           },
           "depth": {
-            "comparedPixels": 910070,
+            "comparedPixels": 910049,
             "worldUnits": {
-              "count": 910070,
-              "mean": 0.813275,
+              "count": 910049,
+              "mean": 0.813144,
               "p50": 0.742066,
               "p95": 1.26777,
               "max": 69.41084
             }
           },
           "worldNormal": {
-            "comparedPixels": 910070,
+            "comparedPixels": 910049,
             "degrees": {
-              "count": 910070,
-              "mean": 0.023154,
+              "count": 910049,
+              "mean": 0.023005,
               "p50": 0,
               "p95": 0,
               "max": 176.988027
@@ -1974,32 +1974,32 @@
         },
         "structures": {
           "referencePixels": 140,
-          "candidatePixels": 126,
-          "intersectionOverUnion": 0.486034,
+          "candidatePixels": 125,
+          "intersectionOverUnion": 0.522989,
           "contourDistance": {
-            "count": 187,
-            "mean": 0.749644,
+            "count": 183,
+            "mean": 0.712872,
             "p50": 1,
             "p95": 2,
-            "max": 5.4142
+            "max": 5.8284
           },
           "depth": {
-            "comparedPixels": 87,
+            "comparedPixels": 91,
             "worldUnits": {
-              "count": 87,
-              "mean": 25.560493,
-              "p50": 11.552976,
-              "p95": 106.918228,
-              "max": 134.4426
+              "count": 91,
+              "mean": 20.380107,
+              "p50": 9.611089,
+              "p95": 96.175266,
+              "max": 117.507414
             }
           },
           "worldNormal": {
-            "comparedPixels": 87,
+            "comparedPixels": 91,
             "degrees": {
-              "count": 87,
-              "mean": 78.011158,
-              "p50": 84.608122,
-              "p95": 151.489136,
+              "count": 91,
+              "mean": 73.387518,
+              "p50": 76.750146,
+              "p95": 149.595931,
               "max": 176.380902
             }
           }
@@ -2038,30 +2038,30 @@
         },
         "plazas": {
           "referencePixels": 183,
-          "candidatePixels": 189,
-          "intersectionOverUnion": 0.287197,
+          "candidatePixels": 172,
+          "intersectionOverUnion": 0.290909,
           "contourDistance": {
-            "count": 286,
-            "mean": 2.184424,
+            "count": 283,
+            "mean": 2.254124,
             "p50": 1,
             "p95": 11.3136,
-            "max": 30.142
+            "max": 30.2426
           },
           "depth": {
-            "comparedPixels": 83,
+            "comparedPixels": 80,
             "worldUnits": {
-              "count": 83,
-              "mean": 1.254607,
-              "p50": 0.722396,
-              "p95": 4.686635,
+              "count": 80,
+              "mean": 1.21967,
+              "p50": 0.647296,
+              "p95": 5.335719,
               "max": 14.059906
             }
           },
           "worldNormal": {
-            "comparedPixels": 83,
+            "comparedPixels": 80,
             "degrees": {
-              "count": 83,
-              "mean": 107.50171,
+              "count": 80,
+              "mean": 107.12918,
               "p50": 179.101392,
               "p95": 180,
               "max": 180
@@ -2084,30 +2084,30 @@
         },
         "rocks": {
           "referencePixels": 21,
-          "candidatePixels": 18,
-          "intersectionOverUnion": 0.3,
+          "candidatePixels": 17,
+          "intersectionOverUnion": 0.357143,
           "contourDistance": {
-            "count": 36,
-            "mean": 1.679322,
+            "count": 35,
+            "mean": 2.010143,
             "p50": 1,
-            "p95": 12.6568,
-            "max": 13.071
+            "p95": 13.8994,
+            "max": 14.3136
           },
           "depth": {
-            "comparedPixels": 9,
+            "comparedPixels": 10,
             "worldUnits": {
-              "count": 9,
-              "mean": 1.912681,
+              "count": 10,
+              "mean": 1.872151,
               "p50": 1.580689,
               "p95": 5.015648,
               "max": 5.015648
             }
           },
           "worldNormal": {
-            "comparedPixels": 9,
+            "comparedPixels": 10,
             "degrees": {
-              "count": 9,
-              "mean": 46.456305,
+              "count": 10,
+              "mean": 44.930067,
               "p50": 50.341776,
               "p95": 86.723385,
               "max": 86.723385
@@ -2116,31 +2116,31 @@
         },
         "decorations": {
           "referencePixels": 37,
-          "candidatePixels": 52,
-          "intersectionOverUnion": 0.390625,
+          "candidatePixels": 53,
+          "intersectionOverUnion": 0.363636,
           "contourDistance": {
             "count": 73,
-            "mean": 1.406419,
-            "p50": 0,
+            "mean": 1.466888,
+            "p50": 1,
             "p95": 9.8284,
             "max": 13.7278
           },
           "depth": {
-            "comparedPixels": 25,
+            "comparedPixels": 24,
             "worldUnits": {
-              "count": 25,
-              "mean": 5.337936,
-              "p50": 2.224408,
+              "count": 24,
+              "mean": 5.47616,
+              "p50": 2.950381,
               "p95": 13.720165,
               "max": 29.723747
             }
           },
           "worldNormal": {
-            "comparedPixels": 25,
+            "comparedPixels": 24,
             "degrees": {
-              "count": 25,
-              "mean": 84.094144,
-              "p50": 70.451527,
+              "count": 24,
+              "mean": 87.273141,
+              "p50": 71.251706,
               "p95": 177.753843,
               "max": 179.364489
             }
@@ -2148,42 +2148,42 @@
         },
         "vegetation": {
           "referencePixels": 841,
-          "candidatePixels": 850,
-          "intersectionOverUnion": 0.65947,
+          "candidatePixels": 941,
+          "intersectionOverUnion": 0.716763,
           "contourDistance": {
-            "count": 914,
-            "mean": 0.727998,
+            "count": 918,
+            "mean": 0.652808,
             "p50": 1,
-            "p95": 2.4142,
-            "max": 9.2426
+            "p95": 2,
+            "max": 9.071
           },
           "depth": {
-            "comparedPixels": 672,
+            "comparedPixels": 744,
             "worldUnits": {
-              "count": 672,
-              "mean": 11.767456,
-              "p50": 7.892716,
-              "p95": 37.535998,
-              "max": 140.548995
+              "count": 744,
+              "mean": 9.344611,
+              "p50": 6.201164,
+              "p95": 30.186867,
+              "max": 108.951309
             }
           },
           "worldNormal": {
-            "comparedPixels": 672,
+            "comparedPixels": 744,
             "degrees": {
-              "count": 672,
-              "mean": 83.99053,
-              "p50": 83.67381,
-              "p95": 138.184565,
-              "max": 173.504663
+              "count": 744,
+              "mean": 48.545856,
+              "p50": 31.002822,
+              "p95": 142.326611,
+              "max": 177.129457
             }
           }
         },
         "wildlife": {
           "referencePixels": 0,
-          "candidatePixels": 1,
+          "candidatePixels": 2,
           "intersectionOverUnion": 0,
           "contourDistance": {
-            "count": 1,
+            "count": 2,
             "mean": 1000000000,
             "p50": 1000000000,
             "p95": 1000000000,
@@ -2194,12 +2194,12 @@
         },
         "cover": {
           "referencePixels": 4,
-          "candidatePixels": 108,
-          "intersectionOverUnion": 0.009009,
+          "candidatePixels": 106,
+          "intersectionOverUnion": 0.009174,
           "contourDistance": {
-            "count": 112,
-            "mean": 12.925448,
-            "p50": 7.8284,
+            "count": 110,
+            "mean": 12.759811,
+            "p50": 7.6568,
             "p95": 34.3846,
             "max": 39.1124
           },
@@ -2336,7 +2336,7 @@
         "comparedPixels": 947111,
         "worldUnits": {
           "count": 947111,
-          "mean": 8.669943,
+          "mean": 8.663591,
           "p50": 0.312919,
           "p95": 1.471614,
           "max": 557.344837
@@ -2346,7 +2346,7 @@
         "comparedPixels": 947111,
         "degrees": {
           "count": 947111,
-          "mean": 2.590959,
+          "mean": 2.56277,
           "p50": 0,
           "p95": 0,
           "max": 180
@@ -2354,13 +2354,13 @@
       },
       "semantic": {
         "comparedPixels": 1107360,
-        "agreementFraction": 0.838101,
+        "agreementFraction": 0.83815,
         "occupancy": [
           {
             "label": "geography",
             "referencePixels": 920264,
-            "candidatePixels": 1065810,
-            "relativeError": 0.158157
+            "candidatePixels": 1065724,
+            "relativeError": 0.158063
           },
           {
             "label": "horizon",
@@ -2371,14 +2371,14 @@
           {
             "label": "vegetation",
             "referencePixels": 846,
-            "candidatePixels": 814,
-            "relativeError": 0.037825
+            "candidatePixels": 924,
+            "relativeError": 0.092199
           },
           {
             "label": "plazas",
             "referencePixels": 208,
-            "candidatePixels": 271,
-            "relativeError": 0.302885
+            "candidatePixels": 247,
+            "relativeError": 0.1875
           },
           {
             "label": "structures",
@@ -2389,8 +2389,8 @@
           {
             "label": "decorations",
             "referencePixels": 48,
-            "candidatePixels": 54,
-            "relativeError": 0.125
+            "candidatePixels": 56,
+            "relativeError": 0.166667
           },
           {
             "label": "rocks",
@@ -2401,68 +2401,68 @@
           {
             "label": "bridges",
             "referencePixels": 25,
-            "candidatePixels": 57,
-            "relativeError": 1.28
+            "candidatePixels": 61,
+            "relativeError": 1.44
           },
           {
             "label": "cover",
             "referencePixels": 5,
-            "candidatePixels": 94,
-            "relativeError": 17.8
+            "candidatePixels": 91,
+            "relativeError": 17.2
           },
           {
             "label": "paths",
             "referencePixels": 4,
-            "candidatePixels": 9,
-            "relativeError": 1.25
+            "candidatePixels": 6,
+            "relativeError": 0.5
           }
         ],
         "confusion": {
           "0->geography": 160249,
           "geography->horizon": 16432,
           "horizon->geography": 1857,
-          "vegetation->geography": 135,
-          "geography->vegetation": 131,
-          "geography->plazas": 110,
-          "geography->cover": 59,
-          "plazas->geography": 50,
-          "geography->bridges": 29,
+          "geography->vegetation": 154,
+          "geography->plazas": 103,
+          "vegetation->geography": 70,
+          "geography->cover": 58,
+          "plazas->geography": 47,
+          "geography->bridges": 30,
+          "geography->structures": 24,
           "structures->geography": 23,
-          "geography->structures": 22,
-          "vegetation->plazas": 20,
-          "structures->plazas": 17,
-          "plazas->cover": 14,
-          "plazas->decorations": 14,
-          "vegetation->bridges": 12
+          "structures->plazas": 18,
+          "plazas->decorations": 15,
+          "plazas->vegetation": 13,
+          "plazas->cover": 13,
+          "structures->vegetation": 12
         }
       },
       "byGroup": {
         "geography": {
           "referencePixels": 920264,
-          "candidatePixels": 1065810,
-          "intersectionOverUnion": 0.834539,
+          "candidatePixels": 1065724,
+          "intersectionOverUnion": 0.834577,
           "contourDistance": {
-            "count": 13810,
-            "mean": 26.391743,
+            "count": 13763,
+            "mean": 26.475641,
             "p50": 2,
-            "p95": 104.8284,
+            "p95": 105,
             "max": 176.8284
           },
           "depth": {
-            "comparedPixels": 903473,
+            "comparedPixels": 903456,
             "worldUnits": {
-              "count": 903473,
-              "mean": 0.430714,
+              "count": 903456,
+              "mean": 0.430521,
               "p50": 0.298614,
               "p95": 1.113992,
               "max": 65.205206
             }
           },
           "worldNormal": {
-            "comparedPixels": 903473,
+            "comparedPixels": 903456,
             "degrees": {
-              "count": 903473,
-              "mean": 0.023947,
+              "count": 903456,
+              "mean": 0.023693,
               "p50": 0,
               "p95": 0,
               "max": 176.762786
@@ -2504,62 +2504,62 @@
         "structures": {
           "referencePixels": 180,
           "candidatePixels": 147,
-          "intersectionOverUnion": 0.493151,
+          "intersectionOverUnion": 0.472973,
           "contourDistance": {
-            "count": 224,
-            "mean": 0.720018,
+            "count": 222,
+            "mean": 0.7776,
             "p50": 1,
             "p95": 2,
-            "max": 2.4142
+            "max": 3
           },
           "depth": {
-            "comparedPixels": 108,
+            "comparedPixels": 105,
             "worldUnits": {
-              "count": 108,
-              "mean": 12.595693,
-              "p50": 7.359859,
-              "p95": 34.70542,
-              "max": 51.56193
+              "count": 105,
+              "mean": 12.931166,
+              "p50": 8.159144,
+              "p95": 36.854728,
+              "max": 54.319195
             }
           },
           "worldNormal": {
-            "comparedPixels": 108,
+            "comparedPixels": 105,
             "degrees": {
-              "count": 108,
-              "mean": 71.884294,
-              "p50": 80.166172,
-              "p95": 148.265998,
+              "count": 105,
+              "mean": 74.127377,
+              "p50": 85.509639,
+              "p95": 147.286668,
               "max": 178.203337
             }
           }
         },
         "bridges": {
           "referencePixels": 25,
-          "candidatePixels": 57,
-          "intersectionOverUnion": 0.242424,
+          "candidatePixels": 61,
+          "intersectionOverUnion": 0.264706,
           "contourDistance": {
             "count": 61,
-            "mean": 1.234164,
+            "mean": 1.152197,
             "p50": 1,
-            "p95": 2.8284,
+            "p95": 3,
             "max": 3.4142
           },
           "depth": {
-            "comparedPixels": 16,
+            "comparedPixels": 18,
             "worldUnits": {
-              "count": 16,
-              "mean": 6.445018,
-              "p50": 4.443452,
+              "count": 18,
+              "mean": 5.879603,
+              "p50": 4.411267,
               "p95": 17.296385,
               "max": 17.296385
             }
           },
           "worldNormal": {
-            "comparedPixels": 16,
+            "comparedPixels": 18,
             "degrees": {
-              "count": 16,
-              "mean": 61.791599,
-              "p50": 22.551477,
+              "count": 18,
+              "mean": 65.189402,
+              "p50": 57.86137,
               "p95": 179.364489,
               "max": 179.364489
             }
@@ -2567,31 +2567,31 @@
         },
         "plazas": {
           "referencePixels": 208,
-          "candidatePixels": 271,
-          "intersectionOverUnion": 0.337989,
+          "candidatePixels": 247,
+          "intersectionOverUnion": 0.338235,
           "contourDistance": {
-            "count": 352,
-            "mean": 1.702107,
+            "count": 351,
+            "mean": 1.571267,
             "p50": 1,
-            "p95": 9.2426,
-            "max": 23.213
+            "p95": 8.4852,
+            "max": 17.8994
           },
           "depth": {
-            "comparedPixels": 121,
+            "comparedPixels": 115,
             "worldUnits": {
-              "count": 121,
-              "mean": 1.273858,
-              "p50": 0.78498,
-              "p95": 3.488602,
+              "count": 115,
+              "mean": 1.272605,
+              "p50": 0.74743,
+              "p95": 3.635227,
               "max": 21.20698
             }
           },
           "worldNormal": {
-            "comparedPixels": 121,
+            "comparedPixels": 115,
             "degrees": {
-              "count": 121,
-              "mean": 68.978467,
-              "p50": 11.346721,
+              "count": 115,
+              "mean": 67.018119,
+              "p50": 9.960591,
               "p95": 179.550655,
               "max": 180
             }
@@ -2599,14 +2599,14 @@
         },
         "paths": {
           "referencePixels": 4,
-          "candidatePixels": 9,
-          "intersectionOverUnion": 0.444444,
+          "candidatePixels": 6,
+          "intersectionOverUnion": 0.666667,
           "contourDistance": {
-            "count": 13,
-            "mean": 5.8812,
+            "count": 10,
+            "mean": 4.34852,
             "p50": 0,
-            "p95": 29.6568,
-            "max": 29.6568
+            "p95": 31.4142,
+            "max": 31.4142
           },
           "depth": {
             "comparedPixels": 4,
@@ -2663,31 +2663,31 @@
         },
         "decorations": {
           "referencePixels": 48,
-          "candidatePixels": 54,
-          "intersectionOverUnion": 0.43662,
+          "candidatePixels": 56,
+          "intersectionOverUnion": 0.444444,
           "contourDistance": {
-            "count": 87,
-            "mean": 0.985037,
+            "count": 89,
+            "mean": 0.908649,
             "p50": 0,
-            "p95": 3.4142,
+            "p95": 3,
             "max": 11.6568
           },
           "depth": {
-            "comparedPixels": 31,
+            "comparedPixels": 32,
             "worldUnits": {
-              "count": 31,
-              "mean": 7.591218,
+              "count": 32,
+              "mean": 7.512854,
               "p50": 5.153332,
               "p95": 21.968715,
               "max": 32.232465
             }
           },
           "worldNormal": {
-            "comparedPixels": 31,
+            "comparedPixels": 32,
             "degrees": {
-              "count": 31,
-              "mean": 71.361839,
-              "p50": 75.909002,
+              "count": 32,
+              "mean": 73.094553,
+              "p50": 77.78976,
               "p95": 158.507919,
               "max": 178.995198
             }
@@ -2695,44 +2695,44 @@
         },
         "vegetation": {
           "referencePixels": 846,
-          "candidatePixels": 814,
-          "intersectionOverUnion": 0.664995,
+          "candidatePixels": 924,
+          "intersectionOverUnion": 0.718447,
           "contourDistance": {
-            "count": 862,
-            "mean": 0.820323,
+            "count": 875,
+            "mean": 0.643192,
             "p50": 1,
-            "p95": 2.4142,
-            "max": 8.8284
+            "p95": 2,
+            "max": 6.4142
           },
           "depth": {
-            "comparedPixels": 663,
+            "comparedPixels": 740,
             "worldUnits": {
-              "count": 663,
-              "mean": 12.069959,
-              "p50": 8.291464,
-              "p95": 40.568632,
-              "max": 76.16453
+              "count": 740,
+              "mean": 10.10417,
+              "p50": 6.242291,
+              "p95": 35.964249,
+              "max": 88.094798
             }
           },
           "worldNormal": {
-            "comparedPixels": 663,
+            "comparedPixels": 740,
             "degrees": {
-              "count": 663,
-              "mean": 87.867216,
-              "p50": 87.034117,
-              "p95": 144.760955,
-              "max": 177.099229
+              "count": 740,
+              "mean": 50.74032,
+              "p50": 30.327281,
+              "p95": 142.287582,
+              "max": 179.101282
             }
           }
         },
         "cover": {
           "referencePixels": 5,
-          "candidatePixels": 94,
-          "intersectionOverUnion": 0.010204,
+          "candidatePixels": 91,
+          "intersectionOverUnion": 0.010526,
           "contourDistance": {
-            "count": 98,
-            "mean": 15.942031,
-            "p50": 14.4142,
+            "count": 95,
+            "mean": 15.398251,
+            "p50": 14.071,
             "p95": 35.8994,
             "max": 40.6272
           },
@@ -2869,7 +2869,7 @@
         "comparedPixels": 949128,
         "worldUnits": {
           "count": 949128,
-          "mean": 8.41605,
+          "mean": 8.409286,
           "p50": 0.395172,
           "p95": 1.255253,
           "max": 524.375671
@@ -2879,7 +2879,7 @@
         "comparedPixels": 949128,
         "degrees": {
           "count": 949128,
-          "mean": 2.464385,
+          "mean": 2.434338,
           "p50": 0,
           "p95": 0,
           "max": 180
@@ -2887,13 +2887,13 @@
       },
       "semantic": {
         "comparedPixels": 1107360,
-        "agreementFraction": 0.842062,
+        "agreementFraction": 0.84212,
         "occupancy": [
           {
             "label": "geography",
             "referencePixels": 923654,
-            "candidatePixels": 1068142,
-            "relativeError": 0.156431
+            "candidatePixels": 1068065,
+            "relativeError": 0.156348
           },
           {
             "label": "horizon",
@@ -2904,32 +2904,32 @@
           {
             "label": "vegetation",
             "referencePixels": 763,
-            "candidatePixels": 766,
-            "relativeError": 0.003932
+            "candidatePixels": 848,
+            "relativeError": 0.111402
           },
           {
             "label": "structures",
             "referencePixels": 190,
-            "candidatePixels": 160,
-            "relativeError": 0.157895
+            "candidatePixels": 166,
+            "relativeError": 0.126316
           },
           {
             "label": "plazas",
             "referencePixels": 178,
-            "candidatePixels": 176,
-            "relativeError": 0.011236
+            "candidatePixels": 164,
+            "relativeError": 0.078652
           },
           {
             "label": "bridges",
             "referencePixels": 39,
-            "candidatePixels": 60,
-            "relativeError": 0.538462
+            "candidatePixels": 62,
+            "relativeError": 0.589744
           },
           {
             "label": "decorations",
             "referencePixels": 37,
-            "candidatePixels": 61,
-            "relativeError": 0.648649
+            "candidatePixels": 63,
+            "relativeError": 0.702703
           },
           {
             "label": "rocks",
@@ -2940,14 +2940,14 @@
           {
             "label": "cover",
             "referencePixels": 5,
-            "candidatePixels": 107,
-            "relativeError": 20.4
+            "candidatePixels": 105,
+            "relativeError": 20
           },
           {
             "label": "paths",
             "referencePixels": 1,
-            "candidatePixels": 2,
-            "relativeError": 1
+            "candidatePixels": 1,
+            "relativeError": 0
           },
           {
             "label": "wildlife",
@@ -2960,48 +2960,48 @@
           "0->geography": 158232,
           "geography->horizon": 14785,
           "horizon->geography": 1150,
-          "geography->vegetation": 144,
-          "vegetation->geography": 119,
-          "geography->plazas": 71,
+          "geography->vegetation": 148,
+          "geography->plazas": 70,
           "geography->cover": 62,
-          "plazas->geography": 49,
-          "structures->geography": 32,
-          "geography->structures": 27,
+          "vegetation->geography": 57,
+          "plazas->geography": 48,
+          "geography->structures": 34,
+          "structures->geography": 29,
           "plazas->cover": 26,
+          "geography->bridges": 23,
           "structures->plazas": 23,
-          "geography->bridges": 21,
-          "vegetation->plazas": 21,
           "plazas->decorations": 19,
-          "plazas->structures": 13
+          "plazas->structures": 14,
+          "plazas->vegetation": 11
         }
       },
       "byGroup": {
         "geography": {
           "referencePixels": 923654,
-          "candidatePixels": 1068142,
-          "intersectionOverUnion": 0.838709,
+          "candidatePixels": 1068065,
+          "intersectionOverUnion": 0.838746,
           "contourDistance": {
-            "count": 13869,
-            "mean": 25.7049,
+            "count": 13837,
+            "mean": 25.756199,
             "p50": 1.4142,
-            "p95": 104.4142,
+            "p95": 104.8284,
             "max": 179.4142
           },
           "depth": {
-            "comparedPixels": 908538,
+            "comparedPixels": 908525,
             "worldUnits": {
-              "count": 908538,
-              "mean": 0.482839,
+              "count": 908525,
+              "mean": 0.482563,
               "p50": 0.379079,
               "p95": 1.028163,
               "max": 68.000022
             }
           },
           "worldNormal": {
-            "comparedPixels": 908538,
+            "comparedPixels": 908525,
             "degrees": {
-              "count": 908538,
-              "mean": 0.018373,
+              "count": 908525,
+              "mean": 0.018389,
               "p50": 0,
               "p95": 0,
               "max": 179.364489
@@ -3042,43 +3042,43 @@
         },
         "structures": {
           "referencePixels": 190,
-          "candidatePixels": 160,
-          "intersectionOverUnion": 0.446281,
+          "candidatePixels": 166,
+          "intersectionOverUnion": 0.441296,
           "contourDistance": {
-            "count": 252,
-            "mean": 0.71337,
+            "count": 256,
+            "mean": 0.713942,
             "p50": 1,
             "p95": 2,
             "max": 2.4142
           },
           "depth": {
-            "comparedPixels": 108,
+            "comparedPixels": 109,
             "worldUnits": {
-              "count": 108,
-              "mean": 11.782732,
-              "p50": 8.920879,
-              "p95": 29.12473,
-              "max": 41.521694
+              "count": 109,
+              "mean": 11.020202,
+              "p50": 8.278948,
+              "p95": 29.831033,
+              "max": 44.359424
             }
           },
           "worldNormal": {
-            "comparedPixels": 108,
+            "comparedPixels": 109,
             "degrees": {
-              "count": 108,
-              "mean": 77.836756,
-              "p50": 82.500391,
-              "p95": 167.504744,
+              "count": 109,
+              "mean": 79.302736,
+              "p50": 84.107058,
+              "p95": 168.014279,
               "max": 179.364489
             }
           }
         },
         "bridges": {
           "referencePixels": 39,
-          "candidatePixels": 60,
-          "intersectionOverUnion": 0.571429,
+          "candidatePixels": 62,
+          "intersectionOverUnion": 0.553846,
           "contourDistance": {
-            "count": 72,
-            "mean": 0.645628,
+            "count": 73,
+            "mean": 0.667504,
             "p50": 1,
             "p95": 2,
             "max": 3.4142
@@ -3106,31 +3106,31 @@
         },
         "plazas": {
           "referencePixels": 178,
-          "candidatePixels": 176,
-          "intersectionOverUnion": 0.204082,
+          "candidatePixels": 164,
+          "intersectionOverUnion": 0.208481,
           "contourDistance": {
-            "count": 314,
-            "mean": 2.034673,
+            "count": 302,
+            "mean": 2.094517,
             "p50": 1,
-            "p95": 8.4852,
+            "p95": 10.4142,
             "max": 26.8994
           },
           "depth": {
-            "comparedPixels": 60,
+            "comparedPixels": 59,
             "worldUnits": {
-              "count": 60,
-              "mean": 2.075101,
-              "p50": 0.962003,
+              "count": 59,
+              "mean": 2.12976,
+              "p50": 0.924453,
               "p95": 9.900763,
               "max": 18.115339
             }
           },
           "worldNormal": {
-            "comparedPixels": 60,
+            "comparedPixels": 59,
             "degrees": {
-              "count": 60,
-              "mean": 85.783005,
-              "p50": 18.019806,
+              "count": 59,
+              "mean": 91.602298,
+              "p50": 35.290901,
               "p95": 180,
               "max": 180
             }
@@ -3138,14 +3138,14 @@
         },
         "paths": {
           "referencePixels": 1,
-          "candidatePixels": 2,
+          "candidatePixels": 1,
           "intersectionOverUnion": 0,
           "contourDistance": {
-            "count": 3,
-            "mean": 22.694267,
+            "count": 2,
+            "mean": 22.142,
             "p50": 22.142,
-            "p95": 23.7988,
-            "max": 23.7988
+            "p95": 22.142,
+            "max": 22.142
           },
           "depth": null,
           "worldNormal": null
@@ -3153,30 +3153,30 @@
         "rocks": {
           "referencePixels": 22,
           "candidatePixels": 13,
-          "intersectionOverUnion": 0.296296,
+          "intersectionOverUnion": 0.25,
           "contourDistance": {
             "count": 33,
-            "mean": 10.404697,
+            "mean": 10.611618,
             "p50": 1,
             "p95": 35.4142,
             "max": 36
           },
           "depth": {
-            "comparedPixels": 8,
+            "comparedPixels": 7,
             "worldUnits": {
-              "count": 8,
-              "mean": 2.599464,
+              "count": 7,
+              "mean": 2.794815,
               "p50": 1.836389,
               "p95": 5.714798,
               "max": 5.714798
             }
           },
           "worldNormal": {
-            "comparedPixels": 8,
+            "comparedPixels": 7,
             "degrees": {
-              "count": 8,
-              "mean": 57.01391,
-              "p50": 54.288202,
+              "count": 7,
+              "mean": 55.867395,
+              "p50": 52.444526,
               "p95": 104.771171,
               "max": 104.771171
             }
@@ -3184,30 +3184,30 @@
         },
         "decorations": {
           "referencePixels": 37,
-          "candidatePixels": 61,
-          "intersectionOverUnion": 0.380282,
+          "candidatePixels": 63,
+          "intersectionOverUnion": 0.388889,
           "contourDistance": {
-            "count": 78,
-            "mean": 1.149977,
+            "count": 79,
+            "mean": 1.133248,
             "p50": 1,
             "p95": 8.2426,
             "max": 10.071
           },
           "depth": {
-            "comparedPixels": 27,
+            "comparedPixels": 28,
             "worldUnits": {
-              "count": 27,
-              "mean": 6.075334,
+              "count": 28,
+              "mean": 5.922794,
               "p50": 3.442111,
               "p95": 13.838181,
               "max": 32.847574
             }
           },
           "worldNormal": {
-            "comparedPixels": 27,
+            "comparedPixels": 28,
             "degrees": {
-              "count": 27,
-              "mean": 73.009452,
+              "count": 28,
+              "mean": 71.265787,
               "p50": 66.241248,
               "p95": 160.943882,
               "max": 172.602251
@@ -3216,33 +3216,33 @@
         },
         "vegetation": {
           "referencePixels": 763,
-          "candidatePixels": 766,
-          "intersectionOverUnion": 0.645856,
+          "candidatePixels": 848,
+          "intersectionOverUnion": 0.724839,
           "contourDistance": {
-            "count": 845,
-            "mean": 0.690473,
-            "p50": 1,
-            "p95": 2,
-            "max": 6.2426
+            "count": 873,
+            "mean": 0.534686,
+            "p50": 0,
+            "p95": 1.4142,
+            "max": 3.8284
           },
           "depth": {
-            "comparedPixels": 600,
+            "comparedPixels": 677,
             "worldUnits": {
-              "count": 600,
-              "mean": 11.881199,
-              "p50": 8.053646,
-              "p95": 36.452403,
-              "max": 68.548971
+              "count": 677,
+              "mean": 9.192426,
+              "p50": 5.984803,
+              "p95": 30.374619,
+              "max": 80.341555
             }
           },
           "worldNormal": {
-            "comparedPixels": 600,
+            "comparedPixels": 677,
             "degrees": {
-              "count": 600,
-              "mean": 91.802242,
-              "p50": 92.507603,
-              "p95": 143.017613,
-              "max": 170.255771
+              "count": 677,
+              "mean": 50.856559,
+              "p50": 30.585897,
+              "p95": 142.439522,
+              "max": 179.550655
             }
           }
         },
@@ -3262,12 +3262,12 @@
         },
         "cover": {
           "referencePixels": 5,
-          "candidatePixels": 107,
-          "intersectionOverUnion": 0.009009,
+          "candidatePixels": 105,
+          "intersectionOverUnion": 0.009174,
           "contourDistance": {
-            "count": 111,
-            "mean": 10.882771,
-            "p50": 8.2426,
+            "count": 109,
+            "mean": 10.741703,
+            "p50": 8.071,
             "p95": 26.3136,
             "max": 36.1124
           },
@@ -3396,7 +3396,7 @@
   "aggregate": {
     "cameras": 6,
     "groupSilhouetteIoU": {
-      "mean": 0.388469,
+      "mean": 0.398935,
       "worst": {
         "camera": "oblique-north",
         "label": "paths",
@@ -3404,7 +3404,7 @@
       }
     },
     "groupDepthWorldUnits": {
-      "meanP95": 42.096602,
+      "meanP95": 40.949037,
       "worst": {
         "camera": "oblique-north",
         "label": "horizon",
@@ -3412,7 +3412,7 @@
       }
     },
     "groupWorldNormalDegrees": {
-      "meanP95": 110.619407,
+      "meanP95": 109.888194,
       "worst": {
         "camera": "topDown",
         "label": "plazas",
@@ -3434,31 +3434,31 @@
       }
     },
     "depthWorldUnits": {
-      "meanP95": 50.715856,
+      "meanP95": 49.148876,
       "worst": {
         "camera": "authoredOverview",
-        "value": 168.899473
+        "value": 159.497592
       }
     },
     "worldNormalDegrees": {
-      "meanP95": 25.574757,
+      "meanP95": 24.278067,
       "worst": {
         "camera": "authoredOverview",
-        "value": 90.36756
+        "value": 82.775976
       }
     },
     "semanticAgreement": {
-      "mean": 0.866477,
+      "mean": 0.867899,
       "worst": {
         "camera": "oblique-south",
-        "value": 0.838101
+        "value": 0.83815
       }
     },
     "appearanceDeltaE": {
-      "meanMean": 15.410742,
+      "meanMean": 15.422557,
       "worst": {
         "camera": "authoredOverview",
-        "value": 36.702569
+        "value": 36.773461
       }
     }
   }

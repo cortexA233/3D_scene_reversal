@@ -224,7 +224,7 @@ export const SCENE_CONTROLS = Object.freeze([
   {
     id: "strip-components",
     class: "severe",
-    detects: ["worst component delta"],
+    detects: ["worst component deficit"],
     apply: (observation) => {
       const result = cloneObservation(observation);
       for (const entity of result.entities.values()) {

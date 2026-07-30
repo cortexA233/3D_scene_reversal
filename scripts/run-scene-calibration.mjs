@@ -249,11 +249,11 @@ async function main() {
       select: (report) => report.zones.delta?.max,
     },
     {
-      name: "worst component delta",
+      name: "worst component deficit",
       scope: "worst-entity",
-      path: "correspondence.semanticStructure.componentDelta.max",
+      path: "correspondence.semanticStructure.componentDeficit.max",
       direction: "atMost",
-      select: (report) => report.semanticStructure.componentDelta?.max,
+      select: (report) => report.semanticStructure.componentDeficit?.max,
     },
   ].map((definition) => calibrateMetric(sceneRows, definition));
 
