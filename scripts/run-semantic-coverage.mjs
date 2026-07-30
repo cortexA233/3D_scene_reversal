@@ -36,6 +36,14 @@ const INVENTORY_PATH = path.join(
   PROJECT_ROOT,
   ".scratch/scene-parity-foundation/evidence/scene-inventory-v1.json",
 );
+/**
+ * Bounded reference surface samples, kept separate from the inventory because
+ * they are the one dense development artifact in the evidence set.
+ */
+const SAMPLES_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/scene-parity-foundation/evidence/scene-surface-samples-v1.json",
+);
 const checkOnly = process.argv.includes("--check");
 const contract = createReferenceObservationContract();
 
@@ -84,12 +92,19 @@ async function main() {
     true,
     "measuring the Assembled Authored Scene changed it",
   );
-  const inventory = run.state.report;
+  const { samples, ...inventory } = run.state.report;
   assert.equal(inventory.schemaVersion, "scene-inventory-v1");
   if (!checkOnly) {
     await mkdir(path.dirname(INVENTORY_PATH), { recursive: true });
-    await writeFile(INVENTORY_PATH, `${JSON.stringify(inventory, null, 2)}
-`);
+    await Promise.all([
+      writeFile(INVENTORY_PATH, `${JSON.stringify(inventory, null, 2)}
+`),
+      writeFile(
+        SAMPLES_PATH,
+        `${JSON.stringify({ schemaVersion: "scene-surface-samples-v1", samples })}
+`,
+      ),
+    ]);
   }
 
   const manifest = buildSemanticCoverageManifest(inventory, ISLAND_SCENE_RECIPE);

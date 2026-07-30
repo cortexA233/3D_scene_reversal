@@ -265,6 +265,75 @@ function measureVisiblePixels(renderer, scene, camera, meshes) {
   return { counts, totalPixels: width * height };
 }
 
+/**
+ * Bounded, deterministic world-space surface samples.
+ *
+ * Development-only evidence for topology-independent surface comparison. The
+ * per-mesh cap is fixed, so the sample count is independent of source mesh
+ * resolution, and nothing here may enter the Scene Recipe or the runtime.
+ */
+const SAMPLE_CAP = 96;
+const SAMPLE_FLOOR = 12;
+
+function sampleRng(seed) {
+  let state = seed >>> 0;
+  return () => {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let value = Math.imul(state ^ (state >>> 15), state | 1);
+    value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+    return ((value ^ (value >>> 14)) >>> 0) / 0x1_0000_0000;
+  };
+}
+
+function surfaceSamples(mesh, seed) {
+  const geometry = mesh.geometry;
+  const position = geometry?.attributes?.position;
+  if (!position) return [];
+  const index = geometry.index;
+  const triangleCount = Math.floor((index ? index.count : position.count) / 3);
+  if (triangleCount === 0) return [];
+
+  const count = Math.min(
+    SAMPLE_CAP,
+    Math.max(SAMPLE_FLOOR, Math.round(Math.sqrt(triangleCount) * 3)),
+  );
+  const rng = sampleRng(seed);
+  const a = new THREE.Vector3();
+  const b = new THREE.Vector3();
+  const c = new THREE.Vector3();
+  const point = new THREE.Vector3();
+  const matrix = new THREE.Matrix4();
+  const samples = [];
+
+  for (let sample = 0; sample < count; sample += 1) {
+    const triangle = Math.min(triangleCount - 1, Math.floor(rng() * triangleCount));
+    const base = triangle * 3;
+    const i0 = index ? index.getX(base) : base;
+    const i1 = index ? index.getX(base + 1) : base + 1;
+    const i2 = index ? index.getX(base + 2) : base + 2;
+    a.fromBufferAttribute(position, i0);
+    b.fromBufferAttribute(position, i1);
+    c.fromBufferAttribute(position, i2);
+    let u = rng();
+    let v = rng();
+    if (u + v > 1) {
+      u = 1 - u;
+      v = 1 - v;
+    }
+    point
+      .copy(a)
+      .addScaledVector(b.sub(a), u)
+      .addScaledVector(c.sub(a), v);
+    if (mesh.isInstancedMesh) {
+      mesh.getMatrixAt(Math.min(mesh.count - 1, Math.floor(rng() * mesh.count)), matrix);
+      point.applyMatrix4(matrix);
+    }
+    point.applyMatrix4(mesh.matrixWorld);
+    samples.push(round(point.x, 2), round(point.y, 2), round(point.z, 2));
+  }
+  return samples;
+}
+
 function collectInventory(scene, camera, renderer) {
   scene.updateMatrixWorld(true);
   const rows = walkRenderables(scene);
@@ -273,9 +342,11 @@ function collectInventory(scene, camera, renderer) {
   const { counts, totalPixels } = measureVisiblePixels(renderer, scene, camera, meshes);
 
   let totalArea = 0;
+  const samples = {};
   const items = meshes.map(({ object, path }, index) => {
     const surface = surfaceEvidence(object);
     totalArea += surface.area;
+    samples[path] = surfaceSamples(object, index + 1);
     return {
       path,
       type: object.type,
@@ -309,6 +380,7 @@ function collectInventory(scene, camera, renderer) {
     },
     items,
     lights: lights.map(({ object, path }) => ({ path, ...lightSummary(object) })),
+    samples,
   };
 }
 
