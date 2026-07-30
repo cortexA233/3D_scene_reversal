@@ -1,6 +1,6 @@
 {
   "schemaVersion": "scene-quality-baseline-v1",
-  "version": "scene-quality-baseline-v1.2",
+  "version": "scene-quality-baseline-v1.3",
   "migrations": [
     {
       "version": "scene-quality-baseline-v1",
@@ -35,6 +35,17 @@
         "nativeAppearance/material family appearance DeltaE mean: 5.961796 -> 5.985232",
         "nativeAppearance/worst material family appearance DeltaE: 4.062021 -> 4.062392"
       ]
+    },
+    {
+      "version": "scene-quality-baseline-v1.3",
+      "adr": "0055",
+      "change": "Re-derives the worldGeometry surface thresholds after the surface sampler's budget moved from each mesh to each entity. The allocation was per mesh and its formula is sub-linear and floored, so a small part drew far more samples than its share of the geometry and the metric depended on how a form is divided into parts — which penalised the semantic part structure a generator is required to have. Measured, a generated bamboo clump's culms drew 28 per cent of its samples for 13 per cent of its triangles while the authored placement is one mesh whose culms are three parts in a thousand and were never sampled, giving 4.12 one way against 39.32 the other. An entity's budget now comes from its total triangle count and is split across its meshes in proportion, so a single-mesh subject is sampled exactly as before and a multi-part subject is sampled as its own merged equivalent. The reference is on both sides of every world-space control, so its bracket moves with it; no threshold is chosen and no candidate result is consulted.",
+      "movedGeometryThresholds": [
+        "worldGeometry/surface p95: 2.3479 -> 2.454575",
+        "worldGeometry/worst entity surface p95: 13.758675 -> 13.9152",
+        "worldGeometry/over-tolerance surface fraction: 0.11835 -> 0.1204"
+      ],
+      "movedRenderedThresholds": []
     }
   ],
   "calibratedFrom": [
@@ -96,21 +107,21 @@
         "scope": "aggregate",
         "path": "correspondence.surface.p95.mean",
         "direction": "atMost",
-        "threshold": 2.3479
+        "threshold": 2.454575
       },
       {
         "name": "worst entity surface p95",
         "scope": "worst-entity",
         "path": "correspondence.surface.p95.max",
         "direction": "atMost",
-        "threshold": 13.758675
+        "threshold": 13.9152
       },
       {
         "name": "over-tolerance surface fraction",
         "scope": "aggregate",
         "path": "correspondence.surface.overToleranceFraction.mean",
         "direction": "atMost",
-        "threshold": 0.11835
+        "threshold": 0.1204
       },
       {
         "name": "worst neighbourhood distance error",

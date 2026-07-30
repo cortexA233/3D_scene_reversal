@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0054.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0055.
 
 ## Where the work stands
 
@@ -701,18 +701,24 @@ Read the per-group table above rather than the old ranking. `plazas`' reference
 mask was 84 per cent scatter before ADR-0053, so any note about plazas written
 earlier was measured against the wrong thing.
 
-- **The surface sampler penalises semantic part structure, and that is now the
-  largest single lever on the world-geometry layer.** `sampleEntitySurface` gives every
-  mesh in an entity `min(96, max(12, sqrt(triangles) * 3))` samples — sub-linear and
-  floored — so a small part is sampled far more densely than its share. An authored
-  placement is one mesh; a generated form carrying the semantic parts ticket 10 exists
-  to add is several. Measured across every kind by
-  `tools/development/measure-surface-sampling-symmetry.mjs`, `bamboo` reads 4.12 one
-  way against 39.32 the other, a 9.55 ratio, while palm reads 0.73 and blossom 1.18.
-  The candidate's canopy already covers the authored one; the whole penalty is
-  one-directional. Fixing it means allocating an entity's budget in proportion across
-  its meshes, which changes the frozen reference samples and moves the world-geometry
-  thresholds — the same shape as ADR-0053, and worth doing before more shape fitting.
+- **The surface sampler is fixed (ADR-0055) and it was the largest single lever on the
+  world-geometry layer.** The budget belonged to each mesh and its formula is
+  sub-linear and floored, so a small part drew far more points than its share of the
+  geometry and the metric depended on how a form is divided into parts — which
+  penalised the semantic part structure a generator is required to have. The budget now
+  comes from an entity's total triangles and is split across its meshes in proportion,
+  and the reference side stopped keeping its own copy of the rule: it applied the same
+  formula per *renderable*, so an authored placement of five meshes drew five budgets
+  and one of a single mesh drew one.
+  Result: `surface p95` mean **9.3025 to 7.2469**, `bamboo` **29.01 to 7.34**, `bridge`
+  28.21 to 19.28, and the worst directional ratio 9.55 to 6.79. Two gated numbers moved
+  the other way — worst entity 143.10 to 155.20 and over-tolerance 0.5925 to 0.6219 —
+  which is what a corrected measurement does, and the thresholds were re-derived with
+  it because the reference is on both sides of every world-space control.
+  `bamboo`'s remaining 6.79 ratio is not a sampler artefact: the authored clump spends
+  three parts in a thousand of its triangles on culms and the candidate about 13 per
+  cent, so a candidate with visible stems cannot match the authored allocation. That is
+  a representation tension, not a defect.
 - **Ticket 03's gates are a recorded count boundary (ADR-0054), not open work.**
   `tools/development/measure-terrain-form-budget.mjs` runs the production landform
   pursuit at increasing budgets. The frozen 40 forms reach full height p95 8.657;

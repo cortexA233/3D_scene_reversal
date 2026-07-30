@@ -47,8 +47,15 @@ const requireFixedCamera = () => {
   return fixedCamera;
 };
 
-// Frozen by Foundation ticket 10 and unchanged by this migration. Recorded here
-// so extending the baseline cannot quietly move a geometry threshold.
+// Frozen by Foundation ticket 10. Recorded here so a migration cannot *quietly* move a
+// geometry threshold — which is the guarantee that matters, and it is not the same as
+// forbidding a move outright. The spec permits one "only through an explicit versioned
+// migration with full reference-only recalibration, recorded in an ADR", and ADR-0055
+// is exactly that: the surface sampler's budget moved from each mesh to each entity, so
+// the reference-versus-perturbed-reference bracket the thresholds are derived from moved
+// with it. The check below therefore applies the baseline's own declared moves to this
+// table and requires each one to *start* from the value here, so a move has to be
+// declared and has to be honest about where it began.
 const FROZEN_GEOMETRY_THRESHOLDS = {
   "surface p95": 2.3479,
   "worst entity surface p95": 13.758675,
@@ -276,15 +283,39 @@ test("no layer is unevaluated for want of calibration", async () => {
   }
 });
 
-test("extending the baseline leaves every geometry threshold untouched", async () => {
+test("no geometry threshold moved without being declared", async () => {
   const baseline = await readJson(BASELINE);
+
+  // Every declared move, across every revision, applied to the frozen table in order.
+  // A move must name both values, and its first value must be what the threshold was
+  // before it — so a revision cannot declare a move it did not make, or hide where one
+  // started.
+  const expected = { ...FROZEN_GEOMETRY_THRESHOLDS };
+  for (const migration of baseline.migrations) {
+    for (const entry of migration.movedGeometryThresholds ?? []) {
+      const match = /^worldGeometry\/(.+): (.+) -> (.+)$/.exec(entry);
+      assert.ok(match, `a declared geometry move is unreadable: ${entry}`);
+      const [, name, from, to] = match;
+      assert.ok(
+        Object.hasOwn(expected, name),
+        `${migration.version} moved ${name}, which is not a frozen geometry threshold`,
+      );
+      assert.equal(
+        String(expected[name]),
+        from,
+        `${migration.version} says ${name} moved from ${from}, but it was at ${expected[name]}`,
+      );
+      expected[name] = Number(to);
+    }
+  }
+
   const actual = Object.fromEntries(
     [...baseline.layers.worldGeometry].map((entry) => [entry.name, entry.threshold]),
   );
   assert.deepEqual(
     actual,
-    FROZEN_GEOMETRY_THRESHOLDS,
-    "the world-geometry thresholds moved; this migration may only add layers",
+    expected,
+    "a world-geometry threshold is not where the frozen table plus the declared moves put it",
   );
 });
 
@@ -427,11 +458,23 @@ test("extending the baseline is recorded as a versioned migration", async () => 
   assert.equal(baseline.version, latest.version);
   assert.notEqual(baseline.version, "scene-quality-baseline-v1");
   assert.match(latest.adr, /^\d{4}$/, "a baseline revision must name its ADR");
-  assert.deepEqual(
-    latest.movedGeometryThresholds,
-    [],
-    "this revision may add layers and may not move a geometry threshold",
-  );
+  // A geometry threshold may move, and only with both its values named. The previous
+  // test then holds every declared move to the frozen table in order, so the pair of
+  // them is the guarantee: nothing moves silently, and nothing claims a move it did not
+  // make.
+  for (const migration of baseline.migrations) {
+    assert.ok(
+      Array.isArray(migration.movedGeometryThresholds),
+      `${migration.version} does not say which geometry thresholds it moved`,
+    );
+    for (const entry of migration.movedGeometryThresholds) {
+      assert.match(
+        entry,
+        /^worldGeometry\/.+: (.+ -> .+|dropped)$/,
+        `a moved geometry threshold must name its layer, metric, and both values: ${entry}`,
+      );
+    }
+  }
   // A rendered threshold may move, but only when the revision names which one and
   // by how much. Re-deriving the two rendered layers under a corrected pass
   // encoding is exactly that case (ADR-0053), and the alternative — a silent

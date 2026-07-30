@@ -26,8 +26,24 @@ const correspondence = JSON.parse(
  * gates: the fixed-camera and appearance layers have no calibrated thresholds
  * yet, so this ticket must not be allowed to silently give ground it gained.
  */
+/**
+ * The ratchet, and one re-baselining with its reason.
+ *
+ * `palmSurfaceP95` was 6.5 and is 6.8. Palm's generated geometry is byte-identical —
+ * nothing in this ticket's forms changed — and what moved was the measurement: ADR-0055
+ * gave the surface sampler's budget to the entity rather than to each of its meshes, so
+ * a palm's three parts no longer draw a per-mesh budget each and its measured p95 went
+ * from 5.80 to 6.52 on both subjects at once.
+ *
+ * Re-baselining a ratchet because the measurement changed is the move that could hide a
+ * real regression, so the two facts that make it safe are recorded rather than implied:
+ * the candidate's palm geometry is unchanged, and the same correction took the aggregate
+ * from 9.3025 to 7.2469 and `bamboo` from 29.01 to 7.34. A ratchet whose baseline was
+ * measured by a different rule is not a ratchet; it is a comparison between two
+ * different things.
+ */
 const RECORDED = Object.freeze({
-  palmSurfaceP95: 6.5,
+  palmSurfaceP95: 6.8,
   blossomSurfaceP95: 4.5,
   aggregateSurfaceP95: 10.5,
   worstComponentDeficit: 9,

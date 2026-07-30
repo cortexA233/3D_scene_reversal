@@ -80,7 +80,7 @@ const FIXED_CAMERA_PATH = path.join(
  * declare which existing thresholds it moved, so "we only added layers" is a
  * checkable statement rather than a claim in a commit message.
  */
-const BASELINE_VERSION = "scene-quality-baseline-v1.2";
+const BASELINE_VERSION = "scene-quality-baseline-v1.3";
 
 const BASELINE_MIGRATIONS = [
   {
@@ -135,6 +135,28 @@ const BASELINE_MIGRATIONS = [
       "nativeAppearance/material family appearance DeltaE mean: 5.961796 -> 5.985232",
       "nativeAppearance/worst material family appearance DeltaE: 4.062021 -> 4.062392",
     ],
+  },
+  {
+    version: "scene-quality-baseline-v1.3",
+    adr: "0055",
+    change:
+      "Re-derives the worldGeometry surface thresholds after the surface sampler's budget moved from each mesh to each entity. The allocation was per mesh and its formula is sub-linear and floored, so a small part drew far more samples than its share of the geometry and the metric depended on how a form is divided into parts — which penalised the semantic part structure a generator is required to have. Measured, a generated bamboo clump's culms drew 28 per cent of its samples for 13 per cent of its triangles while the authored placement is one mesh whose culms are three parts in a thousand and were never sampled, giving 4.12 one way against 39.32 the other. An entity's budget now comes from its total triangle count and is split across its meshes in proportion, so a single-mesh subject is sampled exactly as before and a multi-part subject is sampled as its own merged equivalent. The reference is on both sides of every world-space control, so its bracket moves with it; no threshold is chosen and no candidate result is consulted.",
+    // The three surface thresholds, and nothing else. They loosen by between one and
+    // five per cent because the reference-versus-perturbed-reference bracket is now
+    // sampled per entity too, and a mild control's samples are distributed over the
+    // whole body rather than concentrated in its smallest parts.
+    //
+    // Read them against the candidate before reading them as a concession: the
+    // candidate's own surface p95 is 7.2469 against a threshold of 2.454575, so it
+    // still fails by threefold and no gate changed state. A one to five per cent move
+    // cannot buy a pass that is three times away, and the candidate result was not an
+    // input to any of it.
+    movedGeometryThresholds: [
+      "worldGeometry/surface p95: 2.3479 -> 2.454575",
+      "worldGeometry/worst entity surface p95: 13.758675 -> 13.9152",
+      "worldGeometry/over-tolerance surface fraction: 0.11835 -> 0.1204",
+    ],
+    movedRenderedThresholds: [],
   },
 ];
 
@@ -502,10 +524,32 @@ async function main() {
       }
     }
   }
+  // Two statements, for the same reason the rendered pair below needs two: the file on
+  // disk is the previous revision only until this command has written once, so
+  // comparing the computed diff to the declared list for equality passes on the run
+  // that writes and fails on every run after it.
+  const declaredGeometry = BASELINE_MIGRATIONS.at(-1).movedGeometryThresholds;
   assert.deepEqual(
-    moved,
-    BASELINE_MIGRATIONS.at(-1).movedGeometryThresholds,
+    moved.filter((entry) => !declaredGeometry.includes(entry)),
+    [],
     "this migration moved a geometry threshold it did not declare",
+  );
+  const misdeclaredGeometry = [];
+  for (const entry of declaredGeometry) {
+    const [dotted, values] = entry.split(": ");
+    const [layer, name] = dotted.split("/");
+    const after = values.split(" -> ")[1];
+    const metric = baseline.layers[layer]?.find((candidate) => candidate.name === name);
+    if (!metric) {
+      misdeclaredGeometry.push(`${entry} — ${layer}/${name} is not in the baseline`);
+    } else if (String(metric.threshold) !== after) {
+      misdeclaredGeometry.push(`${entry} — the metric is actually at ${metric.threshold}`);
+    }
+  }
+  assert.deepEqual(
+    misdeclaredGeometry,
+    [],
+    "a declared geometry-threshold move does not match the frozen value",
   );
 
   // The same statement for the two rendered layers, which differ from the two above

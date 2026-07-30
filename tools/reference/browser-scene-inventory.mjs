@@ -6,6 +6,13 @@ import {
   createProfileAccumulator,
 } from "../evaluation/horizon-profile.mjs";
 import { tintedInstancedMeshes } from "../evaluation/scene-pass-encoding.mjs";
+import {
+  allocateSamples,
+  sampleBudget,
+  sampleMeshSurface,
+  triangleCountOf,
+} from "../evaluation/surface-sampling.mjs";
+import { placementKey } from "../reconstruction/scene-placements.mjs";
 import { createReferenceAccess } from "./reference-access.mjs";
 import { createReferenceObservationContract } from "./reference-observation-contract.mjs";
 
@@ -286,70 +293,35 @@ function measureVisiblePixels(renderer, scene, camera, meshes) {
 }
 
 /**
- * Bounded, deterministic world-space surface samples.
+ * Bounded, deterministic world-space surface samples, using the same rule the
+ * candidate side uses rather than a second copy of it.
  *
- * Development-only evidence for topology-independent surface comparison. The
- * per-mesh cap is fixed, so the sample count is independent of source mesh
- * resolution, and nothing here may enter the Scene Recipe or the runtime.
+ * Two copies of a sampling rule is how the reference and the candidate came to be
+ * sampled differently while both formulas read identically. The budget belongs to a
+ * *placement*: this side used to give each renderable its own, so an authored
+ * placement made of five meshes drew five budgets and one made of a single mesh drew
+ * one. ADR-0055 has the measurements.
+ *
+ * Development-only; nothing here may enter the Scene Recipe or the runtime.
  */
-const SAMPLE_CAP = 96;
-const SAMPLE_FLOOR = 12;
-
-function sampleRng(seed) {
-  let state = seed >>> 0;
-  return () => {
-    state = (state + 0x6d2b79f5) >>> 0;
-    let value = Math.imul(state ^ (state >>> 15), state | 1);
-    value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
-    return ((value ^ (value >>> 14)) >>> 0) / 0x1_0000_0000;
-  };
-}
-
-function surfaceSamples(mesh, seed) {
-  const geometry = mesh.geometry;
-  const position = geometry?.attributes?.position;
-  if (!position) return [];
-  const index = geometry.index;
-  const triangleCount = Math.floor((index ? index.count : position.count) / 3);
-  if (triangleCount === 0) return [];
-
-  const count = Math.min(
-    SAMPLE_CAP,
-    Math.max(SAMPLE_FLOOR, Math.round(Math.sqrt(triangleCount) * 3)),
-  );
-  const rng = sampleRng(seed);
-  const a = new THREE.Vector3();
-  const b = new THREE.Vector3();
-  const c = new THREE.Vector3();
-  const point = new THREE.Vector3();
-  const matrix = new THREE.Matrix4();
-  const samples = [];
-
-  for (let sample = 0; sample < count; sample += 1) {
-    const triangle = Math.min(triangleCount - 1, Math.floor(rng() * triangleCount));
-    const base = triangle * 3;
-    const i0 = index ? index.getX(base) : base;
-    const i1 = index ? index.getX(base + 1) : base + 1;
-    const i2 = index ? index.getX(base + 2) : base + 2;
-    a.fromBufferAttribute(position, i0);
-    b.fromBufferAttribute(position, i1);
-    c.fromBufferAttribute(position, i2);
-    let u = rng();
-    let v = rng();
-    if (u + v > 1) {
-      u = 1 - u;
-      v = 1 - v;
-    }
-    point
-      .copy(a)
-      .addScaledVector(b.sub(a), u)
-      .addScaledVector(c.sub(a), v);
-    if (mesh.isInstancedMesh) {
-      mesh.getMatrixAt(Math.min(mesh.count - 1, Math.floor(rng() * mesh.count)), matrix);
-      point.applyMatrix4(matrix);
-    }
-    point.applyMatrix4(mesh.matrixWorld);
-    samples.push(round(point.x, 2), round(point.y, 2), round(point.z, 2));
+function placementSamples(meshes) {
+  const groups = new Map();
+  for (const row of meshes) {
+    const key = placementKey(row.path)?.key ?? row.path;
+    const entry = groups.get(key) ?? [];
+    entry.push(row);
+    groups.set(key, entry);
+  }
+  const samples = {};
+  for (const members of groups.values()) {
+    const triangleCounts = members.map((member) => triangleCountOf(member.object.geometry));
+    const budget = sampleBudget(triangleCounts.reduce((sum, count) => sum + count, 0));
+    const allocation = allocateSamples(triangleCounts, budget);
+    members.forEach((member, slot) => {
+      // Seeded by the member's position within its own placement, so a placement's
+      // samples do not depend on where it sits in the scene walk.
+      samples[member.path] = sampleMeshSurface(member.object, slot + 1, allocation[slot]);
+    });
   }
   return samples;
 }
@@ -513,12 +485,14 @@ function collectInventory(scene, camera, renderer) {
   const lights = rows.filter(({ light }) => light);
   const { counts, totalPixels } = measureVisiblePixels(renderer, scene, camera, meshes);
 
+  // Grouped by placement before allocating, so the whole placement shares one budget.
+  const samples = placementSamples(meshes);
+
   let totalArea = 0;
-  const samples = {};
   const items = meshes.map(({ object, path }, index) => {
     const surface = surfaceEvidence(object);
     totalArea += surface.area;
-    samples[path] = surfaceSamples(object, index + 1);
+    void index;
     return {
       path,
       type: object.type,
