@@ -34,6 +34,9 @@ function boot() {
 
   const scene = new THREE.Scene();
   scene.add(root);
+  // The authored scene clears to its own horizon colour, so anything the dome does
+  // not cover reads as sky rather than as black.
+  scene.background = new THREE.Color(environment.sky.horizon);
   scene.fog = new THREE.Fog(
     environment.fog.color,
     environment.fog.near,
@@ -98,11 +101,13 @@ function boot() {
     triangles,
     drawCalls: renderer.info.render.calls,
     semanticIds: [...semanticIndex.keys()],
-    render: () => renderer.render(scene, camera),
+    // Both go through the composer. A runtime whose public render bypassed the
+    // post-processing would let an audit measure a frame nobody ever sees.
+    render: () => post.render(),
     setCamera: (position, target) => {
       camera.position.set(...position);
       camera.lookAt(...target);
-      renderer.render(scene, camera);
+      post.render();
     },
   };
   document.body.dataset.state = "ready";

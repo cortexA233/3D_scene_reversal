@@ -164,6 +164,7 @@ async function main() {
   const candidateScene = new THREE.Scene();
   candidateScene.add(generated.root);
   const environment = generated.environment;
+  candidateScene.background = new THREE.Color(environment.sky.horizon);
   candidateScene.fog = new THREE.Fog(
     environment.fog.color,
     environment.fog.near,

@@ -47,29 +47,42 @@ assertions, 3 green and 2 red. The repository forbids committing a known-failing
 check, so it stays in the working tree exactly as ticket 01's red check did. Its two
 red assertions are the appearance thresholds, which no ticket before 11 can satisfy.
 
-**What the measurement says now**, per region, worst and best camera:
+**Also done: the sky dome is reproduced.** The recipe recorded it as two colours; the
+authored dome is five colours, three smoothstep bands, a warm horizon haze, and a
+two-term sun glow. The generated material also used a different height mapping —
+`dir.y * 0.5 + 0.5` spreads the gradient over the whole sphere and puts the horizon
+colour halfway up — and was missing `fog: false`, so the backdrop the fog fades into
+was itself being fogged. The recipe gained `mid`, `haze`, `glow`, `radius`,
+`midStop`, `zenithStop`, `hazeBand`, and `sunGlow`, and the candidate now clears to
+the horizon colour and does not cull the dome. `authoredOverview` sky fell from
+26.535 to 17.553 and global appearance from 22.173 to 21.531, geometry bit-identical.
+
+**What the measurement says now**, per region:
 
 | region | DeltaE | belongs to |
 | --- | --- | --- |
-| sky | 3.39 on `oblique-north`, 26.54 on `authoredOverview` | 02 |
-| horizon | 6.98 to 12.55 | 05 |
-| geography | 16.98 to 26.33, about a million pixels per camera | 03, 04 |
+| sky | 3.34 on `oblique-north`, 17.55 on `authoredOverview` | 02, but see below |
+| horizon | 6.99 to 12.28 | 05 |
+| geography | 16.90 to 26.14, about a million pixels per camera | 03, 04 |
 | plazas | 26.40 to 34.20 | 06 |
 | structures | 31.19 to 40.19 | 07, 11 |
 | vegetation | 38.31 to 52.23 | 11 |
 
-So the atmosphere is close on the four obliques and the remaining global residual is
-mostly ground, vegetation, and architecture rather than sky. Two things are left in
-ticket 02 itself:
+Global appearance DeltaE is 21.531 against a calibrated threshold of 2.852, worst
+camera `topDown` at 28.595.
 
-1. `authoredOverview` sky at 26.54 against `oblique-north`'s 3.39. That camera looks
-   out towards the horizon, so its sky pixels are the band where fog and sky meet.
-   Check whether the reference's sky material sets `fog: false` and the generated one
-   does not, or the reverse.
-2. Cloud pixels are unattributed, because a cloud sprite cannot take a mesh pass
-   material. They stay inside the global mean. Attributing them needs a sprite-aware
-   index pass, worth having before ticket 13 claims the dynamic environment is
-   stable.
+**Read the `sky` figure carefully.** It is not only sky on cloud-heavy cameras. Cloud
+sprites are hidden in the mask pass, because a sprite cannot take a mesh pass
+material, so wherever a cloud is drawn in the lit capture the mask labels that pixel
+`sky`. `authoredOverview` is the camera with clouds across its frame, which is most
+of why it reads 17.55 while the obliques read 3.34 to 9.40. So the remaining sky
+residual is largely a cloud comparison, and clouds belong to Distributed Scene Cover
+(09) and the frozen dynamic environment (13). Attributing them needs a sprite-aware
+index pass; until that exists, `sky` on a cloud-heavy camera means sky-and-cloud.
+
+`oblique-south` at 9.40 is the largest true sky residual — it is the camera looking
+towards the sun's azimuth, so the glow terms affect it most, and it is worth a look
+on its own before the sky is called done.
 
 ## Environment
 

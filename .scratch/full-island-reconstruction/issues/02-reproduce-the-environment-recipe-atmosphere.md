@@ -44,13 +44,44 @@ With the atmosphere finally measurable, the residual is mostly not atmospheric:
 | vegetation | 38.31 to 52.23 | 11 materials |
 | structures | 31.19 to 40.19 | 07, 11 |
 
-Two things left here:
+### The sky dome, reproduced
 
-1. `authoredOverview` sky at 26.54 against 3.39 on `oblique-north`. That camera looks
-   out towards the horizon, so its sky pixels are the band where fog and sky meet.
-   The likely cause is a difference in whether the sky shell is fogged. Check
-   `fog: false` on the reference's sky material against the generated one.
-2. Cloud pixels are still unattributed, because a cloud sprite cannot take a mesh
-   pass material. They remain inside the global mean. Attributing them needs a
-   sprite-aware index pass, which is worth doing before ticket 13 claims the
-   dynamic environment is stable.
+The recipe recorded the dome as two colours. The authored dome is five colours, three
+smoothstep bands, a warm horizon haze, and a two-term sun glow, and the generated
+material was a different height mapping as well: `dir.y * 0.5 + 0.5` spreads the
+gradient over the whole sphere and puts the horizon colour halfway up, where the
+authored `clamp(dir.y, 0, 1)` keeps it at the horizon. The generated material was
+also missing `fog: false`, so the backdrop the fog fades *into* was itself being
+fogged, mixing the fog colour in twice.
+
+The recipe now carries `mid`, `haze`, `glow`, `radius`, `midStop`, `zenithStop`,
+`hazeBand`, and `sunGlow` — still compact semantic parameters, no sampled curve —
+and the generator reproduces the dome, sets `frustumCulled = false` as the authored
+one does, and clears to the horizon colour.
+
+Measured effect, with every geometry metric bit-identical:
+
+| | before | after |
+| --- | --- | --- |
+| `authoredOverview` sky DeltaE | 26.535 | **17.553** |
+| global appearance DeltaE | 22.173 | **21.531** |
+| `oblique-north` sky | 3.391 | 3.343 |
+| `oblique-east` sky | 5.229 | 5.000 |
+| `oblique-west` sky | 5.719 | 5.437 |
+| `oblique-south` sky | 9.314 | 9.398 |
+
+### What is left, and it is not the gradient
+
+`authoredOverview` sky is still 17.55 against 3.34 on `oblique-north`, and the reason
+is that its `sky` region is not only sky. Cloud sprites are hidden in the mask pass,
+because a sprite cannot take a mesh pass material, so wherever a cloud is drawn in
+the lit capture the mask labels that pixel `sky`. The authored overview is the camera
+with clouds across its frame, so its sky figure is partly a cloud comparison. The
+obliques look down at the island and see almost none.
+
+That makes the remaining work belong elsewhere: the clouds are Distributed Scene
+Cover (09) and the frozen dynamic environment (13). Attributing them needs a
+sprite-aware index pass, and until that exists the `sky` region on cloud-heavy
+cameras must be read as sky-and-cloud rather than as sky. `oblique-south` at 9.40 is
+the next largest true sky residual and is worth a look on its own: it is the camera
+looking towards the sun's azimuth, so it is the one the glow terms affect most.

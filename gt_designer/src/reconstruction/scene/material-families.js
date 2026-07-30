@@ -68,30 +68,84 @@ export function createMaterialFamilies(recipe) {
     return object;
   }
 
-  function sky(controls) {
-    const zenith = new THREE.Color(controls.zenith);
-    const horizon = new THREE.Color(controls.horizon);
+  /**
+   * The sky dome: three stacked bands, a warm haze at the horizon, and a two-term
+   * sun glow, all from Environment Recipe parameters.
+   *
+   * `fog: false` matters. The dome is the backdrop the fog fades *into*, so fogging
+   * it mixes the fog colour into the sky twice and flattens the gradient the fog is
+   * supposed to be read against.
+   *
+   * The height term is `clamp(dir.y, 0, 1)`, not a remap of `dir.y` into `0..1`
+   * across the whole sphere. Only the upper hemisphere is sky; remapping spreads
+   * the whole gradient over twice the arc and puts the horizon colour halfway up.
+   */
+  function sky(controls, sunDirection) {
+    const colour = (value) => ({ value: new THREE.Color(value) });
     return new THREE.ShaderMaterial({
       side: THREE.BackSide,
       depthWrite: false,
+      fog: false,
       uniforms: {
-        zenith: { value: zenith },
-        horizon: { value: horizon },
+        zenith: colour(controls.zenith),
+        horizon: colour(controls.horizon),
+        mid: colour(controls.mid),
+        haze: colour(controls.haze),
+        glow: colour(controls.glow),
+        sunDirection: { value: new THREE.Vector3(...sunDirection).normalize() },
+        midStop: { value: new THREE.Vector2(...controls.midStop) },
+        zenithStop: { value: new THREE.Vector2(...controls.zenithStop) },
+        hazeBand: {
+          value: new THREE.Vector3(
+            controls.hazeBand.scale,
+            controls.hazeBand.exponent,
+            controls.hazeBand.mix,
+          ),
+        },
+        sunGlow: {
+          value: new THREE.Vector4(
+            controls.sunGlow.wideExponent,
+            controls.sunGlow.wideWeight,
+            controls.sunGlow.tightExponent,
+            controls.sunGlow.tightWeight,
+          ),
+        },
       },
       vertexShader: `
-        varying vec3 vWorld;
+        varying vec3 vLocal;
         void main() {
-          vWorld = (modelMatrix * vec4(position, 1.0)).xyz;
+          vLocal = position;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
         uniform vec3 zenith;
         uniform vec3 horizon;
-        varying vec3 vWorld;
+        uniform vec3 mid;
+        uniform vec3 haze;
+        uniform vec3 glow;
+        uniform vec3 sunDirection;
+        uniform vec2 midStop;
+        uniform vec2 zenithStop;
+        uniform vec3 hazeBand;
+        uniform vec4 sunGlow;
+        varying vec3 vLocal;
+
         void main() {
-          float height = clamp(normalize(vWorld).y * 0.5 + 0.5, 0.0, 1.0);
-          gl_FragColor = vec4(mix(horizon, zenith, pow(height, 0.65)), 1.0);
+          vec3 direction = normalize(vLocal);
+          float height = clamp(direction.y, 0.0, 1.0);
+
+          vec3 colour = mix(horizon, mid, smoothstep(midStop.x, midStop.y, height));
+          colour = mix(colour, zenith, smoothstep(zenithStop.x, zenithStop.y, height));
+
+          float band = pow(1.0 - clamp(height * hazeBand.x, 0.0, 1.0), hazeBand.y);
+          colour = mix(colour, haze, band * hazeBand.z);
+
+          float towardsSun = max(dot(direction, sunDirection), 0.0);
+          colour += glow * pow(towardsSun, sunGlow.x) * sunGlow.y;
+          colour += glow * pow(towardsSun, sunGlow.z) * sunGlow.w;
+
+          gl_FragColor = vec4(colour, 1.0);
         }
       `,
     });

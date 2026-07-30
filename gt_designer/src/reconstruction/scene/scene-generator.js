@@ -143,10 +143,20 @@ function buildEnvironment(recipe, materials) {
   ambient.userData.semanticId = "environment/ambient";
   root.add(ambient);
 
+  // The dome's radius is a recipe parameter, and its glow needs the sun direction
+  // the sun light already uses, so the two cannot drift apart.
+  const sunDirection = [
+    Math.cos(sunElevation) * Math.cos(sunAzimuth),
+    Math.sin(sunElevation),
+    Math.cos(sunElevation) * Math.sin(sunAzimuth),
+  ];
   const sky = new THREE.Mesh(
-    new THREE.SphereGeometry(12000, 32, 16),
-    materials.sky(environment.sky),
+    new THREE.SphereGeometry(environment.sky.radius, 48, 24),
+    materials.sky(environment.sky, sunDirection),
   );
+  // The authored dome is never culled: it is larger than the far plane at some
+  // framings, and a culled backdrop leaves the clear colour showing through.
+  sky.frustumCulled = false;
   sky.userData.semanticId = "environment/sky";
   root.add(sky);
 

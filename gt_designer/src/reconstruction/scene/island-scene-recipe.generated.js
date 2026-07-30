@@ -62,7 +62,30 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
     "sky": {
       "kind": "gradient",
       "zenith": 4161224,
-      "horizon": 11325414
+      "horizon": 11325414,
+      "mid": 7580383,
+      "haze": 15654842,
+      "glow": 16768924,
+      "radius": 9000,
+      "midStop": [
+        0,
+        0.18
+      ],
+      "zenithStop": [
+        0.1,
+        0.62
+      ],
+      "hazeBand": {
+        "scale": 4.5,
+        "exponent": 2.6,
+        "mix": 0.3
+      },
+      "sunGlow": {
+        "wideExponent": 9,
+        "wideWeight": 0.22,
+        "tightExponent": 150,
+        "tightWeight": 0.4
+      }
     },
     "ocean": {
       "color": 5224376,

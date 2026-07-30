@@ -225,7 +225,30 @@ const ENVIRONMENT = {
   hemisphere: { sky: 0xcfe2f0, ground: 0xc6b06a, intensity: 1.12 },
   ambient: { color: 0xfff0d6, intensity: 0.34 },
   fog: { kind: "linear", color: 0xe6dcc2, near: 650, far: 3500 },
-  sky: { kind: "gradient", zenith: 0x3f7ec8, horizon: 0xaccfe6 },
+  // The authored dome is five colours and a sun glow, not two colours. Recording
+  // only zenith and horizon left the generator to invent the whole band between
+  // them, which is measurable: with the two-colour gradient the sky read DeltaE
+  // 3.39 on `oblique-north`, which sees mostly high sky, and 26.54 on the authored
+  // overview, which looks out at the horizon and the sun where `mid`, `haze`, and
+  // `glow` do the work. The stops and exponents are here for the same reason: a
+  // gradient's shape is as much of its appearance as its endpoints.
+  sky: {
+    kind: "gradient",
+    zenith: 0x3f7ec8,
+    horizon: 0xaccfe6,
+    mid: 0x73aadf,
+    haze: 0xeedfba,
+    glow: 0xffdf9c,
+    radius: 9000,
+    // Blue reaches low, so it dominates even horizon-heavy framings.
+    midStop: [0, 0.18],
+    zenithStop: [0.1, 0.62],
+    // Warm haze confined to the lowest sliver of sky.
+    hazeBand: { scale: 4.5, exponent: 2.6, mix: 0.3 },
+    // Two terms: a wide golden wash and a tight disc, both gentle enough that
+    // bloom does not blow them to white.
+    sunGlow: { wideExponent: 9, wideWeight: 0.22, tightExponent: 150, tightWeight: 0.4 },
+  },
   ocean: {
     color: 0x4fb7b8,
     sunColor: 0xfff0cf,
