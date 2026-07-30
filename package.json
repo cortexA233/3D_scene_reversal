@@ -15,6 +15,8 @@
     "check:geography": "node --test test/geography-evidence.test.mjs && node scripts/run-geography-evidence.mjs --check",
     "measure:horizon": "node scripts/run-horizon-evidence.mjs",
     "check:horizon": "node --test test/horizon-evidence.test.mjs && node scripts/run-horizon-evidence.mjs --check",
+    "capture:scene-passes": "node scripts/run-scene-passes.mjs",
+    "check:scene-passes": "node --test test/scene-pass-metrics.test.mjs && node scripts/run-scene-passes.mjs --check",
     "check:scene-generation": "node --test test/scene-recipe-contract.test.mjs test/scene-generation.test.mjs && node tools/reconstruction/build-scene-recipe.mjs --check && node scripts/check-scene-generation.mjs",
     "check:reference-observation": "node --test test/reference-observation-contract.test.mjs test/normative-observation-host.test.mjs && node scripts/run-reference-observation.mjs --check",
     "prototype:island": "./run.sh --local-three",

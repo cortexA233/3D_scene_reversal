@@ -159,6 +159,7 @@ async function inspectPage({
   allowedExternalRequestUrls,
   browserArguments,
   postReadyExpression,
+  followUpExpression,
   runtimeObjectAttachment,
 }) {
   let browserStderr = "";
@@ -356,8 +357,25 @@ async function inspectPage({
           }
           finalState = postReadyResult.result.value;
         }
+        // A second, separately transferred value keeps large review artifacts
+        // out of the primary evidence payload.
+        let followUp = null;
+        if (followUpExpression) {
+          const followUpResult = await session.send("Runtime.evaluate", {
+            expression: followUpExpression,
+            returnByValue: true,
+            awaitPromise: true,
+          });
+          if (followUpResult.exceptionDetails) {
+            throw new Error(
+              `follow-up expression failed: ${followUpResult.exceptionDetails.text}`,
+            );
+          }
+          followUp = followUpResult.result.value;
+        }
         return {
           state: finalState,
+          followUp,
           primaryState: lastState,
           requestCount: requests.length,
           requests,
@@ -396,6 +414,7 @@ export async function runLocalSceneAutomation({
   allowedExternalRequestUrls = [],
   browserArguments = [],
   postReadyExpression = null,
+  followUpExpression = null,
   runtimeObjectAttachment = null,
 }) {
   const chrome = await firstExisting([
@@ -445,6 +464,7 @@ export async function runLocalSceneAutomation({
       allowedExternalRequestUrls,
       browserArguments,
       postReadyExpression,
+      followUpExpression,
       runtimeObjectAttachment,
     });
     return { ...result, url };

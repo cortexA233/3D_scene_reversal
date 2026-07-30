@@ -54,7 +54,8 @@ function placementKey(path) {
     const key = parts.slice(0, villageIndex + 2).join("/");
     return { key, family: familyKey(key) };
   }
-  const rigIndex = parts.findIndex((part) => part.includes(WILDLIFE_MARKER));
+  // Suffix, not substring: a limb mesh named "..._Right" contains "_Rig".
+  const rigIndex = parts.findIndex((part) => part.endsWith(WILDLIFE_MARKER));
   if (rigIndex >= 0) {
     return { key: parts.slice(0, rigIndex + 1).join("/"), family: "wildlife-rig" };
   }
