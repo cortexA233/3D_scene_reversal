@@ -84,6 +84,13 @@ function boot() {
     post.setSize(innerWidth, innerHeight);
   });
 
+  // `renderer.info` resets on every render call, and a composer makes several, so
+  // reading it after the chain finishes measures the output pass's fullscreen quad
+  // rather than the island: it reported 1 triangle and 1 draw call. Turning the
+  // automatic reset off and resetting once before the chain accumulates every pass,
+  // which is what a runtime budget is about.
+  renderer.info.autoReset = false;
+  renderer.info.reset();
   post.render();
 
   const triangles = renderer.info.render.triangles;
@@ -102,11 +109,16 @@ function boot() {
     drawCalls: renderer.info.render.calls,
     semanticIds: [...semanticIndex.keys()],
     // Both go through the composer. A runtime whose public render bypassed the
-    // post-processing would let an audit measure a frame nobody ever sees.
-    render: () => post.render(),
+    // post-processing would let an audit measure a frame nobody ever sees. Each
+    // resets the counters first, for the same reason the initial render does.
+    render: () => {
+      renderer.info.reset();
+      post.render();
+    },
     setCamera: (position, target) => {
       camera.position.set(...position);
       camera.lookAt(...target);
+      renderer.info.reset();
       post.render();
     },
   };

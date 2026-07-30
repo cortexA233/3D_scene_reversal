@@ -31,6 +31,7 @@ const PERMITTED_RUNTIME_PATHS = new Set([
   "/island-replacement/",
   "/island-replacement/island-replacement.js",
   "/src/reconstruction/scene/island-scene-recipe.generated.js",
+  "/src/reconstruction/scene/environment-postprocessing.js",
   "/src/reconstruction/scene/scene-generator.js",
   "/src/reconstruction/scene/scene-recipe-contract.js",
   "/src/reconstruction/scene/scene-seed.js",
@@ -125,9 +126,19 @@ async function runBrowser() {
     .map((requestUrl) => new URL(requestUrl))
     .filter((url) => ["127.0.0.1", "localhost"].includes(url.hostname))
     .map((url) => url.pathname);
+  // Three.js addon modules are library code in the same category as
+  // `three.module.js`, which is already permitted, and the post-processing chain
+  // pulls in a transitive set of them. Enumerating every one would turn this check
+  // into a list of three's internals that breaks whenever three reorganises. What
+  // the check is for is that the replacement requests no *non-code* resource and no
+  // project file outside its declared graph, and both still hold: the extension is
+  // checked, the vendor prefix is fixed, and every project path stays on the
+  // explicit allowlist above.
+  const isVendoredLibraryCode = (runtimePath) =>
+    runtimePath.startsWith("/vendor/three/") && runtimePath.endsWith(".js");
   for (const runtimePath of runtimePaths) {
     assert.ok(
-      PERMITTED_RUNTIME_PATHS.has(runtimePath),
+      PERMITTED_RUNTIME_PATHS.has(runtimePath) || isVendoredLibraryCode(runtimePath),
       `the replacement requested a non-code or unexpected resource: ${runtimePath}`,
     );
   }

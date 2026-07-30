@@ -1,0 +1,26 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "parity-review",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8610",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        ".scratch/scene-parity-foundation/review"
+      ],
+      "port": 8610
+    },
+    {
+      "name": "island-candidate",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["serve.py", "--island-replacement", "--no-open", "--port", "8620"],
+      "port": 8620,
+      "url": "http://localhost:8620"
+    }
+  ]
+}

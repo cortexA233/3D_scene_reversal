@@ -507,8 +507,16 @@ work, so they can proceed in parallel.
   everything it depends on.
 - Semantic structure is a one-sided deficit. Do not restore an absolute delta:
   penalising extra parts equally pushes every generator toward a single mass.
-- Generation is currently 3.2 s and 678k triangles. Both are outside any
-  sensible budget and belong to ticket 14.
+- Generation is currently 0.58 to 1.9 s and 679,745 triangles at 1,714 draw calls.
+  Triangles and draw calls are outside any sensible budget and belong to ticket 14.
+- `renderer.info` resets on every render call, and the composer makes several, so
+  reading it after the chain measures the output pass's fullscreen quad. It reported
+  1 triangle and 1 draw call, and the certification recorded that. The runtime now
+  sets `info.autoReset = false` and resets once before the chain. Any future pass
+  added to the chain has to keep that ordering.
+- `check:scene-generation` holds an allowlist of paths the replacement may request.
+  A new production module has to be added there *and* to `PRODUCTION_FILES` in the
+  certification, and both are separate lists in separate files.
 - A browser run occasionally dies with "browser exited before DevTools was ready"
   right after other Edge processes were killed. It is a startup race, not a code
   failure; re-run the batch.
