@@ -9,6 +9,8 @@
  * generator.
  */
 
+import { validateTerrainProgram } from "./terrain-program.js";
+
 export const SCENE_RECIPE_SCHEMA_VERSION = "island-scene-recipe-v1";
 
 export const SCENE_ORIENTATION_TYPES = Object.freeze([
@@ -151,6 +153,8 @@ export function validateSceneRecipe(recipe) {
   }
   if (!recipe?.terrain || typeof recipe.terrain !== "object") {
     errors.push("terrain program is required");
+  } else {
+    errors.push(...validateTerrainProgram(recipe.terrain));
   }
   if (!Array.isArray(recipe?.materialFamilies) || recipe.materialFamilies.length === 0) {
     errors.push("materialFamilies must declare at least one family");

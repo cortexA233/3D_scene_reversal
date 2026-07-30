@@ -334,6 +334,44 @@ function surfaceSamples(mesh, seed) {
   return samples;
 }
 
+/**
+ * Terrain elevation evidence.
+ *
+ * The assembled scene exposes its own authoritative elevation function, so the
+ * measurement queries that rather than re-deriving heights from a triangulated
+ * surface. The grid is a development-only evidence artifact used for fitting
+ * and comparison; it is never retained by the Scene Recipe or the runtime.
+ */
+const ELEVATION_RESOLUTION = 257;
+
+function collectElevation(runtime) {
+  const heightAt = runtime?.bounds?.islandH;
+  if (typeof heightAt !== "function") return null;
+  const half = 480;
+  // The runtime datum is a 2D island centre in the world XZ plane.
+  const [centreX, centreZ] = runtime.bounds.center;
+  const x0 = centreX - half;
+  const x1 = centreX + half;
+  const z0 = centreZ - half;
+  const z1 = centreZ + half;
+  const heights = new Array(ELEVATION_RESOLUTION * ELEVATION_RESOLUTION);
+  for (let row = 0; row < ELEVATION_RESOLUTION; row += 1) {
+    const z = z0 + ((z1 - z0) * row) / (ELEVATION_RESOLUTION - 1);
+    for (let column = 0; column < ELEVATION_RESOLUTION; column += 1) {
+      const x = x0 + ((x1 - x0) * column) / (ELEVATION_RESOLUTION - 1);
+      heights[row * ELEVATION_RESOLUTION + column] = round(heightAt(x, z), 2);
+    }
+  }
+  return {
+    schemaVersion: "terrain-elevation-v1",
+    resolution: ELEVATION_RESOLUTION,
+    bounds: { x0: round(x0, 3), x1: round(x1, 3), z0: round(z0, 3), z1: round(z1, 3) },
+    seaLevel: runtime.bounds.seaY,
+    groundY: runtime.bounds.groundY,
+    heights,
+  };
+}
+
 function collectInventory(scene, camera, renderer) {
   scene.updateMatrixWorld(true);
   const rows = walkRenderables(scene);
@@ -381,6 +419,7 @@ function collectInventory(scene, camera, renderer) {
     items,
     lights: lights.map(({ object, path }) => ({ path, ...lightSummary(object) })),
     samples,
+    elevation: collectElevation(window.island),
   };
 }
 

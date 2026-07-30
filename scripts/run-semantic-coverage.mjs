@@ -44,6 +44,11 @@ const SAMPLES_PATH = path.join(
   PROJECT_ROOT,
   ".scratch/scene-parity-foundation/evidence/scene-surface-samples-v1.json",
 );
+/** Development-only elevation grid measured from the assembled scene. */
+const ELEVATION_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/scene-parity-foundation/evidence/terrain-elevation-v1.json",
+);
 const checkOnly = process.argv.includes("--check");
 const contract = createReferenceObservationContract();
 
@@ -92,8 +97,13 @@ async function main() {
     true,
     "measuring the Assembled Authored Scene changed it",
   );
-  const { samples, ...inventory } = run.state.report;
+  const { samples, elevation, ...inventory } = run.state.report;
   assert.equal(inventory.schemaVersion, "scene-inventory-v1");
+  assert.equal(
+    elevation?.schemaVersion,
+    "terrain-elevation-v1",
+    "the assembled scene did not expose its elevation function",
+  );
   if (!checkOnly) {
     await mkdir(path.dirname(INVENTORY_PATH), { recursive: true });
     await Promise.all([
@@ -104,6 +114,8 @@ async function main() {
         `${JSON.stringify({ schemaVersion: "scene-surface-samples-v1", samples })}
 `,
       ),
+      writeFile(ELEVATION_PATH, `${JSON.stringify(elevation)}
+`),
     ]);
   }
 

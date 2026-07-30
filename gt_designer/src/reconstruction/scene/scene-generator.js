@@ -151,7 +151,7 @@ function buildEnvironment(recipe, materials) {
   root.add(sky);
 
   const ocean = new THREE.Mesh(
-    new THREE.PlaneGeometry(26000, 26000, 1, 1),
+    new THREE.PlaneGeometry(environment.ocean.extent, environment.ocean.extent, 1, 1),
     materials.ocean(environment.ocean),
   );
   ocean.rotation.x = -Math.PI / 2;
@@ -162,13 +162,9 @@ function buildEnvironment(recipe, materials) {
   return root;
 }
 
-function buildPopulations(recipe, materials) {
+function buildPopulations(recipe, materials, elevationAt) {
   const root = new THREE.Group();
   root.userData.semanticId = "cover";
-  const { coastExtent, center, groundY, semanticSeaLevel } = {
-    ...recipe.world,
-    semanticSeaLevel: recipe.world.semanticSeaLevel,
-  };
 
   for (const population of recipe.populations) {
     const rng = createSeededRng(
@@ -192,14 +188,16 @@ function buildPopulations(recipe, materials) {
       const scale =
         population.scaleRange[0] +
         rng.nextFloat() * (population.scaleRange[1] - population.scaleRange[0]);
-      const x = center[0] + Math.cos(angle) * radial * coastExtent[0];
-      const z = center[1] + Math.sin(angle) * radial * coastExtent[1];
+      // Populations are placed inside their own measured region and settled on
+      // the generated terrain rather than on a flat nominal ground plane.
+      const x = population.region.center[0] + Math.cos(angle) * radial * population.region.radii[0];
+      const z = population.region.center[1] + Math.sin(angle) * radial * population.region.radii[1];
       const y =
         population.region.shape === "sky-shell"
           ? population.region.minHeight +
             rng.nextFloat() *
               (population.region.maxHeight - population.region.minHeight)
-          : Math.max(semanticSeaLevel, groundY);
+          : elevationAt(x, z);
       matrix.makeRotationY(rng.nextFloat() * Math.PI * 2);
       matrix.scale(new THREE.Vector3(scale, scale, scale));
       matrix.setPosition(x, y, z);
@@ -291,7 +289,7 @@ export function generateScene(recipe, options = {}) {
 
   const environment = buildEnvironment(recipe, materials);
   root.add(environment);
-  const populations = buildPopulations(recipe, materials);
+  const populations = buildPopulations(recipe, materials, terrain.userData.elevationAt);
   root.add(populations);
   for (const cover of populations.children) {
     semanticIndex.set(cover.userData.semanticId, {

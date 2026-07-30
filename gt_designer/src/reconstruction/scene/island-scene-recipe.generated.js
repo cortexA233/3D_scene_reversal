@@ -68,7 +68,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "color": 5224376,
       "sunColor": 16773327,
       "distortion": 1.6,
-      "alpha": 0.92
+      "alpha": 0.92,
+      "extent": 74000
     },
     "renderer": {
       "toneMapping": "ACESFilmicToneMapping",
@@ -110,150 +111,586 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
     }
   },
   "terrain": {
-    "program": "measured-radial-coast-v1",
-    "supersededBy": "bounded-semantic-terrain-program",
-    "center": [
-      86,
-      -24
-    ],
-    "groundY": 26,
-    "oceanFloor": -40,
-    "coastExtent": [
-      322,
-      290
-    ],
-    "flatExtent": [
-      255,
-      228
-    ],
-    "measuredBounds": {
-      "min": [
-        -9000,
-        -9000,
-        -9000
+    "version": "bounded-semantic-terrain-v1",
+    "coastline": {
+      "center": [
+        86,
+        -24
       ],
-      "max": [
-        9000,
-        9000,
-        9000
+      "nodes": [
+        {
+          "azimuth": 0,
+          "radius": 299.02
+        },
+        {
+          "azimuth": 0.07418,
+          "radius": 299.766
+        },
+        {
+          "azimuth": 0.31852,
+          "radius": 291.982
+        },
+        {
+          "azimuth": 0.3927,
+          "radius": 292.063
+        },
+        {
+          "azimuth": 0.51051,
+          "radius": 292.352
+        },
+        {
+          "azimuth": 0.60214,
+          "radius": 292.981
+        },
+        {
+          "azimuth": 0.7854,
+          "radius": 62.594
+        },
+        {
+          "azimuth": 1.14319,
+          "radius": 288.298
+        },
+        {
+          "azimuth": 1.5708,
+          "radius": 270.115
+        },
+        {
+          "azimuth": 1.68424,
+          "radius": 262.777
+        },
+        {
+          "azimuth": 1.95477,
+          "radius": 268.443
+        },
+        {
+          "azimuth": 2.06385,
+          "radius": 268.093
+        },
+        {
+          "azimuth": 2.35619,
+          "radius": 279.682
+        },
+        {
+          "azimuth": 2.56563,
+          "radius": 290.352
+        },
+        {
+          "azimuth": 2.72708,
+          "radius": 295.039
+        },
+        {
+          "azimuth": 2.81871,
+          "radius": 295.442
+        },
+        {
+          "azimuth": 3.14159,
+          "radius": 300.395
+        },
+        {
+          "azimuth": 3.92699,
+          "radius": 273.93
+        },
+        {
+          "azimuth": 4.39823,
+          "radius": 264.125
+        },
+        {
+          "azimuth": 4.58585,
+          "radius": 266.336
+        },
+        {
+          "azimuth": 4.71239,
+          "radius": 265.976
+        },
+        {
+          "azimuth": 5.1749,
+          "radius": 297.867
+        },
+        {
+          "azimuth": 5.34071,
+          "radius": 287.374
+        },
+        {
+          "azimuth": 5.42797,
+          "radius": 289.492
+        },
+        {
+          "azimuth": 5.49779,
+          "radius": 290.304
+        },
+        {
+          "azimuth": 5.77704,
+          "radius": 294.677
+        },
+        {
+          "azimuth": 5.8774,
+          "radius": 293.742
+        },
+        {
+          "azimuth": 5.9603,
+          "radius": 292.584
+        }
       ]
     },
-    "coastlineRadii": [
-      300,
-      300,
-      296,
-      294,
-      294,
-      290,
-      68,
-      82,
-      266,
-      286,
-      280,
-      274,
-      272,
-      266,
-      270,
-      272,
-      272,
-      276,
-      282,
-      290,
-      294,
-      296,
-      298,
-      302,
-      304,
-      296,
-      288,
-      284,
-      282,
-      278,
-      276,
-      274,
-      270,
-      268,
-      266,
-      268,
-      268,
-      282,
-      292,
-      298,
-      298,
-      290,
-      294,
-      296,
-      298,
-      296,
-      296,
-      298
-    ],
-    "relief": [
+    "landforms": [
       {
+        "type": "hill",
         "position": [
-          -22.39,
-          -218.39
+          286.45,
+          138.86
         ],
-        "height": 8.3,
-        "radius": 56
+        "radius": 40,
+        "height": 68.19,
+        "direction": 0,
+        "elongation": 1
       },
       {
+        "type": "hill",
         "position": [
-          34.53,
-          -184.2
+          223.81,
+          176.45
         ],
-        "height": 16.8,
-        "radius": 56
+        "radius": 40,
+        "height": 56.51,
+        "direction": 0,
+        "elongation": 1
       },
       {
+        "type": "hill",
         "position": [
-          -60.34,
-          -155.71
+          148.64,
+          38.64
         ],
-        "height": 20.8,
-        "radius": 56
+        "radius": 40,
+        "height": 51.21,
+        "direction": 0,
+        "elongation": 1
       },
       {
+        "type": "channel",
         "position": [
-          331.8,
-          -64.53
+          161.17,
+          38.64
         ],
-        "height": 5.3,
-        "radius": 56
+        "radius": 40,
+        "height": -61.71,
+        "direction": 0,
+        "elongation": 1
       },
       {
+        "type": "hill",
         "position": [
-          338.12,
-          3.86
+          161.17,
+          51.17
         ],
-        "height": 9.4,
-        "radius": 56
+        "radius": 40,
+        "height": 62.69,
+        "direction": 0,
+        "elongation": 1
       },
       {
+        "type": "channel",
         "position": [
-          287.52,
-          112.13
+          148.64,
+          63.7
         ],
-        "height": 9.5,
-        "radius": 56
+        "radius": 40,
+        "height": -56.9,
+        "direction": 0,
+        "elongation": 1
       },
       {
+        "type": "hill",
         "position": [
-          167.35,
-          180.51
+          186.22,
+          101.28
         ],
-        "height": 27.5,
-        "radius": 56
+        "radius": 40,
+        "height": 50.33,
+        "direction": 0,
+        "elongation": 1
       },
       {
+        "type": "hill",
         "position": [
-          104.1,
-          191.91
+          248.86,
+          113.81
         ],
-        "height": 20.5,
-        "radius": 56
+        "radius": 40,
+        "height": 48.02,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          248.86,
+          101.28
+        ],
+        "radius": 40,
+        "height": -48.18,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          173.7,
+          113.81
+        ],
+        "radius": 40,
+        "height": -47.88,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          198.75,
+          126.34
+        ],
+        "radius": 40,
+        "height": 47.02,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          161.17,
+          63.7
+        ],
+        "radius": 40,
+        "height": 46.87,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          173.7,
+          51.17
+        ],
+        "radius": 40,
+        "height": -61.07,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          161.17,
+          51.17
+        ],
+        "radius": 40,
+        "height": 50.87,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          161.17,
+          38.64
+        ],
+        "radius": 40,
+        "height": -52.11,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          148.64,
+          38.64
+        ],
+        "radius": 40,
+        "height": 49.48,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          136.11,
+          38.64
+        ],
+        "radius": 40,
+        "height": -63.23,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          148.64,
+          38.64
+        ],
+        "radius": 40,
+        "height": 53,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          148.64,
+          51.17
+        ],
+        "radius": 40,
+        "height": -56.94,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          148.64,
+          38.64
+        ],
+        "radius": 40,
+        "height": 47.72,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          148.64,
+          26.11
+        ],
+        "radius": 40,
+        "height": -57.98,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          148.64,
+          38.64
+        ],
+        "radius": 40,
+        "height": 48.59,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          161.17,
+          38.64
+        ],
+        "radius": 40,
+        "height": -54.69,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          161.17,
+          51.17
+        ],
+        "radius": 40,
+        "height": 47.71,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          148.64,
+          51.17
+        ],
+        "radius": 40,
+        "height": -53.68,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          148.64,
+          38.64
+        ],
+        "radius": 40,
+        "height": 57.31,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          161.17,
+          38.64
+        ],
+        "radius": 40,
+        "height": -50.31,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          161.17,
+          51.17
+        ],
+        "radius": 40,
+        "height": 46.9,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          148.64,
+          51.17
+        ],
+        "radius": 40,
+        "height": -52,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          148.64,
+          38.64
+        ],
+        "radius": 40,
+        "height": 52.8,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          136.11,
+          38.64
+        ],
+        "radius": 40,
+        "height": -49.79,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          324.03,
+          163.92
+        ],
+        "radius": 40,
+        "height": 42.7,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          298.98,
+          126.34
+        ],
+        "radius": 40,
+        "height": -44.64,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          148.64,
+          38.64
+        ],
+        "radius": 40,
+        "height": 41.73,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          161.17,
+          38.64
+        ],
+        "radius": 40,
+        "height": -57.44,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          148.64,
+          38.64
+        ],
+        "radius": 40,
+        "height": 48.14,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "channel",
+        "position": [
+          136.11,
+          38.64
+        ],
+        "radius": 40,
+        "height": -46.98,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          123.58,
+          51.17
+        ],
+        "radius": 40,
+        "height": 40.63,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          248.86,
+          113.81
+        ],
+        "radius": 40,
+        "height": 40.34,
+        "direction": 0,
+        "elongation": 1
+      },
+      {
+        "type": "hill",
+        "position": [
+          248.86,
+          239.09
+        ],
+        "radius": 40,
+        "height": 37.69,
+        "direction": 0,
+        "elongation": 1
       }
-    ]
+    ],
+    "shore": {
+      "shelfFraction": 0.12,
+      "beachHeight": -1,
+      "shelfDrop": 0.4
+    },
+    "noise": {
+      "version": "value-noise-v1",
+      "octaves": 3,
+      "frequency": 0.035,
+      "amplitude": 3,
+      "lacunarity": 2.1,
+      "gain": 0.5,
+      "seed": 20260729
+    },
+    "seaLevel": 16,
+    "groundY": 26,
+    "oceanFloor": -40
   },
   "materialFamilies": [
     {

@@ -36,6 +36,7 @@ const PERMITTED_RUNTIME_PATHS = new Set([
   "/src/reconstruction/scene/scene-seed.js",
   "/src/reconstruction/scene/scene-object-generators.js",
   "/src/reconstruction/scene/terrain-generator.js",
+  "/src/reconstruction/scene/terrain-program.js",
   "/src/reconstruction/scene/material-families.js",
   "/src/reconstruction/core/rng.js",
   "/vendor/three/build/three.module.js",

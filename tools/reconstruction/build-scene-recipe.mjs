@@ -34,6 +34,7 @@ import {
   readAuthoredPlacements,
   round,
 } from "./scene-placements.mjs";
+import { fitTerrainProgram } from "./fit-terrain-program.mjs";
 
 const PROJECT_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -46,6 +47,10 @@ const OUTPUT_PATH = path.join(
 const INVENTORY_PATH = path.join(
   PROJECT_ROOT,
   ".scratch/scene-parity-foundation/evidence/scene-inventory-v1.json",
+);
+const ELEVATION_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/scene-parity-foundation/evidence/terrain-elevation-v1.json",
 );
 
 /** One stable root identity for the whole island. */
@@ -198,7 +203,17 @@ const ENVIRONMENT = {
   ambient: { color: 0xfff0d6, intensity: 0.34 },
   fog: { kind: "linear", color: 0xe6dcc2, near: 650, far: 3500 },
   sky: { kind: "gradient", zenith: 0x3f7ec8, horizon: 0xaccfe6 },
-  ocean: { color: 0x4fb7b8, sunColor: 0xfff0cf, distortion: 1.6, alpha: 0.92 },
+  ocean: {
+    color: 0x4fb7b8,
+    sunColor: 0xfff0cf,
+    distortion: 1.6,
+    alpha: 0.92,
+    // The Ocean Appearance Surface must fill the sea in every frozen camera, not
+    // just the authored overview. Its half extent therefore clears the 30000
+    // far plane measured from the outermost oblique camera at ~5100 units, not
+    // from the world origin.
+    extent: 74000,
+  },
   renderer: {
     toneMapping: "ACESFilmicToneMapping",
     exposure: 1,
@@ -221,39 +236,20 @@ const ENVIRONMENT = {
 };
 
 /**
- * Terrain stays a passthrough of the measured radial evidence at this stage.
- * Foundation ticket 06 replaces it with the Bounded Semantic Terrain Program;
- * the field is versioned so that swap is explicit rather than silent.
+ * Terrain is the Bounded Semantic Terrain Program fitted from the complete
+ * measured elevation evidence. The Scene Recipe keeps only the fitted controls,
+ * never the grid they were fitted from.
  */
-function buildTerrain(inventory) {
-  const { terrain, world } = REFERENCE_LAYOUT;
-  const surface = inventory.items
-    .filter((item) => item.bounds && item.instanceCount === 1)
-    .filter((item) => {
-      const spanX = item.bounds.max[0] - item.bounds.min[0];
-      const spanZ = item.bounds.max[2] - item.bounds.min[2];
-      const height = item.bounds.max[1] - item.bounds.min[1];
-      return spanX > world.coast[0] * 2 && spanZ > world.coast[1] * 2 && height > 20;
-    })
-    .sort((a, b) => b.worldSurfaceArea - a.worldSurfaceArea)[0];
-
-  return {
-    program: "measured-radial-coast-v1",
-    supersededBy: "bounded-semantic-terrain-program",
-    center: [world.center[0], world.center[1]],
+function buildTerrain(elevation, world) {
+  return fitTerrainProgram(elevation, {
+    center: world.center,
     groundY: world.groundY,
     oceanFloor: world.oceanFloor,
-    coastExtent: world.coast,
-    flatExtent: world.flat,
-    measuredBounds: surface
-      ? { min: surface.bounds.min, max: surface.bounds.max }
-      : null,
-    coastlineRadii: terrain.coastlineRadii,
-    relief: terrain.relief,
-  };
+    sceneSeed: SCENE_SEED,
+  });
 }
 
-function buildRecipe(inventory) {
+function buildRecipe(inventory, elevation) {
   const entities = buildEntities(inventory);
   return {
     schemaVersion: SCENE_RECIPE_SCHEMA_VERSION,
@@ -271,7 +267,7 @@ function buildRecipe(inventory) {
       coastExtent: REFERENCE_LAYOUT.world.coast,
     },
     environment: ENVIRONMENT,
-    terrain: buildTerrain(inventory),
+    terrain: buildTerrain(elevation, REFERENCE_LAYOUT.world),
     materialFamilies: MATERIAL_FAMILIES,
     entities,
     populations: buildPopulations(inventory),
@@ -289,10 +285,14 @@ export const ISLAND_SCENE_RECIPE = Object.freeze(${JSON.stringify(recipe, null, 
 }
 
 async function main() {
-  const inventory = JSON.parse(await readFile(INVENTORY_PATH, "utf8"));
+  const [inventory, elevation] = await Promise.all([
+    readFile(INVENTORY_PATH, "utf8").then(JSON.parse),
+    readFile(ELEVATION_PATH, "utf8").then(JSON.parse),
+  ]);
   assert.equal(inventory.schemaVersion, "scene-inventory-v1");
+  assert.equal(elevation.schemaVersion, "terrain-elevation-v1");
 
-  const recipe = buildRecipe(inventory);
+  const recipe = buildRecipe(inventory, elevation);
   assert.deepEqual(
     validateSceneRecipe(recipe),
     [],
