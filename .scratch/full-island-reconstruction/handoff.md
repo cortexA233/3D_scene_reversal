@@ -177,14 +177,64 @@ certification recorded 11.1851 from an older run.
 
 ## Next steps
 
-1. Reconstruction ticket 01: calibrate the fixed-camera and native-appearance
-   layers, now that the cameras see the island. `run-scene-calibration.mjs`
-   hard-codes `fixedCameraGeometry: []` and `nativeAppearance: []` at lines
-   369-370. Control families are `SCENE_CONTROLS`, `GEOGRAPHY_CONTROLS`, and
-   `HORIZON_CONTROLS` in `tools/evaluation/scene-perturbations.mjs`, shaped
-   `{ id, class: identity|mild|severe, apply }`. Baseline thresholds are shaped
-   `{ name, scope, path, direction, threshold }`. Calibrate on per-group metrics.
-2. Then tickets 02 atmosphere, 03 terrain, 05 horizon ridges, and onward.
+### Ticket 01, in progress — calibrate the two missing layers
+
+The red check exists and is red: `node --test test/camera-appearance-calibration.test.mjs`,
+8 assertions, 5 red and 3 green. The three green ones are well-formedness and the
+vacuous-pass control, so they stay green throughout. Supporting declaration is
+`tools/acceptance/camera-appearance-layers.mjs`.
+
+Red evidence, which enumerates the remaining work:
+
+1. `fixedCameraGeometry` and `nativeAppearance` hold no thresholds.
+   `run-scene-calibration.mjs` hard-codes both as `[]` at lines 369-370.
+2. `fixedCameraGeometry` leaves six metric families ungated: per-group
+   silhouette, contour distance, linear depth, world normal, semantic occupancy,
+   semantic confusion.
+3. Three evidence paths are not measured at all and must be added to
+   `tools/evaluation/browser-scene-passes.mjs`, after which the passes must be
+   re-captured: `aggregate.semanticConfusion.worstFraction`,
+   `aggregate.appearanceByMaterialFamily.meanMean`,
+   `aggregate.appearanceByMaterialFamily.worst.value`.
+4. Appearance is measured per semantic *group* in `view.appearance.regions`, not
+   per Material Family. The recipe declares 10 families — distant-rock,
+   painted-timber, paving-stone, shore-rock, palm-foliage, blossom-foliage,
+   bamboo-foliage, terrain-ground, ocean-surface, creature-fur — and zero are
+   measured. The ticket requires per-Material-Family appearance.
+
+Order to finish it:
+
+1. Extend `browser-scene-passes.mjs` with per-Material-Family appearance and a
+   semantic-confusion worst fraction; re-capture passes.
+2. Build the calibration harness that renders the reference against declared
+   perturbed clones of itself through all six frozen cameras, using scene-space
+   damage rather than image-space approximation. Existing control families are
+   `SCENE_CONTROLS`, `GEOGRAPHY_CONTROLS`, `HORIZON_CONTROLS` in
+   `tools/evaluation/scene-perturbations.mjs`, shaped
+   `{ id, class: identity|mild|severe, detects, apply }`. `collect` in
+   `run-scene-calibration.mjs` takes mild samples from identity and mild controls
+   and severe samples only from controls whose `detects` names the metric.
+3. Extend the baseline through a versioned migration. Thresholds are shaped
+   `{ name, scope, path, direction, threshold }`. Geometry thresholds must not
+   move; the red check pins all 13 by value.
+4. Demote rather than loosen any metric that cannot separate its bracket, and
+   prove every declared control is caught by at least one gating metric.
+
+Two things not to get wrong here:
+
+- Calibrate on **per-group** metrics. Whole-frame silhouette IoU is 0.994 while
+  per-group is 0.422, because geography fills 84 to 86 per cent of every
+  auxiliary frame. Gating the whole-frame number would recreate the blind spot
+  ADR-0049 just removed.
+- ADR-0040 defers `nativeAppearance` until every geometry layer passes, so an
+  unevaluated appearance layer is correct while the candidate is red. That is a
+  different state from a layer with no thresholds, and the red check
+  distinguishes them by `reason` and `blockedBy`. "All four layers evaluated"
+  is not achievable, and not the goal.
+
+### After that
+
+Tickets 02 atmosphere, 03 terrain, 05 horizon ridges, and onward.
 
 Tickets 03 and 05 depend only on 3D evidence and are unaffected by the camera
 work.
