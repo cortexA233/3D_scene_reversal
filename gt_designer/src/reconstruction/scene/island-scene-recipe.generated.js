@@ -2001,7 +2001,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.8142
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2054,7 +2055,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.7653
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2093,7 +2095,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.8142
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2146,7 +2149,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.7654
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2192,7 +2196,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.7654
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2224,7 +2229,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 1
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2263,7 +2269,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.8142
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2324,7 +2331,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             ],
             "height": 0.5792
           }
-        ]
+        ],
+        "spreadScale": 1
       }
     },
     {
@@ -2363,7 +2371,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.8142
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 0.3
       }
     },
     {
@@ -2409,7 +2418,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.7653
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2470,7 +2480,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             ],
             "height": 0.5792
           }
-        ]
+        ],
+        "spreadScale": 1
       }
     },
     {
@@ -2523,7 +2534,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.7654
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2555,7 +2567,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 1
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2594,7 +2607,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.8142
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {
@@ -2640,7 +2654,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.7653
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 0.45
       }
     },
     {
@@ -2693,7 +2708,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
             "height": 0.7654
           }
         ],
-        "foothills": []
+        "foothills": [],
+        "spreadScale": 1
       }
     },
     {

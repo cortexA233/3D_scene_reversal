@@ -188,18 +188,21 @@ function horizonGroup(rng, shape) {
   const foothills = shape?.foothills ?? [];
   const parts = [];
 
+  // One compact per-group control for how broad its summits sit inside the
+  // group's footprint. Fitted from the reference's own measured skyline.
+  const spreadScale = shape?.spreadScale ?? 1;
   peaks.forEach((peak, index) => {
     const solid = supportSolid(rng, { rings: 4, sides: 9, roughness: 0.34 });
     // A peak's footprint scales with its prominence so a dominant summit reads
     // as a massif and a secondary one as a shoulder.
-    const spread = 0.22 + peak.height * 0.26;
+    const spread = (0.22 + peak.height * 0.26) * spreadScale;
     solid.scale.set(spread, peak.height / 2, spread * 0.86);
     solid.position.set(peak.offset[0], peak.height / 2, peak.offset[1]);
     parts.push(part(solid, `peak-${index}`));
   });
   foothills.forEach((foothill, index) => {
     const solid = supportSolid(rng, { rings: 3, sides: 7, roughness: 0.46 });
-    const spread = 0.16 + foothill.height * 0.2;
+    const spread = (0.16 + foothill.height * 0.2) * spreadScale;
     solid.scale.set(spread, foothill.height / 2, spread * 0.8);
     solid.position.set(foothill.offset[0], foothill.height / 2, foothill.offset[1]);
     parts.push(part(solid, `foothill-${index}`));

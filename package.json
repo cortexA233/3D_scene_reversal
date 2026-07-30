@@ -21,6 +21,8 @@
     "check:scene-calibration": "node --test test/scene-calibration.test.mjs && node scripts/run-scene-calibration.mjs --check",
     "check:scene-parity-gates": "node --test test/scene-parity-gates.test.mjs",
     "report:scene-parity": "node scripts/run-scene-parity-report.mjs",
+    "fit:tracer": "node scripts/run-fitting-loop.mjs",
+    "check:fitting-loop": "node --test test/fitting-loop.test.mjs",
     "check:scene-generation": "node --test test/scene-recipe-contract.test.mjs test/scene-generation.test.mjs && node tools/reconstruction/build-scene-recipe.mjs --check && node scripts/check-scene-generation.mjs",
     "check:reference-observation": "node --test test/reference-observation-contract.test.mjs test/normative-observation-host.test.mjs && node scripts/run-reference-observation.mjs --check",
     "prototype:island": "./run.sh --local-three",

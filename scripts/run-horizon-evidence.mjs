@@ -29,7 +29,12 @@ const checkOnly = process.argv.includes("--check");
 /** The sixteen known authored distant-mountain groups. */
 export const EXPECTED_HORIZON_GROUPS = 16;
 
-export async function measureHorizon() {
+/**
+ * @param {object} [options]
+ * @param {object} [options.recipe] an explicitly supplied Scene Recipe, so a
+ *   caller that has just regenerated one is not served the module cache.
+ */
+export async function measureHorizon({ recipe = ISLAND_SCENE_RECIPE } = {}) {
   const [inventory, referenceEvidence] = await Promise.all([
     readFile(path.join(EVIDENCE_DIRECTORY, "scene-inventory-v1.json"), "utf8").then(
       JSON.parse,
@@ -56,7 +61,7 @@ export async function measureHorizon() {
       ]),
   );
 
-  const generated = generateScene(ISLAND_SCENE_RECIPE);
+  const generated = generateScene(recipe);
   const candidateGroups = new Map(
     [...generated.semanticIndex.entries()].filter(
       ([, record]) => record.group === "horizon",
@@ -69,8 +74,8 @@ export async function measureHorizon() {
       referenceEvidence,
       referenceGroups,
       candidateGroups,
-      anchor: ISLAND_SCENE_RECIPE.sceneAnchor,
-      overviewPosition: ISLAND_SCENE_RECIPE.environment.camera.position,
+      anchor: recipe.sceneAnchor,
+      overviewPosition: recipe.environment.camera.position,
     }),
   };
 }
