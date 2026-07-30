@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0053.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0054.
 
 ## Where the work stands
 
@@ -19,7 +19,7 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 04 — ocean surface | landed; gate red behind vegetation and architecture |
 | Reconstruction 05 — horizon ridges | landed; gate red at a recorded boundary (ADR-0052) |
 | Reconstruction 08 — vegetation canopies | done |
-| Reconstruction 03 | in progress, see below |
+| Reconstruction 03 | boundary recorded (ADR-0054); one in-budget attempt named |
 | Reconstruction 09 — distributed cover | landed; the reference measurement was wrong and is fixed (ADR-0053) |
 | Reconstruction 06, 07, 10-16 | ready-for-agent; 06 is next and `paths` is its dominant term |
 
@@ -700,7 +700,7 @@ Read the per-group table above rather than the old ranking. `plazas`' reference
 mask was 84 per cent scatter before ADR-0053, so any note about plazas written
 earlier was measured against the wrong thing.
 
-- **Ticket 03 is where the work is, and its budget is now measured.**
+- **Ticket 03's gates are a recorded count boundary (ADR-0054), not open work.**
   `tools/development/measure-terrain-form-budget.mjs` runs the production landform
   pursuit at increasing budgets. The frozen 40 forms reach full height p95 8.657;
   60 reach 7.492, 80 reach 5.937, 120 reach 4.673. Interpolating, the 5.26875 gate

@@ -4,20 +4,22 @@
 
 **Blocked by:** None.
 
-**Status:** in-progress — the landform fit is multi-scale; height p95 fell 16.26 to 8.53.
-The budget's capability is now measured: the full-height gate needs about 101 landforms
-against a frozen 40, and the shore gate is not reachable by adding landforms at all.
+**Status:** boundary recorded (ADR-0054). The landform fit is multi-scale and height
+p95 fell 16.26 to 8.53; the budget's capability is now measured, and 40 landforms cannot
+reach 5.26875 while about 101 can. One in-budget attempt remains and is named below.
 
-- [ ] Add one non-interactive check that is red until terrain height and shore height evidence are inside their frozen thresholds.
+- [x] Add one non-interactive check that is red until terrain height and shore height evidence are inside their frozen thresholds. — `test/terrain-reconstruction.test.mjs`, 4 assertions; the height one is marked outstanding with ADR-0054 as its reason, and a second asserts the fit has not bought height with the coastline.
 - [x] Improve the landform fit within the frozen budget of 32 coastline controls, 40 landforms, and 4 noise octaves.
 - [ ] Fit the shore controls against the measured shoreline band rather than hand-picking them.
       They already are fitted, by `fitShoreControls`. What is not fitted is the shelf's *shape*: `shelfFraction`, `beachHeight`, and `shelfDrop` are three numbers for a transition the reference varies by azimuth.
-- [ ] Report height and slope separately over full, interior, and shore regions, keeping the worst region.
-      Height is reported over all three. Slope is not reported at all yet.
+- [x] Report height and slope separately over full, interior, and shore regions, keeping the worst region.
+      Both are, over all three, and always were — the note that slope was missing was stale.
+      `compareGeography` reports slope p95 0.412 full, 0.4345 interior, 0.4650 shore. It is not
+      gated; the new check asserts it is present so a future gate has evidence to gate on.
 - [x] Keep coastline symmetric distance, enclosed area, perimeter, and inlet matching inside their thresholds.
 - [ ] Keep land, shore, and sea classification agreement above its threshold.
 - [x] Retain no elevation grid, regular sample array, per-vertex height, or distance field in production.
-- [ ] If the frozen budget cannot reach the threshold, record that as a representation-boundary result with an ADR rather than growing the budget.
+- [x] If the frozen budget cannot reach the threshold, record that as a representation-boundary result with an ADR rather than growing the budget. — ADR-0054, and it is a *count* boundary rather than a family one: detail below the program's own finest landform radius has p95 2.428, under both thresholds, so the family is adequate and only the count is short.
 
 ## Where the residual is
 
