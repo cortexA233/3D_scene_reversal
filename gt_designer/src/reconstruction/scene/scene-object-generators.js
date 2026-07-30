@@ -220,48 +220,180 @@ function slab(rng, { sides = 7 } = {}) {
   return group([part(new THREE.Mesh(geometry), "slab")]);
 }
 
+/** How high a ridge's foot stands, as a fraction of its own crest height. */
+const APRON_RISE = 0.06;
+
+/**
+ * A swept crest ridge: the landform behind a Horizon Group's skyline.
+ *
+ * Two measurements shaped this. First, the half-buried spheres it replaces have
+ * their widest point at their own equator, so a group built from them stood near
+ * summit height at nearly every azimuth it covered and the measured skyline read
+ * 2.65 degrees too high in 624 of the 720 bins. Second, an authored group's
+ * profile is one continuous massif with sub-summits and shallow saddles, never a
+ * row of separated mounds, so a union of round domes spends its budget filling
+ * the notches between them. Sweeping one crest through the measured summits gets
+ * both: the flanks fall away as `(1 - s^2)^falloff` across the ridge, and the
+ * skyline between two summits is the crest rather than a gap.
+ *
+ * Roughness perturbs the ridge's width and never its crest height: a rocky
+ * outline keeps the form off a lathe without putting noise into the elevation
+ * the skyline is measured by.
+ */
+function crestRidge(
+  rng,
+  { nodes, falloff, saddleDepth, runOut, apron, axis, roughness, spans = 6, sides = 10 },
+) {
+  // Zero-height nodes past each end, so the ridge runs out into its own
+  // footprint instead of ending in a cliff. It runs out along the group's own
+  // crest direction rather than along its last segment, which is what makes that
+  // direction a control the whole ridge answers to instead of only the order its
+  // summits are threaded in. How far it runs is the second fitted control: an
+  // authored group reaches well beyond its outermost summit.
+  const beyond = (from, sign) => ({
+    offset: [
+      from.offset[0] + axis[0] * sign * from.width * runOut,
+      from.offset[1] + axis[1] * sign * from.width * runOut,
+    ],
+    height: 0,
+    width: from.width * 0.6,
+  });
+  const path = [beyond(nodes[0], -1), ...nodes, beyond(nodes.at(-1), 1)];
+
+  // Sample the crest, sagging between nodes by the saddle control: zero holds a
+  // straight interpolation and one takes the saddle all the way to the ground.
+  const crest = [];
+  for (let segment = 0; segment + 1 < path.length; segment += 1) {
+    const from = path[segment];
+    const to = path[segment + 1];
+    const steps = segment + 2 === path.length ? spans : spans - 1;
+    for (let step = 0; step <= steps; step += 1) {
+      const along = step / spans;
+      const sag = saddleDepth * Math.min(from.height, to.height) * Math.sin(Math.PI * along);
+      crest.push({
+        x: from.offset[0] + (to.offset[0] - from.offset[0]) * along,
+        z: from.offset[1] + (to.offset[1] - from.offset[1]) * along,
+        height: Math.max(0, from.height + (to.height - from.height) * along - sag),
+        width: from.width + (to.width - from.width) * along,
+      });
+    }
+  }
+
+  const rows = crest.map((here, index) => {
+    const back = crest[Math.max(0, index - 1)];
+    const ahead = crest[Math.min(crest.length - 1, index + 1)];
+    const tangentX = ahead.x - back.x;
+    const tangentZ = ahead.z - back.z;
+    const length = Math.hypot(tangentX, tangentZ) || 1;
+    const acrossX = -tangentZ / length;
+    const acrossZ = tangentX / length;
+    const row = [];
+    for (let side = 0; side <= sides; side += 1) {
+      const s = (side / sides) * 2 - 1;
+      const support = 1 - roughness * 0.5 + rng.nextFloat() * roughness;
+      const reach = s * here.width * (1 + apron) * support;
+      // Distance across the section in crest half-widths: 1 is the crest's own
+      // edge, and anything past it is the foot the ridge stands on.
+      const spanned = Math.abs(s) * (1 + apron);
+      const flank = spanned <= 1 ? here.height * (1 - spanned * spanned) ** falloff : 0;
+      const foot =
+        apron <= 0
+          ? 0
+          : here.height *
+            APRON_RISE *
+            (spanned <= 1 ? 1 : Math.max(0, 1 - (spanned - 1) / apron));
+      row.push(
+        new THREE.Vector3(
+          here.x + acrossX * reach,
+          Math.max(flank, foot),
+          here.z + acrossZ * reach,
+        ),
+      );
+    }
+    return row;
+  });
+
+  const positions = [];
+  for (let index = 0; index + 1 < rows.length; index += 1) {
+    for (let side = 0; side < sides; side += 1) {
+      const a = rows[index][side];
+      const b = rows[index][side + 1];
+      const c = rows[index + 1][side + 1];
+      const d = rows[index + 1][side];
+      positions.push(...a, ...b, ...c, ...a, ...c, ...d);
+    }
+    // Close the underside. Both flanks already reach zero, so the bottom is the
+    // ribbon between them and the ridge is a solid rather than a shell seen
+    // through from the seaward cameras.
+    const leftHere = rows[index][0];
+    const rightHere = rows[index][sides];
+    const leftNext = rows[index + 1][0];
+    const rightNext = rows[index + 1][sides];
+    positions.push(...leftHere, ...leftNext, ...rightNext, ...leftHere, ...rightNext, ...rightHere);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(new Float32Array(positions), 3),
+  );
+  geometry.computeVertexNormals();
+  return new THREE.Mesh(geometry);
+}
+
 /**
  * Multi-form horizon ridge.
  *
- * Peaks and foothills come from the Horizon Group's own bounded controls, so
- * the skyline is an authored multi-form ridge rather than a scaled Stone or a
- * random cone population. A saddle is the generated gap between two adjacent
- * peaks, which is why the peaks are placed rather than distributed.
+ * Peaks and foothills come from the Horizon Group's own bounded controls, so the
+ * skyline is an authored multi-form ridge rather than a scaled Stone or a random
+ * cone population. They are the crest's nodes, ordered along the group's own
+ * fitted ridge direction, so the group is one landform rather than a scatter of
+ * mounds — which is what the measured profiles are.
  */
 function horizonGroup(rng, shape) {
   const peaks = shape?.peaks?.length ? shape.peaks : [{ offset: [0, 0], height: 1 }];
   const foothills = shape?.foothills ?? [];
-  const parts = [];
 
-  // One compact per-group control for how broad its summits sit inside the
-  // group's footprint. Fitted from the reference's own measured skyline.
+  // The group's compact fitted controls: which way its crest runs, how far it
+  // runs out past its end summits, how broad it is, how steeply its flanks fall,
+  // how deeply it dips between its summits, and how far the foot it stands on
+  // reaches past the crest. None of them moves a summit — where the summits are
+  // is measured, not fitted.
+  const direction = shape?.ridgeDirection ?? 0;
+  const runOut = Math.max(1, shape?.ridgeElongation ?? 1);
   const spreadScale = shape?.spreadScale ?? 1;
-  peaks.forEach((peak, index) => {
-    const solid = supportSolid(rng, { rings: 4, sides: 9, roughness: 0.34 });
-    // A peak's footprint scales with its prominence so a dominant summit reads
-    // as a massif and a secondary one as a shoulder.
-    const spread = (0.22 + peak.height * 0.26) * spreadScale;
-    solid.scale.set(spread, peak.height / 2, spread * 0.86);
-    solid.position.set(peak.offset[0], peak.height / 2, peak.offset[1]);
-    parts.push(part(solid, `peak-${index}`));
-  });
-  foothills.forEach((foothill, index) => {
-    const solid = supportSolid(rng, { rings: 3, sides: 7, roughness: 0.46 });
-    const spread = (0.16 + foothill.height * 0.2) * spreadScale;
-    solid.scale.set(spread, foothill.height / 2, spread * 0.8);
-    solid.position.set(foothill.offset[0], foothill.height / 2, foothill.offset[1]);
-    parts.push(part(solid, `foothill-${index}`));
-  });
-  // A single-summit group still needs a saddle-forming shoulder so its
-  // silhouette is not one symmetric dome.
-  if (peaks.length === 1 && foothills.length === 0) {
-    const solid = supportSolid(rng, { rings: 3, sides: 7, roughness: 0.5 });
-    const height = 0.45 + rng.nextFloat() * 0.2;
-    solid.scale.set(0.24, height / 2, 0.2);
-    solid.position.set(0.3, height / 2, -0.12);
-    parts.push(part(solid, "shoulder"));
-  }
-  return group(parts);
+  const falloff = shape?.flankFalloff ?? 0.5;
+  const saddleDepth = shape?.saddleDepth ?? 0;
+  const apron = Math.max(0, shape?.ridgeApron ?? 0);
+  const turn = Math.cos(direction);
+  const tilt = Math.sin(direction);
+
+  const nodes = [...peaks, ...foothills]
+    .map((form) => ({
+      along: form.offset[0] * turn + form.offset[1] * tilt,
+      offset: [...form.offset],
+      height: form.height,
+      // A summit's breadth is its own fitted control when the loop found one,
+      // and its prominence otherwise: a dominant summit reads as a massif and a
+      // secondary one as a shoulder, though an authored ridge is not obliged to
+      // agree with that rule.
+      width: (form.radius ?? 0.09 + form.height * 0.07) * spreadScale,
+    }))
+    .sort((left, right) => left.along - right.along);
+
+  return group([
+    part(
+      crestRidge(rng, {
+        nodes,
+        falloff,
+        saddleDepth,
+        runOut,
+        apron,
+        axis: [turn, tilt],
+        roughness: 0.16,
+      }),
+      "ridge",
+    ),
+  ]);
 }
 
 /**

@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0051.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0052.
 
 ## Where the work stands
 
@@ -16,8 +16,9 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Camera-set v2 migration (ADR-0049, ADR-0050) | done |
 | Reconstruction 01 — calibrate the two rendered gate layers (ADR-0051) | done |
 | Reconstruction 02 — atmosphere | in progress, see below |
+| Reconstruction 05 — horizon ridges | landed; gate red at a recorded boundary (ADR-0052) |
 | Reconstruction 08 — vegetation canopies | done |
-| Reconstruction 03-07, 09-16 | ready-for-agent |
+| Reconstruction 03, 04, 06, 07, 09-16 | ready-for-agent |
 
 ## Ticket 02, in progress
 
@@ -87,6 +88,46 @@ index pass; until that exists, `sky` on a cloud-heavy camera means sky-and-cloud
 `oblique-south` at 9.40 is the largest true sky residual — it is the camera looking
 towards the sun's azimuth, so the glow terms affect it most, and it is worth a look
 on its own before the sky is called done.
+
+## Ticket 05, landed, and the boundary it found
+
+Full numbers are in the ticket. The short version:
+
+Each Horizon Group was a union of half-buried spheres. A sphere's widest point is
+its own equator, so every group stood near summit height across nearly all of the
+azimuth it covered. **The recorded visual impression was backwards** — the review
+said the candidate's distant mountains were low and blocky; the measurement says
+the skyline was 2.6453 degrees *above* the reference and was the higher of the two
+in 624 of 720 bins. Absolute angular error cannot tell those apart, which is why
+`profile.signedBias` is now part of the evidence.
+
+The authored form, read out of the reference GLB with the loaders already in
+`devDependencies`: a narrow diagonal ridge band filling 31 per cent of its own
+bounding box. Reproduced as one swept crest ridge per group, threaded through the
+measured summits, with six bounded per-group controls and two per summit.
+
+Profile p95 5.6658 -> 2.5002 deg, worst azimuth 7.1609 -> 3.7618, signed bias
++2.6453 -> -0.0036, per-group silhouette p95 0.0627 -> 0.0253, subtended-angle
+error mean 0.766 -> 0.079, depth centre error mean 32.77 -> 7.84, worst entity
+surface p95 165.67 -> 143.10, draw calls 1,714 -> 1,708. Placement, extent,
+orientation, overlap ordering and coverage all still exact.
+
+**The gate is still red and cannot be made green within the eight-form cap.**
+ADR-0052 records the bound: the optimal piecewise-linear approximation of the
+worst group's own measured profile — exact by dynamic programming, and unbeatable
+by any generator carrying that many crest controls — needs 3.257 deg at eight
+nodes and 0.952 at twenty-four, against 0.945. The achieved fit lands where the
+bound predicts, which is the evidence that the fitter is not what is limiting.
+The frozen assertion in `test/horizon-reconstruction.test.mjs` is marked `todo`,
+unchanged. **Do not loosen it.**
+
+The declared way through, for whoever picks this up: the sixteen groups are
+instances of **three** authored meshes (6, 7 and 3 instances), which is why their
+measured summit sets repeat the same heights under rotation and mirroring. Three
+shared crest tables at twenty-four nodes is 216 numbers instead of 1,152 and puts
+the bound under the threshold while staying compact. Derive the family by
+clustering measured shape, never from the source mesh identity. New
+representation, so: reference-only measurement, versioned gate revision, own ADR.
 
 ## Environment
 
@@ -405,15 +446,15 @@ Failing world-geometry metrics:
 
 | metric | value | threshold |
 | --- | --- | --- |
-| surface p95 mean | 9.872 | 2.3479 |
-| worst entity surface p95 | 165.6694 | 13.758675 |
+| surface p95 mean | 9.4508 | 2.3479 |
+| worst entity surface p95 | 143.0972 | 13.758675 |
 | over-tolerance surface fraction | 0.6018 | 0.11835 |
 | worst component deficit | 9 | 3.5 |
-| terrain height p95 | 16.2617 | 5.26875 |
-| shore height p95 | 12.4923 | 2.85035 |
-| land and sea agreement | 0.903491 | 0.931361 |
-| horizon profile p95 | 0.098887 | 0.0165 |
-| worst azimuth horizon error | 0.124982 | 0.0165 |
+| terrain height p95 | 8.532 | 5.26875 |
+| shore height p95 | 7.9996 | 2.85035 |
+| land and sea agreement | 0.922721 | 0.931361 |
+| horizon profile p95 | 0.043636 | 0.0165 |
+| worst azimuth horizon error | 0.065655 | 0.0165 |
 
 Per-Material-Family appearance, the largest single residual being `palm-foliage`:
 
@@ -485,9 +526,9 @@ work, so they can proceed in parallel.
   the wrong way as a side effect, inside a layer already failing all ten — recorded in
   the ticket rather than glossed. Next: the shore triple is three numbers for a
   transition the reference varies by azimuth, and slope is not measured at all.
-- Ticket 05: the Horizon Profile already covers all 720 azimuth bins with none
-  missing, so the failure is purely angular accuracy — p95 5.6658 deg against a
-  0.945 deg threshold, worst azimuth 7.1609 deg at 162 deg.
+- Ticket 05 is **landed** and its remaining red is a recorded boundary, not
+  unfinished work. Do not re-open it as a fitting problem; the next move is the
+  shared form family described above.
 - Ticket 11: `palm-foliage` at DeltaE 61.61 is the largest appearance residual.
 
 ## Things that are easy to get wrong
@@ -524,3 +565,32 @@ work, so they can proceed in parallel.
 - A browser run occasionally dies with "browser exited before DevTools was ready"
   right after other Edge processes were killed. It is a startup race, not a code
   failure; re-run the batch.
+- `test/stone-v2-calibration-contract.test.mjs` fails in this checkout and did so
+  before ticket 05 touched anything — verified by stashing the whole change and
+  re-running. Every one of its eleven frozen files hashes correctly once its CRLF
+  line endings are normalised to LF: `visual-metrics.mjs` is 32,795 bytes on disk
+  with 995 CRLFs and 31,800 bytes as LF, whose sha256 matches the frozen value
+  exactly. `core.autocrlf` is `false`, so nothing is converting on checkout. It is
+  a working-copy line-ending state, not a code defect, and none of the eleven
+  files is one this milestone edits. Decide it deliberately — renormalising eleven
+  files or re-freezing the contract are both repo-wide calls — rather than letting
+  it sit as an unexplained red.
+- The reference GLB can be read offline on the development side:
+  `@gltf-transform/core`, `@gltf-transform/extensions` and `draco3dgltf` are
+  already devDependencies and `tools/development/fit-stone-supports.mjs` is the
+  pattern. That is how ticket 05 established what an authored mountain actually
+  looks like, after two rounds of fitting against a guess. Look at the reference
+  before designing a representation for it.
+- When a measured summary is the input to a fit, check its resolution against the
+  threshold first. The horizon summits come off a 12x12 grid over each group's
+  box, which at 1,400 units is +/- 4.7 azimuth bins — wider than the entire 0.945
+  degree budget.
+- `npm run check:scene-parity-foundation` can never pass. It regenerates the
+  certification report and compares it byte for byte with the stored one, and the
+  report carries `generationMs`, a wall-clock timing: three consecutive runs
+  against a stored 538.5 produced 540.4, 524.5 and 529.5. Structural and
+  pre-existing, unrelated to any candidate change. `npm run
+  certify:scene-parity-foundation` itself is fine — it writes the report and
+  reports the result. Either bucket the timing, or exclude it from the byte
+  comparison and assert it against a budget instead, which is ticket 14's
+  business anyway.

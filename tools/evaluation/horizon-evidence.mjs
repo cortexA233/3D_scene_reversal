@@ -57,6 +57,7 @@ function statistics(values) {
 
 export function compareHorizonProfiles(reference, candidate, bins) {
   const errors = [];
+  const signed = [];
   const rows = [];
   let missingBins = 0;
   for (let bin = 0; bin < bins; bin += 1) {
@@ -71,13 +72,28 @@ export function compareHorizonProfiles(reference, candidate, bins) {
     }
     const error = Math.abs(left - right);
     errors.push(error);
+    signed.push(right - left);
     rows.push({ azimuth, error, referencePresent: true });
   }
+  // The signed bias, separately from the absolute error, because the two say
+  // different things and only one of them names the defect. A skyline that is
+  // the right shape in the wrong place and one that is uniformly too high can
+  // report the same absolute error; the first has a bias near zero and the
+  // second does not. The half-buried-sphere groups this evidence was first taken
+  // on stood 2.65 degrees high in 624 of 720 bins, which the absolute error
+  // reported only as a number that was large.
+  const above = signed.filter((value) => value > 0).length;
   return {
     bins,
     coverageBins: rows.length,
     missingBins,
     angularError: statistics(errors),
+    signedBias: signed.length
+      ? {
+          mean: Number((signed.reduce((sum, value) => sum + value, 0) / signed.length).toFixed(6)),
+          aboveFraction: Number((above / signed.length).toFixed(6)),
+        }
+      : null,
     worstAzimuths: rows
       .filter((row) => row.error !== null)
       .sort((a, b) => b.error - a.error)
@@ -140,6 +156,18 @@ export function compareHorizon({
           Math.abs(reference.depthInterval[1] - measured.depthInterval[1]),
         )
       : null;
+    // Where the group stands, as distinct from how far its outermost vertex
+    // reaches. The endpoint error above is an extremum over two vertices, so it
+    // rewards filling the bounding box to its corners however the mass inside is
+    // arranged: a box-filling blob scores better on it than a correctly narrow
+    // ridge does. The interval's centre is what "standing at the wrong distance"
+    // actually means, and it is the one a silhouette fit must not give away.
+    const depthCentreError = reference.depthInterval && measured.depthInterval
+      ? Math.abs(
+          (reference.depthInterval[0] + reference.depthInterval[1]) / 2 -
+            (measured.depthInterval[0] + measured.depthInterval[1]) / 2,
+        )
+      : null;
 
     // Visible area from the authored overview, as the solid angle the group
     // subtends: this is what overlap ordering competes for.
@@ -159,6 +187,7 @@ export function compareHorizon({
       extentError,
       depthInterval: measured.depthInterval,
       depthError,
+      depthCentreError,
       visibleAngle,
       candidateVisibleAngle,
       visibleAngleRelativeError:
@@ -206,6 +235,9 @@ export function compareHorizon({
       anchorError: statistics(present.map((row) => row.anchorError)),
       extentError: statistics(present.map((row) => row.extentError)),
       depthError: statistics(present.map((row) => row.depthError).filter(Number.isFinite)),
+      depthCentreError: statistics(
+        present.map((row) => row.depthCentreError).filter(Number.isFinite),
+      ),
       visibleAngleRelativeError: statistics(
         present
           .map((row) => row.visibleAngleRelativeError)

@@ -2025,18 +2025,25 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.0417,
               0.125
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.16
           },
           {
             "offset": [
               -0.2083,
               -0.0417
             ],
-            "height": 0.8142
+            "height": 0.7842,
+            "radius": 0.132
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": 0.9,
+        "ridgeElongation": 6,
+        "flankFalloff": 1.25,
+        "saddleDepth": 0.08,
+        "spreadScale": 0.6,
+        "ridgeApron": 0.2
       }
     },
     {
@@ -2065,32 +2072,41 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.125,
               0.2083
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.16
           },
           {
             "offset": [
               -0.2083,
               -0.2917
             ],
-            "height": 0.987
+            "height": 0.837,
+            "radius": 0.1741
           },
           {
             "offset": [
               0.2083,
               0.375
             ],
-            "height": 0.9068
+            "height": 0.8168,
+            "radius": 0.1385
           },
           {
             "offset": [
               -0.0417,
               -0.125
             ],
-            "height": 0.7653
+            "height": 0.6153,
+            "radius": 0.035
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": 0.3,
+        "ridgeElongation": 1,
+        "flankFalloff": 1,
+        "saddleDepth": 0.54,
+        "spreadScale": 1.1,
+        "ridgeApron": 0
       }
     },
     {
@@ -2119,18 +2135,25 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.125,
               -0.0417
             ],
-            "height": 1
+            "height": 0.55,
+            "radius": 0.16
           },
           {
             "offset": [
               -0.0417,
               0.2083
             ],
-            "height": 0.8142
+            "height": 0.8142,
+            "radius": 0.237
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": -1.5,
+        "ridgeElongation": 2.1,
+        "flankFalloff": 0.5,
+        "saddleDepth": 0,
+        "spreadScale": 1.1,
+        "ridgeApron": 0.8
       }
     },
     {
@@ -2159,32 +2182,41 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               -0.2083,
               0.125
             ],
-            "height": 1
+            "height": 0.85,
+            "radius": 0.115
           },
           {
             "offset": [
               0.2917,
               -0.2083
             ],
-            "height": 0.987
+            "height": 0.97,
+            "radius": 0.2191
           },
           {
             "offset": [
               -0.375,
               0.2917
             ],
-            "height": 0.9068
+            "height": 0.7568,
+            "radius": 0.1535
           },
           {
             "offset": [
               0.125,
               -0.125
             ],
-            "height": 0.7654
+            "height": 0.6454,
+            "radius": 0.1136
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": 0,
+        "ridgeElongation": 1.5,
+        "flankFalloff": 1.25,
+        "saddleDepth": 0.46,
+        "spreadScale": 0.6,
+        "ridgeApron": 0.2
       }
     },
     {
@@ -2213,25 +2245,33 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               -0.375,
               -0.2083
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.13
           },
           {
             "offset": [
               0.2917,
               0.2083
             ],
-            "height": 0.987
+            "height": 0.957,
+            "radius": 0.1741
           },
           {
             "offset": [
               -0.0417,
               -0.0417
             ],
-            "height": 0.7654
+            "height": 0.6454,
+            "radius": 0.0986
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": 0,
+        "ridgeElongation": 1.5,
+        "flankFalloff": 1.5,
+        "saddleDepth": 0.46,
+        "spreadScale": 1,
+        "ridgeApron": 0
       }
     },
     {
@@ -2260,11 +2300,17 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.0417,
               -0.125
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.16
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": -0.75,
+        "ridgeElongation": 1.2,
+        "flankFalloff": 1.5,
+        "saddleDepth": 0.3,
+        "spreadScale": 1,
+        "ridgeApron": 0
       }
     },
     {
@@ -2293,18 +2339,25 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.0417,
               0.125
             ],
-            "height": 1
+            "height": 0.97,
+            "radius": 0.16
           },
           {
             "offset": [
               -0.2083,
               -0.0417
             ],
-            "height": 0.8142
+            "height": 0.8142,
+            "radius": 0.147
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": 0.15,
+        "ridgeElongation": 4.5,
+        "flankFalloff": 4.75,
+        "saddleDepth": 0.22,
+        "spreadScale": 1.3,
+        "ridgeApron": 0.2
       }
     },
     {
@@ -2333,28 +2386,32 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               -0.125,
               0.2083
             ],
-            "height": 1
+            "height": 0.85,
+            "radius": 0.085
           },
           {
             "offset": [
               0.2083,
               -0.2917
             ],
-            "height": 0.987
+            "height": 1,
+            "radius": 0.1741
           },
           {
             "offset": [
               -0.2917,
               0.375
             ],
-            "height": 0.9068
+            "height": 0.7868,
+            "radius": 0.1385
           },
           {
             "offset": [
               0.0417,
               -0.125
             ],
-            "height": 0.7653
+            "height": 0.7353,
+            "radius": 0.02
           }
         ],
         "foothills": [
@@ -2363,10 +2420,16 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.0417,
               0.0417
             ],
-            "height": 0.5792
+            "height": 0.5792,
+            "radius": 0.1305
           }
         ],
-        "spreadScale": 1
+        "ridgeDirection": -0.3,
+        "ridgeElongation": 1.8,
+        "flankFalloff": 0.75,
+        "saddleDepth": 0.38,
+        "spreadScale": 1,
+        "ridgeApron": 0
       }
     },
     {
@@ -2395,18 +2458,25 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.125,
               -0.0417
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.13
           },
           {
             "offset": [
               -0.0417,
               0.125
             ],
-            "height": 0.8142
+            "height": 0.7542,
+            "radius": 0.147
           }
         ],
         "foothills": [],
-        "spreadScale": 0.3
+        "ridgeDirection": 0.15,
+        "ridgeElongation": 1.5,
+        "flankFalloff": 5.25,
+        "saddleDepth": 0.14,
+        "spreadScale": 1.4,
+        "ridgeApron": 1
       }
     },
     {
@@ -2435,25 +2505,33 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               -0.2917,
               -0.375
             ],
-            "height": 1
+            "height": 0.73,
+            "radius": 0.115
           },
           {
             "offset": [
               0.2083,
               0.2083
             ],
-            "height": 0.987
+            "height": 0.927,
+            "radius": 0.1591
           },
           {
             "offset": [
               0.0417,
               -0.0417
             ],
-            "height": 0.7653
+            "height": 0.4953,
+            "radius": 0.1436
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": 1.35,
+        "ridgeElongation": 1.8,
+        "flankFalloff": 1.25,
+        "saddleDepth": 0.22,
+        "spreadScale": 1,
+        "ridgeApron": 0
       }
     },
     {
@@ -2482,28 +2560,32 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.125,
               -0.2083
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.02
           },
           {
             "offset": [
               -0.2083,
               0.2917
             ],
-            "height": 0.987
+            "height": 0.867,
+            "radius": 0.1741
           },
           {
             "offset": [
               0.375,
               -0.375
             ],
-            "height": 0.9068
+            "height": 0.7268,
+            "radius": 0.1385
           },
           {
             "offset": [
               -0.0417,
               0.125
             ],
-            "height": 0.7653
+            "height": 0.7653,
+            "radius": 0.08
           }
         ],
         "foothills": [
@@ -2512,10 +2594,16 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               -0.0417,
               -0.0417
             ],
-            "height": 0.5792
+            "height": 0.3692,
+            "radius": 0.1305
           }
         ],
-        "spreadScale": 1
+        "ridgeDirection": -0.15,
+        "ridgeElongation": 1.8,
+        "flankFalloff": 0.75,
+        "saddleDepth": 0.46,
+        "spreadScale": 1.2,
+        "ridgeApron": 0
       }
     },
     {
@@ -2544,32 +2632,41 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               -0.125,
               -0.2083
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.085
           },
           {
             "offset": [
               0.125,
               0.2917
             ],
-            "height": 0.987
+            "height": 0.837,
+            "radius": 0.2041
           },
           {
             "offset": [
               -0.2083,
               -0.4583
             ],
-            "height": 0.9068
+            "height": 0.8468,
+            "radius": 0.1085
           },
           {
             "offset": [
               0.0417,
               0.125
             ],
-            "height": 0.7654
+            "height": 0.6154,
+            "radius": 0.02
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": 0,
+        "ridgeElongation": 1,
+        "flankFalloff": 2,
+        "saddleDepth": 0.54,
+        "spreadScale": 1.1,
+        "ridgeApron": 0
       }
     },
     {
@@ -2598,11 +2695,17 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               -0.0417,
               0.125
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.055
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": -0.15,
+        "ridgeElongation": 1,
+        "flankFalloff": 2.25,
+        "saddleDepth": 0.3,
+        "spreadScale": 0.6,
+        "ridgeApron": 0.2
       }
     },
     {
@@ -2631,18 +2734,25 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.125,
               -0.0417
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.16
           },
           {
             "offset": [
               -0.0417,
               0.2083
             ],
-            "height": 0.8142
+            "height": 0.8142,
+            "radius": 0.147
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": -1.5,
+        "ridgeElongation": 5.4,
+        "flankFalloff": 0.75,
+        "saddleDepth": 0.22,
+        "spreadScale": 1.1,
+        "ridgeApron": 0
       }
     },
     {
@@ -2671,25 +2781,33 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               -0.375,
               -0.2917
             ],
-            "height": 1
+            "height": 1,
+            "radius": 0.145
           },
           {
             "offset": [
               0.2083,
               0.2083
             ],
-            "height": 0.987
+            "height": 0.987,
+            "radius": 0.1591
           },
           {
             "offset": [
               -0.0417,
               -0.0417
             ],
-            "height": 0.7653
+            "height": 0.7653,
+            "radius": 0.1436
           }
         ],
         "foothills": [],
-        "spreadScale": 0.45
+        "ridgeDirection": 0,
+        "ridgeElongation": 1.2,
+        "flankFalloff": 3.75,
+        "saddleDepth": 0.38,
+        "spreadScale": 0.6,
+        "ridgeApron": 0
       }
     },
     {
@@ -2718,32 +2836,41 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
               0.2083,
               -0.125
             ],
-            "height": 1
+            "height": 0.88,
+            "radius": 0.085
           },
           {
             "offset": [
               -0.2917,
               0.125
             ],
-            "height": 0.987
+            "height": 0.957,
+            "radius": 0.2341
           },
           {
             "offset": [
               0.4583,
               -0.2083
             ],
-            "height": 0.9068
+            "height": 0.7568,
+            "radius": 0.1835
           },
           {
             "offset": [
               -0.125,
               0.0417
             ],
-            "height": 0.7654
+            "height": 0.5254,
+            "radius": 0.02
           }
         ],
         "foothills": [],
-        "spreadScale": 1
+        "ridgeDirection": 0,
+        "ridgeElongation": 1,
+        "flankFalloff": 1.75,
+        "saddleDepth": 0.3,
+        "spreadScale": 0.8,
+        "ridgeApron": 0
       }
     },
     {

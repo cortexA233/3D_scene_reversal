@@ -61,9 +61,9 @@ const HORIZON_PATH = path.join(
  * fitted against the reference and then live in the Scene Recipe, so a clean
  * production run reproduces them without the fitter.
  */
-const FITTED_HORIZON_SPREAD_PATH = path.join(
+const FITTED_HORIZON_RIDGE_PATH = path.join(
   PROJECT_ROOT,
-  "tools/reconstruction/fitted/horizon-spread-v1.json",
+  "tools/reconstruction/fitted/horizon-ridge-v1.json",
 );
 
 /** One stable root identity for the whole island. */
@@ -82,7 +82,27 @@ const MATERIAL_FAMILIES = [
   { id: "creature-fur", role: "wildlife", albedo: [0.86, 0.85, 0.84], roughness: 0.85 },
 ];
 
-function buildEntities(inventory, horizonEvidence, fittedSpread) {
+/**
+ * Merges a group's fitted ridge controls onto its measured summits. Where a
+ * summit sits stays measured; the loop only supplies how tall and how broad it
+ * is and how the ridge through it behaves.
+ */
+function fittedShape(shape, fit) {
+  if (!fit) return shape;
+  const merge = (family) =>
+    shape[family].map((form, index) => ({
+      ...form,
+      ...(fit.summits?.[family]?.[index] ?? {}),
+    }));
+  return {
+    ...shape,
+    peaks: merge("peaks"),
+    foothills: merge("foothills"),
+    ...fit.controls,
+  };
+}
+
+function buildEntities(inventory, horizonEvidence, fittedRidges) {
   return readAuthoredPlacements(inventory, horizonEvidence).placements.map((placement) => ({
     semanticId: placement.semanticId,
     kind: placement.kind,
@@ -92,14 +112,7 @@ function buildEntities(inventory, horizonEvidence, fittedSpread) {
     orientation: placement.orientation,
     materialFamily: placement.materialFamily,
     ...(placement.shape
-      ? {
-          shape: {
-            ...placement.shape,
-            ...(fittedSpread?.values?.[placement.semanticId] !== undefined
-              ? { spreadScale: fittedSpread.values[placement.semanticId] }
-              : {}),
-          },
-        }
+      ? { shape: fittedShape(placement.shape, fittedRidges?.values?.[placement.semanticId]) }
       : {}),
   }));
 }
@@ -306,8 +319,8 @@ function buildTerrain(elevation, world) {
   });
 }
 
-function buildRecipe(inventory, elevation, horizonEvidence, fittedSpread) {
-  const entities = buildEntities(inventory, horizonEvidence, fittedSpread);
+function buildRecipe(inventory, elevation, horizonEvidence, fittedRidges) {
+  const entities = buildEntities(inventory, horizonEvidence, fittedRidges);
   return {
     schemaVersion: SCENE_RECIPE_SCHEMA_VERSION,
     generatorVersion: SCENE_GENERATOR_VERSION,
@@ -351,15 +364,15 @@ async function main() {
   assert.equal(elevation.schemaVersion, "terrain-elevation-v1");
   assert.equal(horizonEvidence.schemaVersion, "horizon-evidence-v1");
 
-  let fittedSpread = null;
+  let fittedRidges = null;
   try {
-    fittedSpread = JSON.parse(await readFile(FITTED_HORIZON_SPREAD_PATH, "utf8"));
-    assert.equal(fittedSpread.schemaVersion, "horizon-spread-fit-v1");
+    fittedRidges = JSON.parse(await readFile(FITTED_HORIZON_RIDGE_PATH, "utf8"));
+    assert.equal(fittedRidges.schemaVersion, "horizon-ridge-fit-v1");
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
   }
 
-  const recipe = buildRecipe(inventory, elevation, horizonEvidence, fittedSpread);
+  const recipe = buildRecipe(inventory, elevation, horizonEvidence, fittedRidges);
   assert.deepEqual(
     validateSceneRecipe(recipe),
     [],

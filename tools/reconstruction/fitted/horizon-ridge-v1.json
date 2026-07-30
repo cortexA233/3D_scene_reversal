@@ -1,28 +1,60 @@
 {
-  "schemaVersion": "fitting-history-v1",
-  "tracer": "Horizon Group ridge controls",
-  "measuredDiscrepancy": "Each Horizon Group was a union of half-buried spheres, whose widest point is their own equator, so every group stood near summit height across nearly all of the azimuth it covered and the 360-degree Horizon Profile sat 2.65 degrees above the reference in 624 of 720 bins.",
-  "referenceEvidence": "horizon-reference-v1.json (read-only)",
-  "metric": "horizon.groups.silhouetteError.mean",
-  "before": 0.039117,
-  "after": 0.015463,
-  "combinedProfileP95": {
-    "before": 0.088705,
-    "after": 0.043636
-  },
-  "combinedProfileMax": {
-    "before": 0.115619,
-    "after": 0.065655
-  },
-  "productionChange": "One swept crest ridge per Horizon Group, carrying five bounded per-group controls and two per measured summit, persisted in the Scene Recipe and applied by the production Object Generator.",
-  "controlsAdded": 16,
-  "numbersAdded": 190,
-  "retainedReferenceData": "none: no mesh, sample array, or pixel is persisted",
-  "unrelatedEntitiesChecked": 60,
-  "unrelatedEntitiesDrifted": 0,
-  "perGroup": [
+  "schemaVersion": "horizon-ridge-fit-v1",
+  "groupControls": [
     {
-      "semanticId": "horizon/mountain-n0917-n0136-p12892",
+      "name": "ridgeDirection",
+      "minimum": -3.141592653589793,
+      "maximum": 3.141592653589793,
+      "step": 0.15
+    },
+    {
+      "name": "ridgeElongation",
+      "minimum": 1,
+      "maximum": 6,
+      "step": 0.3
+    },
+    {
+      "name": "flankFalloff",
+      "minimum": 0.5,
+      "maximum": 6,
+      "step": 0.25
+    },
+    {
+      "name": "saddleDepth",
+      "minimum": 0,
+      "maximum": 1,
+      "step": 0.08
+    },
+    {
+      "name": "spreadScale",
+      "minimum": 0.3,
+      "maximum": 2.4,
+      "step": 0.1
+    },
+    {
+      "name": "ridgeApron",
+      "minimum": 0,
+      "maximum": 3,
+      "step": 0.2
+    }
+  ],
+  "summitControls": [
+    {
+      "name": "height",
+      "minimum": 0.08,
+      "maximum": 1,
+      "step": 0.03
+    },
+    {
+      "name": "radius",
+      "minimum": 0.02,
+      "maximum": 0.45,
+      "step": 0.015
+    }
+  ],
+  "passes": 5,
+  "values": {
+    "horizon/mountain-n0917-n0136-p12892": {
       "controls": {
         "ridgeDirection": 0.9,
         "ridgeElongation": 6,
@@ -43,22 +75,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0484,
-        "max": 0.0585,
-        "depthError": 8.3502,
-        "uncovered": 1
-      },
-      "after": {
-        "p95": 0.0122,
-        "max": 0.0133,
-        "depthError": 2.2904,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-n10467-n0177-p5763",
+    "horizon/mountain-n10467-n0177-p5763": {
       "controls": {
         "ridgeDirection": 0.3,
         "ridgeElongation": 1,
@@ -87,22 +106,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0887,
-        "max": 0.1095,
-        "depthError": 35.1203,
-        "uncovered": 2
-      },
-      "after": {
-        "p95": 0.0409,
-        "max": 0.0466,
-        "depthError": 13.4494,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-n11978-n0044-p0122",
+    "horizon/mountain-n11978-n0044-p0122": {
       "controls": {
         "ridgeDirection": -1.5,
         "ridgeElongation": 2.1,
@@ -123,22 +129,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0821,
-        "max": 0.0846,
-        "depthError": 2.2318,
-        "uncovered": 5
-      },
-      "after": {
-        "p95": 0.0242,
-        "max": 0.0249,
-        "depthError": 6.8989,
-        "uncovered": 2
       }
     },
-    {
-      "semanticId": "horizon/mountain-n3462-n0175-n14963",
+    "horizon/mountain-n3462-n0175-n14963": {
       "controls": {
         "ridgeDirection": 0,
         "ridgeElongation": 1.5,
@@ -167,22 +160,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0694,
-        "max": 0.0932,
-        "depthError": 29.5666,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.0317,
-        "max": 0.0431,
-        "depthError": 5.6177,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-n5842-n0144-p11647",
+    "horizon/mountain-n5842-n0144-p11647": {
       "controls": {
         "ridgeDirection": 0,
         "ridgeElongation": 1.5,
@@ -207,22 +187,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0817,
-        "max": 0.09,
-        "depthError": 8.0998,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.0372,
-        "max": 0.0501,
-        "depthError": 9.6912,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-n8045-n0112-n12155",
+    "horizon/mountain-n8045-n0112-n12155": {
       "controls": {
         "ridgeDirection": -0.75,
         "ridgeElongation": 1.2,
@@ -239,22 +206,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0879,
-        "max": 0.0891,
-        "depthError": 2.927,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.0538,
-        "max": 0.0561,
-        "depthError": 2.0141,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-n9204-n0033-p11102",
+    "horizon/mountain-n9204-n0033-p11102": {
       "controls": {
         "ridgeDirection": 0.15,
         "ridgeElongation": 4.5,
@@ -275,22 +229,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0526,
-        "max": 0.0543,
-        "depthError": 0.1222,
-        "uncovered": 4
-      },
-      "after": {
-        "p95": 0.0093,
-        "max": 0.0094,
-        "depthError": 11.3013,
-        "uncovered": 1
       }
     },
-    {
-      "semanticId": "horizon/mountain-n9833-n0179-n6913",
+    "horizon/mountain-n9833-n0179-n6913": {
       "controls": {
         "ridgeDirection": -0.3,
         "ridgeElongation": 1.8,
@@ -324,22 +265,9 @@
             "radius": 0.1305
           }
         ]
-      },
-      "before": {
-        "p95": 0.0881,
-        "max": 0.1156,
-        "depthError": 38.0267,
-        "uncovered": 2
-      },
-      "after": {
-        "p95": 0.0441,
-        "max": 0.0657,
-        "depthError": 6.5778,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-p0998-n0042-n16559",
+    "horizon/mountain-p0998-n0042-n16559": {
       "controls": {
         "ridgeDirection": 0.15,
         "ridgeElongation": 1.5,
@@ -360,22 +288,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0505,
-        "max": 0.0534,
-        "depthError": 4.6251,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.0102,
-        "max": 0.0106,
-        "depthError": 7.8117,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-p10270-n0243-n9219",
+    "horizon/mountain-p10270-n0243-n9219": {
       "controls": {
         "ridgeDirection": 1.35,
         "ridgeElongation": 1.8,
@@ -400,22 +315,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0833,
-        "max": 0.0976,
-        "depthError": 13.2323,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.0423,
-        "max": 0.0513,
-        "depthError": 7.7076,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-p12605-n0303-p7305",
+    "horizon/mountain-p12605-n0303-p7305": {
       "controls": {
         "ridgeDirection": -0.15,
         "ridgeElongation": 1.8,
@@ -449,22 +351,9 @@
             "radius": 0.1305
           }
         ]
-      },
-      "before": {
-        "p95": 0.0813,
-        "max": 0.1072,
-        "depthError": 51.1976,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.043,
-        "max": 0.049,
-        "depthError": 2.2348,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-p12963-n0247-n0827",
+    "horizon/mountain-p12963-n0247-n0827": {
       "controls": {
         "ridgeDirection": 0,
         "ridgeElongation": 1,
@@ -493,22 +382,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0971,
-        "max": 0.1111,
-        "depthError": 27.071,
-        "uncovered": 3
-      },
-      "after": {
-        "p95": 0.0429,
-        "max": 0.0512,
-        "depthError": 15.4818,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-p13216-n0122-p9483",
+    "horizon/mountain-p13216-n0122-p9483": {
       "controls": {
         "ridgeDirection": -0.15,
         "ridgeElongation": 1,
@@ -525,22 +401,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0769,
-        "max": 0.0772,
-        "depthError": 1.0903,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.023,
-        "max": 0.0259,
-        "depthError": 0.3132,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-p13705-n0034-p3644",
+    "horizon/mountain-p13705-n0034-p3644": {
       "controls": {
         "ridgeDirection": -1.5,
         "ridgeElongation": 5.4,
@@ -561,22 +424,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0769,
-        "max": 0.0773,
-        "depthError": 1.3466,
-        "uncovered": 5
-      },
-      "after": {
-        "p95": 0.0117,
-        "max": 0.0123,
-        "depthError": 6.1632,
-        "uncovered": 2
       }
     },
-    {
-      "semanticId": "horizon/mountain-p5206-n0195-n14447",
+    "horizon/mountain-p5206-n0195-n14447": {
       "controls": {
         "ridgeDirection": 0,
         "ridgeElongation": 1.2,
@@ -601,22 +451,9 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.075,
-        "max": 0.0812,
-        "depthError": 30.1406,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.064,
-        "max": 0.0647,
-        "depthError": 17.2738,
-        "uncovered": 0
       }
     },
-    {
-      "semanticId": "horizon/mountain-p5857-n0343-p11498",
+    "horizon/mountain-p5857-n0343-p11498": {
       "controls": {
         "ridgeDirection": 0,
         "ridgeElongation": 1,
@@ -645,19 +482,7 @@
           }
         ],
         "foothills": []
-      },
-      "before": {
-        "p95": 0.0909,
-        "max": 0.1142,
-        "depthError": 12.5761,
-        "uncovered": 0
-      },
-      "after": {
-        "p95": 0.0458,
-        "max": 0.0532,
-        "depthError": 10.5936,
-        "uncovered": 0
       }
     }
-  ]
+  }
 }

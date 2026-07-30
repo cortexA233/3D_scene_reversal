@@ -8,7 +8,10 @@ import * as THREE from "three";
 import { ISLAND_SCENE_RECIPE } from "../gt_designer/src/reconstruction/scene/island-scene-recipe.generated.js";
 import { generateScene } from "../gt_designer/src/reconstruction/scene/scene-generator.js";
 import { generateSceneObject } from "../gt_designer/src/reconstruction/scene/scene-object-generators.js";
-import { SPREAD_RANGE } from "../tools/reconstruction/fit-horizon-spread.mjs";
+import {
+  GROUP_CONTROLS,
+  SUMMIT_CONTROLS,
+} from "../tools/reconstruction/fit-horizon-ridge.mjs";
 
 const PROJECT_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -24,27 +27,57 @@ const [history, fitted] = await Promise.all([
     "utf8",
   ).then(JSON.parse),
   readFile(
-    path.join(PROJECT_ROOT, "tools/reconstruction/fitted/horizon-spread-v1.json"),
+    path.join(PROJECT_ROOT, "tools/reconstruction/fitted/horizon-ridge-v1.json"),
     "utf8",
   ).then(JSON.parse),
 ]);
+
+const boundsFor = new Map(
+  [...GROUP_CONTROLS, ...SUMMIT_CONTROLS].map((control) => [control.name, control]),
+);
 
 test("the loop improved the metric it declared it was targeting", () => {
   assert.equal(history.metric, "horizon.groups.silhouetteError.mean");
   assert.ok(history.after < history.before, `${history.before} -> ${history.after}`);
   assert.equal(history.unrelatedEntitiesDrifted, 0);
   assert.ok(history.unrelatedEntitiesChecked >= 50);
-  // The combined skyline is a max across overlapping groups, so it is reported
-  // for context rather than targeted; the tracer must not make it worse.
+  // The combined skyline is a max across overlapping groups, so improving every
+  // group need not improve it: the loop has to show it did both.
   assert.ok(
-    history.combinedProfileP95.after <= history.combinedProfileP95.before,
-    "the tracer degraded the combined Horizon Profile",
+    history.combinedProfileP95.after < history.combinedProfileP95.before,
+    "the loop did not improve the combined Horizon Profile",
+  );
+  assert.ok(
+    history.combinedProfileMax.after < history.combinedProfileMax.before,
+    "the loop did not improve the worst azimuth",
   );
   for (const row of history.perGroup) {
-    assert.ok(row.after <= row.before, `${row.semanticId} got worse`);
+    assert.ok(row.after.p95 <= row.before.p95, `${row.semanticId} got worse`);
+    // A narrowed summit lowers the angle by not being there, and a ridge at the
+    // wrong distance reaches the right angle from the wrong place. Neither may
+    // be what a group's improvement is made of.
     assert.ok(
-      row.spreadScale >= SPREAD_RANGE.minimum && row.spreadScale <= SPREAD_RANGE.maximum,
+      row.after.uncovered <= row.before.uncovered,
+      `${row.semanticId} dropped azimuth the reference covers`,
     );
+    if (!row.controls) continue;
+    for (const [name, value] of Object.entries(row.controls)) {
+      const bounds = boundsFor.get(name);
+      assert.ok(bounds, `${name} is not a declared control`);
+      assert.ok(
+        value >= bounds.minimum && value <= bounds.maximum,
+        `${row.semanticId} ${name} ${value} is outside its declared range`,
+      );
+    }
+    for (const summit of [...row.summits.peaks, ...row.summits.foothills]) {
+      for (const control of SUMMIT_CONTROLS) {
+        const value = summit[control.name];
+        assert.ok(
+          value >= control.minimum && value <= control.maximum,
+          `${row.semanticId} summit ${control.name} ${value} is outside its declared range`,
+        );
+      }
+    }
   }
 });
 
@@ -53,48 +86,93 @@ test("the correction is persisted in the Scene Recipe, not in an evaluation arti
 
   assert.equal(mountains.length, Object.keys(fitted.values).length);
   for (const mountain of mountains) {
-    assert.equal(
-      mountain.shape.spreadScale,
-      fitted.values[mountain.semanticId],
-      `${mountain.semanticId} did not carry its fitted control into the Scene Recipe`,
-    );
+    const value = fitted.values[mountain.semanticId];
+    for (const [name, control] of Object.entries(value.controls)) {
+      assert.equal(
+        mountain.shape[name],
+        control,
+        `${mountain.semanticId} did not carry its fitted ${name} into the Scene Recipe`,
+      );
+    }
+    for (const family of ["peaks", "foothills"]) {
+      value.summits[family].forEach((summit, index) => {
+        assert.equal(mountain.shape[family][index].height, summit.height);
+        assert.equal(mountain.shape[family][index].radius, summit.radius);
+      });
+    }
   }
 });
 
-test("the production generator honours the persisted control", () => {
+test("the production generator honours the persisted controls", () => {
   const entity = ISLAND_SCENE_RECIPE.entities.find((row) => row.kind === "mountain");
-  const boundsOf = (shape) => {
+  const measure = (shape) => {
     const object = generateSceneObject("mountain", 12345, shape);
     object.updateMatrixWorld(true);
-    return new THREE.Box3().setFromObject(object).getSize(new THREE.Vector3());
+    const box = new THREE.Box3().setFromObject(object);
+    return { size: box.getSize(new THREE.Vector3()), box, object };
   };
 
-  const narrow = boundsOf({ ...entity.shape, spreadScale: 0.4 });
-  const wide = boundsOf({ ...entity.shape, spreadScale: 1.6 });
-  assert.ok(wide.x > narrow.x * 1.5, "the control must actually change the generated form");
-
-  // Generation stays deterministic under the persisted control.
-  assert.deepEqual(
-    boundsOf({ ...entity.shape, spreadScale: 0.4 }).toArray(),
-    narrow.toArray(),
+  const narrow = measure({ ...entity.shape, spreadScale: 0.4 });
+  const wide = measure({ ...entity.shape, spreadScale: 1.6 });
+  assert.ok(
+    wide.size.x > narrow.size.x * 1.2 || wide.size.z > narrow.size.z * 1.2,
+    "the breadth control must actually change the generated form",
   );
+
+  // Each control has to move something, or it is a number the Recipe carries for
+  // nothing. Compared on the generated vertices, because several of them reshape
+  // the ridge inside a bounding box that the extent pins anyway.
+  const digest = (shape) => {
+    const { object } = measure(shape);
+    const parts = [];
+    object.traverse((child) => {
+      if (child.isMesh) parts.push(child.geometry.attributes.position.array.join(","));
+    });
+    return parts.join("|");
+  };
+  // Moved relative to whatever this group was fitted to, and away from the range
+  // it is already nearest, so no control can look inert because the fit happened
+  // to land on the value the check was about to try.
+  const base = digest(entity.shape);
+  for (const control of GROUP_CONTROLS) {
+    const current = entity.shape[control.name];
+    const away =
+      current - control.minimum > control.maximum - current
+        ? control.minimum + (current - control.minimum) * 0.4
+        : control.maximum - (control.maximum - current) * 0.4;
+    assert.notEqual(away, current, `${control.name} could not be moved`);
+    assert.notEqual(
+      digest({ ...entity.shape, [control.name]: away }),
+      base,
+      `${control.name} changes nothing, so it is a number the Recipe carries for nothing`,
+    );
+  }
+
+  // Generation stays deterministic under the persisted controls.
+  assert.equal(digest(entity.shape), base);
 });
 
 test("the fitted artifact is compact and retains no reference data", () => {
   const serialized = JSON.stringify(fitted);
-  // Semantic IDs encode world placement, so they contain digits by design.
-  // What matters is how many numbers the artifact *carries*: one control per
-  // Horizon Group, plus the declared search range.
-  const payload = [...Object.values(fitted.values), ...Object.values(fitted.range)];
+  // Semantic IDs encode world placement, so they contain digits by design. What
+  // matters is how many numbers the artifact *carries*: the group's controls
+  // plus two per measured summit, against the 720 profile bins it was fitted to.
+  const payload = Object.values(fitted.values).flatMap((value) => [
+    ...Object.values(value.controls),
+    ...[...value.summits.peaks, ...value.summits.foothills].flatMap((summit) => [
+      summit.height,
+      summit.radius,
+    ]),
+  ]);
 
   assert.ok(
-    payload.length <= Object.keys(fitted.values).length + 8,
+    payload.length <= Object.keys(fitted.values).length * 24,
     `the fitted artifact carries ${payload.length} numbers`,
   );
   assert.ok(payload.every(Number.isFinite));
   assert.doesNotMatch(serialized, /profile|samples|vertices|azimuth|pixels/i);
   assert.equal(history.retainedReferenceData, "none: no mesh, sample array, or pixel is persisted");
-  assert.equal(history.numbersAdded, Object.keys(fitted.values).length);
+  assert.equal(history.numbersAdded, payload.length);
 });
 
 test("an evaluation-only correction does not reach the generated scene", () => {

@@ -9,9 +9,10 @@
  *   4. regenerate through the real production path
  *   5. prove the intended metric improved and nothing else moved
  *
- * The correction is one number per Horizon Group. It is written into the Scene
- * Recipe, never into the Candidate Adapter or an acceptance artifact, and it is
- * reproduced from a clean generation before it can affect any report.
+ * The correction is a Horizon Group's bounded ridge controls: six per group plus
+ * two per measured summit. It is written into the Scene Recipe, never into the
+ * Candidate Adapter or an acceptance artifact, and it is reproduced from a clean
+ * generation before it can affect any report.
  *
  *   node scripts/run-fitting-loop.mjs           # fit and record
  *   node scripts/run-fitting-loop.mjs --check   # verify the recorded iteration
@@ -25,7 +26,12 @@ import { fileURLToPath } from "node:url";
 import * as THREE from "three";
 
 import { measureHorizon } from "./run-horizon-evidence.mjs";
-import { fitHorizonSpread } from "../tools/reconstruction/fit-horizon-spread.mjs";
+import {
+  FIT_PASSES,
+  GROUP_CONTROLS,
+  SUMMIT_CONTROLS,
+  fitHorizonRidges,
+} from "../tools/reconstruction/fit-horizon-ridge.mjs";
 import { generateScene } from "../gt_designer/src/reconstruction/scene/scene-generator.js";
 
 const PROJECT_ROOT = path.resolve(
@@ -43,7 +49,7 @@ const RECIPE_PATH = path.join(
 );
 const FIT_PATH = path.join(
   PROJECT_ROOT,
-  "tools/reconstruction/fitted/horizon-spread-v1.json",
+  "tools/reconstruction/fitted/horizon-ridge-v1.json",
 );
 const checkOnly = process.argv.includes("--check");
 
@@ -104,13 +110,13 @@ async function main() {
   // nothing. Resetting the control to its neutral value first is what makes
   // this a demonstration rather than a no-op.
   await mkdir(path.dirname(FIT_PATH), { recursive: true });
-  const neutral = {
-    schemaVersion: "horizon-spread-fit-v1",
-    control: "spreadScale",
-    range: { minimum: 0.3, maximum: 1.6, step: 0.05 },
-    values: {},
+  const declaration = {
+    schemaVersion: "horizon-ridge-fit-v1",
+    groupControls: GROUP_CONTROLS,
+    summitControls: SUMMIT_CONTROLS,
+    passes: FIT_PASSES,
   };
-  await writeFile(FIT_PATH, `${JSON.stringify(neutral, null, 2)}
+  await writeFile(FIT_PATH, `${JSON.stringify({ ...declaration, values: {} }, null, 2)}
 `);
   await rebuildRecipe();
 
@@ -127,21 +133,23 @@ async function main() {
       seeds: generatedBefore.semanticIndex.get(entity.semanticId).seeds,
     }));
 
-  // ── 2. Fit one compact control per Horizon Group ─────────────────────────
-  const fitted = fitHorizonSpread({
+  // ── 2. Fit each Horizon Group's bounded ridge controls ───────────────────
+  const fitted = fitHorizonRidges({
     THREE,
     recipe,
     referenceGroups: before.referenceGroups,
     anchor: recipe.sceneAnchor,
     bins: 720,
   });
-  assert.ok(fitted.length > 0, "the tracer fitted nothing");
+  assert.ok(fitted.length > 0, "the loop fitted nothing");
 
   const fittedRecord = {
-    schemaVersion: "horizon-spread-fit-v1",
-    control: "spreadScale",
-    range: { minimum: 0.3, maximum: 1.6, step: 0.05 },
-    values: Object.fromEntries(fitted.map((row) => [row.semanticId, row.spreadScale])),
+    ...declaration,
+    values: Object.fromEntries(
+      fitted
+        .filter((row) => row.controls)
+        .map((row) => [row.semanticId, { controls: row.controls, summits: row.summits }]),
+    ),
   };
   const fittedSerialized = `${JSON.stringify(fittedRecord, null, 2)}\n`;
   if (!checkOnly) {
@@ -152,7 +160,7 @@ async function main() {
   }
 
   // ── 3 and 4. Persist into the Recipe and regenerate through production ───
-  process.stdout.write("Fitting loop: rebuilding the Scene Recipe with the persisted control\n");
+  process.stdout.write("Fitting loop: rebuilding the Scene Recipe with the persisted controls\n");
   const { spawnSync } = await import("node:child_process");
   const rebuild = spawnSync(
     process.execPath,
@@ -166,10 +174,11 @@ async function main() {
   const after = await measureHorizon({ recipe: rebuiltRecipe });
   const generatedAfter = generateScene(rebuiltRecipe);
 
-  // The tracer's control governs how broadly one group's summits sit inside its
-  // own footprint, so the metric it must move is that group's silhouette. The
-  // combined 360-degree profile is a max across overlapping groups and is
-  // dominated by inter-group occlusion, which this control does not own.
+  // The controls govern each group's own ridge, so the metric they must move is
+  // that group's silhouette. The combined 360-degree profile is a max across
+  // overlapping groups, so it is reported and asserted separately: a fit that
+  // improved every group and left the skyline alone would mean the groups are
+  // occluding each other rather than being reconstructed.
   const improvement = {
     metric: "horizon.groups.silhouetteError.mean",
     before: before.report.groups.silhouetteError.mean,
@@ -177,12 +186,19 @@ async function main() {
     combinedProfileP95: {
       before: before.report.profile.angularError.p95,
       after: after.report.profile.angularError.p95,
-      note: "reported for context; the tracer does not target it",
+    },
+    combinedProfileMax: {
+      before: before.report.profile.angularError.max,
+      after: after.report.profile.angularError.max,
     },
   };
   assert.ok(
     improvement.after < improvement.before,
     `the persisted correction did not improve the target metric: ${improvement.before} -> ${improvement.after}`,
+  );
+  assert.ok(
+    improvement.combinedProfileP95.after < improvement.combinedProfileP95.before,
+    `the persisted correction did not improve the skyline: ${improvement.combinedProfileP95.before} -> ${improvement.combinedProfileP95.after}`,
   );
 
   // The reference and the frozen thresholds are untouched.
@@ -219,20 +235,30 @@ async function main() {
     "fitting one Horizon Group perturbed unrelated entities",
   );
 
+  const numbersAdded = fitted.reduce(
+    (total, row) =>
+      row.controls
+        ? total +
+          Object.keys(row.controls).length +
+          (row.summits.peaks.length + row.summits.foothills.length) * 2
+        : total,
+    0,
+  );
   const history = {
     schemaVersion: "fitting-history-v1",
-    tracer: "Horizon Group summit spread",
+    tracer: "Horizon Group ridge controls",
     measuredDiscrepancy:
-      "Generated Horizon Group summits were broader than the authored skyline, so the 360-degree Horizon Profile sat above the reference across most azimuths.",
+      "Each Horizon Group was a union of half-buried spheres, whose widest point is their own equator, so every group stood near summit height across nearly all of the azimuth it covered and the 360-degree Horizon Profile sat 2.65 degrees above the reference in 624 of 720 bins.",
     referenceEvidence: "horizon-reference-v1.json (read-only)",
     metric: improvement.metric,
     before: improvement.before,
     after: improvement.after,
     combinedProfileP95: improvement.combinedProfileP95,
+    combinedProfileMax: improvement.combinedProfileMax,
     productionChange:
-      "One compact spreadScale control per Horizon Group, persisted in the Scene Recipe and applied by the production Object Generator.",
+      "One swept crest ridge per Horizon Group, carrying five bounded per-group controls and two per measured summit, persisted in the Scene Recipe and applied by the production Object Generator.",
     controlsAdded: fitted.length,
-    numbersAdded: fitted.length,
+    numbersAdded,
     retainedReferenceData: "none: no mesh, sample array, or pixel is persisted",
     unrelatedEntitiesChecked: unrelated.length,
     unrelatedEntitiesDrifted: 0,
