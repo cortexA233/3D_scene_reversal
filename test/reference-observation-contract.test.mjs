@@ -174,6 +174,10 @@ test("auxiliary cameras are derived from reference bounds around the Scene Ancho
       min: [-220, 20, -260],
       max: [360, 190, 250],
     },
+    framingSubject: {
+      min: [-220, 20, -260],
+      max: [360, 190, 250],
+    },
     sceneAnchor: [86, 26, -24],
     aspect: 16 / 9,
     verticalFovDegrees: 58,
@@ -181,7 +185,7 @@ test("auxiliary cameras are derived from reference bounds around the Scene Ancho
     far: 30000,
   });
 
-  assert.equal(cameraSet.framingBasis, "reference-authored-bounds");
+  assert.equal(cameraSet.framingBasis, "reference-island-subject");
   assert.deepEqual(cameraSet.topDown.target, [86, 26, -24]);
   assert.equal(cameraSet.topDown.position[0], 86);
   assert.equal(cameraSet.topDown.position[2], -24);
@@ -202,6 +206,54 @@ test("auxiliary cameras are derived from reference bounds around the Scene Ancho
     assert.ok(camera.viewMatrix.every(Number.isFinite));
     assert.ok(camera.projectionMatrix.every(Number.isFinite));
   }
+});
+
+test("the framing subject, not the full authored extent, sets the standoff", () => {
+  const common = {
+    sceneAnchor: [86, 26, -24],
+    aspect: 16 / 9,
+    verticalFovDegrees: 58,
+    near: 0.5,
+    far: 30000,
+  };
+  const island = { min: [-220, 20, -260], max: [360, 190, 250] };
+  // A backdrop six times deeper than the island, as the 16 horizon ridges are.
+  const withBackdrop = { min: [-1400, -40, -1900], max: [1600, 260, 1500] };
+
+  const framed = deriveReferenceCameraSet({
+    ...common,
+    authoredBounds: withBackdrop,
+    framingSubject: island,
+  });
+  const swallowed = deriveReferenceCameraSet({
+    ...common,
+    authoredBounds: withBackdrop,
+    framingSubject: withBackdrop,
+  });
+
+  // Recording the wider extent as provenance must not move any camera.
+  assert.deepEqual(framed.authoredBounds.min, withBackdrop.min);
+  assert.deepEqual(framed.framingSubject.min, island.min);
+  assert.ok(
+    framed.obliques.north.position[1] < swallowed.obliques.north.position[1] / 4,
+    "framing the island must bring the obliques far closer than framing the backdrop",
+  );
+  assert.ok(framed.topDown.position[1] < swallowed.topDown.position[1] / 4);
+});
+
+test("a camera set cannot be derived without a declared framing subject", () => {
+  assert.throws(
+    () =>
+      deriveReferenceCameraSet({
+        authoredBounds: { min: [-220, 20, -260], max: [360, 190, 250] },
+        sceneAnchor: [86, 26, -24],
+        aspect: 16 / 9,
+        verticalFovDegrees: 58,
+        near: 0.5,
+        far: 30000,
+      }),
+    /framingSubject must contain finite ordered min\/max points/,
+  );
 });
 
 test("Scene Render Contract v1 is machine-verified against reference source", async () => {

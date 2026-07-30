@@ -13,19 +13,19 @@
     "determinism": {
       "repeatedGenerations": 2,
       "semanticIdCount": 711,
-      "sceneDigest": "1225a0cef5b5d0d926cbaf3089db9146914413be3c4205a8641cf1d542e07cde",
+      "sceneDigest": "a2f19d8271ccde65b19bae518882c313af7e524380ec553a60d6b374cf7d3f8c",
       "identical": true
     },
     "productionIsolation": {
       "served": 11,
       "requests": 12,
       "externalRequests": 0,
-      "bundleBytes": 180323,
-      "bundleGzipBytes": 32825,
+      "bundleBytes": 183973,
+      "bundleGzipBytes": 34028,
       "thirdPartyInputs": 0,
-      "triangles": 365542,
-      "drawCalls": 3365,
-      "generationMs": 1761.7,
+      "triangles": 678482,
+      "drawCalls": 1699,
+      "generationMs": 1296.6,
       "auditPassed": true
     },
     "candidateCommandExitStatus": 1
@@ -49,10 +49,10 @@
         "evaluated": true,
         "passed": false,
         "failures": [
-          "surface p95: 11.1851 is not <= 2.3479",
+          "surface p95: 9.872 is not <= 2.3479",
           "worst entity surface p95: 165.6694 is not <= 13.758675",
-          "over-tolerance surface fraction: 0.6155 is not <= 0.11835",
-          "worst component delta: 9 is not <= 3.5",
+          "over-tolerance surface fraction: 0.6018 is not <= 0.11835",
+          "worst component deficit: 9 is not <= 3.5",
           "terrain height p95: 16.2617 is not <= 5.26875",
           "shore height p95: 12.4923 is not <= 2.85035",
           "land and sea agreement: 0.903491 is not >= 0.931361",
@@ -86,10 +86,10 @@
     },
     "surface": {
       "count": 672,
-      "mean": 11.1851,
-      "rmse": 24.0012,
-      "p50": 3.6444,
-      "p95": 46.5342,
+      "mean": 9.872,
+      "rmse": 22.15,
+      "p50": 3.3422,
+      "p95": 35.0332,
       "max": 165.6694
     },
     "surfaceWorstEntities": [
@@ -127,46 +127,88 @@
       }
     ],
     "semanticStructure": {
+      "componentDeficit": {
+        "count": 672,
+        "mean": 0.1786,
+        "rmse": 1.2392,
+        "p50": 0,
+        "p95": 0,
+        "max": 9
+      },
       "componentDelta": {
         "count": 672,
-        "mean": 3.9821,
-        "rmse": 4.8224,
-        "p50": 4,
-        "p95": 9,
+        "mean": 1.503,
+        "rmse": 2.0752,
+        "p50": 2,
+        "p95": 3,
         "max": 9
       },
       "entitiesMissingComponents": 14,
+      "worstComponentDeficit": [
+        {
+          "semanticId": "wildlife/panda-n1352-p0238-n1531",
+          "componentDeficit": 9
+        },
+        {
+          "semanticId": "wildlife/panda-p0062-p0259-p0135",
+          "componentDeficit": 9
+        },
+        {
+          "semanticId": "wildlife/panda-p0984-p0234-n2158",
+          "componentDeficit": 9
+        },
+        {
+          "semanticId": "wildlife/panda-p0999-p0241-n2198",
+          "componentDeficit": 9
+        },
+        {
+          "semanticId": "wildlife/panda-p1571-p0535-p1824",
+          "componentDeficit": 9
+        },
+        {
+          "semanticId": "wildlife/panda-p2651-p0258-p0253",
+          "componentDeficit": 9
+        },
+        {
+          "semanticId": "wildlife/panda-p2737-p0267-p0730",
+          "componentDeficit": 9
+        },
+        {
+          "semanticId": "wildlife/panda-p3411-p0264-n0847",
+          "componentDeficit": 9
+        }
+      ],
       "worstComponentDelta": [
         {
-          "semanticId": "vegetation/palm-n0019-p0282-p1912",
+          "semanticId": "wildlife/panda-n1352-p0238-n1531",
           "componentDelta": 9
         },
         {
-          "semanticId": "vegetation/palm-n0411-p0523-p1618",
+          "semanticId": "wildlife/panda-p0062-p0259-p0135",
           "componentDelta": 9
         },
         {
-          "semanticId": "vegetation/palm-n0917-p0277-p0222",
+          "semanticId": "wildlife/panda-p0984-p0234-n2158",
           "componentDelta": 9
         },
         {
-          "semanticId": "vegetation/palm-n1032-p0537-n1745",
+          "semanticId": "wildlife/panda-p0999-p0241-n2198",
           "componentDelta": 9
         },
         {
-          "semanticId": "vegetation/palm-n1232-p0502-n0401",
+          "semanticId": "wildlife/panda-p1571-p0535-p1824",
           "componentDelta": 9
         },
         {
-          "semanticId": "vegetation/palm-n1234-p0259-n0419",
+          "semanticId": "wildlife/panda-p2651-p0258-p0253",
           "componentDelta": 9
         },
         {
-          "semanticId": "vegetation/palm-n1236-p0547-n0409",
+          "semanticId": "wildlife/panda-p2737-p0267-p0730",
           "componentDelta": 9
         },
         {
-          "semanticId": "vegetation/palm-n1247-p0245-n1439",
+          "semanticId": "wildlife/panda-p3411-p0264-n0847",
           "componentDelta": 9
         }
       ]
@@ -271,101 +313,96 @@
     "fixedCamera": {
       "cameras": 6,
       "groupSilhouetteIoU": {
-        "mean": 0.388469,
+        "mean": 0.421857,
         "worst": {
-          "camera": "oblique-north",
-          "label": "paths",
-          "value": 0
+          "camera": "authoredOverview",
+          "label": "cover",
+          "value": 0.000709
         }
       },
       "groupDepthWorldUnits": {
-        "meanP95": 42.096602,
+        "meanP95": 29.810676,
         "worst": {
-          "camera": "oblique-north",
+          "camera": "authoredOverview",
           "label": "horizon",
-          "value": 292.346987
+          "value": 202.4158
         }
       },
       "groupWorldNormalDegrees": {
-        "meanP95": 110.619407,
+        "meanP95": 75.373209,
         "worst": {
-          "camera": "topDown",
-          "label": "plazas",
-          "value": 180
+          "camera": "oblique-east",
+          "label": "decorations",
+          "value": 147.306442
         }
       },
       "silhouetteIoU": {
-        "mean": 0.899969,
+        "mean": 0.994142,
         "worst": {
-          "camera": "oblique-south",
-          "value": 0.855287
+          "camera": "authoredOverview",
+          "value": 0.968554
         }
       },
       "contourDistance": {
-        "meanP95": 86.937867,
+        "meanP95": 5.666667,
         "worst": {
-          "camera": "oblique-north",
-          "value": 122.6568
+          "camera": "authoredOverview",
+          "value": 31
         }
       },
       "depthWorldUnits": {
-        "meanP95": 50.715856,
+        "meanP95": 141.922859,
         "worst": {
-          "camera": "authoredOverview",
-          "value": 168.899473
+          "camera": "oblique-north",
+          "value": 180.427416
         }
       },
       "worldNormalDegrees": {
-        "meanP95": 25.574757,
+        "meanP95": 71.21844,
         "worst": {
           "camera": "authoredOverview",
-          "value": 90.36756
+          "value": 82.775976
         }
       },
       "semanticAgreement": {
-        "mean": 0.866477,
+        "mean": 0.921404,
         "worst": {
-          "camera": "oblique-south",
-          "value": 0.838101
+          "camera": "authoredOverview",
+          "value": 0.885508
         }
       },
       "appearanceDeltaE": {
-        "meanMean": 15.410742,
+        "meanMean": 26.174695,
         "worst": {
           "camera": "authoredOverview",
-          "value": 36.702569
+          "value": 36.773461
         }
       }
     },
     "appearanceByRegion": {
       "horizon": 16.244003,
-      "geography": 28.221753,
-      "vegetation": 50.609023,
-      "structures": 39.1561,
-      "plazas": 27.49251,
-      "wildlife": 33.92978,
-      "paths": 25.160029,
-      "decorations": 27.828187,
-      "rocks": 23.873588,
-      "cover": 39.584662,
-      "bridges": 39.565418
+      "geography": 28.220885,
+      "vegetation": 51.419942,
+      "structures": 39.617684,
+      "plazas": 27.634123,
+      "wildlife": 33.049613,
+      "paths": 24.956515,
+      "decorations": 27.878574,
+      "rocks": 24.246527,
+      "cover": 46.926631,
+      "bridges": 41.147364
     }
   },
   "nextMilestoneResiduals": [
     {
+      "area": "native appearance",
+      "detail": "mean DeltaE 26.174695, worst camera authoredOverview at 36.773461",
+      "magnitude": 26.174695
+    },
+    {
       "area": "terrain elevation",
       "detail": "height p95 16.2617, shore 12.4923",
       "magnitude": 16.2617
-    },
-    {
-      "area": "native appearance",
-      "detail": "mean DeltaE 15.410742, worst camera authoredOverview at 36.702569",
-      "magnitude": 15.410742
-    },
-    {
-      "area": "object surfaces",
-      "detail": "symmetric distance p95 mean 11.1851, worst entity 165.6694",
-      "magnitude": 11.1851
     },
     {
       "area": "skyline",
@@ -373,19 +410,24 @@
       "magnitude": 9.8887
     },
     {
+      "area": "object surfaces",
+      "detail": "symmetric distance p95 mean 9.872, worst entity 165.6694",
+      "magnitude": 9.872
+    },
+    {
       "area": "semantic structure",
-      "detail": "mean component delta 3.9821, 14 entities missing parts",
-      "magnitude": 3.9821
+      "detail": "mean component delta 1.503, 14 entities missing parts",
+      "magnitude": 1.503
     },
     {
       "area": "distributed cover",
-      "detail": "worst group IoU 0, cover populations still mostly unaligned",
+      "detail": "worst group IoU 0.000709, cover populations still mostly unaligned",
       "magnitude": 1
     },
     {
       "area": "fixed-camera silhouette",
-      "detail": "worst group paths on oblique-north at IoU 0",
-      "magnitude": 0.611531
+      "detail": "worst group cover on authoredOverview at IoU 0.000709",
+      "magnitude": 0.578143
     }
   ],
   "environment": {
@@ -397,10 +439,17 @@
     "sceneSeed": 20260729,
     "terrainProgram": "bounded-semantic-terrain-v1",
     "baselineVersion": "scene-quality-baseline-v1",
-    "observationHost": null,
+    "observationHost": {
+      "hostKey": "windows-edge-150-swiftshader-subzero",
+      "os": "windows",
+      "browser": "edge-150",
+      "rasterizerBackend": "Subzero",
+      "acceleration": "software",
+      "threeRevision": "170"
+    },
     "gpu": {
       "vendor": "Google Inc. (Google)",
-      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
       "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
       "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
       "acceleration": "software"
@@ -416,12 +465,12 @@
           "version": "150"
         },
         {
-          "brand": "Google Chrome",
+          "brand": "Microsoft Edge",
           "version": "150"
         }
       ],
       "mobile": false,
-      "platform": "macOS"
+      "platform": "Windows"
     },
     "threeRevision": "170",
     "capture": {

@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 
+import { familyKey, resolveFamily } from "../reconstruction/scene-families.mjs";
+import { createAuxiliaryFramingContract } from "./camera-framing.mjs";
 import { createReferenceAccess } from "./reference-access.mjs";
 import { deriveReferenceCameraSet } from "./reference-cameras.mjs";
 import { createReferenceObservationContract } from "./reference-observation-contract.mjs";
@@ -577,15 +579,57 @@ function transformPoint(matrix, x, y, z) {
   ];
 }
 
-function authoredWorldBounds(scene) {
+function hasReadableMesh(root) {
+  let found = false;
+  root.traverse((object) => {
+    if (object.isMesh && object.geometry?.attributes?.position) found = true;
+  });
+  return found;
+}
+
+/**
+ * Placement roots whose family belongs to one of the excluded groups.
+ *
+ * Only roots that actually carry geometry are resolved. The authored scene keeps
+ * mesh-less organisational children, and they contribute nothing to a bounds.
+ * For the roots that do carry geometry `resolveFamily` throws on an unmapped
+ * family by design, so new reference content cannot be silently dropped from the
+ * framing subject.
+ */
+function excludedPlacementRoots(authored, excludeGroups) {
+  const excluded = new Set(excludeGroups);
+  if (excluded.size === 0) return new Set();
+  const bounds = new THREE.Box3();
+  const size = new THREE.Vector3();
+  const roots = new Set();
+  for (const root of authored.children) {
+    if (!hasReadableMesh(root)) continue;
+    const stable = String(root.name || "").replace(/[^A-Za-z0-9_.-]+/g, "_");
+    bounds.setFromObject(root);
+    bounds.getSize(size);
+    const { group } = resolveFamily(familyKey(`::${stable}`), [size.x, size.y, size.z]);
+    if (excluded.has(group)) roots.add(root);
+  }
+  return roots;
+}
+
+function authoredWorldBounds(scene, { excludeGroups = [] } = {}) {
   const authored = scene.getObjectByName("Authored Village");
   if (!authored) throw new Error("ready scene does not contain Authored Village");
+  const skipped = excludedPlacementRoots(authored, excludeGroups);
   const worldMin = [Infinity, Infinity, Infinity];
   const worldMax = [-Infinity, -Infinity, -Infinity];
   let meshCount = 0;
+  const inSkippedRoot = (object) => {
+    for (let node = object; node && node !== authored; node = node.parent) {
+      if (skipped.has(node)) return true;
+    }
+    return false;
+  };
   authored.traverse((object) => {
     const position = object.geometry?.attributes?.position;
     if (!object.isMesh || !position) return;
+    if (inSkippedRoot(object)) return;
     meshCount += 1;
     const localMin = [Infinity, Infinity, Infinity];
     const localMax = [-Infinity, -Infinity, -Infinity];
@@ -808,8 +852,14 @@ async function observePrimary(clock) {
   const access = createReferenceAccess({ snapshot: () => captureState(scene, camera) });
   const immutableObservation = await access.observe(async () => {
     const authoredBounds = authoredWorldBounds(scene);
+    // The auxiliary cameras frame the island, so the distant backdrop is set
+    // aside before the standoff is computed. See ADR-0049.
+    const framingSubject = authoredWorldBounds(scene, {
+      excludeGroups: createAuxiliaryFramingContract().subjectExclusions,
+    });
     const cameras = deriveReferenceCameraSet({
       authoredBounds,
+      framingSubject,
       sceneAnchor: contract.sceneAnchor,
       aspect: contract.capture.cssViewport[0] / contract.capture.cssViewport[1],
       verticalFovDegrees: contract.cameras.authoredOverview.verticalFovDegrees,
@@ -829,6 +879,7 @@ async function observePrimary(clock) {
         sceneStats: window.island.sceneStats,
         authoredScene: window.island.authoredScene,
         authoredBounds,
+        framingSubject,
       },
       cameraSet: cameras,
       environment: environmentEvidence(),

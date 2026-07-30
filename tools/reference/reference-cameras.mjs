@@ -97,7 +97,7 @@ function makeCamera({
   };
 }
 
-function validateBounds(bounds) {
+function validateBounds(bounds, what) {
   if (
     !bounds ||
     ![bounds.min, bounds.max].every(
@@ -108,41 +108,58 @@ function validateBounds(bounds) {
     ) ||
     bounds.min.some((value, index) => value > bounds.max[index])
   ) {
-    throw new TypeError("authoredBounds must contain finite ordered min/max points");
+    throw new TypeError(`${what} must contain finite ordered min/max points`);
   }
 }
 
+/**
+ * The auxiliary cameras frame the island, not everything the authored scene
+ * contains.
+ *
+ * Framing the full authored extent puts the camera outside the reference's own
+ * atmosphere. The 16 distant horizon ridges reach past 1800 units while the
+ * island reaches 280, so they alone decide the standoff, and a standoff that
+ * clears them exceeds the fog's far plane. The result is a camera that records
+ * fog rather than geometry. `framingSubject` is therefore the island volume,
+ * measured from reference evidence with the backdrop excluded, while
+ * `authoredBounds` stays in the output as provenance for what was set aside.
+ *
+ * See ADR-0049. The margin constants below are unchanged from v1: only the
+ * volume they are applied to has changed.
+ */
 export function deriveReferenceCameraSet({
   authoredBounds,
+  framingSubject,
   sceneAnchor,
   aspect,
   verticalFovDegrees,
   near,
   far,
 }) {
-  validateBounds(authoredBounds);
+  validateBounds(authoredBounds, "authoredBounds");
+  validateBounds(framingSubject, "framingSubject");
   if (!Array.isArray(sceneAnchor) || sceneAnchor.length !== 3) {
     throw new TypeError("sceneAnchor must be a 3D point");
   }
 
-  const center = authoredBounds.min.map(
-    (value, index) => (value + authoredBounds.max[index]) / 2,
+  const center = framingSubject.min.map(
+    (value, index) => (value + framingSubject.max[index]) / 2,
   );
-  const halfExtent = authoredBounds.min.map(
-    (value, index) => (authoredBounds.max[index] - value) / 2,
+  const halfExtent = framingSubject.min.map(
+    (value, index) => (framingSubject.max[index] - value) / 2,
   );
   const tangent = Math.tan((verticalFovDegrees * Math.PI) / 360);
   const anchorExtentX = Math.max(
-    Math.abs(authoredBounds.min[0] - sceneAnchor[0]),
-    Math.abs(authoredBounds.max[0] - sceneAnchor[0]),
+    Math.abs(framingSubject.min[0] - sceneAnchor[0]),
+    Math.abs(framingSubject.max[0] - sceneAnchor[0]),
   );
   const anchorExtentZ = Math.max(
-    Math.abs(authoredBounds.min[2] - sceneAnchor[2]),
-    Math.abs(authoredBounds.max[2] - sceneAnchor[2]),
+    Math.abs(framingSubject.min[2] - sceneAnchor[2]),
+    Math.abs(framingSubject.max[2] - sceneAnchor[2]),
   );
   const topDownHeight =
     Math.max(anchorExtentZ / tangent, anchorExtentX / (tangent * aspect)) * 1.15 +
-    Math.max(0, authoredBounds.max[1] - sceneAnchor[1]);
+    Math.max(0, framingSubject.max[1] - sceneAnchor[1]);
   const horizontalDistance =
     (Math.hypot(halfExtent[0], halfExtent[2]) / tangent) * 1.2;
   const obliqueHeight = Math.max(halfExtent[1] * 1.5, horizontalDistance * 0.62);
@@ -150,11 +167,15 @@ export function deriveReferenceCameraSet({
   const target = center.map(round);
 
   return deepFreeze({
-    schemaVersion: "reference-camera-set-v1",
-    framingBasis: "reference-authored-bounds",
+    schemaVersion: "reference-camera-set-v2",
+    framingBasis: "reference-island-subject",
     authoredBounds: {
       min: authoredBounds.min.map(round),
       max: authoredBounds.max.map(round),
+    },
+    framingSubject: {
+      min: framingSubject.min.map(round),
+      max: framingSubject.max.map(round),
     },
     topDown: makeCamera({
       ...common,

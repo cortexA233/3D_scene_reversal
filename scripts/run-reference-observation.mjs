@@ -24,7 +24,7 @@ const PROJECT_ROOT = path.resolve(
 );
 const CAMERA_SET_PATH = path.join(
   PROJECT_ROOT,
-  "tools/reference/baselines/reference-camera-set-v1.json",
+  "tools/reference/baselines/reference-camera-set-v2.json",
 );
 const EVIDENCE_PATH = path.join(
   PROJECT_ROOT,
@@ -37,7 +37,11 @@ const HOST_EVIDENCE_DIRECTORY = path.join(
 const checkOnly = process.argv.includes("--check");
 const contract = createReferenceObservationContract();
 const crossHostContract = createCrossHostObservationContract();
-const AUTHORITATIVE_HOST_KEY = "macos-chrome-150-swiftshader-llvm-10-0-0";
+// Migrated from macos-chrome-150-swiftshader-llvm-10-0-0 by ADR-0050, because
+// ADR-0049's camera-set migration must be re-frozen by the authoritative host
+// and no macOS host is available. The superseded profiles are preserved under
+// evidence/superseded/. Only an ADR may change this constant.
+const AUTHORITATIVE_HOST_KEY = "windows-edge-150-swiftshader-subzero";
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
@@ -134,7 +138,7 @@ function withoutAppearance(report) {
 function buildCameraSet(report) {
   const observedCamera = report.primary.result.capture.camera;
   return {
-    schemaVersion: "reference-camera-set-v1",
+    schemaVersion: "reference-camera-set-v2",
     framingBasis: "reference-only assembled authored scene evidence",
     sceneAnchor: contract.sceneAnchor,
     authoredOverview: {
@@ -147,6 +151,11 @@ function buildCameraSet(report) {
     derivationEvidence: {
       authority: contract.authority,
       authoredBounds: report.primary.result.cameraSet.authoredBounds,
+      // The auxiliary cameras frame the island rather than the full authored
+      // extent, because a standoff that clears the distant backdrop lands
+      // outside the reference's own fog. See ADR-0049.
+      framingSubject: report.primary.result.cameraSet.framingSubject,
+      framingBasis: report.primary.result.cameraSet.framingBasis,
       candidateConsulted: false,
     },
     topDown: report.primary.result.cameraSet.topDown,
@@ -485,13 +494,22 @@ async function main() {
   const authoritativeHost = describeNormativeHost(authoritative.environment);
   const observedHost = describeNormativeHost(evidence.environment);
   evidence.host = observedHost;
-  assert.equal(
-    authoritativeHost.hostKey,
-    AUTHORITATIVE_HOST_KEY,
-    "the authoritative observation profile no longer describes its declared normative host",
+  // The frozen profile normally describes the declared authoritative host. The
+  // one exception is an ADR-declared migration of that declaration, where the
+  // incoming authoritative host is the one observing and the frozen profile
+  // still describes the outgoing one. See ADR-0050. Check mode never accepts it:
+  // a half-migrated declaration is a real failure, not a frozen state.
+  const migratingAuthority =
+    !checkOnly &&
+    authoritativeHost.hostKey !== AUTHORITATIVE_HOST_KEY &&
+    observedHost.hostKey === AUTHORITATIVE_HOST_KEY;
+  assert.ok(
+    authoritativeHost.hostKey === AUTHORITATIVE_HOST_KEY || migratingAuthority,
+    `the authoritative observation profile describes ${authoritativeHost.hostKey}, ` +
+      `not the declared normative host ${AUTHORITATIVE_HOST_KEY}`,
   );
 
-  if (observedHost.hostKey === authoritativeHost.hostKey) {
+  if (observedHost.hostKey === AUTHORITATIVE_HOST_KEY) {
     await Promise.all([
       writeOrCheck(CAMERA_SET_PATH, cameraSet),
       writeOrCheckEvidence(evidence),

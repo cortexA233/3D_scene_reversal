@@ -1,19 +1,19 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0048.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0050.
 
 ## Where the work stands
 
-Branch `experiment/claude-full-island-scene`, worktree clean, everything pushed.
+Branch `experiment/claude-full-island-scene`.
 
 Scene Parity Foundation is complete and certified. `foundation=PASS` with
-`candidate=RED`, which is the milestone's intended result. Full-island
-reconstruction is planned as sixteen blocker-first tickets; one is done.
+`candidate=RED`, which is the milestone's intended result.
 
 | Ticket | State |
 | --- | --- |
 | Foundation 01-12 | done, certified |
+| Camera-set v2 migration (ADR-0049, ADR-0050) | done |
 | Reconstruction 08 — vegetation canopies | done |
 | Reconstruction 01-07, 09-16 | ready-for-agent |
 
@@ -27,15 +27,79 @@ export CHROME_BIN="C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 export PYTHON_BIN="python"
 ```
 
-The normative observation host here is `windows-edge-150-swiftshader-subzero`.
-It reproduces every scene-determined fact from the authoritative macOS profile
-exactly; only the perceptual hash differs, under a separately versioned
-cross-host bound. See ADR-0048.
+The authoritative observation host is `windows-edge-150-swiftshader-subzero`,
+migrated from `macos-chrome-150-swiftshader-llvm-10-0-0` by ADR-0050 because no
+macOS host is available and only the authoritative host may re-freeze a camera
+set. Superseded profiles are preserved verbatim under
+`.scratch/scene-parity-foundation/evidence/superseded/`.
+
+Firefox and Safari are not installed. Their native GPU gates are real blockers,
+already recorded in the certification's `deferred` list.
+
+## The camera-set blind spot, resolved
+
+Five of the six frozen cameras could not see the island. Measured from frozen
+evidence, not estimated:
+
+- The four obliques stood 5727 units from their target and the top-down camera
+  4080 units above it, while the reference's linear fog ends at 3500. All five
+  recorded the fog colour `0xe6dcc2`.
+- The obliques also stood at normalised cloud-shell radius 0.68 to 0.94, inside
+  a sprite population that begins at 0.2539 in a band reaching `y=3174.86`. An
+  earlier version of this file recorded the band as `y≈500-2600`, understating
+  the top by ~575 units, which is what made the obliques look merely low rather
+  than embedded.
+- Island content filled 10.10 per cent of the authored overview and 0.10 to 0.31
+  per cent of the five auxiliary frames. `paths` had zero reference pixels on
+  `oblique-north`; `wildlife` had zero on `oblique-east` and `oblique-south`.
+
+Root cause: `deriveReferenceCameraSet` framed the full authored bounds, 2982 by
+3365 units, dominated by the 16 horizon ridges at 1400 to 1880 units while the
+island reaches 280. At 58 degrees that forces 4868 units of standoff, which
+cannot fit inside fog far 3500.
+
+ADR-0049 reframes the auxiliary cameras on the island subject: the Scene Recipe's
+entities minus the `horizon` group. The 1.15, 1.2, and 0.62 margin constants are
+unchanged; only the volume they apply to changed. No threshold was touched.
+
+Result, all frozen in `tools/reference/baselines/reference-camera-set-v2.json`:
+
+| | before | after | limit |
+| --- | --- | --- | --- |
+| topDown y | 4106.26 | 622.29 | — |
+| oblique y | 3127.12 | 550.90 | — |
+| farthest subject corner | 5846-6178 | <=1240 | 2800 |
+| cloud shell radius | 0.685-0.940 | <=0.185 | 0.25 |
+| island share of frame | 0.10-0.31% | 4.05-16.21% | — |
+| groups at zero pixels | 3 | 0 | 0 |
+
+The gate is `node --test test/reference-camera-framing.test.mjs`, 11 assertions,
+green. Two of them exist to show the criteria are not arbitrary: the authored
+overview satisfies them, and a camera displaced 4000 units fails both.
+
+### What the migration proved about the metrics
+
+The honest metrics got worse, which is what should happen when cameras stop
+measuring fog:
+
+| metric | v1 | v2 |
+| --- | --- | --- |
+| depth p95 mean | 50.72 | 141.92 |
+| world normal p95 mean | 25.57 deg | 71.22 deg |
+| appearance mean DeltaE | 15.41 | 26.17 |
+| per-group silhouette IoU | 0.388 | 0.422 |
+| whole-frame silhouette IoU | 0.900 | 0.994 |
+
+**Whole-frame silhouette IoU is not island evidence.** Geography fills 84 to 86
+per cent of every auxiliary frame, so 0.994 is ground agreeing with ground while
+per-group IoU is 0.422. Ticket 01 must calibrate the fixed-camera layer on
+per-group metrics. `test/reference-camera-framing.test.mjs` asserts this
+domination so it cannot be quietly gated later.
 
 ## Commands
 
 ```bash
-npm test                              # 187 tests
+npm test                              # 200 tests
 npm run check:scene-foundation-reconciliation
 npm run check:reference-observation   # two full browser observations, slow
 npm run check:scene-coverage
@@ -47,16 +111,18 @@ npm run check:scene-calibration
 npm run check:vegetation
 npm run report:scene-parity           # exits 1 while the candidate is red
 npm run certify:scene-parity-foundation
+node --test test/reference-camera-framing.test.mjs
 ```
 
 Measurement, which rewrites the evidence files:
 
 ```bash
-npm run measure:scene-coverage        # browser, also writes elevation and horizon evidence
+npm run observe:reference             # browser; writes the camera set baseline
+npm run measure:scene-coverage
 node scripts/run-scene-passes.mjs     # browser, six cameras, several minutes
 npm run measure:scene-correspondence
-npm run measure:geography
-npm run measure:horizon
+npm run measure:geography             # consumes the camera set for frusta
+npm run measure:horizon               # does NOT consume the auxiliary cameras
 npm run calibrate:scene
 npm run fit:tracer
 ```
@@ -64,76 +130,87 @@ npm run fit:tracer
 Run the browser gates one at a time. Chained together they exceed ten minutes
 and get killed.
 
+## Re-measurement order when the camera set changes
+
+1. `npm run observe:reference` — freezes the camera set baseline
+2. `node scripts/run-scene-passes.mjs` — six cameras, must be re-captured
+3. `npm run measure:geography` — frustum coverage depends on the cameras
+4. `npm run calibrate:scene`
+5. `npm run report:scene-parity`
+6. `npm run certify:scene-parity-foundation`
+
+`measure:horizon` is unaffected: it reads only
+`recipe.environment.camera.position`.
+
 ## Current candidate result
 
 ```
 structuralCorrespondence  pass
 worldGeometry             fail
-fixedCameraGeometry       not evaluated — no calibrated thresholds
-nativeAppearance          not evaluated — geometry must pass first
+fixedCameraGeometry       blocked — no calibrated thresholds
+nativeAppearance          blocked — geometry must pass first
 ```
 
-World layout is exact and must stay that way: anchor, Target AABB Extent,
-typed orientation, neighbourhood distance, zone occupancy, and overview overlap
+World layout is exact and must stay that way: anchor, Target AABB Extent, typed
+orientation, neighbourhood distance, zone occupancy, and overview overlap
 ordering all report zero error across all 672 entities.
 
-Failing world-geometry metrics, measured:
+Failing world-geometry metrics, from the freshly regenerated
+`scene-parity-report-v1.json`:
 
 | metric | value | threshold |
 | --- | --- | --- |
 | surface p95 mean | 9.872 | 2.3479 |
-| worst entity surface p95 | 165.6694 | 13.7587 |
-| over-tolerance surface fraction | 0.6155 | 0.11835 |
+| worst entity surface p95 | 165.6694 | 13.758675 |
+| over-tolerance surface fraction | 0.6018 | 0.11835 |
 | worst component deficit | 9 | 3.5 |
 | terrain height p95 | 16.2617 | 5.26875 |
 | shore height p95 | 12.4923 | 2.85035 |
-| land and sea agreement | 0.9035 | 0.9314 |
+| land and sea agreement | 0.903491 | 0.931361 |
 | horizon profile p95 | 0.098887 | 0.0165 |
 | worst azimuth horizon error | 0.124982 | 0.0165 |
 
-## The next blocker
+Take these numbers from `scene-parity-report-v1.json` or
+`scene-correspondence-v1.json`, not from a certification written before the last
+correspondence measurement. Surface p95 mean is 9.872; an intermediate
+certification recorded 11.1851 from an older run.
 
-**Five of the six frozen cameras see only cloud and fog, not the island.**
+## Next steps
 
-`topDown` sits at y=4106 and the four obliques at y=3127. The cloud sprites
-occupy y≈500-2600, so they sit between those cameras and the island, and linear
-fog ends at 3500 while the island is 3100-4100 units away from them. The
-reference's `oblique-north` capture is a field of white cloud; the candidate's
-is a field of beige fog. Neither contains the island.
-
-Consequences to take seriously before doing any more appearance work:
-
-- `silhouette IoU mean 0.90` and `semantic agreement 0.867` are largely
-  sky-agreeing-with-sky. Almost all real geometry signal comes from the single
-  authored overview.
-- `worst group paths IoU 0` on `oblique-north` means the paths are not visible
-  from there at all, not that they are wrong.
-- Calibrating the fixed-camera and appearance layers (reconstruction ticket 01)
-  against five empty views would freeze thresholds that measure nothing.
-
-This is a metric blind spot of exactly the kind the spec warns about. It cannot
-be worked around by adjusting a threshold. The camera set is frozen by
-ADR-0036, so changing it requires an explicit versioned migration with a new
-ADR and full reference-only recalibration.
-
-Recommended order from here:
-
-1. Migrate the auxiliary camera set so the four obliques and the top-down view
-   actually frame the island inside the fog range, with a new ADR and a
-   re-derivation from reference world evidence only. Re-run the reference
-   observation to re-freeze `reference-camera-set-v1` as v2.
-2. Then reconstruction ticket 01, calibrating the two missing layers against
-   cameras that see something.
-3. Then ticket 02 atmosphere, 03 terrain, 05 horizon ridges, and onward.
+1. Reconstruction ticket 01: calibrate the fixed-camera and native-appearance
+   layers, now that the cameras see the island. `run-scene-calibration.mjs`
+   hard-codes `fixedCameraGeometry: []` and `nativeAppearance: []` at lines
+   369-370. Control families are `SCENE_CONTROLS`, `GEOGRAPHY_CONTROLS`, and
+   `HORIZON_CONTROLS` in `tools/evaluation/scene-perturbations.mjs`, shaped
+   `{ id, class: identity|mild|severe, apply }`. Baseline thresholds are shaped
+   `{ name, scope, path, direction, threshold }`. Calibrate on per-group metrics.
+2. Then tickets 02 atmosphere, 03 terrain, 05 horizon ridges, and onward.
 
 Tickets 03 and 05 depend only on 3D evidence and are unaffected by the camera
-problem, so they can proceed in parallel if useful.
+work.
+
+- Ticket 03: terrain budget is 32 coastline controls, 40 landforms, 4 noise
+  octaves; the recipe uses 28 coast nodes, 40 landforms, 3 octaves, so there is
+  headroom in coast nodes and octaves but none in landforms. The coastline
+  already passes — symmetric p95 15.7475 against 22.02965 and area error 1.97 per
+  cent against 10.55. The failure is elevation and the shore band: the
+  classification confusion is shore->land 395, land->shore 147, shore->sea 161,
+  sea->shore 123.
+- Ticket 05: the Horizon Profile already covers all 720 azimuth bins with none
+  missing, so the failure is purely angular accuracy — p95 5.6658 deg against a
+  0.945 deg threshold, worst azimuth 7.1609 deg at 162 deg.
 
 ## Things that are easy to get wrong
 
 - The evidence files are inputs to the gate stack. After changing a generator,
   re-run the measurement commands before reading a report, or the report
   describes the previous candidate.
+- `tools/evaluation/reference-classification.json` is gitignored and no script
+  writes it. Anything that must run on a clean checkout has to read the Scene
+  Recipe instead, which is committed and reference-measured.
+- `Authored Village` has mesh-less organisational children such as
+  `PandaVillage`. Resolving a family for every child throws on them; only
+  geometry-bearing roots should be resolved.
 - `measureHorizon` and friends take an explicit recipe. Node caches modules by
   specifier, and busting only the importer still serves the cached recipe to
   everything it depends on.

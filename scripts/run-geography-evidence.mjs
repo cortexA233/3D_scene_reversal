@@ -32,7 +32,7 @@ const EVIDENCE_DIRECTORY = path.join(
 const REPORT_PATH = path.join(EVIDENCE_DIRECTORY, "geography-evidence-v1.json");
 const CAMERA_SET_PATH = path.join(
   PROJECT_ROOT,
-  "tools/reference/baselines/reference-camera-set-v1.json",
+  "tools/reference/baselines/reference-camera-set-v2.json",
 );
 const checkOnly = process.argv.includes("--check");
 

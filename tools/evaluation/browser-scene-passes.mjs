@@ -380,7 +380,7 @@ function matrixDelta(actual, expected) {
 
 async function main() {
   const contractResponse = await fetch(
-    "/dev-tools/reference/baselines/reference-camera-set-v1.json",
+    "/dev-tools/reference/baselines/reference-camera-set-v2.json",
   );
   const cameraSet = await contractResponse.json();
   const width = 1440;
