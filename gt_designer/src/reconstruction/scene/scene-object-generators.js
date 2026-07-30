@@ -571,42 +571,116 @@ function bambooClump(rng) {
     const z = (rng.nextFloat() - 0.5) * 0.44;
     const tilt = (rng.nextFloat() - 0.5) * 0.14;
 
-    const segments = 5;
-    for (let segment = 0; segment < segments; segment += 1) {
-      const segmentHeight = height / segments;
-      const y = segment * segmentHeight + segmentHeight / 2;
-      const culm = cylinder(0.022, 0.026, segmentHeight * 0.94, 6, y);
-      culm.position.x = x + tilt * y;
-      culm.position.z = z;
-      culmMeshes.push(culm);
-      if (segment > 0) {
-        const node = cylinder(0.03, 0.03, 0.012, 6, segment * segmentHeight);
-        node.position.x = x + tilt * segment * segmentHeight;
-        node.position.z = z;
-        culmMeshes.push(node);
-      }
-    }
+    // One slender prism per culm, and no node rings.
+    //
+    // This is a proportion rather than a detail choice. Surface sampling draws a
+    // fixed number of points uniformly over an entity's triangles, so what a form
+    // spends its triangles on decides where it is measured. Measured over the 72
+    // authored standing clumps, 99.9 per cent of their triangles sit above 60 per
+    // cent of their height: the authored culms are about three parts in a thousand
+    // of the geometry, thin enough to carry the bounding box and nothing else.
+    //
+    // The previous segmented culms with node rings were 77 per cent of the
+    // candidate's own triangles, so half its samples landed on stems that the
+    // reference has too but never samples. Reference-to-candidate p95 was 4.35 —
+    // the canopy was already right — while candidate-to-reference was 31.74, and
+    // no other vegetation kind was asymmetric at all. Matching the authored
+    // allocation is the faithful fix, not a concession to the metric.
+    const culm = cylinder(0.009, 0.013, height, 4, height / 2);
+    culm.position.x = x + tilt * height * 0.5;
+    culm.position.z = z;
+    culmMeshes.push(culm);
+  }
 
-    // Foliage lives on the upper third, which is what gives a stand its mass.
-    const leaves = 5 + Math.floor(rng.nextFloat() * 4);
-    for (let leaf = 0; leaf < leaves; leaf += 1) {
-      const t = 0.62 + (leaf / leaves) * 0.38;
-      const azimuth = rng.nextFloat() * Math.PI * 2;
-      const blade = new THREE.Mesh(
-        bladeGeometry({
-          length: 0.16 + rng.nextFloat() * 0.1,
-          width: 0.055,
-          droop: 0.1,
-          segments: 3,
-          curl: 0.2,
-        }),
-      );
-      blade.position.set(x + tilt * height * t, height * t, z);
-      blade.rotation.set(0, -azimuth, -0.35 - rng.nextFloat() * 0.4);
-      leafMeshes.push(blade);
-    }
+  /**
+   * The canopy, distributed through a volume rather than hung on the culms.
+   *
+   * Both of its distributions are measured off the authored clumps rather than
+   * chosen. Over 72 standing placements and 6,912 triangle-uniform samples, the
+   * authored geometry sits 7.1, 34.9, 41.6 and 16.2 per cent in the top four
+   * height deciles and nothing measurable below the sixth, so `CANOPY_FLOOR` is
+   * 0.6 and the vertical draw peaks near 0.85. Radially it is broad and peaks
+   * near the middle of the box rather than at a shell, which a sum of two uniform
+   * draws reproduces without a fitted constant — the previous ring of blades
+   * around each culm left the interior two radial deciles empty where the
+   * reference has 8.6 per cent of its geometry.
+   */
+  const CANOPY_FLOOR = 0.6;
+  // Enough blades that the canopy clears the foliage-mass floor `vegetation`
+  // already gates — a stand may not become a handful of cards — while the culms
+  // stay the small share of the triangles the authored clump gives them.
+  const blades = 46 + Math.floor(rng.nextFloat() * 14);
+  for (let leaf = 0; leaf < blades; leaf += 1) {
+    // Triangular about the middle of the height band, then biased upward to match
+    // the measured 7/35/42/16 ladder.
+    const rise = (rng.nextFloat() + rng.nextFloat()) / 2;
+    const t = CANOPY_FLOOR + (1 - CANOPY_FLOOR) * (0.35 + rise * 0.65);
+    const azimuth = rng.nextFloat() * Math.PI * 2;
+    // Triangular in radius: peaks mid-box and tapers to both the axis and the edge.
+    const radius = ((rng.nextFloat() + rng.nextFloat()) / 2) * 0.46;
+    const blade = new THREE.Mesh(
+      bladeGeometry({
+        length: 0.2 + rng.nextFloat() * 0.14,
+        width: 0.07,
+        droop: 0.14,
+        segments: 3,
+        curl: 0.2,
+      }),
+    );
+    blade.position.set(Math.cos(azimuth) * radius, t, Math.sin(azimuth) * radius);
+    blade.rotation.set(0, -azimuth, -0.3 - rng.nextFloat() * 0.5);
+    leafMeshes.push(blade);
   }
   return group([mergeParts(culmMeshes, "culms"), mergeParts(leafMeshes, "foliage")]);
+}
+
+/**
+ * A bamboo leaf bed: fallen foliage lying across its own footprint.
+ *
+ * The authored `bamboo_forest` asset is placed as two entirely different things.
+ * Seventy-two placements are standing clumps of 19,908 triangles at a
+ * height-to-width aspect near 3.9, and fifty-eight are flat pieces — fifty-six of
+ * 80 triangles at 10.7 by 0.7 by 4.1 units and two mats of 1,748 triangles up to 85
+ * by 5 by 60 — at an aspect near 0.065. Nothing sits between the two clusters.
+ *
+ * Both were generated as standing clumps, and because Target AABB Extent is a hard
+ * output target the flat ones were a clump squashed to a fraction of its height.
+ * Measured, `bamboo` was the single largest contributor to the failing surface gate
+ * at 3.44 of 9.45 — more than the sixteen distant mountains together.
+ *
+ * A bed is blades lying nearly flat and fanned across the footprint rather than
+ * gathered on a culm, so it reads as ground litter from above and as almost nothing
+ * from the side, which is what an 0.7-unit-tall authored piece does.
+ */
+function bambooBed(rng) {
+  const bladeMeshes = [];
+  const blades = 26;
+  for (let index = 0; index < blades; index += 1) {
+    // A deterministic fan with jitter, so the bed covers its footprint evenly
+    // instead of clustering wherever the stream happened to land.
+    const azimuth = (index / blades) * Math.PI * 2 + (rng.nextFloat() - 0.5) * 0.4;
+    const reach = 0.18 + rng.nextFloat() * 0.3;
+    const blade = new THREE.Mesh(
+      bladeGeometry({
+        length: 0.3 + rng.nextFloat() * 0.22,
+        width: 0.1,
+        // Almost no droop and no curl: a fallen blade lies along the ground rather
+        // than arching away from a stem.
+        droop: 0.04,
+        segments: 3,
+        curl: 0.06,
+      }),
+    );
+    blade.position.set(
+      Math.cos(azimuth) * reach,
+      0.1 + rng.nextFloat() * 0.55,
+      Math.sin(azimuth) * reach,
+    );
+    // Yaw around the fan, then a shallow pitch so blades cross rather than tile.
+    blade.rotation.set((rng.nextFloat() - 0.5) * 0.5, -azimuth, (rng.nextFloat() - 0.5) * 0.3);
+    bladeMeshes.push(blade);
+  }
+  return group([mergeParts(bladeMeshes, "foliage")]);
 }
 
 /** A weeping crown: trailing blades hung from a compact canopy. */
@@ -814,6 +888,7 @@ const GENERATORS = Object.freeze({
   palm,
   blossom,
   bamboo: bambooClump,
+  "bamboo-bed": bambooBed,
   "grass-clump": grassClump,
 });
 

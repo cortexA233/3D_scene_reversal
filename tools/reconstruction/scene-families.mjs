@@ -105,9 +105,32 @@ export function resolveFamily(family, extent) {
   if (mapped.kind === "paving-slab" && extent[0] * extent[2] >= LARGE_DECK_FOOTPRINT) {
     return { kind: "deck", group: "plazas", material: "paving-stone", orientation: "surface-aligned" };
   }
+  // The authored `bamboo_forest` asset is placed as two different things, and one
+  // authored name cannot say which. Seventy-two placements are standing clumps of
+  // 19,908 triangles at a height-to-width aspect near 3.9; fifty-eight are flat
+  // pieces at an aspect near 0.065 — fifty-six of 80 triangles and two mats of 1,748
+  // — and nothing sits between the clusters. Generating a stand for a piece 0.7 units
+  // tall and 10.7 wide produced a squashed clump, and made `bamboo` the single
+  // largest contributor to the failing surface gate at 3.44 of 9.45.
+  //
+  // The split is on the measured proportion rather than on a tuned number: a stand is
+  // taller than it is wide and a bed is not. The measured gap between 0.071 and 3.854
+  // is what makes that safe.
+  if (mapped.kind === "bamboo" && extent[1] < Math.max(extent[0], extent[2])) {
+    return { kind: "bamboo-bed", group: "vegetation", material: "bamboo-foliage", orientation: "radial" };
+  }
   return mapped;
 }
 
 export function listSemanticKinds() {
-  return [...new Set(Object.values(FAMILIES).map((entry) => entry.kind)), "deck", "panda"].sort();
+  // `deck`, `bamboo-bed`, and `panda` are not in the table: the first two are
+  // resolved from a placement's measured extent above, and `panda` is assigned by
+  // the wildlife rig walk. A kind that only `resolveFamily` can produce still has to
+  // be listed, or anything that checks every kind has a generator will miss it.
+  return [
+    ...new Set(Object.values(FAMILIES).map((entry) => entry.kind)),
+    "deck",
+    "bamboo-bed",
+    "panda",
+  ].sort();
 }

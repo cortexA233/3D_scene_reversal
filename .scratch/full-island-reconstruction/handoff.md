@@ -18,7 +18,7 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 02 — atmosphere | in progress, see below |
 | Reconstruction 04 — ocean surface | landed; gate red behind vegetation and architecture |
 | Reconstruction 05 — horizon ridges | landed; gate red at a recorded boundary (ADR-0052) |
-| Reconstruction 08 — vegetation canopies | done |
+| Reconstruction 08 — vegetation canopies | re-opened; bamboo was left behind, beds fixed, stands blocked on a sampler defect |
 | Reconstruction 03 | boundary recorded (ADR-0054); one in-budget attempt named |
 | Reconstruction 09 — distributed cover | landed; the reference measurement was wrong and is fixed (ADR-0053) |
 | Reconstruction 06, 07, 10-16 | ready-for-agent; 06 is next and `paths` is its dominant term |
@@ -700,6 +700,18 @@ Read the per-group table above rather than the old ranking. `plazas`' reference
 mask was 84 per cent scatter before ADR-0053, so any note about plazas written
 earlier was measured against the wrong thing.
 
+- **The surface sampler penalises semantic part structure, and that is now the
+  largest single lever on the world-geometry layer.** `sampleEntitySurface` gives every
+  mesh in an entity `min(96, max(12, sqrt(triangles) * 3))` samples — sub-linear and
+  floored — so a small part is sampled far more densely than its share. An authored
+  placement is one mesh; a generated form carrying the semantic parts ticket 10 exists
+  to add is several. Measured across every kind by
+  `tools/development/measure-surface-sampling-symmetry.mjs`, `bamboo` reads 4.12 one
+  way against 39.32 the other, a 9.55 ratio, while palm reads 0.73 and blossom 1.18.
+  The candidate's canopy already covers the authored one; the whole penalty is
+  one-directional. Fixing it means allocating an entity's budget in proportion across
+  its meshes, which changes the frozen reference samples and moves the world-geometry
+  thresholds — the same shape as ADR-0053, and worth doing before more shape fitting.
 - **Ticket 03's gates are a recorded count boundary (ADR-0054), not open work.**
   `tools/development/measure-terrain-form-budget.mjs` runs the production landform
   pursuit at increasing budgets. The frozen 40 forms reach full height p95 8.657;
@@ -758,9 +770,11 @@ earlier was measured against the wrong thing.
   everything it depends on.
 - Semantic structure is a one-sided deficit. Do not restore an absolute delta:
   penalising extra parts equally pushes every generator toward a single mass.
-- Generation is currently 0.63 s and 664,649 triangles at 1,708 draw calls, and the
-  production bundle is 38,561 B gzip. Triangles and draw calls are outside any
-  sensible budget and belong to ticket 14.
+- Generation is currently 0.50 s and 529,390 triangles, and the production bundle is
+  38,627 B gzip. Triangles fell 135,259 as a side effect of matching the authored
+  bamboo triangle allocation, which is worth knowing before ticket 14 starts hunting:
+  a form that spends its triangles differently from the authored one is both a budget
+  problem and a surface-parity problem, and the two move together.
 - `renderer.info` resets on every render call, and the composer makes several, so
   reading it after the chain measures the output pass's fullscreen quad. It reported
   1 triangle and 1 draw call, and the certification recorded that. The runtime now

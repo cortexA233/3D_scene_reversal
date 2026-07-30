@@ -6101,8 +6101,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "blossom-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0034-p0325-n1505",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0034-p0325-n1505",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -3.36,
@@ -6120,8 +6120,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0095-p0316-n1517",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0095-p0316-n1517",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -9.47,
@@ -6139,8 +6139,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0162-p0309-n1549",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0162-p0309-n1549",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -16.25,
@@ -6158,8 +6158,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0214-p0302-n1528",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0214-p0302-n1528",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -21.36,
@@ -6177,8 +6177,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0259-p0296-n1482",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0259-p0296-n1482",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -25.88,
@@ -6196,8 +6196,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0362-p0283-n1431",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0362-p0283-n1431",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -36.17,
@@ -6215,8 +6215,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0403-p0277-n1379",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0403-p0277-n1379",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -40.33,
@@ -6234,8 +6234,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0462-p0262-p0924",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0462-p0262-p0924",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -46.17,
@@ -6253,8 +6253,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0496-p0256-p0559",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0496-p0256-p0559",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -49.56,
@@ -6272,8 +6272,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0499-p0261-p0870",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0499-p0261-p0870",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -49.95,
@@ -6291,8 +6291,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0517-p0256-p0630",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0517-p0256-p0630",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -51.7,
@@ -6310,8 +6310,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0518-p0256-p0506",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0518-p0256-p0506",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -51.76,
@@ -6329,8 +6329,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0521-p0260-p0790",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0521-p0260-p0790",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -52.11,
@@ -6348,8 +6348,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0581-p0256-p0451",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0581-p0256-p0451",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -58.07,
@@ -6367,8 +6367,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0619-p0256-p0400",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0619-p0256-p0400",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -61.94,
@@ -6386,8 +6386,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0638-p0256-p0121",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0638-p0256-p0121",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -63.77,
@@ -6405,8 +6405,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0642-p0256-p0286",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0642-p0256-p0286",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -64.22,
@@ -6424,8 +6424,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0673-p0256-p0229",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0673-p0256-p0229",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -67.35,
@@ -6443,8 +6443,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0683-p0255-p0173",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0683-p0255-p0173",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -68.29,
@@ -6462,8 +6462,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0686-p0256-n1211",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0686-p0256-n1211",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -68.6,
@@ -6481,8 +6481,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0730-p0255-p0057",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0730-p0255-p0057",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -73.05,
@@ -6500,8 +6500,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0761-p0255-n1220",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0761-p0255-n1220",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -76.09,
@@ -6519,8 +6519,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0786-p0255-p0016",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0786-p0255-p0016",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -78.64,
@@ -6538,8 +6538,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0803-p0256-n1184",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0803-p0256-n1184",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -80.29,
@@ -6557,8 +6557,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0829-p0256-n1124",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0829-p0256-n1124",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -82.95,
@@ -6576,8 +6576,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0886-p0256-n0050",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0886-p0256-n0050",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -88.62,
@@ -6595,8 +6595,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0909-p0256-n1040",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0909-p0256-n1040",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -90.9,
@@ -6614,8 +6614,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0930-p0256-n0976",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0930-p0256-n0976",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -92.96,
@@ -6633,8 +6633,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0940-p0256-n0897",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0940-p0256-n0897",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -93.97,
@@ -6652,8 +6652,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0943-p0243-n0196",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0943-p0243-n0196",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -94.35,
@@ -6671,8 +6671,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0959-p0244-n0129",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0959-p0244-n0129",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -95.91,
@@ -6690,8 +6690,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0965-p0243-n0249",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0965-p0243-n0249",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -96.55,
@@ -6709,8 +6709,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n0970-p0256-n0848",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n0970-p0256-n0848",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -97.03,
@@ -6728,8 +6728,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n1013-p0256-n0766",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n1013-p0256-n0766",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -101.28,
@@ -6747,8 +6747,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n1028-p0243-n0304",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n1028-p0243-n0304",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -102.85,
@@ -6766,8 +6766,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n1052-p0255-n0696",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n1052-p0255-n0696",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -105.24,
@@ -6785,8 +6785,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n1067-p0243-n0356",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n1067-p0243-n0356",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -106.72,
@@ -6804,8 +6804,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n1085-p0256-n0635",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n1085-p0256-n0635",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -108.55,
@@ -6823,8 +6823,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n1090-p0256-n0470",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n1090-p0256-n0470",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -109,
@@ -6842,8 +6842,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n1121-p0256-n0527",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n1121-p0256-n0527",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -112.13,
@@ -6861,8 +6861,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-n1131-p0255-n0583",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-n1131-p0255-n0583",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         -113.08,
@@ -6880,8 +6880,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0318-p0256-n0992",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0318-p0256-n0992",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         31.84,
@@ -6899,8 +6899,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0362-p0256-n0943",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0362-p0256-n0943",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         36.16,
@@ -6918,8 +6918,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0428-p0256-n0892",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0428-p0256-n0892",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         42.8,
@@ -6937,8 +6937,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0454-p0256-n0841",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0454-p0256-n0841",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         45.4,
@@ -6956,8 +6956,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0498-p0256-n0767",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0498-p0256-n0767",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         49.77,
@@ -6975,8 +6975,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0569-p0255-n0722",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0569-p0255-n0722",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         56.93,
@@ -6994,8 +6994,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0628-p0256-n0668",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0628-p0256-n0668",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         62.75,
@@ -7013,8 +7013,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0709-p0255-n0645",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0709-p0255-n0645",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         70.87,
@@ -7032,8 +7032,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0792-p0256-n0631",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0792-p0256-n0631",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         79.24,
@@ -7051,8 +7051,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0841-p0256-n0573",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0841-p0256-n0573",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         84.1,
@@ -7070,8 +7070,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0871-p0238-n0508",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0871-p0238-n0508",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         87.1,
@@ -7089,8 +7089,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0888-p0217-n0444",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0888-p0217-n0444",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         88.78,
@@ -7108,8 +7108,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p0967-p0215-n0440",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p0967-p0215-n0440",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         96.74,
@@ -7127,8 +7127,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p1007-p0202-n0384",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p1007-p0202-n0384",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         100.72,
@@ -7146,8 +7146,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p1102-p0203-n0399",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p1102-p0203-n0399",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         110.15,
@@ -7165,8 +7165,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p1353-p0158-n1275",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p1353-p0158-n1275",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         135.33,
@@ -7184,8 +7184,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p1803-p0183-n0535",
-      "kind": "bamboo",
+      "semanticId": "vegetation/bamboo-bed-p1803-p0183-n0535",
+      "kind": "bamboo-bed",
       "group": "vegetation",
       "anchor": [
         180.34,
@@ -15336,7 +15336,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 16.56,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "vegetation/bamboo-p0792-p0256-n0631"
+      "emissiveSource": "vegetation/bamboo-bed-p0792-p0256-n0631"
     },
     {
       "lightId": "lights/point-p0933-p0235-22",
