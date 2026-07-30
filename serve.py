@@ -8,6 +8,7 @@ connections so the 70 MB of assets don't load one at a time.
     ./serve.py                # serve on :8000 (or the next free port) and open a browser
     ./serve.py --lab          # open the isolated single-mesh reference scene
     ./serve.py --replacement  # open the reference-independent procedural scene
+    ./serve.py --island-replacement  # open the code-only island replacement
     ./serve.py --evaluation   # open the fixed-view Evaluation Harness
     ./serve.py --stage-1-5    # open replacements in the eight-slot Lab layout
     ./serve.py --reference-observation  # open the read-only authored reference adapter
@@ -221,6 +222,11 @@ def main() -> None:
         help="open the reference-independent procedural replacement scene",
     )
     scene_group.add_argument(
+        "--island-replacement",
+        action="store_true",
+        help="open the reference-independent procedural island replacement",
+    )
+    scene_group.add_argument(
         "--evaluation",
         action="store_true",
         help="open the fixed-view single-mesh Evaluation Harness",
@@ -265,6 +271,7 @@ def main() -> None:
     requires_exact_three = any(
         (
             args.replacement,
+            args.island_replacement,
             args.evaluation,
             args.runtime_audit,
             args.stage_1_5,
@@ -292,6 +299,9 @@ def main() -> None:
     elif args.replacement:
         url_path = "/single-mesh-replacement/"
         scene_name = "Single Mesh Procedural Replacement"
+    elif args.island_replacement:
+        url_path = "/island-replacement/"
+        scene_name = "Island Procedural Replacement"
     elif args.evaluation:
         url_path = "/single-mesh-evaluation/"
         scene_name = "Single Mesh Evaluation Harness"
@@ -325,7 +335,7 @@ def main() -> None:
                 )
         elif not args.production_audit_root:
             check_cdn()
-        if args.replacement:
+        if args.replacement or args.island_replacement:
             controls_help = "static deterministic fixture"
         elif args.stage_1_5:
             controls_help = "orbit · zoom · pan · focus controls"

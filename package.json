@@ -5,6 +5,9 @@
   "scripts": {
     "check:scene-foundation-reconciliation": "node --test test/object-generator.test.mjs test/rng.test.mjs test/calibration-contract.test.mjs test/calibration-geometry.test.mjs test/visual-metrics.test.mjs test/runtime-evidence.test.mjs test/static-audit.test.mjs test/scene-foundation-reconciliation.test.mjs && npm run smoke:replacement && npm run check:prototype:island",
     "observe:reference": "node scripts/run-reference-observation.mjs",
+    "build:scene-recipe": "node tools/reconstruction/build-scene-recipe.mjs",
+    "check:scene-recipe": "node tools/reconstruction/build-scene-recipe.mjs --check",
+    "check:scene-generation": "node --test test/scene-recipe-contract.test.mjs test/scene-generation.test.mjs && node tools/reconstruction/build-scene-recipe.mjs --check && node scripts/check-scene-generation.mjs",
     "check:reference-observation": "node --test test/reference-observation-contract.test.mjs test/normative-observation-host.test.mjs && node scripts/run-reference-observation.mjs --check",
     "prototype:island": "./run.sh --local-three",
     "check:prototype:island": "node scripts/smoke-full-island-prototype.mjs",
