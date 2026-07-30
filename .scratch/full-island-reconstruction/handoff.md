@@ -103,7 +103,7 @@ on its own before the sky is called done.
 Cover was planted on the seabed: `buildPopulations` settled every ground instance
 on whatever terrain was under it, and a population's region is an ellipse over an
 island, which is mostly water. Floors were 63 and 64 units below the authored
-ones. Fixed by a waterline rule; floors are now 12.7 to 13.1 against authored
+ones. Fixed by a waterline rule; floors are now 12.46 to 13.72 against authored
 13.31 to 25.29, and density ratios held because the rule takes the *first* dry
 draw, not the best of the batch.
 
@@ -111,7 +111,7 @@ Placement alone made the gate slightly *worse* — cover IoU 0.001371 to 0.00055
 because instances hidden underwater became visible. They are also the wrong size.
 Two recipe inputs were invented rather than measured; one is now fixed:
 
-1. `scaleRange: [0.6, 1.6]` is hardcoded for every population in
+1. `scaleRange: [0.6, 1.6]` was hardcoded for every population in
    `build-scene-recipe.mjs`. The reference's measured `worldSurfaceArea` over its
    instance count implies 1.344, 0.506, 0.696, 0.420 and 0.705 against a
    candidate RMS of 1.14 — four of five are 1.6 to 2.7 times too large, and area
@@ -124,7 +124,7 @@ Two recipe inputs were invented rather than measured; one is now fixed:
 
 Both changes together took cover pixels on the authored overview from 4,254 to
 2,199 against the reference's 128, and moved the gate stack 6 metrics better
-against 3 worse.  IoU is still 0.0013 against 0.302569, so burial depth is
+against 3 worse. `cover` IoU is still 0.0013 against 0.302569, so burial depth is
 where the remaining seventeen-fold over-draw lives. Start there, not with
 placement or scale. Two of the ten fixed-camera gates are `cover`'s
 worst-group rows, so this group is worth more than its pixel count suggests.
