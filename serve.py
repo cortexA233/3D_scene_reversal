@@ -247,6 +247,11 @@ def main() -> None:
         help="open the read-only authored-reference observation adapter",
     )
     scene_group.add_argument(
+        "--scene-inventory",
+        action="store_true",
+        help="open the read-only Assembled Authored Scene inventory adapter",
+    )
+    scene_group.add_argument(
         "--production-audit-root",
         type=Path,
         help="serve an isolated generated production package as the web root",
@@ -276,6 +281,7 @@ def main() -> None:
             args.runtime_audit,
             args.stage_1_5,
             args.reference_observation,
+            args.scene_inventory,
         )
     )
     if requires_exact_three:
@@ -311,6 +317,9 @@ def main() -> None:
     elif args.stage_1_5:
         url_path = "/stage-1-5-scene/"
         scene_name = "Stage 1.5 Reference-layout Scene"
+    elif args.scene_inventory:
+        url_path = "/scene-inventory.html"
+        scene_name = "Read-only Assembled Authored Scene Inventory"
     elif args.reference_observation:
         url_path = "/authored-reference.html"
         scene_name = "Read-only Authored Reference Observation"
@@ -344,6 +353,7 @@ def main() -> None:
             or args.runtime_audit
             or args.production_audit_root
             or args.reference_observation
+            or args.scene_inventory
         ):
             controls_help = "fixed protocol controls"
         else:

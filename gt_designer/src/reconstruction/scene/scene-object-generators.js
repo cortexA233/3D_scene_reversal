@@ -290,12 +290,64 @@ function mound(rng, { sides = 8 } = {}) {
   return group([part(solid, "mass")]);
 }
 
+function post(rng, { headWidth = 0.5, headHeight = 0.3 } = {}) {
+  return group([
+    part(box(0.16, 0.62, 0.16, 0.31), "post"),
+    part(box(headWidth, headHeight, headWidth, 0.62 + headHeight / 2), "head"),
+    part(cone(headWidth * 0.78, 0.12, 4, 0.62 + headHeight + 0.06), "cap"),
+  ]);
+}
+
+function panel(rng, { thickness = 0.12 } = {}) {
+  return group([
+    part(box(thickness, 1, 1, 0.5), "face"),
+    part(box(thickness * 1.6, 0.08, 1.06, 0.96), "frame-top"),
+    part(box(thickness * 1.6, 0.08, 1.06, 0.04), "frame-bottom"),
+  ]);
+}
+
+function vessel(rng, { neck = 0.45, belly = 0.5 } = {}) {
+  return group([
+    part(cylinder(belly * 0.6, belly * 0.5, 0.12, 12, 0.06), "foot"),
+    part(sphere(belly, 12, 8, 0.5), "belly"),
+    part(cylinder(neck * 0.5, neck * 0.62, 0.3, 12, 0.85), "neck"),
+  ]);
+}
+
+function pile(rng, { pieces = 5 } = {}) {
+  const parts = [];
+  for (let index = 0; index < pieces; index += 1) {
+    const log = part(cylinder(0.16, 0.16, 0.9, 8, 0), `piece-${index}`);
+    log.rotation.z = Math.PI / 2 + (rng.nextFloat() - 0.5) * 0.4;
+    log.position.set(
+      (rng.nextFloat() - 0.5) * 0.3,
+      0.16 + Math.floor(index / 2) * 0.28,
+      (index % 2) * 0.3 - 0.15,
+    );
+    parts.push(log);
+  }
+  return group(parts);
+}
+
+function figure(rng) {
+  return group([
+    part(cylinder(0.22, 0.3, 0.55, 10, 0.275), "robe"),
+    part(sphere(0.2, 10, 8, 0.75), "head"),
+    part(box(0.62, 0.1, 0.18, 0.6), "arms"),
+    part(cylinder(0.34, 0.34, 0.08, 12, 0.04), "base"),
+  ]);
+}
+
 const GENERATORS = Object.freeze({
   mountain: horizonGroup,
+
+  // Architecture
   pavilion: (rng) => architecture(rng, { levels: 2 }),
+  "pavilion-single": (rng) => architecture(rng, { levels: 1, eaves: 1.24 }),
   "pavilion-tower": (rng) => architecture(rng, { levels: 3, eaves: 1.1 }),
   "ring-booth": (rng) => architecture(rng, { levels: 1, eaves: 1.3 }),
   shop: (rng) => architecture(rng, { levels: 1 }),
+  "shop-stall": (rng) => architecture(rng, { levels: 1, eaves: 1.34, platform: 0.06 }),
   "dumpling-house": (rng) => architecture(rng, { levels: 1 }),
   "fruit-shop": (rng) => architecture(rng, { levels: 1 }),
   "tea-booth": (rng) => architecture(rng, { levels: 1, eaves: 1.26 }),
@@ -304,30 +356,67 @@ const GENERATORS = Object.freeze({
   "wish-tree": blossom,
   willow: blossom,
   bridge,
+
+  // Ground surfaces
   plaza,
+  deck: (rng) => slab(rng, { sides: 5 }),
   "path-stone": slab,
+  "paving-slab": (rng) => slab(rng, { sides: 6 }),
+  "stone-platform": (rng) => slab(rng, { sides: 6 }),
+
+  // Rock
   rock: mound,
+  "stone-block": () => group([part(box(0.9, 1, 0.9, 0.5), "block")]),
+
+  // Decoration and props
   lantern,
-  "grass-clump": (rng) => bambooClump(rng),
+  "camp-light": (rng) => post(rng, { headWidth: 0.42, headHeight: 0.26 }),
   campfire: (rng) => mound(rng, { sides: 6 }),
   umbrella: (rng) => architecture(rng, { levels: 1, eaves: 1.6, platform: 0.04 }),
-  mushroom: (rng) => group([
-    part(cylinder(0.1, 0.14, 0.5, 8, 0.25), "stem"),
-    part(sphere(0.4, 10, 6, 0.62), "cap"),
+  "log-pile": pile,
+  "bamboo-pile": (rng) => pile(rng, { pieces: 7 }),
+  "shop-sign": panel,
+  "name-plate": (rng) => panel(rng, { thickness: 0.18 }),
+  "yin-yang": () => group([
+    part(cylinder(0.5, 0.5, 0.6, 24, 0.3), "disc"),
+    part(cylinder(0.24, 0.24, 0.66, 16, 0.33), "eye"),
   ]),
-  "panda-statue": creature,
-  "stone-platform": (rng) => slab(rng, { sides: 6 }),
-  "flower-bed": (rng) => slab(rng, { sides: 8 }),
   "stone-table": () => group([
     part(cylinder(0.14, 0.18, 0.62, 8, 0.31), "pedestal"),
     part(cylinder(0.5, 0.5, 0.16, 12, 0.7), "top"),
   ]),
+  vase: (rng) => vessel(rng),
+  potion: (rng) => vessel(rng, { neck: 0.3, belly: 0.38 }),
+  candle: () => group([
+    part(cylinder(0.3, 0.34, 0.78, 12, 0.39), "body"),
+    part(cone(0.1, 0.22, 8, 0.89), "flame"),
+  ]),
+  "blue-hat": () => group([
+    part(cylinder(0.5, 0.5, 0.24, 16, 0.12), "brim"),
+    part(sphere(0.34, 12, 8, 0.4), "crown"),
+  ]),
+  "lucky-bag": (rng) => group([
+    part(sphere(0.44, 12, 8, 0.44), "body"),
+    part(cylinder(0.16, 0.24, 0.3, 10, 0.85), "neck"),
+  ]),
+  ganlu: (rng) => vessel(rng, { neck: 0.26, belly: 0.34 }),
+  "flower-bed": (rng) => slab(rng, { sides: 8 }),
+  mushroom: () => group([
+    part(cylinder(0.1, 0.14, 0.5, 8, 0.25), "stem"),
+    part(sphere(0.4, 10, 6, 0.62), "cap"),
+  ]),
   "bamboo-shoot": () => group([part(cone(0.4, 1, 8, 0.5), "shoot")]),
-  "bamboo-pile": bambooClump,
+
+  // Characters
+  "npc-statue": figure,
+  "panda-statue": creature,
+  panda: creature,
+
+  // Vegetation
   palm,
   blossom,
   bamboo: bambooClump,
-  panda: creature,
+  "grass-clump": (rng) => bambooClump(rng),
 });
 
 export function listSceneGeneratorKinds() {

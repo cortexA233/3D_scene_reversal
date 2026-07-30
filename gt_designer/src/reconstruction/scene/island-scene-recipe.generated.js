@@ -126,6 +126,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       255,
       228
     ],
+    "measuredBounds": {
+      "min": [
+        -9000,
+        -9000,
+        -9000
+      ],
+      "max": [
+        9000,
+        9000,
+        9000
+      ]
+    },
     "coastlineRadii": [
       300,
       300,
@@ -347,526 +359,6 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
   ],
   "entities": [
     {
-      "semanticId": "horizon/mountain-p0998-n0042-n16559",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        99.79,
-        -4.23,
-        -1655.86
-      ],
-      "extent": [
-        451.1,
-        195.6,
-        451.1
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": -0.594
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-n3462-n0175-n14963",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        -346.18,
-        -17.55,
-        -1496.27
-      ],
-      "extent": [
-        1359.69,
-        270.32,
-        659.07
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": -0.351
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-p5206-n0195-n14447",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        520.63,
-        -19.52,
-        -1444.71
-      ],
-      "extent": [
-        969.85,
-        260.42,
-        672.29
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 0.513
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-n8045-n0112-n12155",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        -804.49,
-        -11.16,
-        -1215.53
-      ],
-      "extent": [
-        531.93,
-        195.6,
-        531.93
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 1.326
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-p10270-n0243-n9219",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        1026.99,
-        -24.33,
-        -921.88
-      ],
-      "extent": [
-        736.91,
-        260.43,
-        936.41
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 0.951
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-n9833-n0179-n6913",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        -983.3,
-        -17.87,
-        -691.35
-      ],
-      "extent": [
-        550.95,
-        270.33,
-        1380.16
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": -1.31
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-p12963-n0247-n0827",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        1296.3,
-        -24.75,
-        -82.74
-      ],
-      "extent": [
-        438.38,
-        270.32,
-        1389.24
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 1.394
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-n11978-n0044-p0122",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        -1197.83,
-        -4.36,
-        12.21
-      ],
-      "extent": [
-        389.4,
-        195.61,
-        389.4
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": -0.769
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-p13705-n0034-p3644",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        1370.53,
-        -3.43,
-        364.38
-      ],
-      "extent": [
-        389.4,
-        195.61,
-        389.4
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": -0.769
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-n10467-n0177-p5763",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        -1046.69,
-        -17.69,
-        576.33
-      ],
-      "extent": [
-        550.81,
-        270.32,
-        1379.72
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 1.308
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-p12605-n0303-p7305",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        1260.53,
-        -30.34,
-        730.53
-      ],
-      "extent": [
-        659.25,
-        270.33,
-        1360.07
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": -1.223
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-p13216-n0122-p9483",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        1321.58,
-        -12.16,
-        948.31
-      ],
-      "extent": [
-        531.93,
-        195.6,
-        531.93
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 1.326
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-n9204-n0033-p11102",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        -920.4,
-        -3.29,
-        1110.2
-      ],
-      "extent": [
-        389.4,
-        195.61,
-        389.4
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 0.802
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-p5857-n0343-p11498",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        585.68,
-        -34.31,
-        1149.76
-      ],
-      "extent": [
-        1389.24,
-        270.32,
-        438.38
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": -0.177
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-n5842-n0144-p11647",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        -584.23,
-        -14.39,
-        1164.66
-      ],
-      "extent": [
-        1024.65,
-        260.42,
-        449.92
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 0.252
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "horizon/mountain-n0917-n0136-p12892",
-      "kind": "mountain",
-      "group": "horizon",
-      "anchor": [
-        -91.66,
-        -13.65,
-        1289.24
-      ],
-      "extent": [
-        389.4,
-        195.61,
-        389.4
-      ],
-      "orientation": {
-        "type": "axis",
-        "radians": 0.802
-      },
-      "materialFamily": "distant-rock"
-    },
-    {
-      "semanticId": "structures/pavilion-p0309-p0349-n1550",
-      "kind": "pavilion",
-      "group": "structures",
-      "anchor": [
-        30.91,
-        34.92,
-        -155
-      ],
-      "extent": [
-        55.22,
-        54.79,
-        64.15
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.086
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/pavilion-tower-p2145-p0251-n1430",
-      "kind": "pavilion-tower",
-      "group": "structures",
-      "anchor": [
-        214.52,
-        25.11,
-        -143
-      ],
-      "extent": [
-        67.07,
-        67.79,
-        66.37
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.909
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/ring-booth-p0383-p0280-n0442",
-      "kind": "ring-booth",
-      "group": "structures",
-      "anchor": [
-        38.32,
-        27.99,
-        -44.21
-      ],
-      "extent": [
-        28.2,
-        18.72,
-        37
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.335
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/shop-n0125-p0272-n0061",
-      "kind": "shop",
-      "group": "structures",
-      "anchor": [
-        -12.48,
-        27.17,
-        -6.06
-      ],
-      "extent": [
-        14.54,
-        26.04,
-        37.06
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 1.472
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/swing-tree-p2501-p0251-n0035",
-      "kind": "swing-tree",
-      "group": "structures",
-      "anchor": [
-        250.07,
-        25.09,
-        -3.5
-      ],
-      "extent": [
-        76.32,
-        61.45,
-        59.97
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.66
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/dumpling-house-p0781-p0261-n0002",
-      "kind": "dumpling-house",
-      "group": "structures",
-      "anchor": [
-        78.06,
-        26.12,
-        -0.25
-      ],
-      "extent": [
-        30.32,
-        28.81,
-        67.67
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 1.519
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/fruit-shop-n0094-p0272-p0195",
-      "kind": "fruit-shop",
-      "group": "structures",
-      "anchor": [
-        -9.43,
-        27.24,
-        19.46
-      ],
-      "extent": [
-        27.86,
-        21.98,
-        49.66
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.466
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/tea-booth-p0369-p0263-p0214",
-      "kind": "tea-booth",
-      "group": "structures",
-      "anchor": [
-        36.94,
-        26.31,
-        21.37
-      ],
-      "extent": [
-        27.76,
-        23.66,
-        27.18
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.906
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/wish-tree-p1195-p0193-p0278",
-      "kind": "wish-tree",
-      "group": "structures",
-      "anchor": [
-        119.53,
-        19.31,
-        27.82
-      ],
-      "extent": [
-        53.31,
-        85.31,
-        62.11
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.411
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "structures/dessert-shop-p0310-p0268-p0505",
-      "kind": "dessert-shop",
-      "group": "structures",
-      "anchor": [
-        30.95,
-        26.79,
-        50.53
-      ],
-      "extent": [
-        24.16,
-        25.87,
-        28.74
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 1.287
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
       "semanticId": "bridges/bridge-p1321-p0088-p0980",
       "kind": "bridge",
       "group": "bridges",
@@ -882,7 +374,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "heading",
-        "radians": 1.143
+        "radians": 0
       },
       "materialFamily": "painted-timber"
     },
@@ -902,1349 +394,1459 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "heading",
-        "radians": -0.765
+        "radians": 0
       },
       "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "plazas/plaza-p0308-p0265-p0070",
-      "kind": "plaza",
-      "group": "plazas",
+      "semanticId": "decorations/bamboo-pile-p0947-p0205-p0631",
+      "kind": "bamboo-pile",
+      "group": "decorations",
       "anchor": [
-        30.78,
-        26.5,
-        7.01
+        94.67,
+        20.46,
+        63.05
       ],
       "extent": [
-        125.44,
-        0.76,
-        154.72
+        9.6,
+        3.79,
+        11.06
       ],
       "orientation": {
         "type": "axis",
-        "radians": 1.56
+        "radians": 0
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "plazas/plaza-n0201-p0264-p1108",
-      "kind": "plaza",
-      "group": "plazas",
+      "semanticId": "decorations/blue-hat-p0293-p0267-p0056",
+      "kind": "blue-hat",
+      "group": "decorations",
       "anchor": [
-        -20.11,
-        26.4,
-        110.79
+        29.25,
+        26.73,
+        5.59
       ],
       "extent": [
-        152.87,
-        0.66,
-        176.38
+        1.99,
+        1.35,
+        2
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.114
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p0186-p0263-n0416",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/camp-light-n0082-p0271-n0222",
+      "kind": "camp-light",
+      "group": "decorations",
       "anchor": [
-        18.64,
-        26.29,
-        -41.64
+        -8.22,
+        27.07,
+        -22.18
       ],
       "extent": [
-        6.5,
-        0.4,
-        8.29
+        2.55,
+        3.61,
+        2.42
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -1.293,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p0174-p0262-n0342",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/camp-light-p0234-p0265-n0080",
+      "kind": "camp-light",
+      "group": "decorations",
       "anchor": [
-        17.37,
-        26.24,
-        -34.2
+        23.37,
+        26.54,
+        -7.96
       ],
       "extent": [
-        6.53,
-        0.41,
-        8.25
+        1.66,
+        1.69,
+        1.66
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.872,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2741-p0260-n1279",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/campfire-n0289-p0239-n1475",
+      "kind": "campfire",
+      "group": "decorations",
       "anchor": [
-        274.13,
-        26,
-        -127.95
+        -28.94,
+        23.94,
+        -147.53
       ],
       "extent": [
-        5.11,
-        0.25,
+        1.73,
+        1.62,
+        0.85
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "decorations/campfire-n0291-p0239-n1469",
+      "kind": "campfire",
+      "group": "decorations",
+      "anchor": [
+        -29.1,
+        23.94,
+        -146.91
+      ],
+      "extent": [
+        1.58,
+        1.62,
+        1.21
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "decorations/campfire-n0300-p0246-n1435",
+      "kind": "campfire",
+      "group": "decorations",
+      "anchor": [
+        -29.97,
+        24.57,
+        -143.54
+      ],
+      "extent": [
+        1.23,
+        0.77,
+        1.17
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "decorations/campfire-n0307-p0245-n1420",
+      "kind": "campfire",
+      "group": "decorations",
+      "anchor": [
+        -30.72,
+        24.54,
+        -142.05
+      ],
+      "extent": [
+        1.21,
+        0.77,
+        1.28
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "decorations/campfire-n0310-p0245-n1405",
+      "kind": "campfire",
+      "group": "decorations",
+      "anchor": [
+        -31.03,
+        24.51,
+        -140.49
+      ],
+      "extent": [
+        1.3,
+        0.77,
+        1.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "decorations/candle-p0233-p0260-p0052",
+      "kind": "candle",
+      "group": "decorations",
+      "anchor": [
+        23.26,
+        25.95,
+        5.18
+      ],
+      "extent": [
+        1.8,
+        2.94,
+        1.8
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/ganlu-p0244-p0265-n0098",
+      "kind": "ganlu",
+      "group": "decorations",
+      "anchor": [
+        24.43,
+        26.47,
+        -9.85
+      ],
+      "extent": [
+        3.14,
+        5.96,
+        1.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/lantern-n0107-p0540-p0521",
+      "kind": "lantern",
+      "group": "decorations",
+      "anchor": [
+        -10.75,
+        54.02,
+        52.14
+      ],
+      "extent": [
+        3.86,
+        8.01,
         3.86
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.638,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2536-p0260-n1614",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-n0133-p0267-p0538",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        253.6,
-        26,
-        -161.41
+        -13.31,
+        26.67,
+        53.83
       ],
       "extent": [
-        5.28,
-        0.25,
-        4.16
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.263,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2653-p0260-n1145",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        265.26,
-        26,
-        -114.48
-      ],
-      "extent": [
-        4.04,
-        0.25,
+        9.8,
+        38.22,
         5.06
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.862,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2650-p0259-n1150",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-p0008-p0395-p0871",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        265,
-        25.89,
-        -114.97
+        0.76,
+        39.51,
+        87.13
       ],
       "extent": [
-        4.97,
-        0.24,
-        3.99
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.188,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2636-p0253-n1171",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        263.61,
-        25.31,
-        -117.13
-      ],
-      "extent": [
-        5.1,
-        0.25,
-        4.22
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.097,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2204-p0253-n1216",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        220.42,
-        25.34,
-        -121.56
-      ],
-      "extent": [
-        5.24,
-        0.32,
-        6.77
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": -1.22,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2518-p0175-p0651",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        251.84,
-        17.47,
-        65.05
-      ],
-      "extent": [
-        8.58,
-        0.53,
-        6.09
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.137,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-n0617-p0260-n1242",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        -61.72,
-        26,
-        -124.17
-      ],
-      "extent": [
-        5.54,
-        0.32,
-        6.49
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 1.532,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2759-p0227-n1253",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        275.87,
-        22.74,
-        -125.35
-      ],
-      "extent": [
-        4.89,
-        0.35,
-        3.59
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.365,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2563-p0227-n1591",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        256.32,
-        22.74,
-        -159.14
-      ],
-      "extent": [
-        5.16,
-        0.35,
-        3.58
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.009,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2775-p0223-n1223",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        277.52,
-        22.31,
-        -122.31
-      ],
-      "extent": [
-        4.8,
-        0.36,
-        3.71
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.543,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2591-p0223-n1570",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        259.07,
-        22.31,
-        -157
-      ],
-      "extent": [
-        5.3,
-        0.36,
-        3.78
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.168,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2768-p0222-n1234",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        276.8,
-        22.22,
-        -123.36
-      ],
-      "extent": [
-        5.54,
-        0.39,
-        3.95
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.163,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2578-p0222-n1575",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        257.8,
-        22.22,
-        -157.55
-      ],
-      "extent": [
-        5.51,
-        0.39,
-        3.69
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.212,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2756-p0226-n1256",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        275.57,
-        22.6,
-        -125.65
-      ],
-      "extent": [
-        5.75,
-        0.33,
-        4.35
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.525,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2559-p0226-n1595",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        255.92,
-        22.6,
-        -159.5
-      ],
-      "extent": [
+        3.64,
         5.82,
-        0.33,
-        4.72
+        3.64
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.15,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2748-p0227-n1271",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-p0008-p0455-p0871",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        274.77,
-        22.7,
-        -127.07
+        0.79,
+        45.46,
+        87.06
       ],
       "extent": [
-        4.81,
-        0.28,
-        3.79
+        3.64,
+        5.82,
+        3.64
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.259,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2547-p0227-n1605",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-p0009-p0509-p0864",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        254.65,
-        22.7,
-        -160.53
+        0.94,
+        50.9,
+        86.43
       ],
       "extent": [
-        4.68,
-        0.28,
-        4.05
+        3.6,
+        5.76,
+        3.6
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.116,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2747-p0225-n1267",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-p0781-p0273-p0176",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        274.71,
-        22.48,
-        -126.66
+        78.09,
+        27.32,
+        17.58
       ],
       "extent": [
-        5.01,
-        0.32,
-        5.09
+        9.17,
+        4.74,
+        9.77
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.991,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2548-p0225-n1606",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-p1448-p0150-p0000",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        254.83,
-        22.48,
-        -160.56
+        144.8,
+        14.98,
+        0.02
       ],
       "extent": [
-        5.68,
-        0.32,
-        4.22
+        16.26,
+        6.64,
+        14.24
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.616,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2756-p0229-n1250",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-p1463-p0032-n2362",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        275.58,
-        22.87,
-        -125.02
+        146.29,
+        3.18,
+        -236.21
       ],
       "extent": [
-        4.22,
-        0.27,
-        4.4
+        15.13,
+        7.73,
+        15.12
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 1.033,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2563-p0229-n1593",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-p1643-p0024-n1674",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        256.25,
-        22.87,
-        -159.33
+        164.29,
+        2.35,
+        -167.44
       ],
       "extent": [
-        4.78,
-        0.27,
-        3.66
+        18.12,
+        9.25,
+        18.11
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.658,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p0318-p0253-n1247",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lantern-p1944-p0124-p1398",
+      "kind": "lantern",
+      "group": "decorations",
       "anchor": [
-        31.78,
-        25.34,
-        -124.7
+        194.43,
+        12.38,
+        139.79
       ],
       "extent": [
-        7.12,
-        0.34,
-        5.85
+        18.12,
+        9.25,
+        18.11
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.114,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p0316-p0254-n1215",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/log-pile-n0377-p0245-n1518",
+      "kind": "log-pile",
+      "group": "decorations",
       "anchor": [
-        31.64,
-        25.42,
-        -121.46
+        -37.69,
+        24.46,
+        -151.84
       ],
       "extent": [
-        6.02,
-        0.35,
-        7.13
+        6.4,
+        4.3,
+        6.76
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -1.548,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p0339-p0253-n1269",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/log-pile-n0398-p0245-n1538",
+      "kind": "log-pile",
+      "group": "decorations",
       "anchor": [
-        33.86,
-        25.34,
-        -126.89
+        -39.85,
+        24.45,
+        -153.83
       ],
       "extent": [
-        7.7,
-        0.37,
-        5.86
+        6.4,
+        4.3,
+        6.76
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.478,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2377-p0253-n1771",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/log-pile-n0431-p0244-n1533",
+      "kind": "log-pile",
+      "group": "decorations",
       "anchor": [
-        237.7,
-        25.34,
-        -177.12
+        -43.06,
+        24.42,
+        -153.3
       ],
       "extent": [
-        5.15,
-        0.33,
-        6.61
+        6.04,
+        4.3,
+        6.25
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.891,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-p2241-p0253-n1792",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/lucky-bag-p0241-p0253-n0141",
+      "kind": "lucky-bag",
+      "group": "decorations",
       "anchor": [
-        224.14,
-        25.34,
-        -179.19
-      ],
-      "extent": [
-        6.28,
-        0.33,
-        5.43
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.798,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1067-p0242-n1754",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        106.72,
-        24.16,
-        -175.41
-      ],
-      "extent": [
-        5.17,
-        0.29,
-        5.56
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 1.086,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1022-p0246-n1703",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        102.2,
-        24.59,
-        -170.33
-      ],
-      "extent": [
-        7.01,
-        0.34,
-        5.33
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.485,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1056-p0152-n1719",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        105.58,
-        15.23,
-        -171.87
-      ],
-      "extent": [
-        6.56,
-        0.35,
-        6.05
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.87,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p2474-p0174-p0637",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        247.44,
-        17.44,
-        63.69
-      ],
-      "extent": [
-        6.96,
-        0.39,
-        7.99
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 1.435,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1109-p0248-n1731",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        110.87,
-        24.76,
-        -173.13
-      ],
-      "extent": [
-        6.34,
-        0.32,
-        5.57
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.182,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1114-p0251-n1806",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        111.37,
-        25.06,
-        -180.58
-      ],
-      "extent": [
-        5.48,
-        0.31,
-        6.3
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 1.445,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1044-p0242-n1768",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        104.35,
-        24.15,
-        -176.84
-      ],
-      "extent": [
-        6.18,
-        0.35,
-        6.2
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.612,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1563-p0259-p1055",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        156.28,
-        25.87,
-        105.51
-      ],
-      "extent": [
-        8.9,
-        0.43,
-        7.48
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.041,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1633-p0260-p1097",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        163.31,
-        26,
-        109.72
-      ],
-      "extent": [
-        6.28,
-        0.34,
-        6.15
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.573,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p1693-p0260-p1088",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        169.27,
-        26,
-        108.81
-      ],
-      "extent": [
-        6.63,
-        0.32,
-        5.59
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.03,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-n0261-p0264-p0628",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        -26.13,
-        26.35,
-        62.8
-      ],
-      "extent": [
-        7.1,
-        0.35,
-        5.37
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.527,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-n0310-p0264-p0641",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        -31.05,
-        26.35,
-        64.05
-      ],
-      "extent": [
-        5.63,
-        0.34,
-        6.99
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": -1.391,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-n1001-p0241-n1317",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        -100.08,
         24.11,
-        -131.67
+        25.28,
+        -14.1
       ],
       "extent": [
-        3.92,
-        0.24,
-        4.96
+        4.67,
+        4.52,
+        2.97
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -1.325,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-n0994-p0241-n1328",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/name-plate-n0125-p0261-p0781",
+      "kind": "name-plate",
+      "group": "decorations",
       "anchor": [
-        -99.44,
-        24.11,
-        -132.83
+        -12.51,
+        26.12,
+        78.11
       ],
       "extent": [
-        4.66,
-        0.29,
-        5.69
+        40.43,
+        41.69,
+        36.35
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.834,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "heading",
+        "radians": 0
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "painted-timber"
     },
     {
-      "semanticId": "paths/path-stone-n1011-p0260-n1300",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/npc-statue-n0193-p0251-n1266",
+      "kind": "npc-statue",
+      "group": "decorations",
       "anchor": [
-        -101.08,
-        26,
-        -129.96
-      ],
-      "extent": [
-        4.87,
-        0.27,
-        4.77
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.941,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-n0989-p0251-n1339",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        -98.88,
+        -19.33,
         25.13,
-        -133.94
+        -126.56
+      ],
+      "extent": [
+        9.51,
+        14.05,
+        11.13
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/npc-statue-p1261-p0181-p0363",
+      "kind": "npc-statue",
+      "group": "decorations",
+      "anchor": [
+        126.1,
+        18.13,
+        36.32
       ],
       "extent": [
         4.98,
-        0.28,
-        5.84
+        6.87,
+        3.01
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 1.543,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/npc-statue-p1378-p0018-n2525",
+      "kind": "npc-statue",
+      "group": "decorations",
+      "anchor": [
+        137.82,
+        1.77,
+        -252.49
+      ],
+      "extent": [
+        20.87,
+        9.45,
+        19.21
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/npc-statue-p1386-p0125-n0276",
+      "kind": "npc-statue",
+      "group": "decorations",
+      "anchor": [
+        138.62,
+        12.49,
+        -27.64
+      ],
+      "extent": [
+        8.16,
+        3.57,
+        7.44
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/npc-statue-p1405-p0146-n0122",
+      "kind": "npc-statue",
+      "group": "decorations",
+      "anchor": [
+        140.54,
+        14.59,
+        -12.25
+      ],
+      "extent": [
+        12.74,
+        6.42,
+        13.91
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/npc-statue-p1486-p0135-p0175",
+      "kind": "npc-statue",
+      "group": "decorations",
+      "anchor": [
+        148.56,
+        13.54,
+        17.5
+      ],
+      "extent": [
+        16.65,
+        8.39,
+        18.18
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/npc-statue-p1758-p0113-p1179",
+      "kind": "npc-statue",
+      "group": "decorations",
+      "anchor": [
+        175.76,
+        11.32,
+        117.92
+      ],
+      "extent": [
+        9.09,
+        3.57,
+        8.03
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/npc-statue-p1856-p0118-p1257",
+      "kind": "npc-statue",
+      "group": "decorations",
+      "anchor": [
+        185.57,
+        11.8,
+        125.7
+      ],
+      "extent": [
+        20.87,
+        9.45,
+        19.21
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/panda-statue-n0143-p0334-p0247",
+      "kind": "panda-statue",
+      "group": "decorations",
+      "anchor": [
+        -14.32,
+        33.39,
+        24.69
+      ],
+      "extent": [
+        4.64,
+        1.58,
+        5.72
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "decorations/panda-statue-n0202-p0272-p0241",
+      "kind": "panda-statue",
+      "group": "decorations",
+      "anchor": [
+        -20.16,
+        27.24,
+        24.06
+      ],
+      "extent": [
+        4.59,
+        3.34,
+        5.48
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "decorations/potion-p0288-p0264-n0089",
+      "kind": "potion",
+      "group": "decorations",
+      "anchor": [
+        28.83,
+        26.44,
+        -8.93
+      ],
+      "extent": [
+        2.25,
+        3.59,
+        2.13
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/potion-p0292-p0262-n0089",
+      "kind": "potion",
+      "group": "decorations",
+      "anchor": [
+        29.19,
+        26.19,
+        -8.95
+      ],
+      "extent": [
+        2.13,
+        3.03,
+        2.13
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/potion-p0292-p0263-n0089",
+      "kind": "potion",
+      "group": "decorations",
+      "anchor": [
+        29.19,
+        26.25,
+        -8.95
+      ],
+      "extent": [
+        2.03,
+        1.73,
+        2.03
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/potion-p0292-p0265-n0098",
+      "kind": "potion",
+      "group": "decorations",
+      "anchor": [
+        29.21,
+        26.45,
+        -9.83
+      ],
+      "extent": [
+        0.81,
+        1.12,
+        0.43
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/shop-sign-n0009-p0268-p0199",
+      "kind": "shop-sign",
+      "group": "decorations",
+      "anchor": [
+        -0.88,
+        26.79,
+        19.9
+      ],
+      "extent": [
+        2.86,
+        24.99,
+        5.77
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/shop-sign-n0111-p0268-p0416",
+      "kind": "shop-sign",
+      "group": "decorations",
+      "anchor": [
+        -11.13,
+        26.79,
+        41.62
+      ],
+      "extent": [
+        4.41,
+        25.59,
+        5.46
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/shop-sign-p0315-p0365-p0170",
+      "kind": "shop-sign",
+      "group": "decorations",
+      "anchor": [
+        31.45,
+        36.45,
+        16.96
+      ],
+      "extent": [
+        1.64,
+        8.74,
+        8.42
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/shop-sign-p0344-p0268-p0681",
+      "kind": "shop-sign",
+      "group": "decorations",
+      "anchor": [
+        34.41,
+        26.79,
+        68.05
+      ],
+      "extent": [
+        3.42,
+        24.99,
+        5.78
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/shop-sign-p0788-p0273-p0259",
+      "kind": "shop-sign",
+      "group": "decorations",
+      "anchor": [
+        78.81,
+        27.32,
+        25.87
+      ],
+      "extent": [
+        10.14,
+        2.37,
+        3.02
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/shop-sign-p0860-p0273-p0174",
+      "kind": "shop-sign",
+      "group": "decorations",
+      "anchor": [
+        86.01,
+        27.32,
+        17.39
+      ],
+      "extent": [
+        3.02,
+        2.37,
+        10.15
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/stone-block-n0341-p0258-p0530",
+      "kind": "stone-block",
+      "group": "decorations",
+      "anchor": [
+        -34.09,
+        25.75,
+        53.01
+      ],
+      "extent": [
+        2.03,
+        1.9,
+        2.15
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
       },
       "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "paths/path-stone-n0985-p0301-n1407",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/stone-block-p0340-p0274-p0059",
+      "kind": "stone-block",
+      "group": "decorations",
       "anchor": [
-        -98.54,
-        30.09,
-        -140.71
+        33.99,
+        27.42,
+        5.87
       ],
       "extent": [
-        4.26,
-        0.27,
-        5.39
+        2.15,
+        1.91,
+        2.33
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.874,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "axis",
+        "radians": 0
       },
       "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "paths/path-stone-n0984-p0301-n1407",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/stone-block-p0682-p0276-n0220",
+      "kind": "stone-block",
+      "group": "decorations",
       "anchor": [
-        -98.44,
-        30.09,
-        -140.74
+        68.2,
+        27.64,
+        -21.96
       ],
       "extent": [
-        4.93,
-        0.3,
-        5.8
+        1.87,
+        1.74,
+        1.98
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.792,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "axis",
+        "radians": 0
       },
       "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "paths/path-stone-n0999-p0301-n1389",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/stone-block-p1043-p0193-n0070",
+      "kind": "stone-block",
+      "group": "decorations",
       "anchor": [
-        -99.86,
-        30.09,
-        -138.91
+        104.25,
+        19.34,
+        -7
       ],
       "extent": [
-        6.44,
-        0.31,
-        5.09
+        1.36,
+        1.21,
+        1.45
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.251,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "axis",
+        "radians": 0
       },
       "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "paths/path-stone-n0970-p0301-n1432",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/stone-block-p1097-p0248-p0456",
+      "kind": "stone-block",
+      "group": "decorations",
       "anchor": [
-        -97.01,
-        30.09,
-        -143.19
+        109.71,
+        24.79,
+        45.57
       ],
       "extent": [
-        5.75,
-        0.28,
-        4.66
+        2.01,
+        1.79,
+        2.2
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.152,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "axis",
+        "radians": 0
       },
       "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "paths/path-stone-n0716-p0434-n1744",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/stone-block-p1103-p0194-p0042",
+      "kind": "stone-block",
+      "group": "decorations",
       "anchor": [
-        -71.62,
-        43.41,
-        -174.44
+        110.33,
+        19.37,
+        4.18
       ],
       "extent": [
-        5.88,
-        0.28,
-        4.6
+        2.57,
+        2.33,
+        2.86
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": 0.288,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "axis",
+        "radians": 0
       },
       "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "paths/path-stone-p2783-p0258-n1201",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/stone-table-p2279-p0242-p0147",
+      "kind": "stone-table",
+      "group": "decorations",
       "anchor": [
-        278.3,
-        25.8,
-        -120.14
+        227.94,
+        24.2,
+        14.7
       ],
       "extent": [
-        3.82,
-        0.23,
-        4.49
+        21.3,
+        10.53,
+        21.46
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.792,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
       },
       "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "paths/path-stone-p2605-p0258-n1555",
-      "kind": "path-stone",
-      "group": "paths",
+      "semanticId": "decorations/umbrella-n0633-p0254-p0965",
+      "kind": "umbrella",
+      "group": "decorations",
       "anchor": [
-        260.46,
-        25.8,
-        -155.46
+        -63.28,
+        25.37,
+        96.52
       ],
       "extent": [
-        3.69,
-        0.23,
-        4.8
+        17.49,
+        16.43,
+        16.75
       ],
       "orientation": {
-        "type": "surface-aligned",
-        "radians": -1.166,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/umbrella-p0235-p0253-p0328",
+      "kind": "umbrella",
+      "group": "decorations",
+      "anchor": [
+        23.54,
+        25.31,
+        32.75
+      ],
+      "extent": [
+        10.94,
+        9.19,
+        9.32
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/umbrella-p0953-p0232-n0598",
+      "kind": "umbrella",
+      "group": "decorations",
+      "anchor": [
+        95.25,
+        23.15,
+        -59.77
+      ],
+      "extent": [
+        14.72,
+        14.22,
+        17.01
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/vase-p0243-p0255-n0055",
+      "kind": "vase",
+      "group": "decorations",
+      "anchor": [
+        24.34,
+        25.51,
+        -5.52
+      ],
+      "extent": [
+        2.45,
+        3.9,
+        2.45
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "decorations/yin-yang-p0357-p0266-n0046",
+      "kind": "yin-yang",
+      "group": "decorations",
+      "anchor": [
+        35.66,
+        26.64,
+        -4.62
+      ],
+      "extent": [
+        24.36,
+        20.98,
+        33.41
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
       },
       "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "horizon/mountain-n0917-n0136-p12892",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        -91.66,
+        -13.65,
+        1289.24
+      ],
+      "extent": [
+        389.4,
+        195.6,
+        389.4
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-n10467-n0177-p5763",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        -1046.69,
+        -17.69,
+        576.33
+      ],
+      "extent": [
+        550.82,
+        270.33,
+        1379.72
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-n11978-n0044-p0122",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        -1197.83,
+        -4.36,
+        12.21
+      ],
+      "extent": [
+        389.4,
+        195.6,
+        389.4
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-n3462-n0175-n14963",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        -346.17,
+        -17.55,
+        -1496.27
+      ],
+      "extent": [
+        1359.69,
+        270.33,
+        659.06
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-n5842-n0144-p11647",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        -584.23,
+        -14.39,
+        1164.66
+      ],
+      "extent": [
+        1024.65,
+        260.42,
+        449.92
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-n8045-n0112-n12155",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        -804.49,
+        -11.16,
+        -1215.53
+      ],
+      "extent": [
+        531.93,
+        195.6,
+        531.93
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-n9204-n0033-p11102",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        -920.4,
+        -3.29,
+        1110.2
+      ],
+      "extent": [
+        389.4,
+        195.61,
+        389.4
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-n9833-n0179-n6913",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        -983.3,
+        -17.86,
+        -691.35
+      ],
+      "extent": [
+        550.95,
+        270.32,
+        1380.16
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-p0998-n0042-n16559",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        99.79,
+        -4.23,
+        -1655.86
+      ],
+      "extent": [
+        451.1,
+        195.6,
+        451.1
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-p10270-n0243-n9219",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        1026.99,
+        -24.33,
+        -921.88
+      ],
+      "extent": [
+        736.92,
+        260.42,
+        936.41
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-p12605-n0303-p7305",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        1260.52,
+        -30.34,
+        730.53
+      ],
+      "extent": [
+        659.24,
+        270.33,
+        1360.07
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-p12963-n0247-n0827",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        1296.3,
+        -24.75,
+        -82.74
+      ],
+      "extent": [
+        438.39,
+        270.32,
+        1389.24
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-p13216-n0122-p9483",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        1321.58,
+        -12.16,
+        948.31
+      ],
+      "extent": [
+        531.93,
+        195.61,
+        531.93
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-p13705-n0034-p3644",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        1370.53,
+        -3.43,
+        364.38
+      ],
+      "extent": [
+        389.4,
+        195.6,
+        389.4
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-p5206-n0195-n14447",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        520.63,
+        -19.52,
+        -1444.71
+      ],
+      "extent": [
+        969.85,
+        260.42,
+        672.3
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
+    },
+    {
+      "semanticId": "horizon/mountain-p5857-n0343-p11498",
+      "kind": "mountain",
+      "group": "horizon",
+      "anchor": [
+        585.68,
+        -34.31,
+        1149.76
+      ],
+      "extent": [
+        1389.24,
+        270.33,
+        438.39
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "distant-rock"
     },
     {
       "semanticId": "paths/path-stone-n0582-p0256-p0342",
@@ -2262,32 +1864,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "surface-aligned",
-        "radians": -0.322,
-        "supportNormal": [
-          0,
-          1,
-          0
-        ]
-      },
-      "materialFamily": "paving-stone"
-    },
-    {
-      "semanticId": "paths/path-stone-p0352-p0256-n1053",
-      "kind": "path-stone",
-      "group": "paths",
-      "anchor": [
-        35.2,
-        25.57,
-        -105.29
-      ],
-      "extent": [
-        8.96,
-        0.67,
-        5.86
-      ],
-      "orientation": {
-        "type": "surface-aligned",
-        "radians": -0.4,
+        "radians": 0,
         "supportNormal": [
           0,
           1,
@@ -2312,7 +1889,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "surface-aligned",
-        "radians": 0.635,
+        "radians": 0,
         "supportNormal": [
           0,
           1,
@@ -2322,393 +1899,1603 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0578-p0255-n1207",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/path-stone-p0352-p0256-n1053",
+      "kind": "path-stone",
+      "group": "paths",
       "anchor": [
-        57.79,
-        25.53,
-        -120.72
+        35.2,
+        25.57,
+        -105.29
       ],
       "extent": [
-        17.13,
-        7.97,
-        19.1
+        8.96,
+        0.67,
+        5.86
       ],
       "orientation": {
-        "type": "axis",
-        "radians": -1.138
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0431-p0253-n1292",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-n0261-p0264-p0628",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        43.12,
-        25.25,
-        -129.23
+        -26.13,
+        26.35,
+        62.8
       ],
       "extent": [
-        12.93,
+        7.1,
+        0.35,
+        5.37
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0310-p0264-p0641",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -31.05,
+        26.35,
+        64.05
+      ],
+      "extent": [
+        5.63,
+        0.34,
+        6.99
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0519-p0257-p0707",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -51.88,
+        25.68,
+        70.74
+      ],
+      "extent": [
+        11.58,
+        0.94,
+        3.82
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0617-p0260-n1242",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -61.72,
+        26,
+        -124.17
+      ],
+      "extent": [
+        5.54,
+        0.32,
+        6.49
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0716-p0434-n1744",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -71.62,
+        43.41,
+        -174.44
+      ],
+      "extent": [
+        5.88,
+        0.28,
+        4.6
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0970-p0301-n1432",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -97.01,
+        30.09,
+        -143.19
+      ],
+      "extent": [
+        5.75,
+        0.28,
+        4.66
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0984-p0301-n1407",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -98.44,
+        30.09,
+        -140.74
+      ],
+      "extent": [
+        4.93,
+        0.3,
+        5.8
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0985-p0301-n1407",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -98.54,
+        30.09,
+        -140.71
+      ],
+      "extent": [
+        4.26,
+        0.27,
+        5.39
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0989-p0251-n1339",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -98.88,
+        25.13,
+        -133.94
+      ],
+      "extent": [
+        4.98,
+        0.29,
+        5.84
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0994-p0241-n1328",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -99.44,
+        24.11,
+        -132.83
+      ],
+      "extent": [
+        4.66,
+        0.29,
+        5.69
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n0999-p0301-n1389",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -99.86,
+        30.09,
+        -138.91
+      ],
+      "extent": [
+        6.44,
+        0.31,
+        5.09
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n1001-p0241-n1317",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -100.08,
+        24.11,
+        -131.67
+      ],
+      "extent": [
+        3.92,
+        0.24,
+        4.96
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-n1011-p0260-n1300",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        -101.08,
+        26,
+        -129.96
+      ],
+      "extent": [
+        4.87,
+        0.27,
+        4.77
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0174-p0262-n0342",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        17.37,
+        26.24,
+        -34.2
+      ],
+      "extent": [
+        6.53,
+        0.41,
+        8.25
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0186-p0263-n0416",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        18.64,
+        26.29,
+        -41.64
+      ],
+      "extent": [
+        6.5,
+        0.4,
+        8.29
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0316-p0254-n1215",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        31.64,
+        25.42,
+        -121.46
+      ],
+      "extent": [
+        6.02,
+        0.35,
+        7.13
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0318-p0253-n1247",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        31.78,
+        25.34,
+        -124.7
+      ],
+      "extent": [
+        7.12,
+        0.34,
+        5.85
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0339-p0253-n1269",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        33.86,
+        25.34,
+        -126.89
+      ],
+      "extent": [
+        7.7,
+        0.37,
+        5.86
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0952-p0126-n0696",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        95.2,
+        12.61,
+        -69.61
+      ],
+      "extent": [
+        8.54,
+        5.01,
+        8.74
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0952-p0128-n0532",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        95.19,
+        12.83,
+        -53.17
+      ],
+      "extent": [
+        7.7,
+        4.57,
+        7.39
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0958-p0122-n0610",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        95.79,
+        12.18,
+        -61
+      ],
+      "extent": [
+        9.08,
+        5.87,
+        9.49
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p0959-p0127-n0464",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        95.94,
+        12.7,
+        -46.39
+      ],
+      "extent": [
+        8.15,
+        4.89,
+        7.77
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p1022-p0246-n1703",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        102.2,
+        24.59,
+        -170.33
+      ],
+      "extent": [
+        7,
+        0.34,
+        5.33
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p1044-p0242-n1768",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        104.35,
+        24.15,
+        -176.84
+      ],
+      "extent": [
+        6.18,
+        0.34,
+        6.2
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p1056-p0152-n1719",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        105.58,
+        15.23,
+        -171.87
+      ],
+      "extent": [
         6.56,
-        13.8
+        0.35,
+        6.05
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0501-p0257-n1237",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p1067-p0242-n1754",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        50.12,
-        25.7,
-        -123.67
+        106.72,
+        24.16,
+        -175.41
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        5.17,
+        0.29,
+        5.56
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0174-p0255-n1273",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p1109-p0248-n1731",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        17.42,
-        25.53,
-        -127.32
+        110.87,
+        24.76,
+        -173.13
       ],
       "extent": [
-        17.13,
-        7.97,
-        19.1
+        6.34,
+        0.32,
+        5.57
       ],
       "orientation": {
-        "type": "axis",
-        "radians": -1.138
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0098-p0257-n1303",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p1114-p0251-n1806",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        9.76,
-        25.7,
-        -130.26
+        111.37,
+        25.06,
+        -180.58
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        5.48,
+        0.31,
+        6.3
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0374-p0255-n1440",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p1563-p0259-p1055",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        37.43,
-        25.53,
-        -144.03
+        156.28,
+        25.87,
+        105.51
       ],
       "extent": [
-        17.13,
-        7.97,
-        19.1
+        8.9,
+        0.43,
+        7.48
       ],
       "orientation": {
-        "type": "axis",
-        "radians": -1.138
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0298-p0257-n1470",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p1633-p0260-p1097",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        29.77,
-        25.7,
-        -146.97
+        163.31,
+        26,
+        109.72
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        6.28,
+        0.34,
+        6.15
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0349-p0241-n1258",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p1693-p0260-p1088",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        34.94,
-        24.05,
-        -125.76
+        169.27,
+        26,
+        108.81
       ],
       "extent": [
-        18.71,
-        7.97,
-        16.87
+        6.63,
+        0.32,
+        5.59
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 0.546
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0312-p0242-n1187",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2204-p0253-n1216",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        31.17,
-        24.22,
-        -118.68
+        220.42,
+        25.34,
+        -121.56
       ],
       "extent": [
-        20.86,
-        9.42,
-        18.72
+        5.24,
+        0.32,
+        6.77
       ],
       "orientation": {
-        "type": "axis",
-        "radians": -0.249
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0515-p0257-n1397",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2241-p0253-n1792",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        51.47,
-        25.7,
-        -139.7
+        224.14,
+        25.34,
+        -179.19
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        6.28,
+        0.32,
+        5.43
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0015-p0257-n1385",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2377-p0253-n1771",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        1.52,
-        25.7,
-        -138.52
+        237.7,
+        25.34,
+        -177.12
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        5.15,
+        0.33,
+        6.61
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0363-p0257-n1753",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2474-p0174-p0637",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        36.28,
-        25.7,
-        -175.31
+        247.44,
+        17.44,
+        63.69
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        6.96,
+        0.39,
+        7.99
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0174-p0255-n1165",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2518-p0175-p0651",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        17.43,
-        25.53,
-        -116.52
+        251.84,
+        17.47,
+        65.05
       ],
       "extent": [
-        17.13,
-        7.97,
-        19.1
+        8.58,
+        0.53,
+        6.09
       ],
       "orientation": {
-        "type": "axis",
-        "radians": -1.138
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p0515-p0257-n1563",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2536-p0260-n1614",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        51.47,
-        25.7,
-        -156.3
+        253.6,
+        26,
+        -161.41
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        5.28,
+        0.25,
+        4.16
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p2380-p0168-n1268",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2547-p0227-n1605",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        238.04,
-        16.83,
-        -126.8
+        254.65,
+        22.7,
+        -160.53
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        4.68,
+        0.28,
+        4.05
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p2191-p0154-n1218",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2548-p0225-n1606",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        219.08,
-        15.35,
-        -121.82
+        254.83,
+        22.49,
+        -160.56
       ],
       "extent": [
-        20.86,
-        9.42,
-        18.72
+        5.68,
+        0.32,
+        4.23
       ],
       "orientation": {
-        "type": "axis",
-        "radians": -0.249
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p2394-p0168-n1428",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2559-p0226-n1595",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        239.39,
-        16.83,
-        -142.84
+        255.92,
+        22.6,
+        -159.5
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        5.82,
+        0.33,
+        4.72
       ],
       "orientation": {
-        "type": "axis",
-        "radians": 1.209
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p2053-p0167-n1197",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2563-p0227-n1591",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        205.34,
-        16.67,
-        -119.66
+        256.32,
+        22.74,
+        -159.14
       ],
       "extent": [
-        17.13,
-        7.97,
-        19.1
+        5.16,
+        0.35,
+        3.58
       ],
       "orientation": {
-        "type": "axis",
-        "radians": -1.138
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-p2394-p0168-n1594",
-      "kind": "rock",
-      "group": "rocks",
+      "semanticId": "paths/paving-slab-p2563-p0229-n1593",
+      "kind": "paving-slab",
+      "group": "paths",
       "anchor": [
-        239.39,
-        16.83,
-        -159.43
+        256.25,
+        22.87,
+        -159.33
       ],
       "extent": [
-        18.58,
-        9.42,
-        19.83
+        4.78,
+        0.27,
+        3.66
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2578-p0222-n1575",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        257.8,
+        22.22,
+        -157.55
+      ],
+      "extent": [
+        5.51,
+        0.39,
+        3.69
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2591-p0223-n1570",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        259.07,
+        22.31,
+        -157
+      ],
+      "extent": [
+        5.3,
+        0.36,
+        3.78
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2605-p0258-n1555",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        260.46,
+        25.8,
+        -155.46
+      ],
+      "extent": [
+        3.69,
+        0.23,
+        4.8
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2636-p0253-n1171",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        263.61,
+        25.32,
+        -117.13
+      ],
+      "extent": [
+        5.1,
+        0.25,
+        4.22
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2650-p0259-n1150",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        265,
+        25.89,
+        -114.97
+      ],
+      "extent": [
+        4.97,
+        0.24,
+        3.99
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2653-p0260-n1145",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        265.26,
+        26,
+        -114.48
+      ],
+      "extent": [
+        4.04,
+        0.25,
+        5.06
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2741-p0260-n1279",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        274.13,
+        26,
+        -127.95
+      ],
+      "extent": [
+        5.11,
+        0.25,
+        3.86
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2747-p0225-n1267",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        274.71,
+        22.49,
+        -126.66
+      ],
+      "extent": [
+        5.01,
+        0.32,
+        5.09
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2748-p0227-n1271",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        274.77,
+        22.7,
+        -127.07
+      ],
+      "extent": [
+        4.81,
+        0.28,
+        3.79
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2756-p0226-n1256",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        275.58,
+        22.6,
+        -125.65
+      ],
+      "extent": [
+        5.75,
+        0.33,
+        4.35
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2756-p0229-n1250",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        275.58,
+        22.87,
+        -125.02
+      ],
+      "extent": [
+        4.22,
+        0.27,
+        4.4
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2759-p0227-n1253",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        275.87,
+        22.74,
+        -125.35
+      ],
+      "extent": [
+        4.89,
+        0.35,
+        3.59
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2768-p0222-n1234",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        276.8,
+        22.22,
+        -123.36
+      ],
+      "extent": [
+        5.54,
+        0.39,
+        3.95
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2775-p0223-n1223",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        277.52,
+        22.31,
+        -122.31
+      ],
+      "extent": [
+        4.8,
+        0.36,
+        3.71
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "paths/paving-slab-p2783-p0258-n1201",
+      "kind": "paving-slab",
+      "group": "paths",
+      "anchor": [
+        278.3,
+        25.8,
+        -120.14
+      ],
+      "extent": [
+        3.82,
+        0.23,
+        4.49
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "plazas/deck-n0426-p0132-n0699",
+      "kind": "deck",
+      "group": "plazas",
+      "anchor": [
+        -42.59,
+        13.23,
+        -69.89
+      ],
+      "extent": [
+        70.88,
+        4.51,
+        93.17
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "plazas/deck-p0566-p0158-p1307",
+      "kind": "deck",
+      "group": "plazas",
+      "anchor": [
+        56.57,
+        15.8,
+        130.69
+      ],
+      "extent": [
+        92.79,
+        4.51,
+        77.89
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "plazas/deck-p1782-p0166-p0787",
+      "kind": "deck",
+      "group": "plazas",
+      "anchor": [
+        178.18,
+        16.62,
+        78.67
+      ],
+      "extent": [
+        78.88,
+        4.51,
+        89.46
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "plazas/deck-p2455-p0200-n0959",
+      "kind": "deck",
+      "group": "plazas",
+      "anchor": [
+        245.51,
+        19.97,
+        -95.95
+      ],
+      "extent": [
+        65.35,
+        4.38,
+        50.34
+      ],
+      "orientation": {
+        "type": "surface-aligned",
+        "radians": 0,
+        "supportNormal": [
+          0,
+          1,
+          0
+        ]
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "plazas/plaza-n0201-p0264-p1108",
+      "kind": "plaza",
+      "group": "plazas",
+      "anchor": [
+        -20.11,
+        26.4,
+        110.79
+      ],
+      "extent": [
+        152.87,
+        0.67,
+        176.39
       ],
       "orientation": {
         "type": "axis",
-        "radians": 1.209
+        "radians": 0
       },
-      "materialFamily": "shore-rock"
+      "materialFamily": "paving-stone"
     },
     {
-      "semanticId": "rocks/rock-n0231-p0538-p0634",
+      "semanticId": "plazas/plaza-p0308-p0265-p0070",
+      "kind": "plaza",
+      "group": "plazas",
+      "anchor": [
+        30.78,
+        26.5,
+        7.01
+      ],
+      "extent": [
+        125.44,
+        0.76,
+        154.72
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "paving-stone"
+    },
+    {
+      "semanticId": "rocks/rock-n0231-p0409-p0634",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        -23.07,
-        53.75,
-        63.39
+        -23.08,
+        40.9,
+        63.38
       ],
       "extent": [
         4.01,
@@ -2717,7 +3504,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "axis",
-        "radians": 0.75
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
@@ -2737,18 +3524,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "axis",
-        "radians": 0.978
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-n0231-p0409-p0634",
+      "semanticId": "rocks/rock-n0231-p0538-p0634",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        -23.08,
-        40.9,
-        63.38
+        -23.07,
+        53.75,
+        63.39
       ],
       "extent": [
         4.01,
@@ -2757,187 +3544,427 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "axis",
-        "radians": 1.126
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1741-p0120-p1256",
+      "semanticId": "rocks/rock-n0304-p0539-p0733",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        174.05,
-        12,
-        125.59
+        -30.45,
+        53.87,
+        73.31
       ],
       "extent": [
-        14.79,
-        7.47,
-        16.06
+        4.01,
+        6.42,
+        4.01
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.774
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1917-p0020-n2427",
+      "semanticId": "rocks/rock-n0305-p0410-p0733",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        191.67,
-        1.97,
-        -242.68
+        -30.46,
+        41.02,
+        73.3
       ],
       "extent": [
-        14.79,
-        7.47,
-        16.06
+        4.01,
+        6.42,
+        4.01
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.774
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1331-p0132-n0215",
+      "semanticId": "rocks/rock-n0305-p0476-p0733",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        133.1,
-        13.17,
-        -21.47
+        -30.46,
+        47.57,
+        73.3
       ],
       "extent": [
-        15.78,
-        7.47,
-        14.41
+        4.01,
+        6.42,
+        4.01
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.285
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1644-p0109-p1198",
+      "semanticId": "rocks/rock-p0015-p0257-n1385",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        164.44,
-        10.91,
-        119.8
+        1.52,
+        25.7,
+        -138.52
       ],
       "extent": [
-        19.36,
-        7.84,
-        16.98
+        18.58,
+        9.42,
+        19.83
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.004
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1868-p0009-n2536",
+      "semanticId": "rocks/rock-p0070-p0392-p0779",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        186.83,
-        0.88,
-        -253.61
+        7,
+        39.21,
+        77.86
       ],
       "extent": [
-        19.36,
-        7.84,
-        16.98
+        3.64,
+        5.83,
+        3.64
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.004
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1699-p0009-n1806",
+      "semanticId": "rocks/rock-p0070-p0452-p0778",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        169.91,
-        0.88,
-        -180.63
+        7.01,
+        45.15,
+        77.81
       ],
       "extent": [
-        19.36,
-        7.84,
-        16.98
+        3.64,
+        5.82,
+        3.64
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.004
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1562-p0009-n1505",
+      "semanticId": "rocks/rock-p0071-p0507-p0773",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        156.16,
-        0.88,
-        -150.49
+        7.11,
+        50.65,
+        77.26
       ],
       "extent": [
-        19.36,
-        7.84,
-        16.98
+        3.6,
+        5.77,
+        3.6
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.004
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1275-p0121-n0314",
+      "semanticId": "rocks/rock-p0098-p0257-n1303",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        127.47,
-        12.08,
-        -31.44
+        9.76,
+        25.7,
+        -130.26
       ],
       "extent": [
-        19.44,
-        7.84,
-        17.45
+        18.58,
+        9.42,
+        19.83
       ],
       "orientation": {
         "type": "axis",
-        "radians": 0.469
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p1152-p0071-p1365",
+      "semanticId": "rocks/rock-p0174-p0255-n1165",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        115.21,
-        7.09,
-        136.48
+        17.43,
+        25.54,
+        -116.52
       ],
       "extent": [
-        39.23,
-        16.72,
-        34.33
+        17.13,
+        7.97,
+        19.1
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.102
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0174-p0255-n1273",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        17.42,
+        25.54,
+        -127.32
+      ],
+      "extent": [
+        17.13,
+        7.97,
+        19.1
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0298-p0257-n1470",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        29.77,
+        25.7,
+        -146.97
+      ],
+      "extent": [
+        18.58,
+        9.42,
+        19.83
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0312-p0242-n1187",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        31.17,
+        24.22,
+        -118.68
+      ],
+      "extent": [
+        20.86,
+        9.42,
+        18.72
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0349-p0241-n1258",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        34.94,
+        24.06,
+        -125.76
+      ],
+      "extent": [
+        18.71,
+        7.97,
+        16.87
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0363-p0257-n1753",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        36.28,
+        25.7,
+        -175.31
+      ],
+      "extent": [
+        18.58,
+        9.42,
+        19.83
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0374-p0255-n1440",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        37.43,
+        25.54,
+        -144.03
+      ],
+      "extent": [
+        17.13,
+        7.97,
+        19.1
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0431-p0253-n1292",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        43.13,
+        25.25,
+        -129.23
+      ],
+      "extent": [
+        12.93,
+        6.56,
+        13.8
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0501-p0257-n1237",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        50.12,
+        25.7,
+        -123.67
+      ],
+      "extent": [
+        18.58,
+        9.42,
+        19.83
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0515-p0257-n1397",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        51.47,
+        25.7,
+        -139.7
+      ],
+      "extent": [
+        18.58,
+        9.42,
+        19.83
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0515-p0257-n1563",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        51.47,
+        25.7,
+        -156.3
+      ],
+      "extent": [
+        18.58,
+        9.42,
+        19.83
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0578-p0255-n1207",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        57.79,
+        25.54,
+        -120.72
+      ],
+      "extent": [
+        17.13,
+        7.97,
+        19.1
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p0865-p0073-p1611",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        86.49,
+        7.26,
+        161.13
+      ],
+      "extent": [
+        29.33,
+        14.13,
+        33.39
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
@@ -2957,2993 +3984,1083 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "axis",
-        "radians": -0.102
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "rocks/rock-p0865-p0073-p1611",
+      "semanticId": "rocks/rock-p1152-p0071-p1365",
       "kind": "rock",
       "group": "rocks",
       "anchor": [
-        86.49,
-        7.26,
-        161.13
+        115.21,
+        7.09,
+        136.48
       ],
       "extent": [
-        29.34,
-        14.13,
-        33.39
+        39.23,
+        16.72,
+        34.33
       ],
       "orientation": {
         "type": "axis",
-        "radians": -1.562
+        "radians": 0
       },
       "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/lantern-p1463-p0032-n2362",
-      "kind": "lantern",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p1275-p0121-n0314",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        146.29,
-        3.18,
-        -236.21
+        127.47,
+        12.08,
+        -31.44
       ],
       "extent": [
-        15.13,
-        7.73,
-        15.12
+        19.44,
+        7.84,
+        17.45
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -0.523
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/grass-clump-p1892-p0168-n2241",
-      "kind": "grass-clump",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p1331-p0132-n0215",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        189.22,
-        16.79,
-        -224.11
+        133.1,
+        13.17,
+        -21.47
       ],
       "extent": [
-        15.8,
-        15.84,
-        14.79
+        15.78,
+        7.47,
+        14.41
       ],
       "orientation": {
-        "type": "heading",
-        "radians": 0.872
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/grass-clump-p1869-p0176-n2104",
-      "kind": "grass-clump",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p1562-p0009-n1505",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        186.89,
-        17.63,
-        -210.42
+        156.16,
+        0.88,
+        -150.49
       ],
       "extent": [
-        14.11,
-        14.15,
-        13.21
+        19.36,
+        7.84,
+        16.98
       ],
       "orientation": {
-        "type": "heading",
-        "radians": 0.872
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/lantern-p1643-p0024-n1674",
-      "kind": "lantern",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p1644-p0109-p1198",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        164.29,
-        2.35,
-        -167.44
+        164.44,
+        10.91,
+        119.8
       ],
       "extent": [
-        18.12,
-        9.25,
-        18.11
+        19.36,
+        7.84,
+        16.98
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -0.523
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/campfire-n0299-p0239-n1439",
-      "kind": "campfire",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p1699-p0009-n1806",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        -29.88,
-        23.93,
-        -143.88
+        169.91,
+        0.88,
+        -180.63
       ],
       "extent": [
-        3.6,
-        1.62,
-        8.16
+        19.36,
+        7.84,
+        16.98
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -0.553
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/grass-clump-n0162-p0263-n1359",
-      "kind": "grass-clump",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p1741-p0120-p1256",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        -16.19,
-        26.3,
-        -135.92
+        174.05,
+        12,
+        125.6
       ],
       "extent": [
-        18.91,
-        17.05,
-        17.35
+        14.79,
+        7.47,
+        16.06
       ],
       "orientation": {
-        "type": "heading",
-        "radians": 0.043
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/grass-clump-p0684-p0263-n1351",
-      "kind": "grass-clump",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p1868-p0009-n2536",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        68.37,
-        26.3,
-        -135.12
+        186.83,
+        0.88,
+        -253.61
       ],
       "extent": [
-        17.34,
-        17.05,
-        18.89
+        19.36,
+        7.84,
+        16.98
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -1.539
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/grass-clump-p0712-p0223-n1194",
-      "kind": "grass-clump",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p1917-p0020-n2427",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        71.16,
-        22.32,
-        -119.39
+        191.67,
+        1.97,
+        -242.68
       ],
       "extent": [
-        13.95,
-        13.72,
-        15.21
+        14.79,
+        7.48,
+        16.06
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -1.539
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/grass-clump-n0018-p0073-n0711",
-      "kind": "grass-clump",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p2053-p0167-n1197",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        -1.82,
-        7.34,
-        -71.12
+        205.34,
+        16.67,
+        -119.66
       ],
       "extent": [
-        20.84,
-        20.5,
-        22.71
+        17.13,
+        7.97,
+        19.1
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -1.539
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/umbrella-p0953-p0232-n0598",
-      "kind": "umbrella",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p2191-p0154-n1218",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        95.25,
-        23.15,
-        -59.77
+        219.09,
+        15.35,
+        -121.82
       ],
       "extent": [
-        14.72,
-        14.22,
-        17.01
+        20.86,
+        9.42,
+        18.72
       ],
       "orientation": {
-        "type": "heading",
-        "radians": 1.251
+        "type": "axis",
+        "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "shore-rock"
     },
     {
-      "semanticId": "decorations/grass-clump-n0144-p0096-n0589",
-      "kind": "grass-clump",
-      "group": "decorations",
+      "semanticId": "rocks/rock-p2380-p0168-n1268",
+      "kind": "rock",
+      "group": "rocks",
       "anchor": [
-        -14.39,
-        9.64,
-        -58.86
-      ],
-      "extent": [
-        16.15,
-        15.88,
-        17.6
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.539
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/mushroom-p2373-p0161-n0561",
-      "kind": "mushroom",
-      "group": "decorations",
-      "anchor": [
-        237.28,
-        16.09,
-        -56.13
-      ],
-      "extent": [
-        3.47,
-        7.02,
-        3
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.303
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/mushroom-n0980-p0249-n0400",
-      "kind": "mushroom",
-      "group": "decorations",
-      "anchor": [
-        -98.01,
-        24.89,
-        -40.05
-      ],
-      "extent": [
-        1.01,
-        2.21,
-        1.09
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.703
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/mushroom-p2486-p0210-n0391",
-      "kind": "mushroom",
-      "group": "decorations",
-      "anchor": [
-        248.58,
-        20.96,
-        -39.09
-      ],
-      "extent": [
-        5.7,
-        12.57,
-        6.31
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.86
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/panda-statue-p2258-p0249-n0308",
-      "kind": "panda-statue",
-      "group": "decorations",
-      "anchor": [
-        225.84,
-        24.94,
-        -30.83
-      ],
-      "extent": [
-        13.64,
-        22.13,
-        13.46
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.274
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-n0082-p0271-n0222",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        -8.22,
-        27.07,
-        -22.18
-      ],
-      "extent": [
-        2.55,
-        3.61,
-        2.42
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.696
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/stone-platform-p0682-p0276-n0220",
-      "kind": "stone-platform",
-      "group": "decorations",
-      "anchor": [
-        68.2,
-        27.64,
-        -21.96
-      ],
-      "extent": [
-        1.87,
-        1.74,
-        1.98
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.474
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/mushroom-n1081-p0251-n0219",
-      "kind": "mushroom",
-      "group": "decorations",
-      "anchor": [
-        -108.08,
-        25.07,
-        -21.94
-      ],
-      "extent": [
-        1.02,
-        2.03,
-        0.81
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.096
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/grass-clump-n1099-p0206-n0209",
-      "kind": "grass-clump",
-      "group": "decorations",
-      "anchor": [
-        -109.86,
-        20.62,
-        -20.93
-      ],
-      "extent": [
-        11.13,
-        11.33,
-        10.68
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.768
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/mushroom-n0800-p0252-n0081",
-      "kind": "mushroom",
-      "group": "decorations",
-      "anchor": [
-        -80.01,
-        25.15,
-        -8.08
-      ],
-      "extent": [
-        0.97,
-        2.19,
-        1.13
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 1.012
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-p0234-p0265-n0080",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        23.37,
-        26.54,
-        -7.96
-      ],
-      "extent": [
-        1.66,
-        1.69,
-        1.66
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.079
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/stone-platform-p1043-p0193-n0070",
-      "kind": "stone-platform",
-      "group": "decorations",
-      "anchor": [
-        104.25,
-        19.34,
-        -7
-      ],
-      "extent": [
-        1.36,
-        1.21,
-        1.45
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.267
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-p1448-p0150-p0000",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        144.8,
-        14.98,
-        0.02
-      ],
-      "extent": [
-        16.27,
-        6.64,
-        14.24
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.034
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/stone-platform-p1103-p0194-p0042",
-      "kind": "stone-platform",
-      "group": "decorations",
-      "anchor": [
-        110.33,
-        19.37,
-        4.18
-      ],
-      "extent": [
-        2.57,
-        2.33,
-        2.86
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.077
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/stone-platform-p0340-p0274-p0059",
-      "kind": "stone-platform",
-      "group": "decorations",
-      "anchor": [
-        33.99,
-        27.42,
-        5.87
-      ],
-      "extent": [
-        2.15,
-        1.91,
-        2.33
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.966
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/flower-bed-p0204-p0248-p0083",
-      "kind": "flower-bed",
-      "group": "decorations",
-      "anchor": [
-        20.36,
-        24.75,
-        8.26
-      ],
-      "extent": [
-        8.15,
-        5.8,
-        7.59
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.558
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/stone-table-p2279-p0242-p0147",
-      "kind": "stone-table",
-      "group": "decorations",
-      "anchor": [
-        227.94,
-        24.2,
-        14.7
-      ],
-      "extent": [
-        21.3,
-        10.53,
-        21.46
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.31
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-p0781-p0273-p0176",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        78.08,
-        27.32,
-        17.58
-      ],
-      "extent": [
-        9.17,
-        4.74,
-        9.77
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 1.571
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/bamboo-shoot-p1074-p0245-p0279",
-      "kind": "bamboo-shoot",
-      "group": "decorations",
-      "anchor": [
-        107.36,
-        24.48,
-        27.89
-      ],
-      "extent": [
-        2.44,
-        9.22,
-        2.55
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.315
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/umbrella-p0235-p0253-p0328",
-      "kind": "umbrella",
-      "group": "decorations",
-      "anchor": [
-        23.54,
-        25.31,
-        32.75
-      ],
-      "extent": [
-        10.94,
-        9.19,
-        9.32
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.301
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/stone-platform-p1097-p0248-p0456",
-      "kind": "stone-platform",
-      "group": "decorations",
-      "anchor": [
-        109.71,
-        24.79,
-        45.57
-      ],
-      "extent": [
-        2.01,
-        1.79,
-        2.2
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.999
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-n0107-p0540-p0521",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        -10.75,
-        54.02,
-        52.14
-      ],
-      "extent": [
-        3.86,
-        8,
-        3.86
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.626
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/stone-platform-n0341-p0258-p0530",
-      "kind": "stone-platform",
-      "group": "decorations",
-      "anchor": [
-        -34.09,
-        25.75,
-        53.01
-      ],
-      "extent": [
-        2.03,
-        1.9,
-        2.15
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.521
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-n0133-p0267-p0538",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        -13.31,
-        26.67,
-        53.83
-      ],
-      "extent": [
-        9.8,
-        38.22,
-        5.06
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.289
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/bamboo-pile-p0947-p0205-p0631",
-      "kind": "bamboo-pile",
-      "group": "decorations",
-      "anchor": [
-        94.67,
-        20.46,
-        63.05
-      ],
-      "extent": [
-        9.6,
-        3.79,
-        11.06
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.955
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/grass-clump-n0432-p0203-p0832",
-      "kind": "grass-clump",
-      "group": "decorations",
-      "anchor": [
-        -43.22,
-        20.29,
-        83.22
-      ],
-      "extent": [
-        13.07,
-        13.11,
-        12.24
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.872
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-p0009-p0509-p0864",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        0.94,
-        50.9,
-        86.43
-      ],
-      "extent": [
-        3.6,
-        5.76,
-        3.6
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 1.225
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-p0008-p0455-p0871",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        0.78,
-        45.46,
-        87.06
-      ],
-      "extent": [
-        3.64,
-        5.82,
-        3.64
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 1.267
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-p0008-p0395-p0871",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        0.76,
-        39.51,
-        87.13
-      ],
-      "extent": [
-        3.64,
-        5.82,
-        3.64
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 1.453
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/grass-clump-p0031-p0201-p0960",
-      "kind": "grass-clump",
-      "group": "decorations",
-      "anchor": [
-        3.05,
-        20.05,
-        96.03
-      ],
-      "extent": [
-        12.69,
-        12.73,
-        11.88
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": 0.872
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/umbrella-n0633-p0254-p0965",
-      "kind": "umbrella",
-      "group": "decorations",
-      "anchor": [
-        -63.28,
-        25.37,
-        96.52
-      ],
-      "extent": [
-        17.49,
-        16.43,
-        16.75
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.717
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/willow-p2180-p0251-p1166",
-      "kind": "willow",
-      "group": "decorations",
-      "anchor": [
-        217.99,
-        25.11,
-        116.61
-      ],
-      "extent": [
-        0.31,
-        1.37,
-        0.17
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.003
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "decorations/lantern-p1944-p0124-p1398",
-      "kind": "lantern",
-      "group": "decorations",
-      "anchor": [
-        194.43,
-        12.38,
-        139.79
-      ],
-      "extent": [
-        18.12,
-        9.25,
-        18.11
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -0.523
-      },
-      "materialFamily": "painted-timber"
-    },
-    {
-      "semanticId": "vegetation/palm-p2248-p0259-n2215",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        224.77,
-        25.86,
-        -221.54
-      ],
-      "extent": [
-        36.86,
-        53.1,
-        37.03
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2794-p0183-n2187",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        279.38,
-        18.31,
-        -218.73
-      ],
-      "extent": [
-        42.46,
-        61.77,
-        42.74
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2612-p0241-n1955",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        261.23,
-        24.11,
-        -195.46
-      ],
-      "extent": [
-        42.23,
-        60.45,
-        42.49
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2208-p0283-n1916",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        220.82,
-        28.29,
-        -191.65
-      ],
-      "extent": [
-        37.75,
-        52.32,
-        34.01
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p1878-p0226-n1840",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        187.76,
-        22.58,
-        -184.01
-      ],
-      "extent": [
-        43.51,
-        62.32,
-        44.28
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2767-p0231-n1781",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        276.73,
-        23.11,
-        -178.13
-      ],
-      "extent": [
-        39.53,
-        53.38,
-        39.68
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1032-p0254-n1745",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -103.22,
-        25.37,
-        -174.51
-      ],
-      "extent": [
-        42.28,
-        60.9,
-        42.48
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3173-p0160-n1711",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        317.27,
-        16.01,
-        -171.06
-      ],
-      "extent": [
-        44.94,
-        61.77,
-        45.1
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2457-p0258-n1649",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        245.68,
-        25.79,
-        -164.86
-      ],
-      "extent": [
-        40.94,
-        55.52,
-        40.9
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2848-p0199-n1464",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        284.75,
-        19.94,
-        -146.36
-      ],
-      "extent": [
-        43.02,
-        58.46,
-        42.62
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1232-p0245-n1452",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -123.25,
-        24.45,
-        -145.19
-      ],
-      "extent": [
-        39.1,
-        56.61,
-        38.41
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2341-p0239-n1435",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        234.14,
-        23.92,
-        -143.46
-      ],
-      "extent": [
-        3.57,
-        35.64,
-        3.59
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3017-p0231-n1347",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        301.73,
-        23.11,
-        -134.71
-      ],
-      "extent": [
-        35.93,
-        53.38,
-        38.7
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2679-p0235-n1343",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        267.93,
-        23.48,
-        -134.28
-      ],
-      "extent": [
-        38.24,
-        55.52,
-        40.06
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1608-p0216-n1118",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -160.83,
-        21.61,
-        -111.8
-      ],
-      "extent": [
-        40.19,
-        57.85,
-        40.28
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1132-p0239-n1087",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -113.25,
-        23.9,
-        -108.75
-      ],
-      "extent": [
-        36.66,
-        50.77,
-        36.51
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2976-p0199-n1031",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        297.61,
-        19.94,
-        -103.09
-      ],
-      "extent": [
-        42.22,
-        58.46,
-        42.89
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1480-p0278-n0825",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -148.04,
-        27.78,
-        -82.5
-      ],
-      "extent": [
-        3.61,
-        36.8,
-        3.73
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3411-p0285-n0802",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        341.11,
-        28.54,
-        -80.16
-      ],
-      "extent": [
-        42.73,
-        59.13,
-        42.38
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1639-p0224-n0698",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -163.94,
-        22.36,
-        -69.77
-      ],
-      "extent": [
-        42.23,
-        62.01,
-        37.35
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3505-p0259-n0426",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        350.48,
-        25.94,
-        -42.59
-      ],
-      "extent": [
-        42.73,
-        61.73,
-        42.38
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1232-p0259-n0401",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -123.25,
-        25.86,
-        -40.07
-      ],
-      "extent": [
-        37.96,
-        52.28,
-        37.99
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2948-p0262-n0335",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        294.76,
-        26.18,
-        -33.55
-      ],
-      "extent": [
-        11.91,
-        38.35,
-        11.55
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1607-p0226-n0234",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -160.66,
-        22.63,
-        -23.42
-      ],
-      "extent": [
-        39,
-        61.28,
-        38.45
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3387-p0236-n0186",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        338.65,
-        23.59,
-        -18.65
-      ],
-      "extent": [
-        40.9,
-        58.33,
-        40.74
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3510-p0216-n0017",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        351.02,
-        21.6,
-        -1.69
-      ],
-      "extent": [
-        35.31,
-        52.8,
-        37.63
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2786-p0259-p0008",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        278.62,
-        25.94,
-        0.82
-      ],
-      "extent": [
-        4.35,
-        43.09,
-        4.29
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3045-p0281-p0106",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        304.5,
-        28.1,
-        10.55
-      ],
-      "extent": [
-        3.75,
-        38.13,
-        3.86
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n0913-p0258-p0208",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -91.34,
-        25.8,
-        20.83
-      ],
-      "extent": [
-        32.69,
-        44.44,
-        32.91
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3291-p0262-p0217",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        329.06,
-        26.18,
-        21.74
-      ],
-      "extent": [
-        34.52,
-        46.44,
-        34.41
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1356-p0267-p0291",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -135.59,
-        26.67,
-        29.14
-      ],
-      "extent": [
-        39.36,
-        61.74,
-        44.84
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3520-p0304-p0376",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        351.95,
-        30.4,
-        37.64
-      ],
-      "extent": [
-        39.94,
-        52.32,
-        39.76
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2492-p0216-p0395",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        249.19,
-        21.6,
-        39.53
-      ],
-      "extent": [
-        12.59,
-        43.6,
-        13.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1688-p0260-p0505",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -168.8,
-        26.03,
-        50.47
-      ],
-      "extent": [
-        35.95,
-        51.32,
-        34.98
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1034-p0256-p0583",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -103.42,
-        25.61,
-        58.34
-      ],
-      "extent": [
-        37.48,
-        54.35,
-        37.72
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3381-p0281-p0682",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        338.05,
-        28.1,
-        68.15
-      ],
-      "extent": [
-        39.94,
-        54.62,
-        39.76
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1350-p0279-p0901",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -135.04,
-        27.91,
-        90.05
-      ],
-      "extent": [
-        36.43,
-        51.64,
-        34.98
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p3173-p0238-p0967",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        317.29,
-        23.84,
-        96.72
-      ],
-      "extent": [
-        40.29,
-        54.43,
-        40.46
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p2807-p0258-p0996",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        280.65,
-        25.82,
-        99.55
-      ],
-      "extent": [
-        38.01,
-        51.19,
-        37.97
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n1171-p0256-p1222",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -117.07,
-        25.63,
-        122.18
-      ],
-      "extent": [
-        46.47,
-        64.05,
-        40.51
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p1822-p0275-p1612",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        182.2,
-        27.48,
-        161.22
-      ],
-      "extent": [
-        40.96,
-        64.51,
-        40.51
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-n0411-p0274-p1618",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        -41.1,
-        27.43,
-        161.77
-      ],
-      "extent": [
-        39.44,
-        53.37,
-        39.09
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p1280-p0269-p1830",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        128.01,
-        26.91,
-        182.95
-      ],
-      "extent": [
-        33.12,
-        64.45,
-        37.38
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p0007-p0186-p1868",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        0.67,
-        18.59,
-        186.76
-      ],
-      "extent": [
-        42.96,
-        55.88,
-        49.2
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p1632-p0229-p1965",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        163.22,
-        22.92,
-        196.51
-      ],
-      "extent": [
-        35.08,
-        74.8,
-        38.78
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/palm-p0956-p0249-p2069",
-      "kind": "palm",
-      "group": "vegetation",
-      "anchor": [
-        95.63,
-        24.86,
-        206.93
-      ],
-      "extent": [
-        37.61,
-        68.77,
-        37.18
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "palm-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p1047-p0237-n2465",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        104.7,
-        23.71,
-        -246.51
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0475-p0273-n2379",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        47.54,
-        27.27,
-        -237.91
-      ],
-      "extent": [
-        39.29,
-        43.94,
-        39.56
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0049-p0302-n2364",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        4.9,
-        30.15,
-        -236.39
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p1249-p0192-n2258",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        124.92,
-        19.16,
-        -225.84
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0787-p0261-n2224",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        78.66,
-        26.07,
-        -222.39
-      ],
-      "extent": [
-        34.3,
-        35.5,
-        33.1
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0218-p0328-n2168",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -21.83,
-        32.84,
-        -216.8
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p1034-p0217-n2150",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        103.35,
-        21.65,
-        -215.01
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0108-p0361-n2078",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        10.77,
-        36.05,
-        -207.84
-      ],
-      "extent": [
-        31.24,
-        28.28,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0552-p0361-n2029",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        55.19,
-        36.05,
-        -202.95
-      ],
-      "extent": [
-        31.24,
-        28.28,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0602-p0365-n1936",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -60.22,
-        36.51,
-        -193.6
-      ],
-      "extent": [
-        25.2,
-        27.11,
-        25.14
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0316-p0302-n1934",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        31.6,
-        30.15,
-        -193.39
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0092-p0330-n1923",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -9.21,
-        33.01,
-        -192.29
-      ],
-      "extent": [
-        31.13,
-        33.56,
-        32.56
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0342-p0326-n1862",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -34.16,
-        32.59,
-        -186.23
-      ],
-      "extent": [
-        35.62,
-        37.34,
-        34.91
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p1131-p0140-n1861",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        113.1,
-        13.98,
-        -186.13
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0831-p0215-n1855",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        83.13,
-        21.46,
-        -185.52
-      ],
-      "extent": [
-        38.77,
-        41.19,
-        40.4
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0757-p0331-n1678",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -75.69,
-        33.05,
-        -167.84
-      ],
-      "extent": [
-        27.43,
-        30.28,
-        26.22
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0713-p0302-n1621",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        71.29,
-        30.15,
-        -162.1
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0005-p0323-n1596",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -0.5,
-        32.26,
-        -159.65
-      ],
-      "extent": [
-        31.76,
-        34.11,
-        31.9
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0261-p0302-n1570",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -26.15,
-        30.15,
-        -157.01
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0911-p0175-n1524",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        91.13,
-        17.49,
-        -152.43
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0494-p0332-n1521",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -49.42,
-        33.16,
-        -152.15
-      ],
-      "extent": [
-        29.69,
-        32.82,
-        28.34
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0933-p0326-n1414",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -93.27,
-        32.59,
-        -141.37
-      ],
-      "extent": [
-        32.04,
-        34.23,
-        33.75
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n1129-p0276-n1409",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -112.86,
-        27.61,
-        -140.93
-      ],
-      "extent": [
-        28.62,
-        31.12,
-        28.75
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0351-p0302-n1313",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -35.06,
-        30.15,
-        -131.31
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0613-p0302-n1293",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -61.26,
-        30.15,
-        -129.28
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0896-p0136-n1289",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        89.62,
-        13.58,
-        -128.95
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n0879-p0303-n1239",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -87.92,
-        30.29,
-        -123.93
-      ],
-      "extent": [
-        30.87,
-        33.56,
-        33.07
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n1359-p0280-n1213",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -135.94,
-        28,
-        -121.32
-      ],
-      "extent": [
-        25.99,
-        28.03,
-        25.9
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p1055-p0152-n1161",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        105.52,
-        15.16,
-        -116.08
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-p0817-p0205-n1081",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        81.67,
-        20.46,
-        -108.12
-      ],
-      "extent": [
-        31.24,
-        34.18,
-        33.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n1441-p0264-n0987",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -144.1,
-        26.44,
-        -98.68
-      ],
-      "extent": [
-        28,
-        30.98,
-        27.28
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n1300-p0248-n0857",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -129.99,
-        24.8,
-        -85.69
-      ],
-      "extent": [
-        28.96,
-        29.36,
-        27.08
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/blossom-n1351-p0266-n0670",
-      "kind": "blossom",
-      "group": "vegetation",
-      "anchor": [
-        -135.12,
-        26.64,
-        -67.05
-      ],
-      "extent": [
-        30.36,
-        31.01,
-        28.33
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "blossom-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2691-p0274-n2063",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        269.1,
-        27.35,
-        -206.29
-      ],
-      "extent": [
-        7.07,
-        28.63,
-        8.07
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3059-p0127-n0622",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        305.93,
-        12.67,
-        -62.16
-      ],
-      "extent": [
-        18.86,
-        67.42,
-        16.86
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2913-p0017-n0585",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        291.33,
-        1.7,
-        -58.46
-      ],
-      "extent": [
-        27.29,
-        96.51,
-        23.58
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3196-p0058-n0492",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        319.59,
-        5.81,
-        -49.16
-      ],
-      "extent": [
-        19.98,
-        70.64,
-        17.25
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3129-p0114-n0407",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        312.94,
-        11.4,
-        -40.73
-      ],
-      "extent": [
-        17.41,
-        62.01,
-        15.44
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3254-p0031-n0384",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        325.36,
-        3.13,
-        -38.41
-      ],
-      "extent": [
-        13.44,
-        48.87,
-        11.89
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2940-p0192-n0348",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        294.02,
-        19.18,
-        -34.77
-      ],
-      "extent": [
-        18.25,
-        66.76,
-        16.24
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2673-p0259-n0329",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        267.34,
-        25.93,
-        -32.92
-      ],
-      "extent": [
-        9.25,
-        33.71,
-        8.47
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3143-p0103-n0293",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        314.34,
-        10.26,
-        -29.34
-      ],
-      "extent": [
-        20.05,
-        72.33,
-        17.58
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2557-p0032-n0274",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        255.68,
-        3.21,
-        -27.38
-      ],
-      "extent": [
-        19.34,
-        69.03,
-        17.23
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2772-p0103-n0250",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        277.18,
-        10.26,
-        -25.01
-      ],
-      "extent": [
-        20.32,
-        72.33,
-        17.99
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2976-p0202-n0246",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        297.56,
-        20.24,
-        -24.63
-      ],
-      "extent": [
-        13.88,
-        49.13,
-        12.04
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3267-p0016-n0246",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        326.7,
-        1.64,
-        -24.63
-      ],
-      "extent": [
-        19.27,
-        68.27,
-        16.82
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3081-p0166-n0225",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        308.1,
-        16.56,
-        -22.47
-      ],
-      "extent": [
-        17.08,
-        60.93,
-        15.21
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2979-p0229-n0132",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        297.88,
-        22.88,
-        -13.24
-      ],
-      "extent": [
-        18.36,
-        64.97,
-        15.63
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2772-p0278-n0111",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        277.16,
-        27.75,
-        -11.13
-      ],
-      "extent": [
-        15.16,
-        58.3,
-        14.34
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2687-p0014-n0110",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        268.69,
-        1.41,
-        -11.02
-      ],
-      "extent": [
-        21.01,
-        82.27,
-        19.94
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3393-p0103-n0106",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        339.26,
-        10.26,
-        -10.62
-      ],
-      "extent": [
-        20.05,
-        72.33,
-        17.58
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3096-p0184-n0094",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        309.55,
-        18.36,
-        -9.38
-      ],
-      "extent": [
-        16.2,
-        57.33,
-        13.79
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2649-p0262-n0074",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        264.88,
-        26.17,
-        -7.45
-      ],
-      "extent": [
-        16.31,
-        60.59,
-        15.16
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3201-p0064-n0072",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        320.14,
-        6.42,
-        -7.17
-      ],
-      "extent": [
-        19.58,
-        69.55,
-        17.24
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3330-p0166-n0037",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        333.02,
-        16.56,
-        -3.75
-      ],
-      "extent": [
-        17.08,
-        60.93,
-        15.21
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2841-p0262-n0035",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        284.12,
-        26.17,
-        -3.51
-      ],
-      "extent": [
-        15.15,
-        60.59,
-        14.35
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2685-p0278-p0023",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        268.51,
-        27.75,
-        2.33
-      ],
-      "extent": [
-        16.38,
-        58.3,
-        14.5
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2763-p0014-p0053",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        276.32,
-        1.41,
-        5.32
-      ],
-      "extent": [
-        22.96,
-        82.27,
-        20.6
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3111-p0016-p0118",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        311.08,
-        1.56,
-        11.79
-      ],
-      "extent": [
-        26.72,
-        96.07,
-        24.09
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3192-p0011-p0125",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        319.17,
-        1.08,
-        12.46
-      ],
-      "extent": [
-        18.27,
-        65.1,
-        16.22
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2549-p0229-p0136",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        254.9,
-        22.88,
-        13.58
-      ],
-      "extent": [
-        17.74,
-        64.97,
-        16.32
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2426-p0184-p0138",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        242.63,
-        18.36,
-        13.84
-      ],
-      "extent": [
-        15.65,
-        57.33,
-        14.4
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2985-p0127-p0153",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        298.53,
-        12.67,
-        15.33
-      ],
-      "extent": [
-        18.86,
-        67.42,
-        16.86
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3094-p0078-p0173",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        309.4,
-        7.8,
-        17.29
-      ],
-      "extent": [
-        14.23,
-        52.03,
-        12.66
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2923-p0171-p0226",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        292.33,
-        17.12,
-        22.58
+        238.04,
+        16.83,
+        -126.8
       ],
       "extent": [
         18.58,
-        68.93,
-        17.56
+        9.43,
+        19.83
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p2394-p0168-n1428",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        239.39,
+        16.83,
+        -142.84
+      ],
+      "extent": [
+        18.58,
+        9.43,
+        19.83
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "rocks/rock-p2394-p0168-n1594",
+      "kind": "rock",
+      "group": "rocks",
+      "anchor": [
+        239.39,
+        16.83,
+        -159.43
+      ],
+      "extent": [
+        18.58,
+        9.43,
+        19.83
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "shore-rock"
+    },
+    {
+      "semanticId": "structures/dessert-shop-p0310-p0268-p0505",
+      "kind": "dessert-shop",
+      "group": "structures",
+      "anchor": [
+        30.95,
+        26.79,
+        50.53
+      ],
+      "extent": [
+        24.16,
+        25.88,
+        28.74
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/dumpling-house-p0699-p0273-p0177",
+      "kind": "dumpling-house",
+      "group": "structures",
+      "anchor": [
+        69.85,
+        27.32,
+        17.72
+      ],
+      "extent": [
+        3.02,
+        2.37,
+        10.15
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/dumpling-house-p0781-p0261-n0002",
+      "kind": "dumpling-house",
+      "group": "structures",
+      "anchor": [
+        78.06,
+        26.12,
+        -0.25
+      ],
+      "extent": [
+        30.32,
+        28.81,
+        67.67
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/dumpling-house-p0789-p0273-p0092",
+      "kind": "dumpling-house",
+      "group": "structures",
+      "anchor": [
+        78.9,
+        27.32,
+        9.24
+      ],
+      "extent": [
+        10.15,
+        2.37,
+        3.02
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/fruit-shop-n0094-p0274-p0195",
+      "kind": "fruit-shop",
+      "group": "structures",
+      "anchor": [
+        -9.43,
+        27.41,
+        19.46
+      ],
+      "extent": [
+        27.86,
+        21.81,
+        49.66
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/fruit-shop-n0138-p0326-p0113",
+      "kind": "fruit-shop",
+      "group": "structures",
+      "anchor": [
+        -13.8,
+        32.62,
+        11.3
+      ],
+      "extent": [
+        2.43,
+        0.83,
+        2.43
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/fruit-shop-n0146-p0334-p0186",
+      "kind": "fruit-shop",
+      "group": "structures",
+      "anchor": [
+        -14.62,
+        33.39,
+        18.64
+      ],
+      "extent": [
+        4.34,
+        1.58,
+        5.48
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/fruit-shop-n0171-p0326-p0112",
+      "kind": "fruit-shop",
+      "group": "structures",
+      "anchor": [
+        -17.14,
+        32.58,
+        11.18
+      ],
+      "extent": [
+        2.26,
+        1.15,
+        2.5
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/fruit-shop-n0185-p0345-p0218",
+      "kind": "fruit-shop",
+      "group": "structures",
+      "anchor": [
+        -18.49,
+        34.5,
+        21.84
+      ],
+      "extent": [
+        4.23,
+        1.52,
+        4.23
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/fruit-shop-n0200-p0327-p0113",
+      "kind": "fruit-shop",
+      "group": "structures",
+      "anchor": [
+        -19.99,
+        32.71,
+        11.3
+      ],
+      "extent": [
+        1.03,
+        0.45,
+        2.32
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/fruit-shop-n0202-p0272-p0181",
+      "kind": "fruit-shop",
+      "group": "structures",
+      "anchor": [
+        -20.16,
+        27.24,
+        18.06
+      ],
+      "extent": [
+        4.59,
+        3.34,
+        5.48
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/pavilion-p2145-p0251-n1430",
+      "kind": "pavilion",
+      "group": "structures",
+      "anchor": [
+        214.52,
+        25.11,
+        -143
+      ],
+      "extent": [
+        67.07,
+        67.79,
+        66.37
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/pavilion-single-p0309-p0349-n1550",
+      "kind": "pavilion-single",
+      "group": "structures",
+      "anchor": [
+        30.91,
+        34.92,
+        -155
+      ],
+      "extent": [
+        55.22,
+        54.79,
+        64.15
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/ring-booth-p0383-p0280-n0442",
+      "kind": "ring-booth",
+      "group": "structures",
+      "anchor": [
+        38.32,
+        27.99,
+        -44.21
+      ],
+      "extent": [
+        28.2,
+        18.72,
+        37
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0124-p0322-n0167",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -12.39,
+        32.24,
+        -16.72
+      ],
+      "extent": [
+        11.06,
+        3.85,
+        6.02
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0125-p0272-n0032",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -12.48,
+        27.17,
+        -3.18
+      ],
+      "extent": [
+        14.54,
+        26.04,
+        31.3
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0128-p0302-n0198",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -12.79,
+        30.16,
+        -19.83
+      ],
+      "extent": [
+        1.41,
+        19.43,
+        9.52
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0133-p0357-p0008",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.27,
+        35.65,
+        0.84
+      ],
+      "extent": [
+        6.8,
+        3.44,
+        5.82
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0133-p0371-p0008",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.27,
+        37.12,
+        0.84
+      ],
+      "extent": [
+        6.43,
+        3.44,
+        6.54
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0133-p0387-p0008",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.27,
+        38.7,
+        0.84
+      ],
+      "extent": [
+        6.19,
+        3.44,
+        5.97
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0133-p0402-p0008",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.27,
+        40.23,
+        0.84
+      ],
+      "extent": [
+        6.29,
+        3.44,
+        6.05
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0134-p0339-p0008",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.39,
+        33.91,
+        0.78
+      ],
+      "extent": [
+        2.15,
+        8.98,
+        2.17
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0134-p0357-n0085",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.44,
+        35.66,
+        -8.47
+      ],
+      "extent": [
+        5.98,
+        3.44,
+        6.17
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0134-p0371-n0085",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.44,
+        37.13,
+        -8.47
+      ],
+      "extent": [
+        7.05,
+        3.44,
+        5.95
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0134-p0387-n0085",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.44,
+        38.72,
+        -8.46
+      ],
+      "extent": [
+        6.16,
+        3.44,
+        6.53
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0134-p0402-n0085",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.44,
+        40.24,
+        -8.46
+      ],
+      "extent": [
+        6.48,
+        3.44,
+        6.71
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0135-p0339-n0086",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -13.53,
+        33.93,
+        -8.57
+      ],
+      "extent": [
+        2.15,
+        8.99,
+        2.16
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0156-p0342-n0174",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -15.57,
+        34.17,
+        -17.37
+      ],
+      "extent": [
+        5.51,
+        0.78,
+        0.78
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0157-p0342-n0156",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -15.74,
+        34.17,
+        -15.59
+      ],
+      "extent": [
+        5.53,
+        0.72,
+        1.19
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/shop-stall-n0157-p0342-n0165",
+      "kind": "shop-stall",
+      "group": "structures",
+      "anchor": [
+        -15.74,
+        34.15,
+        -16.51
+      ],
+      "extent": [
+        5.56,
+        0.65,
+        0.55
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2360-p0396-n0068",
+      "kind": "swing-tree",
+      "group": "structures",
+      "anchor": [
+        236,
+        39.59,
+        -6.83
+      ],
+      "extent": [
+        48.17,
+        46.95,
+        53.3
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2362-p0251-n0069",
+      "kind": "swing-tree",
+      "group": "structures",
+      "anchor": [
+        236.22,
+        25.09,
+        -6.89
+      ],
+      "extent": [
+        46.6,
+        61.26,
+        50.06
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2393-p0295-p0055",
+      "kind": "swing-tree",
+      "group": "structures",
+      "anchor": [
+        239.33,
+        29.51,
+        5.54
+      ],
+      "extent": [
+        15.46,
+        17.51,
+        12.3
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2430-p0361-p0074",
+      "kind": "swing-tree",
+      "group": "structures",
+      "anchor": [
+        243,
+        36.09,
+        7.37
+      ],
+      "extent": [
+        22.32,
+        23.65,
+        28.31
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2803-p0386-p0194",
+      "kind": "swing-tree",
+      "group": "structures",
+      "anchor": [
+        280.25,
+        38.61,
+        19.39
+      ],
+      "extent": [
+        15.97,
+        12.08,
+        14.19
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/tea-booth-p0369-p0263-p0214",
+      "kind": "tea-booth",
+      "group": "structures",
+      "anchor": [
+        36.94,
+        26.31,
+        21.37
+      ],
+      "extent": [
+        27.77,
+        23.66,
+        27.18
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "painted-timber"
+    },
+    {
+      "semanticId": "structures/wish-tree-p1195-p0193-p0282",
+      "kind": "wish-tree",
+      "group": "structures",
+      "anchor": [
+        119.54,
+        19.31,
+        28.2
+      ],
+      "extent": [
+        51.06,
+        84.87,
+        60.57
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "structures/wish-tree-p1195-p0318-p0278",
+      "kind": "wish-tree",
+      "group": "structures",
+      "anchor": [
+        119.53,
+        31.75,
+        27.82
+      ],
+      "extent": [
+        53.31,
+        72.87,
+        62.11
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "structures/wish-tree-p1207-p0346-p0293",
+      "kind": "wish-tree",
+      "group": "structures",
+      "anchor": [
+        120.73,
+        34.57,
+        29.28
+      ],
+      "extent": [
+        41.73,
+        65.08,
+        55.17
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0034-p0325-n1505",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -3.36,
+        32.48,
+        -150.5
+      ],
+      "extent": [
+        5.8,
+        1.19,
+        9.96
       ],
       "orientation": {
         "type": "radial"
@@ -5951,18 +5068,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2591-p0202-p0240",
+      "semanticId": "vegetation/bamboo-n0095-p0316-n1517",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        259.09,
-        20.24,
-        24.02
+        -9.47,
+        31.62,
+        -151.73
       ],
       "extent": [
-        13.07,
-        49.13,
-        12.24
+        6.83,
+        1.56,
+        11.17
       ],
       "orientation": {
         "type": "radial"
@@ -5970,18 +5087,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2484-p0166-p0257",
+      "semanticId": "vegetation/bamboo-n0162-p0309-n1549",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        248.37,
-        16.56,
-        25.69
+        -16.25,
+        30.9,
+        -154.93
       ],
       "extent": [
-        15.73,
-        60.93,
-        14.9
+        5.32,
+        1.24,
+        10.98
       ],
       "orientation": {
         "type": "radial"
@@ -5989,18 +5106,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p3024-p0129-p0278",
+      "semanticId": "vegetation/bamboo-n0214-p0302-n1528",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        302.42,
-        12.85,
-        27.79
+        -21.36,
+        30.18,
+        -152.83
       ],
       "extent": [
-        14.84,
-        52.68,
-        13.03
+        5.8,
+        1.19,
+        9.96
       ],
       "orientation": {
         "type": "radial"
@@ -6008,18 +5125,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p3122-p0058-p0283",
+      "semanticId": "vegetation/bamboo-n0259-p0296-n1482",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        312.18,
-        5.81,
-        28.33
+        -25.88,
+        29.61,
+        -148.24
       ],
       "extent": [
-        19.98,
-        70.64,
-        17.25
+        5.4,
+        1.07,
+        10.29
       ],
       "orientation": {
         "type": "radial"
@@ -6027,18 +5144,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2730-p0058-p0295",
+      "semanticId": "vegetation/bamboo-n0362-p0283-n1431",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        272.97,
-        5.81,
-        29.47
+        -36.17,
+        28.26,
+        -143.13
       ],
       "extent": [
-        18.89,
-        70.64,
-        17.64
+        5.41,
+        1.07,
+        10.29
       ],
       "orientation": {
         "type": "radial"
@@ -6046,18 +5163,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2458-p0103-p0333",
+      "semanticId": "vegetation/bamboo-n0403-p0277-n1379",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        245.76,
-        10.26,
-        33.32
+        -40.33,
+        27.71,
+        -137.93
       ],
       "extent": [
-        22.13,
-        72.33,
-        18.88
+        5.32,
+        1.24,
+        10.98
       ],
       "orientation": {
         "type": "radial"
@@ -6065,18 +5182,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2882-p0171-p0355",
+      "semanticId": "vegetation/bamboo-n0462-p0262-p0924",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        288.16,
-        17.12,
-        35.46
+        -46.17,
+        26.16,
+        92.44
       ],
       "extent": [
-        18.29,
-        64.77,
-        15.94
+        10.14,
+        0.75,
+        6.51
       ],
       "orientation": {
         "type": "radial"
@@ -6084,18 +5201,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p3055-p0114-p0368",
+      "semanticId": "vegetation/bamboo-n0496-p0256-p0559",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        305.53,
-        11.4,
-        36.76
+        -49.56,
+        25.63,
+        55.92
       ],
       "extent": [
-        17.41,
-        62.01,
-        15.44
+        9.56,
+        0.73,
+        4.49
       ],
       "orientation": {
         "type": "radial"
@@ -6103,18 +5220,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p3180-p0031-p0391",
+      "semanticId": "vegetation/bamboo-n0499-p0261-p0870",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        317.95,
-        3.13,
-        39.08
+        -49.95,
+        26.09,
+        86.95
       ],
       "extent": [
-        13.44,
-        48.87,
-        11.89
+        10.03,
+        0.77,
+        4.71
       ],
       "orientation": {
         "type": "radial"
@@ -6122,18 +5239,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2727-p0058-p0412",
+      "semanticId": "vegetation/bamboo-n0517-p0256-p0630",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        272.66,
-        5.81,
-        41.24
+        -51.7,
+        25.62,
+        63.02
       ],
       "extent": [
-        18.89,
-        70.64,
-        17.64
+        11.31,
+        0.87,
+        5.79
       ],
       "orientation": {
         "type": "radial"
@@ -6141,18 +5258,892 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2500-p0114-p0445",
+      "semanticId": "vegetation/bamboo-n0518-p0256-p0506",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        250.04,
-        11.4,
-        44.53
+        -51.76,
+        25.57,
+        50.63
       ],
       "extent": [
-        16.09,
-        62.01,
-        15.22
+        9.56,
+        0.73,
+        4.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0521-p0260-p0790",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -52.11,
+        25.96,
+        79.01
+      ],
+      "extent": [
+        11.92,
+        0.91,
+        6.1
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0581-p0256-p0451",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -58.07,
+        25.55,
+        45.14
+      ],
+      "extent": [
+        11.14,
+        0.91,
+        3.67
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0619-p0256-p0400",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -61.94,
+        25.56,
+        39.95
+      ],
+      "extent": [
+        10.65,
+        0.69,
+        4.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0638-p0256-p0121",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -63.77,
+        25.58,
+        12.08
+      ],
+      "extent": [
+        11.22,
+        0.86,
+        5.74
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0642-p0256-p0286",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -64.22,
+        25.56,
+        28.61
+      ],
+      "extent": [
+        10.65,
+        0.69,
+        4.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0673-p0256-p0229",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -67.35,
+        25.56,
+        22.92
+      ],
+      "extent": [
+        9.55,
+        0.73,
+        4.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0683-p0255-p0173",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -68.29,
+        25.53,
+        17.3
+      ],
+      "extent": [
+        11.14,
+        0.91,
+        3.67
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0686-p0256-n1211",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -68.6,
+        25.58,
+        -121.07
+      ],
+      "extent": [
+        8.83,
+        0.86,
+        10.48
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0730-p0255-p0057",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -73.05,
+        25.52,
+        5.69
+      ],
+      "extent": [
+        9.13,
+        0.67,
+        5.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0761-p0255-n1220",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -76.09,
+        25.53,
+        -122.01
+      ],
+      "extent": [
+        8.19,
+        0.91,
+        9.93
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0786-p0255-p0016",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -78.64,
+        25.53,
+        1.64
+      ],
+      "extent": [
+        9.56,
+        0.73,
+        4.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0803-p0256-n1184",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -80.29,
+        25.56,
+        -118.38
+      ],
+      "extent": [
+        7.36,
+        0.73,
+        9.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0829-p0256-n1124",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -82.95,
+        25.56,
+        -112.37
+      ],
+      "extent": [
+        7.27,
+        0.69,
+        9.68
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0886-p0256-n0050",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -88.62,
+        25.58,
+        -5.01
+      ],
+      "extent": [
+        11.22,
+        0.86,
+        5.74
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0909-p0256-n1040",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -90.9,
+        25.56,
+        -103.97
+      ],
+      "extent": [
+        7.27,
+        0.69,
+        9.68
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0930-p0256-n0976",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -92.96,
+        25.55,
+        -97.62
+      ],
+      "extent": [
+        8.19,
+        0.91,
+        9.93
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0940-p0256-n0897",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -93.97,
+        25.57,
+        -89.68
+      ],
+      "extent": [
+        7.36,
+        0.73,
+        9.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0943-p0243-n0196",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -94.35,
+        24.31,
+        -19.65
+      ],
+      "extent": [
+        9.56,
+        0.73,
+        4.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0959-p0244-n0129",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -95.91,
+        24.39,
+        -12.9
+      ],
+      "extent": [
+        11.22,
+        0.86,
+        5.74
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0965-p0243-n0249",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -96.55,
+        24.32,
+        -24.95
+      ],
+      "extent": [
+        9.55,
+        0.73,
+        4.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n0970-p0256-n0848",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -97.03,
+        25.57,
+        -84.83
+      ],
+      "extent": [
+        7.36,
+        0.73,
+        9.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n1013-p0256-n0766",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -101.28,
+        25.64,
+        -76.65
+      ],
+      "extent": [
+        10.01,
+        0.86,
+        9.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n1028-p0243-n0304",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -102.85,
+        24.3,
+        -30.44
+      ],
+      "extent": [
+        11.14,
+        0.91,
+        3.67
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n1052-p0255-n0696",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -105.24,
+        25.53,
+        -69.61
+      ],
+      "extent": [
+        9.56,
+        0.73,
+        4.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n1067-p0243-n0356",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -106.72,
+        24.31,
+        -35.63
+      ],
+      "extent": [
+        10.65,
+        0.7,
+        4.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n1085-p0256-n0635",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -108.55,
+        25.58,
+        -63.5
+      ],
+      "extent": [
+        11.22,
+        0.86,
+        5.74
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n1090-p0256-n0470",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -109,
+        25.56,
+        -46.97
+      ],
+      "extent": [
+        10.65,
+        0.69,
+        4.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n1121-p0256-n0527",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -112.13,
+        25.56,
+        -52.66
+      ],
+      "extent": [
+        9.56,
+        0.73,
+        4.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-n1131-p0255-n0583",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        -113.08,
+        25.53,
+        -58.28
+      ],
+      "extent": [
+        11.14,
+        0.91,
+        3.67
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0318-p0256-n0992",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        31.84,
+        25.56,
+        -99.23
+      ],
+      "extent": [
+        10.57,
+        0.69,
+        4.28
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0362-p0256-n0943",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        36.16,
+        25.55,
+        -94.26
+      ],
+      "extent": [
+        11.17,
+        0.91,
+        3.86
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0428-p0256-n0892",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        42.8,
+        25.57,
+        -89.21
+      ],
+      "extent": [
+        9.75,
+        0.73,
+        4.66
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0454-p0256-n0841",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        45.4,
+        25.57,
+        -84.1
+      ],
+      "extent": [
+        9.75,
+        0.73,
+        4.66
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0498-p0256-n0767",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        49.77,
+        25.64,
+        -76.7
+      ],
+      "extent": [
+        11.16,
+        0.86,
+        7.14
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0569-p0255-n0722",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        56.93,
+        25.53,
+        -72.17
+      ],
+      "extent": [
+        7.37,
+        0.73,
+        8.45
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0628-p0256-n0668",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        62.75,
+        25.58,
+        -66.83
+      ],
+      "extent": [
+        7.98,
+        0.86,
+        10.6
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0709-p0255-n0645",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        70.87,
+        25.53,
+        -64.5
+      ],
+      "extent": [
+        7.35,
+        0.91,
+        10.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0792-p0256-n0631",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        79.24,
+        25.56,
+        -63.11
+      ],
+      "extent": [
+        7.37,
+        0.73,
+        8.45
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0841-p0256-n0573",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        84.1,
+        25.56,
+        -57.32
+      ],
+      "extent": [
+        10.07,
+        0.69,
+        6.48
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0871-p0238-n0508",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        87.1,
+        23.84,
+        -50.81
+      ],
+      "extent": [
+        9.81,
+        0.7,
+        7.07
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0888-p0217-n0444",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        88.78,
+        21.7,
+        -44.4
+      ],
+      "extent": [
+        9.49,
+        0.91,
+        8.74
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p0967-p0215-n0440",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        96.74,
+        21.46,
+        -44.04
+      ],
+      "extent": [
+        9.14,
+        0.73,
+        7.6
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p1007-p0202-n0384",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        100.72,
+        20.22,
+        -38.4
+      ],
+      "extent": [
+        6.25,
+        0.73,
+        8.58
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p1102-p0203-n0399",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        110.15,
+        20.29,
+        -39.89
+      ],
+      "extent": [
+        5.83,
+        0.86,
+        11.12
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p1353-p0158-n1275",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        135.33,
+        15.84,
+        -127.51
+      ],
+      "extent": [
+        45.1,
+        4,
+        65.81
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p1803-p0183-n0535",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        180.34,
+        18.32,
+        -53.5
+      ],
+      "extent": [
+        85.45,
+        5.18,
+        59.65
       ],
       "orientation": {
         "type": "radial"
@@ -6179,18 +6170,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2981-p0169-p0463",
+      "semanticId": "vegetation/bamboo-p2402-p0170-p0790",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        298.1,
-        16.92,
-        46.3
+        240.24,
+        17.04,
+        78.96
       ],
       "extent": [
-        15.63,
-        55.37,
-        13.35
+        17.69,
+        64.58,
+        16.22
       ],
       "orientation": {
         "type": "radial"
@@ -6198,56 +6189,56 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p3069-p0103-p0482",
+      "semanticId": "vegetation/bamboo-p2414-p0166-p0618",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        306.94,
+        241.36,
+        16.6,
+        61.76
+      ],
+      "extent": [
+        17.98,
+        63.54,
+        15.41
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2426-p0184-p0138",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        242.63,
+        18.36,
+        13.84
+      ],
+      "extent": [
+        15.65,
+        57.33,
+        14.4
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2449-p0103-p0338",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        244.85,
         10.26,
-        48.15
+        33.76
       ],
       "extent": [
-        20.05,
+        20.32,
         72.33,
-        17.58
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2902-p0202-p0529",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        290.15,
-        20.24,
-        52.86
-      ],
-      "extent": [
-        13.88,
-        49.13,
-        12.04
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3193-p0016-p0529",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        319.29,
-        1.64,
-        52.86
-      ],
-      "extent": [
-        19.27,
-        68.27,
-        16.82
+        18
       ],
       "orientation": {
         "type": "radial"
@@ -6262,6 +6253,424 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         246.66,
         5.81,
         54.86
+      ],
+      "extent": [
+        18.89,
+        70.64,
+        17.64
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2476-p0206-p0709",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        247.62,
+        20.63,
+        70.91
+      ],
+      "extent": [
+        14.44,
+        54.88,
+        13.61
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2478-p0148-p0318",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        247.84,
+        14.82,
+        31.82
+      ],
+      "extent": [
+        17.96,
+        63.9,
+        15.88
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2484-p0166-p0257",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        248.37,
+        16.56,
+        25.69
+      ],
+      "extent": [
+        15.73,
+        60.93,
+        14.9
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2500-p0114-p0445",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        250.04,
+        11.4,
+        44.53
+      ],
+      "extent": [
+        16.09,
+        62.01,
+        15.22
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2501-p0230-p0800",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        250.09,
+        23.01,
+        79.99
+      ],
+      "extent": [
+        17.57,
+        62.19,
+        15.26
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2512-p0211-p0617",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        251.17,
+        21.13,
+        61.66
+      ],
+      "extent": [
+        14.42,
+        54.79,
+        13.59
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2543-p0020-p0929",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        254.26,
+        2.01,
+        92.85
+      ],
+      "extent": [
+        19.78,
+        71.57,
+        17.41
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2549-p0229-p0136",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        254.9,
+        22.88,
+        13.58
+      ],
+      "extent": [
+        17.74,
+        64.97,
+        16.31
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2557-p0032-n0274",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        255.68,
+        3.21,
+        -27.38
+      ],
+      "extent": [
+        19.34,
+        69.03,
+        17.23
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2591-p0202-p0240",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        259.09,
+        20.24,
+        24.02
+      ],
+      "extent": [
+        13.07,
+        49.13,
+        12.24
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2611-p0278-p0798",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        261.1,
+        27.75,
+        79.82
+      ],
+      "extent": [
+        16.38,
+        58.3,
+        14.5
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2630-p0021-p1185",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        263.03,
+        2.12,
+        118.5
+      ],
+      "extent": [
+        28.79,
+        101.75,
+        24.64
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2639-p0127-p0624",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        263.9,
+        12.67,
+        62.35
+      ],
+      "extent": [
+        17.31,
+        67.43,
+        16.42
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2649-p0262-n0074",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        264.88,
+        26.17,
+        -7.45
+      ],
+      "extent": [
+        16.31,
+        60.59,
+        15.16
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2673-p0259-n0329",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        267.34,
+        25.93,
+        -32.92
+      ],
+      "extent": [
+        9.25,
+        33.71,
+        8.47
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2685-p0278-p0023",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        268.51,
+        27.75,
+        2.33
+      ],
+      "extent": [
+        16.38,
+        58.3,
+        14.5
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2687-p0014-n0110",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        268.69,
+        1.41,
+        -11.02
+      ],
+      "extent": [
+        21.01,
+        82.27,
+        19.94
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2689-p0014-p0828",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        268.92,
+        1.41,
+        82.81
+      ],
+      "extent": [
+        22.96,
+        82.27,
+        20.6
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2691-p0274-n2063",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        269.1,
+        27.35,
+        -206.29
+      ],
+      "extent": [
+        7.07,
+        28.63,
+        8.08
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2725-p0294-p0631",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        272.46,
+        29.36,
+        63.09
+      ],
+      "extent": [
+        11.67,
+        41.27,
+        10.07
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2727-p0058-p0412",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        272.66,
+        5.81,
+        41.24
+      ],
+      "extent": [
+        18.89,
+        70.64,
+        17.64
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2730-p0058-p0295",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        272.97,
+        5.81,
+        29.47
       ],
       "extent": [
         18.89,
@@ -6293,18 +6702,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p3100-p0109-p0592",
+      "semanticId": "vegetation/bamboo-p2763-p0014-p0053",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        310,
-        10.92,
-        59.19
+        276.32,
+        1.41,
+        5.32
       ],
       "extent": [
-        13.15,
-        46.47,
-        11.18
+        22.96,
+        82.27,
+        20.6
       ],
       "orientation": {
         "type": "radial"
@@ -6312,18 +6721,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2939-p0072-p0616",
+      "semanticId": "vegetation/bamboo-p2772-p0103-n0250",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        293.87,
-        7.22,
-        61.56
+        277.18,
+        10.26,
+        -25.01
       ],
       "extent": [
-        17.29,
-        62.75,
-        15.77
+        20.32,
+        72.33,
+        17.99
       ],
       "orientation": {
         "type": "radial"
@@ -6331,94 +6740,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2512-p0211-p0617",
+      "semanticId": "vegetation/bamboo-p2772-p0278-n0111",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        251.17,
-        21.13,
-        61.66
+        277.16,
+        27.75,
+        -11.13
       ],
       "extent": [
-        14.42,
-        54.79,
-        13.59
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2414-p0166-p0618",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        241.36,
-        16.6,
-        61.76
-      ],
-      "extent": [
-        17.98,
-        63.54,
-        15.41
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2639-p0127-p0624",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        263.9,
-        12.67,
-        62.35
-      ],
-      "extent": [
-        17.32,
-        67.42,
-        16.42
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2725-p0294-p0631",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        272.46,
-        29.36,
-        63.09
-      ],
-      "extent": [
-        11.67,
-        41.27,
-        10.07
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p3022-p0184-p0681",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        302.15,
-        18.36,
-        68.11
-      ],
-      "extent": [
-        16.2,
-        57.33,
-        13.79
+        15.16,
+        58.3,
+        14.34
       ],
       "orientation": {
         "type": "radial"
@@ -6445,87 +6778,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p3127-p0064-p0703",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        312.73,
-        6.42,
-        70.32
-      ],
-      "extent": [
-        19.58,
-        69.55,
-        17.24
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2476-p0206-p0709",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        247.62,
-        20.63,
-        70.91
-      ],
-      "extent": [
-        14.44,
-        54.87,
-        13.61
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2888-p0142-p0720",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        288.82,
-        14.23,
-        71.95
-      ],
-      "extent": [
-        14.52,
-        53.42,
-        13.4
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2959-p0204-p0752",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        295.92,
-        20.41,
-        75.19
-      ],
-      "extent": [
-        16.87,
-        59.91,
-        14.84
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
       "semanticId": "vegetation/bamboo-p2831-p0178-p0783",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        283.12,
+        283.13,
         17.82,
         78.33
       ],
@@ -6533,82 +6790,6 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         12.45,
         44.01,
         10.69
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2402-p0170-p0790",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        240.24,
-        17.04,
-        78.96
-      ],
-      "extent": [
-        17.7,
-        64.58,
-        16.22
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2611-p0278-p0798",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        261.1,
-        27.75,
-        79.82
-      ],
-      "extent": [
-        16.38,
-        58.3,
-        14.5
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2501-p0230-p0800",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        250.09,
-        23.01,
-        79.99
-      ],
-      "extent": [
-        17.57,
-        62.2,
-        15.26
-      ],
-      "orientation": {
-        "type": "radial"
-      },
-      "materialFamily": "bamboo-foliage"
-    },
-    {
-      "semanticId": "vegetation/bamboo-p2689-p0014-p0828",
-      "kind": "bamboo",
-      "group": "vegetation",
-      "anchor": [
-        268.92,
-        1.41,
-        82.81
-      ],
-      "extent": [
-        22.96,
-        82.27,
-        20.6
       ],
       "orientation": {
         "type": "radial"
@@ -6635,18 +6816,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2543-p0020-p0929",
+      "semanticId": "vegetation/bamboo-p2841-p0262-n0035",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        254.26,
-        2.01,
-        92.85
+        284.12,
+        26.17,
+        -3.51
       ],
       "extent": [
-        19.79,
-        71.57,
-        17.41
+        15.15,
+        60.59,
+        14.35
       ],
       "orientation": {
         "type": "radial"
@@ -6654,18 +6835,18 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "vegetation/bamboo-p2630-p0021-p1185",
+      "semanticId": "vegetation/bamboo-p2882-p0171-p0355",
       "kind": "bamboo",
       "group": "vegetation",
       "anchor": [
-        263.03,
-        2.12,
-        118.5
+        288.16,
+        17.12,
+        35.46
       ],
       "extent": [
-        28.79,
-        101.75,
-        24.64
+        18.29,
+        64.77,
+        15.94
       ],
       "orientation": {
         "type": "radial"
@@ -6673,173 +6854,6592 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-p0998-p0093-n2204",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2888-p0142-p0720",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        99.76,
-        9.34,
-        -220.45
+        288.82,
+        14.23,
+        71.95
       ],
       "extent": [
-        1.95,
-        2.9,
-        4.55
+        14.52,
+        53.42,
+        13.4
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -3.142
+        "type": "radial"
       },
-      "materialFamily": "creature-fur"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-p0985-p0093-n2152",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2902-p0202-p0529",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        98.54,
-        9.34,
-        -215.17
+        290.15,
+        20.24,
+        52.86
       ],
       "extent": [
-        1.95,
-        2.9,
-        4.55
+        13.88,
+        49.13,
+        12.04
       ],
       "orientation": {
-        "type": "heading",
-        "radians": 0
+        "type": "radial"
       },
-      "materialFamily": "creature-fur"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-n1351-p0239-n1532",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2913-p0017-n0585",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        -135.15,
-        23.85,
-        -153.19
+        291.33,
+        1.7,
+        -58.46
       ],
       "extent": [
-        7.87,
-        4.56,
-        4.69
+        27.29,
+        96.51,
+        23.58
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -1.262
+        "type": "radial"
       },
-      "materialFamily": "creature-fur"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-p3412-p0285-n0848",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2922-p0171-p0234",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        341.15,
-        28.47,
-        -84.78
+        292.18,
+        17.12,
+        23.39
       ],
       "extent": [
-        5.68,
-        4.51,
-        7.75
+        18.29,
+        64.77,
+        15.94
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -0.471
+        "type": "radial"
       },
-      "materialFamily": "creature-fur"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-n1113-p0260-n0813",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2934-p0278-p0211",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        -111.34,
-        26.02,
-        -81.34
+        293.43,
+        27.75,
+        21.05
       ],
       "extent": [
-        7.87,
-        4.56,
-        4.69
+        16.38,
+        58.3,
+        14.5
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -1.262
+        "type": "radial"
       },
-      "materialFamily": "creature-fur"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-n1220-p0114-n0544",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2939-p0072-p0616",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        -122.01,
-        11.44,
-        -54.39
+        293.87,
+        7.22,
+        61.56
       ],
       "extent": [
-        7.87,
-        4.56,
-        4.69
+        17.29,
+        62.75,
+        15.77
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -1.262
+        "type": "radial"
       },
-      "materialFamily": "creature-fur"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-p1018-p0257-n0033",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2940-p0192-n0348",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        101.81,
-        25.68,
-        -3.28
+        294.02,
+        19.18,
+        -34.77
       ],
       "extent": [
-        7.87,
-        4.56,
-        4.69
+        18.25,
+        66.76,
+        16.24
       ],
       "orientation": {
-        "type": "heading",
-        "radians": -1.262
+        "type": "radial"
       },
-      "materialFamily": "creature-fur"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-p3278-p0342-p0039",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2959-p0204-p0752",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        327.78,
-        34.16,
-        3.94
+        295.92,
+        20.41,
+        75.19
       ],
       "extent": [
-        2.84,
-        4.45,
-        7.39
+        16.87,
+        59.91,
+        14.84
       ],
       "orientation": {
-        "type": "heading",
-        "radians": 0
+        "type": "radial"
       },
-      "materialFamily": "creature-fur"
+      "materialFamily": "bamboo-foliage"
     },
     {
-      "semanticId": "wildlife/panda-p0062-p0257-p0135",
-      "kind": "panda",
-      "group": "wildlife",
+      "semanticId": "vegetation/bamboo-p2976-p0202-n0246",
+      "kind": "bamboo",
+      "group": "vegetation",
       "anchor": [
-        6.22,
+        297.56,
+        20.24,
+        -24.63
+      ],
+      "extent": [
+        13.88,
+        49.13,
+        12.04
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2979-p0229-n0132",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        297.88,
+        22.88,
+        -13.24
+      ],
+      "extent": [
+        18.36,
+        64.97,
+        15.63
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2981-p0169-p0463",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        298.1,
+        16.92,
+        46.3
+      ],
+      "extent": [
+        15.63,
+        55.37,
+        13.35
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p2985-p0127-p0153",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        298.52,
+        12.67,
+        15.33
+      ],
+      "extent": [
+        18.86,
+        67.43,
+        16.86
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3022-p0184-p0681",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        302.15,
+        18.36,
+        68.11
+      ],
+      "extent": [
+        16.2,
+        57.33,
+        13.79
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3024-p0129-p0278",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        302.42,
+        12.85,
+        27.79
+      ],
+      "extent": [
+        14.84,
+        52.68,
+        13.03
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3055-p0114-p0368",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        305.53,
+        11.4,
+        36.76
+      ],
+      "extent": [
+        17.41,
+        62.01,
+        15.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3059-p0127-n0622",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        305.93,
+        12.67,
+        -62.16
+      ],
+      "extent": [
+        18.86,
+        67.43,
+        16.86
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3069-p0103-p0482",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        306.94,
+        10.26,
+        48.15
+      ],
+      "extent": [
+        20.05,
+        72.33,
+        17.58
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3081-p0166-n0225",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        308.1,
+        16.56,
+        -22.47
+      ],
+      "extent": [
+        17.08,
+        60.93,
+        15.21
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3094-p0078-p0173",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        309.4,
+        7.8,
+        17.29
+      ],
+      "extent": [
+        14.23,
+        52.03,
+        12.66
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3096-p0184-n0094",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        309.55,
+        18.36,
+        -9.38
+      ],
+      "extent": [
+        16.2,
+        57.33,
+        13.79
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3100-p0109-p0592",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        310,
+        10.92,
+        59.19
+      ],
+      "extent": [
+        13.14,
+        46.47,
+        11.18
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3111-p0016-p0118",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        311.08,
+        1.57,
+        11.79
+      ],
+      "extent": [
+        26.72,
+        96.07,
+        24.1
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3122-p0058-p0283",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        312.18,
+        5.81,
+        28.33
+      ],
+      "extent": [
+        19.98,
+        70.64,
+        17.25
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3127-p0064-p0703",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        312.73,
+        6.42,
+        70.32
+      ],
+      "extent": [
+        19.58,
+        69.55,
+        17.24
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3129-p0114-n0407",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        312.94,
+        11.4,
+        -40.73
+      ],
+      "extent": [
+        17.41,
+        62.01,
+        15.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3143-p0103-n0293",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        314.34,
+        10.26,
+        -29.34
+      ],
+      "extent": [
+        20.05,
+        72.33,
+        17.58
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3180-p0031-p0391",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        317.95,
+        3.13,
+        39.08
+      ],
+      "extent": [
+        13.44,
+        48.87,
+        11.89
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3192-p0011-p0125",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        319.17,
+        1.09,
+        12.46
+      ],
+      "extent": [
+        18.27,
+        65.1,
+        16.22
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3193-p0016-p0529",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        319.29,
+        1.64,
+        52.86
+      ],
+      "extent": [
+        19.27,
+        68.27,
+        16.82
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3196-p0058-n0492",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        319.59,
+        5.81,
+        -49.16
+      ],
+      "extent": [
+        19.98,
+        70.64,
+        17.25
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3201-p0064-n0072",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        320.14,
+        6.42,
+        -7.17
+      ],
+      "extent": [
+        19.58,
+        69.55,
+        17.24
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3254-p0031-n0384",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        325.36,
+        3.13,
+        -38.41
+      ],
+      "extent": [
+        13.44,
+        48.87,
+        11.89
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3267-p0016-n0246",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        326.7,
+        1.64,
+        -24.63
+      ],
+      "extent": [
+        19.27,
+        68.27,
+        16.82
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3330-p0166-n0037",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        333.02,
+        16.56,
+        -3.75
+      ],
+      "extent": [
+        17.08,
+        60.93,
+        15.21
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-p3393-p0103-n0106",
+      "kind": "bamboo",
+      "group": "vegetation",
+      "anchor": [
+        339.26,
+        10.26,
+        -10.62
+      ],
+      "extent": [
+        20.05,
+        72.33,
+        17.58
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/bamboo-shoot-p1074-p0245-p0279",
+      "kind": "bamboo-shoot",
+      "group": "vegetation",
+      "anchor": [
+        107.36,
+        24.48,
+        27.89
+      ],
+      "extent": [
+        2.44,
+        9.22,
+        2.55
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "bamboo-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0005-p0382-n1596",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -0.5,
+        38.15,
+        -159.65
+      ],
+      "extent": [
+        31.76,
+        28.23,
+        31.9
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0027-p0323-n1595",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -2.68,
+        32.26,
+        -159.47
+      ],
+      "extent": [
+        11.96,
+        28.84,
+        16.15
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0052-p0330-n1924",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -5.18,
+        33.01,
+        -192.38
+      ],
+      "extent": [
+        1.53,
+        0.88,
+        1.55
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0054-p0330-n1909",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -5.37,
+        33.03,
+        -190.92
+      ],
+      "extent": [
+        1.47,
+        0.87,
+        1.4
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0057-p0330-n1937",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -5.66,
+        33.02,
+        -193.69
+      ],
+      "extent": [
+        1.32,
+        0.87,
+        1.39
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0068-p0330-n1949",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -6.77,
+        33.02,
+        -194.88
+      ],
+      "extent": [
+        1.5,
+        0.88,
+        1.45
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0068-p0331-n1897",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -6.8,
+        33.07,
+        -189.75
+      ],
+      "extent": [
+        1.44,
+        0.87,
+        1.52
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0085-p0330-n1955",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -8.52,
+        33.04,
+        -195.53
+      ],
+      "extent": [
+        1.47,
+        0.88,
+        1.4
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0085-p0331-n1890",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -8.53,
+        33.1,
+        -189.02
+      ],
+      "extent": [
+        1.58,
+        0.87,
+        1.52
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0092-p0388-n1923",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -9.21,
+        38.8,
+        -192.29
+      ],
+      "extent": [
+        31.13,
+        27.77,
+        32.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0104-p0331-n1895",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -10.39,
+        33.13,
+        -189.47
+      ],
+      "extent": [
+        1.41,
+        0.87,
+        1.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0104-p0331-n1950",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -10.4,
+        33.08,
+        -195.01
+      ],
+      "extent": [
+        1.32,
+        0.87,
+        1.36
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0110-p0327-n1906",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -10.98,
+        32.72,
+        -190.61
+      ],
+      "extent": [
+        1.33,
+        0.87,
+        1.42
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0114-p0331-n1935",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -11.38,
+        33.11,
+        -193.49
+      ],
+      "extent": [
+        1.55,
+        0.88,
+        1.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0115-p0330-n1915",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -11.52,
+        33.01,
+        -191.5
+      ],
+      "extent": [
+        12.52,
+        28.38,
+        16.27
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0117-p0331-n1920",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -11.75,
+        33.13,
+        -191.98
+      ],
+      "extent": [
+        1.58,
+        0.87,
+        1.51
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0218-p0387-n2168",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -21.83,
+        38.74,
+        -216.8
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0242-p0328-n2158",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -24.21,
+        32.84,
+        -215.8
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0253-p0246-n1406",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -25.32,
+        24.55,
+        -140.58
+      ],
+      "extent": [
+        1.36,
+        0.77,
+        1.37
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0255-p0246-n1421",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -25.47,
+        24.58,
+        -142.12
+      ],
+      "extent": [
+        1.17,
+        0.78,
+        1.24
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0261-p0246-n1434",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -26.1,
+        24.59,
+        -143.36
+      ],
+      "extent": [
+        1.24,
+        0.77,
+        1.18
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0261-p0361-n1570",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -26.15,
+        36.05,
+        -157.01
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0262-p0245-n1391",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -26.25,
+        24.52,
+        -139.14
+      ],
+      "extent": [
+        1.3,
+        0.78,
+        1.24
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0273-p0240-n1470",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -27.33,
+        23.99,
+        -147.05
+      ],
+      "extent": [
+        1.87,
+        1.8,
+        1.15
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0274-p0242-n1439",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -27.4,
+        24.23,
+        -143.9
+      ],
+      "extent": [
+        1.41,
+        0.77,
+        1.36
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0276-p0240-n1476",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -27.6,
+        23.99,
+        -147.64
+      ],
+      "extent": [
+        1.91,
+        1.8,
+        1.07
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0278-p0240-n1481",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -27.8,
+        23.99,
+        -148.1
+      ],
+      "extent": [
+        1.2,
+        1.71,
+        1.84
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0278-p0245-n1385",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -27.85,
+        24.5,
+        -138.54
+      ],
+      "extent": [
+        1.27,
+        0.78,
+        1.35
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0280-p0240-n1466",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -27.96,
+        23.97,
+        -146.59
+      ],
+      "extent": [
+        1.32,
+        1.72,
+        1.75
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0283-p0240-n1465",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -28.32,
+        23.95,
+        -146.5
+      ],
+      "extent": [
+        0.88,
+        1.74,
+        1.91
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0285-p0246-n1443",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -28.49,
+        24.59,
+        -144.32
+      ],
+      "extent": [
+        1.37,
+        0.77,
+        1.41
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0285-p0302-n1560",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -28.53,
+        30.15,
+        -156.01
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0286-p0240-n1481",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -28.65,
+        23.96,
+        -148.11
+      ],
+      "extent": [
+        1,
+        1.72,
+        1.89
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0286-p0270-n1470",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -28.56,
+        27.03,
+        -147.01
+      ],
+      "extent": [
+        1.72,
+        1.2,
+        1.71
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0286-p0280-n1470",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -28.58,
+        27.98,
+        -147.01
+      ],
+      "extent": [
+        1.56,
+        0.72,
+        1.06
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0292-p0245-n1387",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -29.23,
+        24.49,
+        -138.73
+      ],
+      "extent": [
+        1.32,
+        0.78,
+        1.36
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0304-p0245-n1393",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -30.36,
+        24.49,
+        -139.35
+      ],
+      "extent": [
+        1.27,
+        0.78,
+        1.21
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0337-p0326-n1838",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -33.74,
+        32.59,
+        -183.77
+      ],
+      "extent": [
+        17.86,
+        31.57,
+        13.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0342-p0390-n1862",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -34.16,
+        39.03,
+        -186.23
+      ],
+      "extent": [
+        35.62,
+        30.89,
+        34.91
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0351-p0361-n1313",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -35.06,
+        36.05,
+        -131.31
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0374-p0302-n1303",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -37.44,
+        30.15,
+        -130.31
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0484-p0332-n1523",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -48.44,
+        33.16,
+        -152.33
+      ],
+      "extent": [
+        14.93,
+        27.75,
+        11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0494-p0388-n1521",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -49.42,
+        38.82,
+        -152.15
+      ],
+      "extent": [
+        29.69,
+        27.15,
+        28.34
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0570-p0242-n1322",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -57.05,
+        24.18,
+        -132.25
+      ],
+      "extent": [
+        1.33,
+        0.77,
+        1.29
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0570-p0242-n1336",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -57.01,
+        24.16,
+        -133.56
+      ],
+      "extent": [
+        1.38,
+        0.78,
+        1.37
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0576-p0242-n1346",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -57.56,
+        24.17,
+        -134.65
+      ],
+      "extent": [
+        1.16,
+        0.77,
+        1.18
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0582-p0242-n1311",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -58.2,
+        24.21,
+        -131.1
+      ],
+      "extent": [
+        1.23,
+        0.77,
+        1.3
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0586-p0242-n1356",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -58.63,
+        24.17,
+        -135.62
+      ],
+      "extent": [
+        1.35,
+        0.77,
+        1.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0597-p0242-n1303",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -59.66,
+        24.24,
+        -130.31
+      ],
+      "extent": [
+        1.38,
+        0.77,
+        1.31
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0601-p0365-n1919",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -60.09,
+        36.51,
+        -191.9
+      ],
+      "extent": [
+        12.75,
+        22.92,
+        9.36
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0602-p0412-n1936",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -60.22,
+        41.19,
+        -193.6
+      ],
+      "extent": [
+        25.2,
+        22.43,
+        25.14
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0608-p0302-n1323",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -60.84,
+        30.18,
+        -132.33
+      ],
+      "extent": [
+        1.44,
+        0.9,
+        1.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0613-p0243-n1305",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -61.31,
+        24.27,
+        -130.55
+      ],
+      "extent": [
+        1.27,
+        0.77,
+        1.19
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0613-p0361-n1293",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -61.26,
+        36.05,
+        -129.27
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0619-p0239-n1315",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -61.95,
+        23.91,
+        -131.47
+      ],
+      "extent": [
+        1.21,
+        0.77,
+        1.28
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0627-p0243-n1326",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -62.74,
+        24.26,
+        -132.63
+      ],
+      "extent": [
+        1.38,
+        0.77,
+        1.29
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0627-p0302-n1316",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -62.67,
+        30.21,
+        -131.59
+      ],
+      "extent": [
+        1.34,
+        0.89,
+        1.4
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0635-p0303-n1299",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -63.53,
+        30.25,
+        -129.95
+      ],
+      "extent": [
+        1.57,
+        0.89,
+        1.61
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0636-p0302-n1283",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -63.64,
+        30.15,
+        -128.27
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0748-p0331-n1678",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -74.78,
+        33.05,
+        -167.84
+      ],
+      "extent": [
+        13.79,
+        25.6,
+        10.39
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0757-p0383-n1678",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -75.69,
+        38.27,
+        -167.84
+      ],
+      "extent": [
+        27.43,
+        25.05,
+        26.23
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0783-p0434-n1669",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -78.31,
+        43.35,
+        -166.94
+      ],
+      "extent": [
+        6.7,
+        0.41,
+        4.7
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0879-p0361-n1239",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -87.92,
+        36.09,
+        -123.93
+      ],
+      "extent": [
+        30.87,
+        27.77,
+        33.07
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0885-p0326-n1407",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -88.46,
+        32.61,
+        -140.71
+      ],
+      "extent": [
+        1.59,
+        0.88,
+        1.59
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0887-p0326-n1422",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -88.74,
+        32.59,
+        -142.18
+      ],
+      "extent": [
+        1.61,
+        0.9,
+        1.54
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0894-p0327-n1391",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -89.43,
+        32.65,
+        -139.09
+      ],
+      "extent": [
+        1.34,
+        0.89,
+        1.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0897-p0326-n1433",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -89.7,
+        32.6,
+        -143.31
+      ],
+      "extent": [
+        1.35,
+        0.89,
+        1.45
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0899-p0303-n1229",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -89.9,
+        30.29,
+        -122.93
+      ],
+      "extent": [
+        12.85,
+        28.38,
+        16.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0909-p0327-n1378",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -90.87,
+        32.68,
+        -137.84
+      ],
+      "extent": [
+        1.5,
+        0.89,
+        1.42
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0911-p0326-n1441",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -91.09,
+        32.6,
+        -144.11
+      ],
+      "extent": [
+        1.58,
+        0.89,
+        1.61
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0928-p0327-n1377",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -92.77,
+        32.71,
+        -137.66
+      ],
+      "extent": [
+        1.54,
+        0.88,
+        1.48
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0930-p0326-n1441",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -92.98,
+        32.62,
+        -144.13
+      ],
+      "extent": [
+        1.4,
+        0.9,
+        1.34
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0933-p0385-n1414",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -93.27,
+        38.5,
+        -141.37
+      ],
+      "extent": [
+        32.04,
+        28.32,
+        33.75
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0938-p0323-n1385",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -93.78,
+        32.3,
+        -138.54
+      ],
+      "extent": [
+        1.5,
+        0.89,
+        1.55
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0944-p0326-n1404",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -94.45,
+        32.59,
+        -140.41
+      ],
+      "extent": [
+        14.13,
+        28.94,
+        15.94
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0946-p0327-n1430",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -94.6,
+        32.66,
+        -142.99
+      ],
+      "extent": [
+        1.38,
+        0.89,
+        1.47
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0949-p0327-n1396",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -94.95,
+        32.71,
+        -139.63
+      ],
+      "extent": [
+        1.48,
+        0.88,
+        1.41
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n0951-p0327-n1412",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -95.08,
+        32.69,
+        -141.24
+      ],
+      "extent": [
+        1.5,
+        0.89,
+        1.59
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1129-p0330-n1409",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -112.86,
+        32.99,
+        -140.93
+      ],
+      "extent": [
+        28.62,
+        25.75,
+        28.75
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1147-p0276-n1407",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -114.75,
+        27.62,
+        -140.72
+      ],
+      "extent": [
+        10.46,
+        26.31,
+        14.46
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1291-p0248-n0841",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -129.12,
+        24.8,
+        -84.06
+      ],
+      "extent": [
+        14.05,
+        24.82,
+        11.37
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1300-p0299-n0857",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -129.99,
+        29.87,
+        -85.69
+      ],
+      "extent": [
+        28.97,
+        24.29,
+        27.08
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1342-p0266-n0649",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -134.17,
+        26.64,
+        -64.94
+      ],
+      "extent": [
+        15,
+        26.22,
+        11.72
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1351-p0320-n0670",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -135.11,
+        31.99,
+        -67.05
+      ],
+      "extent": [
+        30.36,
         25.66,
-        13.5
+        28.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1358-p0280-n1196",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -135.78,
+        28,
+        -119.59
+      ],
+      "extent": [
+        13.11,
+        23.7,
+        9.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1359-p0328-n1213",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -135.94,
+        32.84,
+        -121.32
+      ],
+      "extent": [
+        25.99,
+        23.19,
+        25.9
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1433-p0264-n0983",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -143.33,
+        26.44,
+        -98.34
+      ],
+      "extent": [
+        13.8,
+        26.19,
+        10.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-n1441-p0318-n0987",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        -144.1,
+        31.79,
+        -98.68
+      ],
+      "extent": [
+        28,
+        25.63,
+        27.28
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0025-p0302-n2354",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        2.53,
+        30.15,
+        -235.39
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0049-p0361-n2364",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        4.9,
+        36.05,
+        -236.39
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0108-p0361-n2078",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        10.77,
+        36.05,
+        -207.84
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0292-p0302-n1924",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        29.22,
+        30.15,
+        -192.39
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0316-p0361-n1934",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        31.6,
+        36.05,
+        -193.39
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0475-p0349-n2379",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        47.54,
+        34.85,
+        -237.91
+      ],
+      "extent": [
+        39.29,
+        36.35,
+        39.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0487-p0273-n2388",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        48.66,
+        27.27,
+        -238.77
+      ],
+      "extent": [
+        15.02,
+        37.15,
+        19.32
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0552-p0361-n2029",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        55.19,
+        36.05,
+        -202.95
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0689-p0302-n1611",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        68.91,
+        30.15,
+        -161.1
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0713-p0361-n1621",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        71.29,
+        36.05,
+        -162.1
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0787-p0322-n2224",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        78.66,
+        32.2,
+        -222.39
+      ],
+      "extent": [
+        34.3,
+        29.37,
+        33.1
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0793-p0205-n1071",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        79.29,
+        20.46,
+        -107.12
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0793-p0261-n2200",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        79.33,
+        26.07,
+        -219.97
+      ],
+      "extent": [
+        17.15,
+        30.01,
+        13.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0817-p0264-n1081",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        81.67,
+        26.36,
+        -108.12
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0831-p0286-n1855",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        83.13,
+        28.57,
+        -185.52
+      ],
+      "extent": [
+        38.77,
+        34.08,
+        40.4
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0842-p0215-n1866",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        84.2,
+        21.46,
+        -186.62
+      ],
+      "extent": [
+        17.42,
+        34.82,
+        18.85
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0872-p0136-n1279",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        87.24,
+        13.58,
+        -127.95
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0888-p0175-n1514",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        88.76,
+        17.49,
+        -151.43
+      ],
+      "extent": [
+        12.91,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0896-p0195-n1289",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        89.62,
+        19.48,
+        -128.95
+      ],
+      "extent": [
+        31.25,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0911-p0234-n1524",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        91.13,
+        23.39,
+        -152.43
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0924-p0127-n0942",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        92.35,
+        12.65,
+        -94.21
+      ],
+      "extent": [
+        8.83,
+        5.26,
+        9.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0942-p0127-n0778",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        94.18,
+        12.65,
+        -77.8
+      ],
+      "extent": [
+        8.83,
+        5.26,
+        9.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p0948-p0127-n0862",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        94.84,
+        12.65,
+        -86.25
+      ],
+      "extent": [
+        8.83,
+        5.26,
+        9.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1010-p0217-n2140",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        100.97,
+        21.65,
+        -214.01
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1023-p0237-n2455",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        102.32,
+        23.71,
+        -245.51
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1032-p0152-n1151",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        103.15,
+        15.16,
+        -115.08
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1034-p0276-n2150",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        103.35,
+        27.55,
+        -215.01
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1047-p0296-n2465",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        104.7,
+        29.61,
+        -246.51
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1055-p0211-n1161",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        105.52,
+        21.06,
+        -116.08
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1107-p0140-n1851",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        110.72,
+        13.98,
+        -185.13
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1131-p0199-n1861",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        113.1,
+        19.88,
+        -186.13
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1226-p0192-n2248",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        122.55,
+        19.16,
+        -224.84
+      ],
+      "extent": [
+        12.9,
+        28.9,
+        16.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p1249-p0251-n2258",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        124.92,
+        25.06,
+        -225.84
+      ],
+      "extent": [
+        31.24,
+        28.28,
+        33.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2849-p0263-n1879",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        284.87,
+        26.32,
+        -187.94
+      ],
+      "extent": [
+        1.17,
+        0.7,
+        1.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2849-p0263-n1892",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        284.94,
+        26.32,
+        -189.2
+      ],
+      "extent": [
+        1.23,
+        0.69,
+        1.21
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2854-p0263-n1902",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        285.41,
+        26.32,
+        -190.25
+      ],
+      "extent": [
+        1.05,
+        0.7,
+        1.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2855-p0263-n1866",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        285.51,
+        26.34,
+        -186.56
+      ],
+      "extent": [
+        1.15,
+        0.7,
+        1.19
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2864-p0263-n1909",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        286.39,
+        26.33,
+        -190.92
+      ],
+      "extent": [
+        1.21,
+        0.69,
+        1.14
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2869-p0264-n1858",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        286.86,
+        26.37,
+        -185.84
+      ],
+      "extent": [
+        1.23,
+        0.69,
+        1.23
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2878-p0264-n1908",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        287.79,
+        26.36,
+        -190.76
+      ],
+      "extent": [
+        1.16,
+        0.69,
+        1.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2882-p0264-n1861",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        288.21,
+        26.39,
+        -186.09
+      ],
+      "extent": [
+        1.08,
+        0.7,
+        1.04
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2892-p0264-n1902",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        289.17,
+        26.38,
+        -190.19
+      ],
+      "extent": [
+        1.06,
+        0.69,
+        1.12
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2893-p0264-n1867",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        289.28,
+        26.41,
+        -186.73
+      ],
+      "extent": [
+        1.06,
+        0.69,
+        1.13
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2897-p0261-n1879",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        289.67,
+        26.09,
+        -187.91
+      ],
+      "extent": [
+        1.2,
+        0.69,
+        1.25
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/blossom-p2900-p0264-n1889",
+      "kind": "blossom",
+      "group": "vegetation",
+      "anchor": [
+        289.98,
+        26.41,
+        -188.92
+      ],
+      "extent": [
+        1.26,
+        0.69,
+        1.21
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/flower-bed-p0174-p0248-p0055",
+      "kind": "flower-bed",
+      "group": "vegetation",
+      "anchor": [
+        17.36,
+        24.75,
+        5.54
+      ],
+      "extent": [
+        2.16,
+        1.11,
+        2.16
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/flower-bed-p0223-p0261-p0096",
+      "kind": "flower-bed",
+      "group": "vegetation",
+      "anchor": [
+        22.33,
+        26.11,
+        9.61
+      ],
+      "extent": [
+        4.22,
+        4.44,
+        4.89
+      ],
+      "orientation": {
+        "type": "axis",
+        "radians": 0
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-n0018-p0073-n0711",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        -1.82,
+        7.34,
+        -71.12
+      ],
+      "extent": [
+        20.84,
+        20.5,
+        22.71
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-n0144-p0097-n0589",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        -14.39,
+        9.65,
+        -58.86
+      ],
+      "extent": [
+        16.15,
+        15.88,
+        17.6
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-n0162-p0263-n1359",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        -16.19,
+        26.3,
+        -135.92
+      ],
+      "extent": [
+        18.92,
+        17.05,
+        17.35
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-n0432-p0203-p0832",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        -43.22,
+        20.29,
+        83.22
+      ],
+      "extent": [
+        13.07,
+        13.11,
+        12.24
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-n1099-p0206-n0209",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        -109.86,
+        20.62,
+        -20.93
+      ],
+      "extent": [
+        11.13,
+        11.34,
+        10.68
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-p0031-p0201-p0960",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        3.05,
+        20.05,
+        96.03
+      ],
+      "extent": [
+        12.69,
+        12.72,
+        11.88
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-p0684-p0263-n1351",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        68.37,
+        26.3,
+        -135.12
+      ],
+      "extent": [
+        17.34,
+        17.05,
+        18.89
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-p0712-p0223-n1194",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        71.16,
+        22.32,
+        -119.39
+      ],
+      "extent": [
+        13.95,
+        13.72,
+        15.2
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-p1869-p0176-n2104",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        186.89,
+        17.63,
+        -210.42
+      ],
+      "extent": [
+        14.12,
+        14.16,
+        13.21
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/grass-clump-p1892-p0168-n2241",
+      "kind": "grass-clump",
+      "group": "vegetation",
+      "anchor": [
+        189.21,
+        16.78,
+        -224.11
+      ],
+      "extent": [
+        15.81,
+        15.85,
+        14.79
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "terrain-ground"
+    },
+    {
+      "semanticId": "vegetation/mushroom-n0800-p0252-n0081",
+      "kind": "mushroom",
+      "group": "vegetation",
+      "anchor": [
+        -80.01,
+        25.15,
+        -8.08
+      ],
+      "extent": [
+        0.97,
+        2.19,
+        1.13
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/mushroom-n0980-p0249-n0400",
+      "kind": "mushroom",
+      "group": "vegetation",
+      "anchor": [
+        -98.01,
+        24.89,
+        -40.05
+      ],
+      "extent": [
+        1.01,
+        2.21,
+        1.09
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/mushroom-n1081-p0251-n0219",
+      "kind": "mushroom",
+      "group": "vegetation",
+      "anchor": [
+        -108.08,
+        25.07,
+        -21.94
+      ],
+      "extent": [
+        1.02,
+        2.03,
+        0.81
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/mushroom-p2373-p0161-n0561",
+      "kind": "mushroom",
+      "group": "vegetation",
+      "anchor": [
+        237.28,
+        16.1,
+        -56.13
+      ],
+      "extent": [
+        3.47,
+        7.02,
+        3
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/mushroom-p2486-p0210-n0391",
+      "kind": "mushroom",
+      "group": "vegetation",
+      "anchor": [
+        248.58,
+        20.97,
+        -39.09
+      ],
+      "extent": [
+        5.7,
+        12.57,
+        6.31
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0019-p0282-p1912",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -1.87,
+        28.24,
+        191.15
+      ],
+      "extent": [
+        2.57,
+        29.38,
+        2.66
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0020-p0211-p1912",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -2.05,
+        21.06,
+        191.17
+      ],
+      "extent": [
+        3.76,
+        37.28,
+        3.71
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0023-p0211-p1930",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -2.3,
+        21.06,
+        193.04
+      ],
+      "extent": [
+        37.03,
+        53.41,
+        36.64
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0023-p0459-p1930",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -2.3,
+        45.91,
+        193.04
+      ],
+      "extent": [
+        37.03,
+        28.56,
+        36.64
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0023-p0554-p1917",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -2.28,
+        55.42,
+        191.69
+      ],
+      "extent": [
+        13.38,
+        14.67,
+        13.02
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0411-p0274-p1618",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -41.1,
+        27.43,
+        161.77
+      ],
+      "extent": [
+        39.44,
+        53.37,
+        39.09
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0411-p0523-p1618",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -41.1,
+        52.26,
+        161.77
+      ],
+      "extent": [
+        39.44,
+        28.54,
+        39.09
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0419-p0568-p1617",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -41.87,
+        56.84,
+        161.72
+      ],
+      "extent": [
+        13.16,
+        14.66,
+        13.74
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0427-p0297-p1614",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -42.7,
+        29.68,
+        161.35
+      ],
+      "extent": [
+        2.61,
+        29.36,
+        2.6
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0429-p0274-p1612",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -42.87,
+        27.43,
+        161.19
+      ],
+      "extent": [
+        3.72,
+        37.25,
+        3.75
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0913-p0258-p0208",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -91.34,
+        25.8,
+        20.83
+      ],
+      "extent": [
+        32.69,
+        44.44,
+        32.91
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0913-p0465-p0208",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -91.34,
+        46.48,
+        20.83
+      ],
+      "extent": [
+        32.69,
+        23.77,
+        32.91
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0914-p0503-p0215",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -91.39,
+        50.29,
+        21.47
+      ],
+      "extent": [
+        11.41,
+        12.21,
+        10.99
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0917-p0277-p0222",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -91.75,
+        27.67,
+        22.15
+      ],
+      "extent": [
+        2.15,
+        24.45,
+        2.18
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n0919-p0258-p0223",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -91.89,
+        25.8,
+        22.29
+      ],
+      "extent": [
+        3.12,
+        31.02,
+        3.11
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1032-p0254-n1745",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -103.22,
+        25.37,
+        -174.51
+      ],
+      "extent": [
+        42.28,
+        60.9,
+        42.48
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1032-p0537-n1745",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -103.22,
+        53.7,
+        -174.51
+      ],
+      "extent": [
+        42.28,
+        32.57,
+        42.48
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1034-p0256-p0583",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -103.42,
+        25.61,
+        58.34
+      ],
+      "extent": [
+        37.48,
+        54.35,
+        37.72
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1034-p0509-p0583",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -103.42,
+        50.89,
+        58.34
+      ],
+      "extent": [
+        37.48,
+        29.06,
+        37.72
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1047-p0556-p0582",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -104.75,
+        55.56,
+        58.17
+      ],
+      "extent": [
+        13.3,
+        14.93,
+        13.52
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1053-p0256-p0579",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -105.29,
+        25.61,
+        57.85
+      ],
+      "extent": [
+        3.75,
+        37.93,
+        3.84
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1053-p0279-p0577",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -105.29,
+        27.9,
+        57.69
+      ],
+      "extent": [
+        2.72,
+        29.9,
+        2.6
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1132-p0239-n1087",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -113.25,
+        23.9,
+        -108.75
+      ],
+      "extent": [
+        36.66,
+        50.77,
+        36.51
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1171-p0256-p1222",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -117.07,
+        25.63,
+        122.18
+      ],
+      "extent": [
+        46.47,
+        64.05,
+        40.51
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1171-p0554-p1222",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -117.07,
+        55.43,
+        122.18
+      ],
+      "extent": [
+        46.47,
+        34.26,
+        40.51
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1175-p0256-p1236",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -117.55,
+        25.63,
+        123.55
+      ],
+      "extent": [
+        4.47,
+        44.71,
+        4.51
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1176-p0609-p1232",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -117.56,
+        60.93,
+        123.24
+      ],
+      "extent": [
+        17,
+        17.6,
+        14.33
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1178-p0283-p1235",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -117.76,
+        28.33,
+        123.54
+      ],
+      "extent": [
+        3.2,
+        35.24,
+        3.18
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1232-p0245-n1452",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -123.25,
+        24.45,
+        -145.19
+      ],
+      "extent": [
+        39.1,
+        53.6,
+        38.41
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1232-p0259-n0401",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -123.25,
+        25.86,
+        -40.07
+      ],
+      "extent": [
+        37.96,
+        52.28,
+        37.99
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1232-p0502-n0401",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -123.25,
+        50.19,
+        -40.07
+      ],
+      "extent": [
+        37.96,
+        27.96,
+        37.99
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1232-p0524-n1452",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -123.25,
+        52.4,
+        -145.19
+      ],
+      "extent": [
+        39.1,
+        28.66,
+        38.41
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1234-p0259-n0419",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -123.43,
+        25.86,
+        -41.89
+      ],
+      "extent": [
+        3.69,
+        36.49,
+        3.6
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1235-p0281-n0417",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -123.53,
+        28.07,
+        -41.74
+      ],
+      "extent": [
+        2.61,
+        28.76,
+        2.55
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1236-p0547-n0409",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -123.64,
+        54.68,
+        -40.88
+      ],
+      "extent": [
+        13.52,
+        14.36,
+        12.59
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1243-p0570-n1446",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -124.32,
+        57,
+        -144.64
+      ],
+      "extent": [
+        14.15,
+        14.72,
+        12.97
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1247-p0245-n1439",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -124.73,
+        24.45,
+        -143.89
+      ],
+      "extent": [
+        3.75,
+        37.41,
+        3.77
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1247-p0267-n1439",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -124.71,
+        26.71,
+        -143.94
+      ],
+      "extent": [
+        2.57,
+        29.49,
+        2.7
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1340-p0267-p0296",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -134.02,
+        26.67,
+        29.56
+      ],
+      "extent": [
+        4.35,
+        43.09,
+        4.3
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1340-p0293-p0298",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -134.02,
+        29.27,
+        29.78
+      ],
+      "extent": [
+        3.07,
+        33.96,
+        3.09
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1344-p0607-p0296",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -134.4,
+        60.69,
+        29.59
+      ],
+      "extent": [
+        13.94,
+        16.96,
+        16.35
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1346-p0301-p0882",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -134.6,
+        30.09,
+        88.16
+      ],
+      "extent": [
+        2.52,
+        28.41,
+        2.56
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1348-p0279-p0882",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -134.78,
+        27.91,
+        88.19
+      ],
+      "extent": [
+        3.62,
+        36.05,
+        3.62
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1349-p0564-p0887",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -134.86,
+        56.37,
+        88.69
+      ],
+      "extent": [
+        13.04,
+        14.19,
+        12.45
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1350-p0279-p0901",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -135.04,
+        27.91,
+        90.05
+      ],
+      "extent": [
+        36.43,
+        51.64,
+        34.98
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1350-p0519-p0901",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -135.04,
+        51.94,
+        90.05
+      ],
+      "extent": [
+        36.43,
+        27.62,
+        34.98
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1356-p0267-p0291",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -135.59,
+        26.67,
+        29.14
+      ],
+      "extent": [
+        39.36,
+        61.74,
+        44.84
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1356-p0554-p0291",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -135.59,
+        55.39,
+        29.14
+      ],
+      "extent": [
+        39.36,
+        33.02,
+        44.84
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1480-p0278-n0825",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -148.04,
+        27.78,
+        -82.49
+      ],
+      "extent": [
+        3.62,
+        36.8,
+        3.73
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1480-p0300-n0824",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -148.04,
+        30,
+        -82.38
+      ],
+      "extent": [
+        2.64,
+        29.01,
+        2.54
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1593-p0309-n0248",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -159.29,
+        30.9,
+        -24.79
+      ],
+      "extent": [
+        3.68,
+        37,
+        3.74
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1593-p0331-n0247",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -159.35,
+        33.13,
+        -24.72
+      ],
+      "extent": [
+        2.54,
+        29.17,
+        2.67
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1598-p0601-n0240",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -159.79,
+        60.11,
+        -24
+      ],
+      "extent": [
+        13.94,
+        14.56,
+        12.97
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1607-p0226-n0234",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -160.66,
+        22.63,
+        -23.42
+      ],
+      "extent": [
+        39,
+        53.01,
+        38.45
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1607-p0556-n0234",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -160.66,
+        55.56,
+        -23.42
+      ],
+      "extent": [
+        39,
+        28.35,
+        38.45
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1608-p0216-n1118",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -160.83,
+        21.61,
+        -111.8
+      ],
+      "extent": [
+        40.19,
+        54.21,
+        40.28
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1608-p0505-n1118",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -160.83,
+        50.48,
+        -111.8
+      ],
+      "extent": [
+        40.19,
+        28.99,
+        40.28
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1634-p0286-n0715",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -163.36,
+        28.64,
+        -71.52
+      ],
+      "extent": [
+        2.91,
+        32.01,
+        2.9
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1635-p0583-n0711",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -163.55,
+        58.25,
+        -71.06
+      ],
+      "extent": [
+        15.35,
+        15.98,
+        13.24
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1636-p0224-n0715",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -163.58,
+        22.36,
+        -71.51
+      ],
+      "extent": [
+        4.03,
+        40.61,
+        4.1
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1639-p0244-n0698",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -163.94,
+        24.38,
+        -69.77
+      ],
+      "extent": [
+        42.23,
+        58.18,
+        37.35
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1639-p0533-n0698",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -163.94,
+        53.26,
+        -69.77
+      ],
+      "extent": [
+        42.23,
+        31.11,
+        37.35
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1688-p0260-p0505",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -168.8,
+        26.03,
+        50.47
+      ],
+      "extent": [
+        35.95,
+        51.32,
+        34.97
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1688-p0499-p0505",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -168.8,
+        49.9,
+        50.47
+      ],
+      "extent": [
+        35.95,
+        27.44,
+        34.97
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1689-p0543-p0518",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -168.91,
+        54.31,
+        51.8
+      ],
+      "extent": [
+        12.92,
+        14.1,
+        12.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1690-p0260-p0523",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -169.05,
+        26.03,
+        52.3
+      ],
+      "extent": [
+        3.6,
+        35.82,
+        3.59
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-n1692-p0282-p0523",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        -169.23,
+        28.19,
+        52.32
+      ],
+      "extent": [
+        2.49,
+        28.23,
+        2.55
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0031-p0208-p1818",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        3.12,
+        20.79,
+        181.76
+      ],
+      "extent": [
+        2.57,
+        28.83,
+        2.59
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0033-p0186-p1817",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        3.31,
+        18.59,
+        181.73
+      ],
+      "extent": [
+        3.66,
+        36.58,
+        3.68
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0034-p0546-p1812",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        3.35,
+        54.64,
+        181.22
+      ],
+      "extent": [
+        13.25,
+        14.39,
+        12.58
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0036-p0186-p1798",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        3.58,
+        18.59,
+        179.82
+      ],
+      "extent": [
+        37.13,
+        52.4,
+        35.32
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0036-p0430-p1798",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        3.58,
+        42.96,
+        179.82
+      ],
+      "extent": [
+        37.13,
+        28.02,
+        35.32
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0956-p0404-p2069",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        95.63,
+        40.42,
+        206.93
+      ],
+      "extent": [
+        37.61,
+        53.22,
+        37.18
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0956-p0496-p2069",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        95.63,
+        49.62,
+        206.93
+      ],
+      "extent": [
+        37.61,
+        28.46,
+        37.18
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0967-p0542-p2079",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        96.69,
+        54.19,
+        207.85
+      ],
+      "extent": [
+        13.42,
+        14.62,
+        12.8
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0970-p0249-p2084",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        96.97,
+        24.86,
+        208.42
+      ],
+      "extent": [
+        3.7,
+        37.15,
+        3.75
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p0970-p0271-p2085",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        96.99,
+        27.1,
+        208.46
+      ],
+      "extent": [
+        2.68,
+        29.28,
+        2.59
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1264-p0269-p1826",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        126.42,
+        26.91,
+        182.64
+      ],
+      "extent": [
+        3.63,
+        35.96,
+        3.57
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1264-p0420-p1824",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        126.42,
+        42.01,
+        182.44
+      ],
+      "extent": [
+        2.57,
+        28.34,
+        2.57
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1268-p0682-p1826",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        126.83,
+        68.23,
+        182.61
+      ],
+      "extent": [
+        11.74,
+        14.15,
+        13.58
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1280-p0389-p1830",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        128.01,
+        38.85,
+        182.95
+      ],
+      "extent": [
+        33.12,
+        51.52,
+        37.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1280-p0638-p1830",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        128.01,
+        63.81,
+        182.95
+      ],
+      "extent": [
+        33.12,
+        27.55,
+        37.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1623-p0229-p1958",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        162.28,
+        22.92,
+        195.78
+      ],
+      "extent": [
+        3.71,
+        37.39,
+        3.78
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1623-p0252-p1957",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        162.3,
+        25.17,
+        195.67
+      ],
+      "extent": [
+        2.62,
+        29.47,
+        2.66
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1632-p0442-p1965",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        163.22,
+        44.15,
+        196.51
+      ],
+      "extent": [
+        35.08,
+        53.56,
+        38.78
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1822-p0367-p1612",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        182.2,
+        36.65,
+        161.22
+      ],
+      "extent": [
+        40.96,
+        55.35,
+        40.51
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1822-p0532-p1612",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        182.2,
+        53.23,
+        161.22
+      ],
+      "extent": [
+        40.96,
+        29.6,
+        40.51
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1829-p0580-p1606",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        182.91,
+        57.99,
+        160.57
+      ],
+      "extent": [
+        14.46,
+        15.2,
+        13.64
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1834-p0298-p1598",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        183.42,
+        29.82,
+        159.8
+      ],
+      "extent": [
+        2.66,
+        30.45,
+        2.78
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1835-p0275-p1597",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        183.54,
+        27.49,
+        159.71
+      ],
+      "extent": [
+        3.83,
+        38.63,
+        3.91
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1878-p0226-n1840",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        187.76,
+        22.58,
+        -184.01
+      ],
+      "extent": [
+        43.51,
+        62.32,
+        44.28
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p1878-p0516-n1840",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        187.76,
+        51.58,
+        -184.01
+      ],
+      "extent": [
+        43.51,
+        33.33,
+        44.28
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2096-p0259-n2251",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        209.55,
+        25.86,
+        -225.07
+      ],
+      "extent": [
+        3.65,
+        37.06,
+        3.76
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2096-p0281-n2250",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        209.55,
+        28.1,
+        -224.96
+      ],
+      "extent": [
+        2.66,
+        29.21,
+        2.57
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2208-p0283-n1916",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        220.82,
+        28.29,
+        -191.65
+      ],
+      "extent": [
+        37.75,
+        52.32,
+        34.01
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2208-p0502-n1916",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        220.82,
+        50.15,
+        -191.65
+      ],
+      "extent": [
+        37.75,
+        27.98,
+        34.01
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2248-p0259-n2215",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        224.77,
+        25.86,
+        -221.54
+      ],
+      "extent": [
+        36.86,
+        53.1,
+        37.03
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2248-p0506-n2215",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        224.77,
+        50.57,
+        -221.54
+      ],
+      "extent": [
+        36.86,
+        28.39,
+        37.03
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2341-p0239-n1435",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        234.14,
+        23.92,
+        -143.46
+      ],
+      "extent": [
+        3.57,
+        35.65,
+        3.59
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2341-p0261-n1435",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        234.1,
+        26.08,
+        -143.51
+      ],
+      "extent": [
+        2.5,
+        28.1,
+        2.57
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2444-p0521-n1668",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        244.39,
+        52.05,
+        -166.77
+      ],
+      "extent": [
+        12.25,
+        13.09,
+        11.25
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2449-p0565-n1650",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        244.91,
+        56.53,
+        -165.01
+      ],
+      "extent": [
+        13.72,
+        15.16,
+        14.13
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2450-p0258-n1660",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        245.04,
+        25.79,
+        -165.96
+      ],
+      "extent": [
+        34.3,
+        47.66,
+        33.94
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2450-p0480-n1660",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        245.04,
+        47.96,
+        -165.96
+      ],
+      "extent": [
+        34.3,
+        25.49,
+        33.94
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2457-p0261-n1649",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        245.68,
+        26.12,
+        -164.86
+      ],
+      "extent": [
+        40.94,
+        55.19,
+        40.9
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2457-p0518-n1649",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        245.68,
+        51.8,
+        -164.86
+      ],
+      "extent": [
+        40.94,
+        29.51,
+        40.9
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2486-p0238-p0393",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        248.64,
+        23.83,
+        39.33
+      ],
+      "extent": [
+        2.6,
+        29.05,
+        2.6
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2487-p0216-p0395",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        248.68,
+        21.61,
+        39.53
+      ],
+      "extent": [
+        3.72,
+        36.85,
+        3.69
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2492-p0507-p0395",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        249.19,
+        50.7,
+        39.53
+      ],
+      "extent": [
+        12.59,
+        14.5,
+        13.44
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2597-p0241-n1938",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        259.74,
+        24.11,
+        -193.79
+      ],
+      "extent": [
+        4.27,
+        42.19,
+        4.18
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2597-p0267-n1938",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        259.67,
+        26.66,
+        -193.78
+      ],
+      "extent": [
+        2.94,
+        33.26,
+        3.04
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2603-p0574-n1942",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        260.34,
+        57.42,
+        -194.18
+      ],
+      "extent": [
+        14.64,
+        16.61,
+        15.16
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2612-p0522-n1955",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        261.23,
+        52.23,
+        -195.46
+      ],
+      "extent": [
+        42.23,
+        32.33,
+        42.49
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2668-p0238-n1356",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        266.77,
+        23.82,
+        -135.58
+      ],
+      "extent": [
+        3.81,
+        38.52,
+        3.9
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2668-p0261-n1356",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        266.79,
+        26.14,
+        -135.63
+      ],
+      "extent": [
+        2.75,
+        30.36,
+        2.7
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2669-p0235-n1357",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        266.93,
+        23.48,
+        -135.75
+      ],
+      "extent": [
+        35.43,
+        47.67,
+        35.29
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2669-p0457-n1357",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        266.93,
+        45.66,
+        -135.75
+      ],
+      "extent": [
+        35.43,
+        25.49,
+        35.29
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2672-p0498-n1364",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        267.2,
+        49.75,
+        -136.37
+      ],
+      "extent": [
+        12.22,
+        13.09,
+        11.85
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2675-p0542-n1354",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        267.46,
+        54.23,
+        -135.39
+      ],
+      "extent": [
+        12.95,
+        15.16,
+        14.58
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2677-p0255-n1371",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        267.71,
+        25.49,
+        -137.07
+      ],
+      "extent": [
+        2.28,
+        26.22,
+        2.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2679-p0235-n1372",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        267.87,
+        23.48,
+        -137.18
+      ],
+      "extent": [
+        3.3,
+        33.27,
+        3.35
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2679-p0238-n1343",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        267.93,
+        23.82,
+        -134.28
+      ],
+      "extent": [
+        38.24,
+        55.19,
+        40.06
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2679-p0495-n1343",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        267.93,
+        49.49,
+        -134.28
+      ],
+      "extent": [
+        38.24,
+        29.51,
+        40.06
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2767-p0231-n1781",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        276.73,
+        23.11,
+        -178.13
+      ],
+      "extent": [
+        39.53,
+        53.38,
+        39.68
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2767-p0479-n1781",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        276.73,
+        47.94,
+        -178.13
+      ],
+      "extent": [
+        39.53,
+        28.55,
+        39.68
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2786-p0260-p0008",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        278.62,
+        25.95,
+        0.82
+      ],
+      "extent": [
+        4.35,
+        43.09,
+        4.29
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2794-p0183-n2187",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        279.38,
+        18.31,
+        -218.73
+      ],
+      "extent": [
+        42.46,
+        61.77,
+        42.74
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2807-p0258-p0996",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        280.65,
+        25.82,
+        99.55
+      ],
+      "extent": [
+        38.01,
+        51.19,
+        37.97
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2809-p0540-p0989",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        280.86,
+        54.03,
+        98.85
+      ],
+      "extent": [
+        13.13,
+        14.06,
+        12.73
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2848-p0199-n1464",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        284.75,
+        19.94,
+        -146.36
+      ],
+      "extent": [
+        43.02,
+        58.46,
+        42.62
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2848-p0471-n1464",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        284.75,
+        47.14,
+        -146.36
+      ],
+      "extent": [
+        43.02,
+        31.26,
+        42.62
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2948-p0518-n0335",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        294.76,
+        51.77,
+        -33.55
+      ],
+      "extent": [
+        11.91,
+        12.76,
+        11.55
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2953-p0281-n0342",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        295.25,
+        28.14,
+        -34.23
+      ],
+      "extent": [
+        2.21,
+        25.55,
+        2.32
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2954-p0262-n0343",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        295.4,
+        26.18,
+        -34.34
+      ],
+      "extent": [
+        3.23,
+        32.42,
+        3.27
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2976-p0199-n1031",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        297.61,
+        19.94,
+        -103.08
+      ],
+      "extent": [
+        42.22,
+        58.46,
+        42.89
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p2976-p0471-n1031",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        297.61,
+        47.14,
+        -103.08
+      ],
+      "extent": [
+        42.22,
+        31.26,
+        42.89
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3017-p0231-n1347",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        301.73,
+        23.11,
+        -134.71
+      ],
+      "extent": [
+        35.93,
+        53.38,
+        38.7
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3017-p0479-n1347",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        301.73,
+        47.94,
+        -134.71
+      ],
+      "extent": [
+        35.93,
+        28.55,
+        38.7
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3045-p0281-p0106",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        304.5,
+        28.1,
+        10.55
+      ],
+      "extent": [
+        3.75,
+        38.13,
+        3.86
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3173-p0160-n1711",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        317.27,
+        16.01,
+        -171.06
+      ],
+      "extent": [
+        44.94,
+        61.77,
+        45.1
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3173-p0238-p0967",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        317.29,
+        23.84,
+        96.72
+      ],
+      "extent": [
+        40.29,
+        54.43,
+        40.46
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3173-p0492-p0967",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        317.29,
+        49.16,
+        96.72
+      ],
+      "extent": [
+        40.29,
+        29.11,
+        40.46
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3291-p0262-p0217",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        329.06,
+        26.18,
+        21.74
+      ],
+      "extent": [
+        34.52,
+        46.44,
+        34.41
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3291-p0478-p0217",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        329.06,
+        47.78,
+        21.74
+      ],
+      "extent": [
+        34.52,
+        24.84,
+        34.41
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3372-p0582-p0684",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        337.22,
+        58.2,
+        68.39
+      ],
+      "extent": [
+        13.26,
+        15.01,
+        14.13
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3381-p0281-p0682",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        338.05,
+        28.1,
+        68.15
+      ],
+      "extent": [
+        39.94,
+        54.62,
+        39.76
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3387-p0236-n0186",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        338.65,
+        23.59,
+        -18.65
+      ],
+      "extent": [
+        40.9,
+        58.33,
+        40.75
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3387-p0507-n0186",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        338.65,
+        50.72,
+        -18.65
+      ],
+      "extent": [
+        40.9,
+        31.19,
+        40.75
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3406-p0286-n0780",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        340.62,
+        28.55,
+        -77.99
+      ],
+      "extent": [
+        2.97,
+        33.96,
+        3.08
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3411-p0547-n0802",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        341.11,
+        54.66,
+        -80.16
+      ],
+      "extent": [
+        42.73,
+        33.01,
+        42.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3503-p0304-p0377",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        350.25,
+        30.4,
+        37.69
+      ],
+      "extent": [
+        2.65,
+        30.05,
+        2.71
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3505-p0260-n0426",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        350.48,
+        25.95,
+        -42.59
+      ],
+      "extent": [
+        42.73,
+        61.73,
+        42.38
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3505-p0600-n0410",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        350.47,
+        59.96,
+        -41.04
+      ],
+      "extent": [
+        15.44,
+        16.96,
+        15.05
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3510-p0216-n0017",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        351.02,
+        21.61,
+        -1.69
+      ],
+      "extent": [
+        35.31,
+        52.8,
+        37.63
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3510-p0462-n0017",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        351.02,
+        46.17,
+        -1.69
+      ],
+      "extent": [
+        35.31,
+        28.24,
+        37.63
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/palm-p3520-p0535-p0376",
+      "kind": "palm",
+      "group": "vegetation",
+      "anchor": [
+        351.95,
+        53.51,
+        37.64
+      ],
+      "extent": [
+        39.94,
+        29.21,
+        39.76
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "palm-foliage"
+    },
+    {
+      "semanticId": "vegetation/willow-p2180-p0251-p1166",
+      "kind": "willow",
+      "group": "vegetation",
+      "anchor": [
+        217.99,
+        25.11,
+        116.61
+      ],
+      "extent": [
+        0.31,
+        1.37,
+        0.17
+      ],
+      "orientation": {
+        "type": "radial"
+      },
+      "materialFamily": "blossom-foliage"
+    },
+    {
+      "semanticId": "wildlife/panda-n1114-p0247-n0812",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        -111.38,
+        24.72,
+        -81.24
+      ],
+      "extent": [
+        7.87,
+        4.56,
+        4.69
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": -1.2618
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-n1220-p0257-n0543",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        -122.05,
+        25.73,
+        -54.29
+      ],
+      "extent": [
+        7.87,
+        4.56,
+        4.69
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": -1.2618
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-n1352-p0238-n1531",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        -135.18,
+        23.79,
+        -153.09
+      ],
+      "extent": [
+        7.87,
+        4.56,
+        4.69
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": -1.2618
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-p0062-p0259-p0135",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        6.24,
+        25.93,
+        13.51
       ],
       "extent": [
         2.87,
@@ -6848,37 +13448,17 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "heading",
-        "radians": 0
+        "radians": -0.0001
       },
       "materialFamily": "creature-fur"
     },
     {
-      "semanticId": "wildlife/panda-p2652-p0256-p0252",
+      "semanticId": "wildlife/panda-p0779-p0259-p0480",
       "kind": "panda",
       "group": "wildlife",
       "anchor": [
-        265.18,
-        25.57,
-        25.17
-      ],
-      "extent": [
-        7.87,
-        4.56,
-        4.69
-      ],
-      "orientation": {
-        "type": "heading",
-        "radians": -1.262
-      },
-      "materialFamily": "creature-fur"
-    },
-    {
-      "semanticId": "wildlife/panda-p0778-p0258-p0480",
-      "kind": "panda",
-      "group": "wildlife",
-      "anchor": [
-        77.84,
-        25.78,
+        77.86,
+        25.94,
         47.99
       ],
       "extent": [
@@ -6893,53 +13473,53 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "creature-fur"
     },
     {
-      "semanticId": "wildlife/panda-p2403-p0261-p0595",
+      "semanticId": "wildlife/panda-p0984-p0234-n2158",
       "kind": "panda",
       "group": "wildlife",
       "anchor": [
-        240.31,
-        26.09,
-        59.51
+        98.44,
+        23.43,
+        -215.78
       ],
       "extent": [
-        5.25,
-        3.04,
-        3.04
+        1.95,
+        2.9,
+        4.55
       ],
       "orientation": {
         "type": "heading",
-        "radians": -1.283
+        "radians": 0
       },
       "materialFamily": "creature-fur"
     },
     {
-      "semanticId": "wildlife/panda-p2737-p0266-p0731",
+      "semanticId": "wildlife/panda-p0999-p0241-n2198",
       "kind": "panda",
       "group": "wildlife",
       "anchor": [
-        273.67,
-        26.57,
-        73.1
+        99.86,
+        24.05,
+        -219.84
       ],
       "extent": [
-        5.96,
-        3.66,
-        5.51
+        1.95,
+        2.9,
+        4.55
       ],
       "orientation": {
         "type": "heading",
-        "radians": 2.286
+        "radians": 3.1416
       },
       "materialFamily": "creature-fur"
     },
     {
-      "semanticId": "wildlife/panda-p1572-p0260-p1823",
+      "semanticId": "wildlife/panda-p1018-p0209-n0032",
       "kind": "panda",
       "group": "wildlife",
       "anchor": [
-        157.17,
-        26.03,
-        182.3
+        101.77,
+        20.92,
+        -3.18
       ],
       "extent": [
         7.87,
@@ -6948,59 +13528,271 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       ],
       "orientation": {
         "type": "heading",
-        "radians": -1.262
+        "radians": -1.2618
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-p1571-p0535-p1824",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        157.14,
+        53.47,
+        182.4
+      ],
+      "extent": [
+        7.87,
+        4.56,
+        4.69
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": -1.2618
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-p2403-p0252-p0596",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        240.28,
+        25.2,
+        59.58
+      ],
+      "extent": [
+        5.25,
+        3.04,
+        3.04
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": -1.2827
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-p2651-p0258-p0253",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        265.14,
+        25.82,
+        25.27
+      ],
+      "extent": [
+        7.87,
+        4.56,
+        4.69
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": -1.2618
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-p2737-p0267-p0730",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        273.74,
+        26.69,
+        73.03
+      ],
+      "extent": [
+        5.96,
+        3.66,
+        5.52
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 2.2866
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-p3278-p0344-p0039",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        327.8,
+        34.41,
+        3.94
+      ],
+      "extent": [
+        2.84,
+        4.45,
+        7.39
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": 0
+      },
+      "materialFamily": "creature-fur"
+    },
+    {
+      "semanticId": "wildlife/panda-p3411-p0264-n0847",
+      "kind": "panda",
+      "group": "wildlife",
+      "anchor": [
+        341.06,
+        26.37,
+        -84.72
+      ],
+      "extent": [
+        5.69,
+        4.52,
+        7.75
+      ],
+      "orientation": {
+        "type": "heading",
+        "radians": -0.4711
       },
       "materialFamily": "creature-fur"
     }
   ],
   "populations": [
     {
-      "coverId": "cover/shore-pebbles",
-      "kind": "pebble",
+      "coverId": "cover/ground-rock-p3018-4200",
+      "kind": "ground-rock",
       "count": 4200,
       "region": {
-        "shape": "coast-band",
-        "innerRadius": 0.86,
+        "shape": "island-ellipse",
+        "center": [
+          87.7,
+          -27.37
+        ],
+        "radii": [
+          301.83,
+          277.25
+        ],
+        "innerRadius": 0,
         "outerRadius": 1
       },
+      "heightRange": [
+        14,
+        54.04
+      ],
       "scaleRange": [
-        0.4,
+        0.6,
         1.6
       ],
       "orientation": "radial",
       "materialFamily": "shore-rock"
     },
     {
-      "coverId": "cover/inland-rocks",
+      "coverId": "cover/ground-rock-p1034-948",
       "kind": "ground-rock",
-      "count": 900,
+      "count": 948,
       "region": {
-        "shape": "inland-disc",
+        "shape": "island-ellipse",
+        "center": [
+          -14.3,
+          -43.3
+        ],
+        "radii": [
+          103.42,
+          47.38
+        ],
         "innerRadius": 0,
-        "outerRadius": 0.88
+        "outerRadius": 1
       },
+      "heightRange": [
+        23.72,
+        30.65
+      ],
       "scaleRange": [
         0.6,
-        2.4
+        1.6
       ],
       "orientation": "radial",
       "materialFamily": "shore-rock"
     },
     {
-      "coverId": "cover/meadow-grass",
-      "kind": "grass-tuft",
-      "count": 5200,
+      "coverId": "cover/ground-rock-p2954-900",
+      "kind": "ground-rock",
+      "count": 900,
       "region": {
-        "shape": "inland-disc",
+        "shape": "island-ellipse",
+        "center": [
+          84.07,
+          -30.66
+        ],
+        "radii": [
+          295.38,
+          276.01
+        ],
         "innerRadius": 0,
-        "outerRadius": 0.8
+        "outerRadius": 1
       },
+      "heightRange": [
+        13.31,
+        54.8
+      ],
       "scaleRange": [
-        0.5,
-        1.4
+        0.6,
+        1.6
       ],
       "orientation": "radial",
-      "materialFamily": "terrain-ground"
+      "materialFamily": "shore-rock"
+    },
+    {
+      "coverId": "cover/ground-rock-p0948-145",
+      "kind": "ground-rock",
+      "count": 145,
+      "region": {
+        "shape": "island-ellipse",
+        "center": [
+          -20.63,
+          -39.33
+        ],
+        "radii": [
+          94.85,
+          40.12
+        ],
+        "innerRadius": 0,
+        "outerRadius": 1
+      },
+      "heightRange": [
+        25.29,
+        31.49
+      ],
+      "scaleRange": [
+        0.6,
+        1.6
+      ],
+      "orientation": "radial",
+      "materialFamily": "shore-rock"
+    },
+    {
+      "coverId": "cover/ground-rock-p1024-127",
+      "kind": "ground-rock",
+      "count": 127,
+      "region": {
+        "shape": "island-ellipse",
+        "center": [
+          -14.22,
+          -42.94
+        ],
+        "radii": [
+          102.4,
+          46.45
+        ],
+        "innerRadius": 0,
+        "outerRadius": 1
+      },
+      "heightRange": [
+        24.05,
+        27.61
+      ],
+      "scaleRange": [
+        0.6,
+        1.6
+      ],
+      "orientation": "radial",
+      "materialFamily": "shore-rock"
     },
     {
       "coverId": "cover/sky-clouds",
@@ -7008,16 +13800,33 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "count": 34,
       "region": {
         "shape": "sky-shell",
-        "minHeight": 266,
-        "maxHeight": 546,
-        "radius": 2600
+        "center": [
+          296.46,
+          -166.99
+        ],
+        "radii": [
+          6818.27,
+          5215.52
+        ],
+        "minHeight": -501.67,
+        "maxHeight": 3174.86,
+        "innerRadius": 0.25,
+        "outerRadius": 1
       },
+      "spanRange": [
+        1663.89,
+        4178.36
+      ],
       "scaleRange": [
-        0.7,
-        1.8
+        0.6,
+        1.6
       ],
       "orientation": "radial",
-      "materialFamily": "ocean-surface"
+      "materialFamily": "ocean-surface",
+      "heightRange": [
+        -501.67,
+        3174.86
+      ]
     }
   ],
   "semanticLights": [
@@ -7033,8 +13842,9 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.6588,
         0.6588
       ],
-      "range": 33,
-      "intensity": 4.58,
+      "range": 20,
+      "intensity": 20.61,
+      "decay": 2,
       "castShadow": false,
       "emissiveSource": null
     },
@@ -7051,7 +13861,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.3647
       ],
       "range": 6,
-      "intensity": 9.26,
+      "intensity": 41.67,
+      "decay": 2,
       "castShadow": false,
       "emissiveSource": "structures/dessert-shop-p0310-p0268-p0505"
     },
@@ -7068,7 +13879,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.3333
       ],
       "range": 8,
-      "intensity": 3.36,
+      "intensity": 15.12,
+      "decay": 2,
       "castShadow": false,
       "emissiveSource": "structures/dessert-shop-p0310-p0268-p0505"
     },
@@ -7085,7 +13897,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.3333
       ],
       "range": 8,
-      "intensity": 3.36,
+      "intensity": 15.12,
+      "decay": 2,
       "castShadow": false,
       "emissiveSource": "structures/dessert-shop-p0310-p0268-p0505"
     },
@@ -7101,10 +13914,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         1,
         1
       ],
-      "range": 27,
-      "intensity": 3.36,
+      "range": 20,
+      "intensity": 15.12,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "structures/ring-booth-p0383-p0280-n0442"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p1011-p0474-5",
@@ -7119,9 +13933,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 6.32,
+      "intensity": 28.44,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/stone-platform-p1097-p0248-p0456"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p1055-p0594-6",
@@ -7136,9 +13951,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 5.9,
+      "intensity": 26.55,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/stone-platform-p1097-p0248-p0456"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p1027-p0726-7",
@@ -7153,9 +13969,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 8,
+      "intensity": 36,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/bamboo-pile-p0947-p0205-p0631"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0977-p0624-8",
@@ -7170,9 +13987,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 8,
+      "intensity": 36,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/bamboo-pile-p0947-p0205-p0631"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0877-p0734-9",
@@ -7187,7 +14005,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 8,
+      "intensity": 36,
+      "decay": 2,
       "castShadow": false,
       "emissiveSource": null
     },
@@ -7204,9 +14023,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 8,
+      "intensity": 36,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p0778-p0258-p0480"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0878-p0473-11",
@@ -7221,9 +14041,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 8,
+      "intensity": 36,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p0778-p0258-p0480"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0921-p0534-12",
@@ -7238,9 +14059,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 18.52,
+      "intensity": 54,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p0778-p0258-p0480"
+      "emissiveSource": "wildlife/panda-p0779-p0259-p0480"
     },
     {
       "lightId": "lights/point-p0994-p0643-13",
@@ -7255,7 +14077,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8039
       ],
       "range": 12,
-      "intensity": 7.58,
+      "intensity": 34.11,
+      "decay": 2,
       "castShadow": false,
       "emissiveSource": "decorations/bamboo-pile-p0947-p0205-p0631"
     },
@@ -7272,9 +14095,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.4902
       ],
       "range": 8,
-      "intensity": 5.06,
+      "intensity": 22.77,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "paths/path-stone-p2653-p0260-n1145"
+      "emissiveSource": "paths/paving-slab-p2653-p0260-n1145"
     },
     {
       "lightId": "lights/point-p0305-p1643-15",
@@ -7289,9 +14113,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.0902
       ],
       "range": 10,
-      "intensity": 10,
+      "intensity": 45,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "vegetation/palm-p0007-p0186-p1868"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p2464-n0896-16",
@@ -7306,15 +14131,16 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.4902
       ],
       "range": 8,
-      "intensity": 5.06,
+      "intensity": 22.77,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "paths/path-stone-p2653-p0260-n1145"
+      "emissiveSource": "plazas/deck-p2455-p0200-n0959"
     },
     {
       "lightId": "lights/point-p2567-n0507-17",
       "position": [
-        256.69,
-        31.94,
+        256.7,
+        31.95,
         -50.69
       ],
       "color": [
@@ -7323,9 +14149,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.4902
       ],
       "range": 8,
-      "intensity": 5.06,
+      "intensity": 22.77,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/mushroom-p2486-p0210-n0391"
+      "emissiveSource": "vegetation/mushroom-p2486-p0210-n0391"
     },
     {
       "lightId": "lights/point-p2171-n0597-18",
@@ -7340,9 +14167,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.4902
       ],
       "range": 8,
-      "intensity": 5.06,
+      "intensity": 22.77,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/mushroom-p2373-p0161-n0561"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p2288-n0595-19",
@@ -7357,9 +14185,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.4902
       ],
       "range": 8,
-      "intensity": 5.06,
+      "intensity": 22.77,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/mushroom-p2373-p0161-n0561"
+      "emissiveSource": "vegetation/mushroom-p2373-p0161-n0561"
     },
     {
       "lightId": "lights/point-p0838-n0708-20",
@@ -7374,9 +14203,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         1
       ],
       "range": 16,
-      "intensity": 10.1,
+      "intensity": 45.45,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/umbrella-p0953-p0232-n0598"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0838-n0708-21",
@@ -7390,10 +14220,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         1,
         1
       ],
-      "range": 60,
-      "intensity": 3.68,
+      "range": 20,
+      "intensity": 16.56,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/umbrella-p0953-p0232-n0598"
+      "emissiveSource": "vegetation/bamboo-p0792-p0256-n0631"
     },
     {
       "lightId": "lights/point-p0933-p0235-22",
@@ -7408,29 +14239,13 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         1
       ],
       "range": 16,
-      "intensity": 19.36,
+      "intensity": 54,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/bamboo-shoot-p1074-p0245-p0279"
+      "emissiveSource": "decorations/shop-sign-p0860-p0273-p0174"
     },
     {
-      "lightId": "lights/point-p0932-p0235-23",
-      "position": [
-        93.22,
-        27.48,
-        23.48
-      ],
-      "color": [
-        1,
-        1,
-        1
-      ],
-      "range": 8,
-      "intensity": 0,
-      "castShadow": false,
-      "emissiveSource": "decorations/bamboo-shoot-p1074-p0245-p0279"
-    },
-    {
-      "lightId": "lights/point-p1009-p0263-24",
+      "lightId": "lights/point-p1009-p0263-23",
       "position": [
         100.93,
         29.3,
@@ -7442,29 +14257,31 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.4902
       ],
       "range": 8,
-      "intensity": 5.06,
+      "intensity": 22.77,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/bamboo-shoot-p1074-p0245-p0279"
+      "emissiveSource": "vegetation/bamboo-shoot-p1074-p0245-p0279"
     },
     {
-      "lightId": "lights/point-p0229-p0759-25",
+      "lightId": "lights/point-p0229-p0759-24",
       "position": [
         22.9,
         42.9,
-        75.89
+        75.9
       ],
       "color": [
         1,
         0.949,
         0.7608
       ],
-      "range": 30,
-      "intensity": 3.78,
+      "range": 20,
+      "intensity": 17.01,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/lantern-p0008-p0455-p0871"
+      "emissiveSource": "rocks/rock-p0070-p0452-p0778"
     },
     {
-      "lightId": "lights/point-p0636-p0731-26",
+      "lightId": "lights/point-p0636-p0731-25",
       "position": [
         63.64,
         37.01,
@@ -7475,13 +14292,14 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.949,
         0.7608
       ],
-      "range": 30,
-      "intensity": 3.78,
+      "range": 20,
+      "intensity": 17.01,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p0778-p0258-p0480"
+      "emissiveSource": null
     },
     {
-      "lightId": "lights/point-p0638-p0576-27",
+      "lightId": "lights/point-p0638-p0576-26",
       "position": [
         63.79,
         36.66,
@@ -7492,13 +14310,14 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.949,
         0.7608
       ],
-      "range": 30,
-      "intensity": 3.78,
+      "range": 20,
+      "intensity": 17.01,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p0778-p0258-p0480"
+      "emissiveSource": "wildlife/panda-p0779-p0259-p0480"
     },
     {
-      "lightId": "lights/point-p0655-p0315-28",
+      "lightId": "lights/point-p0655-p0315-27",
       "position": [
         65.52,
         38.35,
@@ -7509,16 +14328,17 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.949,
         0.7608
       ],
-      "range": 21,
-      "intensity": 3.78,
+      "range": 20,
+      "intensity": 17.01,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/lantern-p0781-p0273-p0176"
+      "emissiveSource": "decorations/shop-sign-p0788-p0273-p0259"
     },
     {
-      "lightId": "lights/point-p0220-p0053-29",
+      "lightId": "lights/point-p0220-p0053-28",
       "position": [
         21.98,
-        38.13,
+        38.14,
         5.28
       ],
       "color": [
@@ -7526,13 +14346,14 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.8275,
         0.5961
       ],
-      "range": 30,
-      "intensity": 3.78,
+      "range": 20,
+      "intensity": 17.01,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/flower-bed-p0204-p0248-p0083"
+      "emissiveSource": "decorations/candle-p0233-p0260-p0052"
     },
     {
-      "lightId": "lights/point-p0242-p0311-30",
+      "lightId": "lights/point-p0242-p0311-29",
       "position": [
         24.24,
         38.19,
@@ -7543,13 +14364,14 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.949,
         0.7608
       ],
-      "range": 30,
-      "intensity": 3.78,
+      "range": 20,
+      "intensity": 17.01,
+      "decay": 2,
       "castShadow": false,
       "emissiveSource": "decorations/umbrella-p0235-p0253-p0328"
     },
     {
-      "lightId": "lights/point-p0966-n0046-31",
+      "lightId": "lights/point-p0966-n0046-30",
       "position": [
         96.6,
         36.31,
@@ -7560,13 +14382,14 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         1,
         1
       ],
-      "range": 21,
-      "intensity": 6.74,
+      "range": 20,
+      "intensity": 30.33,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p1018-p0257-n0033"
+      "emissiveSource": "wildlife/panda-p1018-p0209-n0032"
     },
     {
-      "lightId": "lights/point-p0604-n0109-32",
+      "lightId": "lights/point-p0604-n0109-31",
       "position": [
         60.44,
         39.56,
@@ -7577,10 +14400,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.949,
         0.7608
       ],
-      "range": 21,
-      "intensity": 3.78,
+      "range": 20,
+      "intensity": 17.01,
+      "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/stone-platform-p0682-p0276-n0220"
+      "emissiveSource": "decorations/stone-block-p0682-p0276-n0220"
     }
   ]
 });
