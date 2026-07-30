@@ -228,7 +228,23 @@ async function inspectPage({
         message.method === "Log.entryAdded" &&
         ["error", "warning"].includes(message.params.entry.level)
       ) {
-        errors.push(message.params.entry.text);
+        const entry = message.params.entry;
+        // Only the page's own failures matter. With external network blocked the
+        // browser's background services log their own resolution failures, and
+        // treating those as page errors would make the isolation audit fail for
+        // doing exactly what it is supposed to do.
+        const fromPage =
+          entry.source !== "network" ||
+          ["127.0.0.1", "localhost"].includes(
+            (() => {
+              try {
+                return new URL(entry.url ?? "").hostname;
+              } catch {
+                return "";
+              }
+            })(),
+          );
+        if (fromPage) errors.push(`${entry.source}: ${entry.text}`);
       }
     });
     await session.send("Runtime.enable");

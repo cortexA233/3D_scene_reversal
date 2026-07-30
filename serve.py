@@ -144,9 +144,15 @@ class SceneHandler(http.server.SimpleHTTPRequestHandler):
         return super().send_head()
 
     def send_patched_index(self):
-        """Serve index.html with its CDN importmap swapped for the mounted copy."""
+        """Serve index.html with its CDN importmap swapped for the mounted copy.
+
+        Reads from the directory actually being served, not from gt_designer: an
+        isolated production-audit root has its own index and must not be handed
+        the project's.
+        """
+        index = Path(self.directory) / "index.html"
         html, n = IMPORTMAP_RE.subn(
-            LOCAL_IMPORTS, (ROOT / "index.html").read_text(encoding="utf-8")
+            LOCAL_IMPORTS, index.read_text(encoding="utf-8")
         )
         if not n:
             sys.stderr.write(

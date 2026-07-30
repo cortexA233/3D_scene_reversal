@@ -1,0 +1,457 @@
+{
+  "schemaVersion": "scene-parity-foundation-certification-v1",
+  "foundation": {
+    "passed": true,
+    "note": "The measuring foundation is complete and self-consistent. This result is independent of the candidate's quality, which is red and recorded below.",
+    "evidenceFamilies": {
+      "coverage": "semantic-coverage-manifest-v2",
+      "correspondence": "scene-correspondence-v1",
+      "geography": "geography-evidence-v1",
+      "horizon": "horizon-comparison-v1",
+      "passes": "scene-pass-evidence-v1"
+    },
+    "determinism": {
+      "repeatedGenerations": 2,
+      "semanticIdCount": 711,
+      "sceneDigest": "1225a0cef5b5d0d926cbaf3089db9146914413be3c4205a8641cf1d542e07cde",
+      "identical": true
+    },
+    "productionIsolation": {
+      "served": 11,
+      "requests": 12,
+      "externalRequests": 0,
+      "bundleBytes": 180323,
+      "bundleGzipBytes": 32825,
+      "thirdPartyInputs": 0,
+      "triangles": 365542,
+      "drawCalls": 3365,
+      "generationMs": 1761.7,
+      "auditPassed": true
+    },
+    "candidateCommandExitStatus": 1
+  },
+  "candidate": {
+    "passed": false,
+    "exitStatus": "candidate-failure",
+    "failedLayers": [
+      "worldGeometry",
+      "fixedCameraGeometry",
+      "nativeAppearance"
+    ],
+    "layers": {
+      "structuralCorrespondence": {
+        "evaluated": true,
+        "passed": true,
+        "failures": [],
+        "reason": null
+      },
+      "worldGeometry": {
+        "evaluated": true,
+        "passed": false,
+        "failures": [
+          "surface p95: 11.1851 is not <= 2.3479",
+          "worst entity surface p95: 165.6694 is not <= 13.758675",
+          "over-tolerance surface fraction: 0.6155 is not <= 0.11835",
+          "worst component delta: 9 is not <= 3.5",
+          "terrain height p95: 16.2617 is not <= 5.26875",
+          "shore height p95: 12.4923 is not <= 2.85035",
+          "land and sea agreement: 0.903491 is not >= 0.931361",
+          "horizon profile p95: 0.098887 is not <= 0.0165",
+          "worst azimuth horizon error: 0.124982 is not <= 0.0165"
+        ],
+        "reason": null
+      },
+      "fixedCameraGeometry": {
+        "evaluated": false,
+        "passed": false,
+        "failures": [],
+        "reason": "no frozen thresholds are calibrated for this layer, so it cannot pass"
+      },
+      "nativeAppearance": {
+        "evaluated": false,
+        "passed": false,
+        "failures": [],
+        "reason": "native appearance is not evaluated until every geometry layer passes, because a material result over the wrong shape is not evidence"
+      }
+    }
+  },
+  "redBaseline": {
+    "layout": {
+      "entities": 672,
+      "anchorErrorMax": 0,
+      "extentRelativeMax": 0,
+      "orientationErrorMax": 0,
+      "zoneDeltaMax": 0,
+      "overlapRankErrorMax": 0
+    },
+    "surface": {
+      "count": 672,
+      "mean": 11.1851,
+      "rmse": 24.0012,
+      "p50": 3.6444,
+      "p95": 46.5342,
+      "max": 165.6694
+    },
+    "surfaceWorstEntities": [
+      {
+        "semanticId": "horizon/mountain-n3462-n0175-n14963",
+        "p95": 165.6694
+      },
+      {
+        "semanticId": "horizon/mountain-p10270-n0243-n9219",
+        "p95": 145.8193
+      },
+      {
+        "semanticId": "horizon/mountain-p12605-n0303-p7305",
+        "p95": 137.206
+      },
+      {
+        "semanticId": "horizon/mountain-p5857-n0343-p11498",
+        "p95": 131.612
+      },
+      {
+        "semanticId": "horizon/mountain-n10467-n0177-p5763",
+        "p95": 128.0488
+      },
+      {
+        "semanticId": "horizon/mountain-n0917-n0136-p12892",
+        "p95": 127.2924
+      },
+      {
+        "semanticId": "horizon/mountain-n9204-n0033-p11102",
+        "p95": 123.5702
+      },
+      {
+        "semanticId": "horizon/mountain-n9833-n0179-n6913",
+        "p95": 119.6782
+      }
+    ],
+    "semanticStructure": {
+      "componentDelta": {
+        "count": 672,
+        "mean": 3.9821,
+        "rmse": 4.8224,
+        "p50": 4,
+        "p95": 9,
+        "max": 9
+      },
+      "entitiesMissingComponents": 14,
+      "worstComponentDelta": [
+        {
+          "semanticId": "vegetation/palm-n0019-p0282-p1912",
+          "componentDelta": 9
+        },
+        {
+          "semanticId": "vegetation/palm-n0411-p0523-p1618",
+          "componentDelta": 9
+        },
+        {
+          "semanticId": "vegetation/palm-n0917-p0277-p0222",
+          "componentDelta": 9
+        },
+        {
+          "semanticId": "vegetation/palm-n1032-p0537-n1745",
+          "componentDelta": 9
+        },
+        {
+          "semanticId": "vegetation/palm-n1232-p0502-n0401",
+          "componentDelta": 9
+        },
+        {
+          "semanticId": "vegetation/palm-n1234-p0259-n0419",
+          "componentDelta": 9
+        },
+        {
+          "semanticId": "vegetation/palm-n1236-p0547-n0409",
+          "componentDelta": 9
+        },
+        {
+          "semanticId": "vegetation/palm-n1247-p0245-n1439",
+          "componentDelta": 9
+        }
+      ]
+    },
+    "geography": {
+      "height": {
+        "full": {
+          "count": 16641,
+          "mean": 3.1735,
+          "rmse": 6.2721,
+          "p50": 0.5691,
+          "p95": 16.2617,
+          "max": 38.2462
+        },
+        "interior": {
+          "count": 3173,
+          "mean": 3.8873,
+          "rmse": 6.1259,
+          "p50": 2.1607,
+          "p95": 14.1582,
+          "max": 36.2774
+        },
+        "shore": {
+          "count": 1111,
+          "mean": 4.2057,
+          "rmse": 6.4168,
+          "p50": 1.7664,
+          "p95": 12.4923,
+          "max": 32.4264
+        }
+      },
+      "coastline": {
+        "symmetricP95": 15.7475,
+        "areaRelativeError": 0.019657
+      },
+      "classification": 0.903491
+    },
+    "horizon": {
+      "groups": 16,
+      "profileP95": 0.098887,
+      "worstAzimuths": [
+        {
+          "azimuthDegrees": 162,
+          "errorDegrees": 7.1609
+        },
+        {
+          "azimuthDegrees": 69.5,
+          "errorDegrees": 7.0383
+        },
+        {
+          "azimuthDegrees": 162.5,
+          "errorDegrees": 7.0055
+        },
+        {
+          "azimuthDegrees": 69,
+          "errorDegrees": 6.9685
+        },
+        {
+          "azimuthDegrees": 163,
+          "errorDegrees": 6.756
+        },
+        {
+          "azimuthDegrees": 163.5,
+          "errorDegrees": 6.5841
+        },
+        {
+          "azimuthDegrees": 77,
+          "errorDegrees": 6.513
+        },
+        {
+          "azimuthDegrees": 353.5,
+          "errorDegrees": 6.4884
+        }
+      ],
+      "worstSilhouette": [
+        {
+          "semanticId": "horizon/mountain-n10467-n0177-p5763",
+          "p95Degrees": 6.2825
+        },
+        {
+          "semanticId": "horizon/mountain-p5857-n0343-p11498",
+          "p95Degrees": 6.169
+        },
+        {
+          "semanticId": "horizon/mountain-p12963-n0247-n0827",
+          "p95Degrees": 6.1419
+        },
+        {
+          "semanticId": "horizon/mountain-n5842-n0144-p11647",
+          "p95Degrees": 6.0487
+        },
+        {
+          "semanticId": "horizon/mountain-p10270-n0243-n9219",
+          "p95Degrees": 5.7249
+        },
+        {
+          "semanticId": "horizon/mountain-p13705-n0034-p3644",
+          "p95Degrees": 5.636
+        }
+      ]
+    },
+    "fixedCamera": {
+      "cameras": 6,
+      "groupSilhouetteIoU": {
+        "mean": 0.388469,
+        "worst": {
+          "camera": "oblique-north",
+          "label": "paths",
+          "value": 0
+        }
+      },
+      "groupDepthWorldUnits": {
+        "meanP95": 42.096602,
+        "worst": {
+          "camera": "oblique-north",
+          "label": "horizon",
+          "value": 292.346987
+        }
+      },
+      "groupWorldNormalDegrees": {
+        "meanP95": 110.619407,
+        "worst": {
+          "camera": "topDown",
+          "label": "plazas",
+          "value": 180
+        }
+      },
+      "silhouetteIoU": {
+        "mean": 0.899969,
+        "worst": {
+          "camera": "oblique-south",
+          "value": 0.855287
+        }
+      },
+      "contourDistance": {
+        "meanP95": 86.937867,
+        "worst": {
+          "camera": "oblique-north",
+          "value": 122.6568
+        }
+      },
+      "depthWorldUnits": {
+        "meanP95": 50.715856,
+        "worst": {
+          "camera": "authoredOverview",
+          "value": 168.899473
+        }
+      },
+      "worldNormalDegrees": {
+        "meanP95": 25.574757,
+        "worst": {
+          "camera": "authoredOverview",
+          "value": 90.36756
+        }
+      },
+      "semanticAgreement": {
+        "mean": 0.866477,
+        "worst": {
+          "camera": "oblique-south",
+          "value": 0.838101
+        }
+      },
+      "appearanceDeltaE": {
+        "meanMean": 15.410742,
+        "worst": {
+          "camera": "authoredOverview",
+          "value": 36.702569
+        }
+      }
+    },
+    "appearanceByRegion": {
+      "horizon": 16.244003,
+      "geography": 28.221753,
+      "vegetation": 50.609023,
+      "structures": 39.1561,
+      "plazas": 27.49251,
+      "wildlife": 33.92978,
+      "paths": 25.160029,
+      "decorations": 27.828187,
+      "rocks": 23.873588,
+      "cover": 39.584662,
+      "bridges": 39.565418
+    }
+  },
+  "nextMilestoneResiduals": [
+    {
+      "area": "terrain elevation",
+      "detail": "height p95 16.2617, shore 12.4923",
+      "magnitude": 16.2617
+    },
+    {
+      "area": "native appearance",
+      "detail": "mean DeltaE 15.410742, worst camera authoredOverview at 36.702569",
+      "magnitude": 15.410742
+    },
+    {
+      "area": "object surfaces",
+      "detail": "symmetric distance p95 mean 11.1851, worst entity 165.6694",
+      "magnitude": 11.1851
+    },
+    {
+      "area": "skyline",
+      "detail": "profile p95 0.098887 rad, worst azimuth 0.124982",
+      "magnitude": 9.8887
+    },
+    {
+      "area": "semantic structure",
+      "detail": "mean component delta 3.9821, 14 entities missing parts",
+      "magnitude": 3.9821
+    },
+    {
+      "area": "distributed cover",
+      "detail": "worst group IoU 0, cover populations still mostly unaligned",
+      "magnitude": 1
+    },
+    {
+      "area": "fixed-camera silhouette",
+      "detail": "worst group paths on oblique-north at IoU 0",
+      "magnitude": 0.611531
+    }
+  ],
+  "environment": {
+    "branch": "experiment/claude-full-island-scene",
+    "recipeVersion": "island-scene-recipe-v1",
+    "generatorVersion": "island-scene-generator-v1",
+    "rngVersion": "mulberry32-v1",
+    "seedVersion": "scene-seed-fnv1a-mulberry32-v1",
+    "sceneSeed": 20260729,
+    "terrainProgram": "bounded-semantic-terrain-v1",
+    "baselineVersion": "scene-quality-baseline-v1",
+    "observationHost": null,
+    "gpu": {
+      "vendor": "Google Inc. (Google)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+      "acceleration": "software"
+    },
+    "browser": {
+      "brands": [
+        {
+          "brand": "Not;A=Brand",
+          "version": "8"
+        },
+        {
+          "brand": "Chromium",
+          "version": "150"
+        },
+        {
+          "brand": "Google Chrome",
+          "version": "150"
+        }
+      ],
+      "mobile": false,
+      "platform": "macOS"
+    },
+    "threeRevision": "170",
+    "capture": {
+      "cssViewport": [
+        1440,
+        810
+      ],
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "deviceScaleFactor": 1,
+      "momentMs": 12000
+    }
+  },
+  "humanReviewPackage": {
+    "contactSheet": ".scratch/scene-parity-foundation/review/index.html",
+    "gateSummary": ".scratch/scene-parity-foundation/review/parity.html",
+    "cameras": [
+      "authoredOverview",
+      "topDown",
+      "oblique-north",
+      "oblique-east",
+      "oblique-south",
+      "oblique-west"
+    ],
+    "note": "Human Parity Review runs only after the automated stack passes. It cannot waive a failed gate."
+  },
+  "deferred": [
+    "Native Firefox and Safari GPU scene gates: neither browser is installed on this normative host, so they are a real blocker rather than a passed check.",
+    "Fixed-camera and native-appearance thresholds are not yet calibrated, so those two layers cannot pass and are reported as not evaluated."
+  ]
+}
