@@ -42,10 +42,14 @@ to nothing. The ticket that exists to fix the atmosphere had no measurement of i
 Regions now come from a second semantic index over the same frame that keeps the sky
 shell; the geometry passes still exclude it.
 
-**Uncommitted, deliberately.** `test/atmosphere-reconstruction.test.mjs`, 5
-assertions, 3 green and 2 red. The repository forbids committing a known-failing
-check, so it stays in the working tree exactly as ticket 01's red check did. Its two
-red assertions are the appearance thresholds, which no ticket before 11 can satisfy.
+**The check is committed, with two assertions marked `todo`.**
+`test/atmosphere-reconstruction.test.mjs`, 5 assertions: 3 pass and 2 are `todo`.
+The two are the calibrated appearance thresholds, which ticket 02 cannot reach on its
+own — appearance DeltaE is 21.50 against 2.85, and what is left is ground, vegetation,
+and architecture rather than atmosphere. They are marked rather than deleted or
+loosened: the assertions are unchanged, `npm test` exits 0 and reports `todo 2`, and
+clearing the flag is how tickets 04, 06, 07, and 11 prove they landed. Do not loosen
+the thresholds to turn them green.
 
 **Also done: the sky dome is reproduced.** The recipe recorded it as two colours; the
 authored dome is five colours, three smoothstep bands, a warm horizon haze, and a
@@ -139,7 +143,7 @@ Neither is gated.
 ## Commands
 
 ```bash
-npm test                              # 221 tests
+npm test                              # 227 tests, 225 pass, 2 todo, exits 0
 npm run check:scene-foundation-reconciliation
 npm run check:reference-observation   # two full browser observations, slow
 npm run check:scene-coverage

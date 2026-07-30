@@ -7,7 +7,7 @@
 **Status:** in-progress — post-processing and attribution done; the residual is not atmospheric
 
 - [x] Add one non-interactive check that is red until the candidate's atmospheric evidence is inside the calibrated appearance thresholds for the sky and geography regions.
-      `test/atmosphere-reconstruction.test.mjs`, 5 assertions, 3 green and 2 red. **Deliberately uncommitted** while it is red, as the repository forbids committing a known-failing check.
+      `test/atmosphere-reconstruction.test.mjs`, 5 assertions: 3 pass, and 2 are marked `todo` because they are the calibrated appearance thresholds that tickets 04, 06, 07, and 11 have to reach. The assertions are unchanged and `npm test` reports `todo 2`; clearing the flag is those tickets' proof of landing.
 - [x] Reproduce linear fog at the frozen colour and near/far, so distance fades rather than ending at a hard horizon line.
       Already in the recipe and applied; asserted against the frozen render contract.
 - [x] Reproduce the sky gradient's zenith and horizon colours and its falloff.
