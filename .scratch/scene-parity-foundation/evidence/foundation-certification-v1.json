@@ -25,7 +25,7 @@
       "thirdPartyInputs": 0,
       "triangles": 678482,
       "drawCalls": 1699,
-      "generationMs": 3114.3,
+      "generationMs": 503.6,
       "auditPassed": true
     },
     "candidateCommandExitStatus": 1
@@ -62,10 +62,21 @@
         "reason": null
       },
       "fixedCameraGeometry": {
-        "evaluated": false,
+        "evaluated": true,
         "passed": false,
-        "failures": [],
-        "reason": "no frozen thresholds are calibrated for this layer, so it cannot pass"
+        "failures": [
+          "group silhouette IoU: 0.421857 is not >= 0.745598",
+          "worst group silhouette IoU: 0.000709 is not >= 0.302569",
+          "group contour distance p95: 74.531695 is not <= 5.874122",
+          "worst group contour distance: 391.562 is not <= 39.2559",
+          "group depth p95: 29.810676 is not <= 7.644414",
+          "worst group depth p95: 202.4158 is not <= 22.354947",
+          "group world normal p95: 71.994121 is not <= 49.456982",
+          "semantic agreement: 0.921404 is not >= 0.987474",
+          "worst camera semantic agreement: 0.885508 is not >= 0.974085",
+          "worst semantic confusion fraction: 0.041653 is not <= 0.007092"
+        ],
+        "reason": null
       },
       "nativeAppearance": {
         "evaluated": false,
@@ -320,6 +331,14 @@
           "value": 0.000709
         }
       },
+      "groupContourDistance": {
+        "meanP95": 74.531695,
+        "worst": {
+          "camera": "authoredOverview",
+          "label": "cover",
+          "value": 391.562
+        }
+      },
       "groupDepthWorldUnits": {
         "meanP95": 29.810676,
         "worst": {
@@ -329,11 +348,11 @@
         }
       },
       "groupWorldNormalDegrees": {
-        "meanP95": 75.373209,
+        "meanP95": 71.994121,
         "worst": {
-          "camera": "oblique-east",
+          "camera": "oblique-west",
           "label": "decorations",
-          "value": 147.306442
+          "value": 154.829546
         }
       },
       "silhouetteIoU": {
@@ -358,10 +377,10 @@
         }
       },
       "worldNormalDegrees": {
-        "meanP95": 71.218171,
+        "meanP95": 4.022361,
         "worst": {
-          "camera": "authoredOverview",
-          "value": 82.775976
+          "camera": "topDown",
+          "value": 13.593197
         }
       },
       "semanticAgreement": {
@@ -372,18 +391,18 @@
         }
       },
       "appearanceDeltaE": {
-        "meanMean": 26.174708,
+        "meanMean": 26.174704,
         "worst": {
           "camera": "authoredOverview",
-          "value": 36.773484
+          "value": 36.773471
         }
       },
       "appearanceByMaterialFamily": {
-        "meanMean": 27.325361,
+        "meanMean": 27.325297,
         "worst": {
           "camera": "authoredOverview",
           "label": "palm-foliage",
-          "value": 61.611074
+          "value": 61.611046
         }
       },
       "semanticConfusion": {
@@ -397,24 +416,24 @@
       }
     },
     "appearanceByRegion": {
-      "horizon": 16.244003,
       "geography": 28.220885,
-      "vegetation": 51.419942,
+      "horizon": 16.244003,
       "structures": 39.619892,
-      "plazas": 27.634123,
-      "wildlife": 33.049613,
+      "bridges": 41.147364,
+      "plazas": 27.633926,
       "paths": 24.956515,
-      "decorations": 27.878574,
       "rocks": 24.246527,
-      "cover": 46.926631,
-      "bridges": 41.147364
+      "decorations": 27.874983,
+      "vegetation": 51.419922,
+      "wildlife": 33.049613,
+      "cover": 46.926631
     }
   },
   "nextMilestoneResiduals": [
     {
       "area": "native appearance",
-      "detail": "mean DeltaE 26.174708, worst camera authoredOverview at 36.773484",
-      "magnitude": 26.174708
+      "detail": "mean DeltaE 26.174704, worst camera authoredOverview at 36.773471",
+      "magnitude": 26.174704
     },
     {
       "area": "terrain elevation",
@@ -455,7 +474,7 @@
     "seedVersion": "scene-seed-fnv1a-mulberry32-v1",
     "sceneSeed": 20260729,
     "terrainProgram": "bounded-semantic-terrain-v1",
-    "baselineVersion": "scene-quality-baseline-v1",
+    "baselineVersion": "scene-quality-baseline-v1.1",
     "observationHost": {
       "hostKey": "windows-edge-150-swiftshader-subzero",
       "os": "windows",
@@ -517,7 +536,6 @@
     "note": "Human Parity Review runs only after the automated stack passes. It cannot waive a failed gate."
   },
   "deferred": [
-    "Native Firefox and Safari GPU scene gates: neither browser is installed on this normative host, so they are a real blocker rather than a passed check.",
-    "Fixed-camera and native-appearance thresholds are not yet calibrated, so those two layers cannot pass and are reported as not evaluated."
+    "Native Firefox and Safari GPU scene gates: neither browser is installed on this normative host, so they are a real blocker rather than a passed check."
   ]
 }

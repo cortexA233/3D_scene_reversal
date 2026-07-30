@@ -263,6 +263,11 @@ def main() -> None:
         help="open the fixed six-camera scene pass harness",
     )
     scene_group.add_argument(
+        "--scene-calibration",
+        action="store_true",
+        help="open the reference-only fixed-camera calibration control harness",
+    )
+    scene_group.add_argument(
         "--production-audit-root",
         type=Path,
         help="serve an isolated generated production package as the web root",
@@ -294,6 +299,7 @@ def main() -> None:
             args.reference_observation,
             args.scene_inventory,
             args.scene_passes,
+            args.scene_calibration,
         )
     )
     if requires_exact_three:
@@ -332,6 +338,9 @@ def main() -> None:
     elif args.scene_passes:
         url_path = "/scene-passes.html"
         scene_name = "Fixed Scene Passes"
+    elif args.scene_calibration:
+        url_path = "/scene-calibration.html"
+        scene_name = "Reference-only Fixed-camera Calibration"
     elif args.scene_inventory:
         url_path = "/scene-inventory.html"
         scene_name = "Read-only Assembled Authored Scene Inventory"
@@ -370,6 +379,7 @@ def main() -> None:
             or args.reference_observation
             or args.scene_inventory
             or args.scene_passes
+            or args.scene_calibration
         ):
             controls_help = "fixed protocol controls"
         else:

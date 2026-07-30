@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Painterly Island — Fixed-camera Calibration Controls</title>
+    <link rel="icon" href="data:," />
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #9fc3e0;
+      }
+      canvas {
+        display: block;
+      }
+      #load {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        color: #eaf2fb;
+        font: 13px/1.5 ui-monospace, Menlo, monospace;
+        background: #0d1622;
+        transition: opacity 1.1s;
+        z-index: 5;
+      }
+      #load .bar {
+        width: 240px;
+        height: 3px;
+        background: #22324a;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      #load .bar i {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: #7fd0ff;
+      }
+      #keys {
+        display: none;
+      }
+      #err {
+        position: fixed;
+        left: 10px;
+        top: 34px;
+        color: #ff9a9a;
+        font: 11px ui-monospace, Menlo, monospace;
+        white-space: pre-wrap;
+        max-width: 92vw;
+        z-index: 9;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/vendor/three/build/three.module.js",
+          "three/addons/": "/vendor/three/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="load">
+      <div id="loadmsg">building the island…</div>
+      <div class="bar"><i id="loadbar"></i></div>
+    </div>
+    <div id="keys"></div>
+    <div id="err"></div>
+    <script>
+      window.island = { ready: false, error: null };
+      window.addEventListener("error", (event) => {
+        const message = String(event.message || event.error);
+        document.getElementById("err").textContent += message + "\n";
+        window.island.error = (window.island.error || "") + message + "\n";
+      });
+      window.addEventListener("unhandledrejection", (event) => {
+        const message =
+          "promise: " + ((event.reason && event.reason.message) || event.reason);
+        document.getElementById("err").textContent += message + "\n";
+        window.island.error = (window.island.error || "") + message + "\n";
+      });
+    </script>
+    <script type="module" src="./main.js"></script>
+    <!--
+      Only the reference and the calibration harness are loaded here. The Scene
+      Generation Module is deliberately absent: a threshold derived on a page that
+      had the candidate available would not be reference-only, and the driver
+      checks the page's request log rather than taking this comment's word for it.
+    -->
+    <script
+      type="module"
+      src="/dev-tools/evaluation/browser-scene-calibration.mjs"
+    ></script>
+  </body>
+</html>

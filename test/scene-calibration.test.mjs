@@ -16,6 +16,10 @@ import {
   HORIZON_CONTROLS,
   SCENE_CONTROLS,
 } from "../tools/evaluation/scene-perturbations.mjs";
+import {
+  CAPTURE_KINDS,
+  SCENE_GRAPH_CONTROLS,
+} from "../tools/evaluation/scene-graph-perturbations.mjs";
 import { evaluateSceneParityGateStack } from "../tools/acceptance/scene-parity-gates.mjs";
 
 const PROJECT_ROOT = path.resolve(
@@ -128,6 +132,41 @@ test("every declared damage result fails the threshold it is meant to trip", () 
   }
 });
 
+test("the rendered layers' damage bracket is the world layers' bracket", () => {
+  // The fixed-camera layer's thresholds are only comparable to the world layers'
+  // if "mild" and "severe" mean the same damage in both. They are declared twice
+  // because one acts on a measured observation and the other on the live scene
+  // graph, so the shared control names must not drift apart in class.
+  const worldClass = new Map(SCENE_CONTROLS.map((control) => [control.id, control.class]));
+  const shared = SCENE_GRAPH_CONTROLS.filter((control) => worldClass.has(control.id));
+  assert.ok(shared.length >= 8, "the two brackets share too few controls to be comparable");
+  for (const control of shared) {
+    assert.equal(
+      control.class,
+      worldClass.get(control.id),
+      `${control.id} is ${control.class} in scene space but ${worldClass.get(control.id)} in world space`,
+    );
+  }
+
+  const ids = SCENE_GRAPH_CONTROLS.map((control) => control.id);
+  assert.equal(new Set(ids).size, ids.length, "control ids must be unique");
+  for (const control of SCENE_GRAPH_CONTROLS) {
+    assert.ok(control.needs.length > 0, `${control.id} declares no capture`);
+    for (const kind of control.needs) assert.ok(CAPTURE_KINDS.includes(kind));
+    if (control.class === "severe") {
+      assert.ok(
+        Array.isArray(control.detects) && control.detects.length > 0,
+        `${control.id} is severe but names no metric it should trip`,
+      );
+    }
+  }
+  assert.ok(
+    SCENE_GRAPH_CONTROLS.some((control) => control.needs.includes("geometry")) &&
+      SCENE_GRAPH_CONTROLS.some((control) => control.needs.includes("appearance")),
+    "both rendered layers need declared damage",
+  );
+});
+
 test("the calibration input graph contains no candidate artifact", () => {
   assert.equal(calibration.schemaVersion, CALIBRATION_SCHEMA);
   assert.deepEqual(calibration.candidateArtifactsRead, []);
@@ -140,7 +179,16 @@ test("the calibration input graph contains no candidate artifact", () => {
 
 test("the frozen baseline is versioned and covers the calibrated layers", () => {
   assert.equal(baseline.schemaVersion, BASELINE_SCHEMA);
-  assert.equal(baseline.version, "scene-quality-baseline-v1");
+  // The schema version is the shape the gate stack requires; the version is the
+  // frozen revision, and every revision names itself and its ADR in `migrations`.
+  // Pinning a single version string here instead would make a declared migration
+  // indistinguishable from an undeclared threshold edit.
+  assert.equal(baseline.version, baseline.migrations.at(-1).version);
+  for (const migration of baseline.migrations) {
+    assert.match(migration.adr, /^\d{4}$/);
+    assert.ok(typeof migration.change === "string" && migration.change.length > 0);
+    assert.ok(Array.isArray(migration.movedGeometryThresholds));
+  }
   assert.ok(baseline.layers.structuralCorrespondence.length >= 6);
   assert.ok(baseline.layers.worldGeometry.length >= 10);
   for (const metric of [
@@ -157,8 +205,7 @@ test("the frozen baseline is versioned and covers the calibrated layers", () => 
   );
 });
 
-test("an uncalibrated layer cannot pass vacuously", () => {
-  const frozen = JSON.parse(JSON.stringify(baseline));
+test("a perfect 3D result cannot certify without rendered evidence", () => {
   const deepFreeze = (value) => {
     if (value && typeof value === "object") {
       for (const child of Object.values(value)) deepFreeze(child);
@@ -166,8 +213,7 @@ test("an uncalibrated layer cannot pass vacuously", () => {
     }
     return value;
   };
-  const report = evaluateSceneParityGateStack({
-    evidence: {
+  const perfectIn3D = {
       coverage: { schemaVersion: "semantic-coverage-manifest-v2", blocking: { visibleUnclassifiedCount: 0 } },
       correspondence: {
         schemaVersion: "scene-correspondence-v1",
@@ -193,17 +239,45 @@ test("an uncalibrated layer cannot pass vacuously", () => {
         schemaVersion: "horizon-comparison-v1",
         profile: { angularError: { p95: 0, max: 0 } },
       },
-      passes: { schemaVersion: "scene-pass-evidence-v1", aggregate: {} },
-    },
-    baseline: deepFreeze(frozen),
-  });
+    passes: { schemaVersion: "scene-pass-evidence-v1", aggregate: {} },
+  };
 
-  // A perfect 3D result still cannot certify: two layers have no frozen
-  // thresholds yet, so they are not evaluated and cannot pass.
-  assert.equal(report.layers.structuralCorrespondence.passed, true);
-  assert.equal(report.layers.worldGeometry.passed, true);
-  assert.equal(report.layers.fixedCameraGeometry.evaluated, false);
-  assert.equal(report.layers.fixedCameraGeometry.passed, false);
-  assert.match(report.layers.fixedCameraGeometry.reason, /no frozen thresholds/);
-  assert.equal(report.exitStatus, "candidate-failure");
+  // Against the real frozen baseline, the two rendered layers now carry
+  // thresholds (ADR-0051), so they are evaluated. A subject that is perfect in 3D
+  // and supplies no rendered evidence still cannot certify: the fixed-camera
+  // metrics report missing evidence and fail, and native appearance stays blocked
+  // behind them.
+  const calibrated = evaluateSceneParityGateStack({
+    evidence: perfectIn3D,
+    baseline: deepFreeze(JSON.parse(JSON.stringify(baseline))),
+  });
+  assert.equal(calibrated.layers.structuralCorrespondence.passed, true);
+  assert.equal(calibrated.layers.worldGeometry.passed, true);
+  assert.equal(calibrated.layers.fixedCameraGeometry.evaluated, true);
+  assert.equal(calibrated.layers.fixedCameraGeometry.passed, false);
+  assert.ok(
+    calibrated.layers.fixedCameraGeometry.metrics.every((metric) => metric.missing),
+    "an absent pass aggregate must read as missing evidence rather than as agreement",
+  );
+  assert.equal(calibrated.layers.nativeAppearance.evaluated, false);
+  // Named precisely: world geometry passes here, so the fixed-camera layer is the
+  // only thing blocking appearance. A blocked layer has to say which layer blocks
+  // it, or "not evaluated" is indistinguishable from "not calibrated".
+  assert.deepEqual(calibrated.layers.nativeAppearance.blockedBy, ["fixedCameraGeometry"]);
+  assert.equal(calibrated.exitStatus, "candidate-failure");
+
+  // And the property that made this test worth having in the first place: a layer
+  // whose thresholds are emptied is not evaluated and cannot pass. Calibrating the
+  // layers must not turn a vacuous pass back on.
+  const emptied = JSON.parse(JSON.stringify(baseline));
+  emptied.layers.fixedCameraGeometry = [];
+  emptied.layers.nativeAppearance = [];
+  const uncalibrated = evaluateSceneParityGateStack({
+    evidence: perfectIn3D,
+    baseline: deepFreeze(emptied),
+  });
+  assert.equal(uncalibrated.layers.fixedCameraGeometry.evaluated, false);
+  assert.equal(uncalibrated.layers.fixedCameraGeometry.passed, false);
+  assert.match(uncalibrated.layers.fixedCameraGeometry.reason, /no frozen thresholds/);
+  assert.equal(uncalibrated.exitStatus, "candidate-failure");
 });

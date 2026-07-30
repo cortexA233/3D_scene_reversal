@@ -1,0 +1,831 @@
+{
+  "schemaVersion": "fixed-camera-calibration-v1",
+  "perturbationSchema": "scene-graph-perturbations-v1",
+  "note": "Thresholds for the two rendered gate layers, calibrated from declared scene-space damage to the reference rendered through the six frozen cameras. No candidate observation, report, or module took part.",
+  "capture": {
+    "cssViewport": [
+      1440,
+      810
+    ],
+    "framebuffer": [
+      1440,
+      810
+    ],
+    "deviceScaleFactor": 1,
+    "momentMs": 12000
+  },
+  "inventory": {
+    "rootsByGroup": {
+      "bridges": 2,
+      "cloud": 34,
+      "cover": 8,
+      "decorations": 58,
+      "geography": 2,
+      "horizon": 16,
+      "paths": 60,
+      "plazas": 6,
+      "rocks": 39,
+      "sky": 1,
+      "structures": 39,
+      "vegetation": 438,
+      "wildlife": 14
+    },
+    "terrainRoots": 1,
+    "materials": 367,
+    "materialsByFamily": {
+      "bamboo-foliage": 9,
+      "blossom-foliage": 25,
+      "creature-fur": 212,
+      "distant-rock": 3,
+      "ocean-surface": 35,
+      "painted-timber": 62,
+      "palm-foliage": 5,
+      "paving-stone": 9,
+      "shore-rock": 16,
+      "terrain-ground": 2
+    },
+    "familiesSharingAMaterial": [
+      "bamboo-foliage+blossom-foliage+paving-stone",
+      "bamboo-foliage+paving-stone",
+      "blossom-foliage+painted-timber",
+      "blossom-foliage+paving-stone+shore-rock",
+      "blossom-foliage+shore-rock",
+      "painted-timber+shore-rock"
+    ]
+  },
+  "inputs": [
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/albedo-1pct.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/albedo-8pct.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/collapse-vegetation.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/delete-structures.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/extent-1pct.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/extent-45pct.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/extent-8pct.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/identity.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/raise-terrain-12.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/recolour-palm-foliage.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/translate-0.15.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/translate-1.2.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/translate-12.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/wrong-role-palette.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/yaw-0.02.json",
+    ".scratch/scene-parity-foundation/evidence/fixed-camera-controls/yaw-0.9.json"
+  ],
+  "candidateArtifactsRead": [],
+  "modulesLoadedByTheCalibrationPage": [
+    "/assets/draco/draco_wasm_wrapper.js",
+    "/dev-tools/evaluation/browser-scene-calibration.mjs",
+    "/dev-tools/evaluation/browser-scene-pass-kit.mjs",
+    "/dev-tools/evaluation/scene-graph-perturbations.mjs",
+    "/dev-tools/evaluation/scene-pass-metrics.mjs",
+    "/dev-tools/reconstruction/scene-families.mjs",
+    "/main.js",
+    "/scene-decoration.js",
+    "/src/pointer-lock.js",
+    "/src/reconstruction/scene/island-scene-recipe.generated.js",
+    "/src/scene-builder.js",
+    "/src/scene-utils.js"
+  ],
+  "controls": [
+    {
+      "id": "albedo-1pct",
+      "class": "mild",
+      "needs": [
+        "appearance"
+      ],
+      "detects": [],
+      "note": "A one per cent albedo shift across every authored material. Below the just-noticeable difference, so it belongs in the same bracket as a one per cent extent error."
+    },
+    {
+      "id": "albedo-8pct",
+      "class": "intermediate",
+      "needs": [
+        "appearance"
+      ],
+      "detects": [],
+      "note": null
+    },
+    {
+      "id": "collapse-vegetation",
+      "class": "severe",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [
+        "worst group silhouette IoU",
+        "worst group contour distance"
+      ],
+      "note": "Canopies shrunk to two-fifths, the sparse-sticks failure human review already described. One group, so it claims only worst-case metrics."
+    },
+    {
+      "id": "delete-structures",
+      "class": "severe",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [
+        "worst group silhouette IoU",
+        "worst semantic confusion fraction"
+      ],
+      "note": "The village removed. Its pixels become whatever stands behind it, which is what semantic confusion names."
+    },
+    {
+      "id": "extent-1pct",
+      "class": "mild",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [],
+      "note": null
+    },
+    {
+      "id": "extent-45pct",
+      "class": "severe",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [
+        "group silhouette IoU",
+        "worst group silhouette IoU",
+        "group contour distance p95",
+        "worst group contour distance",
+        "semantic agreement",
+        "worst camera semantic agreement"
+      ],
+      "note": null
+    },
+    {
+      "id": "extent-8pct",
+      "class": "intermediate",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [],
+      "note": null
+    },
+    {
+      "id": "identity",
+      "class": "identity",
+      "needs": [
+        "geometry",
+        "appearance"
+      ],
+      "detects": [],
+      "note": "Renders the untouched reference against itself, so the mild bracket starts at the harness's own repeatability rather than at an assumed zero."
+    },
+    {
+      "id": "raise-terrain-12",
+      "class": "severe",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [
+        "worst group depth p95",
+        "semantic agreement",
+        "worst camera semantic agreement"
+      ],
+      "note": "The same 12 units the geography layer's severe elevation control uses. Geography fills 84 to 86 per cent of every auxiliary frame, so leaving it undamaged would calibrate the largest group against nothing. It is one group, so it claims the worst-case depth metric and the pixel-weighted semantic ones, not the group-weighted means."
+    },
+    {
+      "id": "recolour-palm-foliage",
+      "class": "severe",
+      "needs": [
+        "appearance"
+      ],
+      "detects": [
+        "worst material family appearance DeltaE"
+      ],
+      "note": "One Material Family made plainly wrong. The global mean barely moves, which is the point: this control exists to prove the per-family metric catches what the global average cannot."
+    },
+    {
+      "id": "translate-0.15",
+      "class": "mild",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [],
+      "note": null
+    },
+    {
+      "id": "translate-1.2",
+      "class": "intermediate",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [],
+      "note": null
+    },
+    {
+      "id": "translate-12",
+      "class": "severe",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [
+        "group silhouette IoU",
+        "worst group silhouette IoU",
+        "group contour distance p95",
+        "worst group contour distance",
+        "group depth p95",
+        "worst group depth p95",
+        "semantic agreement",
+        "worst camera semantic agreement",
+        "worst semantic confusion fraction"
+      ],
+      "note": null
+    },
+    {
+      "id": "wrong-role-palette",
+      "class": "severe",
+      "needs": [
+        "appearance"
+      ],
+      "detects": [
+        "appearance DeltaE mean",
+        "worst camera appearance DeltaE",
+        "material family appearance DeltaE mean",
+        "worst material family appearance DeltaE"
+      ],
+      "note": "Every material's albedo pushed toward magenta while its pattern, shape, lighting, and post-processing are left alone, so this is appearance damage and nothing else. A base colour multiplies its texture map, which is why a cast reaches every surface: replacing each colour with its own luminance does not, because the authored materials are textured and their base colours are white, so desaturating white is a no-op. Removing the maps instead would have calibrated the layer against having no texture at all, which is the Production Runtime's own legitimate condition, and a textureless candidate would then pass by construction."
+    },
+    {
+      "id": "yaw-0.02",
+      "class": "mild",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [],
+      "note": null
+    },
+    {
+      "id": "yaw-0.9",
+      "class": "severe",
+      "needs": [
+        "geometry"
+      ],
+      "detects": [
+        "group world normal p95",
+        "worst group world normal p95",
+        "worst group contour distance"
+      ],
+      "note": "Every placement turned on its own footprint. Rotation is what world-normal evidence is for: the silhouette of a squarish mass barely moves while every wall faces somewhere else. It applies to every root rather than to the buildings alone so that it differs from the mild yaw in magnitude and in nothing else, which is what a bracket is."
+    }
+  ],
+  "metrics": [
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "group silhouette IoU",
+      "scope": "aggregate",
+      "path": "passes.aggregate.groupSilhouetteIoU.mean",
+      "direction": "atLeast",
+      "detectedControls": [
+        "extent-45pct",
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          0.89153,
+          1,
+          0.894337,
+          0.863603
+        ],
+        "severe": [
+          0.391582,
+          0.330487
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.745598,
+        "mildWorst": 0.863603,
+        "severeBest": 0.391582,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "worst group silhouette IoU",
+      "scope": "worst-group",
+      "path": "passes.aggregate.groupSilhouetteIoU.worst.value",
+      "direction": "atLeast",
+      "detectedControls": [
+        "collapse-vegetation",
+        "delete-structures",
+        "extent-45pct",
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          0.417901,
+          1,
+          0.429907,
+          0.341028
+        ],
+        "severe": [
+          0.187192,
+          0,
+          0,
+          0
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.302569,
+        "mildWorst": 0.341028,
+        "severeBest": 0.187192,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "group contour distance p95",
+      "scope": "aggregate",
+      "path": "passes.aggregate.groupContourDistance.meanP95",
+      "direction": "atMost",
+      "detectedControls": [
+        "extent-45pct",
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          1.67756,
+          0,
+          1.409649,
+          1.990077
+        ],
+        "severe": [
+          48.498385,
+          17.526255
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 5.874122,
+        "mildWorst": 1.990077,
+        "severeBest": 17.526255,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "worst group contour distance",
+      "scope": "worst-group",
+      "path": "passes.aggregate.groupContourDistance.worst.value",
+      "direction": "atMost",
+      "detectedControls": [
+        "collapse-vegetation",
+        "extent-45pct",
+        "translate-12",
+        "yaw-0.9"
+      ],
+      "samples": {
+        "mild": [
+          16,
+          0,
+          19.7278,
+          10.2426
+        ],
+        "severe": [
+          139.5916,
+          251.2306,
+          97.8402,
+          238.0294
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 39.2559,
+        "mildWorst": 19.7278,
+        "severeBest": 97.8402,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "group depth p95",
+      "scope": "aggregate",
+      "path": "passes.aggregate.groupDepthWorldUnits.meanP95",
+      "direction": "atMost",
+      "detectedControls": [
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          1.492191,
+          0,
+          0.942224,
+          2.31585
+        ],
+        "severe": [
+          23.630105
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 7.644414,
+        "mildWorst": 2.31585,
+        "severeBest": 23.630105,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "worst group depth p95",
+      "scope": "worst-group",
+      "path": "passes.aggregate.groupDepthWorldUnits.worst.value",
+      "direction": "atMost",
+      "detectedControls": [
+        "raise-terrain-12",
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          17.044261,
+          0,
+          7.345554,
+          21.639703
+        ],
+        "severe": [
+          24.500678,
+          194.671497
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 22.354947,
+        "mildWorst": 21.639703,
+        "severeBest": 24.500678,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "group world normal p95",
+      "scope": "aggregate",
+      "path": "passes.aggregate.groupWorldNormalDegrees.meanP95",
+      "direction": "atMost",
+      "detectedControls": [
+        "yaw-0.9"
+      ],
+      "samples": {
+        "mild": [
+          33.690294,
+          0.000001,
+          39.368247,
+          36.849947
+        ],
+        "severe": [
+          79.723186
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 49.456982,
+        "mildWorst": 39.368247,
+        "severeBest": 79.723186,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "worst group world normal p95",
+      "scope": "worst-group",
+      "path": "passes.aggregate.groupWorldNormalDegrees.worst.value",
+      "direction": "atMost",
+      "detectedControls": [
+        "yaw-0.9"
+      ],
+      "samples": {
+        "mild": [
+          171.022024,
+          0.000001,
+          152.603544,
+          174.072554
+        ],
+        "severe": [
+          167.611637
+        ]
+      },
+      "calibration": {
+        "separable": false,
+        "reason": "mild reaches 174.072554 while damage reaches 167.611637, so this metric cannot tell them apart",
+        "threshold": null,
+        "mildWorst": 174.072554,
+        "severeBest": 167.611637
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "semantic agreement",
+      "scope": "aggregate",
+      "path": "passes.aggregate.semanticAgreement.mean",
+      "direction": "atLeast",
+      "detectedControls": [
+        "extent-45pct",
+        "raise-terrain-12",
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          0.990578,
+          1,
+          0.995898,
+          0.989419
+        ],
+        "severe": [
+          0.902151,
+          0.981639,
+          0.940219
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.987474,
+        "mildWorst": 0.989419,
+        "severeBest": 0.981639,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "worst camera semantic agreement",
+      "scope": "worst-camera",
+      "path": "passes.aggregate.semanticAgreement.worst.value",
+      "direction": "atLeast",
+      "detectedControls": [
+        "extent-45pct",
+        "raise-terrain-12",
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          0.980686,
+          1,
+          0.991127,
+          0.982141
+        ],
+        "severe": [
+          0.845668,
+          0.954283,
+          0.875074
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.974085,
+        "mildWorst": 0.980686,
+        "severeBest": 0.954283,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "worst semantic confusion fraction",
+      "scope": "worst-transition",
+      "path": "passes.aggregate.semanticConfusion.worstFraction",
+      "direction": "atMost",
+      "detectedControls": [
+        "delete-structures",
+        "translate-12"
+      ],
+      "samples": {
+        "mild": [
+          0.005861,
+          0,
+          0.002659,
+          0.006142
+        ],
+        "severe": [
+          0.009943,
+          0.035502
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 0.007092,
+        "mildWorst": 0.006142,
+        "severeBest": 0.009943,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "nativeAppearance",
+      "name": "appearance DeltaE mean",
+      "scope": "aggregate",
+      "path": "passes.aggregate.appearanceDeltaE.meanMean",
+      "direction": "atMost",
+      "detectedControls": [
+        "wrong-role-palette"
+      ],
+      "samples": {
+        "mild": [
+          0.327325,
+          0
+        ],
+        "severe": [
+          10.427875
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 2.852463,
+        "mildWorst": 0.327325,
+        "severeBest": 10.427875,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "nativeAppearance",
+      "name": "worst camera appearance DeltaE",
+      "scope": "worst-camera",
+      "path": "passes.aggregate.appearanceDeltaE.worst.value",
+      "direction": "atMost",
+      "detectedControls": [
+        "wrong-role-palette"
+      ],
+      "samples": {
+        "mild": [
+          0.5577,
+          0
+        ],
+        "severe": [
+          15.239753
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 4.228213,
+        "mildWorst": 0.5577,
+        "severeBest": 15.239753,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "nativeAppearance",
+      "name": "material family appearance DeltaE mean",
+      "scope": "aggregate",
+      "path": "passes.aggregate.appearanceByMaterialFamily.meanMean",
+      "direction": "atMost",
+      "detectedControls": [
+        "wrong-role-palette"
+      ],
+      "samples": {
+        "mild": [
+          0.515557,
+          0
+        ],
+        "severe": [
+          22.300514
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 5.961796,
+        "mildWorst": 0.515557,
+        "severeBest": 22.300514,
+        "margin": 0.25
+      }
+    },
+    {
+      "layer": "nativeAppearance",
+      "name": "worst material family appearance DeltaE",
+      "scope": "worst-material-family",
+      "path": "passes.aggregate.appearanceByMaterialFamily.worst.value",
+      "direction": "atMost",
+      "detectedControls": [
+        "recolour-palm-foliage",
+        "wrong-role-palette"
+      ],
+      "samples": {
+        "mild": [
+          1.263066,
+          0
+        ],
+        "severe": [
+          12.458887,
+          35.314757
+        ]
+      },
+      "calibration": {
+        "separable": true,
+        "threshold": 4.062021,
+        "mildWorst": 1.263066,
+        "severeBest": 12.458887,
+        "margin": 0.25
+      }
+    }
+  ],
+  "layers": {
+    "fixedCameraGeometry": [
+      {
+        "name": "group silhouette IoU",
+        "scope": "aggregate",
+        "path": "passes.aggregate.groupSilhouetteIoU.mean",
+        "direction": "atLeast",
+        "threshold": 0.745598
+      },
+      {
+        "name": "worst group silhouette IoU",
+        "scope": "worst-group",
+        "path": "passes.aggregate.groupSilhouetteIoU.worst.value",
+        "direction": "atLeast",
+        "threshold": 0.302569
+      },
+      {
+        "name": "group contour distance p95",
+        "scope": "aggregate",
+        "path": "passes.aggregate.groupContourDistance.meanP95",
+        "direction": "atMost",
+        "threshold": 5.874122
+      },
+      {
+        "name": "worst group contour distance",
+        "scope": "worst-group",
+        "path": "passes.aggregate.groupContourDistance.worst.value",
+        "direction": "atMost",
+        "threshold": 39.2559
+      },
+      {
+        "name": "group depth p95",
+        "scope": "aggregate",
+        "path": "passes.aggregate.groupDepthWorldUnits.meanP95",
+        "direction": "atMost",
+        "threshold": 7.644414
+      },
+      {
+        "name": "worst group depth p95",
+        "scope": "worst-group",
+        "path": "passes.aggregate.groupDepthWorldUnits.worst.value",
+        "direction": "atMost",
+        "threshold": 22.354947
+      },
+      {
+        "name": "group world normal p95",
+        "scope": "aggregate",
+        "path": "passes.aggregate.groupWorldNormalDegrees.meanP95",
+        "direction": "atMost",
+        "threshold": 49.456982
+      },
+      {
+        "name": "semantic agreement",
+        "scope": "aggregate",
+        "path": "passes.aggregate.semanticAgreement.mean",
+        "direction": "atLeast",
+        "threshold": 0.987474
+      },
+      {
+        "name": "worst camera semantic agreement",
+        "scope": "worst-camera",
+        "path": "passes.aggregate.semanticAgreement.worst.value",
+        "direction": "atLeast",
+        "threshold": 0.974085
+      },
+      {
+        "name": "worst semantic confusion fraction",
+        "scope": "worst-transition",
+        "path": "passes.aggregate.semanticConfusion.worstFraction",
+        "direction": "atMost",
+        "threshold": 0.007092
+      }
+    ],
+    "nativeAppearance": [
+      {
+        "name": "appearance DeltaE mean",
+        "scope": "aggregate",
+        "path": "passes.aggregate.appearanceDeltaE.meanMean",
+        "direction": "atMost",
+        "threshold": 2.852463
+      },
+      {
+        "name": "worst camera appearance DeltaE",
+        "scope": "worst-camera",
+        "path": "passes.aggregate.appearanceDeltaE.worst.value",
+        "direction": "atMost",
+        "threshold": 4.228213
+      },
+      {
+        "name": "material family appearance DeltaE mean",
+        "scope": "aggregate",
+        "path": "passes.aggregate.appearanceByMaterialFamily.meanMean",
+        "direction": "atMost",
+        "threshold": 5.961796
+      },
+      {
+        "name": "worst material family appearance DeltaE",
+        "scope": "worst-material-family",
+        "path": "passes.aggregate.appearanceByMaterialFamily.worst.value",
+        "direction": "atMost",
+        "threshold": 4.062021
+      }
+    ]
+  },
+  "diagnostic": [
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "worst group world normal p95",
+      "scope": "worst-group",
+      "path": "passes.aggregate.groupWorldNormalDegrees.worst.value",
+      "reason": "mild reaches 174.072554 while damage reaches 167.611637, so this metric cannot tell them apart"
+    }
+  ]
+}

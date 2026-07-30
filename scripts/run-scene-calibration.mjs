@@ -60,6 +60,43 @@ const CALIBRATION_INPUTS = [
   "terrain-elevation-v1.json",
   "horizon-reference-v1.json",
   "reference-observation-v1.json",
+  // The two rendered layers' thresholds, produced by
+  // `run-fixed-camera-calibration.mjs` from declared scene-space damage to the
+  // reference. It is a control result, not a candidate result: the calibration
+  // page never loads the Scene Generation Module and records the modules it did
+  // load so that claim is checkable.
+  "fixed-camera-calibration-v1.json",
+];
+
+const FIXED_CAMERA_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/scene-parity-foundation/evidence/fixed-camera-calibration-v1.json",
+);
+
+/**
+ * The baseline's frozen revision, distinct from its schema version: the shape is
+ * still `scene-quality-baseline-v1`, which is what the gate stack requires, while
+ * the contents are the v1.1 revision. Every revision has to name itself here and
+ * declare which existing thresholds it moved, so "we only added layers" is a
+ * checkable statement rather than a claim in a commit message.
+ */
+const BASELINE_VERSION = "scene-quality-baseline-v1.1";
+
+const BASELINE_MIGRATIONS = [
+  {
+    version: "scene-quality-baseline-v1",
+    adr: "0040",
+    change:
+      "Freezes the structural-correspondence and world-geometry layers from reference repeatability and declared reference-only perturbations. The two rendered layers are left empty and therefore cannot pass.",
+    movedGeometryThresholds: [],
+  },
+  {
+    version: "scene-quality-baseline-v1.1",
+    adr: "0051",
+    change:
+      "Adds the fixedCameraGeometry and nativeAppearance thresholds, calibrated from declared scene-space damage rendered through the six frozen cameras of ADR-0049. Contour distance is gated per group rather than whole-frame, because whole-frame contour p95 measures 0 on topDown and 1 on the four obliques whatever the island looks like.",
+    movedGeometryThresholds: [],
+  },
 ];
 
 const SCENE_ANCHOR = [86, 26, -24];
@@ -119,6 +156,29 @@ async function main() {
       readFile(path.join(EVIDENCE_DIRECTORY, name), "utf8").then(JSON.parse),
     ),
   );
+
+  // The rendered layers' thresholds. Missing evidence fails here rather than
+  // writing two empty layers: an empty layer is the defect this ticket exists to
+  // remove, and silently reproducing it would be the worst outcome available.
+  const fixedCamera = await readFile(FIXED_CAMERA_PATH, "utf8").then(JSON.parse).catch(() => {
+    throw new Error(
+      "fixed-camera-calibration-v1.json is missing; run " +
+        "`node scripts/run-fixed-camera-calibration.mjs --control <ids>` for every declared " +
+        "control and then `--aggregate`",
+    );
+  });
+  assert.equal(fixedCamera.schemaVersion, "fixed-camera-calibration-v1");
+  assert.deepEqual(
+    fixedCamera.candidateArtifactsRead,
+    [],
+    "the fixed-camera calibration read a candidate artifact",
+  );
+  for (const layer of ["fixedCameraGeometry", "nativeAppearance"]) {
+    assert.ok(
+      Array.isArray(fixedCamera.layers?.[layer]) && fixedCamera.layers[layer].length > 0,
+      `the fixed-camera calibration froze no thresholds for ${layer}`,
+    );
+  }
 
   // ── Structural and world-geometry layers ─────────────────────────────────
   const reference = observeAuthoredReference({ inventory, samples });
@@ -354,8 +414,9 @@ async function main() {
 
   const baseline = {
     schemaVersion: BASELINE_SCHEMA,
-    version: "scene-quality-baseline-v1",
-    calibratedFrom: CALIBRATION_SCHEMA,
+    version: BASELINE_VERSION,
+    migrations: BASELINE_MIGRATIONS,
+    calibratedFrom: [CALIBRATION_SCHEMA, fixedCamera.schemaVersion],
     note: "Calibrated from reference repeatability and declared reference-only perturbations before any candidate result was consulted. Changing a value requires an explicit migration and full recalibration.",
     knownProperties: [
       "Placement and surface limits are absolute world units, and the mild controls apply to every entity including the 1.4 km horizon groups, so those limits are dominated by the largest objects. A small entity can therefore pass a limit that is generous for its own scale. Scale-relative placement evidence is the declared next refinement.",
@@ -365,12 +426,48 @@ async function main() {
       worldGeometry: worldLayer.gating,
       // Fixed-camera and native-appearance limits are calibrated separately by
       // the browser control run, which renders declared reference-only damage
-      // through the same six frozen cameras.
-      fixedCameraGeometry: [],
-      nativeAppearance: [],
+      // through the same six frozen cameras. They are read here rather than
+      // recomputed, because they cost about an hour of SwiftShader time.
+      fixedCameraGeometry: fixedCamera.layers.fixedCameraGeometry,
+      nativeAppearance: fixedCamera.layers.nativeAppearance,
     },
-    diagnostic: [...structuralLayer.diagnostic, ...worldLayer.diagnostic],
+    // Each demoted metric names its layer, so coverage can tell a path this layer
+    // measured and demoted from one it never measured.
+    diagnostic: [
+      ...structuralLayer.diagnostic.map((entry) => ({
+        layer: "structuralCorrespondence",
+        ...entry,
+      })),
+      ...worldLayer.diagnostic.map((entry) => ({ layer: "worldGeometry", ...entry })),
+      ...(fixedCamera.diagnostic ?? []),
+    ],
   };
+
+  // The migration may add layers and may not move an existing threshold. This is
+  // asserted against the file on disk rather than trusted, because "only added
+  // layers" is the whole licence under which this revision is allowed to exist.
+  const previous = JSON.parse(await readFile(BASELINE_PATH, "utf8"));
+  const moved = [];
+  for (const layer of ["structuralCorrespondence", "worldGeometry"]) {
+    const before = new Map(
+      (previous.layers?.[layer] ?? []).map((entry) => [entry.name, entry.threshold]),
+    );
+    for (const entry of baseline.layers[layer]) {
+      if (before.has(entry.name) && before.get(entry.name) !== entry.threshold) {
+        moved.push(`${layer}/${entry.name}: ${before.get(entry.name)} -> ${entry.threshold}`);
+      }
+    }
+    for (const name of before.keys()) {
+      if (!baseline.layers[layer].some((entry) => entry.name === name)) {
+        moved.push(`${layer}/${name}: dropped`);
+      }
+    }
+  }
+  assert.deepEqual(
+    moved,
+    BASELINE_MIGRATIONS.at(-1).movedGeometryThresholds,
+    "this migration moved a geometry threshold it did not declare",
+  );
 
   const calibrationSerialized = `${JSON.stringify(calibration, null, 2)}\n`;
   const baselineSerialized = `${JSON.stringify(baseline, null, 2)}\n`;

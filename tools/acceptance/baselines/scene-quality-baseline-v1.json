@@ -1,7 +1,24 @@
 {
   "schemaVersion": "scene-quality-baseline-v1",
-  "version": "scene-quality-baseline-v1",
-  "calibratedFrom": "scene-calibration-v1",
+  "version": "scene-quality-baseline-v1.1",
+  "migrations": [
+    {
+      "version": "scene-quality-baseline-v1",
+      "adr": "0040",
+      "change": "Freezes the structural-correspondence and world-geometry layers from reference repeatability and declared reference-only perturbations. The two rendered layers are left empty and therefore cannot pass.",
+      "movedGeometryThresholds": []
+    },
+    {
+      "version": "scene-quality-baseline-v1.1",
+      "adr": "0051",
+      "change": "Adds the fixedCameraGeometry and nativeAppearance thresholds, calibrated from declared scene-space damage rendered through the six frozen cameras of ADR-0049. Contour distance is gated per group rather than whole-frame, because whole-frame contour p95 measures 0 on topDown and 1 on the four obliques whatever the island looks like.",
+      "movedGeometryThresholds": []
+    }
+  ],
+  "calibratedFrom": [
+    "scene-calibration-v1",
+    "fixed-camera-calibration-v1"
+  ],
   "note": "Calibrated from reference repeatability and declared reference-only perturbations before any candidate result was consulted. Changing a value requires an explicit migration and full recalibration.",
   "knownProperties": [
     "Placement and surface limits are absolute world units, and the mild controls apply to every entity including the 1.4 km horizon groups, so those limits are dominated by the largest objects. A small entity can therefore pass a limit that is generous for its own scale. Scale-relative placement evidence is the declared next refinement."
@@ -144,8 +161,116 @@
         "threshold": 0.0165
       }
     ],
-    "fixedCameraGeometry": [],
-    "nativeAppearance": []
+    "fixedCameraGeometry": [
+      {
+        "name": "group silhouette IoU",
+        "scope": "aggregate",
+        "path": "passes.aggregate.groupSilhouetteIoU.mean",
+        "direction": "atLeast",
+        "threshold": 0.745598
+      },
+      {
+        "name": "worst group silhouette IoU",
+        "scope": "worst-group",
+        "path": "passes.aggregate.groupSilhouetteIoU.worst.value",
+        "direction": "atLeast",
+        "threshold": 0.302569
+      },
+      {
+        "name": "group contour distance p95",
+        "scope": "aggregate",
+        "path": "passes.aggregate.groupContourDistance.meanP95",
+        "direction": "atMost",
+        "threshold": 5.874122
+      },
+      {
+        "name": "worst group contour distance",
+        "scope": "worst-group",
+        "path": "passes.aggregate.groupContourDistance.worst.value",
+        "direction": "atMost",
+        "threshold": 39.2559
+      },
+      {
+        "name": "group depth p95",
+        "scope": "aggregate",
+        "path": "passes.aggregate.groupDepthWorldUnits.meanP95",
+        "direction": "atMost",
+        "threshold": 7.644414
+      },
+      {
+        "name": "worst group depth p95",
+        "scope": "worst-group",
+        "path": "passes.aggregate.groupDepthWorldUnits.worst.value",
+        "direction": "atMost",
+        "threshold": 22.354947
+      },
+      {
+        "name": "group world normal p95",
+        "scope": "aggregate",
+        "path": "passes.aggregate.groupWorldNormalDegrees.meanP95",
+        "direction": "atMost",
+        "threshold": 49.456982
+      },
+      {
+        "name": "semantic agreement",
+        "scope": "aggregate",
+        "path": "passes.aggregate.semanticAgreement.mean",
+        "direction": "atLeast",
+        "threshold": 0.987474
+      },
+      {
+        "name": "worst camera semantic agreement",
+        "scope": "worst-camera",
+        "path": "passes.aggregate.semanticAgreement.worst.value",
+        "direction": "atLeast",
+        "threshold": 0.974085
+      },
+      {
+        "name": "worst semantic confusion fraction",
+        "scope": "worst-transition",
+        "path": "passes.aggregate.semanticConfusion.worstFraction",
+        "direction": "atMost",
+        "threshold": 0.007092
+      }
+    ],
+    "nativeAppearance": [
+      {
+        "name": "appearance DeltaE mean",
+        "scope": "aggregate",
+        "path": "passes.aggregate.appearanceDeltaE.meanMean",
+        "direction": "atMost",
+        "threshold": 2.852463
+      },
+      {
+        "name": "worst camera appearance DeltaE",
+        "scope": "worst-camera",
+        "path": "passes.aggregate.appearanceDeltaE.worst.value",
+        "direction": "atMost",
+        "threshold": 4.228213
+      },
+      {
+        "name": "material family appearance DeltaE mean",
+        "scope": "aggregate",
+        "path": "passes.aggregate.appearanceByMaterialFamily.meanMean",
+        "direction": "atMost",
+        "threshold": 5.961796
+      },
+      {
+        "name": "worst material family appearance DeltaE",
+        "scope": "worst-material-family",
+        "path": "passes.aggregate.appearanceByMaterialFamily.worst.value",
+        "direction": "atMost",
+        "threshold": 4.062021
+      }
+    ]
   },
-  "diagnostic": []
+  "diagnostic": [
+    {
+      "layer": "fixedCameraGeometry",
+      "name": "worst group world normal p95",
+      "scope": "worst-group",
+      "path": "passes.aggregate.groupWorldNormalDegrees.worst.value",
+      "reason": "mild reaches 174.072554 while damage reaches 167.611637, so this metric cannot tell them apart"
+    }
+  ]
 }

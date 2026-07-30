@@ -1,6 +1,6 @@
 {
   "schemaVersion": "scene-parity-gate-stack-v1",
-  "baselineVersion": "scene-quality-baseline-v1",
+  "baselineVersion": "scene-quality-baseline-v1.1",
   "infrastructure": {
     "passed": true,
     "failures": []
@@ -205,11 +205,112 @@
     },
     "fixedCameraGeometry": {
       "layer": "fixedCameraGeometry",
-      "evaluated": false,
+      "evaluated": true,
       "passed": false,
-      "metrics": [],
-      "failures": [],
-      "reason": "no frozen thresholds are calibrated for this layer, so it cannot pass"
+      "metrics": [
+        {
+          "name": "group silhouette IoU",
+          "scope": "aggregate",
+          "value": 0.421857,
+          "threshold": 0.745598,
+          "direction": "atLeast",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "worst group silhouette IoU",
+          "scope": "worst-group",
+          "value": 0.000709,
+          "threshold": 0.302569,
+          "direction": "atLeast",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "group contour distance p95",
+          "scope": "aggregate",
+          "value": 74.531695,
+          "threshold": 5.874122,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "worst group contour distance",
+          "scope": "worst-group",
+          "value": 391.562,
+          "threshold": 39.2559,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "group depth p95",
+          "scope": "aggregate",
+          "value": 29.810676,
+          "threshold": 7.644414,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "worst group depth p95",
+          "scope": "worst-group",
+          "value": 202.4158,
+          "threshold": 22.354947,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "group world normal p95",
+          "scope": "aggregate",
+          "value": 71.994121,
+          "threshold": 49.456982,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "semantic agreement",
+          "scope": "aggregate",
+          "value": 0.921404,
+          "threshold": 0.987474,
+          "direction": "atLeast",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "worst camera semantic agreement",
+          "scope": "worst-camera",
+          "value": 0.885508,
+          "threshold": 0.974085,
+          "direction": "atLeast",
+          "passed": false,
+          "missing": false
+        },
+        {
+          "name": "worst semantic confusion fraction",
+          "scope": "worst-transition",
+          "value": 0.041653,
+          "threshold": 0.007092,
+          "direction": "atMost",
+          "passed": false,
+          "missing": false
+        }
+      ],
+      "failures": [
+        "group silhouette IoU: 0.421857 is not >= 0.745598",
+        "worst group silhouette IoU: 0.000709 is not >= 0.302569",
+        "group contour distance p95: 74.531695 is not <= 5.874122",
+        "worst group contour distance: 391.562 is not <= 39.2559",
+        "group depth p95: 29.810676 is not <= 7.644414",
+        "worst group depth p95: 202.4158 is not <= 22.354947",
+        "group world normal p95: 71.994121 is not <= 49.456982",
+        "semantic agreement: 0.921404 is not >= 0.987474",
+        "worst camera semantic agreement: 0.885508 is not >= 0.974085",
+        "worst semantic confusion fraction: 0.041653 is not <= 0.007092"
+      ]
     },
     "nativeAppearance": {
       "layer": "nativeAppearance",
@@ -235,7 +336,7 @@
   "trendIndex": {
     "authoritative": false,
     "note": "diagnostic only; no gate decision reads this value",
-    "value": 0.6538
+    "value": 0.4359
   },
   "exitStatus": "candidate-failure",
   "subject": {

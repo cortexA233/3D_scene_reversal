@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   SCENE_PASSES,
+  SURFACE_CORRESPONDENCE_WORLD_UNITS,
   aggregateCameras,
   appearanceEvidence,
   binaryMask,
@@ -181,6 +182,65 @@ test("world normal error is reported in degrees on the shared mask", () => {
   const perpendicular = worldNormalEvidence(up, sideways, WIDTH, HEIGHT, mask);
   assert.ok(Math.abs(perpendicular.degrees.mean - 90) < 1.5);
   assert.equal(perpendicular.comparedPixels, 400);
+});
+
+test("world normal is compared only where both subjects see the same surface", () => {
+  const up = fillRect(blank(), 10, 10, 30, 30, [128, 255, 128]);
+  const sideways = fillRect(blank(), 10, 10, 30, 30, [255, 128, 128]);
+  const mask = binaryMask(fillRect(blank(), 10, 10, 30, 30, [255, 255, 255]));
+  const near = 0.5;
+  const far = 1000;
+  // A 24-bit linear-depth encoding of a chosen world distance.
+  const atDepth = (worldUnits) => {
+    const scaled = Math.round(
+      ((worldUnits - near) / (far - near)) * 16777215,
+    );
+    return fillRect(blank(), 10, 10, 30, 30, [
+      Math.floor(scaled / 65536),
+      Math.floor((scaled % 65536) / 256),
+      scaled % 256,
+    ]);
+  };
+
+  // Same place, different orientation: this is a real normal error and must be
+  // reported.
+  const rotated = worldNormalEvidence(up, sideways, WIDTH, HEIGHT, mask, {
+    referenceDepth: atDepth(100),
+    candidateDepth: atDepth(100),
+    near,
+    far,
+  });
+  assert.equal(rotated.comparedPixels, 400);
+  assert.equal(rotated.correspondingFraction, 1);
+  assert.ok(Math.abs(rotated.degrees.mean - 90) < 1.5);
+
+  // A different surface 40 units away is not the same surface turned, and its
+  // angle says nothing about orientation. This is the case that saturated the
+  // metric on the real island, where a sub-pixel shift makes a pixel see the
+  // other side of a leaf.
+  const elsewhere = worldNormalEvidence(up, sideways, WIDTH, HEIGHT, mask, {
+    referenceDepth: atDepth(100),
+    candidateDepth: atDepth(140),
+    near,
+    far,
+  });
+  assert.equal(elsewhere.comparedPixels, 0);
+  assert.equal(elsewhere.correspondingFraction, 0);
+  assert.equal(elsewhere.degrees, null);
+  // The discarded evidence is still reported, so a restriction that threw away
+  // the whole frame cannot look like agreement.
+  assert.equal(elsewhere.sharedPixels, 400);
+  assert.ok(Math.abs(elsewhere.allSharedPixelDegrees.mean - 90) < 1.5);
+
+  // Inside the declared tolerance it is still the same surface.
+  const nudged = worldNormalEvidence(up, sideways, WIDTH, HEIGHT, mask, {
+    referenceDepth: atDepth(100),
+    candidateDepth: atDepth(101),
+    near,
+    far,
+  });
+  assert.equal(nudged.comparedPixels, 400);
+  assert.equal(nudged.toleranceWorldUnits, SURFACE_CORRESPONDENCE_WORLD_UNITS);
 });
 
 test("semantic evidence separates occupancy from confusion", () => {
@@ -385,6 +445,16 @@ test("per-group evidence exposes a village that a global silhouette would hide",
   ]);
   assert.equal(aggregate.groupSilhouetteIoU.worst.label, "structures");
   assert.equal(aggregate.groupSilhouetteIoU.worst.value, 0);
+
+  // Contour distance has the same blind spot as IoU when it is taken over the
+  // whole frame: the frame-filling mask's outline is the frame border, so it
+  // reports agreement while the village is 30 pixels away from where it belongs.
+  assert.equal(global.contourDistance.p95, 0, "whole-frame contour is uninformative here");
+  assert.equal(aggregate.groupContourDistance.worst.label, "structures");
+  assert.ok(
+    aggregate.groupContourDistance.worst.value >= 25,
+    `per-group contour must see the displaced village, got ${aggregate.groupContourDistance.worst.value}`,
+  );
 });
 
 function emptyView() {
@@ -396,3 +466,60 @@ function emptyView() {
     appearance: { deltaE: { mean: 0 } },
   };
 }
+
+test("contour distance is undefined against a subject that rendered nothing", () => {
+  const present = fillRect(blank(), 10, 10, 30, 30, [255, 255, 255]);
+  const absent = blank();
+
+  // A deleted group leaves no contour to measure a distance to. Reporting a
+  // number here means reporting the distance-transform sentinel, which is about
+  // 1e9 per unmatched pixel and would calibrate a threshold that accepts
+  // everything.
+  const deleted = silhouetteEvidence(present, absent, WIDTH, HEIGHT);
+  assert.equal(deleted.contourDistance, null);
+  assert.equal(deleted.intersectionOverUnion, 0, "absence is reported by IoU instead");
+  assert.equal(deleted.contourPixels.candidate, 0);
+
+  // Disjoint but present on both sides is a real distance and must be measured.
+  const moved = silhouetteEvidence(
+    present,
+    fillRect(blank(), 34, 10, 54, 30, [255, 255, 255]),
+    WIDTH,
+    HEIGHT,
+  );
+  assert.equal(moved.intersectionOverUnion, 0);
+  assert.ok(moved.contourDistance.p95 > 0 && moved.contourDistance.p95 < 100);
+});
+
+test("nothing confused is a fraction of zero, and nothing compared is null", () => {
+  // The gate stack reads a null as missing evidence and fails the metric, so a
+  // subject that mislabels nothing must not report null for the metric that
+  // exists to catch mislabelling.
+  const perfect = aggregateCameras([
+    {
+      camera: "authoredOverview",
+      ...emptyView(),
+      semantic: { agreementFraction: 1, comparedPixels: 4000, confusion: {} },
+    },
+  ]);
+  assert.equal(perfect.semanticConfusion.worstFraction, 0);
+  assert.equal(perfect.semanticConfusion.worst, null);
+
+  // A capture that compared no pixels measured nothing, and that stays null.
+  const unmeasured = aggregateCameras([
+    {
+      camera: "authoredOverview",
+      ...emptyView(),
+      semantic: { agreementFraction: 1, comparedPixels: 0, confusion: {} },
+    },
+  ]);
+  assert.equal(unmeasured.semanticConfusion.worstFraction, null);
+
+  // A view that skipped the auxiliary passes altogether is also null, not zero.
+  const appearanceOnly = aggregateCameras([
+    { camera: "authoredOverview", appearance: { deltaE: { mean: 3 } } },
+  ]);
+  assert.equal(appearanceOnly.semanticConfusion.worstFraction, null);
+  assert.equal(appearanceOnly.appearanceDeltaE.meanMean, 3);
+  assert.equal(appearanceOnly.groupSilhouetteIoU.mean, null);
+});

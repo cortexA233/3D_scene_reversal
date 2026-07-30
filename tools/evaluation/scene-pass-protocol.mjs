@@ -15,7 +15,16 @@
 export const PROTOCOL_TOLERANCE = 1e-5;
 export const REQUIRED_CAMERAS = 6;
 
-export function verifyScenePassProtocol({ report, contract }) {
+/**
+ * The camera half of the protocol: capture size, device scale, frozen moment,
+ * camera count, and per-camera matrix and clipping fidelity.
+ *
+ * The calibration run has to satisfy exactly this and violate one of the subject
+ * rules below — it mutates the reference on purpose — so the two halves are
+ * separate functions rather than one that calibration would have to be excused
+ * from.
+ */
+export function verifyFrozenCameraProtocol({ report, contract }) {
   const errors = [];
   const expectedFramebuffer = JSON.stringify(contract.capture.framebuffer);
 
@@ -66,6 +75,11 @@ export function verifyScenePassProtocol({ report, contract }) {
       );
     }
   }
+  return errors;
+}
+
+export function verifyScenePassProtocol({ report, contract }) {
+  const errors = verifyFrozenCameraProtocol({ report, contract });
   if (report?.subjects?.sharedLighting) {
     errors.push("appearance evidence must not give both subjects the same injected lighting");
   }
@@ -74,6 +88,46 @@ export function verifyScenePassProtocol({ report, contract }) {
   }
   if (report?.subjects?.candidateReframed) {
     errors.push("the candidate was framed from itself rather than from the frozen cameras");
+  }
+  return errors;
+}
+
+/**
+ * The calibration run's protocol.
+ *
+ * Calibration is the one place that mutates the reference, because a threshold
+ * for a rendered metric has to come from rendered damage. What makes that
+ * legitimate is not a promise: the run declares the damage, snapshots what it
+ * touches, and proves the restore put the scene back — both numerically and by
+ * re-capturing a frame and comparing it to the undamaged one byte for byte. A
+ * run that cannot prove its own restore is not evidence, because every later
+ * control in the same session would be measuring against a damaged baseline.
+ */
+export function verifyCalibrationCaptureProtocol({ report, contract }) {
+  const errors = verifyFrozenCameraProtocol({ report, contract });
+  const mutation = report?.mutation;
+  if (mutation?.declared !== true) {
+    errors.push("the calibration run did not declare that it mutates the reference");
+  }
+  if (mutation?.restored !== true) {
+    errors.push("the calibration run did not restore the reference after its damage");
+  }
+  if (mutation?.restoreVerified !== true) {
+    errors.push(
+      `the restore was not verified against the pre-damage snapshot: ${
+        mutation?.restoreFailures?.join("; ") ?? "no audit was recorded"
+      }`,
+    );
+  }
+  if (mutation?.restoredFrameIdentical !== true) {
+    errors.push(
+      "the frame re-captured after restoring is not identical to the undamaged frame, so later controls measured against a damaged baseline",
+    );
+  }
+  if (report?.subjects?.candidateModulesLoaded?.length > 0) {
+    errors.push(
+      `the calibration page loaded candidate modules: ${report.subjects.candidateModulesLoaded.join(", ")}`,
+    );
   }
   return errors;
 }

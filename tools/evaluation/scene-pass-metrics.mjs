@@ -133,19 +133,34 @@ export function silhouetteEvidence(referenceRgba, candidateRgba, width, height) 
 
   const referenceContour = contourMask(reference, width, height);
   const candidateContour = contourMask(candidate, width, height);
-  const referenceField = distanceField(referenceContour, width, height);
-  const candidateField = distanceField(candidateContour, width, height);
+
+  // The distance from a contour to a contour that does not exist is not a
+  // distance. `distanceField` leaves its 1e9 sentinel in place for an empty mask,
+  // so measuring anyway reports about 1e9 per unmatched contour pixel: a group
+  // deleted outright produced a per-group contour p95 of 9.2e7, and a threshold
+  // calibrated between mild variation and that would have accepted any candidate
+  // at all. Absence is already reported, by an intersection over union of zero and
+  // by semantic occupancy, so this returns null rather than a number.
+  const referenceContourPixels = referenceContour.reduce((sum, value) => sum + value, 0);
+  const candidateContourPixels = candidateContour.reduce((sum, value) => sum + value, 0);
+  const comparable = referenceContourPixels > 0 && candidateContourPixels > 0;
+
   const distances = [];
-  for (let index = 0; index < reference.length; index += 1) {
-    if (referenceContour[index]) distances.push(candidateField[index]);
-    if (candidateContour[index]) distances.push(referenceField[index]);
+  if (comparable) {
+    const referenceField = distanceField(referenceContour, width, height);
+    const candidateField = distanceField(candidateContour, width, height);
+    for (let index = 0; index < reference.length; index += 1) {
+      if (referenceContour[index]) distances.push(candidateField[index]);
+      if (candidateContour[index]) distances.push(referenceField[index]);
+    }
   }
 
   return {
     intersectionOverUnion: union === 0 ? 1 : Number((intersection / union).toFixed(6)),
     referenceOnlyFraction: Number((referenceOnly / reference.length).toFixed(6)),
     candidateOnlyFraction: Number((candidateOnly / reference.length).toFixed(6)),
-    contourDistance: summarize(distances),
+    contourDistance: comparable ? summarize(distances) : null,
+    contourPixels: { reference: referenceContourPixels, candidate: candidateContourPixels },
   };
 }
 
@@ -182,10 +197,50 @@ export function depthEvidence(referenceRgba, candidateRgba, width, height, near,
   return { comparedPixels: errors.length, worldUnits: summarize(errors) };
 }
 
-export function worldNormalEvidence(referenceRgba, candidateRgba, width, height, sharedMask) {
+/**
+ * Two subjects see the same surface at a pixel when their linear depth agrees to
+ * within this many world units.
+ *
+ * The value is the world-geometry layer's own surface tolerance rounded down:
+ * `surface p95` is frozen at 2.3479 world units, so agreeing to within 2 units is
+ * already "the same surface" everywhere else in the stack.
+ */
+export const SURFACE_CORRESPONDENCE_WORLD_UNITS = 2;
+
+/**
+ * World-normal error where the two subjects see the same surface.
+ *
+ * The silhouette intersection is not enough on its own. At scene scale most
+ * pixels sit on geometry a pixel or two across — leaves, railings, path stones —
+ * so a sub-pixel displacement makes a pixel see a different surface rather than
+ * the same surface turned, and the reported angle is then the angle between two
+ * unrelated faces. Measured on this island, a 0.15-unit translate produced a
+ * per-group p95 of 45.75 degrees and a 1 per cent scale 69.57, with individual
+ * groups above 150 degrees, which is a normal that flipped rather than one that
+ * rotated. That saturates the metric: mild damage, severe damage, and the real
+ * candidate all land in one band, so it can neither separate its own bracket nor
+ * say anything about a candidate.
+ *
+ * Restricting the comparison to pixels whose depth also agrees is what makes the
+ * metric mean what its name says — where both subjects put a surface in the same
+ * place, do they agree on which way it faces. The unrestricted value is still
+ * reported, as a diagnostic, so nothing is hidden by the restriction.
+ */
+export function worldNormalEvidence(
+  referenceRgba,
+  candidateRgba,
+  width,
+  height,
+  sharedMask,
+  correspondence = null,
+) {
   requireRgba(referenceRgba, width, height, "reference world normal");
   requireRgba(candidateRgba, width, height, "candidate world normal");
   const errors = [];
+  const allShared = [];
+  const range = correspondence ? correspondence.far - correspondence.near : 0;
+  const tolerance =
+    correspondence?.toleranceWorldUnits ?? SURFACE_CORRESPONDENCE_WORLD_UNITS;
   for (let index = 0; index < sharedMask.length; index += 1) {
     if (!sharedMask[index]) continue;
     const offset = index * 4;
@@ -199,9 +254,34 @@ export function worldNormalEvidence(referenceRgba, candidateRgba, width, height,
     const left = decode(referenceRgba);
     const right = decode(candidateRgba);
     const dot = Math.min(1, Math.max(-1, left[0] * right[0] + left[1] * right[1] + left[2] * right[2]));
-    errors.push((Math.acos(dot) * 180) / Math.PI);
+    const degrees = (Math.acos(dot) * 180) / Math.PI;
+    allShared.push(degrees);
+    if (correspondence) {
+      const referenceDepth =
+        decodeLinearDepth(correspondence.referenceDepth, index) * range + correspondence.near;
+      const candidateDepth =
+        decodeLinearDepth(correspondence.candidateDepth, index) * range + correspondence.near;
+      if (Math.abs(referenceDepth - candidateDepth) > tolerance) continue;
+    }
+    errors.push(degrees);
   }
-  return { comparedPixels: errors.length, degrees: summarize(errors) };
+  if (!correspondence) {
+    return { comparedPixels: errors.length, degrees: summarize(errors) };
+  }
+  return {
+    comparedPixels: errors.length,
+    sharedPixels: allShared.length,
+    correspondingFraction:
+      allShared.length === 0
+        ? null
+        : Number((errors.length / allShared.length).toFixed(6)),
+    toleranceWorldUnits: tolerance,
+    degrees: summarize(errors),
+    // What the metric reported before the correspondence restriction. Kept so a
+    // restriction that quietly discarded most of the frame is visible rather than
+    // reported as agreement.
+    allSharedPixelDegrees: summarize(allShared),
+  };
 }
 
 /**
@@ -429,7 +509,14 @@ export function groupGeometryEvidence({
           : null,
       worldNormal:
         intersection > 0
-          ? worldNormalEvidence(referenceNormal, candidateNormal, width, height, sharedMask)
+          ? worldNormalEvidence(referenceNormal, candidateNormal, width, height, sharedMask, {
+              // Orientation is only comparable where both subjects put a surface
+              // in the same place; the depth pass is what says whether they did.
+              referenceDepth,
+              candidateDepth,
+              near,
+              far,
+            })
           : null,
     };
   }
@@ -516,6 +603,12 @@ export function aggregateCameras(views) {
     }
   }
   const worstConfusion = confusionRows.sort((a, b) => b.fraction - a.fraction)[0] ?? null;
+  // No confusion at all is a fraction of zero, not missing evidence. The gate
+  // stack treats a null as "evidence is missing" and fails the metric, so
+  // reporting null here would make a subject that mislabels nothing fail the
+  // metric that exists to catch mislabelling. Null is reserved for the case where
+  // no camera compared any pixels, which really is nothing measured.
+  const comparedAnywhere = views.some((view) => view.semantic?.comparedPixels > 0);
 
   return {
     cameras: views.length,
@@ -524,6 +617,17 @@ export function aggregateCameras(views) {
         summarize(groupRows.map((row) => row.intersectionOverUnion).filter(Number.isFinite))
           ?.mean ?? null,
       worst: worstGroup((row) => row.intersectionOverUnion, true),
+    },
+    // Per-group contour distance, for the same reason the per-group IoU exists.
+    // The whole-frame silhouette covers everything that is not sky, so its
+    // outline is very nearly the frame border and its contour distance sits at 0
+    // or 1 pixel on five of the six cameras no matter what the island looks
+    // like. A group's outline is the group's own shape.
+    groupContourDistance: {
+      meanP95:
+        summarize(groupRows.map((row) => row.contourDistance?.p95).filter(Number.isFinite))
+          ?.mean ?? null,
+      worst: worstGroup((row) => row.contourDistance?.p95, false),
     },
     groupDepthWorldUnits: {
       meanP95:
@@ -538,13 +642,18 @@ export function aggregateCameras(views) {
         )?.mean ?? null,
       worst: worstGroup((row) => row.worldNormal?.degrees?.p95, false),
     },
+    // The optional reads below let a view that measured only some of the passes
+    // aggregate to `null` for the rest rather than throwing. The calibration run
+    // needs that: geometry controls skip the lit-RGB composer pass and appearance
+    // controls skip the auxiliary passes, which is most of what keeps a
+    // fifteen-control bracket inside an hour of SwiftShader time.
     silhouetteIoU: {
-      mean: summarize(values((view) => view.silhouette.intersectionOverUnion))?.mean ?? null,
-      worst: best((view) => view.silhouette.intersectionOverUnion),
+      mean: summarize(values((view) => view.silhouette?.intersectionOverUnion))?.mean ?? null,
+      worst: best((view) => view.silhouette?.intersectionOverUnion),
     },
     contourDistance: {
-      meanP95: summarize(values((view) => view.silhouette.contourDistance?.p95))?.mean ?? null,
-      worst: worst((view) => view.silhouette.contourDistance?.p95),
+      meanP95: summarize(values((view) => view.silhouette?.contourDistance?.p95))?.mean ?? null,
+      worst: worst((view) => view.silhouette?.contourDistance?.p95),
     },
     depthWorldUnits: {
       meanP95: summarize(values((view) => view.depth?.worldUnits?.p95))?.mean ?? null,
@@ -555,12 +664,12 @@ export function aggregateCameras(views) {
       worst: worst((view) => view.worldNormal?.degrees?.p95),
     },
     semanticAgreement: {
-      mean: summarize(values((view) => view.semantic.agreementFraction))?.mean ?? null,
-      worst: best((view) => view.semantic.agreementFraction),
+      mean: summarize(values((view) => view.semantic?.agreementFraction))?.mean ?? null,
+      worst: best((view) => view.semantic?.agreementFraction),
     },
     appearanceDeltaE: {
-      meanMean: summarize(values((view) => view.appearance.deltaE?.mean))?.mean ?? null,
-      worst: worst((view) => view.appearance.deltaE?.mean),
+      meanMean: summarize(values((view) => view.appearance?.deltaE?.mean))?.mean ?? null,
+      worst: worst((view) => view.appearance?.deltaE?.mean),
     },
     // A Material Family mixed into a group that scores well is invisible to
     // per-group appearance, so the worst family is kept as its own result.
@@ -572,7 +681,11 @@ export function aggregateCameras(views) {
     // they disagree, so one group consistently rendered as another cannot hide
     // inside a high agreement fraction.
     semanticConfusion: {
-      worstFraction: worstConfusion ? worstConfusion.fraction : null,
+      worstFraction: worstConfusion
+        ? worstConfusion.fraction
+        : comparedAnywhere
+          ? 0
+          : null,
       worst: worstConfusion,
     },
   };

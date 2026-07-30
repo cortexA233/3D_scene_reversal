@@ -19,6 +19,8 @@
     "check:scene-passes": "node --test test/scene-pass-metrics.test.mjs && node scripts/run-scene-passes.mjs --check",
     "calibrate:scene": "node scripts/run-scene-calibration.mjs",
     "check:scene-calibration": "node --test test/scene-calibration.test.mjs && node scripts/run-scene-calibration.mjs --check",
+    "calibrate:fixed-camera": "node scripts/run-fixed-camera-calibration.mjs",
+    "check:fixed-camera-calibration": "node --test test/camera-appearance-calibration.test.mjs && node scripts/run-fixed-camera-calibration.mjs --aggregate --check",
     "check:scene-parity-gates": "node --test test/scene-parity-gates.test.mjs",
     "report:scene-parity": "node scripts/run-scene-parity-report.mjs",
     "fit:tracer": "node scripts/run-fitting-loop.mjs",

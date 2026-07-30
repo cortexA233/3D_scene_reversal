@@ -1,0 +1,1262 @@
+{
+  "schemaVersion": "fixed-camera-calibration-v1",
+  "perturbationSchema": "scene-graph-perturbations-v1",
+  "capture": {
+    "cssViewport": [
+      1440,
+      810
+    ],
+    "framebuffer": [
+      1440,
+      810
+    ],
+    "deviceScaleFactor": 1,
+    "momentMs": 12000
+  },
+  "protocol": [
+    {
+      "camera": "authoredOverview",
+      "viewMatrixDelta": 0,
+      "projectionMatrixDelta": 0,
+      "fov": 58,
+      "near": 0.5,
+      "far": 30000,
+      "aspect": 1.777777778,
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "referenceViewMatrixDelta": 0
+    },
+    {
+      "camera": "topDown",
+      "viewMatrixDelta": 0,
+      "projectionMatrixDelta": 0,
+      "fov": 58,
+      "near": 0.5,
+      "far": 30000,
+      "aspect": 1.777777778,
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "referenceViewMatrixDelta": 0
+    },
+    {
+      "camera": "oblique-north",
+      "viewMatrixDelta": 0,
+      "projectionMatrixDelta": 0,
+      "fov": 58,
+      "near": 0.5,
+      "far": 30000,
+      "aspect": 1.777777778,
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "referenceViewMatrixDelta": 0
+    },
+    {
+      "camera": "oblique-east",
+      "viewMatrixDelta": 0,
+      "projectionMatrixDelta": 0,
+      "fov": 58,
+      "near": 0.5,
+      "far": 30000,
+      "aspect": 1.777777778,
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "referenceViewMatrixDelta": 0
+    },
+    {
+      "camera": "oblique-south",
+      "viewMatrixDelta": 0,
+      "projectionMatrixDelta": 0,
+      "fov": 58,
+      "near": 0.5,
+      "far": 30000,
+      "aspect": 1.777777778,
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "referenceViewMatrixDelta": 0
+    },
+    {
+      "camera": "oblique-west",
+      "viewMatrixDelta": 0,
+      "projectionMatrixDelta": 0,
+      "fov": 58,
+      "near": 0.5,
+      "far": 30000,
+      "aspect": 1.777777778,
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "referenceViewMatrixDelta": 0
+    }
+  ],
+  "mutation": {
+    "declared": true,
+    "subject": "the reference's own scene graph, damaged by declared reference-only controls",
+    "restored": true,
+    "restoreVerified": true,
+    "restoredFrameIdentical": true,
+    "restoreFailures": []
+  },
+  "subjects": {
+    "candidateBuilt": false,
+    "candidateModulesLoaded": [],
+    "referenceRenderer": "authored composer",
+    "note": "Both sides of every comparison are the reference. The undamaged capture stands in for the reference and the damaged capture for a candidate, so the metrics are the acceptance metrics unchanged.",
+    "requestedModules": [
+      "/assets/draco/draco_wasm_wrapper.js",
+      "/dev-tools/evaluation/browser-scene-calibration.mjs",
+      "/dev-tools/evaluation/browser-scene-pass-kit.mjs",
+      "/dev-tools/evaluation/scene-graph-perturbations.mjs",
+      "/dev-tools/evaluation/scene-pass-metrics.mjs",
+      "/dev-tools/reconstruction/scene-families.mjs",
+      "/main.js",
+      "/scene-decoration.js",
+      "/src/pointer-lock.js",
+      "/src/reconstruction/scene/island-scene-recipe.generated.js",
+      "/src/scene-builder.js",
+      "/src/scene-utils.js"
+    ]
+  },
+  "inventory": {
+    "rootsByGroup": {
+      "bridges": 2,
+      "cloud": 34,
+      "cover": 8,
+      "decorations": 58,
+      "geography": 2,
+      "horizon": 16,
+      "paths": 60,
+      "plazas": 6,
+      "rocks": 39,
+      "sky": 1,
+      "structures": 39,
+      "vegetation": 438,
+      "wildlife": 14
+    },
+    "terrainRoots": 1,
+    "materials": 367,
+    "materialsByFamily": {
+      "bamboo-foliage": 9,
+      "blossom-foliage": 25,
+      "creature-fur": 212,
+      "distant-rock": 3,
+      "ocean-surface": 35,
+      "painted-timber": 62,
+      "palm-foliage": 5,
+      "paving-stone": 9,
+      "shore-rock": 16,
+      "terrain-ground": 2
+    },
+    "familiesSharingAMaterial": [
+      "bamboo-foliage+blossom-foliage+paving-stone",
+      "bamboo-foliage+paving-stone",
+      "blossom-foliage+painted-timber",
+      "blossom-foliage+paving-stone+shore-rock",
+      "blossom-foliage+shore-rock",
+      "painted-timber+shore-rock"
+    ]
+  },
+  "control": {
+    "id": "albedo-8pct",
+    "class": "intermediate",
+    "needs": [
+      "appearance"
+    ],
+    "detects": [],
+    "note": null,
+    "views": [
+      {
+        "camera": "authoredOverview",
+        "appearance": {
+          "deltaE": {
+            "count": 1166400,
+            "mean": 2.184629,
+            "p50": 1.631434,
+            "p95": 5.981845,
+            "max": 20.447789
+          },
+          "referenceChannelMeans": [
+            169.5405,
+            176.9851,
+            167.7968
+          ],
+          "candidateChannelMeans": [
+            174.683,
+            182.0048,
+            173.4232
+          ],
+          "regions": {
+            "geography": {
+              "count": 678277,
+              "mean": 1.296433,
+              "p50": 1.064184,
+              "p95": 2.858515,
+              "max": 9.3239
+            },
+            "horizon": {
+              "count": 101246,
+              "mean": 2.926032,
+              "p50": 2.464995,
+              "p95": 5.865322,
+              "max": 8.161806
+            },
+            "structures": {
+              "count": 12457,
+              "mean": 7.207498,
+              "p50": 6.922484,
+              "p95": 11.835954,
+              "max": 16.530628
+            },
+            "bridges": {
+              "count": 2714,
+              "mean": 5.777385,
+              "p50": 5.669241,
+              "p95": 8.258357,
+              "max": 9.554064
+            },
+            "plazas": {
+              "count": 11326,
+              "mean": 2.805555,
+              "p50": 2.485098,
+              "p95": 5.232301,
+              "max": 8.772692
+            },
+            "paths": {
+              "count": 70,
+              "mean": 3.356267,
+              "p50": 3.086624,
+              "p95": 7.626428,
+              "max": 8.06509
+            },
+            "rocks": {
+              "count": 962,
+              "mean": 3.510539,
+              "p50": 3.088732,
+              "p95": 6.623428,
+              "max": 7.821661
+            },
+            "decorations": {
+              "count": 3271,
+              "mean": 3.977582,
+              "p50": 3.415749,
+              "p95": 6.99521,
+              "max": 12.061302
+            },
+            "vegetation": {
+              "count": 86780,
+              "mean": 6.66771,
+              "p50": 5.812274,
+              "p95": 13.127511,
+              "max": 20.447789
+            },
+            "wildlife": {
+              "count": 217,
+              "mean": 3.593756,
+              "p50": 2.801245,
+              "p95": 9.68327,
+              "max": 11.625496
+            },
+            "cover": {
+              "count": 128,
+              "mean": 6.36353,
+              "p50": 6.401437,
+              "p95": 6.891152,
+              "max": 8.653978
+            }
+          },
+          "materialFamilies": {
+            "bamboo-foliage": {
+              "count": 13613,
+              "mean": 4.62512,
+              "p50": 4.694324,
+              "p95": 5.943157,
+              "max": 8.333207
+            },
+            "blossom-foliage": {
+              "count": 14842,
+              "mean": 7.201137,
+              "p50": 7.188631,
+              "p95": 10.084551,
+              "max": 16.818408
+            },
+            "creature-fur": {
+              "count": 230,
+              "mean": 3.742413,
+              "p50": 2.9604,
+              "p95": 9.592474,
+              "max": 11.625496
+            },
+            "distant-rock": {
+              "count": 101221,
+              "mean": 2.926003,
+              "p50": 2.464995,
+              "p95": 5.865322,
+              "max": 8.161806
+            },
+            "ocean-surface": {
+              "count": 590602,
+              "mean": 1.096702,
+              "p50": 0.929861,
+              "p95": 2.669905,
+              "max": 6.156014
+            },
+            "painted-timber": {
+              "count": 13897,
+              "mean": 6.05783,
+              "p50": 5.823606,
+              "p95": 11.536908,
+              "max": 16.530628
+            },
+            "palm-foliage": {
+              "count": 62001,
+              "mean": 7.069367,
+              "p50": 6.098083,
+              "p95": 14.001288,
+              "max": 20.447789
+            },
+            "paving-stone": {
+              "count": 6811,
+              "mean": 3.466103,
+              "p50": 3.327961,
+              "p95": 5.997373,
+              "max": 8.772692
+            },
+            "shore-rock": {
+              "count": 1090,
+              "mean": 3.845569,
+              "p50": 3.274575,
+              "p95": 6.721195,
+              "max": 8.653978
+            },
+            "terrain-ground": {
+              "count": 93141,
+              "mean": 2.62815,
+              "p50": 2.303733,
+              "p95": 5.128174,
+              "max": 11.013377
+            }
+          }
+        }
+      },
+      {
+        "camera": "topDown",
+        "appearance": {
+          "deltaE": {
+            "count": 1166400,
+            "mean": 0.81022,
+            "p50": 0.697936,
+            "p95": 2.129516,
+            "max": 3.098412
+          },
+          "referenceChannelMeans": [
+            137.6588,
+            165.334,
+            155.659
+          ],
+          "candidateChannelMeans": [
+            139.5312,
+            166.9128,
+            157.0638
+          ],
+          "regions": {
+            "geography": {
+              "count": 976738,
+              "mean": 0.652287,
+              "p50": 0.554977,
+              "p95": 2.057801,
+              "max": 2.907247
+            },
+            "structures": {
+              "count": 20673,
+              "mean": 1.956141,
+              "p50": 1.955202,
+              "p95": 2.368545,
+              "max": 2.929003
+            },
+            "bridges": {
+              "count": 5299,
+              "mean": 1.831343,
+              "p50": 1.849817,
+              "p95": 2.247707,
+              "max": 2.749437
+            },
+            "plazas": {
+              "count": 38312,
+              "mean": 1.884339,
+              "p50": 1.993669,
+              "p95": 2.578225,
+              "max": 3.098412
+            },
+            "paths": {
+              "count": 249,
+              "mean": 1.705827,
+              "p50": 1.546034,
+              "p95": 2.410555,
+              "max": 2.844902
+            },
+            "rocks": {
+              "count": 4616,
+              "mean": 2.043488,
+              "p50": 2.002734,
+              "p95": 2.339041,
+              "max": 2.695102
+            },
+            "decorations": {
+              "count": 4567,
+              "mean": 1.82779,
+              "p50": 1.891119,
+              "p95": 2.320322,
+              "max": 2.698984
+            },
+            "vegetation": {
+              "count": 115163,
+              "mean": 1.439698,
+              "p50": 1.667819,
+              "p95": 2.275314,
+              "max": 2.979764
+            },
+            "wildlife": {
+              "count": 203,
+              "mean": 1.772703,
+              "p50": 1.875172,
+              "p95": 2.278368,
+              "max": 2.393718
+            },
+            "cover": {
+              "count": 580,
+              "mean": 2.112999,
+              "p50": 2.017633,
+              "p95": 2.583355,
+              "max": 2.629143
+            }
+          },
+          "materialFamilies": {
+            "bamboo-foliage": {
+              "count": 15397,
+              "mean": 2.06011,
+              "p50": 2.121949,
+              "p95": 2.65521,
+              "max": 2.979764
+            },
+            "blossom-foliage": {
+              "count": 34312,
+              "mean": 1.99605,
+              "p50": 2.0083,
+              "p95": 2.334114,
+              "max": 2.929003
+            },
+            "creature-fur": {
+              "count": 203,
+              "mean": 1.772703,
+              "p50": 1.875172,
+              "p95": 2.278368,
+              "max": 2.393718
+            },
+            "ocean-surface": {
+              "count": 859898,
+              "mean": 0.462439,
+              "p50": 0.537764,
+              "p95": 1.053543,
+              "max": 2.397379
+            },
+            "painted-timber": {
+              "count": 26453,
+              "mean": 1.896324,
+              "p50": 1.918474,
+              "p95": 2.304506,
+              "max": 2.812409
+            },
+            "palm-foliage": {
+              "count": 66893,
+              "mean": 1.03257,
+              "p50": 0.998036,
+              "p95": 1.947528,
+              "max": 2.756265
+            },
+            "paving-stone": {
+              "count": 35335,
+              "mean": 1.864457,
+              "p50": 1.990124,
+              "p95": 2.583934,
+              "max": 3.098412
+            },
+            "shore-rock": {
+              "count": 5189,
+              "mean": 2.051324,
+              "p50": 2.006662,
+              "p95": 2.343773,
+              "max": 2.695102
+            },
+            "terrain-ground": {
+              "count": 122720,
+              "mean": 2.045814,
+              "p50": 1.998312,
+              "p95": 2.596604,
+              "max": 2.907247
+            }
+          }
+        }
+      },
+      {
+        "camera": "oblique-north",
+        "appearance": {
+          "deltaE": {
+            "count": 1166400,
+            "mean": 0.504152,
+            "p50": 0.449081,
+            "p95": 1.650743,
+            "max": 3.66812
+          },
+          "referenceChannelMeans": [
+            162.3632,
+            178.0531,
+            173.2978
+          ],
+          "candidateChannelMeans": [
+            163.3827,
+            178.9539,
+            174.2202
+          ],
+          "regions": {
+            "geography": {
+              "count": 1002080,
+              "mean": 0.413439,
+              "p50": 0.358283,
+              "p95": 1.259411,
+              "max": 3.599739
+            },
+            "horizon": {
+              "count": 112126,
+              "mean": 0.882353,
+              "p50": 0.821861,
+              "p95": 1.47503,
+              "max": 1.942
+            },
+            "structures": {
+              "count": 5751,
+              "mean": 1.665507,
+              "p50": 1.689981,
+              "p95": 2.115634,
+              "max": 2.616595
+            },
+            "bridges": {
+              "count": 1174,
+              "mean": 1.536328,
+              "p50": 1.512187,
+              "p95": 2.07984,
+              "max": 2.285434
+            },
+            "plazas": {
+              "count": 6984,
+              "mean": 1.69432,
+              "p50": 1.711618,
+              "p95": 2.096088,
+              "max": 2.889457
+            },
+            "paths": {
+              "count": 17,
+              "mean": 1.57814,
+              "p50": 1.532122,
+              "p95": 2.105052,
+              "max": 2.105052
+            },
+            "rocks": {
+              "count": 397,
+              "mean": 1.753463,
+              "p50": 1.738002,
+              "p95": 1.981894,
+              "max": 2.250331
+            },
+            "decorations": {
+              "count": 1302,
+              "mean": 1.58148,
+              "p50": 1.63607,
+              "p95": 1.935602,
+              "max": 2.281841
+            },
+            "vegetation": {
+              "count": 34917,
+              "mean": 1.345443,
+              "p50": 1.391614,
+              "p95": 2.103022,
+              "max": 2.685583
+            },
+            "wildlife": {
+              "count": 61,
+              "mean": 1.541376,
+              "p50": 1.754874,
+              "p95": 1.942438,
+              "max": 1.970242
+            },
+            "cover": {
+              "count": 151,
+              "mean": 1.806074,
+              "p50": 1.867942,
+              "p95": 2.05906,
+              "max": 2.072804
+            }
+          },
+          "materialFamilies": {
+            "bamboo-foliage": {
+              "count": 3528,
+              "mean": 1.852415,
+              "p50": 1.809656,
+              "p95": 2.354707,
+              "max": 2.685583
+            },
+            "blossom-foliage": {
+              "count": 12272,
+              "mean": 1.867566,
+              "p50": 1.930712,
+              "p95": 2.1442,
+              "max": 2.638985
+            },
+            "creature-fur": {
+              "count": 61,
+              "mean": 1.541376,
+              "p50": 1.754874,
+              "p95": 1.942438,
+              "max": 1.970242
+            },
+            "distant-rock": {
+              "count": 112000,
+              "mean": 0.882486,
+              "p50": 0.821861,
+              "p95": 1.475624,
+              "max": 1.942
+            },
+            "ocean-surface": {
+              "count": 969053,
+              "mean": 0.361684,
+              "p50": 0.343064,
+              "p95": 1.052012,
+              "max": 3.599739
+            },
+            "painted-timber": {
+              "count": 6993,
+              "mean": 1.619776,
+              "p50": 1.657809,
+              "p95": 2.075037,
+              "max": 2.616595
+            },
+            "palm-foliage": {
+              "count": 19643,
+              "mean": 0.946739,
+              "p50": 0.881047,
+              "p95": 1.646555,
+              "max": 2.49213
+            },
+            "paving-stone": {
+              "count": 5880,
+              "mean": 1.62739,
+              "p50": 1.634049,
+              "p95": 2.069015,
+              "max": 2.889457
+            },
+            "shore-rock": {
+              "count": 546,
+              "mean": 1.768965,
+              "p50": 1.824569,
+              "p95": 2.044783,
+              "max": 2.250331
+            },
+            "terrain-ground": {
+              "count": 34984,
+              "mean": 1.922034,
+              "p50": 1.95129,
+              "p95": 2.573227,
+              "max": 2.905197
+            }
+          }
+        }
+      },
+      {
+        "camera": "oblique-east",
+        "appearance": {
+          "deltaE": {
+            "count": 1166400,
+            "mean": 1.127236,
+            "p50": 0.877089,
+            "p95": 4.239038,
+            "max": 5.305426
+          },
+          "referenceChannelMeans": [
+            178.1007,
+            188.8534,
+            183.9576
+          ],
+          "candidateChannelMeans": [
+            181.0699,
+            191.5136,
+            186.6027
+          ],
+          "regions": {
+            "geography": {
+              "count": 1003991,
+              "mean": 1.000627,
+              "p50": 0.859763,
+              "p95": 3.554899,
+              "max": 5.305426
+            },
+            "horizon": {
+              "count": 111528,
+              "mean": 1.936537,
+              "p50": 1.09936,
+              "p95": 4.945891,
+              "max": 5.247837
+            },
+            "structures": {
+              "count": 5607,
+              "mean": 2.05201,
+              "p50": 2.061838,
+              "p95": 2.620947,
+              "max": 3.014858
+            },
+            "bridges": {
+              "count": 1653,
+              "mean": 1.760029,
+              "p50": 1.809852,
+              "p95": 2.171258,
+              "max": 2.506589
+            },
+            "plazas": {
+              "count": 5890,
+              "mean": 1.673581,
+              "p50": 1.729428,
+              "p95": 2.292513,
+              "max": 2.781442
+            },
+            "paths": {
+              "count": 48,
+              "mean": 1.748707,
+              "p50": 1.605688,
+              "p95": 2.383905,
+              "max": 2.488668
+            },
+            "rocks": {
+              "count": 882,
+              "mean": 1.925036,
+              "p50": 1.923931,
+              "p95": 2.297525,
+              "max": 2.438927
+            },
+            "decorations": {
+              "count": 1404,
+              "mean": 1.650729,
+              "p50": 1.689514,
+              "p95": 2.01676,
+              "max": 2.315209
+            },
+            "vegetation": {
+              "count": 35145,
+              "mean": 1.860413,
+              "p50": 1.953122,
+              "p95": 3.285847,
+              "max": 4.246828
+            },
+            "wildlife": {
+              "count": 52,
+              "mean": 1.476381,
+              "p50": 1.56378,
+              "p95": 2.136009,
+              "max": 3.1386
+            },
+            "cover": {
+              "count": 200,
+              "mean": 1.880277,
+              "p50": 1.91918,
+              "p95": 2.377582,
+              "max": 2.387737
+            }
+          },
+          "materialFamilies": {
+            "bamboo-foliage": {
+              "count": 5064,
+              "mean": 2.040119,
+              "p50": 2.079571,
+              "p95": 2.571872,
+              "max": 2.955047
+            },
+            "blossom-foliage": {
+              "count": 8325,
+              "mean": 2.306223,
+              "p50": 2.356258,
+              "p95": 2.819122,
+              "max": 3.277253
+            },
+            "creature-fur": {
+              "count": 55,
+              "mean": 1.474469,
+              "p50": 1.548946,
+              "p95": 2.136009,
+              "max": 3.1386
+            },
+            "distant-rock": {
+              "count": 111407,
+              "mean": 1.936681,
+              "p50": 1.09936,
+              "p95": 4.945891,
+              "max": 5.247837
+            },
+            "ocean-surface": {
+              "count": 972008,
+              "mean": 0.969881,
+              "p50": 0.843513,
+              "p95": 3.642607,
+              "max": 5.305426
+            },
+            "painted-timber": {
+              "count": 7192,
+              "mean": 1.951697,
+              "p50": 1.930813,
+              "p95": 2.589761,
+              "max": 3.014858
+            },
+            "palm-foliage": {
+              "count": 22704,
+              "mean": 1.659143,
+              "p50": 1.441313,
+              "p95": 3.36872,
+              "max": 4.246828
+            },
+            "paving-stone": {
+              "count": 4937,
+              "mean": 1.615598,
+              "p50": 1.674858,
+              "p95": 2.142563,
+              "max": 2.685324
+            },
+            "shore-rock": {
+              "count": 1081,
+              "mean": 1.917076,
+              "p50": 1.923931,
+              "p95": 2.313087,
+              "max": 2.438927
+            },
+            "terrain-ground": {
+              "count": 33627,
+              "mean": 1.931476,
+              "p50": 1.904458,
+              "p95": 2.462451,
+              "max": 3.112202
+            }
+          }
+        }
+      },
+      {
+        "camera": "oblique-south",
+        "appearance": {
+          "deltaE": {
+            "count": 1166400,
+            "mean": 1.650713,
+            "p50": 1.191726,
+            "p95": 4.370238,
+            "max": 10.675825
+          },
+          "referenceChannelMeans": [
+            172.3511,
+            186.109,
+            181.1737
+          ],
+          "candidateChannelMeans": [
+            176.5384,
+            190.0318,
+            185.4843
+          ],
+          "regions": {
+            "geography": {
+              "count": 1001831,
+              "mean": 1.39932,
+              "p50": 1.050061,
+              "p95": 4.178814,
+              "max": 6.407812
+            },
+            "horizon": {
+              "count": 115811,
+              "mean": 3.34588,
+              "p50": 3.355245,
+              "p95": 4.916747,
+              "max": 10.675825
+            },
+            "structures": {
+              "count": 6026,
+              "mean": 2.968188,
+              "p50": 2.88785,
+              "p95": 3.875478,
+              "max": 5.020662
+            },
+            "bridges": {
+              "count": 768,
+              "mean": 2.522175,
+              "p50": 2.334737,
+              "p95": 3.190464,
+              "max": 3.608719
+            },
+            "plazas": {
+              "count": 9149,
+              "mean": 2.123851,
+              "p50": 2.297688,
+              "p95": 2.755221,
+              "max": 3.139397
+            },
+            "paths": {
+              "count": 50,
+              "mean": 1.862955,
+              "p50": 1.582011,
+              "p95": 3.00684,
+              "max": 3.044173
+            },
+            "rocks": {
+              "count": 829,
+              "mean": 2.306161,
+              "p50": 2.298774,
+              "p95": 2.735796,
+              "max": 2.812782
+            },
+            "decorations": {
+              "count": 1461,
+              "mean": 2.357497,
+              "p50": 2.378691,
+              "p95": 2.785055,
+              "max": 3.307956
+            },
+            "vegetation": {
+              "count": 28852,
+              "mean": 2.96766,
+              "p50": 2.955398,
+              "p95": 4.507764,
+              "max": 5.104827
+            },
+            "wildlife": {
+              "count": 66,
+              "mean": 1.934606,
+              "p50": 1.920644,
+              "p95": 2.651051,
+              "max": 3.103754
+            },
+            "cover": {
+              "count": 117,
+              "mean": 2.696964,
+              "p50": 2.725966,
+              "p95": 2.804078,
+              "max": 2.89832
+            }
+          },
+          "materialFamilies": {
+            "bamboo-foliage": {
+              "count": 4128,
+              "mean": 2.6114,
+              "p50": 2.732083,
+              "p95": 3.244212,
+              "max": 3.803261
+            },
+            "blossom-foliage": {
+              "count": 7004,
+              "mean": 3.12418,
+              "p50": 3.201157,
+              "p95": 3.664531,
+              "max": 4.078769
+            },
+            "creature-fur": {
+              "count": 70,
+              "mean": 1.969729,
+              "p50": 1.929055,
+              "p95": 2.718272,
+              "max": 3.103754
+            },
+            "distant-rock": {
+              "count": 115701,
+              "mean": 3.346086,
+              "p50": 3.355245,
+              "p95": 4.917695,
+              "max": 10.675825
+            },
+            "ocean-surface": {
+              "count": 969927,
+              "mean": 1.375178,
+              "p50": 0.998708,
+              "p95": 4.239038,
+              "max": 6.407812
+            },
+            "painted-timber": {
+              "count": 6816,
+              "mean": 2.812934,
+              "p50": 2.759732,
+              "p95": 3.840451,
+              "max": 5.020662
+            },
+            "palm-foliage": {
+              "count": 18547,
+              "mean": 2.987774,
+              "p50": 2.915475,
+              "p95": 4.58469,
+              "max": 5.104827
+            },
+            "paving-stone": {
+              "count": 7972,
+              "mean": 2.176227,
+              "p50": 2.327105,
+              "p95": 2.789129,
+              "max": 3.139397
+            },
+            "shore-rock": {
+              "count": 942,
+              "mean": 2.354028,
+              "p50": 2.319585,
+              "p95": 2.781885,
+              "max": 2.89832
+            },
+            "terrain-ground": {
+              "count": 33853,
+              "mean": 2.133355,
+              "p50": 2.008993,
+              "p95": 2.895439,
+              "max": 3.773954
+            }
+          }
+        }
+      },
+      {
+        "camera": "oblique-west",
+        "appearance": {
+          "deltaE": {
+            "count": 1166400,
+            "mean": 1.187429,
+            "p50": 0.765289,
+            "p95": 4.682503,
+            "max": 5.752317
+          },
+          "referenceChannelMeans": [
+            175.3099,
+            188.0469,
+            183.8404
+          ],
+          "candidateChannelMeans": [
+            178.413,
+            190.9873,
+            186.8539
+          ],
+          "regions": {
+            "geography": {
+              "count": 1007338,
+              "mean": 1.062964,
+              "p50": 0.672298,
+              "p95": 4.601453,
+              "max": 5.752317
+            },
+            "horizon": {
+              "count": 107336,
+              "mean": 2.024486,
+              "p50": 1.205075,
+              "p95": 5.237991,
+              "max": 5.597039
+            },
+            "structures": {
+              "count": 7029,
+              "mean": 2.102149,
+              "p50": 2.029227,
+              "p95": 2.879558,
+              "max": 3.348395
+            },
+            "bridges": {
+              "count": 1307,
+              "mean": 1.714588,
+              "p50": 1.764893,
+              "p95": 2.085911,
+              "max": 2.384145
+            },
+            "plazas": {
+              "count": 8241,
+              "mean": 1.846216,
+              "p50": 1.92567,
+              "p95": 2.373186,
+              "max": 2.873059
+            },
+            "paths": {
+              "count": 31,
+              "mean": 1.676286,
+              "p50": 1.577105,
+              "p95": 2.10345,
+              "max": 2.244949
+            },
+            "rocks": {
+              "count": 963,
+              "mean": 1.95319,
+              "p50": 1.930521,
+              "p95": 2.28752,
+              "max": 2.544989
+            },
+            "decorations": {
+              "count": 1669,
+              "mean": 1.748427,
+              "p50": 1.837821,
+              "p95": 2.090997,
+              "max": 2.38251
+            },
+            "vegetation": {
+              "count": 30742,
+              "mean": 1.845342,
+              "p50": 1.862887,
+              "p95": 3.194807,
+              "max": 4.373488
+            },
+            "wildlife": {
+              "count": 60,
+              "mean": 1.701607,
+              "p50": 1.823602,
+              "p95": 2.185353,
+              "max": 2.248602
+            },
+            "cover": {
+              "count": 244,
+              "mean": 1.999331,
+              "p50": 1.923,
+              "p95": 2.380391,
+              "max": 2.581972
+            }
+          },
+          "materialFamilies": {
+            "bamboo-foliage": {
+              "count": 2790,
+              "mean": 1.852719,
+              "p50": 1.929672,
+              "p95": 2.226517,
+              "max": 2.502631
+            },
+            "blossom-foliage": {
+              "count": 8499,
+              "mean": 2.431282,
+              "p50": 2.454494,
+              "p95": 3.032835,
+              "max": 3.217216
+            },
+            "creature-fur": {
+              "count": 77,
+              "mean": 1.7007,
+              "p50": 1.802432,
+              "p95": 2.103234,
+              "max": 2.248602
+            },
+            "distant-rock": {
+              "count": 107254,
+              "mean": 2.024709,
+              "p50": 1.205075,
+              "p95": 5.237991,
+              "max": 5.597039
+            },
+            "ocean-surface": {
+              "count": 971426,
+              "mean": 1.027813,
+              "p50": 0.662641,
+              "p95": 4.647968,
+              "max": 5.752317
+            },
+            "painted-timber": {
+              "count": 8607,
+              "mean": 2.009982,
+              "p50": 1.964206,
+              "p95": 2.836566,
+              "max": 3.348395
+            },
+            "palm-foliage": {
+              "count": 20092,
+              "mean": 1.593088,
+              "p50": 1.399608,
+              "p95": 3.487313,
+              "max": 4.373488
+            },
+            "paving-stone": {
+              "count": 7066,
+              "mean": 1.798596,
+              "p50": 1.907388,
+              "p95": 2.304093,
+              "max": 2.873059
+            },
+            "shore-rock": {
+              "count": 1205,
+              "mean": 1.962635,
+              "p50": 1.928083,
+              "p95": 2.313,
+              "max": 2.581972
+            },
+            "terrain-ground": {
+              "count": 37944,
+              "mean": 2.016617,
+              "p50": 1.945854,
+              "p95": 2.625944,
+              "max": 3.326883
+            }
+          }
+        }
+      }
+    ],
+    "aggregate": {
+      "cameras": 6,
+      "groupSilhouetteIoU": {
+        "mean": null,
+        "worst": null
+      },
+      "groupContourDistance": {
+        "meanP95": null,
+        "worst": null
+      },
+      "groupDepthWorldUnits": {
+        "meanP95": null,
+        "worst": null
+      },
+      "groupWorldNormalDegrees": {
+        "meanP95": null,
+        "worst": null
+      },
+      "silhouetteIoU": {
+        "mean": null,
+        "worst": null
+      },
+      "contourDistance": {
+        "meanP95": null,
+        "worst": null
+      },
+      "depthWorldUnits": {
+        "meanP95": null,
+        "worst": null
+      },
+      "worldNormalDegrees": {
+        "meanP95": null,
+        "worst": null
+      },
+      "semanticAgreement": {
+        "mean": null,
+        "worst": null
+      },
+      "appearanceDeltaE": {
+        "meanMean": 1.244063,
+        "worst": {
+          "camera": "authoredOverview",
+          "value": 2.184629
+        }
+      },
+      "appearanceByMaterialFamily": {
+        "meanMean": 2.260034,
+        "worst": {
+          "camera": "authoredOverview",
+          "label": "blossom-foliage",
+          "value": 7.201137
+        }
+      },
+      "semanticConfusion": {
+        "worstFraction": null,
+        "worst": null
+      }
+    }
+  }
+}

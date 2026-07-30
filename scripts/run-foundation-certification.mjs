@@ -385,7 +385,16 @@ async function main() {
     },
     deferred: [
       "Native Firefox and Safari GPU scene gates: neither browser is installed on this normative host, so they are a real blocker rather than a passed check.",
-      "Fixed-camera and native-appearance thresholds are not yet calibrated, so those two layers cannot pass and are reported as not evaluated.",
+      // Read from the stack rather than written down. An uncalibrated layer is a
+      // real deferral and has to be listed, but a sentence saying so outlives the
+      // condition it describes: this list still claimed the two rendered layers
+      // were uncalibrated after ADR-0051 froze them.
+      ...Object.entries(stack.layers)
+        .filter(([, layer]) => /no frozen thresholds/.test(layer.reason ?? ""))
+        .map(
+          ([name]) =>
+            `${name} has no calibrated thresholds, so it cannot pass and is reported as not evaluated.`,
+        ),
     ],
   };
 
