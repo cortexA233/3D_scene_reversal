@@ -82,6 +82,22 @@ function groupIndex(group) {
   return index < 0 ? 0 : index + 1;
 }
 
+/**
+ * Material Families come from the Scene Recipe rather than a second hand-written
+ * list, so a family added to the recipe cannot be silently left unmeasured.
+ */
+const MATERIAL_FAMILIES = Object.freeze(
+  [...ISLAND_SCENE_RECIPE.materialFamilies.map((family) => family.id)].sort(),
+);
+const MATERIAL_FAMILY_LABELS = Object.fromEntries(
+  MATERIAL_FAMILIES.map((family, index) => [index + 1, family]),
+);
+
+function materialFamilyIndex(family) {
+  const index = MATERIAL_FAMILIES.indexOf(family);
+  return index < 0 ? 0 : index + 1;
+}
+
 function round(value, digits = 6) {
   if (!Number.isFinite(value)) return String(value);
   const result = Number(value.toFixed(digits));
@@ -292,11 +308,17 @@ function buildReferenceSemanticIndex(scene) {
     return null;
   };
 
+  // Material Families for the reference's own layers. The family table covers
+  // every authored placement; these are the layers it does not describe, taken
+  // from the same populations and Environment Recipe the candidate builds from.
+  const SEA_LEVEL = ISLAND_SCENE_RECIPE.terrain.seaLevel;
+  const set = (object, group, material) => byMesh.set(object, { group, material });
+
   scene.traverse((object) => {
     if (!object.isMesh && !object.isPoints && !object.isLine && !object.isSprite) return;
     const placement = placementRootOf(object);
     if (placement?.wildlife) {
-      byMesh.set(object, "wildlife");
+      set(object, "wildlife", "creature-fur");
       return;
     }
     if (placement?.village) {
@@ -305,32 +327,52 @@ function buildReferenceSemanticIndex(scene) {
       try {
         // familyKey reads a full "index:type:name" evidence segment.
         const family = familyKey(`::${stable(placement.root.name)}`);
-        byMesh.set(object, resolveFamily(family, [size.x, size.y, size.z]).group);
+        const resolved = resolveFamily(family, [size.x, size.y, size.z]);
+        set(object, resolved.group, resolved.material);
       } catch {
-        byMesh.set(object, null);
+        set(object, null, null);
       }
       return;
     }
     // Root-level layers, classified by measured extent exactly as coverage does.
     if (object.isSprite) {
-      byMesh.set(object, "cloud");
+      set(object, "cloud", "ocean-surface");
       return;
     }
     if (object.isInstancedMesh) {
-      byMesh.set(object, "cover");
+      set(object, "cover", "shore-rock");
       return;
     }
     bounds.setFromObject(object);
     if (!Number.isFinite(bounds.min.x)) {
-      byMesh.set(object, null);
+      set(object, null, null);
       return;
     }
     bounds.getSize(size);
-    if (size.x >= 10000 && size.z >= 10000 && size.y > 1) byMesh.set(object, "sky");
-    else if (size.x > 700 && size.z > 700) byMesh.set(object, "geography");
-    else byMesh.set(object, null);
+    if (size.x >= 10000 && size.z >= 10000 && size.y > 1) set(object, "sky", null);
+    else if (size.x > 700 && size.z > 700) {
+      // Both the terrain and the Ocean Appearance Surface are world-spanning
+      // planes in this group. The ocean is the flat one sitting on the Semantic
+      // Sea Level; the terrain carries relief.
+      const flatAtSeaLevel = size.y < 0.5 && Math.abs(bounds.min.y - SEA_LEVEL) < 1;
+      set(object, "geography", flatAtSeaLevel ? "ocean-surface" : "terrain-ground");
+    } else set(object, null, null);
   });
   return byMesh;
+}
+
+/** The candidate records its own family on the placement holder. */
+function materialFamilyOf(object) {
+  let node = object;
+  while (node) {
+    if (typeof node.userData?.materialFamily === "string") return node.userData.materialFamily;
+    const id = node.userData?.semanticId;
+    if (id === "environment/ocean-appearance-surface") return "ocean-surface";
+    if (id === "environment/terrain") return "terrain-ground";
+    if (id === "environment/sky") return null;
+    node = node.parent;
+  }
+  return null;
 }
 
 function decodeSemantic(rgba) {
@@ -339,6 +381,23 @@ function decodeSemantic(rgba) {
     ids[index] = Math.round(rgba[index * 4] / 20);
   }
   return ids;
+}
+
+function labelMasks(ids, labels) {
+  const masks = {};
+  for (const [id, label] of Object.entries(labels)) {
+    const numeric = Number(id);
+    const mask = new Uint8Array(ids.length);
+    let any = false;
+    for (let index = 0; index < ids.length; index += 1) {
+      if (ids[index] === numeric) {
+        mask[index] = 1;
+        any = true;
+      }
+    }
+    if (any) masks[label] = mask;
+  }
+  return masks;
 }
 
 function regionMasks(semanticIds) {
@@ -445,6 +504,9 @@ async function main() {
   const semanticMaterials = new Map(
     SEMANTIC_GROUPS.map((group, index) => [index + 1, semanticMaterial(index + 1)]),
   );
+  const materialFamilyMaterials = new Map(
+    MATERIAL_FAMILIES.map((family, index) => [index + 1, semanticMaterial(index + 1)]),
+  );
   const unclassifiedMaterial = semanticMaterial(0);
 
   const cameraEntries = [
@@ -495,12 +557,16 @@ async function main() {
     DEPTH_MATERIAL.uniforms.near.value = camera.near;
     DEPTH_MATERIAL.uniforms.far.value = camera.far;
 
-    const capture = (renderer, target, scene, semanticChooser, isSky) => ({
+    const capture = (renderer, target, scene, semanticChooser, isSky, materialChooser) => ({
       silhouette: withPassMaterials(scene, () => SILHOUETTE_MATERIAL, () =>
         readTarget(renderer, target, scene, camera, width, height),
         isSky,
       ),
       semantic: withPassMaterials(scene, semanticChooser, () =>
+        readTarget(renderer, target, scene, camera, width, height),
+        isSky,
+      ),
+      materialFamily: withPassMaterials(scene, materialChooser, () =>
         readTarget(renderer, target, scene, camera, width, height),
         isSky,
       ),
@@ -520,11 +586,18 @@ async function main() {
       island.scene,
       (object) => {
         const placement = referenceSemantic.get(object);
-        return semanticMaterials.get(groupIndex(placement)) ?? unclassifiedMaterial;
+        return semanticMaterials.get(groupIndex(placement?.group)) ?? unclassifiedMaterial;
       },
       (object) => {
-        const group = referenceSemantic.get(object);
+        const group = referenceSemantic.get(object)?.group;
         return group === "sky" || group === "cloud";
+      },
+      (object) => {
+        const placement = referenceSemantic.get(object);
+        return (
+          materialFamilyMaterials.get(materialFamilyIndex(placement?.material)) ??
+          unclassifiedMaterial
+        );
       },
     );
     const candidatePasses = capture(
@@ -547,6 +620,9 @@ async function main() {
         }
         return false;
       },
+      (object) =>
+        materialFamilyMaterials.get(materialFamilyIndex(materialFamilyOf(object))) ??
+        unclassifiedMaterial,
     );
 
     // Native lit RGB: the reference through its own renderer and composer, so
@@ -627,6 +703,13 @@ async function main() {
         width,
         height,
         regionMasks(referenceIds),
+        // Family masks come from the reference, like the group masks: the
+        // question is how the candidate renders where the authored scene put a
+        // given material, not where the candidate thinks it put one.
+        labelMasks(
+          decodeSemantic(referencePasses.materialFamily),
+          MATERIAL_FAMILY_LABELS,
+        ),
       ),
     });
 

@@ -42,14 +42,92 @@ function encodeDepth(rgba, x0, y0, x1, y1, normalized) {
   ]);
 }
 
-test("the pass set is the five declared encodings", () => {
+test("the pass set is the six declared encodings", () => {
   assert.deepEqual(SCENE_PASSES, [
     "semantic",
+    "materialFamily",
     "silhouette",
     "linearDepth",
     "worldNormal",
     "litRgb",
   ]);
+});
+
+test("appearance reports material families as a partition independent of groups", () => {
+  const reference = fillRect(blank(), 0, 0, WIDTH, HEIGHT, [200, 200, 200]);
+  const candidate = fillRect(blank(), 0, 0, WIDTH, HEIGHT, [200, 200, 200]);
+  // One wrong material spanning half of a group that is otherwise right.
+  fillRect(candidate, 0, 0, WIDTH / 2, HEIGHT, [40, 200, 200]);
+
+  const wholeGroup = new Uint8Array(WIDTH * HEIGHT).fill(1);
+  const wrongFamily = new Uint8Array(WIDTH * HEIGHT);
+  const rightFamily = new Uint8Array(WIDTH * HEIGHT);
+  for (let y = 0; y < HEIGHT; y += 1) {
+    for (let x = 0; x < WIDTH; x += 1) {
+      (x < WIDTH / 2 ? wrongFamily : rightFamily)[y * WIDTH + x] = 1;
+    }
+  }
+
+  const evidence = appearanceEvidence(
+    reference,
+    candidate,
+    WIDTH,
+    HEIGHT,
+    { plazas: wholeGroup },
+    { "paving-stone": wrongFamily, "painted-timber": rightFamily },
+  );
+
+  assert.equal(evidence.materialFamilies["painted-timber"].mean, 0);
+  assert.ok(evidence.materialFamilies["paving-stone"].mean > 20);
+  // The group average halves the damage; the family isolates it. This is why the
+  // appearance layer gates families as well as groups.
+  assert.ok(
+    evidence.materialFamilies["paving-stone"].mean > evidence.regions.plazas.mean * 1.9,
+  );
+});
+
+test("aggregation keeps the worst material family and the worst confusion", () => {
+  const views = [
+    {
+      camera: "authoredOverview",
+      semantic: {
+        comparedPixels: 1000,
+        agreementFraction: 0.9,
+        confusion: { "plazas->plazas": 500, "vegetation->geography": 90 },
+      },
+      appearance: {
+        deltaE: { mean: 5 },
+        materialFamilies: { "paving-stone": { mean: 3 }, "palm-foliage": { mean: 41 } },
+      },
+      byGroup: {},
+      silhouette: { intersectionOverUnion: 0.9, contourDistance: { p95: 4 } },
+    },
+    {
+      camera: "oblique-north",
+      semantic: {
+        comparedPixels: 1000,
+        agreementFraction: 0.8,
+        confusion: { "vegetation->geography": 120 },
+      },
+      appearance: {
+        deltaE: { mean: 9 },
+        materialFamilies: { "paving-stone": { mean: 7 } },
+      },
+      byGroup: {},
+      silhouette: { intersectionOverUnion: 0.8, contourDistance: { p95: 6 } },
+    },
+  ];
+
+  const aggregate = aggregateCameras(views);
+  assert.deepEqual(aggregate.appearanceByMaterialFamily.worst, {
+    camera: "authoredOverview",
+    label: "palm-foliage",
+    value: 41,
+  });
+  // A same-label transition is agreement, not confusion, and must not win.
+  assert.equal(aggregate.semanticConfusion.worst.transition, "vegetation->geography");
+  assert.equal(aggregate.semanticConfusion.worst.camera, "oblique-north");
+  assert.equal(aggregate.semanticConfusion.worstFraction, 0.12);
 });
 
 test("silhouette evidence is exact for identity and reports a known shift", () => {

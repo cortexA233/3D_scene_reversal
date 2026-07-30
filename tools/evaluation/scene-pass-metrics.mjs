@@ -15,6 +15,10 @@ export const SCENE_PASS_SCHEMA = "scene-pass-evidence-v1";
 
 export const SCENE_PASSES = Object.freeze([
   "semantic",
+  // A second index pass over the same frame, keyed by Material Family rather
+  // than semantic group. The two partitions do not nest: one group can carry
+  // several families, and one family spans several groups.
+  "materialFamily",
   "silhouette",
   "linearDepth",
   "worldNormal",
@@ -285,11 +289,35 @@ function deltaE76(left, right) {
   return Math.hypot(left[0] - right[0], left[1] - right[1], left[2] - right[2]);
 }
 
-export function appearanceEvidence(referenceRgba, candidateRgba, width, height, regions = {}) {
+/**
+ * Appearance evidence, globally and over two independent mask sets.
+ *
+ * `materialFamilies` is separate from `regions` because a semantic group and a
+ * Material Family are different partitions of the same frame: a plaza and a path
+ * are two groups sharing one paving material, while one group can carry several
+ * families. Gating only groups would let a wrong material pass wherever it is
+ * mixed with a right one. Both partitions share this single pass because the
+ * CIELAB conversion is the expensive part and running it twice would double the
+ * cost of every camera.
+ */
+export function appearanceEvidence(
+  referenceRgba,
+  candidateRgba,
+  width,
+  height,
+  regions = {},
+  materialFamilies = {},
+) {
   requireRgba(referenceRgba, width, height, "reference lit RGB");
   requireRgba(candidateRgba, width, height, "candidate lit RGB");
   const global = [];
-  const perRegion = new Map();
+  // Entries and per-label buckets are built once. Re-deriving them inside the
+  // per-pixel loop allocates an array for every mask for every pixel, which at
+  // scene scale costs more than the CIELAB conversion the loop exists for.
+  const bucketsFor = (masks) =>
+    Object.entries(masks).map(([name, mask]) => ({ name, mask, values: [] }));
+  const regionBuckets = bucketsFor(regions);
+  const familyBuckets = bucketsFor(materialFamilies);
 
   for (let index = 0; index < width * height; index += 1) {
     const offset = index * 4;
@@ -297,11 +325,11 @@ export function appearanceEvidence(referenceRgba, candidateRgba, width, height, 
     const right = rgbToLab(candidateRgba[offset], candidateRgba[offset + 1], candidateRgba[offset + 2]);
     const delta = deltaE76(left, right);
     global.push(delta);
-    for (const [name, mask] of Object.entries(regions)) {
-      if (!mask[index]) continue;
-      const values = perRegion.get(name) ?? [];
-      values.push(delta);
-      perRegion.set(name, values);
+    for (let bucket = 0; bucket < regionBuckets.length; bucket += 1) {
+      if (regionBuckets[bucket].mask[index]) regionBuckets[bucket].values.push(delta);
+    }
+    for (let bucket = 0; bucket < familyBuckets.length; bucket += 1) {
+      if (familyBuckets[bucket].mask[index]) familyBuckets[bucket].values.push(delta);
     }
   }
 
@@ -320,10 +348,19 @@ export function appearanceEvidence(referenceRgba, candidateRgba, width, height, 
     deltaE: summarize(global),
     referenceChannelMeans: meanChannel(referenceRgba),
     candidateChannelMeans: meanChannel(candidateRgba),
-    regions: Object.fromEntries(
-      [...perRegion.entries()].map(([name, values]) => [name, summarize(values)]),
-    ),
+    // A label with no pixels in this frame is omitted rather than reported as
+    // null, so "measured here" stays distinguishable from "present but empty".
+    regions: summarizeBuckets(regionBuckets),
+    materialFamilies: summarizeBuckets(familyBuckets),
   };
+}
+
+function summarizeBuckets(buckets) {
+  return Object.fromEntries(
+    buckets
+      .filter((bucket) => bucket.values.length > 0)
+      .map((bucket) => [bucket.name, summarize(bucket.values)]),
+  );
 }
 
 /**
@@ -445,6 +482,41 @@ export function aggregateCameras(views) {
     return rows.sort((a, b) => (ascending ? a.value - b.value : b.value - a.value))[0];
   };
 
+  // Per-Material-Family appearance across every camera. `sky` is excluded for the
+  // same reason it is excluded from the group rows: it is a backdrop that fills
+  // every frame for both subjects.
+  const familyRows = [];
+  for (const view of views) {
+    for (const [label, row] of Object.entries(view.appearance?.materialFamilies ?? {})) {
+      familyRows.push({ camera: view.camera, label, ...row });
+    }
+  }
+  const worstFamilyRow = familyRows
+    .filter((row) => Number.isFinite(row.mean))
+    .sort((a, b) => b.mean - a.mean)[0];
+  const worstFamily = worstFamilyRow
+    ? { camera: worstFamilyRow.camera, label: worstFamilyRow.label, value: worstFamilyRow.mean }
+    : null;
+
+  // The largest single mislabelling across every camera, as a fraction of the
+  // pixels compared in that camera.
+  const confusionRows = [];
+  for (const view of views) {
+    const compared = view.semantic?.comparedPixels;
+    if (!Number.isFinite(compared) || compared === 0) continue;
+    for (const [transition, pixels] of Object.entries(view.semantic.confusion ?? {})) {
+      const [from, to] = transition.split("->");
+      if (from === to) continue;
+      confusionRows.push({
+        camera: view.camera,
+        transition,
+        pixels,
+        fraction: Number((pixels / compared).toFixed(6)),
+      });
+    }
+  }
+  const worstConfusion = confusionRows.sort((a, b) => b.fraction - a.fraction)[0] ?? null;
+
   return {
     cameras: views.length,
     groupSilhouetteIoU: {
@@ -489,6 +561,19 @@ export function aggregateCameras(views) {
     appearanceDeltaE: {
       meanMean: summarize(values((view) => view.appearance.deltaE?.mean))?.mean ?? null,
       worst: worst((view) => view.appearance.deltaE?.mean),
+    },
+    // A Material Family mixed into a group that scores well is invisible to
+    // per-group appearance, so the worst family is kept as its own result.
+    appearanceByMaterialFamily: {
+      meanMean: summarize(familyRows.map((row) => row.mean).filter(Number.isFinite))?.mean ?? null,
+      worst: worstFamily,
+    },
+    // Agreement counts pixels that match. Confusion names the single largest way
+    // they disagree, so one group consistently rendered as another cannot hide
+    // inside a high agreement fraction.
+    semanticConfusion: {
+      worstFraction: worstConfusion ? worstConfusion.fraction : null,
+      worst: worstConfusion,
     },
   };
 }

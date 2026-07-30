@@ -25,7 +25,7 @@
       "thirdPartyInputs": 0,
       "triangles": 678482,
       "drawCalls": 1699,
-      "generationMs": 1296.6,
+      "generationMs": 3114.3,
       "auditPassed": true
     },
     "candidateCommandExitStatus": 1
@@ -358,7 +358,7 @@
         }
       },
       "worldNormalDegrees": {
-        "meanP95": 71.21844,
+        "meanP95": 71.218171,
         "worst": {
           "camera": "authoredOverview",
           "value": 82.775976
@@ -372,10 +372,27 @@
         }
       },
       "appearanceDeltaE": {
-        "meanMean": 26.174695,
+        "meanMean": 26.174708,
         "worst": {
           "camera": "authoredOverview",
-          "value": 36.773461
+          "value": 36.773484
+        }
+      },
+      "appearanceByMaterialFamily": {
+        "meanMean": 27.325361,
+        "worst": {
+          "camera": "authoredOverview",
+          "label": "palm-foliage",
+          "value": 61.611074
+        }
+      },
+      "semanticConfusion": {
+        "worstFraction": 0.041653,
+        "worst": {
+          "camera": "oblique-north",
+          "transition": "geography->horizon",
+          "pixels": 48584,
+          "fraction": 0.041653
         }
       }
     },
@@ -383,7 +400,7 @@
       "horizon": 16.244003,
       "geography": 28.220885,
       "vegetation": 51.419942,
-      "structures": 39.617684,
+      "structures": 39.619892,
       "plazas": 27.634123,
       "wildlife": 33.049613,
       "paths": 24.956515,
@@ -396,8 +413,8 @@
   "nextMilestoneResiduals": [
     {
       "area": "native appearance",
-      "detail": "mean DeltaE 26.174695, worst camera authoredOverview at 36.773461",
-      "magnitude": 26.174695
+      "detail": "mean DeltaE 26.174708, worst camera authoredOverview at 36.773484",
+      "magnitude": 26.174708
     },
     {
       "area": "terrain elevation",
