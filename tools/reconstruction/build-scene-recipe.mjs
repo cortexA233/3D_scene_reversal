@@ -243,10 +243,21 @@ const ENVIRONMENT = {
     outputColorSpace: "SRGBColorSpace",
     shadowType: "PCFSoftShadowMap",
   },
+  // The authored chain is a bloom pass, then one grade-and-vignette shader, then
+  // an output pass. `warmMix` and `gamma` alone do not describe the grade: the
+  // shader mixes towards `colour * tint + lift`, and the vignette falls off as
+  // `amount * dot(offset, offset) * falloff` from the frame centre. Those three
+  // constants are recorded here so the Environment Recipe describes the grade
+  // completely and the generator has nothing left to guess.
   postprocessing: {
     bloom: { strength: 0.26, radius: 0.7, threshold: 0.9 },
-    grading: { warmMix: 0.6, gamma: 0.96 },
-    vignette: { amount: 0.34 },
+    grading: {
+      warmMix: 0.6,
+      gamma: 0.96,
+      tint: [1.04, 1.015, 0.97],
+      lift: [0.012, 0.008, 0],
+    },
+    vignette: { amount: 0.34, falloff: 2 },
     filmGrain: { amount: 0 },
   },
   camera: {

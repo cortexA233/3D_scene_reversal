@@ -85,10 +85,21 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       },
       "grading": {
         "warmMix": 0.6,
-        "gamma": 0.96
+        "gamma": 0.96,
+        "tint": [
+          1.04,
+          1.015,
+          0.97
+        ],
+        "lift": [
+          0.012,
+          0.008,
+          0
+        ]
       },
       "vignette": {
-        "amount": 0.34
+        "amount": 0.34,
+        "falloff": 2
       },
       "filmGrain": {
         "amount": 0

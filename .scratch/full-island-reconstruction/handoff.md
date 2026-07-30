@@ -15,8 +15,61 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Foundation 01-12 | done, certified |
 | Camera-set v2 migration (ADR-0049, ADR-0050) | done |
 | Reconstruction 01 — calibrate the two rendered gate layers (ADR-0051) | done |
+| Reconstruction 02 — atmosphere | in progress, see below |
 | Reconstruction 08 — vegetation canopies | done |
-| Reconstruction 02-07, 09-16 | ready-for-agent |
+| Reconstruction 03-07, 09-16 | ready-for-agent |
+
+## Ticket 02, in progress
+
+**Done and committed.** The Production Runtime had no post-processing at all while
+the authored scene renders through a composer, so every appearance measurement was
+dominated by the absence of bloom, grade, and vignette.
+`gt_designer/src/reconstruction/scene/environment-postprocessing.js` reproduces the
+authored chain — render, bloom, one grade-and-vignette shader, output — from the
+Environment Recipe's parameters, and is used by both the production page and the
+candidate's evaluation path. Global appearance DeltaE fell from 26.17 to 22.17 with
+every geometry metric bit-identical. The recipe gained `grading.tint`,
+`grading.lift`, and `vignette.falloff`: `warmMix` and `gamma` alone do not describe
+the grade, and without them the generator had to invent the colours it mixes
+towards. The whole chain is 13 numbers, nothing is loaded, and certification still
+reports 0 external requests.
+
+**Also done: the atmosphere is now measurable.** It was not. Appearance region masks
+came from the auxiliary semantic pass, which hides the sky shell so a backdrop
+filling every frame cannot make geometry evidence report perfect agreement — so
+`sky` had no mask at all and the atmosphere sat inside the global mean attributable
+to nothing. The ticket that exists to fix the atmosphere had no measurement of it.
+Regions now come from a second semantic index over the same frame that keeps the sky
+shell; the geometry passes still exclude it.
+
+**Uncommitted, deliberately.** `test/atmosphere-reconstruction.test.mjs`, 5
+assertions, 3 green and 2 red. The repository forbids committing a known-failing
+check, so it stays in the working tree exactly as ticket 01's red check did. Its two
+red assertions are the appearance thresholds, which no ticket before 11 can satisfy.
+
+**What the measurement says now**, per region, worst and best camera:
+
+| region | DeltaE | belongs to |
+| --- | --- | --- |
+| sky | 3.39 on `oblique-north`, 26.54 on `authoredOverview` | 02 |
+| horizon | 6.98 to 12.55 | 05 |
+| geography | 16.98 to 26.33, about a million pixels per camera | 03, 04 |
+| plazas | 26.40 to 34.20 | 06 |
+| structures | 31.19 to 40.19 | 07, 11 |
+| vegetation | 38.31 to 52.23 | 11 |
+
+So the atmosphere is close on the four obliques and the remaining global residual is
+mostly ground, vegetation, and architecture rather than sky. Two things are left in
+ticket 02 itself:
+
+1. `authoredOverview` sky at 26.54 against `oblique-north`'s 3.39. That camera looks
+   out towards the horizon, so its sky pixels are the band where fog and sky meet.
+   Check whether the reference's sky material sets `fog: false` and the generated one
+   does not, or the reverse.
+2. Cloud pixels are unattributed, because a cloud sprite cannot take a mesh pass
+   material. They stay inside the global mean. Attributing them needs a sprite-aware
+   index pass, worth having before ticket 13 claims the dynamic environment is
+   stable.
 
 ## Environment
 

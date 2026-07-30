@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 
 import { ISLAND_SCENE_RECIPE } from "/src/reconstruction/scene/island-scene-recipe.generated.js";
+import { createEnvironmentComposer } from "/src/reconstruction/scene/environment-postprocessing.js";
 import { generateScene } from "/src/reconstruction/scene/scene-generator.js";
 import {
   DEPTH_MATERIAL,
@@ -183,6 +184,18 @@ async function main() {
   candidateRenderer.shadowMap.enabled = true;
   candidateRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+  // The candidate's own post-processing chain, generated from its own Environment
+  // Recipe. Both subjects now reach their native lit capture through a composer,
+  // so the appearance comparison is between two graded frames rather than between
+  // a graded frame and a raw one.
+  const candidatePost = createEnvironmentComposer({
+    renderer: candidateRenderer,
+    scene: candidateScene,
+    camera: null,
+    environment,
+    size: [width, height],
+  });
+
   // One render target per renderer context. Both write raw values into a
   // NoColorSpace target with tone mapping disabled, so the two encodings match.
   const referenceTarget = createTarget(width, height);
@@ -234,14 +247,42 @@ async function main() {
       ),
     });
 
+    const chooseReferenceSemantic = (object) => {
+      const placement = referenceSemantic.get(object);
+      return semanticMaterials.get(groupIndex(placement?.group)) ?? unclassifiedMaterial;
+    };
+
+    // A second semantic index over the same frame that keeps the sky shell, used
+    // only for appearance region masks.
+    //
+    // The auxiliary geometry passes hide the backdrops, because a shell that fills
+    // every frame for both subjects would make silhouette, depth, and normal
+    // evidence report perfect agreement regardless of the island. But the sky is
+    // present in the native lit capture, and taking the appearance regions from
+    // the backdrop-free pass left `sky` with no mask at all: the atmosphere was
+    // inside the global mean and attributable to nothing, so the ticket that exists
+    // to fix the atmosphere had no measurement of it. Sprites stay hidden here
+    // because a cloud sprite cannot take a mesh pass material, so cloud pixels
+    // remain unattributed and are reported as such.
+    const referenceSkyAwareSemantic = withPassMaterials(
+      island.scene,
+      chooseReferenceSemantic,
+      () => readTarget(
+        referenceRenderObjects.renderer,
+        referenceTarget,
+        island.scene,
+        camera,
+        width,
+        height,
+      ),
+      () => false,
+    );
+
     const referencePasses = capture(
       referenceRenderObjects.renderer,
       referenceTarget,
       island.scene,
-      (object) => {
-        const placement = referenceSemantic.get(object);
-        return semanticMaterials.get(groupIndex(placement?.group)) ?? unclassifiedMaterial;
-      },
+      chooseReferenceSemantic,
       (object) => {
         const group = referenceSemantic.get(object)?.group;
         return group === "sky" || group === "cloud";
@@ -298,8 +339,10 @@ async function main() {
       height,
     );
 
-    // The candidate renders through its own Environment Recipe.
-    candidateRenderer.render(candidateScene, camera);
+    // The candidate renders through its own Environment Recipe, including its own
+    // generated post-processing chain.
+    candidatePost.setCamera(camera);
+    candidatePost.render();
     const candidateLit = readCanvas(candidateRenderer.domElement, width, height);
     island.camera.up.copy(referenceUp);
 
@@ -362,7 +405,8 @@ async function main() {
         candidateLit,
         width,
         height,
-        regionMasks(referenceIds),
+        // Regions from the sky-aware index, so the atmosphere is attributable.
+        regionMasks(decodeSemantic(referenceSkyAwareSemantic)),
         // Family masks come from the reference, like the group masks: the
         // question is how the candidate renders where the authored scene put a
         // given material, not where the candidate thinks it put one.
@@ -408,6 +452,10 @@ async function main() {
       candidateRenderer: "generated Environment Recipe",
       auxiliaryPassExclusions: [
         "sky shell and cloud sprites: atmospheric backdrops that fill every frame for both subjects, so leaving them in would report perfect agreement regardless of the island. Both are fully present in the native lit capture.",
+      ],
+      appearanceRegionAttribution: [
+        "sky: attributed, from a second semantic index over the same frame that keeps the sky shell. The geometry passes still exclude it.",
+        "cloud: not attributed. A cloud sprite cannot take a mesh pass material, so its pixels fall outside every region mask while remaining inside the global appearance mean.",
       ],
     },
     views,

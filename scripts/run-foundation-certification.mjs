@@ -53,6 +53,7 @@ const PRODUCTION_FILES = [
   "gt_designer/island-replacement/index.html",
   "gt_designer/island-replacement/island-replacement.js",
   "gt_designer/src/reconstruction/scene/island-scene-recipe.generated.js",
+  "gt_designer/src/reconstruction/scene/environment-postprocessing.js",
   "gt_designer/src/reconstruction/scene/scene-generator.js",
   "gt_designer/src/reconstruction/scene/scene-recipe-contract.js",
   "gt_designer/src/reconstruction/scene/scene-seed.js",

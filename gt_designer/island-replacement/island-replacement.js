@@ -1,6 +1,7 @@
 import * as THREE from "three";
 
 import { ISLAND_SCENE_RECIPE } from "../src/reconstruction/scene/island-scene-recipe.generated.js";
+import { createEnvironmentComposer } from "../src/reconstruction/scene/environment-postprocessing.js";
 import { generateScene } from "../src/reconstruction/scene/scene-generator.js";
 
 /**
@@ -62,13 +63,25 @@ function boot() {
   camera.position.set(...framing.position);
   camera.lookAt(...framing.target);
 
+  // The authored scene renders through a composer, so rendering straight out of
+  // the renderer here would leave every appearance measurement dominated by the
+  // absence of bloom, grade, and vignette rather than by the island.
+  const post = createEnvironmentComposer({
+    renderer,
+    scene,
+    camera,
+    environment,
+    size: [innerWidth, innerHeight],
+  });
+
   addEventListener("resize", () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
+    post.setSize(innerWidth, innerHeight);
   });
 
-  renderer.render(scene, camera);
+  post.render();
 
   const triangles = renderer.info.render.triangles;
   window.islandReplacement = {
