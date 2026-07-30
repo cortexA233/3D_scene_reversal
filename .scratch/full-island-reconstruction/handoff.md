@@ -682,30 +682,40 @@ while the per-group figures above are nowhere near. None of them is gated.
 
 ## Next steps
 
-**Ticket 06, ground surfaces, and inside it `paths` first.** `paths` now owns two
-of the ten fixed-camera gates — worst group silhouette IoU 0.067961 and worst group
-contour distance 223.9112 — which is the position `cover` held before ADR-0053. It
-is 465 reference pixels drawing 1,457 candidate pixels, a 3.13-fold over-draw of
-the smallest group on the board, with a contour p95 of 111 pixels: the path stones
-are in the wrong places, not merely the wrong shape. `plazas` at 1.89 and `bridges`
-at 2.11 are the same shape of error and are next.
+**Ticket 03, terrain, and it is the unblocker.** `paths` now owns two of the ten
+fixed-camera gates — worst group silhouette IoU 0.067961 and worst group contour
+distance 223.9112, the position `cover` held before ADR-0053 — but it cannot be
+fixed in ticket 06. Measured at the entities' own anchors, the terrain misfit
+beneath the group is 4.73 units mean against a mean slab thickness of 0.67:
+**37 of 60 paving slabs float entirely above the candidate terrain, 13 are fully
+buried, and 10 intersect it.** A floating slab shows its top and all four sides
+where the reference shows a sliver, which is the whole 3.13-fold over-draw.
+Re-settling them would move the Scene Placement Anchor, which the spec makes a hard
+contract and which is currently exact for all 672 entities, so the fix is ticket
+03's terrain and nothing else. Ticket 06's `rocks` — pixel ratio 0.99, IoU 0.3371 —
+is the one part of it that is actionable now, because its 8.40-unit thickness is
+comparable to the misfit beneath it.
 
 Read the per-group table above rather than the old ranking. `plazas`' reference
 mask was 84 per cent scatter before ADR-0053, so any note about plazas written
 earlier was measured against the wrong thing.
 
-- Ticket 03 is **in progress**; details in its ticket file. The landform fitter gave
-  every one of its 40 landforms the same 40-unit radius, so matching pursuit spent
-  them part-explaining features that are not 40 units across. `radius` is already a
-  per-landform control, so making the fit multi-scale spent no budget: height p95 fell
-  16.2617 to 8.5320, interior 14.1582 to 8.7434, shore 12.4923 to 7.9996, and
-  classification 0.9035 to 0.9227. All three still fail, all three are closer.
-  Two things learned by measuring: fine scales on the shore band pushed coastline
-  symmetric p95 from 15.75 past its 22.03 threshold, so they are interior-only now;
-  and a peak that no allowed scale can improve must be skipped rather than ending the
-  pursuit, which had left 2 landforms of 40 placed. Next: the shore triple is three
-  numbers for a transition the reference varies by azimuth, and slope is not measured
-  at all.
+- **Ticket 03 is where the work is, and its budget is now measured.**
+  `tools/development/measure-terrain-form-budget.mjs` runs the production landform
+  pursuit at increasing budgets. The frozen 40 forms reach full height p95 8.657;
+  60 reach 7.492, 80 reach 5.937, 120 reach 4.673. Interpolating, the 5.26875 gate
+  needs **about 101 landforms against a frozen budget of 40**. Each row is a greedy
+  upper bound, so this is strong evidence of a budget boundary rather than the proof
+  ADR-0052 had, and no ADR is written on it yet.
+  The **shore** gate is a different result and the more important one: shore p95
+  flattens at 4.976 by 160 forms and 4.121 by 320, against a threshold of 2.85035,
+  so **more landforms will never reach it**. The cause is this ticket's own
+  fine-scale constraint — scales finer than the base radius are refused beyond
+  normalised radius 0.8 to protect the coastline gate, which leaves the shore band
+  with nothing but the three-number shelf. The next move inside the budget is the
+  shelf's *radial* profile, not the per-node azimuthal controls an earlier note
+  proposed: measured over 24 azimuths the shore signed bias runs -4.9 to +6.6 against
+  an absolute p95 of 8.89, so the azimuthal term is the smaller one.
 - Ticket 05 is **landed** and its remaining red is a recorded boundary, not
   unfinished work. Do not re-open it as a fitting problem; the next move is the
   shared form family described above.

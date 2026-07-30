@@ -140,7 +140,7 @@ const LANDFORM_PROBE_GRID = 49;
  * Greedily taking the largest raw residuals instead would double-count
  * overlapping features and drive the interior below sea level.
  */
-function fitLandforms(sampler, base, centre, radii, budget) {
+export function fitLandforms(sampler, base, centre, radii, budget) {
   const reach = Math.max(...radii);
   const probes = [];
   for (let row = 0; row < LANDFORM_PROBE_GRID; row += 1) {
