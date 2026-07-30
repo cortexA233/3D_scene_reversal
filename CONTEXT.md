@@ -92,6 +92,10 @@ _Avoid_: PCA yaw, rotation hint, visual direction
 The fixed, reference-framed cameras used to evaluate full-scene layout and visible parity: one authored overview, one top-down layout view, and four opposing oblique views. The set is never reframed from the Procedural Replacement.
 _Avoid_: Screenshot angles, candidate-fitted cameras, free-fly views
 
+**Normative Observation Host**:
+The OS, browser, and rasterizer-backend combination under which blocking scene evidence is captured; one host owns the authoritative Immutable Reference Observation profile and every other host records its own profile while reproducing all scene-determined evidence exactly.
+_Avoid_: Test machine, CI runner, browser version
+
 **Normative Scene Capture**:
 The `1440x810` CSS-pixel and framebuffer capture at device scale factor 1 under Three.js r170 used for blocking scene-render evidence across the Scene Evaluation Camera Set.
 _Avoid_: Current browser window, Retina screenshot, diagnostic render
@@ -339,3 +343,4 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 - Bamboo Shoot's 64-scalar Axial Layer Family replacement uses a seven-ring tapered core, three bounded sheath families, one hero sheath, and a six-branch crown in two render batches. It passes the unchanged `bamboo-shoot-category-baseline-v1` geometry metrics in Chrome, including mean/worst silhouette IoU `0.93124/0.89656` and edge P95 `5.0991` pixels.
 - Bamboo Shoot retains its category-v1 exact-position appearance FAIL as historical evidence. `bamboo-shoot-semantic-category-baseline-v2` instead hard-gates brown-core and green-sheath Semantic Material Role Coverage plus unchanged material and geometry gates; the approved candidate covers `0.96795/0.03205` with reference coverage `0.91683/0.03370`, and delete-sheath, wrong-palette, and flat-single-role controls all reject.
 - The hash-frozen Bamboo Shoot candidate passes its semantic appearance v2, nonvisual ceilings, Reference Independence, determinism, Chrome acceptance, and two stable native hardware-GPU repetitions in Firefox and Safari. This resolves only Bamboo Shoot; the eight-object exit remains blocked on Mushroom, Blue Hat, and Candle.
+- Immutable Reference Observation is recorded per Normative Observation Host. `macos-chrome-150-swiftshader-llvm-10-0-0` owns the authoritative profile and no other host may rewrite it; `windows-edge-150-swiftshader-subzero` reproduces all seven state digests, the Scene Render Contract, and the frozen camera set exactly, is repeatable to 0.0 on every same-host appearance metric, and differs only by 7 of 576 perceptual-hash bits under the separately versioned `cross-host-observation-contract-v1` bound of 16.

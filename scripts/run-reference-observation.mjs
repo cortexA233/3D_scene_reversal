@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -10,6 +10,12 @@ import {
   createReferenceObservationContract,
   validateReferenceObservationContract,
 } from "../tools/reference/reference-observation-contract.mjs";
+import {
+  createCrossHostObservationContract,
+  describeNormativeHost,
+  validateCrossHostObservationContract,
+  verifyCrossHostObservation,
+} from "../tools/reference/normative-hosts.mjs";
 import { verifySceneRenderContractSource } from "../tools/reference/scene-render-contract-source.mjs";
 
 const PROJECT_ROOT = path.resolve(
@@ -24,8 +30,14 @@ const EVIDENCE_PATH = path.join(
   PROJECT_ROOT,
   ".scratch/scene-parity-foundation/evidence/reference-observation-v1.json",
 );
+const HOST_EVIDENCE_DIRECTORY = path.join(
+  PROJECT_ROOT,
+  ".scratch/scene-parity-foundation/evidence/hosts",
+);
 const checkOnly = process.argv.includes("--check");
 const contract = createReferenceObservationContract();
+const crossHostContract = createCrossHostObservationContract();
+const AUTHORITATIVE_HOST_KEY = "macos-chrome-150-swiftshader-llvm-10-0-0";
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
@@ -216,6 +228,7 @@ function stableEvidenceProjection(evidence) {
   delete result.appearanceIntegrity.primaryCapturePngSha256;
   delete result.appearanceIntegrity.primaryCaptureByteLength;
   delete result.repeatability.appearanceDeltas;
+  if (result.crossHost) delete result.crossHost.appearanceDeltas;
   for (const run of result.repeatability.independentRuns) {
     delete run.primaryCapturePngSha256;
     delete run.appearance;
@@ -223,19 +236,75 @@ function stableEvidenceProjection(evidence) {
   return result;
 }
 
-async function writeOrCheckEvidence(evidence) {
+/**
+ * Everything the Assembled Authored Scene itself determines. A second normative
+ * host must reproduce this exactly; only the host's own environment metadata and
+ * its rasterizer-dependent native appearance may differ.
+ */
+function hostInvariantProjection(evidence) {
+  const result = stableEvidenceProjection(evidence);
+  delete result.environment;
+  delete result.host;
+  delete result.crossHost;
+  delete result.contract;
+  delete result.capture.contextAttributes;
+  delete result.appearanceIntegrity.rgbaSha256;
+  return result;
+}
+
+function canonicalDigest(value) {
+  return sha256(JSON.stringify(value));
+}
+
+function hostEvidencePath(hostKey) {
+  return path.join(HOST_EVIDENCE_DIRECTORY, `${hostKey}.json`);
+}
+
+function crossHostSubject(evidence) {
+  return {
+    environment: evidence.environment,
+    stateDigests: summaryDigests(evidence.immutableState.before),
+    renderContractDigest: canonicalDigest(evidence.renderContract),
+    appearance: evidence.repeatability.independentRuns[0].appearance,
+  };
+}
+
+async function registeredHostKeys(authoritativeHostKey) {
+  let entries = [];
+  try {
+    entries = await readdir(HOST_EVIDENCE_DIRECTORY);
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  return [
+    authoritativeHostKey,
+    ...entries
+      .filter((name) => name.endsWith(".json"))
+      .map((name) => name.slice(0, -".json".length)),
+  ];
+}
+
+async function writeOrCheckEvidence(evidence, evidencePath = EVIDENCE_PATH) {
+  // The authoritative profile records one specific normative host. Only that
+  // host may rewrite it; anything else records its own profile instead.
+  assert.equal(
+    evidencePath === EVIDENCE_PATH,
+    describeNormativeHost(evidence.environment).hostKey ===
+      AUTHORITATIVE_HOST_KEY,
+    "only the authoritative normative host may write the authoritative observation profile",
+  );
   if (!checkOnly) {
-    await mkdir(path.dirname(EVIDENCE_PATH), { recursive: true });
-    await writeFile(EVIDENCE_PATH, `${JSON.stringify(evidence, null, 2)}\n`);
+    await mkdir(path.dirname(evidencePath), { recursive: true });
+    await writeFile(evidencePath, `${JSON.stringify(evidence, null, 2)}\n`);
     return;
   }
   let frozen;
   try {
-    frozen = JSON.parse(await readFile(EVIDENCE_PATH, "utf8"));
+    frozen = JSON.parse(await readFile(evidencePath, "utf8"));
   } catch (error) {
     if (error.code === "ENOENT") {
       assert.fail(
-        `${path.relative(PROJECT_ROOT, EVIDENCE_PATH)} is not frozen; run npm run observe:reference`,
+        `${path.relative(PROJECT_ROOT, evidencePath)} is not frozen; run npm run observe:reference`,
       );
     }
     throw error;
@@ -255,12 +324,19 @@ async function writeOrCheckEvidence(evidence) {
   assert.deepEqual(
     stableEvidenceProjection(evidence),
     stableEvidenceProjection(frozen),
-    `${path.relative(PROJECT_ROOT, EVIDENCE_PATH)} stable evidence drifted`,
+    `${path.relative(PROJECT_ROOT, evidencePath)} stable evidence drifted`,
   );
 }
 
 async function main() {
   assert.deepEqual(validateReferenceObservationContract(contract), []);
+  assert.deepEqual(
+    validateCrossHostObservationContract(
+      crossHostContract,
+      contract.repeatability.appearance,
+    ),
+    [],
+  );
   const [referenceSource, localLights] = await Promise.all([
     readFile(path.join(PROJECT_ROOT, contract.reference.sourcePath), "utf8"),
     readFile(
@@ -405,12 +481,78 @@ async function main() {
     },
   };
 
-  await Promise.all([
-    writeOrCheck(CAMERA_SET_PATH, cameraSet),
-    writeOrCheckEvidence(evidence),
-  ]);
+  const authoritative = JSON.parse(await readFile(EVIDENCE_PATH, "utf8"));
+  const authoritativeHost = describeNormativeHost(authoritative.environment);
+  const observedHost = describeNormativeHost(evidence.environment);
+  evidence.host = observedHost;
+  assert.equal(
+    authoritativeHost.hostKey,
+    AUTHORITATIVE_HOST_KEY,
+    "the authoritative observation profile no longer describes its declared normative host",
+  );
+
+  if (observedHost.hostKey === authoritativeHost.hostKey) {
+    await Promise.all([
+      writeOrCheck(CAMERA_SET_PATH, cameraSet),
+      writeOrCheckEvidence(evidence),
+    ]);
+    process.stdout.write(
+      `Reference observation v1: OK on the authoritative host ${observedHost.hostKey} (${runs.length} structurally exact runs, bounded native appearance, ${checkOnly ? "frozen evidence verified" : "evidence frozen"})\n`,
+    );
+    return;
+  }
+
+  // A second normative host observes the same unmodified reference. The
+  // authoritative macOS profile is never rewritten from here; this host records
+  // its own profile and must reproduce every scene-determined fact exactly.
+  const crossHostErrors = verifyCrossHostObservation({
+    authoritative: crossHostSubject(authoritative),
+    observed: crossHostSubject(evidence),
+    crossHost: crossHostContract,
+    registeredHostKeys: checkOnly
+      ? await registeredHostKeys(authoritativeHost.hostKey)
+      : null,
+  });
+  assert.deepEqual(
+    crossHostErrors,
+    [],
+    `cross-host reference observation failed on ${observedHost.hostKey}`,
+  );
+  assert.deepEqual(
+    cameraSet,
+    authoritative.cameraSet,
+    "the frozen Scene Evaluation Camera Set must be identical on every normative host",
+  );
+  assert.deepEqual(
+    hostInvariantProjection(evidence),
+    hostInvariantProjection(authoritative),
+    `${observedHost.hostKey} observed a different Assembled Authored Scene than the authoritative profile`,
+  );
+  assert.deepEqual(
+    authoritative.contract,
+    contract,
+    "the authoritative profile was frozen under a different Reference Observation contract",
+  );
+  await assertFrozenFile(
+    CAMERA_SET_PATH,
+    `${JSON.stringify(authoritative.cameraSet, null, 2)}\n`,
+  );
+
+  evidence.crossHost = {
+    authoritativeProfile: path.relative(PROJECT_ROOT, EVIDENCE_PATH).replace(/\\/g, "/"),
+    authoritativeHost,
+    structuralDigestsExact: true,
+    renderContractExact: true,
+    cameraSetExact: true,
+    appearanceDeltas: compareAppearance(
+      authoritative.repeatability.independentRuns[0].appearance,
+      appearances[0],
+    ),
+    declared: crossHostContract,
+  };
+  await writeOrCheckEvidence(evidence, hostEvidencePath(observedHost.hostKey));
   process.stdout.write(
-    `Reference observation v1: OK (${runs.length} structurally exact runs, bounded native appearance, ${checkOnly ? "frozen evidence verified" : "evidence frozen"})\n`,
+    `Reference observation v1: OK on normative host ${observedHost.hostKey} (${runs.length} structurally exact runs, scene evidence identical to ${authoritativeHost.hostKey}, cross-host appearance within declared bounds, ${checkOnly ? "host profile verified" : "host profile recorded"})\n`,
   );
 }
 

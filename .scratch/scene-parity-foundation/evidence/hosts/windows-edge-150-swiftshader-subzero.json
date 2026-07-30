@@ -1,0 +1,2535 @@
+{
+  "schemaVersion": "reference-observation-evidence-v1",
+  "authority": "Assembled Authored Scene",
+  "contract": {
+    "schemaVersion": "reference-observation-contract-v1",
+    "authority": "Assembled Authored Scene",
+    "reference": {
+      "pagePath": "/authored-reference.html",
+      "sourcePath": "gt_designer/main.js",
+      "sourceSha256": "d950434dd62ad46f63779153f4da467803c1c5549b71b77c34194ddf4bf98b72",
+      "urlOptions": {
+        "cam": "1",
+        "campos": "390,190,410,80,26,-20",
+        "grain": "0"
+      }
+    },
+    "sceneAnchor": [
+      86,
+      26,
+      -24
+    ],
+    "cameras": {
+      "authoredOverview": {
+        "position": [
+          390,
+          190,
+          410
+        ],
+        "target": [
+          80,
+          26,
+          -20
+        ],
+        "verticalFovDegrees": 58,
+        "near": 0.5,
+        "far": 30000
+      }
+    },
+    "capture": {
+      "cssViewport": [
+        1440,
+        810
+      ],
+      "framebuffer": [
+        1440,
+        810
+      ],
+      "deviceScaleFactor": 1,
+      "threeRevision": "170"
+    },
+    "clock": {
+      "kind": "Frozen Observation Clock",
+      "primaryMomentMs": 12000,
+      "dynamicMomentsMs": [
+        16000,
+        24000
+      ],
+      "maximumDynamicMoments": 2
+    },
+    "repeatability": {
+      "independentRuns": 2,
+      "structuralDigests": "exact",
+      "primaryCapturePngSha256": "diagnostic",
+      "appearance": {
+        "maximumMeanChannelDelta": 0.15,
+        "maximumStandardDeviationDelta": 0.2,
+        "maximumHistogramL1Distance": 0.002,
+        "maximumDifferenceHashDistance": 4
+      }
+    },
+    "renderContract": {
+      "schemaVersion": "scene-render-contract-v1",
+      "renderer": {
+        "antialias": true,
+        "powerPreference": "high-performance",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmicToneMapping",
+        "exposure": 1,
+        "outputColorSpace": "SRGBColorSpace"
+      },
+      "shadows": {
+        "enabled": true,
+        "type": "PCFSoftShadowMap",
+        "sunMapSize": [
+          4096,
+          4096
+        ],
+        "sunBias": -0.0004
+      },
+      "globalLights": {
+        "sun": {
+          "elevationDegrees": 23,
+          "azimuthDegrees": 60,
+          "color": 16764550,
+          "intensity": 2.7,
+          "castShadow": true
+        },
+        "hemisphere": {
+          "sky": 13624048,
+          "ground": 13021290,
+          "intensity": 1.12
+        },
+        "ambient": {
+          "color": 16773334,
+          "intensity": 0.34
+        }
+      },
+      "localLights": {
+        "sourcePath": "gt_designer/data/lighting.json",
+        "sourceSchema": "island-lighting-v1",
+        "sourceCount": 33,
+        "runtimeCount": 32,
+        "sourceIntensityScale": 1.5,
+        "intensityMultiplier": 3
+      },
+      "fog": {
+        "kind": "Fog",
+        "color": 15129794,
+        "near": 650,
+        "far": 3500
+      },
+      "sky": {
+        "kind": "gradient",
+        "zenith": 4161224,
+        "horizon": 11325414
+      },
+      "ocean": {
+        "y": 16,
+        "color": 5224376,
+        "sunColor": 16773327,
+        "distortion": 1.6,
+        "alpha": 0.92,
+        "normalMapUrl": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r170/examples/textures/waternormals.jpg"
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 34
+      },
+      "urlOptions": {
+        "cameraControlsDisabled": true,
+        "pavingVariant": 0,
+        "boulders": 0,
+        "rocks": 900,
+        "pebbles": 4200,
+        "shrubs": 0,
+        "lanternMultiplier": 3
+      },
+      "postprocessing": {
+        "passes": [
+          "RenderPass",
+          "UnrealBloomPass",
+          "ShaderPass",
+          "OutputPass"
+        ],
+        "bloom": {
+          "enabled": true,
+          "strength": 0.26,
+          "radius": 0.7,
+          "threshold": 0.9
+        },
+        "grading": {
+          "enabled": true,
+          "warmMix": 0.6,
+          "gamma": 0.96
+        },
+        "vignette": {
+          "enabled": true,
+          "amount": 0.34
+        },
+        "filmGrain": {
+          "enabled": false,
+          "configuredAmount": 0.045,
+          "runtimeAmount": 0
+        }
+      }
+    }
+  },
+  "sourceVerification": {
+    "path": "gt_designer/main.js",
+    "sha256": "d950434dd62ad46f63779153f4da467803c1c5549b71b77c34194ddf4bf98b72",
+    "renderContractErrors": []
+  },
+  "renderContract": {
+    "declared": {
+      "schemaVersion": "scene-render-contract-v1",
+      "renderer": {
+        "antialias": true,
+        "powerPreference": "high-performance",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmicToneMapping",
+        "exposure": 1,
+        "outputColorSpace": "SRGBColorSpace"
+      },
+      "shadows": {
+        "enabled": true,
+        "type": "PCFSoftShadowMap",
+        "sunMapSize": [
+          4096,
+          4096
+        ],
+        "sunBias": -0.0004
+      },
+      "globalLights": {
+        "sun": {
+          "elevationDegrees": 23,
+          "azimuthDegrees": 60,
+          "color": 16764550,
+          "intensity": 2.7,
+          "castShadow": true
+        },
+        "hemisphere": {
+          "sky": 13624048,
+          "ground": 13021290,
+          "intensity": 1.12
+        },
+        "ambient": {
+          "color": 16773334,
+          "intensity": 0.34
+        }
+      },
+      "localLights": {
+        "sourcePath": "gt_designer/data/lighting.json",
+        "sourceSchema": "island-lighting-v1",
+        "sourceCount": 33,
+        "runtimeCount": 32,
+        "sourceIntensityScale": 1.5,
+        "intensityMultiplier": 3
+      },
+      "fog": {
+        "kind": "Fog",
+        "color": 15129794,
+        "near": 650,
+        "far": 3500
+      },
+      "sky": {
+        "kind": "gradient",
+        "zenith": 4161224,
+        "horizon": 11325414
+      },
+      "ocean": {
+        "y": 16,
+        "color": 5224376,
+        "sunColor": 16773327,
+        "distortion": 1.6,
+        "alpha": 0.92,
+        "normalMapUrl": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@r170/examples/textures/waternormals.jpg"
+      },
+      "clouds": {
+        "enabled": true,
+        "count": 34
+      },
+      "urlOptions": {
+        "cameraControlsDisabled": true,
+        "pavingVariant": 0,
+        "boulders": 0,
+        "rocks": 900,
+        "pebbles": 4200,
+        "shrubs": 0,
+        "lanternMultiplier": 3
+      },
+      "postprocessing": {
+        "passes": [
+          "RenderPass",
+          "UnrealBloomPass",
+          "ShaderPass",
+          "OutputPass"
+        ],
+        "bloom": {
+          "enabled": true,
+          "strength": 0.26,
+          "radius": 0.7,
+          "threshold": 0.9
+        },
+        "grading": {
+          "enabled": true,
+          "warmMix": 0.6,
+          "gamma": 0.96
+        },
+        "vignette": {
+          "enabled": true,
+          "amount": 0.34
+        },
+        "filmGrain": {
+          "enabled": false,
+          "configuredAmount": 0.045,
+          "runtimeAmount": 0
+        }
+      }
+    },
+    "runtime": {
+      "capture": {
+        "cssViewport": [
+          1440,
+          810
+        ],
+        "framebuffer": [
+          1440,
+          810
+        ],
+        "deviceScaleFactor": 1,
+        "context": "webgl2",
+        "contextAttributes": {
+          "alpha": true,
+          "antialias": true,
+          "depth": true,
+          "desynchronized": false,
+          "failIfMajorPerformanceCaveat": false,
+          "powerPreference": "high-performance",
+          "premultipliedAlpha": true,
+          "preserveDrawingBuffer": false,
+          "stencil": false
+        },
+        "drawingBufferColorSpace": "srgb",
+        "unpackColorSpace": "srgb",
+        "fog": {
+          "type": "Fog",
+          "color": "e6dcc2",
+          "near": 650,
+          "far": 3500
+        },
+        "camera": {
+          "type": "PerspectiveCamera",
+          "fov": 58,
+          "aspect": 1.777777778,
+          "near": 0.5,
+          "far": 30000,
+          "position": [
+            390,
+            190,
+            410
+          ],
+          "direction": [
+            -0.558675557,
+            -0.295557391,
+            -0.774937062
+          ],
+          "up": [
+            0,
+            1,
+            0
+          ],
+          "viewMatrix": [
+            0.811176379,
+            -0.172842428,
+            0.558675557,
+            0,
+            0,
+            0.955324986,
+            0.295557391,
+            0,
+            -0.584801575,
+            -0.239749174,
+            0.774937062,
+            0,
+            -76.590141807,
+            -15.806038875,
+            -591.763567071,
+            1
+          ],
+          "projectionMatrix": [
+            1.014776862,
+            0,
+            0,
+            0,
+            0,
+            1.804047755,
+            0,
+            0,
+            0,
+            0,
+            -1.000033334,
+            -1,
+            0,
+            0,
+            -1.000016667,
+            0
+          ]
+        }
+      },
+      "threeRenderer": {
+        "toneMapping": "ACESFilmicToneMapping",
+        "exposure": 1,
+        "outputColorSpace": "SRGBColorSpace",
+        "pixelRatio": 1,
+        "shadows": {
+          "enabled": true,
+          "type": "PCFSoftShadowMap"
+        }
+      },
+      "composer": {
+        "passes": [
+          "RenderPass",
+          "UnrealBloomPass",
+          "ShaderPass",
+          "OutputPass"
+        ],
+        "bloom": {
+          "strength": 0.26,
+          "radius": 0.7,
+          "threshold": 0.9
+        },
+        "grading": {
+          "amount": 0,
+          "vignette": 0.34
+        }
+      },
+      "environment": {
+        "globalLights": {
+          "sun": {
+            "color": 16764550,
+            "intensity": 2.7,
+            "castShadow": true,
+            "shadowMapSize": [
+              4096,
+              4096
+            ],
+            "shadowBias": -0.0004
+          },
+          "hemisphere": {
+            "sky": 13624048,
+            "ground": 13021290,
+            "intensity": 1.12
+          },
+          "ambient": {
+            "color": 16773334,
+            "intensity": 0.34
+          }
+        },
+        "localLightCount": 32,
+        "sky": {
+          "kind": "gradient",
+          "zenith": 4161224,
+          "horizon": 11325414
+        },
+        "ocean": {
+          "y": 16,
+          "color": 5224376,
+          "sunColor": 16773327,
+          "distortion": 1.6,
+          "alpha": 0.92
+        },
+        "cloudCount": 34
+      },
+      "urlOptions": {
+        "cam": "1",
+        "campos": "390,190,410,80,26,-20",
+        "grain": "0"
+      },
+      "verificationErrors": []
+    }
+  },
+  "cameraSet": {
+    "schemaVersion": "reference-camera-set-v1",
+    "framingBasis": "reference-only assembled authored scene evidence",
+    "sceneAnchor": [
+      86,
+      26,
+      -24
+    ],
+    "authoredOverview": {
+      "position": [
+        390,
+        190,
+        410
+      ],
+      "target": [
+        80,
+        26,
+        -20
+      ],
+      "verticalFovDegrees": 58,
+      "near": 0.5,
+      "far": 30000,
+      "aspect": 1.777777778,
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "viewMatrix": [
+        0.811176379,
+        -0.172842428,
+        0.558675557,
+        0,
+        0,
+        0.955324986,
+        0.295557391,
+        0,
+        -0.584801575,
+        -0.239749174,
+        0.774937062,
+        0,
+        -76.590141807,
+        -15.806038875,
+        -591.763567071,
+        1
+      ],
+      "projectionMatrix": [
+        1.014776862,
+        0,
+        0,
+        0,
+        0,
+        1.804047755,
+        0,
+        0,
+        0,
+        0,
+        -1.000033334,
+        -1,
+        0,
+        0,
+        -1.000016667,
+        0
+      ]
+    },
+    "derivationEvidence": {
+      "authority": "Assembled Authored Scene",
+      "authoredBounds": {
+        "min": [
+          -1392.526367188,
+          -34.308685303,
+          -1881.412353516
+        ],
+        "max": [
+          1590.151611328,
+          252.770812988,
+          1483.943725586
+        ]
+      },
+      "candidateConsulted": false
+    },
+    "topDown": {
+      "position": [
+        86,
+        4106.260488008,
+        -24
+      ],
+      "target": [
+        86,
+        26,
+        -24
+      ],
+      "up": [
+        0,
+        0,
+        -1
+      ],
+      "verticalFovDegrees": 58,
+      "aspect": 1.777777778,
+      "near": 0.5,
+      "far": 30000,
+      "viewMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        -86,
+        -24,
+        -4106.260488008,
+        1
+      ],
+      "projectionMatrix": [
+        1.014776862,
+        0,
+        0,
+        0,
+        0,
+        1.804047755,
+        0,
+        0,
+        0,
+        0,
+        -1.000033334,
+        -1,
+        0,
+        0,
+        -1.000016667,
+        0
+      ]
+    },
+    "obliques": {
+      "north": {
+        "position": [
+          98.81262207,
+          3127.117613043,
+          -5066.293264289
+        ],
+        "target": [
+          98.81262207,
+          109.231063842,
+          -198.734313965
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "verticalFovDegrees": 58,
+        "aspect": 1.777777778,
+        "near": 0.5,
+        "far": 30000,
+        "viewMatrix": [
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0.849902692,
+          0.526939669,
+          0,
+          0,
+          0.526939669,
+          -0.849902692,
+          0,
+          98.81262207,
+          11.885218414,
+          -5953.658601832,
+          1
+        ],
+        "projectionMatrix": [
+          1.014776862,
+          0,
+          0,
+          0,
+          0,
+          1.804047755,
+          0,
+          0,
+          0,
+          0,
+          -1.000033334,
+          -1,
+          0,
+          0,
+          -1.000016667,
+          0
+        ]
+      },
+      "east": {
+        "position": [
+          4966.371572394,
+          3127.117613043,
+          -198.734313965
+        ],
+        "target": [
+          98.81262207,
+          109.231063842,
+          -198.734313965
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "verticalFovDegrees": 58,
+        "aspect": 1.777777778,
+        "near": 0.5,
+        "far": 30000,
+        "viewMatrix": [
+          0,
+          -0.526939669,
+          0.849902692,
+          0,
+          0,
+          0.849902692,
+          0.526939669,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          -198.734313965,
+          -40.767484825,
+          -5868.73488693,
+          1
+        ],
+        "projectionMatrix": [
+          1.014776862,
+          0,
+          0,
+          0,
+          0,
+          1.804047755,
+          0,
+          0,
+          0,
+          0,
+          -1.000033334,
+          -1,
+          0,
+          0,
+          -1.000016667,
+          0
+        ]
+      },
+      "south": {
+        "position": [
+          98.81262207,
+          3127.117613043,
+          4668.824636359
+        ],
+        "target": [
+          98.81262207,
+          109.231063842,
+          -198.734313965
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "verticalFovDegrees": 58,
+        "aspect": 1.777777778,
+        "near": 0.5,
+        "far": 30000,
+        "viewMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.849902692,
+          0.526939669,
+          0,
+          0,
+          -0.526939669,
+          0.849902692,
+          0,
+          -98.81262207,
+          -197.55676877,
+          -5615.848945083,
+          1
+        ],
+        "projectionMatrix": [
+          1.014776862,
+          0,
+          0,
+          0,
+          0,
+          1.804047755,
+          0,
+          0,
+          0,
+          0,
+          -1.000033334,
+          -1,
+          0,
+          0,
+          -1.000016667,
+          0
+        ]
+      },
+      "west": {
+        "position": [
+          -4768.746328254,
+          3127.117613043,
+          -198.734313965
+        ],
+        "target": [
+          98.81262207,
+          109.231063842,
+          -198.734313965
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "verticalFovDegrees": 58,
+        "aspect": 1.777777778,
+        "near": 0.5,
+        "far": 30000,
+        "viewMatrix": [
+          0,
+          0.526939669,
+          -0.849902692,
+          0,
+          0,
+          0.849902692,
+          0.526939669,
+          0,
+          1,
+          0,
+          0,
+          0,
+          198.734313965,
+          -144.904065531,
+          -5700.772659985,
+          1
+        ],
+        "projectionMatrix": [
+          1.014776862,
+          0,
+          0,
+          0,
+          0,
+          1.804047755,
+          0,
+          0,
+          0,
+          0,
+          -1.000033334,
+          -1,
+          0,
+          0,
+          -1.000016667,
+          0
+        ]
+      }
+    }
+  },
+  "environment": {
+    "browser": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0",
+      "userAgentData": {
+        "brands": [
+          {
+            "brand": "Not;A=Brand",
+            "version": "8"
+          },
+          {
+            "brand": "Chromium",
+            "version": "150"
+          },
+          {
+            "brand": "Microsoft Edge",
+            "version": "150"
+          }
+        ],
+        "mobile": false,
+        "platform": "Windows"
+      }
+    },
+    "os": {
+      "platform": "Win32",
+      "userAgentPlatform": "Windows"
+    },
+    "gpu": {
+      "vendor": "Google Inc. (Google)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+      "acceleration": "software"
+    },
+    "color": {
+      "colorGamut": "srgb",
+      "dynamicRangeHigh": false,
+      "drawingBufferColorSpace": "srgb"
+    },
+    "threeRevision": "170"
+  },
+  "capture": {
+    "cssViewport": [
+      1440,
+      810
+    ],
+    "framebuffer": [
+      1440,
+      810
+    ],
+    "deviceScaleFactor": 1,
+    "context": "webgl2",
+    "contextAttributes": {
+      "alpha": true,
+      "antialias": true,
+      "depth": true,
+      "desynchronized": false,
+      "failIfMajorPerformanceCaveat": false,
+      "powerPreference": "high-performance",
+      "premultipliedAlpha": true,
+      "preserveDrawingBuffer": false,
+      "stencil": false
+    },
+    "drawingBufferColorSpace": "srgb",
+    "unpackColorSpace": "srgb",
+    "fog": {
+      "type": "Fog",
+      "color": "e6dcc2",
+      "near": 650,
+      "far": 3500
+    },
+    "camera": {
+      "type": "PerspectiveCamera",
+      "fov": 58,
+      "aspect": 1.777777778,
+      "near": 0.5,
+      "far": 30000,
+      "position": [
+        390,
+        190,
+        410
+      ],
+      "direction": [
+        -0.558675557,
+        -0.295557391,
+        -0.774937062
+      ],
+      "up": [
+        0,
+        1,
+        0
+      ],
+      "viewMatrix": [
+        0.811176379,
+        -0.172842428,
+        0.558675557,
+        0,
+        0,
+        0.955324986,
+        0.295557391,
+        0,
+        -0.584801575,
+        -0.239749174,
+        0.774937062,
+        0,
+        -76.590141807,
+        -15.806038875,
+        -591.763567071,
+        1
+      ],
+      "projectionMatrix": [
+        1.014776862,
+        0,
+        0,
+        0,
+        0,
+        1.804047755,
+        0,
+        0,
+        0,
+        0,
+        -1.000033334,
+        -1,
+        0,
+        0,
+        -1.000016667,
+        0
+      ]
+    }
+  },
+  "assembledScene": {
+    "ready": true,
+    "authority": "Assembled Authored Scene",
+    "runtimeBounds": {
+      "center": [
+        86,
+        -24
+      ],
+      "groundY": 26,
+      "seaY": 16,
+      "style": "ghibli painterly"
+    },
+    "sceneStats": {
+      "animatedWildlife": 16,
+      "localLights": 33
+    },
+    "authoredScene": {
+      "meshes": 738,
+      "excluded": 4
+    },
+    "authoredBounds": {
+      "min": [
+        -1392.526367188,
+        -34.308685303,
+        -1881.412353516
+      ],
+      "max": [
+        1590.151611328,
+        252.770812988,
+        1483.943725586
+      ],
+      "meshCount": 738
+    }
+  },
+  "immutableState": {
+    "unchanged": true,
+    "withinDeclaredChanges": true,
+    "allowedChanges": [],
+    "changedSummaries": [],
+    "comparedSummaries": [
+      "structure",
+      "transforms",
+      "geometry",
+      "materials",
+      "lights",
+      "renderer",
+      "dynamic"
+    ],
+    "before": {
+      "structure": {
+        "digest": "49bd59e5a565920b83adb9895ccb43ef3163ad1978515e4e484f9cf3695991e6",
+        "nodeCount": 1298,
+        "typeCounts": {
+          "AmbientLight": 1,
+          "DirectionalLight": 1,
+          "Group": 267,
+          "HemisphereLight": 1,
+          "Mesh": 959,
+          "Object3D": 2,
+          "PointLight": 32,
+          "Scene": 1,
+          "Sprite": 34
+        }
+      },
+      "transforms": {
+        "digest": "606774513b2e7f02740b3931901a11a02838156f3f13f84bb16ee637d33a91a2",
+        "nodeCount": 1298
+      },
+      "geometry": {
+        "digest": "931586117e143a4b46aa9ea634dedd10412c10d1506ea9fa5415a5e14a20a23b",
+        "meshCount": 993
+      },
+      "materials": {
+        "digest": "aa8a3fa25d9b171b4edab964c321f0c432ca312eb129fa02af5b77ccb3358b4a",
+        "materialAssignments": 993
+      },
+      "lights": {
+        "digest": "fc8ce92d9b01b8e615c48c6cd5733fc744dd82839ddd02eeedd4ecba0411a0db",
+        "lightCount": 35
+      },
+      "renderer": {
+        "digest": "d8c12ab6411587f9e1b98914dd93410c46a857d6626716d2b989a0f9da307158",
+        "capture": {
+          "cssViewport": [
+            1440,
+            810
+          ],
+          "framebuffer": [
+            1440,
+            810
+          ],
+          "deviceScaleFactor": 1,
+          "context": "webgl2",
+          "contextAttributes": {
+            "alpha": true,
+            "antialias": true,
+            "depth": true,
+            "desynchronized": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "high-performance",
+            "premultipliedAlpha": true,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "drawingBufferColorSpace": "srgb",
+          "unpackColorSpace": "srgb",
+          "fog": {
+            "type": "Fog",
+            "color": "e6dcc2",
+            "near": 650,
+            "far": 3500
+          },
+          "camera": {
+            "type": "PerspectiveCamera",
+            "fov": 58,
+            "aspect": 1.777777778,
+            "near": 0.5,
+            "far": 30000,
+            "position": [
+              390,
+              190,
+              410
+            ],
+            "direction": [
+              -0.558675557,
+              -0.295557391,
+              -0.774937062
+            ],
+            "up": [
+              0,
+              1,
+              0
+            ],
+            "viewMatrix": [
+              0.811176379,
+              -0.172842428,
+              0.558675557,
+              0,
+              0,
+              0.955324986,
+              0.295557391,
+              0,
+              -0.584801575,
+              -0.239749174,
+              0.774937062,
+              0,
+              -76.590141807,
+              -15.806038875,
+              -591.763567071,
+              1
+            ],
+            "projectionMatrix": [
+              1.014776862,
+              0,
+              0,
+              0,
+              0,
+              1.804047755,
+              0,
+              0,
+              0,
+              0,
+              -1.000033334,
+              -1,
+              0,
+              0,
+              -1.000016667,
+              0
+            ]
+          }
+        },
+        "threeRenderer": {
+          "toneMapping": "ACESFilmicToneMapping",
+          "exposure": 1,
+          "outputColorSpace": "SRGBColorSpace",
+          "pixelRatio": 1,
+          "shadows": {
+            "enabled": true,
+            "type": "PCFSoftShadowMap"
+          }
+        },
+        "composer": {
+          "passes": [
+            "RenderPass",
+            "UnrealBloomPass",
+            "ShaderPass",
+            "OutputPass"
+          ],
+          "bloom": {
+            "strength": 0.26,
+            "radius": 0.7,
+            "threshold": 0.9
+          },
+          "grading": {
+            "amount": 0,
+            "vignette": 0.34
+          }
+        },
+        "environment": {
+          "globalLights": {
+            "sun": {
+              "color": 16764550,
+              "intensity": 2.7,
+              "castShadow": true,
+              "shadowMapSize": [
+                4096,
+                4096
+              ],
+              "shadowBias": -0.0004
+            },
+            "hemisphere": {
+              "sky": 13624048,
+              "ground": 13021290,
+              "intensity": 1.12
+            },
+            "ambient": {
+              "color": 16773334,
+              "intensity": 0.34
+            }
+          },
+          "localLightCount": 32,
+          "sky": {
+            "kind": "gradient",
+            "zenith": 4161224,
+            "horizon": 11325414
+          },
+          "ocean": {
+            "y": 16,
+            "color": 5224376,
+            "sunColor": 16773327,
+            "distortion": 1.6,
+            "alpha": 0.92
+          },
+          "cloudCount": 34
+        },
+        "urlOptions": {
+          "cam": "1",
+          "campos": "390,190,410,80,26,-20",
+          "grain": "0"
+        },
+        "verificationErrors": []
+      },
+      "dynamic": {
+        "digest": "769aa183790ca151dcb8d73a1c116b2e1836561fb693cc445e3c89bfbde78450",
+        "stateCount": 35,
+        "momentMs": 12000
+      }
+    },
+    "after": {
+      "structure": {
+        "digest": "49bd59e5a565920b83adb9895ccb43ef3163ad1978515e4e484f9cf3695991e6",
+        "nodeCount": 1298,
+        "typeCounts": {
+          "AmbientLight": 1,
+          "DirectionalLight": 1,
+          "Group": 267,
+          "HemisphereLight": 1,
+          "Mesh": 959,
+          "Object3D": 2,
+          "PointLight": 32,
+          "Scene": 1,
+          "Sprite": 34
+        }
+      },
+      "transforms": {
+        "digest": "606774513b2e7f02740b3931901a11a02838156f3f13f84bb16ee637d33a91a2",
+        "nodeCount": 1298
+      },
+      "geometry": {
+        "digest": "931586117e143a4b46aa9ea634dedd10412c10d1506ea9fa5415a5e14a20a23b",
+        "meshCount": 993
+      },
+      "materials": {
+        "digest": "aa8a3fa25d9b171b4edab964c321f0c432ca312eb129fa02af5b77ccb3358b4a",
+        "materialAssignments": 993
+      },
+      "lights": {
+        "digest": "fc8ce92d9b01b8e615c48c6cd5733fc744dd82839ddd02eeedd4ecba0411a0db",
+        "lightCount": 35
+      },
+      "renderer": {
+        "digest": "d8c12ab6411587f9e1b98914dd93410c46a857d6626716d2b989a0f9da307158",
+        "capture": {
+          "cssViewport": [
+            1440,
+            810
+          ],
+          "framebuffer": [
+            1440,
+            810
+          ],
+          "deviceScaleFactor": 1,
+          "context": "webgl2",
+          "contextAttributes": {
+            "alpha": true,
+            "antialias": true,
+            "depth": true,
+            "desynchronized": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "high-performance",
+            "premultipliedAlpha": true,
+            "preserveDrawingBuffer": false,
+            "stencil": false
+          },
+          "drawingBufferColorSpace": "srgb",
+          "unpackColorSpace": "srgb",
+          "fog": {
+            "type": "Fog",
+            "color": "e6dcc2",
+            "near": 650,
+            "far": 3500
+          },
+          "camera": {
+            "type": "PerspectiveCamera",
+            "fov": 58,
+            "aspect": 1.777777778,
+            "near": 0.5,
+            "far": 30000,
+            "position": [
+              390,
+              190,
+              410
+            ],
+            "direction": [
+              -0.558675557,
+              -0.295557391,
+              -0.774937062
+            ],
+            "up": [
+              0,
+              1,
+              0
+            ],
+            "viewMatrix": [
+              0.811176379,
+              -0.172842428,
+              0.558675557,
+              0,
+              0,
+              0.955324986,
+              0.295557391,
+              0,
+              -0.584801575,
+              -0.239749174,
+              0.774937062,
+              0,
+              -76.590141807,
+              -15.806038875,
+              -591.763567071,
+              1
+            ],
+            "projectionMatrix": [
+              1.014776862,
+              0,
+              0,
+              0,
+              0,
+              1.804047755,
+              0,
+              0,
+              0,
+              0,
+              -1.000033334,
+              -1,
+              0,
+              0,
+              -1.000016667,
+              0
+            ]
+          }
+        },
+        "threeRenderer": {
+          "toneMapping": "ACESFilmicToneMapping",
+          "exposure": 1,
+          "outputColorSpace": "SRGBColorSpace",
+          "pixelRatio": 1,
+          "shadows": {
+            "enabled": true,
+            "type": "PCFSoftShadowMap"
+          }
+        },
+        "composer": {
+          "passes": [
+            "RenderPass",
+            "UnrealBloomPass",
+            "ShaderPass",
+            "OutputPass"
+          ],
+          "bloom": {
+            "strength": 0.26,
+            "radius": 0.7,
+            "threshold": 0.9
+          },
+          "grading": {
+            "amount": 0,
+            "vignette": 0.34
+          }
+        },
+        "environment": {
+          "globalLights": {
+            "sun": {
+              "color": 16764550,
+              "intensity": 2.7,
+              "castShadow": true,
+              "shadowMapSize": [
+                4096,
+                4096
+              ],
+              "shadowBias": -0.0004
+            },
+            "hemisphere": {
+              "sky": 13624048,
+              "ground": 13021290,
+              "intensity": 1.12
+            },
+            "ambient": {
+              "color": 16773334,
+              "intensity": 0.34
+            }
+          },
+          "localLightCount": 32,
+          "sky": {
+            "kind": "gradient",
+            "zenith": 4161224,
+            "horizon": 11325414
+          },
+          "ocean": {
+            "y": 16,
+            "color": 5224376,
+            "sunColor": 16773327,
+            "distortion": 1.6,
+            "alpha": 0.92
+          },
+          "cloudCount": 34
+        },
+        "urlOptions": {
+          "cam": "1",
+          "campos": "390,190,410,80,26,-20",
+          "grain": "0"
+        },
+        "verificationErrors": []
+      },
+      "dynamic": {
+        "digest": "769aa183790ca151dcb8d73a1c116b2e1836561fb693cc445e3c89bfbde78450",
+        "stateCount": 35,
+        "momentMs": 12000
+      }
+    }
+  },
+  "dynamicCaptures": [
+    {
+      "momentMs": 16000,
+      "dynamic": {
+        "digest": "37c69d47879ab287fa65b11af788d72f5676b85df5d303c656b076a3bc13b977",
+        "stateCount": 35,
+        "momentMs": 16000
+      },
+      "transforms": {
+        "digest": "c7898f6b16ab3210982c73e0dbc8ae5513235a59e6d8223161c8f0ba14649c91",
+        "nodeCount": 1298
+      },
+      "stateTransition": {
+        "unchanged": false,
+        "withinDeclaredChanges": true,
+        "allowedChanges": [
+          "transforms",
+          "dynamic"
+        ],
+        "changedSummaries": [
+          "transforms",
+          "dynamic"
+        ],
+        "comparedSummaries": [
+          "structure",
+          "transforms",
+          "geometry",
+          "materials",
+          "lights",
+          "renderer",
+          "dynamic"
+        ],
+        "before": {
+          "structure": {
+            "digest": "49bd59e5a565920b83adb9895ccb43ef3163ad1978515e4e484f9cf3695991e6",
+            "nodeCount": 1298,
+            "typeCounts": {
+              "AmbientLight": 1,
+              "DirectionalLight": 1,
+              "Group": 267,
+              "HemisphereLight": 1,
+              "Mesh": 959,
+              "Object3D": 2,
+              "PointLight": 32,
+              "Scene": 1,
+              "Sprite": 34
+            }
+          },
+          "transforms": {
+            "digest": "606774513b2e7f02740b3931901a11a02838156f3f13f84bb16ee637d33a91a2",
+            "nodeCount": 1298
+          },
+          "geometry": {
+            "digest": "931586117e143a4b46aa9ea634dedd10412c10d1506ea9fa5415a5e14a20a23b",
+            "meshCount": 993
+          },
+          "materials": {
+            "digest": "aa8a3fa25d9b171b4edab964c321f0c432ca312eb129fa02af5b77ccb3358b4a",
+            "materialAssignments": 993
+          },
+          "lights": {
+            "digest": "fc8ce92d9b01b8e615c48c6cd5733fc744dd82839ddd02eeedd4ecba0411a0db",
+            "lightCount": 35
+          },
+          "renderer": {
+            "digest": "d8c12ab6411587f9e1b98914dd93410c46a857d6626716d2b989a0f9da307158",
+            "capture": {
+              "cssViewport": [
+                1440,
+                810
+              ],
+              "framebuffer": [
+                1440,
+                810
+              ],
+              "deviceScaleFactor": 1,
+              "context": "webgl2",
+              "contextAttributes": {
+                "alpha": true,
+                "antialias": true,
+                "depth": true,
+                "desynchronized": false,
+                "failIfMajorPerformanceCaveat": false,
+                "powerPreference": "high-performance",
+                "premultipliedAlpha": true,
+                "preserveDrawingBuffer": false,
+                "stencil": false
+              },
+              "drawingBufferColorSpace": "srgb",
+              "unpackColorSpace": "srgb",
+              "fog": {
+                "type": "Fog",
+                "color": "e6dcc2",
+                "near": 650,
+                "far": 3500
+              },
+              "camera": {
+                "type": "PerspectiveCamera",
+                "fov": 58,
+                "aspect": 1.777777778,
+                "near": 0.5,
+                "far": 30000,
+                "position": [
+                  390,
+                  190,
+                  410
+                ],
+                "direction": [
+                  -0.558675557,
+                  -0.295557391,
+                  -0.774937062
+                ],
+                "up": [
+                  0,
+                  1,
+                  0
+                ],
+                "viewMatrix": [
+                  0.811176379,
+                  -0.172842428,
+                  0.558675557,
+                  0,
+                  0,
+                  0.955324986,
+                  0.295557391,
+                  0,
+                  -0.584801575,
+                  -0.239749174,
+                  0.774937062,
+                  0,
+                  -76.590141807,
+                  -15.806038875,
+                  -591.763567071,
+                  1
+                ],
+                "projectionMatrix": [
+                  1.014776862,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1.804047755,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.000033334,
+                  -1,
+                  0,
+                  0,
+                  -1.000016667,
+                  0
+                ]
+              }
+            },
+            "threeRenderer": {
+              "toneMapping": "ACESFilmicToneMapping",
+              "exposure": 1,
+              "outputColorSpace": "SRGBColorSpace",
+              "pixelRatio": 1,
+              "shadows": {
+                "enabled": true,
+                "type": "PCFSoftShadowMap"
+              }
+            },
+            "composer": {
+              "passes": [
+                "RenderPass",
+                "UnrealBloomPass",
+                "ShaderPass",
+                "OutputPass"
+              ],
+              "bloom": {
+                "strength": 0.26,
+                "radius": 0.7,
+                "threshold": 0.9
+              },
+              "grading": {
+                "amount": 0,
+                "vignette": 0.34
+              }
+            },
+            "environment": {
+              "globalLights": {
+                "sun": {
+                  "color": 16764550,
+                  "intensity": 2.7,
+                  "castShadow": true,
+                  "shadowMapSize": [
+                    4096,
+                    4096
+                  ],
+                  "shadowBias": -0.0004
+                },
+                "hemisphere": {
+                  "sky": 13624048,
+                  "ground": 13021290,
+                  "intensity": 1.12
+                },
+                "ambient": {
+                  "color": 16773334,
+                  "intensity": 0.34
+                }
+              },
+              "localLightCount": 32,
+              "sky": {
+                "kind": "gradient",
+                "zenith": 4161224,
+                "horizon": 11325414
+              },
+              "ocean": {
+                "y": 16,
+                "color": 5224376,
+                "sunColor": 16773327,
+                "distortion": 1.6,
+                "alpha": 0.92
+              },
+              "cloudCount": 34
+            },
+            "urlOptions": {
+              "cam": "1",
+              "campos": "390,190,410,80,26,-20",
+              "grain": "0"
+            },
+            "verificationErrors": []
+          },
+          "dynamic": {
+            "digest": "769aa183790ca151dcb8d73a1c116b2e1836561fb693cc445e3c89bfbde78450",
+            "stateCount": 35,
+            "momentMs": 12000
+          }
+        },
+        "after": {
+          "structure": {
+            "digest": "49bd59e5a565920b83adb9895ccb43ef3163ad1978515e4e484f9cf3695991e6",
+            "nodeCount": 1298,
+            "typeCounts": {
+              "AmbientLight": 1,
+              "DirectionalLight": 1,
+              "Group": 267,
+              "HemisphereLight": 1,
+              "Mesh": 959,
+              "Object3D": 2,
+              "PointLight": 32,
+              "Scene": 1,
+              "Sprite": 34
+            }
+          },
+          "transforms": {
+            "digest": "c7898f6b16ab3210982c73e0dbc8ae5513235a59e6d8223161c8f0ba14649c91",
+            "nodeCount": 1298
+          },
+          "geometry": {
+            "digest": "931586117e143a4b46aa9ea634dedd10412c10d1506ea9fa5415a5e14a20a23b",
+            "meshCount": 993
+          },
+          "materials": {
+            "digest": "aa8a3fa25d9b171b4edab964c321f0c432ca312eb129fa02af5b77ccb3358b4a",
+            "materialAssignments": 993
+          },
+          "lights": {
+            "digest": "fc8ce92d9b01b8e615c48c6cd5733fc744dd82839ddd02eeedd4ecba0411a0db",
+            "lightCount": 35
+          },
+          "renderer": {
+            "digest": "d8c12ab6411587f9e1b98914dd93410c46a857d6626716d2b989a0f9da307158",
+            "capture": {
+              "cssViewport": [
+                1440,
+                810
+              ],
+              "framebuffer": [
+                1440,
+                810
+              ],
+              "deviceScaleFactor": 1,
+              "context": "webgl2",
+              "contextAttributes": {
+                "alpha": true,
+                "antialias": true,
+                "depth": true,
+                "desynchronized": false,
+                "failIfMajorPerformanceCaveat": false,
+                "powerPreference": "high-performance",
+                "premultipliedAlpha": true,
+                "preserveDrawingBuffer": false,
+                "stencil": false
+              },
+              "drawingBufferColorSpace": "srgb",
+              "unpackColorSpace": "srgb",
+              "fog": {
+                "type": "Fog",
+                "color": "e6dcc2",
+                "near": 650,
+                "far": 3500
+              },
+              "camera": {
+                "type": "PerspectiveCamera",
+                "fov": 58,
+                "aspect": 1.777777778,
+                "near": 0.5,
+                "far": 30000,
+                "position": [
+                  390,
+                  190,
+                  410
+                ],
+                "direction": [
+                  -0.558675557,
+                  -0.295557391,
+                  -0.774937062
+                ],
+                "up": [
+                  0,
+                  1,
+                  0
+                ],
+                "viewMatrix": [
+                  0.811176379,
+                  -0.172842428,
+                  0.558675557,
+                  0,
+                  0,
+                  0.955324986,
+                  0.295557391,
+                  0,
+                  -0.584801575,
+                  -0.239749174,
+                  0.774937062,
+                  0,
+                  -76.590141807,
+                  -15.806038875,
+                  -591.763567071,
+                  1
+                ],
+                "projectionMatrix": [
+                  1.014776862,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1.804047755,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.000033334,
+                  -1,
+                  0,
+                  0,
+                  -1.000016667,
+                  0
+                ]
+              }
+            },
+            "threeRenderer": {
+              "toneMapping": "ACESFilmicToneMapping",
+              "exposure": 1,
+              "outputColorSpace": "SRGBColorSpace",
+              "pixelRatio": 1,
+              "shadows": {
+                "enabled": true,
+                "type": "PCFSoftShadowMap"
+              }
+            },
+            "composer": {
+              "passes": [
+                "RenderPass",
+                "UnrealBloomPass",
+                "ShaderPass",
+                "OutputPass"
+              ],
+              "bloom": {
+                "strength": 0.26,
+                "radius": 0.7,
+                "threshold": 0.9
+              },
+              "grading": {
+                "amount": 0,
+                "vignette": 0.34
+              }
+            },
+            "environment": {
+              "globalLights": {
+                "sun": {
+                  "color": 16764550,
+                  "intensity": 2.7,
+                  "castShadow": true,
+                  "shadowMapSize": [
+                    4096,
+                    4096
+                  ],
+                  "shadowBias": -0.0004
+                },
+                "hemisphere": {
+                  "sky": 13624048,
+                  "ground": 13021290,
+                  "intensity": 1.12
+                },
+                "ambient": {
+                  "color": 16773334,
+                  "intensity": 0.34
+                }
+              },
+              "localLightCount": 32,
+              "sky": {
+                "kind": "gradient",
+                "zenith": 4161224,
+                "horizon": 11325414
+              },
+              "ocean": {
+                "y": 16,
+                "color": 5224376,
+                "sunColor": 16773327,
+                "distortion": 1.6,
+                "alpha": 0.92
+              },
+              "cloudCount": 34
+            },
+            "urlOptions": {
+              "cam": "1",
+              "campos": "390,190,410,80,26,-20",
+              "grain": "0"
+            },
+            "verificationErrors": []
+          },
+          "dynamic": {
+            "digest": "37c69d47879ab287fa65b11af788d72f5676b85df5d303c656b076a3bc13b977",
+            "stateCount": 35,
+            "momentMs": 16000
+          }
+        }
+      }
+    },
+    {
+      "momentMs": 24000,
+      "dynamic": {
+        "digest": "3d93beaf72d991881eb35c733c1a751458fad2fc39c63179292ae9c43c54d974",
+        "stateCount": 35,
+        "momentMs": 24000
+      },
+      "transforms": {
+        "digest": "f02870fc5637b1352551e9ae17d1f40b3a1a9ef4e4a56a3f33e8036913a6fa0d",
+        "nodeCount": 1298
+      },
+      "stateTransition": {
+        "unchanged": false,
+        "withinDeclaredChanges": true,
+        "allowedChanges": [
+          "transforms",
+          "dynamic"
+        ],
+        "changedSummaries": [
+          "transforms",
+          "dynamic"
+        ],
+        "comparedSummaries": [
+          "structure",
+          "transforms",
+          "geometry",
+          "materials",
+          "lights",
+          "renderer",
+          "dynamic"
+        ],
+        "before": {
+          "structure": {
+            "digest": "49bd59e5a565920b83adb9895ccb43ef3163ad1978515e4e484f9cf3695991e6",
+            "nodeCount": 1298,
+            "typeCounts": {
+              "AmbientLight": 1,
+              "DirectionalLight": 1,
+              "Group": 267,
+              "HemisphereLight": 1,
+              "Mesh": 959,
+              "Object3D": 2,
+              "PointLight": 32,
+              "Scene": 1,
+              "Sprite": 34
+            }
+          },
+          "transforms": {
+            "digest": "c7898f6b16ab3210982c73e0dbc8ae5513235a59e6d8223161c8f0ba14649c91",
+            "nodeCount": 1298
+          },
+          "geometry": {
+            "digest": "931586117e143a4b46aa9ea634dedd10412c10d1506ea9fa5415a5e14a20a23b",
+            "meshCount": 993
+          },
+          "materials": {
+            "digest": "aa8a3fa25d9b171b4edab964c321f0c432ca312eb129fa02af5b77ccb3358b4a",
+            "materialAssignments": 993
+          },
+          "lights": {
+            "digest": "fc8ce92d9b01b8e615c48c6cd5733fc744dd82839ddd02eeedd4ecba0411a0db",
+            "lightCount": 35
+          },
+          "renderer": {
+            "digest": "d8c12ab6411587f9e1b98914dd93410c46a857d6626716d2b989a0f9da307158",
+            "capture": {
+              "cssViewport": [
+                1440,
+                810
+              ],
+              "framebuffer": [
+                1440,
+                810
+              ],
+              "deviceScaleFactor": 1,
+              "context": "webgl2",
+              "contextAttributes": {
+                "alpha": true,
+                "antialias": true,
+                "depth": true,
+                "desynchronized": false,
+                "failIfMajorPerformanceCaveat": false,
+                "powerPreference": "high-performance",
+                "premultipliedAlpha": true,
+                "preserveDrawingBuffer": false,
+                "stencil": false
+              },
+              "drawingBufferColorSpace": "srgb",
+              "unpackColorSpace": "srgb",
+              "fog": {
+                "type": "Fog",
+                "color": "e6dcc2",
+                "near": 650,
+                "far": 3500
+              },
+              "camera": {
+                "type": "PerspectiveCamera",
+                "fov": 58,
+                "aspect": 1.777777778,
+                "near": 0.5,
+                "far": 30000,
+                "position": [
+                  390,
+                  190,
+                  410
+                ],
+                "direction": [
+                  -0.558675557,
+                  -0.295557391,
+                  -0.774937062
+                ],
+                "up": [
+                  0,
+                  1,
+                  0
+                ],
+                "viewMatrix": [
+                  0.811176379,
+                  -0.172842428,
+                  0.558675557,
+                  0,
+                  0,
+                  0.955324986,
+                  0.295557391,
+                  0,
+                  -0.584801575,
+                  -0.239749174,
+                  0.774937062,
+                  0,
+                  -76.590141807,
+                  -15.806038875,
+                  -591.763567071,
+                  1
+                ],
+                "projectionMatrix": [
+                  1.014776862,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1.804047755,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.000033334,
+                  -1,
+                  0,
+                  0,
+                  -1.000016667,
+                  0
+                ]
+              }
+            },
+            "threeRenderer": {
+              "toneMapping": "ACESFilmicToneMapping",
+              "exposure": 1,
+              "outputColorSpace": "SRGBColorSpace",
+              "pixelRatio": 1,
+              "shadows": {
+                "enabled": true,
+                "type": "PCFSoftShadowMap"
+              }
+            },
+            "composer": {
+              "passes": [
+                "RenderPass",
+                "UnrealBloomPass",
+                "ShaderPass",
+                "OutputPass"
+              ],
+              "bloom": {
+                "strength": 0.26,
+                "radius": 0.7,
+                "threshold": 0.9
+              },
+              "grading": {
+                "amount": 0,
+                "vignette": 0.34
+              }
+            },
+            "environment": {
+              "globalLights": {
+                "sun": {
+                  "color": 16764550,
+                  "intensity": 2.7,
+                  "castShadow": true,
+                  "shadowMapSize": [
+                    4096,
+                    4096
+                  ],
+                  "shadowBias": -0.0004
+                },
+                "hemisphere": {
+                  "sky": 13624048,
+                  "ground": 13021290,
+                  "intensity": 1.12
+                },
+                "ambient": {
+                  "color": 16773334,
+                  "intensity": 0.34
+                }
+              },
+              "localLightCount": 32,
+              "sky": {
+                "kind": "gradient",
+                "zenith": 4161224,
+                "horizon": 11325414
+              },
+              "ocean": {
+                "y": 16,
+                "color": 5224376,
+                "sunColor": 16773327,
+                "distortion": 1.6,
+                "alpha": 0.92
+              },
+              "cloudCount": 34
+            },
+            "urlOptions": {
+              "cam": "1",
+              "campos": "390,190,410,80,26,-20",
+              "grain": "0"
+            },
+            "verificationErrors": []
+          },
+          "dynamic": {
+            "digest": "37c69d47879ab287fa65b11af788d72f5676b85df5d303c656b076a3bc13b977",
+            "stateCount": 35,
+            "momentMs": 16000
+          }
+        },
+        "after": {
+          "structure": {
+            "digest": "49bd59e5a565920b83adb9895ccb43ef3163ad1978515e4e484f9cf3695991e6",
+            "nodeCount": 1298,
+            "typeCounts": {
+              "AmbientLight": 1,
+              "DirectionalLight": 1,
+              "Group": 267,
+              "HemisphereLight": 1,
+              "Mesh": 959,
+              "Object3D": 2,
+              "PointLight": 32,
+              "Scene": 1,
+              "Sprite": 34
+            }
+          },
+          "transforms": {
+            "digest": "f02870fc5637b1352551e9ae17d1f40b3a1a9ef4e4a56a3f33e8036913a6fa0d",
+            "nodeCount": 1298
+          },
+          "geometry": {
+            "digest": "931586117e143a4b46aa9ea634dedd10412c10d1506ea9fa5415a5e14a20a23b",
+            "meshCount": 993
+          },
+          "materials": {
+            "digest": "aa8a3fa25d9b171b4edab964c321f0c432ca312eb129fa02af5b77ccb3358b4a",
+            "materialAssignments": 993
+          },
+          "lights": {
+            "digest": "fc8ce92d9b01b8e615c48c6cd5733fc744dd82839ddd02eeedd4ecba0411a0db",
+            "lightCount": 35
+          },
+          "renderer": {
+            "digest": "d8c12ab6411587f9e1b98914dd93410c46a857d6626716d2b989a0f9da307158",
+            "capture": {
+              "cssViewport": [
+                1440,
+                810
+              ],
+              "framebuffer": [
+                1440,
+                810
+              ],
+              "deviceScaleFactor": 1,
+              "context": "webgl2",
+              "contextAttributes": {
+                "alpha": true,
+                "antialias": true,
+                "depth": true,
+                "desynchronized": false,
+                "failIfMajorPerformanceCaveat": false,
+                "powerPreference": "high-performance",
+                "premultipliedAlpha": true,
+                "preserveDrawingBuffer": false,
+                "stencil": false
+              },
+              "drawingBufferColorSpace": "srgb",
+              "unpackColorSpace": "srgb",
+              "fog": {
+                "type": "Fog",
+                "color": "e6dcc2",
+                "near": 650,
+                "far": 3500
+              },
+              "camera": {
+                "type": "PerspectiveCamera",
+                "fov": 58,
+                "aspect": 1.777777778,
+                "near": 0.5,
+                "far": 30000,
+                "position": [
+                  390,
+                  190,
+                  410
+                ],
+                "direction": [
+                  -0.558675557,
+                  -0.295557391,
+                  -0.774937062
+                ],
+                "up": [
+                  0,
+                  1,
+                  0
+                ],
+                "viewMatrix": [
+                  0.811176379,
+                  -0.172842428,
+                  0.558675557,
+                  0,
+                  0,
+                  0.955324986,
+                  0.295557391,
+                  0,
+                  -0.584801575,
+                  -0.239749174,
+                  0.774937062,
+                  0,
+                  -76.590141807,
+                  -15.806038875,
+                  -591.763567071,
+                  1
+                ],
+                "projectionMatrix": [
+                  1.014776862,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1.804047755,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.000033334,
+                  -1,
+                  0,
+                  0,
+                  -1.000016667,
+                  0
+                ]
+              }
+            },
+            "threeRenderer": {
+              "toneMapping": "ACESFilmicToneMapping",
+              "exposure": 1,
+              "outputColorSpace": "SRGBColorSpace",
+              "pixelRatio": 1,
+              "shadows": {
+                "enabled": true,
+                "type": "PCFSoftShadowMap"
+              }
+            },
+            "composer": {
+              "passes": [
+                "RenderPass",
+                "UnrealBloomPass",
+                "ShaderPass",
+                "OutputPass"
+              ],
+              "bloom": {
+                "strength": 0.26,
+                "radius": 0.7,
+                "threshold": 0.9
+              },
+              "grading": {
+                "amount": 0,
+                "vignette": 0.34
+              }
+            },
+            "environment": {
+              "globalLights": {
+                "sun": {
+                  "color": 16764550,
+                  "intensity": 2.7,
+                  "castShadow": true,
+                  "shadowMapSize": [
+                    4096,
+                    4096
+                  ],
+                  "shadowBias": -0.0004
+                },
+                "hemisphere": {
+                  "sky": 13624048,
+                  "ground": 13021290,
+                  "intensity": 1.12
+                },
+                "ambient": {
+                  "color": 16773334,
+                  "intensity": 0.34
+                }
+              },
+              "localLightCount": 32,
+              "sky": {
+                "kind": "gradient",
+                "zenith": 4161224,
+                "horizon": 11325414
+              },
+              "ocean": {
+                "y": 16,
+                "color": 5224376,
+                "sunColor": 16773327,
+                "distortion": 1.6,
+                "alpha": 0.92
+              },
+              "cloudCount": 34
+            },
+            "urlOptions": {
+              "cam": "1",
+              "campos": "390,190,410,80,26,-20",
+              "grain": "0"
+            },
+            "verificationErrors": []
+          },
+          "dynamic": {
+            "digest": "3d93beaf72d991881eb35c733c1a751458fad2fc39c63179292ae9c43c54d974",
+            "stateCount": 35,
+            "momentMs": 24000
+          }
+        }
+      }
+    }
+  ],
+  "appearanceIntegrity": {
+    "referenceSourcePatched": false,
+    "referenceMaterialsOrLightsInjected": false,
+    "cameraAppliedByExistingPublicUrlControl": true,
+    "nativeComposerCanvasObserved": true,
+    "primaryCapturePngSha256": "5344b0e6eae873a2a5b7627311b20ccd74160a75d79143cd03e54568617bcadf",
+    "primaryCaptureByteLength": 1040270
+  },
+  "repeatability": {
+    "declared": {
+      "independentRuns": 2,
+      "structuralDigests": "exact",
+      "primaryCapturePngSha256": "diagnostic",
+      "appearance": {
+        "maximumMeanChannelDelta": 0.15,
+        "maximumStandardDeviationDelta": 0.2,
+        "maximumHistogramL1Distance": 0.002,
+        "maximumDifferenceHashDistance": 4
+      }
+    },
+    "independentRuns": [
+      {
+        "run": 1,
+        "primaryCapturePngSha256": "5344b0e6eae873a2a5b7627311b20ccd74160a75d79143cd03e54568617bcadf",
+        "appearance": {
+          "source": "unmodified native composer canvas",
+          "width": 1440,
+          "height": 810,
+          "rgbaSha256": "7603d284eaf25531bcfbbbfc3e3ca02c9670666d82c546c64ca072c8c12e81fa",
+          "channelMeans": [
+            169.54047668,
+            176.985121742,
+            167.796761831
+          ],
+          "channelStandardDeviations": [
+            46.549622024,
+            45.491447079,
+            57.755314632
+          ],
+          "normalizedHistograms": [
+            [
+              0.006502058,
+              0.019504458,
+              0.017745199,
+              0.006044239,
+              0.004427298,
+              0.015097737,
+              0.026906722,
+              0.049410151,
+              0.061897291,
+              0.075229767,
+              0.264333848,
+              0.137944102,
+              0.071702675,
+              0.165600137,
+              0.077642318,
+              0.000012003
+            ],
+            [
+              0.01210048,
+              0.021487483,
+              0.01299297,
+              0.005414952,
+              0.005004287,
+              0.006205418,
+              0.009474451,
+              0.017080761,
+              0.053451646,
+              0.074676783,
+              0.112013889,
+              0.293815158,
+              0.149905693,
+              0.141466907,
+              0.084909122,
+              0
+            ],
+            [
+              0.038921468,
+              0.015283779,
+              0.009331276,
+              0.019092078,
+              0.036625514,
+              0.024131516,
+              0.012200789,
+              0.033003258,
+              0.043746571,
+              0.052548868,
+              0.043787723,
+              0.309342421,
+              0.125484396,
+              0.136254287,
+              0.100246056,
+              0
+            ]
+          ],
+          "differenceHash": "02000d1940003cfc000217be0100199f574265ef6e016bb144988fbf6d86ae2b61ba5bc9d3a26341249a3d8664a2b88e476b26551338ab2c276a571a82d924b51968cdad402c42ab"
+        },
+        "stateDigests": {
+          "structure": "49bd59e5a565920b83adb9895ccb43ef3163ad1978515e4e484f9cf3695991e6",
+          "transforms": "606774513b2e7f02740b3931901a11a02838156f3f13f84bb16ee637d33a91a2",
+          "geometry": "931586117e143a4b46aa9ea634dedd10412c10d1506ea9fa5415a5e14a20a23b",
+          "materials": "aa8a3fa25d9b171b4edab964c321f0c432ca312eb129fa02af5b77ccb3358b4a",
+          "lights": "fc8ce92d9b01b8e615c48c6cd5733fc744dd82839ddd02eeedd4ecba0411a0db",
+          "renderer": "d8c12ab6411587f9e1b98914dd93410c46a857d6626716d2b989a0f9da307158",
+          "dynamic": "769aa183790ca151dcb8d73a1c116b2e1836561fb693cc445e3c89bfbde78450"
+        },
+        "dynamicDigests": [
+          {
+            "momentMs": 16000,
+            "dynamic": "37c69d47879ab287fa65b11af788d72f5676b85df5d303c656b076a3bc13b977",
+            "transforms": "c7898f6b16ab3210982c73e0dbc8ae5513235a59e6d8223161c8f0ba14649c91"
+          },
+          {
+            "momentMs": 24000,
+            "dynamic": "3d93beaf72d991881eb35c733c1a751458fad2fc39c63179292ae9c43c54d974",
+            "transforms": "f02870fc5637b1352551e9ae17d1f40b3a1a9ef4e4a56a3f33e8036913a6fa0d"
+          }
+        ]
+      },
+      {
+        "run": 2,
+        "primaryCapturePngSha256": "3f132293d1e320845f4a0eadd0df29a032446ef275820e71f3238748d726921a",
+        "appearance": {
+          "source": "unmodified native composer canvas",
+          "width": 1440,
+          "height": 810,
+          "rgbaSha256": "3d986ab0c32fc7637c7d23f9d77f8f50f70cacecc6c5f50ec2e2eba6650ccf7c",
+          "channelMeans": [
+            169.540621571,
+            176.985453532,
+            167.796852709
+          ],
+          "channelStandardDeviations": [
+            46.549331836,
+            45.490805819,
+            57.755126755
+          ],
+          "normalizedHistograms": [
+            [
+              0.006502058,
+              0.019503601,
+              0.017744342,
+              0.006044239,
+              0.004427298,
+              0.015097737,
+              0.026908436,
+              0.049410151,
+              0.061896433,
+              0.075230624,
+              0.264333848,
+              0.137944102,
+              0.071702675,
+              0.165600137,
+              0.077642318,
+              0.000012003
+            ],
+            [
+              0.01210048,
+              0.021486626,
+              0.012992112,
+              0.005414095,
+              0.005001715,
+              0.006206276,
+              0.009476166,
+              0.017080761,
+              0.053453361,
+              0.074677641,
+              0.112013889,
+              0.293815158,
+              0.149905693,
+              0.141466907,
+              0.084909122,
+              0
+            ],
+            [
+              0.038921468,
+              0.015283779,
+              0.009327846,
+              0.019093793,
+              0.036627229,
+              0.024131516,
+              0.012200789,
+              0.033003258,
+              0.043746571,
+              0.052548868,
+              0.043787723,
+              0.309342421,
+              0.125484396,
+              0.136254287,
+              0.100246056,
+              0
+            ]
+          ],
+          "differenceHash": "02000d1940003cfc000217be0100199f574265ef6e016bb144988fbf6d86ae2b61ba5bc9d3a26341249a3d8664a2b88e476b26551338ab2c276a571a82d924b51968cdad402c42ab"
+        },
+        "stateDigests": {
+          "structure": "49bd59e5a565920b83adb9895ccb43ef3163ad1978515e4e484f9cf3695991e6",
+          "transforms": "606774513b2e7f02740b3931901a11a02838156f3f13f84bb16ee637d33a91a2",
+          "geometry": "931586117e143a4b46aa9ea634dedd10412c10d1506ea9fa5415a5e14a20a23b",
+          "materials": "aa8a3fa25d9b171b4edab964c321f0c432ca312eb129fa02af5b77ccb3358b4a",
+          "lights": "fc8ce92d9b01b8e615c48c6cd5733fc744dd82839ddd02eeedd4ecba0411a0db",
+          "renderer": "d8c12ab6411587f9e1b98914dd93410c46a857d6626716d2b989a0f9da307158",
+          "dynamic": "769aa183790ca151dcb8d73a1c116b2e1836561fb693cc445e3c89bfbde78450"
+        },
+        "dynamicDigests": [
+          {
+            "momentMs": 16000,
+            "dynamic": "37c69d47879ab287fa65b11af788d72f5676b85df5d303c656b076a3bc13b977",
+            "transforms": "c7898f6b16ab3210982c73e0dbc8ae5513235a59e6d8223161c8f0ba14649c91"
+          },
+          {
+            "momentMs": 24000,
+            "dynamic": "3d93beaf72d991881eb35c733c1a751458fad2fc39c63179292ae9c43c54d974",
+            "transforms": "f02870fc5637b1352551e9ae17d1f40b3a1a9ef4e4a56a3f33e8036913a6fa0d"
+          }
+        ]
+      }
+    ],
+    "appearanceDeltas": {
+      "maximumMeanChannelDelta": 0.00033179000001837267,
+      "maximumStandardDeviationDelta": 0.0006412599999947588,
+      "maximumHistogramL1Distance": 0.000010290000000003942,
+      "maximumDifferenceHashDistance": 0
+    },
+    "structuralExact": true,
+    "appearanceWithinDeclaredBounds": true
+  },
+  "host": {
+    "hostKey": "windows-edge-150-swiftshader-subzero",
+    "os": "windows",
+    "browser": "edge-150",
+    "rasterizerBackend": "Subzero",
+    "acceleration": "software",
+    "threeRevision": "170"
+  },
+  "crossHost": {
+    "authoritativeProfile": ".scratch/scene-parity-foundation/evidence/reference-observation-v1.json",
+    "authoritativeHost": {
+      "hostKey": "macos-chrome-150-swiftshader-llvm-10-0-0",
+      "os": "macos",
+      "browser": "chrome-150",
+      "rasterizerBackend": "LLVM 10.0.0",
+      "acceleration": "software",
+      "threeRevision": "170"
+    },
+    "structuralDigestsExact": true,
+    "renderContractExact": true,
+    "cameraSetExact": true,
+    "appearanceDeltas": {
+      "maximumMeanChannelDelta": 0.006981309999986252,
+      "maximumStandardDeviationDelta": 0.0034211469999974042,
+      "maximumHistogramL1Distance": 0.000576128999999966,
+      "maximumDifferenceHashDistance": 7
+    },
+    "declared": {
+      "schemaVersion": "cross-host-observation-contract-v1",
+      "structuralDigests": "exact",
+      "renderContract": "exact",
+      "cameraSet": "exact",
+      "sceneEvidence": "exact",
+      "appearance": {
+        "maximumMeanChannelDelta": 0.15,
+        "maximumStandardDeviationDelta": 0.2,
+        "maximumHistogramL1Distance": 0.002,
+        "maximumDifferenceHashDistance": 16
+      }
+    }
+  }
+}

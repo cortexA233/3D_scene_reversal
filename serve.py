@@ -100,7 +100,9 @@ def three_version(pkg: Path) -> str:
     try:
         import json
 
-        return json.loads((pkg / "package.json").read_text()).get("version", "?")
+        return json.loads(
+            (pkg / "package.json").read_text(encoding="utf-8")
+        ).get("version", "?")
     except Exception:
         return "?"
 
@@ -142,7 +144,9 @@ class SceneHandler(http.server.SimpleHTTPRequestHandler):
 
     def send_patched_index(self):
         """Serve index.html with its CDN importmap swapped for the mounted copy."""
-        html, n = IMPORTMAP_RE.subn(LOCAL_IMPORTS, (ROOT / "index.html").read_text())
+        html, n = IMPORTMAP_RE.subn(
+            LOCAL_IMPORTS, (ROOT / "index.html").read_text(encoding="utf-8")
+        )
         if not n:
             sys.stderr.write(
                 "  ! couldn't find the three/three-addons importmap entries in index.html;\n"
