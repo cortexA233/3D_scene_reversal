@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0052.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0053.
 
 ## Where the work stands
 
@@ -20,8 +20,36 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 05 — horizon ridges | landed; gate red at a recorded boundary (ADR-0052) |
 | Reconstruction 08 — vegetation canopies | done |
 | Reconstruction 03 | in progress, see below |
-| Reconstruction 09 — distributed cover | in progress; placement fixed, gate unmoved, cause measured |
-| Reconstruction 06, 07, 10-16 | ready-for-agent |
+| Reconstruction 09 — distributed cover | landed; the reference measurement was wrong and is fixed (ADR-0053) |
+| Reconstruction 06, 07, 10-16 | ready-for-agent; 06 is next and `paths` is its dominant term |
+
+## Read this before trusting any number below
+
+`scene-quality-baseline-v1.2` and every rendered measurement in this file are
+**post-ADR-0053**. Three encoding defects made the reference's own masks wrong,
+and the numbers a previous revision of this file recorded were measured through
+them. If you are comparing against an older note, the older note is wrong.
+
+The short version: three.js multiplies a material's colour by an
+`InstancedMesh`'s `instanceColor` whenever one is present, so every mask pass
+read back a tinted identity for the two ground-rock populations that call
+`setColorAt`. `cover`'s reference mask held 128 pixels on the authored overview
+where the scene draws 5,299, and all 5,172 went to `plazas`, whose mask was
+therefore 84 per cent scatter. Separately, the depth and world-normal
+`ShaderMaterial`s ignored `instanceMatrix` and drew every instance on its mesh's
+origin, and the identity lattice could not carry the fourteenth group.
+
+All sixteen reference-only controls were re-captured and the two rendered layers
+re-derived. Two thresholds got **stricter**. The encodings now live in
+`tools/evaluation/scene-pass-encoding.mjs`, which imports only `three`, and
+`test/scene-pass-encoding.test.mjs` holds them to fixtures without a GPU — four
+of its six assertions fail against the previous behaviour.
+
+**The lesson for whoever is next: a pass had no check of its own for the whole
+Foundation, and an encoding defect and a candidate defect are indistinguishable
+in the reported numbers.** Before fitting anything against a rendered
+measurement, ask what would happen if the pass were wrong, and whether anything
+would tell you.
 
 ## Ticket 02, in progress
 
@@ -67,67 +95,132 @@ the horizon colour and does not cull the dome. `authoredOverview` sky fell from
 
 **What the measurement says now**, per region:
 
-| region | DeltaE | belongs to |
+| region | mean DeltaE over the cameras | belongs to |
 | --- | --- | --- |
-| sky | 3.34 on `oblique-north`, 17.55 on `authoredOverview` | 02, but see below |
-| horizon | 8.19 to 11.86 | 05, at its recorded boundary |
-| geography | 7.80 to 16.34 after ticket 04, about a million pixels per camera | 03 |
-| plazas | 26.40 to 34.20 | 06 |
-| structures | 31.19 to 40.19 | 07, 11 |
-| vegetation | 38.31 to 52.23 | 11 |
+| sky | 5.96 (3.84 on `oblique-north`, 8.82 on `authoredOverview`) | 02, largely settled |
+| horizon | 16.60 | 05, at its recorded boundary |
+| geography | 15.19, about a million pixels per camera | 03 |
+| plazas | 33.18 | 06 |
+| structures | 35.41 | 07, 11 |
+| vegetation | 43.54 | 11 |
+| cover | 22.04 | 09, landed |
 
-Global appearance DeltaE is 13.369 against a calibrated threshold of 2.852, worst
-camera `authoredOverview` at 19.176. It was 21.531 before ticket 04.
+Global appearance DeltaE is 13.172 against a calibrated threshold of 2.852, worst
+camera `authoredOverview` at 17.281.
 
 Per Material Family, averaged over the six cameras, which is the ranking to work
-down: `palm-foliage` 51.82, `paving-stone` 33.15, `blossom-foliage` 32.82,
-`painted-timber` 32.26, `creature-fur` 24.48, `terrain-ground` 23.82,
-`bamboo-foliage` 22.98, `shore-rock` 20.22, `ocean-surface` 10.57,
-`distant-rock` 9.41.
+down: `palm-foliage` 51.87, `blossom-foliage` 33.28, `paving-stone` 33.21,
+`painted-timber` 32.29, `creature-fur` 24.48, `terrain-ground` 23.66,
+`bamboo-foliage` 22.98, `shore-rock` 20.07, `distant-rock` 16.60,
+`ocean-surface` 14.72.
 
-**Read the `sky` figure carefully.** It is not only sky on cloud-heavy cameras. Cloud
-sprites are hidden in the mask pass, because a sprite cannot take a mesh pass
-material, so wherever a cloud is drawn in the lit capture the mask labels that pixel
-`sky`. `authoredOverview` is the camera with clouds across its frame, which is most
-of why it reads 17.55 while the obliques read 3.34 to 9.40. So the remaining sky
-residual is largely a cloud comparison, and clouds belong to Distributed Scene Cover
-(09) and the frozen dynamic environment (13). Attributing them needs a sprite-aware
-index pass; until that exists, `sky` on a cloud-heavy camera means sky-and-cloud.
+**The `sky` figure is still sky-and-cloud, but the clouds are now the candidate's
+too.** Cloud sprites cannot take a mesh pass material, so they are hidden in the
+mask pass and wherever a cloud is drawn in the lit capture the mask labels that
+pixel `sky`. `authoredOverview` is the cloud-heavy camera, which is why it reads
+8.82 while the obliques read 3.84 to 6.15. Giving the candidate's cloud shell its
+measured span, aspect and material took that camera from 16.59 to 8.82, which is
+the strongest evidence available that most of the old residual was the missing
+clouds rather than the dome.
 
-`oblique-south` at 9.40 is the largest true sky residual — it is the camera looking
-towards the sun's azimuth, so the glow terms affect it most, and it is worth a look
-on its own before the sky is called done.
+`oblique-west` at 6.15 is now the largest sky residual and `oblique-south` at 6.12
+the second; the latter looks towards the sun's azimuth, so its glow terms affect it
+most, and it is worth a look on its own before the sky is called done.
 
-## Ticket 09, in progress — read this before touching cover
+## Ticket 09, landed
 
-Cover was planted on the seabed: `buildPopulations` settled every ground instance
-on whatever terrain was under it, and a population's region is an ellipse over an
-island, which is mostly water. Floors were 63 and 64 units below the authored
-ones. Fixed by a waterline rule; floors are now 12.46 to 13.72 against authored
-13.31 to 25.29, and density ratios held because the rule takes the *first* dry
-draw, not the best of the batch.
+Two placement defects were fixed in an earlier round and hold: cover was planted
+on the seabed (a population's region is an ellipse over an island, and an ellipse
+over an island is mostly water), and the waterline rule that fixed it takes the
+*first* dry draw rather than the best of the batch, which is what keeps the
+scatter spread out. Floors are 11.2 to 14.1 against authored 13.3 to 25.3; the
+three small inland populations are still about eleven units low and that residual
+is ticket 03's terrain, not cover's — under those ellipses the candidate's terrain
+tops out near 28 against authored floors of 23.7 to 25.3.
 
-Placement alone made the gate slightly *worse* — cover IoU 0.001371 to 0.000553 —
-because instances hidden underwater became visible. They are also the wrong size.
-Two recipe inputs were invented rather than measured; one is now fixed:
+**What this round found.** The scale correction the previous round made was
+fitted against a reference number that was wrong by forty-one times, and it moved
+a candidate that was within 0.1 per cent of correct *away* from the reference. See
+the section above. Cover was too sparse, not seventeen times too dense.
 
-1. `scaleRange: [0.6, 1.6]` was hardcoded for every population in
-   `build-scene-recipe.mjs`. The reference's measured `worldSurfaceArea` over its
-   instance count implies 1.344, 0.506, 0.696, 0.420 and 0.705 against a
-   candidate RMS of 1.14 — four of five are 1.6 to 2.7 times too large, and area
-   goes as the square. **Fixed:** the recipe now derives the magnitude from the
-   measured area and keeps the spread as a declared shape rule.
-2. Burial depth is unmeasured. Reference `overviewPixels` are 0, 0, 105, 3, 20:
-   the two largest populations occupy no pixels at all. Authored ground rocks are
-   sunk into the terrain; the candidate centres each on the surface. Needs a
-   browser-side measurement of per-instance Y against the terrain beneath it.
+**What cover carries now,** measured per instance by
+`tools/development/measure-cover-instances.mjs` into
+`.scratch/full-island-reconstruction/evidence/cover-instances-v1.json`:
 
-Both changes together took cover pixels on the authored overview from 4,254 to
-2,199 against the reference's 128, and moved the gate stack 6 metrics better
-against 3 worse. `cover` IoU is still 0.0013 against 0.302569, so burial depth is
-where the remaining seventeen-fold over-draw lives. Start there, not with
-placement or scale. Two of the ten fixed-camera gates are `cover`'s
-worst-group rows, so this group is worth more than its pixel count suggests.
+| count | scale | median | exponent | sink | form extent |
+| --- | --- | --- | --- | --- | --- |
+| 4200 | 0.117-1.008 | 0.296 | 2.317 | 0.291 | 2.17 x 1.82 x 2.47 |
+| 948 | 0.424-1.732 | 0.983 | 1.226 | 0 | 2.09 x 1.92 x **0** |
+| 900 | 0.344-2.561 | 0.844 | 2.148 | 0.271 | 2.17 x 1.83 x 2.47 |
+| 145 | 0.464-1.945 | 1.129 | 1.156 | 0 | 1.58 x 2.00 x **0** |
+| 127 | 0.540-1.416 | 0.923 | 1.194 | 0 | 2.02 x 0.89 x **0** |
+
+Three things a summary could not say. The ladder has a *shape* — the rocks are
+power laws at 2.15 and 2.32, and the uniform range derived from measured surface
+area put the median at 1.5 times the authored one with no instance below 0.71, so
+every candidate instance cleared a pixel where the reference renders most of them
+below one. Rasterisation is not linear in size, so matching the sum of squared
+scales does not match pixels. The rocks are **sunk** 0.27 and 0.29 of their own
+scale and the grass is not. And three of the five populations are **two-triangle
+blades with no thickness**, rooted at their base rather than centred: the old
+`kind` rule called anything whose *population bounds* stood taller than three
+units a rock, and the grass ellipses span seven units of terrain, so all five were
+labelled rocks and three got rock albedo and a solid cone.
+
+Ten measured numbers per population now, and the recipe contract rejects a
+population that omits any of them, because every one of them was invented before
+it was measured and two of them were invented twice.
+
+Result: cover contour p95 **173-414 pixels to 22.6-49.0** against a 39.3
+threshold, inside it on five of six cameras and inside the depth threshold on
+four. The remaining gap is generator *form*, not distribution — the authored rock
+is an 80-triangle noise-displaced lump and the candidate's is a 20-triangle
+icosahedron stretched to the same bounding box, which under-draws it.
+
+**Clouds are improved and not finished.** The region is now the band the sprite
+*centres* occupy rather than the band their extents reach, which was
+double-counting each cloud's own radius; the span ladder is the measured sprite
+widths; and the form carries the measured 0.542 height-to-width aspect instead of
+being a sphere. Bounds went from -1,394..4,190 to **-483..3,440** against an
+authored -502..3,175.
+
+Giving them their measured size revealed they had no appearance program at all —
+they drew as opaque `ocean-surface` teal spheres and took `sky` from DeltaE 3.35
+to 29.66 on the north oblique. Rather than shrink them back to invisible, which is
+a missing object hidden inside an appearance average, they now use their sprites'
+own measured material: white, opacity 0.9546, transparent, with the standard
+soft-particle falloff and no fitted constant. Global appearance DeltaE **13.364 to
+13.172** and `sky` on the cloud-heavy overview **16.59 to 8.82** — better than
+before the clouds were sized at all.
+
+The residual: authored span correlates with height at -0.46, higher clouds being
+smaller, and the generator draws scale independently of position. That is one more
+measured number, but clouds are hidden in every auxiliary geometry pass, so their
+only gated contribution is through the `sky` appearance region, which belongs to
+tickets 02 and 13.
+
+**The frozen worst-group intersection no longer gates cover, and this is
+measured.** Through the corrected passes a *mild* 0.02-radian yaw of the reference
+against itself reads 0.0415 on cover and a mild one per cent scale reads 0.1344,
+against 0.302569 — the group is 5,100 instances one to a few pixels across, so
+once anything moves further than an instance's own footprint there is nothing left
+to intersect. A per-pixel intersection is an instance pairing, which Distributed
+Scene Cover is *defined* not to be compared by, so that maximum now ranges over
+identity-bearing groups. Scoping it made it **harder**: `paths` at 0.4299 mild
+against `vegetation` at 0.1872 severe puts the threshold at 0.369228.
+
+Cover stays in every mean, stays in the contour and depth maxima whose own
+brackets separate on it (17.9 to 268.6 pixels, 5.3 to 86.5 world units), and its
+intersection is still reported as `worstDistributed`. A fixture in
+`test/scene-pass-metrics.test.mjs` bounds the scope, because excluding a group
+from a worst-case metric is one keystroke from hiding one.
+
+The declared next step, if a distribution gate is wanted: a position-tolerant
+occupancy comparison calibrated from a new reference-only control that re-draws
+the scatter under the reference's own rule with a different stream. Semantic
+Pattern Coverage is the precedent already in this repo. That needs editing
+`scene-pass-metrics.mjs`, which invalidates every stored capture, so it is a
+deliberate re-measurement rather than a free change.
 
 ## Ticket 04, landed
 
@@ -252,7 +345,7 @@ Neither is gated.
 ## Commands
 
 ```bash
-npm test                              # 227 tests, 225 pass, 2 todo, exits 0
+npm test                              # 255 tests, 249 pass, 2 fail, 4 todo
 npm run check:scene-foundation-reconciliation
 npm run check:reference-observation   # two full browser observations, slow
 npm run check:scene-coverage
@@ -524,62 +617,82 @@ Failing world-geometry metrics:
 | horizon profile p95 | 0.043636 | 0.0165 |
 | worst azimuth horizon error | 0.065655 | 0.0165 |
 
-Per-Material-Family appearance, the largest single residual being `palm-foliage`:
+Per-Material-Family appearance, the largest single residual still being
+`palm-foliage`:
 
 | family | mean DeltaE |
 | --- | --- |
-| palm-foliage | 61.61 |
-| blossom-foliage | 35.32 |
-| painted-timber | 34.38 |
-| paving-stone | 33.83 |
-| creature-fur | 32.99 |
-| ocean-surface | 29.03 |
-| shore-rock | 26.91 |
-| terrain-ground | 22.68 |
-| bamboo-foliage | 22.35 |
-| distant-rock | 16.24 |
+| palm-foliage | 51.87 |
+| blossom-foliage | 33.28 |
+| paving-stone | 33.21 |
+| painted-timber | 32.29 |
+| creature-fur | 24.48 |
+| terrain-ground | 23.66 |
+| bamboo-foliage | 22.98 |
+| shore-rock | 20.07 |
+| distant-rock | 16.60 |
+| ocean-surface | 14.72 |
 
-Global mean 26.17. Worst semantic confusion `geography->horizon` on
-`oblique-north` at 4.17 per cent.
+Global mean 13.172. Worst semantic confusion `geography->horizon` on
+`oblique-north` at 2.59 per cent.
 
-The fixed-camera layer is now evaluated and fails all ten of its metrics. This is
-the first time it has produced a result rather than "not evaluated":
+The fixed-camera layer, against `scene-quality-baseline-v1.2`:
 
-| metric | value | threshold |
-| --- | --- | --- |
-| group silhouette IoU | 0.421857 | 0.745598 |
-| worst group silhouette IoU | 0.000709 | 0.302569 |
-| group contour distance p95 | 74.531695 | 5.874122 |
-| worst group contour distance | 391.562 | 39.2559 |
-| group depth p95 | 29.810676 | 7.644414 |
-| worst group depth p95 | 202.4158 | 22.354947 |
-| group world normal p95 | 71.994121 | 49.456982 |
-| semantic agreement | 0.921404 | 0.987474 |
-| worst camera semantic agreement | 0.885508 | 0.974085 |
-| worst semantic confusion fraction | 0.041653 | 0.007092 |
+| metric | value | threshold | worst row |
+| --- | --- | --- | --- |
+| group silhouette IoU | 0.452862 | 0.724931 | — |
+| worst group silhouette IoU | 0.067961 | 0.369228 | `paths` @ oblique-north |
+| group contour distance p95 | 29.549102 | 6.536774 | — |
+| worst group contour distance | 223.9112 | 39.2559 | `paths` @ topDown |
+| group depth p95 | 21.219442 | 8.173471 | — |
+| worst group depth p95 | 117.194494 | 22.354947 | `structures` @ authoredOverview |
+| group world normal p95 | 79.738478 | 58.959694 | — |
+| semantic agreement | 0.940319 | 0.987465 | — |
+| worst camera semantic agreement | 0.906555 | 0.974068 | `authoredOverview` |
+| worst semantic confusion fraction | 0.025947 | 0.006534 | — |
+
+**Per group, averaged over the six cameras — this is the table to pick work
+from.** `ratio` is candidate pixels over reference pixels, so it says whether a
+group is absent, right-sized, or over-drawn, which an IoU alone cannot.
+
+| group | IoU | contour p95 | depth p95 | ref px | cand px | ratio |
+| --- | --- | --- | --- | --- | --- | --- |
+| cover | 0.0140 | 30.6 | 20.2 | 16,739 | 11,714 | 0.70 |
+| paths | 0.1765 | **111.3** | 0.6 | 465 | 1,457 | **3.13** |
+| rocks | 0.3371 | 25.5 | 3.6 | 8,649 | 8,584 | 0.99 |
+| plazas | 0.3671 | 17.8 | 5.7 | 64,583 | 122,177 | **1.89** |
+| bridges | 0.3695 | 20.4 | 20.7 | 12,915 | 27,191 | **2.11** |
+| wildlife | 0.3986 | 40.3 | 1.6 | 659 | 512 | 0.78 |
+| decorations | 0.4279 | 14.6 | 24.9 | 13,674 | 20,742 | 1.52 |
+| structures | 0.4999 | 14.0 | **58.7** | 57,543 | 51,533 | 0.90 |
+| vegetation | 0.7157 | 11.0 | 31.8 | 331,599 | 368,440 | 1.11 |
+| horizon | 0.7927 | 21.2 | **67.7** | 548,047 | 534,130 | 0.97 |
+| geography | 0.9391 | 17.0 | 5.7 | 5,670,255 | 5,591,769 | 0.99 |
 
 `nativeAppearance` is `blockedBy: ["worldGeometry", "fixedCameraGeometry"]`, which
 is ADR-0040's ordering rule and not a missing calibration. The two states are
 distinguished by `reason` and `blockedBy`, and the red check asserts the
 difference. Certification reports `foundation=PASS candidate=RED (worldGeometry,
 fixedCameraGeometry, nativeAppearance)` against baseline
-`scene-quality-baseline-v1.1`.
+`scene-quality-baseline-v1.2`.
 
-For contrast, the whole-frame numbers on the same capture: silhouette IoU 0.994,
-contour p95 5.67, world normal p95 4.02 degrees. All three look close to perfect
+For contrast, the whole-frame numbers on the same capture: silhouette IoU 0.9969,
+contour p95 2.5, world normal p95 4.86 degrees. All three look close to perfect
 while the per-group figures above are nowhere near. None of them is gated.
-
-Whole-frame world normal fell from 71.22 to 4.02 degrees under the
-depth-correspondence restriction, which is not an improvement in the candidate: it
-means almost all of the old figure came from pixels where the two subjects were
-looking at different surfaces. The per-group figure, 71.99, is the one that
-measures the island.
 
 ## Next steps
 
-Tickets 02 atmosphere, 03 terrain, 05 horizon ridges, and onward. Tickets 03 and
-05 depend only on 3D evidence and are unaffected by the camera and calibration
-work, so they can proceed in parallel.
+**Ticket 06, ground surfaces, and inside it `paths` first.** `paths` now owns two
+of the ten fixed-camera gates — worst group silhouette IoU 0.067961 and worst group
+contour distance 223.9112 — which is the position `cover` held before ADR-0053. It
+is 465 reference pixels drawing 1,457 candidate pixels, a 3.13-fold over-draw of
+the smallest group on the board, with a contour p95 of 111 pixels: the path stones
+are in the wrong places, not merely the wrong shape. `plazas` at 1.89 and `bridges`
+at 2.11 are the same shape of error and are next.
+
+Read the per-group table above rather than the old ranking. `plazas`' reference
+mask was 84 per cent scatter before ADR-0053, so any note about plazas written
+earlier was measured against the wrong thing.
 
 - Ticket 03 is **in progress**; details in its ticket file. The landform fitter gave
   every one of its 40 landforms the same 40-unit radius, so matching pursuit spent
@@ -590,27 +703,37 @@ work, so they can proceed in parallel.
   Two things learned by measuring: fine scales on the shore band pushed coastline
   symmetric p95 from 15.75 past its 22.03 threshold, so they are interior-only now;
   and a peak that no allowed scale can improve must be skipped rather than ending the
-  pursuit, which had left 2 landforms of 40 placed. Four fixed-camera metrics moved
-  the wrong way as a side effect, inside a layer already failing all ten — recorded in
-  the ticket rather than glossed. Next: the shore triple is three numbers for a
-  transition the reference varies by azimuth, and slope is not measured at all.
+  pursuit, which had left 2 landforms of 40 placed. Next: the shore triple is three
+  numbers for a transition the reference varies by azimuth, and slope is not measured
+  at all.
 - Ticket 05 is **landed** and its remaining red is a recorded boundary, not
   unfinished work. Do not re-open it as a fitting problem; the next move is the
   shared form family described above.
-- Ticket 11: `palm-foliage` at DeltaE 51.82 averaged over the six cameras is by
+- Ticket 07: `structures` carries the worst group depth p95 at 58.7 averaged and
+  117.19 on the authored overview, and its pixel ratio is 0.90 — the buildings are
+  roughly the right size and the wrong depth, which is a massing problem rather
+  than a footprint one.
+- Ticket 11: `palm-foliage` at DeltaE 51.87 averaged over the six cameras is by
   some way the largest appearance residual left.
 - Before 06, 07 and 11, build the browser-in-the-loop fitting harness ticket 04
   did without. All three are appearance tickets measurable only through a
   rendered capture, and the existing Reference-guided Fitting Loop is Node-side
-  and measures geometry.
+  and measures geometry. Ticket 09 was pushed through with three 2-minute capture
+  round trips per parameter change, which was affordable only because its
+  corrections were measured rather than searched.
 
 ## Things that are easy to get wrong
 
 - The evidence files are inputs to the gate stack. After changing a generator,
   re-run the measurement commands before reading a report, or the report
   describes the previous candidate.
-- Editing a pass metric invalidates every stored capture, including all sixteen
-  calibration control partials. See the re-measurement order above.
+- Editing what a *pass* measures still invalidates every stored capture, including
+  all sixteen calibration control partials. Editing how the per-camera, per-group
+  rows are *combined* no longer does: `run-fixed-camera-calibration.mjs --aggregate`
+  recomputes `aggregateCameras` from the rows stored in each partial rather than
+  reading the aggregate the browser wrote beside them. That is what made ADR-0053's
+  worst-group scoping change free, and it is worth keeping in mind before assuming a
+  re-render is needed.
 - `tools/evaluation/reference-classification.json` is gitignored and no script
   writes it. Anything that must run on a clean checkout has to read the Scene
   Recipe instead, which is committed and reference-measured.
@@ -625,8 +748,9 @@ work, so they can proceed in parallel.
   everything it depends on.
 - Semantic structure is a one-sided deficit. Do not restore an absolute delta:
   penalising extra parts equally pushes every generator toward a single mass.
-- Generation is currently 0.58 to 1.9 s and 679,745 triangles at 1,714 draw calls.
-  Triangles and draw calls are outside any sensible budget and belong to ticket 14.
+- Generation is currently 0.63 s and 664,649 triangles at 1,708 draw calls, and the
+  production bundle is 38,561 B gzip. Triangles and draw calls are outside any
+  sensible budget and belong to ticket 14.
 - `renderer.info` resets on every render call, and the composer makes several, so
   reading it after the chain measures the output pass's fullscreen quad. It reported
   1 triangle and 1 draw call, and the certification recorded that. The runtime now
