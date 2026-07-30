@@ -73,7 +73,24 @@ const WILDLIFE = Object.freeze({
  *   `members` maps each renderable path to its placement key, so coverage can
  *   account for every row without regrouping.
  */
-export function readAuthoredPlacements(inventory) {
+/** Bounded multi-form controls for one Horizon Group. */
+export const HORIZON_PEAK_CAP = 8;
+
+function horizonShape(peaks) {
+  const bounded = peaks.slice(0, HORIZON_PEAK_CAP);
+  return {
+    // Peaks carry the ridge line; the lower measured maxima are the foothills
+    // that fill the group's silhouette between them.
+    peaks: bounded
+      .filter((peak) => peak.height >= 0.6)
+      .map((peak) => ({ offset: peak.offset, height: peak.height })),
+    foothills: bounded
+      .filter((peak) => peak.height < 0.6)
+      .map((peak) => ({ offset: peak.offset, height: peak.height })),
+  };
+}
+
+export function readAuthoredPlacements(inventory, horizonEvidence = null) {
   const placements = new Map();
   const members = new Map();
   for (const item of inventory.items) {
@@ -105,6 +122,9 @@ export function readAuthoredPlacements(inventory) {
     placements.set(resolved.key, placement);
   }
 
+  const horizonByPath = new Map(
+    (horizonEvidence?.groups ?? []).map((group) => [group.path, group]),
+  );
   const rows = [...placements.values()].map((placement) => {
     const extent = [0, 1, 2].map((axis) =>
       Math.max(MINIMUM_EXTENT, round(placement.max[axis] - placement.min[axis])),
@@ -116,6 +136,7 @@ export function readAuthoredPlacements(inventory) {
     ];
     const semantics =
       placement.family === "wildlife-rig" ? WILDLIFE : resolveFamily(placement.family, extent);
+    const horizon = horizonByPath.get(placement.key);
     return {
       ...placement,
       anchor,
@@ -125,6 +146,7 @@ export function readAuthoredPlacements(inventory) {
       materialFamily: semantics.material,
       orientation: orientationFor(semantics.orientation, placement.dominant?.orientation),
       semanticId: semanticIdFor(semantics.group, semantics.kind, anchor),
+      shape: horizon ? horizonShape(horizon.peaks) : undefined,
     };
   });
 

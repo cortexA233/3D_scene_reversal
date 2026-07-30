@@ -175,33 +175,43 @@ function slab(rng, { sides = 7 } = {}) {
   return group([part(new THREE.Mesh(geometry), "slab")]);
 }
 
-/** Multi-form horizon ridge with peaks, saddles, and foothills. */
-function horizonGroup(rng) {
+/**
+ * Multi-form horizon ridge.
+ *
+ * Peaks and foothills come from the Horizon Group's own bounded controls, so
+ * the skyline is an authored multi-form ridge rather than a scaled Stone or a
+ * random cone population. A saddle is the generated gap between two adjacent
+ * peaks, which is why the peaks are placed rather than distributed.
+ */
+function horizonGroup(rng, shape) {
+  const peaks = shape?.peaks?.length ? shape.peaks : [{ offset: [0, 0], height: 1 }];
+  const foothills = shape?.foothills ?? [];
   const parts = [];
-  const peaks = 3 + Math.floor(rng.nextFloat() * 3);
-  for (let index = 0; index < peaks; index += 1) {
-    const solid = supportSolid(rng, { rings: 4, sides: 9, roughness: 0.4 });
-    const height = 0.55 + rng.nextFloat() * 0.45;
-    const spread = 0.5 - Math.abs(index / (peaks - 1 || 1) - 0.5) * 0.2;
-    solid.scale.set(spread, height / 2, spread * 0.8);
-    solid.position.set(
-      (index / (peaks - 1 || 1) - 0.5) * 0.9,
-      height / 2,
-      (rng.nextFloat() - 0.5) * 0.3,
-    );
+
+  peaks.forEach((peak, index) => {
+    const solid = supportSolid(rng, { rings: 4, sides: 9, roughness: 0.34 });
+    // A peak's footprint scales with its prominence so a dominant summit reads
+    // as a massif and a secondary one as a shoulder.
+    const spread = 0.22 + peak.height * 0.26;
+    solid.scale.set(spread, peak.height / 2, spread * 0.86);
+    solid.position.set(peak.offset[0], peak.height / 2, peak.offset[1]);
     parts.push(part(solid, `peak-${index}`));
-  }
-  const foothills = 2 + Math.floor(rng.nextFloat() * 3);
-  for (let index = 0; index < foothills; index += 1) {
-    const solid = supportSolid(rng, { rings: 3, sides: 7, roughness: 0.5 });
-    const height = 0.18 + rng.nextFloat() * 0.16;
-    solid.scale.set(0.3, height / 2, 0.26);
-    solid.position.set(
-      (rng.nextFloat() - 0.5) * 1.1,
-      height / 2,
-      0.2 + rng.nextFloat() * 0.3,
-    );
+  });
+  foothills.forEach((foothill, index) => {
+    const solid = supportSolid(rng, { rings: 3, sides: 7, roughness: 0.46 });
+    const spread = 0.16 + foothill.height * 0.2;
+    solid.scale.set(spread, foothill.height / 2, spread * 0.8);
+    solid.position.set(foothill.offset[0], foothill.height / 2, foothill.offset[1]);
     parts.push(part(solid, `foothill-${index}`));
+  });
+  // A single-summit group still needs a saddle-forming shoulder so its
+  // silhouette is not one symmetric dome.
+  if (peaks.length === 1 && foothills.length === 0) {
+    const solid = supportSolid(rng, { rings: 3, sides: 7, roughness: 0.5 });
+    const height = 0.45 + rng.nextFloat() * 0.2;
+    solid.scale.set(0.24, height / 2, 0.2);
+    solid.position.set(0.3, height / 2, -0.12);
+    parts.push(part(solid, "shoulder"));
   }
   return group(parts);
 }
@@ -435,12 +445,13 @@ export function hasSceneGeneratorKind(kind) {
  *
  * @param {string} kind
  * @param {number} seed unsigned 32-bit derived geometry seed
+ * @param {object} [shape] the entity's compact local shape controls
  */
-export function generateSceneObject(kind, seed) {
+export function generateSceneObject(kind, seed, shape) {
   const generator = GENERATORS[kind];
   if (!generator) throw new Error(`Unknown scene generator kind: ${kind}`);
 
-  const local = generator(createSeededRng(seed), UNIT);
+  const local = generator(createSeededRng(seed), shape ?? UNIT);
   if (!local?.isObject3D) {
     throw new TypeError(`${kind} generator must return one THREE.Object3D root`);
   }

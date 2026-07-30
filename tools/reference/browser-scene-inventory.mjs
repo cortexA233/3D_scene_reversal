@@ -1,5 +1,10 @@
 import * as THREE from "three";
 
+import {
+  HORIZON_BINS,
+  accumulateMeshTriangles,
+  createProfileAccumulator,
+} from "../evaluation/horizon-profile.mjs";
 import { createReferenceAccess } from "./reference-access.mjs";
 import { createReferenceObservationContract } from "./reference-observation-contract.mjs";
 
@@ -372,6 +377,120 @@ function collectElevation(runtime) {
   };
 }
 
+/**
+ * Horizon evidence.
+ *
+ * The Horizon Profile is the elevation angle of visible distant geometry as a
+ * function of azimuth around the fixed Scene Anchor. It is computed exactly
+ * from the distant meshes' own vertices rather than from a screenshot, so it is
+ * independent of any camera, and each Horizon Group also keeps its own profile
+ * and a bounded set of local peak descriptors.
+ */
+const HORIZON_MINIMUM_DISTANCE = 700;
+const HORIZON_MAXIMUM_SPAN = 2000;
+const HORIZON_MINIMUM_HEIGHT = 50;
+const HORIZON_PEAK_CAP = 8;
+
+function groupHorizonProfile(mesh, anchor) {
+  const accumulator = createProfileAccumulator(anchor, HORIZON_BINS);
+  const point = new THREE.Vector3();
+  accumulateMeshTriangles(mesh, accumulator, (local) => {
+    point.set(local[0], local[1], local[2]).applyMatrix4(mesh.matrixWorld);
+    return [point.x, point.y, point.z];
+  });
+  const measured = accumulator.result();
+  if (!measured.depthInterval) return null;
+  return {
+    profile: measured.profile.map((value) => (value === null ? null : round(value, 6))),
+    depthInterval: measured.depthInterval.map((value) => round(value, 2)),
+  };
+}
+
+/**
+ * A bounded set of local peaks in the group's own frame, expressed as
+ * normalized offsets so a generator can reproduce the multi-form shape without
+ * copying vertices.
+ */
+function groupPeaks(mesh) {
+  const position = mesh.geometry?.attributes?.position;
+  if (!position) return [];
+  const box = new THREE.Box3().setFromObject(mesh);
+  const size = box.getSize(new THREE.Vector3());
+  const cells = 12;
+  const heights = new Array(cells * cells).fill(Number.NEGATIVE_INFINITY);
+  const point = new THREE.Vector3();
+  for (let index = 0; index < position.count; index += 1) {
+    point.fromBufferAttribute(position, index).applyMatrix4(mesh.matrixWorld);
+    const u = Math.min(cells - 1, Math.max(0, Math.floor(((point.x - box.min.x) / Math.max(1e-6, size.x)) * cells)));
+    const v = Math.min(cells - 1, Math.max(0, Math.floor(((point.z - box.min.z) / Math.max(1e-6, size.z)) * cells)));
+    const normalized = (point.y - box.min.y) / Math.max(1e-6, size.y);
+    if (normalized > heights[v * cells + u]) heights[v * cells + u] = normalized;
+  }
+  const peaks = [];
+  for (let v = 0; v < cells; v += 1) {
+    for (let u = 0; u < cells; u += 1) {
+      const height = heights[v * cells + u];
+      if (!Number.isFinite(height) || height < 0.35) continue;
+      let isPeak = true;
+      for (let dv = -1; dv <= 1 && isPeak; dv += 1) {
+        for (let du = -1; du <= 1; du += 1) {
+          if (du === 0 && dv === 0) continue;
+          const nu = u + du;
+          const nv = v + dv;
+          if (nu < 0 || nv < 0 || nu >= cells || nv >= cells) continue;
+          if (heights[nv * cells + nu] > height) {
+            isPeak = false;
+            break;
+          }
+        }
+      }
+      if (!isPeak) continue;
+      peaks.push({
+        offset: [round((u + 0.5) / cells - 0.5, 4), round((v + 0.5) / cells - 0.5, 4)],
+        height: round(height, 4),
+      });
+    }
+  }
+  return peaks.sort((a, b) => b.height - a.height).slice(0, HORIZON_PEAK_CAP);
+}
+
+function collectHorizon(meshes, anchor) {
+  const combined = new Array(HORIZON_BINS).fill(Number.NEGATIVE_INFINITY);
+  const groups = [];
+  for (const { object, path } of meshes) {
+    // Horizon Groups are distant landform meshes. Cloud sprites, the sky shell,
+    // and the ocean plane are separate scene layers and are excluded by
+    // measured type and extent rather than by name.
+    if (!object.isMesh || object.isInstancedMesh) continue;
+    const bounds = new THREE.Box3().setFromObject(object);
+    if (!Number.isFinite(bounds.min.x)) continue;
+    const size = bounds.getSize(new THREE.Vector3());
+    if (Math.max(size.x, size.z) > HORIZON_MAXIMUM_SPAN || size.y < HORIZON_MINIMUM_HEIGHT) {
+      continue;
+    }
+    const centre = bounds.getCenter(new THREE.Vector3());
+    if (Math.hypot(centre.x - anchor[0], centre.z - anchor[2]) < HORIZON_MINIMUM_DISTANCE) {
+      continue;
+    }
+    const evidence = groupHorizonProfile(object, anchor);
+    if (!evidence) continue;
+    groups.push({ path, ...evidence, peaks: groupPeaks(object) });
+    evidence.profile.forEach((value, bin) => {
+      if (value !== null && value > combined[bin]) combined[bin] = value;
+    });
+  }
+  return {
+    schemaVersion: "horizon-evidence-v1",
+    anchor,
+    bins: HORIZON_BINS,
+    minimumDistance: HORIZON_MINIMUM_DISTANCE,
+    maximumSpan: HORIZON_MAXIMUM_SPAN,
+    minimumHeight: HORIZON_MINIMUM_HEIGHT,
+    combined: combined.map((value) => (Number.isFinite(value) ? round(value, 6) : null)),
+    groups,
+  };
+}
+
 function collectInventory(scene, camera, renderer) {
   scene.updateMatrixWorld(true);
   const rows = walkRenderables(scene);
@@ -420,6 +539,7 @@ function collectInventory(scene, camera, renderer) {
     lights: lights.map(({ object, path }) => ({ path, ...lightSummary(object) })),
     samples,
     elevation: collectElevation(window.island),
+    horizon: collectHorizon(meshes, [86, 26, -24]),
   };
 }
 

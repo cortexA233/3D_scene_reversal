@@ -1983,7 +1983,26 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.0417,
+              0.125
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              -0.2083,
+              -0.0417
+            ],
+            "height": 0.8142
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-n10467-n0177-p5763",
@@ -2003,7 +2022,40 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.125,
+              0.2083
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              -0.2083,
+              -0.2917
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              0.2083,
+              0.375
+            ],
+            "height": 0.9068
+          },
+          {
+            "offset": [
+              -0.0417,
+              -0.125
+            ],
+            "height": 0.7653
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-n11978-n0044-p0122",
@@ -2023,7 +2075,26 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.125,
+              -0.0417
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              -0.0417,
+              0.2083
+            ],
+            "height": 0.8142
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-n3462-n0175-n14963",
@@ -2043,7 +2114,40 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              -0.2083,
+              0.125
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              0.2917,
+              -0.2083
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              -0.375,
+              0.2917
+            ],
+            "height": 0.9068
+          },
+          {
+            "offset": [
+              0.125,
+              -0.125
+            ],
+            "height": 0.7654
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-n5842-n0144-p11647",
@@ -2063,7 +2167,33 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              -0.375,
+              -0.2083
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              0.2917,
+              0.2083
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              -0.0417,
+              -0.0417
+            ],
+            "height": 0.7654
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-n8045-n0112-n12155",
@@ -2083,7 +2213,19 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.0417,
+              -0.125
+            ],
+            "height": 1
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-n9204-n0033-p11102",
@@ -2103,7 +2245,26 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.0417,
+              0.125
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              -0.2083,
+              -0.0417
+            ],
+            "height": 0.8142
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-n9833-n0179-n6913",
@@ -2123,7 +2284,48 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              -0.125,
+              0.2083
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              0.2083,
+              -0.2917
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              -0.2917,
+              0.375
+            ],
+            "height": 0.9068
+          },
+          {
+            "offset": [
+              0.0417,
+              -0.125
+            ],
+            "height": 0.7653
+          }
+        ],
+        "foothills": [
+          {
+            "offset": [
+              0.0417,
+              0.0417
+            ],
+            "height": 0.5792
+          }
+        ]
+      }
     },
     {
       "semanticId": "horizon/mountain-p0998-n0042-n16559",
@@ -2143,7 +2345,26 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.125,
+              -0.0417
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              -0.0417,
+              0.125
+            ],
+            "height": 0.8142
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-p10270-n0243-n9219",
@@ -2163,7 +2384,33 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              -0.2917,
+              -0.375
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              0.2083,
+              0.2083
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              0.0417,
+              -0.0417
+            ],
+            "height": 0.7653
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-p12605-n0303-p7305",
@@ -2183,7 +2430,48 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.125,
+              -0.2083
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              -0.2083,
+              0.2917
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              0.375,
+              -0.375
+            ],
+            "height": 0.9068
+          },
+          {
+            "offset": [
+              -0.0417,
+              0.125
+            ],
+            "height": 0.7653
+          }
+        ],
+        "foothills": [
+          {
+            "offset": [
+              -0.0417,
+              -0.0417
+            ],
+            "height": 0.5792
+          }
+        ]
+      }
     },
     {
       "semanticId": "horizon/mountain-p12963-n0247-n0827",
@@ -2203,7 +2491,40 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              -0.125,
+              -0.2083
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              0.125,
+              0.2917
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              -0.2083,
+              -0.4583
+            ],
+            "height": 0.9068
+          },
+          {
+            "offset": [
+              0.0417,
+              0.125
+            ],
+            "height": 0.7654
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-p13216-n0122-p9483",
@@ -2223,7 +2544,19 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              -0.0417,
+              0.125
+            ],
+            "height": 1
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-p13705-n0034-p3644",
@@ -2243,7 +2576,26 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.125,
+              -0.0417
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              -0.0417,
+              0.2083
+            ],
+            "height": 0.8142
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-p5206-n0195-n14447",
@@ -2263,7 +2615,33 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              -0.375,
+              -0.2917
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              0.2083,
+              0.2083
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              -0.0417,
+              -0.0417
+            ],
+            "height": 0.7653
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "horizon/mountain-p5857-n0343-p11498",
@@ -2283,7 +2661,40 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "distant-rock"
+      "materialFamily": "distant-rock",
+      "shape": {
+        "peaks": [
+          {
+            "offset": [
+              0.2083,
+              -0.125
+            ],
+            "height": 1
+          },
+          {
+            "offset": [
+              -0.2917,
+              0.125
+            ],
+            "height": 0.987
+          },
+          {
+            "offset": [
+              0.4583,
+              -0.2083
+            ],
+            "height": 0.9068
+          },
+          {
+            "offset": [
+              -0.125,
+              0.0417
+            ],
+            "height": 0.7654
+          }
+        ],
+        "foothills": []
+      }
     },
     {
       "semanticId": "paths/path-stone-n0582-p0256-p0342",

@@ -49,6 +49,11 @@ const ELEVATION_PATH = path.join(
   PROJECT_ROOT,
   ".scratch/scene-parity-foundation/evidence/terrain-elevation-v1.json",
 );
+/** Reference Horizon Profile and per-group horizon evidence. */
+const HORIZON_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/scene-parity-foundation/evidence/horizon-reference-v1.json",
+);
 const checkOnly = process.argv.includes("--check");
 const contract = createReferenceObservationContract();
 
@@ -97,13 +102,15 @@ async function main() {
     true,
     "measuring the Assembled Authored Scene changed it",
   );
-  const { samples, elevation, ...inventory } = run.state.report;
+  const { samples, elevation, horizon, ...inventory } = run.state.report;
   assert.equal(inventory.schemaVersion, "scene-inventory-v1");
   assert.equal(
     elevation?.schemaVersion,
     "terrain-elevation-v1",
     "the assembled scene did not expose its elevation function",
   );
+  assert.equal(horizon?.schemaVersion, "horizon-evidence-v1");
+  assert.ok(horizon.groups.length > 0, "no distant Horizon Groups were measured");
   if (!checkOnly) {
     await mkdir(path.dirname(INVENTORY_PATH), { recursive: true });
     await Promise.all([
@@ -115,6 +122,8 @@ async function main() {
 `,
       ),
       writeFile(ELEVATION_PATH, `${JSON.stringify(elevation)}
+`),
+      writeFile(HORIZON_PATH, `${JSON.stringify(horizon)}
 `),
     ]);
   }

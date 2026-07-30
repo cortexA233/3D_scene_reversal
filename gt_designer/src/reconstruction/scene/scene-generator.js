@@ -269,7 +269,7 @@ export function generateScene(recipe, options = {}) {
       continue;
     }
     const seeds = derivedSeeds(recipe, entity.semanticId);
-    const form = generateSceneObject(entity.kind, seeds.geometry);
+    const form = generateSceneObject(entity.kind, seeds.geometry, entity.shape);
     materials.apply(form, entity.materialFamily, seeds.material);
     const holder = placeEntity(entity, form);
     contractErrors.push(...contractErrorsFor(entity, holder));

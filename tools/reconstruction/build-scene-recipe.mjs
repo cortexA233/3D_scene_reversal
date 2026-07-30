@@ -52,6 +52,10 @@ const ELEVATION_PATH = path.join(
   PROJECT_ROOT,
   ".scratch/scene-parity-foundation/evidence/terrain-elevation-v1.json",
 );
+const HORIZON_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/scene-parity-foundation/evidence/horizon-reference-v1.json",
+);
 
 /** One stable root identity for the whole island. */
 const SCENE_SEED = 20260729;
@@ -69,8 +73,8 @@ const MATERIAL_FAMILIES = [
   { id: "creature-fur", role: "wildlife", albedo: [0.86, 0.85, 0.84], roughness: 0.85 },
 ];
 
-function buildEntities(inventory) {
-  return readAuthoredPlacements(inventory).placements.map((placement) => ({
+function buildEntities(inventory, horizonEvidence) {
+  return readAuthoredPlacements(inventory, horizonEvidence).placements.map((placement) => ({
     semanticId: placement.semanticId,
     kind: placement.kind,
     group: placement.group,
@@ -78,6 +82,7 @@ function buildEntities(inventory) {
     extent: placement.extent,
     orientation: placement.orientation,
     materialFamily: placement.materialFamily,
+    ...(placement.shape ? { shape: placement.shape } : {}),
   }));
 }
 
@@ -249,8 +254,8 @@ function buildTerrain(elevation, world) {
   });
 }
 
-function buildRecipe(inventory, elevation) {
-  const entities = buildEntities(inventory);
+function buildRecipe(inventory, elevation, horizonEvidence) {
+  const entities = buildEntities(inventory, horizonEvidence);
   return {
     schemaVersion: SCENE_RECIPE_SCHEMA_VERSION,
     generatorVersion: SCENE_GENERATOR_VERSION,
@@ -285,14 +290,16 @@ export const ISLAND_SCENE_RECIPE = Object.freeze(${JSON.stringify(recipe, null, 
 }
 
 async function main() {
-  const [inventory, elevation] = await Promise.all([
+  const [inventory, elevation, horizonEvidence] = await Promise.all([
     readFile(INVENTORY_PATH, "utf8").then(JSON.parse),
     readFile(ELEVATION_PATH, "utf8").then(JSON.parse),
+    readFile(HORIZON_PATH, "utf8").then(JSON.parse),
   ]);
   assert.equal(inventory.schemaVersion, "scene-inventory-v1");
   assert.equal(elevation.schemaVersion, "terrain-elevation-v1");
+  assert.equal(horizonEvidence.schemaVersion, "horizon-evidence-v1");
 
-  const recipe = buildRecipe(inventory, elevation);
+  const recipe = buildRecipe(inventory, elevation, horizonEvidence);
   assert.deepEqual(
     validateSceneRecipe(recipe),
     [],
