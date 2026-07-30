@@ -16,9 +16,11 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Camera-set v2 migration (ADR-0049, ADR-0050) | done |
 | Reconstruction 01 — calibrate the two rendered gate layers (ADR-0051) | done |
 | Reconstruction 02 — atmosphere | in progress, see below |
+| Reconstruction 04 — ocean surface | landed; gate red behind vegetation and architecture |
 | Reconstruction 05 — horizon ridges | landed; gate red at a recorded boundary (ADR-0052) |
 | Reconstruction 08 — vegetation canopies | done |
-| Reconstruction 03, 04, 06, 07, 09-16 | ready-for-agent |
+| Reconstruction 03 | in progress, see below |
+| Reconstruction 06, 07, 09-16 | ready-for-agent |
 
 ## Ticket 02, in progress
 
@@ -67,14 +69,20 @@ the horizon colour and does not cull the dome. `authoredOverview` sky fell from
 | region | DeltaE | belongs to |
 | --- | --- | --- |
 | sky | 3.34 on `oblique-north`, 17.55 on `authoredOverview` | 02, but see below |
-| horizon | 6.99 to 12.28 | 05 |
-| geography | 16.90 to 26.14, about a million pixels per camera | 03, 04 |
+| horizon | 8.19 to 11.86 | 05, at its recorded boundary |
+| geography | 7.80 to 16.34 after ticket 04, about a million pixels per camera | 03 |
 | plazas | 26.40 to 34.20 | 06 |
 | structures | 31.19 to 40.19 | 07, 11 |
 | vegetation | 38.31 to 52.23 | 11 |
 
-Global appearance DeltaE is 21.531 against a calibrated threshold of 2.852, worst
-camera `topDown` at 28.595.
+Global appearance DeltaE is 13.369 against a calibrated threshold of 2.852, worst
+camera `authoredOverview` at 19.176. It was 21.531 before ticket 04.
+
+Per Material Family, averaged over the six cameras, which is the ranking to work
+down: `palm-foliage` 51.82, `paving-stone` 33.15, `blossom-foliage` 32.82,
+`painted-timber` 32.26, `creature-fur` 24.48, `terrain-ground` 23.82,
+`bamboo-foliage` 22.98, `shore-rock` 20.22, `ocean-surface` 10.57,
+`distant-rock` 9.41.
 
 **Read the `sky` figure carefully.** It is not only sky on cloud-heavy cameras. Cloud
 sprites are hidden in the mask pass, because a sprite cannot take a mesh pass
@@ -88,6 +96,34 @@ index pass; until that exists, `sky` on a cloud-heavy camera means sky-and-cloud
 `oblique-south` at 9.40 is the largest true sky residual — it is the camera looking
 towards the sun's azimuth, so the glow terms affect it most, and it is worth a look
 on its own before the sky is called done.
+
+## Ticket 04, landed
+
+The authored sea is `THREE.Water` — mirror render target, four samples of a
+loaded `waternormals.jpg`, Schlick Fresnel, Blinn-Phong sun. The candidate had a
+flat `MeshStandardMaterial` plane. It is now an analytic `ShaderMaterial` whose
+wave bands stand in for the normal map's own tilings and whose reflection samples
+the same sky gradient the dome renders, so the water and the backdrop cannot
+disagree. Thirteen numbers added to the Environment Recipe; nothing loaded.
+
+Ocean DeltaE per camera 26.04/25.64/16.13/20.29/18.89/19.70 ->
+15.34/9.86/7.15/11.24/10.20/9.62. **Global appearance DeltaE 21.311 -> 13.369.**
+Every geometry metric unchanged, which is what an appearance-only change should
+do. Worst camera is `authoredOverview`, the framing that looks along the sea to
+the horizon.
+
+The phase is *declared*, not read from a clock: the Frozen Observation Clock pins
+`performance.now()`, so the authored surface's own frame delta is zero and it
+renders one repeatable phase. A Production Runtime may not read device state, so
+`environment.ocean.phase` carries it.
+
+**What is not done:** the wave amplitudes and the shader's three coefficient
+pairs are the authored values used as-is, unfitted. Fitting them needs a browser
+in the loop, because the sea is only measurable through a rendered capture, and
+the Reference-guided Fitting Loop is Node-side and measures geometry. **Build
+that harness before tickets 06, 07 and 11** — all three are appearance tickets
+with exactly this shape, and each will otherwise be hand-tuned through 90-second
+capture round trips.
 
 ## Ticket 05, landed, and the boundary it found
 
@@ -529,7 +565,12 @@ work, so they can proceed in parallel.
 - Ticket 05 is **landed** and its remaining red is a recorded boundary, not
   unfinished work. Do not re-open it as a fitting problem; the next move is the
   shared form family described above.
-- Ticket 11: `palm-foliage` at DeltaE 61.61 is the largest appearance residual.
+- Ticket 11: `palm-foliage` at DeltaE 51.82 averaged over the six cameras is by
+  some way the largest appearance residual left.
+- Before 06, 07 and 11, build the browser-in-the-loop fitting harness ticket 04
+  did without. All three are appearance tickets measurable only through a
+  rendered capture, and the existing Reference-guided Fitting Loop is Node-side
+  and measures geometry.
 
 ## Things that are easy to get wrong
 

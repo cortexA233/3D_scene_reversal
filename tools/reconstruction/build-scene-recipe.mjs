@@ -272,6 +272,22 @@ const ENVIRONMENT = {
     // far plane measured from the outermost oblique camera at ~5100 units, not
     // from the world origin.
     extent: 74000,
+    // The authored surface animates its normal map and the Frozen Observation
+    // Clock pins `performance.now()`, so the reference renders one repeatable
+    // phase and its own frame delta is zero. The candidate reaches the same
+    // repeatability by declaring the phase instead of reading a clock.
+    phase: 0,
+    // Standing in for the authored normal map's four tilings: `Water` divides
+    // world XY by 103, 107, 1091 and 8907 at `size` 2, which is two fine bands
+    // near fifty units and two long swells. Amplitudes are slopes, not heights:
+    // the surface stays flat on the datum and only its normal moves, exactly as
+    // the authored one does.
+    waveBands: [
+      { wavelength: 51.5, amplitude: 0.09, angle: 0.34 },
+      { wavelength: 53.5, amplitude: 0.08, angle: 1.92 },
+      { wavelength: 545, amplitude: 0.55, angle: 0.82 },
+      { wavelength: 4450, amplitude: 2.6, angle: 2.51 },
+    ],
   },
   renderer: {
     toneMapping: "ACESFilmicToneMapping",

@@ -92,7 +92,30 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "sunColor": 16773327,
       "distortion": 1.6,
       "alpha": 0.92,
-      "extent": 74000
+      "extent": 74000,
+      "phase": 0,
+      "waveBands": [
+        {
+          "wavelength": 51.5,
+          "amplitude": 0.09,
+          "angle": 0.34
+        },
+        {
+          "wavelength": 53.5,
+          "amplitude": 0.08,
+          "angle": 1.92
+        },
+        {
+          "wavelength": 545,
+          "amplitude": 0.55,
+          "angle": 0.82
+        },
+        {
+          "wavelength": 4450,
+          "amplitude": 2.6,
+          "angle": 2.51
+        }
+      ]
     },
     "renderer": {
       "toneMapping": "ACESFilmicToneMapping",

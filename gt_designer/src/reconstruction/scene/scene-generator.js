@@ -162,7 +162,7 @@ function buildEnvironment(recipe, materials) {
 
   const ocean = new THREE.Mesh(
     new THREE.PlaneGeometry(environment.ocean.extent, environment.ocean.extent, 1, 1),
-    materials.ocean(environment.ocean),
+    materials.ocean(environment.ocean, environment.sky, sunDirection),
   );
   ocean.rotation.x = -Math.PI / 2;
   ocean.position.y = recipe.world.semanticSeaLevel;
