@@ -5,6 +5,7 @@ import {
   accumulateMeshTriangles,
   createProfileAccumulator,
 } from "../evaluation/horizon-profile.mjs";
+import { tintedInstancedMeshes } from "../evaluation/scene-pass-encoding.mjs";
 import { createReferenceAccess } from "./reference-access.mjs";
 import { createReferenceObservationContract } from "./reference-observation-contract.mjs";
 
@@ -222,6 +223,20 @@ function measureVisiblePixels(renderer, scene, camera, meshes) {
 
   const restore = [];
   const idMaterials = [];
+  // three.js multiplies a material's colour by an InstancedMesh's per-instance
+  // colour whenever one is present, so an identity written onto a mesh that
+  // carries `instanceColor` comes back tinted and decodes as a different mesh.
+  // Two of the reference's five cover populations call `setColorAt`; measured,
+  // that lost 5,100 authored instances from this pass and credited their pixels
+  // to whichever identity the tinted value happened to land on. Suppressed for
+  // the pass and restored with the materials.
+  for (const object of tintedInstancedMeshes(scene)) {
+    const instanceColor = object.instanceColor;
+    object.instanceColor = null;
+    restore.push(() => {
+      object.instanceColor = instanceColor;
+    });
+  }
   meshes.forEach(({ object }, index) => {
     const [r, g, b] = idToColor(index + 1);
     const material = new THREE.MeshBasicMaterial({

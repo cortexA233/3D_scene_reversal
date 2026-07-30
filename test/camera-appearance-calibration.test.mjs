@@ -432,6 +432,23 @@ test("extending the baseline is recorded as a versioned migration", async () => 
     [],
     "this revision may add layers and may not move a geometry threshold",
   );
+  // A rendered threshold may move, but only when the revision names which one and
+  // by how much. Re-deriving the two rendered layers under a corrected pass
+  // encoding is exactly that case (ADR-0053), and the alternative — a silent
+  // change of what a threshold means — is the failure this field exists to catch.
+  for (const migration of baseline.migrations) {
+    assert.ok(
+      Array.isArray(migration.movedRenderedThresholds),
+      `${migration.version} does not say which rendered thresholds it moved`,
+    );
+    for (const entry of migration.movedRenderedThresholds) {
+      assert.match(
+        entry,
+        /^(fixedCameraGeometry|nativeAppearance)\/.+: (.+ -> .+|dropped)$/,
+        `a moved rendered threshold must name its layer, metric, and both values: ${entry}`,
+      );
+    }
+  }
 });
 
 test("an uncalibrated layer still refuses to pass vacuously", () => {

@@ -294,6 +294,78 @@ export function createMaterialFamilies(recipe) {
     });
   }
 
+  /**
+   * The cloud shell.
+   *
+   * The authored clouds are 34 `Sprite`s: white, transparent at a measured mean
+   * opacity of 0.955, and carrying a soft puff texture that the Production Runtime
+   * may not load. Their spans were unmeasured, so the candidate drew them as
+   * one-unit spheres — present in the recipe and invisible on screen, which is a
+   * missing object hidden inside an appearance average rather than a small error.
+   *
+   * Sized correctly they need the rest of what a sprite is, or a correctly-sized
+   * opaque ball is worse than no cloud at all: measured, an opaque `ocean-surface`
+   * sphere took the `sky` region from DeltaE 3.35 to 29.66 on the north oblique.
+   * The colour and opacity here are the sprites' own measured values. The soft edge
+   * is the standard soft-particle falloff — the fragment fades as the surface turns
+   * away from the eye, so a low-poly sphere reads as a volume with no silhouette of
+   * its own — and it carries no fitted constant.
+   *
+   * `depthWrite: false` because a translucent shell must not occlude the shell
+   * behind it, and `fog: true` because a cloud at 6,000 units is inside the same
+   * atmosphere everything else is.
+   */
+  function clouds(controls) {
+    return new THREE.ShaderMaterial({
+      transparent: true,
+      depthWrite: false,
+      fog: true,
+      side: THREE.DoubleSide,
+      uniforms: THREE.UniformsUtils.merge([
+        THREE.UniformsLib.fog,
+        {
+          tint: { value: new THREE.Color(controls.color) },
+          opacity: { value: controls.opacity },
+        },
+      ]),
+      vertexShader: `
+        #include <fog_pars_vertex>
+        varying vec3 vViewNormal;
+        varying vec3 vViewPosition;
+        void main() {
+          vec4 local = vec4(position, 1.0);
+          #ifdef USE_INSTANCING
+            local = instanceMatrix * local;
+          #endif
+          vec3 objectNormal = normal;
+          #ifdef USE_INSTANCING
+            objectNormal = mat3(instanceMatrix) * objectNormal;
+          #endif
+          vViewNormal = normalize(normalMatrix * objectNormal);
+          vec4 mvPosition = modelViewMatrix * local;
+          vViewPosition = mvPosition.xyz;
+          gl_Position = projectionMatrix * mvPosition;
+          #include <fog_vertex>
+        }
+      `,
+      fragmentShader: `
+        #include <fog_pars_fragment>
+        uniform vec3 tint;
+        uniform float opacity;
+        varying vec3 vViewNormal;
+        varying vec3 vViewPosition;
+        void main() {
+          vec3 eye = normalize(-vViewPosition);
+          // Thickest where the shell faces the eye and gone at the rim, which is
+          // what makes a puff out of a polyhedron.
+          float thickness = max(dot(normalize(vViewNormal), eye), 0.0);
+          gl_FragColor = vec4(tint, opacity * thickness * thickness);
+          #include <fog_fragment>
+        }
+      `,
+    });
+  }
+
   function terrain(id) {
     const material = baseMaterial(id);
     material.vertexColors = true;
@@ -301,5 +373,5 @@ export function createMaterialFamilies(recipe) {
     return material;
   }
 
-  return { family, variant, apply, sky, ocean, terrain, declared };
+  return { family, variant, apply, sky, ocean, clouds, terrain, declared };
 }

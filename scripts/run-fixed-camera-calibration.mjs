@@ -29,6 +29,7 @@ import { fileURLToPath } from "node:url";
 import { runLocalSceneAutomation } from "./lib/smoke-local-scene.mjs";
 import { createFrozenObservationClockPreload } from "../tools/reference/frozen-observation-clock.mjs";
 import { createReferenceObservationContract } from "../tools/reference/reference-observation-contract.mjs";
+import { aggregateCameras } from "../tools/evaluation/scene-pass-metrics.mjs";
 import { verifyCalibrationCaptureProtocol } from "../tools/evaluation/scene-pass-protocol.mjs";
 import { undetectedControls } from "../tools/evaluation/scene-calibration.mjs";
 import {
@@ -267,7 +268,16 @@ async function aggregate() {
       // Shaped like the gate stack's evidence object, whose `passes` key holds the
       // pass report, so a metric's declared path is evaluated here by the same
       // expression acceptance will evaluate it by.
-      report: { passes: { aggregate: partial.control.aggregate } },
+      //
+      // Recomputed from the partial's stored per-camera, per-group rows rather than
+      // read from the aggregate the browser wrote beside them. `aggregateCameras`
+      // is a pure function of those rows, so recomputing costs nothing and removes
+      // a real hazard: changing how the rows are combined otherwise invalidates
+      // sixteen stored captures silently, and the aggregate would keep reporting
+      // whatever the code said when it was captured. What still invalidates a
+      // capture is a change to what a *pass* measures, which no amount of
+      // recomputing can recover.
+      report: { passes: { aggregate: aggregateCameras(partial.control.views) } },
     };
   });
 

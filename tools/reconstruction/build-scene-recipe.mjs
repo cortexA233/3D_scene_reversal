@@ -57,6 +57,16 @@ const HORIZON_PATH = path.join(
   ".scratch/scene-parity-foundation/evidence/horizon-reference-v1.json",
 );
 /**
+ * Per-instance Distributed Scene Cover evidence, measured by
+ * `tools/development/measure-cover-instances.mjs`. Separate from the inventory
+ * because it is a distribution rather than a summary, and the inventory's
+ * per-population totals cannot carry one.
+ */
+const COVER_INSTANCES_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/full-island-reconstruction/evidence/cover-instances-v1.json",
+);
+/**
  * Compact controls persisted by the Reference-guided Fitting Loop. They are
  * fitted against the reference and then live in the Scene Recipe, so a clean
  * production run reproduces them without the fitter.
@@ -83,30 +93,48 @@ const MATERIAL_FAMILIES = [
 ];
 
 /**
- * How large a population's instances actually are, from the reference's own
- * measured surface area rather than from a number chosen once for all of them.
+ * How large a population's instances actually are, and how they sit in the
+ * ground, from the reference's own per-instance matrices.
  *
- * `scaleRange` used to be a hardcoded `[0.6, 1.6]` for every population, and it
- * was wrong by between 1.6 and 2.7 times on four of the five — area goes as the
- * square, so the candidate drew 5,302 cover pixels on the authored overview
- * against the reference's 128. What is measured is the population's total world
- * surface area; dividing by its instance count and by the unit generator form's
- * own area gives the scale that reproduces it.
+ * This has now been wrong twice in the same place, in opposite directions, and
+ * both times because the input was a summary rather than a distribution.
  *
- * The spread stays a declared shape rule, because a total area does not describe
- * a distribution. The ratio between the ends is the one the hardcoded range
- * used, so only the magnitude has changed hands from invented to measured, and
- * the range still has the same root-mean-square as the area it came from.
+ * First `scaleRange` was a hardcoded `[0.6, 1.6]` for every population. Then it
+ * became the range whose root-mean-square reproduces the population's measured
+ * total world surface area, which is the right magnitude for the wrong quantity:
+ * rasterisation is not linear in size, so a distribution whose instances
+ * straddle one pixel does not render like a uniform distribution with the same
+ * sum of squares, and the spread stayed an invented shape rule either way.
+ *
+ * What the reference actually has, measured instance by instance, is a power-law
+ * ladder — `min + pow(uniform, exponent) * (max - min)` — a mean per-axis
+ * proportion, and a sink expressed as a fraction of each instance's own scale.
+ * Those are read from `cover-instances-v1.json` and carried as measured numbers:
+ * three for the ladder, one for the sink, and the authored form's own extent and
+ * origin height so a scale means the same world size it means in the reference.
+ * Ten numbers per population, none of them chosen.
+ *
+ * The mean per-axis proportion is folded into the form extent rather than
+ * carried separately, because the two only ever appear multiplied together: the
+ * authored world extent of an instance is its form's extent times its scale
+ * times that proportion.
  */
-const UNIT_FORM_AREA = 9.5745; // THREE.IcosahedronGeometry(1, 0)
-const SCALE_SPREAD = 1.6 / 0.6;
-const SCALE_RMS = Math.sqrt((1 + SCALE_SPREAD + SCALE_SPREAD ** 2) / 3);
-
-function measuredScaleRange(item) {
-  const areaPerInstance = item.worldSurfaceArea / item.instanceCount;
-  const rms = Math.sqrt(areaPerInstance / UNIT_FORM_AREA);
-  const low = rms / SCALE_RMS;
-  return [round(low, 4), round(low * SCALE_SPREAD, 4)];
+function measuredInstanceForm(measured) {
+  const { localBounds } = measured.form;
+  const lateral = measured.scale.axisJitter.lateralMean;
+  const vertical = measured.scale.axisJitter.verticalMean;
+  return {
+    extent: [
+      round((localBounds.max[0] - localBounds.min[0]) * lateral, 4),
+      round((localBounds.max[1] - localBounds.min[1]) * vertical, 4),
+      round((localBounds.max[2] - localBounds.min[2]) * lateral, 4),
+    ],
+    // Where the authored form's own origin sits above its base, which is what a
+    // sink is measured against. The ground rocks are centred lumps and the grass
+    // is a blade rooted at its base, so a single convention would misplace one of
+    // them by half its height.
+    originHeight: round(-localBounds.min[1] * vertical, 4),
+  };
 }
 
 /**
@@ -187,18 +215,39 @@ function buildSemanticLights(inventory, entities) {
  * Distributed Scene Cover populations, measured from the reference's own
  * instanced meshes and cloud sprites rather than declared by hand.
  */
-function buildPopulations(inventory) {
+function buildPopulations(inventory, coverInstances) {
   const { world } = REFERENCE_LAYOUT;
   const instanced = inventory.items
     .filter((item) => item.instanceCount > 1 && item.bounds)
     .sort((a, b) => b.instanceCount - a.instanceCount);
   const sprites = inventory.items.filter((item) => item.type === "Sprite" && item.bounds);
+  const measuredByPath = new Map(
+    coverInstances.populations.map((population) => [population.path, population]),
+  );
 
   const populations = instanced.map((item) => {
     const spanX = (item.bounds.max[0] - item.bounds.min[0]) / 2;
     const spanZ = (item.bounds.max[2] - item.bounds.min[2]) / 2;
-    const height = item.bounds.max[1] - item.bounds.min[1];
-    const kind = height <= 3 ? "grass-tuft" : "ground-rock";
+    // Joined by the same development-only path key both measurements walk, so a
+    // population cannot be silently matched to the wrong row by array order. A
+    // missing row is a blocking failure rather than a fallback, because the
+    // fallback is exactly the invented spread this replaces.
+    const measured = measuredByPath.get(item.path);
+    assert.ok(
+      measured,
+      `no per-instance measurement for the ${item.instanceCount}-instance population at ${item.path}; re-run tools/development/measure-cover-instances.mjs`,
+    );
+    assert.equal(measured.count, item.instanceCount);
+    // What the population is made of, from the authored form rather than from the
+    // spread of the whole population. The previous rule called anything whose
+    // *population bounds* stood taller than three units a rock, and the grass
+    // ellipses span seven units of terrain, so all five populations were labelled
+    // ground rocks and the three blade populations were given rock albedo. The
+    // authored form says it plainly: a blade is two triangles with no thickness,
+    // and a rock is a closed lump.
+    const form = measuredInstanceForm(measured);
+    const flat = form.extent.some((value) => value === 0);
+    const kind = flat && measured.form.triangles <= 2 ? "grass-blade" : "ground-rock";
     return {
       coverId: `cover/${kind}-${placementToken(spanX)}-${item.instanceCount}`,
       kind,
@@ -214,38 +263,76 @@ function buildPopulations(inventory) {
         outerRadius: 1,
       },
       heightRange: [round(item.bounds.min[1]), round(item.bounds.max[1])],
-      scaleRange: measuredScaleRange(item),
+      scaleRange: [round(measured.scale.min, 4), round(measured.scale.max, 4)],
+      scaleExponent: round(measured.scale.exponent, 3),
+      sinkFraction: round(measured.sink.meanFraction, 4),
+      form,
       orientation: "radial",
-      materialFamily: kind === "grass-tuft" ? "terrain-ground" : "shore-rock",
+      materialFamily: kind === "grass-blade" ? "terrain-ground" : "shore-rock",
     };
   });
 
   if (sprites.length > 0) {
-    const min = [0, 1, 2].map((axis) =>
-      Math.min(...sprites.map((sprite) => sprite.bounds.min[axis])),
-    );
-    const max = [0, 1, 2].map((axis) =>
-      Math.max(...sprites.map((sprite) => sprite.bounds.max[axis])),
-    );
     const width = sprites.map((sprite) => sprite.bounds.max[0] - sprite.bounds.min[0]);
+    // Cloud sprites are wide and flat, not round: measured, their height is 0.542
+    // of their width. A unit sphere stood in for them, so every cloud was twice as
+    // tall as the authored one it replaced and the population reached a thousand
+    // units past the authored band in both directions.
+    const aspect =
+      sprites.reduce(
+        (sum, sprite) =>
+          sum +
+          (sprite.bounds.max[1] - sprite.bounds.min[1]) /
+            (sprite.bounds.max[0] - sprite.bounds.min[0]),
+        0,
+      ) / sprites.length;
+    /**
+     * The band the sprite *centres* occupy, not the band their extents reach.
+     *
+     * A sprite's world AABB already includes its own span, so taking the region
+     * from the union of those boxes and then placing a form of the same span
+     * inside it counts each cloud's radius twice — measured, that put the
+     * population 2,440 units below the sea and 4,702 above it against an authored
+     * -502 to 3,175. Each box is inset by its own half-span first, which is
+     * exactly the set of positions the authored sprites were placed at.
+     */
+    const centreBand = (axis) => {
+      const halves = sprites.map(
+        (sprite) => (sprite.bounds.max[axis] - sprite.bounds.min[axis]) / 2,
+      );
+      return [
+        Math.min(...sprites.map((sprite, index) => sprite.bounds.min[axis] + halves[index])),
+        Math.max(...sprites.map((sprite, index) => sprite.bounds.max[axis] - halves[index])),
+      ];
+    };
+    const [minX, maxX] = centreBand(0);
+    const [minY, maxY] = centreBand(1);
+    const [minZ, maxZ] = centreBand(2);
+    // Cloud sprites are not instanced, so they have no instance matrices to read.
+    // Their spans are measured one sprite at a time; the ladder over those spans
+    // is flat and the sink is zero, declared as such rather than dressed up as a
+    // measurement of something else.
     populations.push({
       coverId: "cover/sky-clouds",
       kind: "cloud",
       count: sprites.length,
       region: {
         shape: "sky-shell",
-        center: [round((min[0] + max[0]) / 2), round((min[2] + max[2]) / 2)],
-        radii: [round((max[0] - min[0]) / 2), round((max[2] - min[2]) / 2)],
-        minHeight: round(min[1]),
-        maxHeight: round(max[1]),
+        center: [round((minX + maxX) / 2), round((minZ + maxZ) / 2)],
+        radii: [round((maxX - minX) / 2), round((maxZ - minZ) / 2)],
+        minHeight: round(minY),
+        maxHeight: round(maxY),
         innerRadius: 0.25,
         outerRadius: 1,
       },
       spanRange: [round(Math.min(...width)), round(Math.max(...width))],
-      scaleRange: [0.6, 1.6],
+      scaleRange: [round(Math.min(...width) / 2), round(Math.max(...width) / 2)],
+      scaleExponent: 1,
+      sinkFraction: 0,
+      form: { extent: [2, round(2 * aspect, 4), 2], originHeight: round(aspect, 4) },
       orientation: "radial",
       materialFamily: "ocean-surface",
-      heightRange: [round(min[1]), round(max[1])],
+      heightRange: [round(minY), round(maxY)],
     });
   }
   void world;
@@ -316,6 +403,21 @@ const ENVIRONMENT = {
       { wavelength: 4450, amplitude: 2.6, angle: 2.51 },
     ],
   },
+  /**
+   * The cloud shell's own appearance, measured from the 34 authored sprites'
+   * materials rather than borrowed from a surface family.
+   *
+   * They are white at every sprite and transparent at a mean opacity of 0.9546,
+   * carried through the sprite's own soft puff texture. The texture cannot enter
+   * production, so the softness is the standard soft-particle falloff in
+   * `material-families.js`; the colour and the opacity are the sprites' measured
+   * values. Before this the population pointed at `ocean-surface`, which drew the
+   * sky full of opaque teal balls once the clouds were given their measured size.
+   */
+  clouds: {
+    color: 0xffffff,
+    opacity: 0.9546,
+  },
   renderer: {
     toneMapping: "ACESFilmicToneMapping",
     exposure: 1,
@@ -362,7 +464,7 @@ function buildTerrain(elevation, world) {
   });
 }
 
-function buildRecipe(inventory, elevation, horizonEvidence, fittedRidges) {
+function buildRecipe(inventory, elevation, horizonEvidence, fittedRidges, coverInstances) {
   const entities = buildEntities(inventory, horizonEvidence, fittedRidges);
   return {
     schemaVersion: SCENE_RECIPE_SCHEMA_VERSION,
@@ -383,7 +485,7 @@ function buildRecipe(inventory, elevation, horizonEvidence, fittedRidges) {
     terrain: buildTerrain(elevation, REFERENCE_LAYOUT.world),
     materialFamilies: MATERIAL_FAMILIES,
     entities,
-    populations: buildPopulations(inventory),
+    populations: buildPopulations(inventory, coverInstances),
     semanticLights: buildSemanticLights(inventory, entities),
   };
 }
@@ -398,14 +500,16 @@ export const ISLAND_SCENE_RECIPE = Object.freeze(${JSON.stringify(recipe, null, 
 }
 
 async function main() {
-  const [inventory, elevation, horizonEvidence] = await Promise.all([
+  const [inventory, elevation, horizonEvidence, coverInstances] = await Promise.all([
     readFile(INVENTORY_PATH, "utf8").then(JSON.parse),
     readFile(ELEVATION_PATH, "utf8").then(JSON.parse),
     readFile(HORIZON_PATH, "utf8").then(JSON.parse),
+    readFile(COVER_INSTANCES_PATH, "utf8").then(JSON.parse),
   ]);
   assert.equal(inventory.schemaVersion, "scene-inventory-v1");
   assert.equal(elevation.schemaVersion, "terrain-elevation-v1");
   assert.equal(horizonEvidence.schemaVersion, "horizon-evidence-v1");
+  assert.equal(coverInstances.schemaVersion, "cover-instances-v1");
 
   let fittedRidges = null;
   try {
@@ -415,7 +519,13 @@ async function main() {
     if (error.code !== "ENOENT") throw error;
   }
 
-  const recipe = buildRecipe(inventory, elevation, horizonEvidence, fittedRidges);
+  const recipe = buildRecipe(
+    inventory,
+    elevation,
+    horizonEvidence,
+    fittedRidges,
+    coverInstances,
+  );
   assert.deepEqual(
     validateSceneRecipe(recipe),
     [],

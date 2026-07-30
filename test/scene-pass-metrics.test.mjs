@@ -299,6 +299,58 @@ test("camera aggregation keeps the worst view, not just the mean", () => {
   assert.ok(aggregate.silhouetteIoU.mean > aggregate.silhouetteIoU.worst.value);
 });
 
+/**
+ * Distributed Scene Cover is kept out of the worst-group *intersection* and out of
+ * nothing else.
+ *
+ * A per-pixel intersection is an instance pairing, and cover is defined as
+ * compared "by semantic occupancy and spatial distribution rather than arbitrary
+ * instance pairing". Measured through the corrected passes, a mild 0.02-radian yaw
+ * of the reference against itself takes cover's IoU to 0.0415, so a maximum over
+ * every camera and group reports cover as the scene's worst failure whatever the
+ * island looks like.
+ *
+ * The danger in that correction is obvious and this fixture is what bounds it: a
+ * scope is one keystroke away from being a way to hide an unfavourable group. So
+ * cover stays in every mean, stays in the contour and depth maxima whose brackets
+ * do separate on it, and its intersection is still reported.
+ */
+test("cover is excluded from the worst-group intersection and from nothing else", () => {
+  const row = (iou, contour, depth) => ({
+    intersectionOverUnion: iou,
+    referencePixels: 100,
+    candidatePixels: 100,
+    contourDistance: { p95: contour },
+    depth: { worldUnits: { p95: depth } },
+    worldNormal: { degrees: { p95: 4 } },
+  });
+  const aggregate = aggregateCameras([
+    {
+      camera: "authoredOverview",
+      byGroup: {
+        structures: row(0.8, 3, 5),
+        // The worst of everything, on every metric.
+        cover: row(0.02, 900, 400),
+      },
+    },
+  ]);
+
+  // Out of the intersection maximum.
+  assert.equal(aggregate.groupSilhouetteIoU.worst.label, "structures");
+  assert.equal(aggregate.groupSilhouetteIoU.worst.value, 0.8);
+  // Reported rather than dropped, so a review can still see it.
+  assert.equal(aggregate.groupSilhouetteIoU.worstDistributed.label, "cover");
+  assert.equal(aggregate.groupSilhouetteIoU.worstDistributed.value, 0.02);
+  // In the mean, which is not a maximum and cannot be defined by one group.
+  assert.equal(aggregate.groupSilhouetteIoU.mean, 0.41);
+  // In every other maximum, because those brackets separate mild from severe on
+  // cover: contour distance asks how far the nearest cover pixel is, which is a
+  // distribution question, and depth is measured where the mask already agrees.
+  assert.equal(aggregate.groupContourDistance.worst.label, "cover");
+  assert.equal(aggregate.groupDepthWorldUnits.worst.label, "cover");
+  assert.equal(aggregate.groupWorldNormalDegrees.worst.value, 4);
+});
+
 import { createReferenceObservationContract } from "../tools/reference/reference-observation-contract.mjs";
 import {
   PROTOCOL_TOLERANCE,

@@ -116,6 +116,42 @@ function validatePopulation(population, index, seen, errors) {
   if (!population?.region || typeof population.region !== "object") {
     errors.push(`${label}: region must describe where the cover is distributed`);
   }
+  // The distribution controls, required rather than optional.
+  //
+  // Every one of them was invented before it was measured, and twice the invented
+  // value was wrong in a way no aggregate could show: a hardcoded `[0.6, 1.6]`
+  // scale for every population, then a range whose root-mean-square matched a
+  // measured surface area while its shape stayed a guess. A scatter's rendered
+  // size is set by the shape of its size distribution, not by the total area, so
+  // the ladder's exponent and the sink are part of the contract and a recipe
+  // without them is rejected rather than defaulted.
+  const range = population?.scaleRange;
+  if (
+    !Array.isArray(range) ||
+    range.length !== 2 ||
+    !range.every((value) => Number.isFinite(value) && value > 0) ||
+    range[0] > range[1]
+  ) {
+    errors.push(`${label}: scaleRange must be an ascending pair of positive measured scales`);
+  }
+  if (!Number.isFinite(population?.scaleExponent) || population.scaleExponent <= 0) {
+    errors.push(`${label}: scaleExponent must be the measured shape of the size ladder`);
+  }
+  if (!Number.isFinite(population?.sinkFraction)) {
+    errors.push(`${label}: sinkFraction must be the measured sink as a fraction of scale`);
+  }
+  const extent = population?.form?.extent;
+  if (
+    !Array.isArray(extent) ||
+    extent.length !== 3 ||
+    !extent.every((value) => Number.isFinite(value) && value >= 0) ||
+    extent.every((value) => value === 0)
+  ) {
+    errors.push(`${label}: form.extent must be the authored unit form's measured extent`);
+  }
+  if (!Number.isFinite(population?.form?.originHeight)) {
+    errors.push(`${label}: form.originHeight must say where the authored form's origin sits`);
+  }
 }
 
 export function validateSceneRecipe(recipe) {

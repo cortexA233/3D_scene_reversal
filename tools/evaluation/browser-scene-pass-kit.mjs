@@ -2,6 +2,26 @@ import * as THREE from "three";
 
 import { ISLAND_SCENE_RECIPE } from "/src/reconstruction/scene/island-scene-recipe.generated.js";
 import { familyKey, resolveFamily } from "/dev-tools/reconstruction/scene-families.mjs";
+// The pass encodings live in a module the checks can import without a GPU, so a
+// defect in them is caught by a fixture rather than by a candidate result that
+// looks merely disappointing. Re-exported here because both capture harnesses
+// already import this kit as their single entry point.
+export {
+  DEPTH_MATERIAL,
+  NORMAL_MATERIAL,
+  PASS_IDENTITY_CAPACITY,
+  PASS_IDENTITY_STEP,
+  SEMANTIC_GROUPS,
+  SEMANTIC_LABELS,
+  SILHOUETTE_MATERIAL,
+  decodeSemantic,
+  groupIndex,
+  labelMasks,
+  regionMasks,
+  semanticMaterial,
+  tintedInstancedMeshes,
+  withPassMaterials,
+} from "/dev-tools/evaluation/scene-pass-encoding.mjs";
 
 /**
  * The shared machinery behind every fixed-camera capture: the pass encodings,
@@ -15,32 +35,6 @@ import { familyKey, resolveFamily } from "/dev-tools/reconstruction/scene-famili
  *
  * Nothing here builds, imports, or reads the candidate.
  */
-
-export const SEMANTIC_GROUPS = Object.freeze([
-  "sky",
-  "cloud",
-  "geography",
-  "horizon",
-  "structures",
-  "bridges",
-  "plazas",
-  "paths",
-  "rocks",
-  "decorations",
-  "vegetation",
-  "wildlife",
-  "cover",
-  "environment",
-]);
-
-export const SEMANTIC_LABELS = Object.freeze(
-  Object.fromEntries(SEMANTIC_GROUPS.map((group, index) => [index + 1, group])),
-);
-
-export function groupIndex(group) {
-  const index = SEMANTIC_GROUPS.indexOf(group);
-  return index < 0 ? 0 : index + 1;
-}
 
 /**
  * Material Families come from the Scene Recipe rather than a second hand-written
@@ -75,67 +69,6 @@ export function createTarget(width, height) {
   });
 }
 
-export const SILHOUETTE_MATERIAL = new THREE.MeshBasicMaterial({
-  color: 0xffffff,
-  side: THREE.DoubleSide,
-  fog: false,
-  toneMapped: false,
-});
-
-export function semanticMaterial(index) {
-  const material = new THREE.MeshBasicMaterial({
-    side: THREE.DoubleSide,
-    fog: false,
-    toneMapped: false,
-  });
-  // A coarse lattice so decoding survives any colour-space rounding.
-  material.color.setRGB((index * 20) / 255, 0, 0, THREE.LinearSRGBColorSpace);
-  return material;
-}
-
-export const DEPTH_MATERIAL = new THREE.ShaderMaterial({
-  side: THREE.DoubleSide,
-  uniforms: { near: { value: 0.5 }, far: { value: 30000 } },
-  vertexShader: `
-    varying float vViewDepth;
-    void main() {
-      vec4 view = modelViewMatrix * vec4(position, 1.0);
-      vViewDepth = -view.z;
-      gl_Position = projectionMatrix * view;
-    }
-  `,
-  fragmentShader: `
-    uniform float near;
-    uniform float far;
-    varying float vViewDepth;
-    void main() {
-      float normalized = clamp((vViewDepth - near) / (far - near), 0.0, 1.0);
-      float scaled = normalized * 16777215.0;
-      float r = floor(scaled / 65536.0);
-      float g = floor(mod(scaled, 65536.0) / 256.0);
-      float b = floor(mod(scaled, 256.0));
-      gl_FragColor = vec4(r / 255.0, g / 255.0, b / 255.0, 1.0);
-    }
-  `,
-});
-
-export const NORMAL_MATERIAL = new THREE.ShaderMaterial({
-  side: THREE.DoubleSide,
-  vertexShader: `
-    varying vec3 vWorldNormal;
-    void main() {
-      vWorldNormal = normalize(mat3(modelMatrix) * normal);
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: `
-    varying vec3 vWorldNormal;
-    void main() {
-      gl_FragColor = vec4(normalize(vWorldNormal) * 0.5 + 0.5, 1.0);
-    }
-  `,
-});
-
 /** WebGL reads bottom-up; every pass is stored top-down so they align. */
 function flipVertically(pixels, width, height) {
   const flipped = new Uint8Array(pixels.length);
@@ -158,46 +91,6 @@ export function readTarget(renderer, target, scene, camera, width, height) {
   renderer.readRenderTargetPixels(target, 0, 0, width, height, pixels);
   renderer.setRenderTarget(null);
   return flipVertically(pixels, width, height);
-}
-
-/**
- * Swaps in a pass material for every mesh and restores the exact original
- * references afterwards, so no authored material is modified.
- *
- * The sky shell is hidden for the auxiliary passes. It is a backdrop that fills
- * every frame for both subjects, so leaving it in would make silhouette,
- * depth, and normal evidence say the two scenes agree perfectly no matter what
- * the island looks like. It stays fully present in the native lit capture.
- */
-export function withPassMaterials(scene, chooser, run, isBackdrop) {
-  const restore = [];
-  const hidden = [];
-  scene.traverse((object) => {
-    if (!object.isMesh && !object.isPoints && !object.isLine && !object.isSprite) return;
-    if (object.isSprite || isBackdrop?.(object)) {
-      if (object.visible) {
-        hidden.push(object);
-        object.visible = false;
-      }
-      return;
-    }
-    const material = chooser(object);
-    if (!material) return;
-    restore.push([object, object.material]);
-    object.material = material;
-  });
-  const previousBackground = scene.background;
-  const previousFog = scene.fog;
-  scene.background = null;
-  scene.fog = null;
-  try {
-    return run();
-  } finally {
-    for (const [object, material] of restore) object.material = material;
-    for (const object of hidden) object.visible = true;
-    scene.background = previousBackground;
-    scene.fog = previousFog;
-  }
 }
 
 export function readCanvas(canvas, width, height) {
@@ -302,35 +195,6 @@ export function buildReferenceSemanticIndex(scene) {
     } else set(object, null, null, object);
   });
   return byMesh;
-}
-
-export function decodeSemantic(rgba) {
-  const ids = new Uint8Array(rgba.length / 4);
-  for (let index = 0; index < ids.length; index += 1) {
-    ids[index] = Math.round(rgba[index * 4] / 20);
-  }
-  return ids;
-}
-
-export function labelMasks(ids, labels) {
-  const masks = {};
-  for (const [id, label] of Object.entries(labels)) {
-    const numeric = Number(id);
-    const mask = new Uint8Array(ids.length);
-    let any = false;
-    for (let index = 0; index < ids.length; index += 1) {
-      if (ids[index] === numeric) {
-        mask[index] = 1;
-        any = true;
-      }
-    }
-    if (any) masks[label] = mask;
-  }
-  return masks;
-}
-
-export function regionMasks(semanticIds) {
-  return labelMasks(semanticIds, SEMANTIC_LABELS);
 }
 
 export async function previewPng(rgba, width, height, scale = 4) {

@@ -77,6 +77,7 @@
     "/dev-tools/evaluation/browser-scene-calibration.mjs",
     "/dev-tools/evaluation/browser-scene-pass-kit.mjs",
     "/dev-tools/evaluation/scene-graph-perturbations.mjs",
+    "/dev-tools/evaluation/scene-pass-encoding.mjs",
     "/dev-tools/evaluation/scene-pass-metrics.mjs",
     "/dev-tools/reconstruction/scene-families.mjs",
     "/main.js",
@@ -284,21 +285,21 @@
       ],
       "samples": {
         "mild": [
-          0.89153,
+          0.857968,
           1,
-          0.894337,
-          0.863603
+          0.885908,
+          0.833774
         ],
         "severe": [
-          0.391582,
-          0.330487
+          0.3984,
+          0.329521
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 0.745598,
-        "mildWorst": 0.863603,
-        "severeBest": 0.391582,
+        "threshold": 0.724931,
+        "mildWorst": 0.833774,
+        "severeBest": 0.3984,
         "margin": 0.25
       }
     },
@@ -316,22 +317,22 @@
       ],
       "samples": {
         "mild": [
-          0.417901,
+          0.787879,
           1,
           0.429907,
-          0.341028
+          0.705882
         ],
         "severe": [
           0.187192,
           0,
-          0,
+          0.039683,
           0
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 0.302569,
-        "mildWorst": 0.341028,
+        "threshold": 0.369228,
+        "mildWorst": 0.429907,
         "severeBest": 0.187192,
         "margin": 0.25
       }
@@ -348,21 +349,21 @@
       ],
       "samples": {
         "mild": [
-          1.67756,
+          1.966772,
           0,
-          1.409649,
-          1.990077
+          1.490305,
+          2.418843
         ],
         "severe": [
-          48.498385,
-          17.526255
+          45.858058,
+          18.890569
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 5.874122,
-        "mildWorst": 1.990077,
-        "severeBest": 17.526255,
+        "threshold": 6.536774,
+        "mildWorst": 2.418843,
+        "severeBest": 18.890569,
         "margin": 0.25
       }
     },
@@ -383,11 +384,11 @@
           16,
           0,
           19.7278,
-          10.2426
+          17.8994
         ],
         "severe": [
           139.5916,
-          251.2306,
+          268.627,
           97.8402,
           238.0294
         ]
@@ -411,20 +412,20 @@
       ],
       "samples": {
         "mild": [
-          1.492191,
+          1.729927,
           0,
-          0.942224,
-          2.31585
+          0.975813,
+          2.658341
         ],
         "severe": [
-          23.630105
+          24.718862
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 7.644414,
-        "mildWorst": 2.31585,
-        "severeBest": 23.630105,
+        "threshold": 8.173471,
+        "mildWorst": 2.658341,
+        "severeBest": 24.718862,
         "margin": 0.25
       }
     },
@@ -469,20 +470,20 @@
       ],
       "samples": {
         "mild": [
-          33.690294,
+          46.005746,
           0.000001,
-          39.368247,
-          36.849947
+          44.465423,
+          51.484861
         ],
         "severe": [
-          79.723186
+          81.384193
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 49.456982,
-        "mildWorst": 39.368247,
-        "severeBest": 79.723186,
+        "threshold": 58.959694,
+        "mildWorst": 51.484861,
+        "severeBest": 81.384193,
         "margin": 0.25
       }
     },
@@ -527,21 +528,21 @@
       ],
       "samples": {
         "mild": [
-          0.990578,
+          0.990566,
           1,
-          0.995898,
-          0.989419
+          0.995895,
+          0.989407
         ],
         "severe": [
-          0.902151,
+          0.902056,
           0.981639,
-          0.940219
+          0.940168
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 0.987474,
-        "mildWorst": 0.989419,
+        "threshold": 0.987465,
+        "mildWorst": 0.989407,
         "severeBest": 0.981639,
         "margin": 0.25
       }
@@ -559,21 +560,21 @@
       ],
       "samples": {
         "mild": [
-          0.980686,
+          0.980663,
           1,
-          0.991127,
-          0.982141
+          0.991122,
+          0.982117
         ],
         "severe": [
-          0.845668,
+          0.845528,
           0.954283,
-          0.875074
+          0.874968
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 0.974085,
-        "mildWorst": 0.980686,
+        "threshold": 0.974068,
+        "mildWorst": 0.980663,
         "severeBest": 0.954283,
         "margin": 0.25
       }
@@ -590,10 +591,10 @@
       ],
       "samples": {
         "mild": [
-          0.005861,
+          0.005361,
           0,
           0.002659,
-          0.006142
+          0.005397
         ],
         "severe": [
           0.009943,
@@ -602,8 +603,8 @@
       },
       "calibration": {
         "separable": true,
-        "threshold": 0.007092,
-        "mildWorst": 0.006142,
+        "threshold": 0.006534,
+        "mildWorst": 0.005397,
         "severeBest": 0.009943,
         "margin": 0.25
       }
@@ -623,14 +624,14 @@
           0
         ],
         "severe": [
-          10.427875
+          10.427914
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 2.852463,
+        "threshold": 2.852472,
         "mildWorst": 0.327325,
-        "severeBest": 10.427875,
+        "severeBest": 10.427914,
         "margin": 0.25
       }
     },
@@ -645,18 +646,18 @@
       ],
       "samples": {
         "mild": [
-          0.5577,
+          0.557698,
           0
         ],
         "severe": [
-          15.239753
+          15.239811
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 4.228213,
-        "mildWorst": 0.5577,
-        "severeBest": 15.239753,
+        "threshold": 4.228226,
+        "mildWorst": 0.557698,
+        "severeBest": 15.239811,
         "margin": 0.25
       }
     },
@@ -671,18 +672,18 @@
       ],
       "samples": {
         "mild": [
-          0.515557,
+          0.513084,
           0
         ],
         "severe": [
-          22.300514
+          22.401677
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 5.961796,
-        "mildWorst": 0.515557,
-        "severeBest": 22.300514,
+        "threshold": 5.985232,
+        "mildWorst": 0.513084,
+        "severeBest": 22.401677,
         "margin": 0.25
       }
     },
@@ -698,19 +699,19 @@
       ],
       "samples": {
         "mild": [
-          1.263066,
+          1.263048,
           0
         ],
         "severe": [
-          12.458887,
-          35.314757
+          12.460424,
+          35.392712
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 4.062021,
-        "mildWorst": 1.263066,
-        "severeBest": 12.458887,
+        "threshold": 4.062392,
+        "mildWorst": 1.263048,
+        "severeBest": 12.460424,
         "margin": 0.25
       }
     }
@@ -722,21 +723,21 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupSilhouetteIoU.mean",
         "direction": "atLeast",
-        "threshold": 0.745598
+        "threshold": 0.724931
       },
       {
         "name": "worst group silhouette IoU",
         "scope": "worst-group",
         "path": "passes.aggregate.groupSilhouetteIoU.worst.value",
         "direction": "atLeast",
-        "threshold": 0.302569
+        "threshold": 0.369228
       },
       {
         "name": "group contour distance p95",
         "scope": "aggregate",
         "path": "passes.aggregate.groupContourDistance.meanP95",
         "direction": "atMost",
-        "threshold": 5.874122
+        "threshold": 6.536774
       },
       {
         "name": "worst group contour distance",
@@ -750,7 +751,7 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupDepthWorldUnits.meanP95",
         "direction": "atMost",
-        "threshold": 7.644414
+        "threshold": 8.173471
       },
       {
         "name": "worst group depth p95",
@@ -764,28 +765,28 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupWorldNormalDegrees.meanP95",
         "direction": "atMost",
-        "threshold": 49.456982
+        "threshold": 58.959694
       },
       {
         "name": "semantic agreement",
         "scope": "aggregate",
         "path": "passes.aggregate.semanticAgreement.mean",
         "direction": "atLeast",
-        "threshold": 0.987474
+        "threshold": 0.987465
       },
       {
         "name": "worst camera semantic agreement",
         "scope": "worst-camera",
         "path": "passes.aggregate.semanticAgreement.worst.value",
         "direction": "atLeast",
-        "threshold": 0.974085
+        "threshold": 0.974068
       },
       {
         "name": "worst semantic confusion fraction",
         "scope": "worst-transition",
         "path": "passes.aggregate.semanticConfusion.worstFraction",
         "direction": "atMost",
-        "threshold": 0.007092
+        "threshold": 0.006534
       }
     ],
     "nativeAppearance": [
@@ -794,28 +795,28 @@
         "scope": "aggregate",
         "path": "passes.aggregate.appearanceDeltaE.meanMean",
         "direction": "atMost",
-        "threshold": 2.852463
+        "threshold": 2.852472
       },
       {
         "name": "worst camera appearance DeltaE",
         "scope": "worst-camera",
         "path": "passes.aggregate.appearanceDeltaE.worst.value",
         "direction": "atMost",
-        "threshold": 4.228213
+        "threshold": 4.228226
       },
       {
         "name": "material family appearance DeltaE mean",
         "scope": "aggregate",
         "path": "passes.aggregate.appearanceByMaterialFamily.meanMean",
         "direction": "atMost",
-        "threshold": 5.961796
+        "threshold": 5.985232
       },
       {
         "name": "worst material family appearance DeltaE",
         "scope": "worst-material-family",
         "path": "passes.aggregate.appearanceByMaterialFamily.worst.value",
         "direction": "atMost",
-        "threshold": 4.062021
+        "threshold": 4.062392
       }
     ]
   },

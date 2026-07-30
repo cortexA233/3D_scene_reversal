@@ -1,18 +1,40 @@
 {
   "schemaVersion": "scene-quality-baseline-v1",
-  "version": "scene-quality-baseline-v1.1",
+  "version": "scene-quality-baseline-v1.2",
   "migrations": [
     {
       "version": "scene-quality-baseline-v1",
       "adr": "0040",
       "change": "Freezes the structural-correspondence and world-geometry layers from reference repeatability and declared reference-only perturbations. The two rendered layers are left empty and therefore cannot pass.",
-      "movedGeometryThresholds": []
+      "movedGeometryThresholds": [],
+      "movedRenderedThresholds": []
     },
     {
       "version": "scene-quality-baseline-v1.1",
       "adr": "0051",
       "change": "Adds the fixedCameraGeometry and nativeAppearance thresholds, calibrated from declared scene-space damage rendered through the six frozen cameras of ADR-0049. Contour distance is gated per group rather than whole-frame, because whole-frame contour p95 measures 0 on topDown and 1 on the four obliques whatever the island looks like.",
-      "movedGeometryThresholds": []
+      "movedGeometryThresholds": [],
+      "movedRenderedThresholds": []
+    },
+    {
+      "version": "scene-quality-baseline-v1.2",
+      "adr": "0053",
+      "change": "Re-derives the fixedCameraGeometry and nativeAppearance thresholds under the corrected pass encodings. Three encoding defects made the reference's own masks wrong: a per-instance colour that tinted the identity every mask pass wrote, depth and world-normal shaders that ignored instanceMatrix and rendered every instance on its mesh's origin, and an identity lattice that could not carry the fourteenth declared group. The reference is on both sides of every calibration control, so the previous thresholds were calibrated through the defect. No threshold is chosen and no candidate result is consulted: the controls, their damage magnitudes, and the selection rule are unchanged, and only what the passes measure has changed.",
+      "movedGeometryThresholds": [],
+      "movedRenderedThresholds": [
+        "fixedCameraGeometry/group silhouette IoU: 0.745598 -> 0.724931",
+        "fixedCameraGeometry/worst group silhouette IoU: 0.302569 -> 0.369228",
+        "fixedCameraGeometry/group contour distance p95: 5.874122 -> 6.536774",
+        "fixedCameraGeometry/group depth p95: 7.644414 -> 8.173471",
+        "fixedCameraGeometry/group world normal p95: 49.456982 -> 58.959694",
+        "fixedCameraGeometry/semantic agreement: 0.987474 -> 0.987465",
+        "fixedCameraGeometry/worst camera semantic agreement: 0.974085 -> 0.974068",
+        "fixedCameraGeometry/worst semantic confusion fraction: 0.007092 -> 0.006534",
+        "nativeAppearance/appearance DeltaE mean: 2.852463 -> 2.852472",
+        "nativeAppearance/worst camera appearance DeltaE: 4.228213 -> 4.228226",
+        "nativeAppearance/material family appearance DeltaE mean: 5.961796 -> 5.985232",
+        "nativeAppearance/worst material family appearance DeltaE: 4.062021 -> 4.062392"
+      ]
     }
   ],
   "calibratedFrom": [
@@ -167,21 +189,21 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupSilhouetteIoU.mean",
         "direction": "atLeast",
-        "threshold": 0.745598
+        "threshold": 0.724931
       },
       {
         "name": "worst group silhouette IoU",
         "scope": "worst-group",
         "path": "passes.aggregate.groupSilhouetteIoU.worst.value",
         "direction": "atLeast",
-        "threshold": 0.302569
+        "threshold": 0.369228
       },
       {
         "name": "group contour distance p95",
         "scope": "aggregate",
         "path": "passes.aggregate.groupContourDistance.meanP95",
         "direction": "atMost",
-        "threshold": 5.874122
+        "threshold": 6.536774
       },
       {
         "name": "worst group contour distance",
@@ -195,7 +217,7 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupDepthWorldUnits.meanP95",
         "direction": "atMost",
-        "threshold": 7.644414
+        "threshold": 8.173471
       },
       {
         "name": "worst group depth p95",
@@ -209,28 +231,28 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupWorldNormalDegrees.meanP95",
         "direction": "atMost",
-        "threshold": 49.456982
+        "threshold": 58.959694
       },
       {
         "name": "semantic agreement",
         "scope": "aggregate",
         "path": "passes.aggregate.semanticAgreement.mean",
         "direction": "atLeast",
-        "threshold": 0.987474
+        "threshold": 0.987465
       },
       {
         "name": "worst camera semantic agreement",
         "scope": "worst-camera",
         "path": "passes.aggregate.semanticAgreement.worst.value",
         "direction": "atLeast",
-        "threshold": 0.974085
+        "threshold": 0.974068
       },
       {
         "name": "worst semantic confusion fraction",
         "scope": "worst-transition",
         "path": "passes.aggregate.semanticConfusion.worstFraction",
         "direction": "atMost",
-        "threshold": 0.007092
+        "threshold": 0.006534
       }
     ],
     "nativeAppearance": [
@@ -239,28 +261,28 @@
         "scope": "aggregate",
         "path": "passes.aggregate.appearanceDeltaE.meanMean",
         "direction": "atMost",
-        "threshold": 2.852463
+        "threshold": 2.852472
       },
       {
         "name": "worst camera appearance DeltaE",
         "scope": "worst-camera",
         "path": "passes.aggregate.appearanceDeltaE.worst.value",
         "direction": "atMost",
-        "threshold": 4.228213
+        "threshold": 4.228226
       },
       {
         "name": "material family appearance DeltaE mean",
         "scope": "aggregate",
         "path": "passes.aggregate.appearanceByMaterialFamily.meanMean",
         "direction": "atMost",
-        "threshold": 5.961796
+        "threshold": 5.985232
       },
       {
         "name": "worst material family appearance DeltaE",
         "scope": "worst-material-family",
         "path": "passes.aggregate.appearanceByMaterialFamily.worst.value",
         "direction": "atMost",
-        "threshold": 4.062021
+        "threshold": 4.062392
       }
     ]
   },

@@ -111,15 +111,23 @@ test("the generated chain reproduces the authored pass order", async () => {
  * The two thresholds below are not reachable by ticket 02 alone and are marked
  * `todo` rather than deleted or loosened.
  *
- * Measured now: global appearance DeltaE 21.50 against the calibrated 2.85, and
- * geography 16.90 to 26.14 over about a million pixels per camera. The atmosphere is
- * no longer the dominant term — sky is 3.34 on `oblique-north` — so what is left is
- * ground, vegetation, and architecture: tickets 04, 06, 07, and 11. Clearing the
- * `todo` is how those tickets prove they landed, so the assertions stay exactly as
- * they are and the suite reports them as outstanding rather than as passing.
+ * The atmosphere is no longer the dominant term — sky reads 3.84 on
+ * `oblique-north` and 8.82 on the cloud-heavy authored overview once the cloud
+ * shell has its measured size and material — so what is left is ground,
+ * vegetation, and architecture: tickets 04, 06, 07, and 11. Clearing the `todo` is
+ * how those tickets prove they landed, so the assertions stay exactly as they are
+ * and the suite reports them as outstanding rather than as passing.
+ *
+ * The reason string reads the live measurement rather than restating one. A
+ * hardcoded figure here said 21.50 for three tickets after the number became
+ * 13.17, which is the same staleness the certification's own prose was rewritten
+ * to avoid.
  */
+const measured = await readJson(`${EVIDENCE}/scene-passes-v1.json`);
 const NOT_YET_REACHABLE = {
-  todo: "blocked on tickets 04, 06, 07, and 11; appearance DeltaE is 21.50 against 2.85",
+  todo:
+    "blocked on tickets 04, 06, 07, and 11; appearance DeltaE is " +
+    `${measured.aggregate.appearanceDeltaE.meanMean} against 2.85`,
 };
 
 test("the candidate's appearance is inside the calibrated thresholds", NOT_YET_REACHABLE, async () => {

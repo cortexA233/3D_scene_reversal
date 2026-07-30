@@ -117,6 +117,10 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         }
       ]
     },
+    "clouds": {
+      "color": 16777215,
+      "opacity": 0.9546
+    },
     "renderer": {
       "toneMapping": "ACESFilmicToneMapping",
       "exposure": 1,
@@ -14724,15 +14728,25 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         54.04
       ],
       "scaleRange": [
-        0.2669,
-        0.7116
+        0.1172,
+        1.0076
       ],
+      "scaleExponent": 2.317,
+      "sinkFraction": 0.2906,
+      "form": {
+        "extent": [
+          2.1671,
+          1.8232,
+          2.4689
+        ],
+        "originHeight": 0.8585
+      },
       "orientation": "radial",
       "materialFamily": "shore-rock"
     },
     {
-      "coverId": "cover/ground-rock-p1034-948",
-      "kind": "ground-rock",
+      "coverId": "cover/grass-blade-p1034-948",
+      "kind": "grass-blade",
       "count": 948,
       "region": {
         "shape": "island-ellipse",
@@ -14752,11 +14766,21 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         30.65
       ],
       "scaleRange": [
-        0.3671,
-        0.9788
+        0.4235,
+        1.7319
       ],
+      "scaleExponent": 1.226,
+      "sinkFraction": 0,
+      "form": {
+        "extent": [
+          2.0851,
+          1.9186,
+          0
+        ],
+        "originHeight": 0
+      },
       "orientation": "radial",
-      "materialFamily": "shore-rock"
+      "materialFamily": "terrain-ground"
     },
     {
       "coverId": "cover/ground-rock-p2954-900",
@@ -14780,15 +14804,25 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         54.8
       ],
       "scaleRange": [
-        0.7093,
-        1.8915
+        0.3442,
+        2.5614
       ],
+      "scaleExponent": 2.148,
+      "sinkFraction": 0.2713,
+      "form": {
+        "extent": [
+          2.165,
+          1.8267,
+          2.4665
+        ],
+        "originHeight": 0.8602
+      },
       "orientation": "radial",
       "materialFamily": "shore-rock"
     },
     {
-      "coverId": "cover/ground-rock-p0948-145",
-      "kind": "ground-rock",
+      "coverId": "cover/grass-blade-p0948-145",
+      "kind": "grass-blade",
       "count": 145,
       "region": {
         "shape": "island-ellipse",
@@ -14808,15 +14842,25 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         31.49
       ],
       "scaleRange": [
-        0.3719,
-        0.9917
+        0.4635,
+        1.9454
       ],
+      "scaleExponent": 1.156,
+      "sinkFraction": -0.0003,
+      "form": {
+        "extent": [
+          1.5758,
+          2.0005,
+          0
+        ],
+        "originHeight": 0
+      },
       "orientation": "radial",
-      "materialFamily": "shore-rock"
+      "materialFamily": "terrain-ground"
     },
     {
-      "coverId": "cover/ground-rock-p1024-127",
-      "kind": "ground-rock",
+      "coverId": "cover/grass-blade-p1024-127",
+      "kind": "grass-blade",
       "count": 127,
       "region": {
         "shape": "island-ellipse",
@@ -14836,11 +14880,21 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         27.61
       ],
       "scaleRange": [
-        0.2217,
-        0.5912
+        0.5395,
+        1.4161
       ],
+      "scaleExponent": 1.194,
+      "sinkFraction": 0,
+      "form": {
+        "extent": [
+          2.0172,
+          0.8942,
+          0
+        ],
+        "originHeight": 0
+      },
       "orientation": "radial",
-      "materialFamily": "shore-rock"
+      "materialFamily": "terrain-ground"
     },
     {
       "coverId": "cover/sky-clouds",
@@ -14849,15 +14903,15 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "region": {
         "shape": "sky-shell",
         "center": [
-          296.46,
+          350.68,
           -166.99
         ],
         "radii": [
-          6818.27,
+          5622.71,
           5215.52
         ],
-        "minHeight": -501.67,
-        "maxHeight": 3174.86,
+        "minHeight": 566.88,
+        "maxHeight": 2613.31,
         "innerRadius": 0.25,
         "outerRadius": 1
       },
@@ -14866,14 +14920,24 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         4178.36
       ],
       "scaleRange": [
-        0.6,
-        1.6
+        831.94,
+        2089.18
       ],
+      "scaleExponent": 1,
+      "sinkFraction": 0,
+      "form": {
+        "extent": [
+          2,
+          1.0843,
+          2
+        ],
+        "originHeight": 0.5422
+      },
       "orientation": "radial",
       "materialFamily": "ocean-surface",
       "heightRange": [
-        -501.67,
-        3174.86
+        566.88,
+        2613.31
       ]
     }
   ],

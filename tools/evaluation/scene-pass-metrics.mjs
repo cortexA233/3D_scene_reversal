@@ -561,13 +561,34 @@ export function aggregateCameras(views) {
       groupRows.push({ camera: view.camera, label, ...row });
     }
   }
-  const worstGroup = (selector, ascending) => {
-    const rows = groupRows
+  const worstGroup = (selector, ascending, rowsIn = groupRows) => {
+    const rows = rowsIn
       .map((row) => ({ camera: row.camera, label: row.label, value: selector(row) }))
       .filter((row) => Number.isFinite(row.value));
     if (rows.length === 0) return null;
     return rows.sort((a, b) => (ascending ? a.value - b.value : b.value - a.value))[0];
   };
+  // Groups compared by distribution rather than by instance pairing, which is what
+  // Distributed Scene Cover is defined to be: "reconstructed and compared by
+  // semantic occupancy and spatial distribution rather than arbitrary instance
+  // pairing". A per-pixel *intersection* is an instance pairing, and on a scatter
+  // of one-to-few-pixel instances it saturates: measured through the corrected
+  // passes, a mild 0.02-radian yaw of the reference against itself takes cover's
+  // IoU to 0.0415 and a mild one per cent scale to 0.1344, against a frozen
+  // worst-group threshold of 0.302569. The maximum over every camera and group
+  // therefore always finds cover and reports it as the scene's worst failure
+  // whatever the island looks like — the same saturation ADR-0051 found in
+  // world-normal p95, and repaired the same way, by fixing what the metric
+  // compares rather than what it demands.
+  //
+  // Only the intersection is scoped. Contour *distance* asks how far the nearest
+  // candidate cover pixel is, which is a distribution question and not a pairing:
+  // measured, cover's own contour bracket separates a mild 17.9 pixels from a
+  // severe 268.6, and its depth bracket separates a mild 5.3 world units from a
+  // severe 86.5. Both keep cover, and both still gate it.
+  const DISTRIBUTION_COMPARED_GROUPS = new Set(["cover"]);
+  const pairedRows = groupRows.filter((row) => !DISTRIBUTION_COMPARED_GROUPS.has(row.label));
+  const distributedRows = groupRows.filter((row) => DISTRIBUTION_COMPARED_GROUPS.has(row.label));
 
   // Per-Material-Family appearance across every camera. `sky` is excluded for the
   // same reason it is excluded from the group rows: it is a backdrop that fills
@@ -613,10 +634,17 @@ export function aggregateCameras(views) {
   return {
     cameras: views.length,
     groupSilhouetteIoU: {
+      // The mean keeps every group, cover included: a scatter that is absent, far
+      // too sparse, or far too dense still drags it, and a mean is not a maximum,
+      // so one saturated group cannot define it.
       mean:
         summarize(groupRows.map((row) => row.intersectionOverUnion).filter(Number.isFinite))
           ?.mean ?? null,
-      worst: worstGroup((row) => row.intersectionOverUnion, true),
+      worst: worstGroup((row) => row.intersectionOverUnion, true, pairedRows),
+      // Reported, never hidden. The gate does not read it, and a review that wants
+      // to know what the scatter's per-pixel intersection is can see it here
+      // alongside the reason it is not gated.
+      worstDistributed: worstGroup((row) => row.intersectionOverUnion, true, distributedRows),
     },
     // Per-group contour distance, for the same reason the per-group IoU exists.
     // The whole-frame silhouette covers everything that is not sky, so its

@@ -179,6 +179,56 @@ function buildEnvironment(recipe, materials) {
  */
 const COVER_PLACEMENT_ATTEMPTS = 24;
 
+/**
+ * A population's unit form, sized and seated to the authored one it stands for.
+ *
+ * The measured form extent is a hard output target for one instance at scale 1,
+ * the way Target AABB Extent is for an identity-bearing entity, so a scale in the
+ * recipe means the same world size it means in the reference. `originHeight` is
+ * how far the authored form's own origin sits above its base: the ground rocks
+ * are centred lumps and the grass is a blade rooted at its base, and a single
+ * convention would misplace one of them by half its height and undo the sink.
+ *
+ * A zero extent is a flat form, not a degenerate one. The authored grass is two
+ * triangles with no thickness, so the axis stays flat rather than being scaled to
+ * nothing.
+ */
+function coverForm(population) {
+  const [width, height, depth] = population.form.extent;
+  const geometry =
+    population.kind === "cloud"
+      ? new THREE.SphereGeometry(1, 6, 5)
+      : depth === 0 || width === 0
+        ? new THREE.PlaneGeometry(1, 1).translate(0, 0.5, 0)
+        : new THREE.IcosahedronGeometry(1, 0);
+  geometry.computeBoundingBox();
+  const box = geometry.boundingBox;
+  const span = [box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z];
+  const target = [width, height, depth];
+  const factor = target.map((value, axis) =>
+    value === 0 || span[axis] === 0 ? 1 : value / span[axis],
+  );
+  geometry.scale(factor[0], factor[1], factor[2]);
+  geometry.computeBoundingBox();
+  geometry.translate(0, -geometry.boundingBox.min.y - population.form.originHeight, 0);
+  return geometry;
+}
+
+/**
+ * One instance's scale, drawn from the population's measured ladder.
+ *
+ * The authored scatter draws size as `min + pow(uniform, exponent) * (max - min)`,
+ * and the exponent is what a range on its own cannot say. Measured, the two
+ * ground-rock populations sit at 2.15 and 2.32, so most of their instances are
+ * near the small end: a uniform draw over the same range puts the median at 1.5
+ * times the authored one and renders every instance above a pixel where the
+ * reference renders most of them below one.
+ */
+function coverScale(population, unit) {
+  const [low, high] = population.scaleRange;
+  return low + unit ** population.scaleExponent * (high - low);
+}
+
 function buildPopulations(recipe, materials, elevationAt) {
   const root = new THREE.Group();
   root.userData.semanticId = "cover";
@@ -187,13 +237,16 @@ function buildPopulations(recipe, materials, elevationAt) {
     const rng = createSeededRng(
       deriveSceneSeed(recipe.sceneSeed, population.coverId, "distribution"),
     );
-    const geometry =
+    const geometry = coverForm(population);
+    // The cloud shell is the one population that is not a surface family: the
+    // authored clouds are transparent sprites, and a Material Family here is an
+    // opaque MeshStandardMaterial. Its colour and opacity are measured from those
+    // sprites and carried in the Environment Recipe, because a cloud belongs to the
+    // atmosphere rather than to the ground.
+    const material =
       population.kind === "cloud"
-        ? new THREE.SphereGeometry(1, 6, 5)
-        : population.kind === "grass-tuft"
-          ? new THREE.ConeGeometry(1, 2, 4)
-          : new THREE.IcosahedronGeometry(1, 0);
-    const material = materials.family(population.materialFamily);
+        ? materials.clouds(recipe.environment.clouds)
+        : materials.family(population.materialFamily);
     const mesh = new THREE.InstancedMesh(geometry, material, population.count);
     const matrix = new THREE.Matrix4();
     // A ground population's own measured floor. Its region is an ellipse over
@@ -251,12 +304,14 @@ function buildPopulations(recipe, materials, elevationAt) {
         }
       }
       const [x, y, z] = dry ?? highest;
-      const scale =
-        population.scaleRange[0] +
-        rng.nextFloat() * (population.scaleRange[1] - population.scaleRange[0]);
+      const scale = coverScale(population, rng.nextFloat());
       matrix.makeRotationY(rng.nextFloat() * Math.PI * 2);
       matrix.scale(new THREE.Vector3(scale, scale, scale));
-      matrix.setPosition(x, y, z);
+      // Sunk by the measured fraction of the instance's own scale. The authored
+      // ground rocks sit 0.27 and 0.29 of their scale below the terrain under
+      // them and the grass sits exactly on it, so the offset is proportional
+      // rather than constant and belongs to the population, not the form.
+      matrix.setPosition(x, y - population.sinkFraction * scale, z);
       mesh.setMatrixAt(index, matrix);
     }
     mesh.instanceMatrix.needsUpdate = true;

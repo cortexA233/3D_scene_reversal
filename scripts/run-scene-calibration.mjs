@@ -80,7 +80,7 @@ const FIXED_CAMERA_PATH = path.join(
  * declare which existing thresholds it moved, so "we only added layers" is a
  * checkable statement rather than a claim in a commit message.
  */
-const BASELINE_VERSION = "scene-quality-baseline-v1.1";
+const BASELINE_VERSION = "scene-quality-baseline-v1.2";
 
 const BASELINE_MIGRATIONS = [
   {
@@ -89,6 +89,7 @@ const BASELINE_MIGRATIONS = [
     change:
       "Freezes the structural-correspondence and world-geometry layers from reference repeatability and declared reference-only perturbations. The two rendered layers are left empty and therefore cannot pass.",
     movedGeometryThresholds: [],
+    movedRenderedThresholds: [],
   },
   {
     version: "scene-quality-baseline-v1.1",
@@ -96,6 +97,44 @@ const BASELINE_MIGRATIONS = [
     change:
       "Adds the fixedCameraGeometry and nativeAppearance thresholds, calibrated from declared scene-space damage rendered through the six frozen cameras of ADR-0049. Contour distance is gated per group rather than whole-frame, because whole-frame contour p95 measures 0 on topDown and 1 on the four obliques whatever the island looks like.",
     movedGeometryThresholds: [],
+    movedRenderedThresholds: [],
+  },
+  {
+    version: "scene-quality-baseline-v1.2",
+    adr: "0053",
+    change:
+      "Re-derives the fixedCameraGeometry and nativeAppearance thresholds under the corrected pass encodings. Three encoding defects made the reference's own masks wrong: a per-instance colour that tinted the identity every mask pass wrote, depth and world-normal shaders that ignored instanceMatrix and rendered every instance on its mesh's origin, and an identity lattice that could not carry the fourteenth declared group. The reference is on both sides of every calibration control, so the previous thresholds were calibrated through the defect. No threshold is chosen and no candidate result is consulted: the controls, their damage magnitudes, and the selection rule are unchanged, and only what the passes measure has changed.",
+    movedGeometryThresholds: [],
+    // Measured, not chosen, and checked two ways: on the run that writes the file,
+    // a threshold that moves without appearing here fails the run; on every run,
+    // each entry's second value must be what the metric is actually frozen at. What
+    // that cannot catch is a declaration deleted after the fact, because once the
+    // file is written it no longer carries the previous revision's values — the same
+    // limit the geometry list beside it has, and the reason each entry records both
+    // numbers rather than only the fact that something changed.
+    //
+    // Read the direction of each move before reading the count. The two worst-case
+    // metrics that a corrected mask makes discriminating again got *stricter* —
+    // worst group silhouette IoU from 0.302569 to 0.369228, worst semantic
+    // confusion from 0.007092 to 0.006534 — because the previous bracket was
+    // measured through a reference whose scatter had been credited to `plazas`. The
+    // three that loosened did so because the corrected passes measure more: cover's
+    // world normals are rendered at all now, and cover's own rows join the depth
+    // and IoU means. The four appearance moves are in the fourth decimal place.
+    movedRenderedThresholds: [
+      "fixedCameraGeometry/group silhouette IoU: 0.745598 -> 0.724931",
+      "fixedCameraGeometry/worst group silhouette IoU: 0.302569 -> 0.369228",
+      "fixedCameraGeometry/group contour distance p95: 5.874122 -> 6.536774",
+      "fixedCameraGeometry/group depth p95: 7.644414 -> 8.173471",
+      "fixedCameraGeometry/group world normal p95: 49.456982 -> 58.959694",
+      "fixedCameraGeometry/semantic agreement: 0.987474 -> 0.987465",
+      "fixedCameraGeometry/worst camera semantic agreement: 0.974085 -> 0.974068",
+      "fixedCameraGeometry/worst semantic confusion fraction: 0.007092 -> 0.006534",
+      "nativeAppearance/appearance DeltaE mean: 2.852463 -> 2.852472",
+      "nativeAppearance/worst camera appearance DeltaE: 4.228213 -> 4.228226",
+      "nativeAppearance/material family appearance DeltaE mean: 5.961796 -> 5.985232",
+      "nativeAppearance/worst material family appearance DeltaE: 4.062021 -> 4.062392",
+    ],
   },
 ];
 
@@ -467,6 +506,60 @@ async function main() {
     moved,
     BASELINE_MIGRATIONS.at(-1).movedGeometryThresholds,
     "this migration moved a geometry threshold it did not declare",
+  );
+
+  // The same statement for the two rendered layers, which differ from the two above
+  // in being allowed to move: they are re-derived from the reference-only controls
+  // rather than hand-adjusted. A revision may move them, but only the ones it names,
+  // and the diff lands in the artifact rather than having to be reconstructed from a
+  // previous copy of the file.
+  const movedRendered = [];
+  for (const layer of ["fixedCameraGeometry", "nativeAppearance"]) {
+    const before = new Map(
+      (previous.layers?.[layer] ?? []).map((entry) => [entry.name, entry.threshold]),
+    );
+    for (const entry of baseline.layers[layer]) {
+      if (before.has(entry.name) && before.get(entry.name) !== entry.threshold) {
+        movedRendered.push(
+          `${layer}/${entry.name}: ${before.get(entry.name)} -> ${entry.threshold}`,
+        );
+      }
+    }
+    for (const name of before.keys()) {
+      if (!baseline.layers[layer].some((entry) => entry.name === name)) {
+        movedRendered.push(`${layer}/${name}: dropped`);
+      }
+    }
+  }
+  // Two statements, because the file on disk is the *previous* revision only until
+  // this command has written once. Comparing the computed diff to the declared list
+  // for equality would therefore pass on the run that writes and fail on every run
+  // after it, which is a check that only works once.
+  //
+  // What holds either way: nothing may move that was not declared, and every
+  // declared move must name the value the metric actually ends up at.
+  const declaredRendered = BASELINE_MIGRATIONS.at(-1).movedRenderedThresholds;
+  assert.deepEqual(
+    movedRendered.filter((entry) => !declaredRendered.includes(entry)),
+    [],
+    "this migration moved a rendered threshold it did not declare",
+  );
+  const misdeclared = [];
+  for (const entry of declaredRendered) {
+    const [path, values] = entry.split(": ");
+    const [layer, name] = path.split("/");
+    const after = values.split(" -> ")[1];
+    const metric = baseline.layers[layer]?.find((candidate) => candidate.name === name);
+    if (!metric) {
+      misdeclared.push(`${entry} — ${layer}/${name} is not in the baseline`);
+    } else if (String(metric.threshold) !== after) {
+      misdeclared.push(`${entry} — the metric is actually at ${metric.threshold}`);
+    }
+  }
+  assert.deepEqual(
+    misdeclared,
+    [],
+    "a declared rendered-threshold move does not match the frozen value",
   );
 
   const calibrationSerialized = `${JSON.stringify(calibration, null, 2)}\n`;

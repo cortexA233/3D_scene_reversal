@@ -4,7 +4,10 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import * as THREE from "three";
+
 import { ISLAND_SCENE_RECIPE } from "../gt_designer/src/reconstruction/scene/island-scene-recipe.generated.js";
+import { generateScene } from "../gt_designer/src/reconstruction/scene/scene-generator.js";
 import { findControl } from "../tools/evaluation/scene-graph-perturbations.mjs";
 
 const PROJECT_ROOT = path.resolve(
@@ -15,10 +18,11 @@ const readJson = (relative) =>
   readFile(path.join(PROJECT_ROOT, relative), "utf8").then(JSON.parse);
 
 const EVIDENCE = ".scratch/scene-parity-foundation/evidence";
-const [baseline, passes, correspondence] = await Promise.all([
+const [baseline, passes, correspondence, coverInstances] = await Promise.all([
   readJson("tools/acceptance/baselines/scene-quality-baseline-v1.json"),
   readJson(`${EVIDENCE}/scene-passes-v1.json`),
   readJson(`${EVIDENCE}/scene-correspondence-v1.json`),
+  readJson(".scratch/full-island-reconstruction/evidence/cover-instances-v1.json"),
 ]);
 
 const cover = correspondence.distributedCover;
@@ -119,52 +123,76 @@ test("every population starts closer to its authored floor than it did", () => {
 });
 
 /**
- * What cover costs at acceptance. It is the worst group in the fixed-camera
- * layer and it fails the two worst-case gates on its own, so this reads them
- * from the baseline rather than restating them.
+ * What cover costs at acceptance, read against the worst-case thresholds that
+ * actually gate it rather than the one that does not.
  *
- * Marked outstanding, not loosened. Clearing the water did not move it, and the
- * measurement says why: the candidate draws 5,302 cover pixels on the authored
- * overview where the reference draws 128, and the two largest populations
- * contribute zero reference pixels there at all. Two inputs are invented rather
- * than measured. The per-instance scale in the Scene Recipe is a hardcoded
- * `[0.6, 1.6]` for every population, while the reference's own instanced surface
- * area implies 1.344, 0.506, 0.696, 0.420 and 0.705 — so four of the five are
- * between 1.6 and 2.7 times too large, and area goes as the square. And nothing
- * measures how deep an authored instance is buried, which is the only way two
- * populations spanning 590 by 552 units across the island can occupy no pixels.
- * Both need a reference measurement that does not exist yet; neither is a
- * placement rule.
+ * Per-pixel silhouette IoU is no longer among them, and the reason is measured
+ * rather than argued. Distributed Scene Cover is defined as compared "by semantic
+ * occupancy and spatial distribution rather than arbitrary instance pairing", and a
+ * per-pixel intersection is an instance pairing. Through the corrected passes
+ * (ADR-0053) the frozen bracket's own *mild* controls fail the frozen threshold on
+ * this group: a 0.02-radian yaw of the reference against itself reads 0.0415 and a
+ * one per cent scale reads 0.1344, against 0.302569. Cover is 5,100 instances one
+ * to a few pixels across, so once anything moves further than an instance's own
+ * footprint there is no intersection left to measure.
+ *
+ * Contour distance and depth are a different question and both still gate cover:
+ * contour distance asks how far the nearest cover pixel is, and cover's own bracket
+ * separates a mild 17.9 pixels from a severe 268.6, while its depth separates a
+ * mild 5.3 world units from a severe 86.5. That is what this asserts.
  */
-const NEEDS_INSTANCE_MEASUREMENT = {
+const OUTSTANDING = {
   todo:
-    "the per-instance scale is invented (0.6-1.6 against a measured 0.42-1.34) and burial depth " +
-    "is unmeasured; cover draws 5,302 pixels against the reference's 128",
+    "cover is inside its contour threshold on five of six cameras and its depth threshold on " +
+    "four, and the remaining gap is generator form rather than distribution: the authored rock " +
+    "is an 80-triangle noise-displaced lump and the candidate's is a 20-triangle icosahedron " +
+    "stretched to the same bounding box, which under-draws it",
 };
 
-test("the cover group is inside the frozen worst-group thresholds", NEEDS_INSTANCE_MEASUREMENT, () => {
-  const gates = baseline.layers.fixedCameraGeometry.filter((metric) =>
-    metric.scope === "worst-group",
+test("the cover group is inside the worst-case thresholds that gate it", OUTSTANDING, () => {
+  const gating = baseline.layers.fixedCameraGeometry.filter(
+    (metric) => metric.scope === "worst-group",
   );
-  assert.ok(gates.length >= 2, "the worst-group gates are not declared");
+  assert.ok(gating.length >= 2, "the worst-group gates are not declared");
 
+  // The scoping is asserted, not assumed. If per-pixel intersection ever gates
+  // cover again this check has to be rewritten rather than quietly pass.
+  assert.equal(
+    gating.some((metric) => metric.name === "worst group silhouette IoU"),
+    true,
+    "the worst-group intersection is no longer declared at all",
+  );
+  assert.equal(
+    passes.aggregate.groupSilhouetteIoU.worst?.label === "cover",
+    false,
+    "cover is back inside the gated worst-group intersection",
+  );
+  // And it is still reported, so the scoping cannot become a way to hide it.
+  assert.equal(passes.aggregate.groupSilhouetteIoU.worstDistributed?.label, "cover");
+
+  const contour = gating.find((metric) => metric.name === "worst group contour distance");
+  const depth = gating.find((metric) => metric.name === "worst group depth p95");
   const failures = [];
   for (const view of passes.views) {
     const measured = view.byGroup?.cover;
     if (!measured) continue;
-    const iou = baseline.layers.fixedCameraGeometry.find(
-      (metric) => metric.name === "worst group silhouette IoU",
-    );
-    if (measured.intersectionOverUnion < iou.threshold) {
-      failures.push(
-        `${view.camera}: cover silhouette IoU ${measured.intersectionOverUnion} is not >= ${iou.threshold}`,
-      );
+    const rows = [
+      ["contour distance p95", measured.contourDistance?.p95, contour],
+      ["depth p95", measured.depth?.worldUnits?.p95, depth],
+    ];
+    for (const [name, value, metric] of rows) {
+      if (!metric || !Number.isFinite(value)) continue;
+      if (value > metric.threshold) {
+        failures.push(
+          `${view.camera}: cover ${name} ${value} is not <= ${metric.threshold}`,
+        );
+      }
     }
   }
   assert.deepEqual(
     failures,
     [],
-    `the cover group is outside its frozen threshold:\n- ${failures.join("\n- ")}`,
+    `the cover group is outside a threshold that gates it:\n- ${failures.join("\n- ")}`,
   );
 });
 
@@ -202,5 +230,171 @@ test("cover stays instanced", () => {
   assert.ok(
     populations.length <= 8,
     `${populations.length} populations is more than one instanced mesh each`,
+  );
+});
+
+/**
+ * What the generated scatter actually looks like, instance by instance.
+ *
+ * The reference's per-instance evidence is a distribution, so the candidate has to
+ * be compared as one. Reading the generated instance matrices is the only way to
+ * do that without a browser, and it is the same decomposition the reference
+ * measurement uses.
+ */
+const generated = (() => {
+  const { root } = generateScene(ISLAND_SCENE_RECIPE);
+  let group = null;
+  root.traverse((object) => {
+    if (object.userData?.semanticId === "cover") group = object;
+  });
+  const rows = new Map();
+  const matrix = new THREE.Matrix4();
+  const position = new THREE.Vector3();
+  const quaternion = new THREE.Quaternion();
+  const scale = new THREE.Vector3();
+  for (const mesh of group.children) {
+    const scales = [];
+    for (let index = 0; index < mesh.count; index += 1) {
+      mesh.getMatrixAt(index, matrix);
+      matrix.decompose(position, quaternion, scale);
+      scales.push(Math.cbrt(scale.x * scale.y * scale.z));
+    }
+    scales.sort((a, b) => a - b);
+    mesh.geometry.computeBoundingBox();
+    const box = mesh.geometry.boundingBox;
+    rows.set(mesh.count, {
+      min: scales[0],
+      max: scales[scales.length - 1],
+      median: scales[Math.floor((scales.length - 1) / 2)],
+      formExtent: [box.max.x - box.min.x, box.max.y - box.min.y, box.max.z - box.min.z],
+      formBase: box.min.y,
+    });
+  }
+  return rows;
+})();
+
+const measuredByCount = new Map(
+  coverInstances.populations.map((population) => [population.count, population]),
+);
+const declaredByCount = new Map(
+  populations.map((population) => [population.count, population]),
+);
+
+/**
+ * The size ladder, reproduced rather than invented.
+ *
+ * This is the ticket's core correction and it has been got wrong twice. A
+ * population's rendered footprint is set by the *shape* of its size distribution,
+ * because rasterisation is not linear in size: an instance below a pixel across
+ * contributes almost nothing however much surface area it carries. A range whose
+ * root-mean-square matches the reference's measured total surface area therefore
+ * renders nothing like it when the authored spread is a power law and the derived
+ * one is uniform.
+ *
+ * Measured, the two ground-rock populations sit at exponents 2.15 and 2.32 with
+ * medians 0.84 and 0.30, while the surface-area range had medians 1.30 and 0.49
+ * and no instance at all below 0.71.
+ */
+test("every population reproduces its measured size ladder", () => {
+  const failures = [];
+  for (const [count, measured] of measuredByCount) {
+    const row = generated.get(count);
+    assert.ok(row, `the generated scene has no ${count}-instance population`);
+    for (const [name, actual, expected] of [
+      ["min", row.min, measured.scale.min],
+      ["max", row.max, measured.scale.max],
+      // The median is what separates a ladder from a range: two distributions can
+      // share both ends and still put most of their mass in different places.
+      ["median", row.median, measured.scale.deciles[5]],
+    ]) {
+      const relative = Math.abs(actual - expected) / Math.max(1e-6, expected);
+      if (relative > 0.1) {
+        failures.push(
+          `the ${count}-instance population's ${name} scale is ${actual.toFixed(4)} against a ` +
+            `measured ${expected.toFixed(4)} (${(relative * 100).toFixed(1)} per cent out)`,
+        );
+      }
+    }
+  }
+  assert.deepEqual(
+    failures,
+    [],
+    `the generated scatter does not follow the reference's size distribution:\n- ${failures.join("\n- ")}`,
+  );
+});
+
+/**
+ * How deep an instance sits in the ground, and where its own origin is.
+ *
+ * The authored ground rocks sit 0.27 and 0.29 of their own scale below the terrain
+ * under them and the grass sits exactly on it. Both were unmeasured, and the
+ * generator centred every form on the surface, which buries a blade to its waist
+ * and leaves a rock standing half again too proud. The two only mean anything
+ * together, because a sink is measured from the form's own origin.
+ */
+test("every population sits in the ground the way the authored one does", () => {
+  const failures = [];
+  for (const [count, measured] of measuredByCount) {
+    const population = declaredByCount.get(count);
+    if (Math.abs(population.sinkFraction - measured.sink.meanFraction) > 1e-3) {
+      failures.push(
+        `the ${count}-instance population sinks ${population.sinkFraction} of its scale against ` +
+          `a measured ${measured.sink.meanFraction}`,
+      );
+    }
+    const row = generated.get(count);
+    const expectedBase = -population.form.originHeight;
+    if (Math.abs(row.formBase - expectedBase) > 1e-3) {
+      failures.push(
+        `the ${count}-instance form sits ${row.formBase.toFixed(4)} below its own origin against ` +
+          `the authored ${expectedBase.toFixed(4)}`,
+      );
+    }
+  }
+  assert.deepEqual(
+    failures,
+    [],
+    `Distributed Scene Cover does not meet the ground the way the reference does:\n- ${failures.join("\n- ")}`,
+  );
+});
+
+/**
+ * One instance at scale 1 has to be the size of the authored one it stands for,
+ * the way Target AABB Extent binds an identity-bearing entity. Without it a scale
+ * in the recipe means one thing in the reference and another in the candidate and
+ * the ladder above is measuring nothing.
+ *
+ * It also keeps the generated form honest about being flat. The authored grass is
+ * two triangles with no thickness, and the solid cone that stood in for it has a
+ * silhouette that cannot vary with yaw.
+ */
+test("one instance at unit scale is the size of the authored form", () => {
+  const failures = [];
+  for (const [count, measured] of measuredByCount) {
+    const row = generated.get(count);
+    const population = declaredByCount.get(count);
+    row.formExtent.forEach((actual, axis) => {
+      const expected = population.form.extent[axis];
+      if (Math.abs(actual - expected) > 1e-3) {
+        failures.push(
+          `the ${count}-instance form spans ${actual.toFixed(4)} on axis ${axis} against the ` +
+            `measured ${expected.toFixed(4)}`,
+        );
+      }
+    });
+    const authoredFlat =
+      measured.form.localBounds.min[2] === measured.form.localBounds.max[2];
+    const generatedFlat = row.formExtent[2] === 0;
+    if (authoredFlat !== generatedFlat) {
+      failures.push(
+        `the ${count}-instance authored form is ${authoredFlat ? "flat" : "solid"} and the ` +
+          `generated one is ${generatedFlat ? "flat" : "solid"}`,
+      );
+    }
+  }
+  assert.deepEqual(
+    failures,
+    [],
+    `the generated unit form is not the authored one's size:\n- ${failures.join("\n- ")}`,
   );
 });
