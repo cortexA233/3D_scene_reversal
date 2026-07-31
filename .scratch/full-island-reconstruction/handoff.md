@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0055.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0056.
 
 ## Where the work stands
 
@@ -18,11 +18,12 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 02 — atmosphere | in progress, see below |
 | Reconstruction 04 — ocean surface | landed; gate red behind vegetation and architecture |
 | Reconstruction 05 — horizon ridges | landed; gate red at a recorded boundary (ADR-0052) |
-| Reconstruction 08 — vegetation canopies | re-opened; bamboo was left behind, beds fixed, stands blocked on a sampler defect |
+| Reconstruction 08 — vegetation canopies | landed; the sampler defect behind it is fixed (ADR-0055) |
 | Reconstruction 03 | boundary recorded (ADR-0054); one in-budget attempt named |
 | Reconstruction 09 — distributed cover | landed; the reference measurement was wrong and is fixed (ADR-0053) |
+| Reconstruction 10 — semantic part structure | done; gate passes at 0 against 3.5 (ADR-0056) |
 | Reconstruction 11 — material families | in progress; every albedo is measured, distant-rock converged |
-| Reconstruction 06, 07, 10, 12-16 | ready-for-agent; 06's paths is blocked on 03 |
+| Reconstruction 06, 07, 12-16 | ready-for-agent; 06's paths is blocked on 03 |
 
 ## Read this before trusting any number below
 
@@ -719,6 +720,23 @@ earlier was measured against the wrong thing.
   three parts in a thousand of its triangles on culms and the candidate about 13 per
   cent, so a candidate with visible stems cannot match the authored allocation. That is
   a representation tension, not a defect.
+- **Ticket 10 is done and its lesson is the sampler's twin.** The 14 entities missing
+  parts were all pandas: the authored rig is 15 meshes and the generator emitted 6, or 7
+  on a coin flip. The topology was measured before anything was built and every rig has
+  the same one — 3 body masses in a chain along its own long axis, 4 legs of 3 stacked
+  segments, mirrored across it — so what crossed into production is ~20 fractions of the
+  Target AABB Extent and a program, not a table.
+  `worst component deficit` 9 to **0** against its 3.5 threshold, entities missing parts
+  14 to **0**, and `panda` surface p95 1.2691 to **1.1581**. `panda-statue` is one merged
+  204-triangle authored mesh with no deficit to fix and improved anyway, 1.8857 to
+  **1.7037**, so it keeps no special case.
+  Two things to know before touching it: the rigs face their own local **-Z** (asserted,
+  because building the head at +Z satisfies the extent contract exactly and puts every
+  head where its tail is), and the proportions come only from the two yaw-0
+  representatives, because a yawed placement's authored AABB bounds the rotated form and
+  its axes are not the rig's own. The remaining component *delta* of 14 is deliberately
+  ungated: nearly every authored object here is a single merged mesh, so gating the delta
+  would pay a generator to merge its parts away. ADR-0056.
 - **Ticket 03's gates are a recorded count boundary (ADR-0054), not open work.**
   `tools/development/measure-terrain-form-budget.mjs` runs the production landform
   pursuit at increasing budgets. The frozen 40 forms reach full height p95 8.657;

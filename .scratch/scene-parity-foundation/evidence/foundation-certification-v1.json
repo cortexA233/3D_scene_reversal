@@ -13,19 +13,19 @@
     "determinism": {
       "repeatedGenerations": 2,
       "semanticIdCount": 711,
-      "sceneDigest": "4640b08004e0283dfc59a888dc362950b3a001cf355030362a4d4da6333b14a2",
+      "sceneDigest": "c6dae9fc734b788ae185ea37725578daea30e09a4246ca7f0c2c69178bf304fc",
       "identical": true
     },
     "productionIsolation": {
       "served": 12,
       "requests": 23,
       "externalRequests": 0,
-      "bundleBytes": 199964,
-      "bundleGzipBytes": 38632,
+      "bundleBytes": 200621,
+      "bundleGzipBytes": 38901,
       "thirdPartyInputs": 0,
-      "triangles": 529405,
-      "drawCalls": 1650,
-      "generationMs": 523,
+      "triangles": 541245,
+      "drawCalls": 1786,
+      "generationMs": 457.6,
       "auditPassed": true
     },
     "candidateCommandExitStatus": 1
@@ -49,10 +49,9 @@
         "evaluated": true,
         "passed": false,
         "failures": [
-          "surface p95: 7.2469 is not <= 2.454575",
+          "surface p95: 7.2441 is not <= 2.454575",
           "worst entity surface p95: 155.2008 is not <= 13.9152",
-          "over-tolerance surface fraction: 0.6219 is not <= 0.1204",
-          "worst component deficit: 9 is not <= 3.5",
+          "over-tolerance surface fraction: 0.6201 is not <= 0.1204",
           "terrain height p95: 8.532 is not <= 5.26875",
           "shore height p95: 7.9996 is not <= 2.85035",
           "land and sea agreement: 0.922721 is not >= 0.931361",
@@ -65,15 +64,15 @@
         "evaluated": true,
         "passed": false,
         "failures": [
-          "group silhouette IoU: 0.455222 is not >= 0.724931",
+          "group silhouette IoU: 0.461155 is not >= 0.724931",
           "worst group silhouette IoU: 0.067961 is not >= 0.369228",
-          "group contour distance p95: 29.634855 is not <= 6.536774",
+          "group contour distance p95: 29.642775 is not <= 6.536774",
           "worst group contour distance: 223.8402 is not <= 39.2559",
-          "group depth p95: 21.099584 is not <= 8.173471",
+          "group depth p95: 21.095347 is not <= 8.173471",
           "worst group depth p95: 118.403257 is not <= 22.354947",
-          "group world normal p95: 79.939817 is not <= 58.959694",
-          "semantic agreement: 0.941433 is not >= 0.987465",
-          "worst camera semantic agreement: 0.908872 is not >= 0.974068",
+          "group world normal p95: 79.371606 is not <= 58.959694",
+          "semantic agreement: 0.941442 is not >= 0.987465",
+          "worst camera semantic agreement: 0.908899 is not >= 0.974068",
           "worst semantic confusion fraction: 0.025947 is not <= 0.006534"
         ],
         "reason": null
@@ -97,8 +96,8 @@
     },
     "surface": {
       "count": 672,
-      "mean": 7.2469,
-      "rmse": 17.4532,
+      "mean": 7.2441,
+      "rmse": 17.453,
       "p50": 3.6683,
       "p95": 13.408,
       "max": 155.2008
@@ -140,87 +139,87 @@
     "semanticStructure": {
       "componentDeficit": {
         "count": 672,
-        "mean": 0.1786,
-        "rmse": 1.2392,
+        "mean": 0,
+        "rmse": 0,
         "p50": 0,
         "p95": 0,
-        "max": 9
+        "max": 0
       },
       "componentDelta": {
         "count": 672,
-        "mean": 1.3676,
-        "rmse": 2.0226,
-        "p50": 2,
-        "p95": 3,
-        "max": 9
+        "mean": 1.2128,
+        "rmse": 1.741,
+        "p50": 1,
+        "p95": 2,
+        "max": 14
       },
-      "entitiesMissingComponents": 14,
+      "entitiesMissingComponents": 0,
       "worstComponentDeficit": [
         {
-          "semanticId": "wildlife/panda-n1352-p0238-n1531",
-          "componentDeficit": 9
+          "semanticId": "bridges/bridge-p1321-p0088-p0980",
+          "componentDeficit": 0
         },
         {
-          "semanticId": "wildlife/panda-p0062-p0259-p0135",
-          "componentDeficit": 9
+          "semanticId": "bridges/bridge-p1456-p0170-n0810",
+          "componentDeficit": 0
         },
         {
-          "semanticId": "wildlife/panda-p0984-p0234-n2158",
-          "componentDeficit": 9
+          "semanticId": "decorations/bamboo-pile-p0947-p0205-p0631",
+          "componentDeficit": 0
         },
         {
-          "semanticId": "wildlife/panda-p0999-p0241-n2198",
-          "componentDeficit": 9
+          "semanticId": "decorations/blue-hat-p0293-p0267-p0056",
+          "componentDeficit": 0
         },
         {
-          "semanticId": "wildlife/panda-p1571-p0535-p1824",
-          "componentDeficit": 9
+          "semanticId": "decorations/camp-light-n0082-p0271-n0222",
+          "componentDeficit": 0
         },
         {
-          "semanticId": "wildlife/panda-p2651-p0258-p0253",
-          "componentDeficit": 9
+          "semanticId": "decorations/camp-light-p0234-p0265-n0080",
+          "componentDeficit": 0
         },
         {
-          "semanticId": "wildlife/panda-p2737-p0267-p0730",
-          "componentDeficit": 9
+          "semanticId": "decorations/campfire-n0289-p0239-n1475",
+          "componentDeficit": 0
         },
         {
-          "semanticId": "wildlife/panda-p3411-p0264-n0847",
-          "componentDeficit": 9
+          "semanticId": "decorations/campfire-n0291-p0239-n1469",
+          "componentDeficit": 0
         }
       ],
       "worstComponentDelta": [
         {
-          "semanticId": "wildlife/panda-n1352-p0238-n1531",
-          "componentDelta": 9
+          "semanticId": "decorations/panda-statue-n0143-p0334-p0247",
+          "componentDelta": 14
         },
         {
-          "semanticId": "wildlife/panda-p0062-p0259-p0135",
-          "componentDelta": 9
+          "semanticId": "decorations/panda-statue-n0202-p0272-p0241",
+          "componentDelta": 14
         },
         {
-          "semanticId": "wildlife/panda-p0984-p0234-n2158",
-          "componentDelta": 9
+          "semanticId": "decorations/bamboo-pile-p0947-p0205-p0631",
+          "componentDelta": 6
         },
         {
-          "semanticId": "wildlife/panda-p0999-p0241-n2198",
-          "componentDelta": 9
+          "semanticId": "bridges/bridge-p1321-p0088-p0980",
+          "componentDelta": 5
         },
         {
-          "semanticId": "wildlife/panda-p1571-p0535-p1824",
-          "componentDelta": 9
+          "semanticId": "bridges/bridge-p1456-p0170-n0810",
+          "componentDelta": 5
         },
         {
-          "semanticId": "wildlife/panda-p2651-p0258-p0253",
-          "componentDelta": 9
+          "semanticId": "decorations/log-pile-n0377-p0245-n1518",
+          "componentDelta": 4
         },
         {
-          "semanticId": "wildlife/panda-p2737-p0267-p0730",
-          "componentDelta": 9
+          "semanticId": "decorations/log-pile-n0398-p0245-n1538",
+          "componentDelta": 4
         },
         {
-          "semanticId": "wildlife/panda-p3411-p0264-n0847",
-          "componentDelta": 9
+          "semanticId": "decorations/log-pile-n0431-p0244-n1533",
+          "componentDelta": 4
         }
       ]
     },
@@ -324,7 +323,7 @@
     "fixedCamera": {
       "cameras": 6,
       "groupSilhouetteIoU": {
-        "mean": 0.455222,
+        "mean": 0.461155,
         "worst": {
           "camera": "oblique-north",
           "label": "paths",
@@ -333,11 +332,11 @@
         "worstDistributed": {
           "camera": "oblique-west",
           "label": "cover",
-          "value": 0.010963
+          "value": 0.01096
         }
       },
       "groupContourDistance": {
-        "meanP95": 29.634855,
+        "meanP95": 29.642775,
         "worst": {
           "camera": "topDown",
           "label": "paths",
@@ -345,7 +344,7 @@
         }
       },
       "groupDepthWorldUnits": {
-        "meanP95": 21.099584,
+        "meanP95": 21.095347,
         "worst": {
           "camera": "authoredOverview",
           "label": "structures",
@@ -353,7 +352,7 @@
         }
       },
       "groupWorldNormalDegrees": {
-        "meanP95": 79.939817,
+        "meanP95": 79.371606,
         "worst": {
           "camera": "oblique-west",
           "label": "decorations",
@@ -375,39 +374,39 @@
         }
       },
       "depthWorldUnits": {
-        "meanP95": 37.163773,
+        "meanP95": 37.161091,
         "worst": {
           "camera": "authoredOverview",
-          "value": 64.371947
+          "value": 64.359431
         }
       },
       "worldNormalDegrees": {
-        "meanP95": 4.931932,
+        "meanP95": 4.929032,
         "worst": {
           "camera": "topDown",
-          "value": 15.214839
+          "value": 15.207745
         }
       },
       "semanticAgreement": {
-        "mean": 0.941433,
+        "mean": 0.941442,
         "worst": {
           "camera": "authoredOverview",
-          "value": 0.908872
+          "value": 0.908899
         }
       },
       "appearanceDeltaE": {
-        "meanMean": 12.50407,
+        "meanMean": 12.504016,
         "worst": {
           "camera": "authoredOverview",
-          "value": 16.521817
+          "value": 16.521519
         }
       },
       "appearanceByMaterialFamily": {
-        "meanMean": 22.558967,
+        "meanMean": 22.538601,
         "worst": {
           "camera": "authoredOverview",
           "label": "palm-foliage",
-          "value": 47.385085
+          "value": 47.385559
         }
       },
       "semanticConfusion": {
@@ -422,24 +421,24 @@
     },
     "appearanceByRegion": {
       "sky": 8.952232,
-      "geography": 16.617349,
+      "geography": 16.617098,
       "horizon": 11.999522,
-      "structures": 34.042513,
+      "structures": 34.038951,
       "bridges": 32.343666,
-      "plazas": 34.12922,
+      "plazas": 34.1278,
       "paths": 34.177136,
       "rocks": 26.882432,
-      "decorations": 25.414759,
-      "vegetation": 39.650068,
-      "wildlife": 32.318658,
+      "decorations": 25.408912,
+      "vegetation": 39.650432,
+      "wildlife": 31.682326,
       "cover": 21.522306
     }
   },
   "nextMilestoneResiduals": [
     {
       "area": "native appearance",
-      "detail": "mean DeltaE 12.50407, worst camera authoredOverview at 16.521817",
-      "magnitude": 12.50407
+      "detail": "mean DeltaE 12.504016, worst camera authoredOverview at 16.521519",
+      "magnitude": 12.504016
     },
     {
       "area": "terrain elevation",
@@ -448,8 +447,8 @@
     },
     {
       "area": "object surfaces",
-      "detail": "symmetric distance p95 mean 7.2469, worst entity 155.2008",
-      "magnitude": 7.2469
+      "detail": "symmetric distance p95 mean 7.2441, worst entity 155.2008",
+      "magnitude": 7.2441
     },
     {
       "area": "skyline",
@@ -458,8 +457,8 @@
     },
     {
       "area": "semantic structure",
-      "detail": "mean component delta 1.3676, 14 entities missing parts",
-      "magnitude": 1.3676
+      "detail": "mean component delta 1.2128, 0 entities missing parts",
+      "magnitude": 1.2128
     },
     {
       "area": "distributed cover",
@@ -469,7 +468,7 @@
     {
       "area": "fixed-camera silhouette",
       "detail": "worst group paths on oblique-north at IoU 0.067961",
-      "magnitude": 0.544778
+      "magnitude": 0.538845
     }
   ],
   "environment": {

@@ -46,8 +46,6 @@ const RECORDED = Object.freeze({
   palmSurfaceP95: 6.8,
   blossomSurfaceP95: 4.5,
   aggregateSurfaceP95: 10.5,
-  worstComponentDeficit: 9,
-  meanComponentDeficit: 0.5,
 });
 
 function measure(kind, seed) {
@@ -132,17 +130,4 @@ test("the measured vegetation result has not regressed", () => {
     correspondence.surface.p95.mean <= RECORDED.aggregateSurfaceP95,
     `aggregate surface p95 ${correspondence.surface.p95.mean} regressed`,
   );
-});
-
-test("semantic structure is measured as missing parts, not different parts", () => {
-  const structure = correspondence.semanticStructure;
-
-  assert.ok(structure.componentDeficit, "the deficit metric must exist");
-  assert.ok(
-    structure.componentDeficit.max <= RECORDED.worstComponentDeficit,
-    `worst component deficit ${structure.componentDeficit.max} regressed`,
-  );
-  assert.ok(structure.componentDeficit.mean <= RECORDED.meanComponentDeficit);
-  // Extra parts are not a deficit; the two metrics must be able to disagree.
-  assert.ok(structure.componentDelta.max >= structure.componentDeficit.max);
 });

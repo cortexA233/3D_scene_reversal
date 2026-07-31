@@ -102,6 +102,30 @@ function sphere(radius, widthSegments, heightSegments, y = radius) {
 }
 
 /**
+ * A rounded mass with an independent size on each axis. The AABB of a unit
+ * sphere scaled by `size` is exactly `size`, so a form built out of these lands
+ * on its Target AABB Extent without the normalising step having to stretch it.
+ */
+function ellipsoid(size, widthSegments, heightSegments, [x, y, z]) {
+  const mesh = new THREE.Mesh(
+    new THREE.SphereGeometry(0.5, widthSegments, heightSegments),
+  );
+  mesh.scale.set(...size);
+  mesh.position.set(x, y, z);
+  return mesh;
+}
+
+/** One limb segment: a slightly tapered barrel, widest where it meets the ground. */
+function limbSegment(size, radialSegments, [x, y, z]) {
+  const mesh = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.4, 0.5, 1, radialSegments),
+  );
+  mesh.scale.set(...size);
+  mesh.position.set(x, y, z);
+  return mesh;
+}
+
+/**
  * A bounded support-plane solid: the accepted compact Stone representation,
  * reused here for rocks and distant ridges so the horizon is not a scaled
  * primitive.
@@ -737,21 +761,71 @@ function lantern() {
   ]);
 }
 
-function creature(rng) {
-  const parts = [
-    part(sphere(0.3, 10, 8, 0.42), "body"),
-    part(sphere(0.22, 10, 8, 0.76), "head"),
-  ];
-  for (const [x, z, id] of [
-    [-0.18, 0.16, "leg-front-left"],
-    [0.18, 0.16, "leg-front-right"],
-    [-0.18, -0.16, "leg-back-left"],
-    [0.18, -0.16, "leg-back-right"],
-  ]) {
-    parts.push(part(cylinder(0.08, 0.08, 0.24, 6, 0.12), id));
-    parts.at(-1).position.set(x, 0.12, z);
+/**
+ * The authored wildlife rigs, measured as fractions of their own Target AABB
+ * Extent by tools/development/measure-creature-parts.mjs. Both distinct panda
+ * assets agree on the topology — a three-mass body chain along the long axis and
+ * four legs of three stacked segments, mirrored across it — and on these
+ * proportions to within a few per cent, so one program covers the family.
+ *
+ * The head is at negative Z because the rigs face their own local -Z, and the
+ * Typed Scene Orientation yaw is read from the same world matrix that decides
+ * that. Building the head at +Z would seat every panda's head where its tail is
+ * and still satisfy the extent contract exactly.
+ */
+const QUADRUPED_MASSES = Object.freeze([
+  { id: "head", size: [0.91, 0.61, 0.38], at: [0, 0.7, -0.31] },
+  { id: "chest", size: [0.99, 0.71, 0.375], at: [0, 0.647, -0.03] },
+  { id: "hips", size: [1, 0.72, 0.44], at: [0, 0.637, 0.28] },
+]);
+const QUADRUPED_LEGS = Object.freeze([
+  {
+    id: "front",
+    z: -0.07,
+    halfWidth: 0.28,
+    segments: [
+      { id: "paw", y: 0.115, size: [0.26, 0.22, 0.2] },
+      { id: "shank", y: 0.25, size: [0.29, 0.26, 0.16] },
+      { id: "shoulder", y: 0.42, size: [0.38, 0.28, 0.19] },
+    ],
+  },
+  {
+    id: "rear",
+    z: 0.337,
+    halfWidth: 0.256,
+    segments: [
+      { id: "paw", y: 0.09, size: [0.21, 0.17, 0.185] },
+      { id: "shank", y: 0.225, size: [0.31, 0.23, 0.16] },
+      { id: "haunch", y: 0.362, size: [0.35, 0.21, 0.183] },
+    ],
+  },
+]);
+
+/**
+ * A quadruped as a Bounded Semantic Part Program: fifteen parts with fixed
+ * identities, the same fifteen on every run. Nothing here is a coin flip,
+ * because a part that exists half the time is not a part the evaluation can
+ * hold a generator to.
+ */
+function quadruped() {
+  const parts = QUADRUPED_MASSES.map(({ id, size, at }) =>
+    part(ellipsoid(size, 14, 10, at), id),
+  );
+  for (const leg of QUADRUPED_LEGS) {
+    for (const [side, hand] of [
+      [-1, "left"],
+      [1, "right"],
+    ]) {
+      for (const segment of leg.segments) {
+        parts.push(
+          part(
+            limbSegment(segment.size, 8, [side * leg.halfWidth, segment.y, leg.z]),
+            `${leg.id}-${hand}-${segment.id}`,
+          ),
+        );
+      }
+    }
   }
-  if (rng.nextFloat() > 0.5) parts.push(part(sphere(0.07, 6, 5, 0.92), "ear"));
   return group(parts);
 }
 
@@ -881,8 +955,8 @@ const GENERATORS = Object.freeze({
 
   // Characters
   "npc-statue": figure,
-  "panda-statue": creature,
-  panda: creature,
+  "panda-statue": quadruped,
+  panda: quadruped,
 
   // Vegetation
   palm,

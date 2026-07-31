@@ -1,0 +1,17 @@
+---
+status: accepted
+---
+
+# Generate semantic parts from a bounded part program
+
+Fourteen entities were missing semantic parts and every one of them was a panda: the authored wildlife rig carries fifteen meshes and the generator emitted six, or seven when a coin flip said so. `worst component deficit` read 9 against a calibrated threshold of 3.5, and it was the only entity kind failing the structural layer.
+
+A part count does not say what to build, so the structure was measured first. Every one of the fourteen rigs turns out to have the same topology: three body masses in a chain along the rig's own long axis, and four legs of three stacked segments each, mirrored across that axis. Three plus four times three is fifteen. The two distinct panda assets on the island — 2,316 and 1,879 triangles — agree on that topology and on the proportions to within a few per cent once each is expressed as fractions of its own Target AABB Extent. So the measurement that crosses into production is about twenty fractions and a topology, independent of triangle count, of resolution, and of how many pandas the island has. It is a program, not a table, and it is recorded by `tools/development/measure-creature-parts.mjs` with a `--check` mode that fails if the authored structure it was fitted to ever measures differently.
+
+Two facts in that measurement are easy to get backwards and cost nothing to get right once stated. The rigs face their own local **-Z**: in the local frame recovered by un-rotating each world offset by the entity's own Typed Scene Orientation yaw, all fourteen put the head mass at negative Z. A generator that builds its head at +Z satisfies the Target AABB Extent contract exactly and seats every panda's head where its tail is, so a test asserts the chain's order rather than trusting the comment. And the proportions are taken only from the two yaw-0 representatives, because an authored AABB is a world AABB: for a yawed placement it bounds the rotated form and its axes are not the rig's own, so normalising by it would fold the rotation into the proportions.
+
+Nothing in the program is random. The previous generator's ear existed on a coin flip, which means the entity's part count was not a property of the entity — and a part that exists half the time is not a part any evaluation can hold a generator to. Fifteen fixed identities (`head`, `chest`, `hips`, `front-left-shank`, …) are asserted stable across seeds.
+
+Two results are worth separating. The deficit went to zero, which was the point. But the panda's Scene Surface Parity also *improved*, mean p95 1.2691 to 1.1581, and `panda-statue` — authored as one merged 204-triangle mesh, with no deficit to fix — improved from 1.8857 to 1.7037 on the same program. Structure that is measured rather than invented tends to pay twice, and that is why the statue keeps no special case.
+
+The remaining component *delta* is 14 at its worst and is deliberately not gated. Nearly every authored object on this island is a single merged mesh, an artefact of how the scene was exported rather than a statement that a pavilion has one part; a generated form that decomposes meaningfully therefore has a large delta and no deficit at all. Gating the delta would pay a generator to merge its parts away, which is the exact failure the deficit exists to catch. The one-sidedness is a property of the metric, and the ratchet is on the deficit.
