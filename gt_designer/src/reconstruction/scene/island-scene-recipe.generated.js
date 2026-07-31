@@ -4423,7 +4423,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1914,
+        "perimeterShare": 0.2621
+      }
     },
     {
       "semanticId": "plazas/deck-p0566-p0158-p1307",
@@ -4448,7 +4452,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1914,
+        "perimeterShare": 0.156
+      }
     },
     {
       "semanticId": "plazas/deck-p1782-p0166-p0787",
@@ -4473,7 +4481,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1769,
+        "perimeterShare": 0.21
+      }
     },
     {
       "semanticId": "plazas/deck-p2455-p0200-n0959",
@@ -4498,7 +4510,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1263,
+        "perimeterShare": 0.2362
+      }
     },
     {
       "semanticId": "plazas/plaza-n0201-p0264-p1108",
@@ -4518,7 +4534,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.3413,
+        "perimeterShare": 0.6737
+      }
     },
     {
       "semanticId": "plazas/plaza-p0308-p0265-p0070",
@@ -4538,7 +4558,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "axis",
         "radians": 0
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 1,
+        "perimeterShare": 0
+      }
     },
     {
       "semanticId": "rocks/rock-n0231-p0409-p0634",

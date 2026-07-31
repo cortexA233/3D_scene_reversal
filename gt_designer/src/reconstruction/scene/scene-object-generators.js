@@ -217,11 +217,59 @@ function bridge(rng) {
   return group(parts);
 }
 
-function plaza() {
-  return group([
-    part(box(1, 0.7, 1, 0.35), "paving"),
-    part(box(0.88, 0.3, 0.88, 0.85), "inlay"),
-  ]);
+/**
+ * A ground plate as walks and paths rather than a filled slab.
+ *
+ * The authored plates cover a fraction of their own bounding rectangle —
+ * measured by scan-conversion in the reference page, 1.000 and 0.341 for the two
+ * plazas and 0.126 to 0.191 for the decks — while still reaching all four walls
+ * of it. They have to: the Target AABB Extent is a hard output target, so a
+ * candidate cannot cover less by shrinking, only by being concave. Filling the
+ * box is what made `plazas` draw 1.89 times the reference's pixels.
+ *
+ * Two measured controls decide the form, and two closed forms invert them. A
+ * perimeter walk of width w covers 1 - (1 - 2w)^2 and puts its mass at the
+ * edges; crossing paths of half-width w cover 4w - 4w^2 and put theirs in the
+ * middle. Coverage alone cannot choose between them — a ring and a cross of the
+ * same area have footprint reach 0.71 and 0.28 — so `perimeterShare` carries how
+ * much of the covered area is the walk, solved from the authored reach. It comes
+ * out at 0.16 to 0.26 across the four decks and 0.67 for the sparse plaza.
+ *
+ * At full coverage the program degenerates to the filled plate the other plaza
+ * actually is, which is the behaviour that lets one kind serve both assets.
+ */
+function plate(rng, { footprintCoverage = 1, perimeterShare = 0 } = {}) {
+  const coverage = Math.min(1, Math.max(0.02, footprintCoverage));
+  const share = Math.min(1, Math.max(0, perimeterShare));
+  // Invert each component's area for its width. The two overlap at the four
+  // places an arm meets the walk, and coverage means the *union*, so the two
+  // areas are grown by the overlap until the union lands on the target. The
+  // overlap is a product of both widths, so a few fixed-point passes converge.
+  let pathHalfWidth = 0;
+  let walkWidth = 0;
+  let overlap = 0;
+  for (let pass = 0; pass < 4; pass += 1) {
+    const target = Math.min(1, coverage + overlap);
+    pathHalfWidth = (1 - Math.sqrt(Math.max(0, 1 - target * (1 - share)))) / 2;
+    walkWidth = 0.5 - Math.sqrt(Math.max(0, 1 - target * share) / 4);
+    overlap = 8 * pathHalfWidth * walkWidth;
+  }
+
+  const parts = [
+    part(box(2 * pathHalfWidth, 1, 1, 0.5), "path-along"),
+    part(box(1, 1, 2 * pathHalfWidth, 0.5), "path-across"),
+  ];
+  if (walkWidth > 1e-4) {
+    const offset = 0.5 - walkWidth / 2;
+    const inner = Math.max(1e-4, 1 - 2 * walkWidth);
+    parts.push(
+      part(box(1, 1, walkWidth, 0.5, 0, -offset), "walk-south"),
+      part(box(1, 1, walkWidth, 0.5, 0, offset), "walk-north"),
+      part(box(walkWidth, 1, inner, 0.5, -offset, 0), "walk-west"),
+      part(box(walkWidth, 1, inner, 0.5, offset, 0), "walk-east"),
+    );
+  }
+  return group(parts);
 }
 
 /** Shallow irregular slab: the accepted Stone Path footprint extrusion idea. */
@@ -904,8 +952,8 @@ const GENERATORS = Object.freeze({
   bridge,
 
   // Ground surfaces
-  plaza,
-  deck: (rng) => slab(rng, { sides: 5 }),
+  plaza: plate,
+  deck: plate,
   "path-stone": slab,
   "paving-slab": (rng) => slab(rng, { sides: 6 }),
   "stone-platform": (rng) => slab(rng, { sides: 6 }),

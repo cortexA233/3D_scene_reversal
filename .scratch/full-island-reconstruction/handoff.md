@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0056.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0057.
 
 ## Where the work stands
 
@@ -23,7 +23,8 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 09 — distributed cover | landed; the reference measurement was wrong and is fixed (ADR-0053) |
 | Reconstruction 10 — semantic part structure | done; gate passes at 0 against 3.5 (ADR-0056) |
 | Reconstruction 11 — material families | in progress; every albedo is measured, distant-rock converged |
-| Reconstruction 06, 07, 12-16 | ready-for-agent; 06's paths is blocked on 03 |
+| Reconstruction 06 — ground surfaces | plazas and decks landed (ADR-0057); `rocks` actionable and newly exposed; `paths` blocked on 03 |
+| Reconstruction 07, 12-16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
 ## Read this before trusting any number below
 
@@ -756,8 +757,30 @@ earlier was measured against the wrong thing.
 - Ticket 05 is **landed** and its remaining red is a recorded boundary, not
   unfinished work. Do not re-open it as a fitting problem; the next move is the
   shared form family described above.
-- **The village is measured twice over and now blocked on a design decision, not on a
-  form.** Read ticket 07's three findings before touching it. The short version:
+- **The plazas group is fixed and it says how the rest of the village goes.** ADR-0057:
+  the over-draw was footprint coverage, not terrain — the generator filled its bounding
+  rectangle and the authored plates cover 1.000, 0.341 and 0.126-0.191 of theirs. A
+  candidate cannot cover less by shrinking, because `placeEntity` scales its AABB onto
+  the declared extent exactly, so lower coverage comes from concavity; and coverage
+  alone cannot pick the shape, because a perimeter walk and crossing paths of equal
+  area sit at reach 0.71 and 0.28. Two measured scalars per entity — `footprintCoverage`
+  and `perimeterShare`, the latter inverted from the authored reach — and a walk plus
+  crossing paths that degenerates to a filled plate at full coverage.
+  `plazas` pixel ratio **1.89 to 1.12**, IoU 0.367 to 0.398, contour 17.63 to 13.24,
+  `plaza` surface p95 42.75 to 34.05, and **nine of the ten gated rendered metrics
+  improved** — against the previous village attempt which regressed six of eight. The
+  difference is that this one was validated on the layer it was meant to fix.
+- **An over-drawing group was propping up its neighbours, and that changes how to read
+  the per-group table.** With the plaza shrunk to its measured footprint, `paths`
+  contour fell 111.5 to 81.1 and `geography` 16.7 to 12.4, while `rocks` contour nearly
+  **doubled** — 25.6 to 47.9 — and `bridges` IoU slipped 0.370 to 0.360. None of those
+  generators changed; the plaza had been covering them. So a per-group score measured
+  while a neighbour over-draws is not independent of that neighbour, and the ranking has
+  to be re-read after each over-draw is fixed. `rocks` is now the most exposed shape
+  error in the village and is ticket 06's own next checkbox, with `fit-stone-supports.mjs`
+  already written for it.
+- **The rest of the village is still blocked on a design decision, not on a form.**
+  Read ticket 07's three findings before touching it. The short version:
   `plazas` draws 1.89 times the reference's pixels and `bridges` 2.11 because the
   authored plates do not fill their boxes — measured by scan-conversion in the
   reference page, coverage is 1.000 and 0.341 for the two plazas, 0.568 and 0.432 for

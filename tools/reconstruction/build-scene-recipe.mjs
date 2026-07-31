@@ -67,6 +67,25 @@ const COVER_INSTANCES_PATH = path.join(
   ".scratch/full-island-reconstruction/evidence/cover-instances-v1.json",
 );
 /**
+ * Authored ground-plate footprint coverage, measured by
+ * `tools/development/measure-plate-footprint.mjs`. Absent on a clean checkout, in
+ * which case the plate kinds fall back to a filled plate.
+ */
+const PLATE_FOOTPRINT_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/full-island-reconstruction/evidence/plate-footprint-v1.json",
+);
+const SURFACE_SAMPLES_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/scene-parity-foundation/evidence/scene-surface-samples-v1.json",
+);
+/**
+ * The kinds whose generator reads plate controls. `bridge` is measured too but
+ * its two placements have opposite vertical massing, which a footprint control
+ * cannot carry, so it keeps its own form until that is measured.
+ */
+const PLATE_CONTROL_KINDS = ["plaza", "deck"];
+/**
  * Compact controls persisted by the Reference-guided Fitting Loop. They are
  * fitted against the reference and then live in the Scene Recipe, so a clean
  * production run reproduces them without the fitter.
@@ -202,8 +221,56 @@ function fittedShape(shape, fit) {
   };
 }
 
-function buildEntities(inventory, horizonEvidence, fittedRidges) {
-  return readAuthoredPlacements(inventory, horizonEvidence).placements.map((placement) => ({
+/**
+ * The two compact plate controls, per entity.
+ *
+ * `footprintCoverage` is measured, and coverage alone cannot say what shape has
+ * it: a perimeter walk and crossing paths of equal area have footprint reach 0.71
+ * and 0.28 on the unit square. So the authored reach — the mean distance of the
+ * plate's own surface samples from its centre, doubled and expressed as a
+ * fraction of extent — is inverted against those two closed forms to give
+ * `perimeterShare`, the fraction of the covered area that is the walk. Both are
+ * scalars; nothing per-entity is carried but two numbers.
+ *
+ * Reach is read from the same frozen samples the surface gate uses, so the
+ * candidate and the reference are described by the same measurement.
+ */
+function plateControls(placement, plateCoverage, samples, members) {
+  const coverage = plateCoverage.get(placement.semanticId);
+  if (coverage === undefined) return null;
+  const paths = [...members.entries()]
+    .filter(([, key]) => key === placement.key)
+    .map(([itemPath]) => itemPath);
+  let lateral = 0;
+  let count = 0;
+  for (const itemPath of paths) {
+    const flat = samples.samples[itemPath] ?? [];
+    for (let slot = 0; slot + 2 < flat.length; slot += 3) {
+      lateral +=
+        Math.abs((flat[slot] - placement.anchor[0]) / placement.extent[0]) +
+        Math.abs((flat[slot + 2] - placement.anchor[2]) / placement.extent[2]);
+      count += 1;
+    }
+  }
+  if (count === 0) return { footprintCoverage: round(coverage, 4), perimeterShare: 0 };
+  const reach = lateral / count;
+  // Crossing paths cover 4w - 4w^2; a perimeter walk covers 1 - (1 - 2w)^2.
+  const pathHalf = (1 - Math.sqrt(Math.max(0, 1 - coverage))) / 2;
+  const pathReach =
+    (2 * (pathHalf ** 2 + 0.5 * pathHalf - 2 * pathHalf ** 3)) / (4 * pathHalf - 4 * pathHalf ** 2);
+  const inner = Math.sqrt(Math.max(0, (1 - coverage) / 4));
+  const walkReach = (2 * (0.25 - 2 * inner ** 3)) / Math.max(1e-6, 1 - 4 * inner ** 2);
+  const span = walkReach - pathReach;
+  const share = Math.abs(span) < 1e-6 ? 0 : (reach - pathReach) / span;
+  return {
+    footprintCoverage: round(coverage, 4),
+    perimeterShare: round(Math.min(1, Math.max(0, share)), 4),
+  };
+}
+
+function buildEntities(inventory, horizonEvidence, fittedRidges, plateCoverage, samples) {
+  const { placements, members } = readAuthoredPlacements(inventory, horizonEvidence);
+  return placements.map((placement) => ({
     semanticId: placement.semanticId,
     kind: placement.kind,
     group: placement.group,
@@ -214,6 +281,11 @@ function buildEntities(inventory, horizonEvidence, fittedRidges) {
     ...(placement.shape
       ? { shape: fittedShape(placement.shape, fittedRidges?.values?.[placement.semanticId]) }
       : {}),
+    ...(() => {
+      if (placement.shape) return {};
+      const controls = plateControls(placement, plateCoverage, samples, members);
+      return controls ? { shape: controls } : {};
+    })(),
   }));
 }
 
@@ -509,8 +581,23 @@ function buildTerrain(elevation, world) {
   });
 }
 
-function buildRecipe(inventory, elevation, horizonEvidence, fittedRidges, coverInstances, measuredAlbedo) {
-  const entities = buildEntities(inventory, horizonEvidence, fittedRidges);
+function buildRecipe(
+  inventory,
+  elevation,
+  horizonEvidence,
+  fittedRidges,
+  coverInstances,
+  measuredAlbedo,
+  plateCoverage,
+  surfaceSamples,
+) {
+  const entities = buildEntities(
+    inventory,
+    horizonEvidence,
+    fittedRidges,
+    plateCoverage,
+    surfaceSamples,
+  );
   return {
     schemaVersion: SCENE_RECIPE_SCHEMA_VERSION,
     generatorVersion: SCENE_GENERATOR_VERSION,
@@ -564,6 +651,23 @@ async function main() {
     if (error.code !== "ENOENT") throw error;
   }
 
+  // Plate coverage and the samples reach is inverted from. Both optional: on a
+  // clean checkout the plate kinds fall back to the filled plate they were.
+  const plateCoverage = new Map();
+  let surfaceSamples = { samples: {} };
+  try {
+    const plate = JSON.parse(await readFile(PLATE_FOOTPRINT_PATH, "utf8"));
+    assert.equal(plate.schemaVersion, "plate-footprint-v1");
+    for (const asset of plate.assets) {
+      if (!PLATE_CONTROL_KINDS.includes(asset.kind)) continue;
+      for (const semanticId of asset.placements) plateCoverage.set(semanticId, asset.coverage);
+    }
+    surfaceSamples = JSON.parse(await readFile(SURFACE_SAMPLES_PATH, "utf8"));
+    assert.equal(surfaceSamples.schemaVersion, "scene-surface-samples-v1");
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+
   let measuredAlbedo = null;
   try {
     measuredAlbedo = JSON.parse(await readFile(MATERIAL_ALBEDO_PATH, "utf8"));
@@ -579,6 +683,8 @@ async function main() {
     fittedRidges,
     coverInstances,
     measuredAlbedo,
+    plateCoverage,
+    surfaceSamples,
   );
   assert.deepEqual(
     validateSceneRecipe(recipe),

@@ -88,6 +88,19 @@ function validateEntity(entity, index, seen, errors) {
   if (entity?.shape !== undefined && (entity.shape === null || typeof entity.shape !== "object")) {
     errors.push(`${label}: shape must be a compact semantic object when present`);
   }
+  // Plate controls. Coverage below one is only reachable by a concave form,
+  // because the Target AABB Extent is a hard output target, so a generator that
+  // reads these has to mean them.
+  if (entity?.shape?.footprintCoverage !== undefined) {
+    const coverage = entity.shape.footprintCoverage;
+    if (!Number.isFinite(coverage) || coverage <= 0 || coverage > 1) {
+      errors.push(`${label}: footprintCoverage must be a measured fraction in (0, 1]`);
+    }
+    const share = entity.shape.perimeterShare;
+    if (!Number.isFinite(share) || share < 0 || share > 1) {
+      errors.push(`${label}: perimeterShare must accompany footprintCoverage as a fraction`);
+    }
+  }
   if ("position" in (entity ?? {}) || "size" in (entity ?? {}) || "yaw" in (entity ?? {})) {
     errors.push(
       `${label}: ambiguous position/size/yaw fields are replaced by anchor, extent, and typed orientation`,
