@@ -2,11 +2,35 @@
   "schemaVersion": "ground-structure-v1",
   "authority": "Assembled Authored Scene",
   "subject": "the lower band of the Assembled Authored Scene's structural trees",
-  "measuredAt": "2026-07-31T18:15:29.208Z",
+  "measuredAt": "2026-07-31T18:20:34.487Z",
   "raster": 96,
-  "band": 1,
+  "band": 0.3,
   "note": "Connected components of the horizontal projection of the geometry inside the bottom BAND of each placement's own height, by triangle scan-conversion. Ticket 07 records the upright count as unrecoverable from a radially averaged profile, which is true of that profile: a radial mean cannot separate N posts at radius r from a solid cylinder of radius r. A banded scan conversion can, because one is N blobs and the other is a disc. reach and areaShare use the same normalisation as axial-massing-v1.json so a form built to this file is built to numbers both read.",
   "kinds": [
+    {
+      "kind": "pavilion",
+      "placements": 1,
+      "areaShare": 1,
+      "reach": 0.4268,
+      "coverage": 0.6152,
+      "componentsPerPlacement": [
+        1
+      ],
+      "componentsMedian": 1,
+      "outerComponentReach": 0.087
+    },
+    {
+      "kind": "pavilion-single",
+      "placements": 1,
+      "areaShare": 1,
+      "reach": 0.4961,
+      "coverage": 0.8458,
+      "componentsPerPlacement": [
+        1
+      ],
+      "componentsMedian": 1,
+      "outerComponentReach": 0.063
+    },
     {
       "kind": "shop-sign",
       "placements": 6,
@@ -25,6 +49,22 @@
       "outerComponentReach": 0.0717
     },
     {
+      "kind": "swing-tree",
+      "placements": 5,
+      "areaShare": 0.3798,
+      "reach": 0.5363,
+      "coverage": 0.1491,
+      "componentsPerPlacement": [
+        1,
+        1,
+        12,
+        1,
+        12
+      ],
+      "componentsMedian": 1,
+      "outerComponentReach": 0.516
+    },
+    {
       "kind": "umbrella",
       "placements": 3,
       "areaShare": 1,
@@ -37,9 +77,79 @@
       ],
       "componentsMedian": 1,
       "outerComponentReach": 0.118
+    },
+    {
+      "kind": "wish-tree",
+      "placements": 3,
+      "areaShare": 0.2113,
+      "reach": 0.3999,
+      "coverage": 0.0371,
+      "componentsPerPlacement": [
+        1,
+        12,
+        8
+      ],
+      "componentsMedian": 8,
+      "outerComponentReach": 0.5507
     }
   ],
   "placements": [
+    {
+      "semanticId": "decorations/shop-sign-n0009-p0268-p0199",
+      "meshes": 1,
+      "occupancyMap": [
+        "   +#####.              ",
+        "   +#####.              ",
+        ".#++#####.              ",
+        ".#########.             ",
+        ".#########.             ",
+        "+#########+.............",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        " #########.             ",
+        " +########.             ",
+        " .########.             ",
+        "   +#####.              ",
+        "   +#####.              ",
+        "   +#####.              "
+      ],
+      "triangles": 3256,
+      "extent": [
+        2.86,
+        24.99,
+        5.77
+      ],
+      "band": 1,
+      "bandTriangles": 3256,
+      "areaShare": 1,
+      "reach": 0.5476,
+      "coverage": 0.6635,
+      "components": 1,
+      "largest": [
+        {
+          "cells": 6115,
+          "occupancyShare": 1,
+          "centre": [
+            -0.059,
+            -0.007
+          ],
+          "centroidReach": 0.118,
+          "outerReach": 0.99
+        }
+      ],
+      "specks": 0,
+      "kind": "shop-sign"
+    },
     {
       "semanticId": "decorations/shop-sign-n0111-p0268-p0416",
       "meshes": 1,
@@ -90,6 +200,118 @@
             -0.009
           ],
           "centroidReach": 0.018,
+          "outerReach": 0.99
+        }
+      ],
+      "specks": 0,
+      "kind": "shop-sign"
+    },
+    {
+      "semanticId": "decorations/shop-sign-p0315-p0365-p0170",
+      "meshes": 1,
+      "occupancyMap": [
+        "  .#########.           ",
+        "   #########            ",
+        "   #########            ",
+        "   #########            ",
+        "  +#########.           ",
+        "   #########++.         ",
+        "   ######### .+#.       ",
+        "   ###################+.",
+        "   #####################",
+        "   ###################. ",
+        "   #########.           ",
+        "  .#########..          ",
+        "++.#########..          ",
+        "   #########            ",
+        ".++#########++          ",
+        ".#############......    ",
+        "   ###################. ",
+        "   ##################+. ",
+        "   #########            ",
+        "   #########            ",
+        "   #########            ",
+        "   #########            ",
+        "   #########            ",
+        "   #########            "
+      ],
+      "triangles": 6652,
+      "extent": [
+        1.64,
+        8.74,
+        8.42
+      ],
+      "band": 1,
+      "bandTriangles": 6652,
+      "areaShare": 1,
+      "reach": 0.5708,
+      "coverage": 0.4803,
+      "components": 1,
+      "largest": [
+        {
+          "cells": 4426,
+          "occupancyShare": 1,
+          "centre": [
+            -0.112,
+            -0.001
+          ],
+          "centroidReach": 0.225,
+          "outerReach": 0.99
+        }
+      ],
+      "specks": 0,
+      "kind": "shop-sign"
+    },
+    {
+      "semanticId": "decorations/shop-sign-p0344-p0268-p0681",
+      "meshes": 1,
+      "occupancyMap": [
+        "         ####+          ",
+        "     ....#####          ",
+        "     .#++####+          ",
+        "     +#######.          ",
+        "     ########+          ",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        ".+#####.                ",
+        " #####.                 ",
+        ".#####                  ",
+        ".####+                  "
+      ],
+      "triangles": 3256,
+      "extent": [
+        3.42,
+        24.99,
+        5.78
+      ],
+      "band": 1,
+      "bandTriangles": 3256,
+      "areaShare": 1,
+      "reach": 0.4761,
+      "coverage": 0.7088,
+      "components": 1,
+      "largest": [
+        {
+          "cells": 6532,
+          "occupancyShare": 1,
+          "centre": [
+            -0.025,
+            0.005
+          ],
+          "centroidReach": 0.051,
           "outerReach": 0.99
         }
       ],
@@ -209,172 +431,60 @@
       "kind": "shop-sign"
     },
     {
-      "semanticId": "decorations/shop-sign-p0344-p0268-p0681",
+      "semanticId": "decorations/umbrella-n0633-p0254-p0965",
       "meshes": 1,
       "occupancyMap": [
-        "         ####+          ",
-        "     ....#####          ",
-        "     .#++####+          ",
-        "     +#######.          ",
-        "     ########+          ",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        ".+#####.                ",
-        " #####.                 ",
-        ".#####                  ",
-        ".####+                  "
-      ],
-      "triangles": 3256,
-      "extent": [
-        3.42,
-        24.99,
-        5.78
-      ],
-      "band": 1,
-      "bandTriangles": 3256,
-      "areaShare": 1,
-      "reach": 0.4761,
-      "coverage": 0.7088,
-      "components": 1,
-      "largest": [
-        {
-          "cells": 6532,
-          "occupancyShare": 1,
-          "centre": [
-            -0.025,
-            0.005
-          ],
-          "centroidReach": 0.051,
-          "outerReach": 0.99
-        }
-      ],
-      "specks": 0,
-      "kind": "shop-sign"
-    },
-    {
-      "semanticId": "decorations/shop-sign-n0009-p0268-p0199",
-      "meshes": 1,
-      "occupancyMap": [
-        "   +#####.              ",
-        "   +#####.              ",
-        ".#++#####.              ",
-        ".#########.             ",
-        ".#########.             ",
-        "+#########+.............",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        "########################",
-        " #########.             ",
-        " +########.             ",
-        " .########.             ",
-        "   +#####.              ",
-        "   +#####.              ",
-        "   +#####.              "
-      ],
-      "triangles": 3256,
-      "extent": [
-        2.86,
-        24.99,
-        5.77
-      ],
-      "band": 1,
-      "bandTriangles": 3256,
-      "areaShare": 1,
-      "reach": 0.5476,
-      "coverage": 0.6635,
-      "components": 1,
-      "largest": [
-        {
-          "cells": 6115,
-          "occupancyShare": 1,
-          "centre": [
-            -0.059,
-            -0.007
-          ],
-          "centroidReach": 0.118,
-          "outerReach": 0.99
-        }
-      ],
-      "specks": 0,
-      "kind": "shop-sign"
-    },
-    {
-      "semanticId": "decorations/shop-sign-p0315-p0365-p0170",
-      "meshes": 1,
-      "occupancyMap": [
-        "  .#########.           ",
-        "   #########            ",
-        "   #########            ",
-        "   #########            ",
-        "  +#########.           ",
-        "   #########++.         ",
-        "   ######### .+#.       ",
-        "   ###################+.",
+        "            .+#####+    ",
+        "         .+##########.  ",
+        "        +#############. ",
+        "      .################ ",
+        "     .#################+",
+        "    .###################",
+        "   .####################",
         "   #####################",
-        "   ###################. ",
-        "   #########.           ",
-        "  .#########..          ",
-        "++.#########..          ",
-        "   #########            ",
-        ".++#########++          ",
-        ".#############......    ",
-        "   ###################. ",
-        "   ##################+. ",
-        "   #########            ",
-        "   #########            ",
-        "   #########            ",
-        "   #########            ",
-        "   #########            ",
-        "   #########            "
+        "  +#####################",
+        " .######################",
+        " +#####################+",
+        ".######################.",
+        "+######################.",
+        "+#####################+ ",
+        "######################. ",
+        "#####################+  ",
+        "####################+   ",
+        "####################.   ",
+        "###################.    ",
+        "+#################+     ",
+        ".################..+    ",
+        " .#############.   ++   ",
+        "  .##########+.     +   ",
+        "    .#####+.            "
       ],
-      "triangles": 6652,
+      "triangles": 3840,
       "extent": [
-        1.64,
-        8.74,
-        8.42
+        17.49,
+        16.43,
+        16.75
       ],
       "band": 1,
-      "bandTriangles": 6652,
+      "bandTriangles": 3840,
       "areaShare": 1,
-      "reach": 0.5708,
-      "coverage": 0.4803,
-      "components": 1,
+      "reach": 0.5641,
+      "coverage": 0.7318,
+      "components": 2,
       "largest": [
         {
-          "cells": 4426,
-          "occupancyShare": 1,
+          "cells": 6743,
+          "occupancyShare": 0.9999,
           "centre": [
-            -0.112,
-            -0.001
+            0.002,
+            0.001
           ],
-          "centroidReach": 0.225,
+          "centroidReach": 0.003,
           "outerReach": 0.99
         }
       ],
-      "specks": 0,
-      "kind": "shop-sign"
+      "specks": 1,
+      "kind": "umbrella"
     },
     {
       "semanticId": "decorations/umbrella-p0235-p0253-p0328",
@@ -489,60 +599,964 @@
       "kind": "umbrella"
     },
     {
-      "semanticId": "decorations/umbrella-n0633-p0254-p0965",
+      "semanticId": "structures/pavilion-p2145-p0251-n1430",
       "meshes": 1,
       "occupancyMap": [
-        "            .+#####+    ",
-        "         .+##########.  ",
-        "        +#############. ",
-        "      .################ ",
-        "     .#################+",
-        "    .###################",
-        "   .####################",
-        "   #####################",
-        "  +#####################",
-        " .######################",
-        " +#####################+",
-        ".######################.",
-        "+######################.",
-        "+#####################+ ",
-        "######################. ",
-        "#####################+  ",
-        "####################+   ",
+        "             +#         ",
+        "           .###+        ",
+        "          +#####.       ",
+        "        .########       ",
+        "    #############+      ",
+        "    ##############.     ",
+        "    ###############     ",
+        "  .################.    ",
+        ".+##################.   ",
+        "+####################   ",
+        " ####################.  ",
+        " .####################. ",
+        "  +###################+ ",
+        "..#####################.",
+        "########################",
+        "######################+ ",
+        "#####################.  ",
         "####################.   ",
-        "###################.    ",
-        "+#################+     ",
-        ".################..+    ",
-        " .#############.   ++   ",
-        "  .##########+.     +   ",
-        "    .#####+.            "
+        "####################.   ",
+        "####################.   ",
+        "######++#######......   ",
+        "######. #####.          ",
+        "        .###.           ",
+        "         ++             "
       ],
-      "triangles": 3840,
+      "triangles": 5252,
       "extent": [
-        17.49,
-        16.43,
-        16.75
+        67.07,
+        67.79,
+        66.37
       ],
       "band": 1,
-      "bandTriangles": 3840,
+      "bandTriangles": 5252,
       "areaShare": 1,
-      "reach": 0.5641,
-      "coverage": 0.7318,
-      "components": 2,
+      "reach": 0.4268,
+      "coverage": 0.6152,
+      "components": 1,
       "largest": [
         {
-          "cells": 6743,
-          "occupancyShare": 0.9999,
+          "cells": 5670,
+          "occupancyShare": 1,
           "centre": [
-            0.002,
-            0.001
+            -0.044,
+            0.033
           ],
-          "centroidReach": 0.003,
+          "centroidReach": 0.087,
           "outerReach": 0.99
         }
       ],
-      "specks": 1,
-      "kind": "umbrella"
+      "specks": 0,
+      "kind": "pavilion"
+    },
+    {
+      "semanticId": "structures/pavilion-single-p0309-p0349-n1550",
+      "meshes": 1,
+      "occupancyMap": [
+        "    .....+++++######### ",
+        "####################### ",
+        "####################### ",
+        "####################### ",
+        "####################### ",
+        "#######################.",
+        "#######################.",
+        "#######################.",
+        "+######################.",
+        "+######################+",
+        "+######################+",
+        ".######################+",
+        ".######################+",
+        ".#######################",
+        ".#######################",
+        " #######################",
+        " #######################",
+        " #######################",
+        " #######################",
+        " ##################+++++",
+        " +++...###########.     ",
+        "       ###########.     ",
+        "       ###########+     ",
+        "       #########++.     "
+      ],
+      "triangles": 4120,
+      "extent": [
+        55.22,
+        54.79,
+        64.15
+      ],
+      "band": 1,
+      "bandTriangles": 4120,
+      "areaShare": 1,
+      "reach": 0.4961,
+      "coverage": 0.8458,
+      "components": 1,
+      "largest": [
+        {
+          "cells": 7795,
+          "occupancyShare": 1,
+          "centre": [
+            0.003,
+            -0.032
+          ],
+          "centroidReach": 0.063,
+          "outerReach": 0.99
+        }
+      ],
+      "specks": 0,
+      "kind": "pavilion-single"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2360-p0396-n0068",
+      "meshes": 1,
+      "occupancyMap": [
+        "                        ",
+        "          .             ",
+        "          ..            ",
+        "          .+.           ",
+        "          +..           ",
+        "          .+.    .      ",
+        "              .+.+.     ",
+        "           . .++...  ...",
+        "              .... .+#+#",
+        "                 +###+#.",
+        "                ...+++..",
+        "             ... .  ..  ",
+        "              ...... .. ",
+        "                +++#. . ",
+        "   ..           +###.   ",
+        " .+#.            ....   ",
+        ".++...                  ",
+        "++#.                    ",
+        " ..+....                ",
+        " ..+... ..              ",
+        ".++#.   ++.             ",
+        "+#.#.  ++.              ",
+        "+#.    ++               ",
+        "         .              "
+      ],
+      "triangles": 18790,
+      "extent": [
+        48.17,
+        46.95,
+        53.3
+      ],
+      "band": 0.3,
+      "bandTriangles": 4055,
+      "areaShare": 0.2151,
+      "reach": 0.6713,
+      "coverage": 0.0732,
+      "components": 58,
+      "largest": [
+        {
+          "cells": 133,
+          "occupancyShare": 0.197,
+          "centre": [
+            0.37,
+            -0.11
+          ],
+          "centroidReach": 0.739,
+          "outerReach": 0.99
+        },
+        {
+          "cells": 99,
+          "occupancyShare": 0.1467,
+          "centre": [
+            0.266,
+            0.087
+          ],
+          "centroidReach": 0.532,
+          "outerReach": 0.698
+        },
+        {
+          "cells": 62,
+          "occupancyShare": 0.0919,
+          "centre": [
+            -0.361,
+            0.344
+          ],
+          "centroidReach": 0.723,
+          "outerReach": 0.802
+        },
+        {
+          "cells": 51,
+          "occupancyShare": 0.0756,
+          "centre": [
+            -0.45,
+            0.409
+          ],
+          "centroidReach": 0.901,
+          "outerReach": 0.99
+        },
+        {
+          "cells": 36,
+          "occupancyShare": 0.0533,
+          "centre": [
+            -0.422,
+            0.222
+          ],
+          "centroidReach": 0.844,
+          "outerReach": 0.99
+        },
+        {
+          "cells": 34,
+          "occupancyShare": 0.0504,
+          "centre": [
+            -0.169,
+            0.414
+          ],
+          "centroidReach": 0.827,
+          "outerReach": 0.906
+        },
+        {
+          "cells": 29,
+          "occupancyShare": 0.043,
+          "centre": [
+            -0.358,
+            0.141
+          ],
+          "centroidReach": 0.715,
+          "outerReach": 0.802
+        },
+        {
+          "cells": 26,
+          "occupancyShare": 0.0385,
+          "centre": [
+            -0.036,
+            -0.347
+          ],
+          "centroidReach": 0.694,
+          "outerReach": 0.781
+        },
+        {
+          "cells": 21,
+          "occupancyShare": 0.0311,
+          "centre": [
+            0.12,
+            -0.178
+          ],
+          "centroidReach": 0.356,
+          "outerReach": 0.406
+        },
+        {
+          "cells": 16,
+          "occupancyShare": 0.0237,
+          "centre": [
+            0.237,
+            -0.225
+          ],
+          "centroidReach": 0.474,
+          "outerReach": 0.51
+        },
+        {
+          "cells": 16,
+          "occupancyShare": 0.0237,
+          "centre": [
+            -0.418,
+            0.185
+          ],
+          "centroidReach": 0.836,
+          "outerReach": 0.865
+        },
+        {
+          "cells": 15,
+          "occupancyShare": 0.0222,
+          "centre": [
+            -0.101,
+            0.356
+          ],
+          "centroidReach": 0.712,
+          "outerReach": 0.76
+        }
+      ],
+      "specks": 36,
+      "kind": "swing-tree"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2362-p0251-n0069",
+      "meshes": 1,
+      "occupancyMap": [
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "        .+        .     ",
+        "        .#+#.    .      ",
+        "       +#####+          ",
+        "       .####+.          ",
+        "        +##+.           ",
+        "       .#+              ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "     .                  ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "triangles": 13793,
+      "extent": [
+        46.61,
+        61.26,
+        50.06
+      ],
+      "band": 0.3,
+      "bandTriangles": 922,
+      "areaShare": 0.2046,
+      "reach": 0.1592,
+      "coverage": 0.0321,
+      "components": 5,
+      "largest": [
+        {
+          "cells": 292,
+          "occupancyShare": 0.9865,
+          "centre": [
+            -0.077,
+            0.004
+          ],
+          "centroidReach": 0.154,
+          "outerReach": 0.406
+        }
+      ],
+      "specks": 4,
+      "kind": "swing-tree"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2393-p0295-p0055",
+      "meshes": 1,
+      "occupancyMap": [
+        "               ++       ",
+        "             .###.      ",
+        "           .#####+      ",
+        "          +#######      ",
+        "        .#########.     ",
+        "       +###########     ",
+        "     .#############.    ",
+        "    +##############+    ",
+        "   +################    ",
+        "   .################+   ",
+        "   .#################   ",
+        "  ###################.  ",
+        " +###################+  ",
+        ".#####################. ",
+        "+####.################+ ",
+        "####+ ################+ ",
+        "###+  +##############+  ",
+        "#+.   .#############.   ",
+        "       +##########+     ",
+        "       .#########.      ",
+        "        #######+        ",
+        "        +#####.         ",
+        "        .###.           ",
+        "         ++             "
+      ],
+      "triangles": 9106,
+      "extent": [
+        15.45,
+        17.51,
+        12.3
+      ],
+      "band": 0.3,
+      "bandTriangles": 6497,
+      "areaShare": 0.7848,
+      "reach": 0.5,
+      "coverage": 0.4954,
+      "components": 1,
+      "largest": [
+        {
+          "cells": 4566,
+          "occupancyShare": 1,
+          "centre": [
+            0.006,
+            0.008
+          ],
+          "centroidReach": 0.015,
+          "outerReach": 0.99
+        }
+      ],
+      "specks": 0,
+      "kind": "swing-tree"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2430-p0361-p0074",
+      "meshes": 1,
+      "occupancyMap": [
+        ".##+                    ",
+        "####.                   ",
+        "+####                   ",
+        " .###+                  ",
+        "  .###                  ",
+        "   .##+                 ",
+        "    +##.                ",
+        "     +#+                ",
+        "      +#.               ",
+        "      ....              ",
+        "      .                 ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "triangles": 1776,
+      "extent": [
+        22.32,
+        23.65,
+        28.31
+      ],
+      "band": 0.3,
+      "bandTriangles": 33,
+      "areaShare": 0.359,
+      "reach": 0.6981,
+      "coverage": 0.0473,
+      "components": 6,
+      "largest": [
+        {
+          "cells": 431,
+          "occupancyShare": 0.9885,
+          "centre": [
+            -0.331,
+            -0.33
+          ],
+          "centroidReach": 0.663,
+          "outerReach": 0.99
+        }
+      ],
+      "specks": 5,
+      "kind": "swing-tree"
+    },
+    {
+      "semanticId": "structures/swing-tree-p2803-p0386-p0194",
+      "meshes": 1,
+      "occupancyMap": [
+        "                 +.     ",
+        "               . #+     ",
+        "              ++##+     ",
+        "              ..+.+     ",
+        "              +.. .     ",
+        "              ..        ",
+        "              ..  ...   ",
+        "  + .+            #.++  ",
+        "+##...      .#.   ++##. ",
+        ".###+.      .+    .+#+. ",
+        ".##.      #         .   ",
+        " ++.+..                 ",
+        " ..+#++..               ",
+        "    ##+..      #        ",
+        "    ...        +        ",
+        "    .#         .+       ",
+        "              ...       ",
+        "             .+#.+. .   ",
+        "             .+##+..#   ",
+        "              .+#+###.  ",
+        "               .+.+#.   ",
+        "                  #+.   ",
+        "                        ",
+        "                        "
+      ],
+      "triangles": 4704,
+      "extent": [
+        15.97,
+        12.08,
+        14.19
+      ],
+      "band": 0.3,
+      "bandTriangles": 1635,
+      "areaShare": 0.3355,
+      "reach": 0.653,
+      "coverage": 0.0977,
+      "components": 29,
+      "largest": [
+        {
+          "cells": 151,
+          "occupancyShare": 0.1678,
+          "centre": [
+            -0.409,
+            -0.098
+          ],
+          "centroidReach": 0.818,
+          "outerReach": 0.948
+        },
+        {
+          "cells": 119,
+          "occupancyShare": 0.1322,
+          "centre": [
+            0.316,
+            0.33
+          ],
+          "centroidReach": 0.66,
+          "outerReach": 0.823
+        },
+        {
+          "cells": 107,
+          "occupancyShare": 0.1189,
+          "centre": [
+            0.165,
+            0.28
+          ],
+          "centroidReach": 0.559,
+          "outerReach": 0.698
+        },
+        {
+          "cells": 94,
+          "occupancyShare": 0.1044,
+          "centre": [
+            -0.288,
+            0.035
+          ],
+          "centroidReach": 0.576,
+          "outerReach": 0.719
+        },
+        {
+          "cells": 59,
+          "occupancyShare": 0.0656,
+          "centre": [
+            0.246,
+            -0.423
+          ],
+          "centroidReach": 0.847,
+          "outerReach": 0.99
+        },
+        {
+          "cells": 44,
+          "occupancyShare": 0.0489,
+          "centre": [
+            0.352,
+            -0.119
+          ],
+          "centroidReach": 0.703,
+          "outerReach": 0.76
+        },
+        {
+          "cells": 31,
+          "occupancyShare": 0.0344,
+          "centre": [
+            0.17,
+            -0.389
+          ],
+          "centroidReach": 0.779,
+          "outerReach": 0.844
+        },
+        {
+          "cells": 31,
+          "occupancyShare": 0.0344,
+          "centre": [
+            0.054,
+            -0.128
+          ],
+          "centroidReach": 0.256,
+          "outerReach": 0.323
+        },
+        {
+          "cells": 29,
+          "occupancyShare": 0.0322,
+          "centre": [
+            0.277,
+            -0.166
+          ],
+          "centroidReach": 0.554,
+          "outerReach": 0.594
+        },
+        {
+          "cells": 20,
+          "occupancyShare": 0.0222,
+          "centre": [
+            -0.277,
+            0.145
+          ],
+          "centroidReach": 0.553,
+          "outerReach": 0.594
+        },
+        {
+          "cells": 19,
+          "occupancyShare": 0.0211,
+          "centre": [
+            0.144,
+            0.075
+          ],
+          "centroidReach": 0.288,
+          "outerReach": 0.323
+        },
+        {
+          "cells": 17,
+          "occupancyShare": 0.0189,
+          "centre": [
+            0.411,
+            -0.134
+          ],
+          "centroidReach": 0.822,
+          "outerReach": 0.844
+        }
+      ],
+      "specks": 2,
+      "kind": "swing-tree"
+    },
+    {
+      "semanticId": "structures/wish-tree-p1195-p0193-p0282",
+      "meshes": 1,
+      "occupancyMap": [
+        "                        ",
+        "                        ",
+        "          .             ",
+        "          .             ",
+        "           .            ",
+        "          . .           ",
+        "           .            ",
+        "                        ",
+        "          .             ",
+        "          +             ",
+        "          +.            ",
+        "          .+            ",
+        "          .#+           ",
+        "          .+            ",
+        "                        ",
+        "             .          ",
+        "                        ",
+        "               .        ",
+        "                  .     ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "triangles": 7118,
+      "extent": [
+        51.06,
+        84.87,
+        60.57
+      ],
+      "band": 0.3,
+      "bandTriangles": 279,
+      "areaShare": 0.3101,
+      "reach": 0.0941,
+      "coverage": 0.0078,
+      "components": 13,
+      "largest": [
+        {
+          "cells": 60,
+          "occupancyShare": 0.8333,
+          "centre": [
+            -0.031,
+            -0.015
+          ],
+          "centroidReach": 0.062,
+          "outerReach": 0.323
+        }
+      ],
+      "specks": 12,
+      "kind": "wish-tree"
+    },
+    {
+      "semanticId": "structures/wish-tree-p1195-p0318-p0278",
+      "meshes": 1,
+      "occupancyMap": [
+        "                        ",
+        "                        ",
+        "         .+..           ",
+        "      .. +##+.          ",
+        "     .+..###..          ",
+        "    ..#..+####..        ",
+        "    .++.  #+###.        ",
+        "    .##.  ..#++##.      ",
+        "     .   ...+#++..      ",
+        "        +++.. ..        ",
+        "        ++..            ",
+        "        ..#             ",
+        "          .             ",
+        "            .           ",
+        "        . ..            ",
+        "    .. ...  ...         ",
+        "    ..+.    ...+..      ",
+        "  .+###  ..+  +####     ",
+        "  .++.. .## ..#++#.     ",
+        "  .      . .... +##+    ",
+        "          .    .+...    ",
+        "                        ",
+        "                        ",
+        "                        "
+      ],
+      "triangles": 10908,
+      "extent": [
+        53.31,
+        72.87,
+        62.11
+      ],
+      "band": 0.3,
+      "bandTriangles": 1200,
+      "areaShare": 0.1066,
+      "reach": 0.5115,
+      "coverage": 0.0959,
+      "components": 60,
+      "largest": [
+        {
+          "cells": 351,
+          "occupancyShare": 0.3971,
+          "centre": [
+            0.018,
+            -0.25
+          ],
+          "centroidReach": 0.501,
+          "outerReach": 0.823
+        },
+        {
+          "cells": 189,
+          "occupancyShare": 0.2138,
+          "centre": [
+            0.192,
+            0.269
+          ],
+          "centroidReach": 0.538,
+          "outerReach": 0.698
+        },
+        {
+          "cells": 77,
+          "occupancyShare": 0.0871,
+          "centre": [
+            -0.293,
+            0.233
+          ],
+          "centroidReach": 0.585,
+          "outerReach": 0.76
+        },
+        {
+          "cells": 45,
+          "occupancyShare": 0.0509,
+          "centre": [
+            -0.255,
+            -0.196
+          ],
+          "centroidReach": 0.51,
+          "outerReach": 0.615
+        },
+        {
+          "cells": 39,
+          "occupancyShare": 0.0441,
+          "centre": [
+            -0.114,
+            -0.087
+          ],
+          "centroidReach": 0.228,
+          "outerReach": 0.323
+        },
+        {
+          "cells": 35,
+          "occupancyShare": 0.0396,
+          "centre": [
+            -0.228,
+            -0.289
+          ],
+          "centroidReach": 0.577,
+          "outerReach": 0.677
+        },
+        {
+          "cells": 30,
+          "occupancyShare": 0.0339,
+          "centre": [
+            -0.085,
+            0.276
+          ],
+          "centroidReach": 0.551,
+          "outerReach": 0.615
+        },
+        {
+          "cells": 17,
+          "occupancyShare": 0.0192,
+          "centre": [
+            -0.071,
+            -0.019
+          ],
+          "centroidReach": 0.143,
+          "outerReach": 0.198
+        },
+        {
+          "cells": 9,
+          "occupancyShare": 0.0102,
+          "centre": [
+            0.005,
+            0.297
+          ],
+          "centroidReach": 0.594,
+          "outerReach": 0.656
+        },
+        {
+          "cells": 8,
+          "occupancyShare": 0.009,
+          "centre": [
+            -0.309,
+            0.164
+          ],
+          "centroidReach": 0.617,
+          "outerReach": 0.656
+        },
+        {
+          "cells": 8,
+          "occupancyShare": 0.009,
+          "centre": [
+            -0.033,
+            0.224
+          ],
+          "centroidReach": 0.448,
+          "outerReach": 0.49
+        },
+        {
+          "cells": 4,
+          "occupancyShare": 0.0045,
+          "centre": [
+            -0.294,
+            -0.242
+          ],
+          "centroidReach": 0.589,
+          "outerReach": 0.594
+        }
+      ],
+      "specks": 47,
+      "kind": "wish-tree"
+    },
+    {
+      "semanticId": "structures/wish-tree-p1207-p0346-p0293",
+      "meshes": 1,
+      "occupancyMap": [
+        "         .              ",
+        "                        ",
+        "    ..                  ",
+        "                        ",
+        ".        ..             ",
+        ".             .         ",
+        "               .        ",
+        "       .+ ..            ",
+        "                        ",
+        "                        ",
+        "     .                  ",
+        "                        ",
+        "                        ",
+        "    ..                  ",
+        "     .  +               ",
+        "                .       ",
+        "           .    .       ",
+        "  .       ..    .       ",
+        "  .                     ",
+        "                        ",
+        "       ..               ",
+        "       .                ",
+        "                 .      ",
+        "                        "
+      ],
+      "triangles": 19999,
+      "extent": [
+        41.72,
+        65.08,
+        55.17
+      ],
+      "band": 0.3,
+      "bandTriangles": 3607,
+      "areaShare": 0.2172,
+      "reach": 0.5942,
+      "coverage": 0.0077,
+      "components": 21,
+      "largest": [
+        {
+          "cells": 9,
+          "occupancyShare": 0.1268,
+          "centre": [
+            -0.084,
+            -0.321
+          ],
+          "centroidReach": 0.642,
+          "outerReach": 0.656
+        },
+        {
+          "cells": 7,
+          "occupancyShare": 0.0986,
+          "centre": [
+            -0.153,
+            -0.197
+          ],
+          "centroidReach": 0.394,
+          "outerReach": 0.406
+        },
+        {
+          "cells": 7,
+          "occupancyShare": 0.0986,
+          "centre": [
+            -0.156,
+            0.102
+          ],
+          "centroidReach": 0.311,
+          "outerReach": 0.323
+        },
+        {
+          "cells": 5,
+          "occupancyShare": 0.0704,
+          "centre": [
+            -0.486,
+            -0.299
+          ],
+          "centroidReach": 0.973,
+          "outerReach": 0.99
+        },
+        {
+          "cells": 5,
+          "occupancyShare": 0.0704,
+          "centre": [
+            -0.041,
+            -0.195
+          ],
+          "centroidReach": 0.39,
+          "outerReach": 0.406
+        },
+        {
+          "cells": 5,
+          "occupancyShare": 0.0704,
+          "centre": [
+            -0.036,
+            0.203
+          ],
+          "centroidReach": 0.406,
+          "outerReach": 0.427
+        },
+        {
+          "cells": 5,
+          "occupancyShare": 0.0704,
+          "centre": [
+            -0.405,
+            0.247
+          ],
+          "centroidReach": 0.81,
+          "outerReach": 0.823
+        },
+        {
+          "cells": 4,
+          "occupancyShare": 0.0563,
+          "centre": [
+            0.172,
+            0.156
+          ],
+          "centroidReach": 0.344,
+          "outerReach": 0.344
+        }
+      ],
+      "specks": 13,
+      "kind": "wish-tree"
     }
   ]
 }

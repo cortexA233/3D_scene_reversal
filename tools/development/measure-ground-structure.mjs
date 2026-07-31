@@ -454,6 +454,33 @@ async function main() {
     placements: rows,
   };
 
+  /**
+   * Merge rather than replace.
+   *
+   * A partial `--kinds` run used to write the whole file, silently deleting every other
+   * kind's rows — including the pavilion footprints `pavilion-reconstruction.test.mjs`
+   * reads, which turned a passing check red. This is the *second* tool in this directory
+   * with that defect; `measure-architecture-massing.mjs` had it too and was fixed earlier,
+   * and its sibling was not, which is how the same bug shipped twice. A development tool
+   * that writes a whole evidence file from a partial measurement quietly discards evidence.
+   */
+  const freshKinds = new Set(evidence.kinds.map((row) => row.kind));
+  let existing = { kinds: [], placements: [] };
+  try {
+    const recorded = JSON.parse(await readFile(EVIDENCE_PATH, "utf8"));
+    if (recorded.schemaVersion === SCHEMA_VERSION) existing = recorded;
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  evidence.kinds = [
+    ...(existing.kinds ?? []).filter((row) => !freshKinds.has(row.kind)),
+    ...evidence.kinds,
+  ].sort((left, right) => left.kind.localeCompare(right.kind));
+  evidence.placements = [
+    ...(existing.placements ?? []).filter((row) => !freshKinds.has(row.kind)),
+    ...evidence.placements,
+  ].sort((left, right) => left.semanticId.localeCompare(right.semanticId));
+
   await mkdir(path.dirname(EVIDENCE_PATH), { recursive: true });
   await writeFile(EVIDENCE_PATH, `${JSON.stringify(evidence, null, 2)}\n`);
 
