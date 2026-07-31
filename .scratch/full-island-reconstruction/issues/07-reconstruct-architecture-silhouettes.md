@@ -104,6 +104,62 @@ measure rendered contour and depth. An authored building is one smooth mesh of u
 discontinuities the reference does not have, and contour distance rose a fifth. Getting
 the proportions right is necessary and was not sufficient.
 
+## Finding: the deck band along the measured axis was built and reverted too
+
+The next attempt this ticket asked for — "a deck band along a measured axis, not a plate"
+— was built exactly as specified and **reverted**. It is worth reading before a third
+attempt, because it rules out the band hypothesis rather than a parameter of it.
+
+All four controls came out of `plate-footprint-v1.json` and reproduce the values recorded
+above to four figures: axis `atan2` between the two largest rectangles' centres gives
+**-119.2** and **+136.1** degrees, `deckHeight` as the centroid of the vertical area
+profile gives **0.7119** and **0.4428**, profile spread **0.1842** and **0.1871**, and the
+scan-converted coverages 0.5677 and 0.4315.
+
+The geometry leaves less freedom than the ticket assumed, and this part is worth keeping.
+`placeEntity` scales the generated AABB onto the extent exactly, so the band must reach all
+four walls, and that sets a **minimum** width: 0.3849 at 60.8 degrees, covering 0.4409, and
+0.0271 at 136.1 degrees where the axis is almost the box diagonal and the constraint costs
+nothing. Both measured coverages are *above* their own minimum, so a single band clipped to
+the box reaches both and no filler is needed. The footprint was built as exact polygon
+clipping with the width bisected from the measured coverage — no fitted constant anywhere.
+
+| `bridges` | before | band |
+| --- | --- | --- |
+| candidate/reference pixels | 2.22 | **1.38** |
+| contour p95 | 20.49 | **20.06** |
+| depth p95 | 20.77 | **19.19** |
+| world normal p95 | 107.0 | **94.7** |
+| silhouette IoU | 0.3624 | **0.2885** |
+| `bridge` surface p95 mean | 15.8742 | **23.4370** |
+
+Four of five rendered the right way and IoU down 20 per cent — the *same signature* as the
+reverted plate, which went 0.362 to 0.295. In the stack, five metrics improved (contour
+25.486 to 24.735, depth 20.854 to 20.694, normals 78.426 to 77.257, semantic 0.944713 to
+0.944894, worst camera 0.909701 to 0.910019) and three regressed (group IoU 0.472084 to
+0.465646, worst IoU 0.109859 to 0.104558, confusion 0.017581 to 0.017791).
+
+**The number that decided it.** ADR-0057's arithmetic: a candidate covering fraction *c*
+of its box in *uncorrelated* places scores IoU = c²/(2c − c²), which is about **0.33** at
+the bridges' c ≈ 0.5. The band scored **0.2885** — *below* the uncorrelated prediction. A
+form that agrees with the reference less than random placement of the same area is not a
+mis-parameterised band; it is the wrong family. The measured axis is real and the plate
+program was wrong, and a band along that axis is also wrong.
+
+**What the third attempt should do differently.** Stop deriving the shape from the
+rectangle *decomposition* and read the occupancy raster itself. The decomposition is a
+greedy axis-aligned cover, and a greedy cover of almost any blob yields two large offset
+rectangles whose centres define *some* axis — so the -119.2 and +136.1 degrees may be an
+artefact of the decomposition rather than a property of the bridges. The evidence needed is
+one browser run: dump the 96x96 occupancy grid for the two bridge assets and look at it.
+Both village reverts in this milestone came from designing a form before looking at the
+subject at full resolution, and that is the one measurement nobody has taken here.
+
+One positive knock-on is worth recording because it confirms the over-draw diagnosis:
+shrinking the bridge from 2.22 to 1.38 took `rocks` contour **24.06 to 16.69** and its IoU
+0.3804 to 0.3897, with no change to the rock generator. The over-draw is real and fixing it
+does uncover the neighbours correctly — the band is just not the form that fixes it.
+
 ## Finding: the plate controls transfer to a bridge and the plate *form* does not
 
 The plaza work (ADR-0057) gave bridges two of their three controls for free, and the
