@@ -26,6 +26,7 @@
     "fit:tracer": "node scripts/run-fitting-loop.mjs",
     "check:fitting-loop": "node --test test/fitting-loop.test.mjs",
     "certify:scene-parity-foundation": "node scripts/run-foundation-certification.mjs",
+    "workflow:full-island": "node scripts/run-full-island-workflow.mjs",
     "check:scene-parity-foundation": "node scripts/run-foundation-certification.mjs --check",
     "check:scene-runtime-budget": "node --test test/scene-runtime-budget.test.mjs && node scripts/run-foundation-certification.mjs --check",
     "check:dynamic-moments": "node --test test/dynamic-moment-stability.test.mjs",

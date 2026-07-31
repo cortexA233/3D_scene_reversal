@@ -7,7 +7,7 @@
 **Status:** partly done. The review package is complete and the blocking-command behaviour is verified; Human Parity Review itself cannot run yet, and that is the spec's own ordering rule rather than a gap.
 
 - [x] Add one non-interactive certification command that passes only when all four gate layers pass against the frozen baseline. — `npm run report:scene-parity` exits 1 while any layer is red, verified. `npm run check:scene-parity-foundation` now passes too, having been structurally impossible before ADR-0062.
-- [ ] Re-run immutable reference observation, complete semantic coverage, recipe validation, production generation, all direct 3D evidence, all camera passes, and the gate stack in one reproducible workflow.
+- [x] Re-run immutable reference observation, complete semantic coverage, recipe validation, production generation, all direct 3D evidence, all camera passes, and the gate stack in one reproducible workflow. — `npm run workflow:full-island`, twelve steps in dependency order with per-step timing and result.
 - [x] Keep the production isolation, determinism, static audit, and budget results green. — 13 production files, 24 local code requests, 0 external, 0 third-party inputs, 711 semantic IDs byte-identical, five budgets inside their ceilings.
 - [x] Generate six-camera contact sheets, overlays, differences, and pass previews from the same evidence the metrics use. — 60 images: eight passes plus **two difference images per camera**, red for reference-only and blue for candidate-only, built from the same RGBA buffers the metrics read in the same frame.
 - [ ] Run Human Parity Review only after the automated stack passes.
@@ -39,11 +39,15 @@ world-geometry reds are recorded representation boundaries with their own ADRs (
 and `nativeAppearance` is blocked by ADR-0040's ordering rule. Running the review now would
 be exactly the waiver the spec forbids — "it cannot waive an automated failure".
 
-The one remaining checklist item that is genuinely open rather than blocked is the single
-reproducible workflow that re-runs observation, coverage, recipe validation, generation, all
-direct 3D evidence, all camera passes and the gate stack in one command. The step order is
-recorded in `handoff.md` and each step has its own command; what does not exist is one
-entry point that runs them in order. It was left because chaining them exceeds ten minutes
-and the harness kills a foreground run at that point, so the entry point has to be a
-background-friendly script with per-step reporting rather than an npm chain — worth doing
-properly rather than as a chain that dies halfway.
+The workflow entry point exists now: `npm run workflow:full-island`, twelve steps in
+dependency order. It is a script rather than an npm chain because the browser steps alone
+exceed ten minutes and the harness kills a foreground run at that point — every step prints
+its own timing and result, so a run that dies half way says exactly where. Run it
+backgrounded.
+
+Two flags carry judgements rather than convenience. `--no-observe` keeps the frozen camera
+set, which is the right default for a *candidate* change: `observe:reference` re-freezes the
+camera-set baseline, ADR-0050 restricts that to the authoritative observation host, and
+nothing about the candidate can move the reference's own framing. `--offline` skips every
+browser step, and running it is a determinism check in its own right — the seven offline
+steps reproduced every stored measurement byte-identically, leaving the worktree clean.
