@@ -1,6 +1,6 @@
 # Full Island Reconstruction — merged report
 
-State at `5acb697` on `experiment/claude-full-island-scene`.
+State at HEAD on `experiment/claude-full-island-scene`.
 
 ---
 
@@ -31,19 +31,36 @@ crossable at 0.680° and was wrong; the rebuild check caught it and the correcti
 ADR-0054's 40-landform budget reaches terrain height p95 8.657 where the gate needs about
 101 landforms. Shore p95 is worse than that: it **is not reachable by adding forms at all**.
 
-### A gate that is unreachable by arithmetic, which is worth separating from the above
+### The surface gate is measuring its own sampling noise (ADR-0066)
 
-`surface p95 ≤ 2.4875` cannot be met while the horizon sits where ADR-0052 records it, and
-this is not a judgement:
+This supersedes the arithmetic argument I made earlier in the session — that the sixteen
+mountains floor `surface p95` at 2.4316 against a 2.4875 threshold. That was true and it
+was the small half of the story.
 
-- the 16 horizon mountains contribute **2.4316** to the 672-entity mean on their own
-- that leaves **0.056** of headroom for the other 656 entities
-- every one of them would have to average under **0.09** world units of surface distance
+`surfaceDistance` compares point clouds and `SAMPLE_CAP` is 96 per entity **at every size**,
+so the metric reads a non-zero distance between a form and itself. Measured through the
+production path, with only the per-mesh sample seed displaced:
 
-No amount of object work reaches it. This is a *consequence* of a recorded boundary rather
-than a boundary itself, and nothing in the repository said so before — it is the single
-most useful thing I found, because it retires a target that would otherwise look like
-unfinished work.
+**Entity-weighted floor 4.8964, against a measured 6.4967 and a threshold of 2.4875.**
+
+75 per cent of the scene's surface residual is the metric comparing a form with itself. Six
+kinds measure at or *below* their own floor — `pavilion` at 100.1 per cent of it, `bridge`
+at 105.7, `shop-sign` at 107.2 — meaning they are already indistinguishable from a perfect
+reproduction at this sampling density.
+
+And the calibration that set 2.4875 contains none of that noise. Its mild bracket is
+`[0, 0.1803, 0.2284, 0.2622]`: **the identity control reads exactly 0**, because the
+reference is on both sides of every world-space control and the two clouds' points
+correspond. The candidate is a different mesh, so its samples are an independent draw. The
+threshold was calibrated on a comparison with a zero noise floor and is applied to one whose
+floor is at least 4.8964 — at least, because reference-against-candidate compares two
+different tessellations and can only be noisier than the candidate-against-candidate figure
+measured here.
+
+So `surface p95 ≤ 2.4875` **cannot be met by any candidate, including a geometrically
+perfect one**, and this is the reason every fit in this milestone returned single-digit
+percentages while its profile proxy moved by half. Nothing was changed on the strength of
+it: the threshold, `SAMPLE_CAP` and the metric are all untouched.
 
 ### Unfinished work — no boundary, just not done
 
@@ -77,8 +94,10 @@ That two controls are already at their surface optimum is the other half of the 
 the existing fit is not sloppy, it is *small*. Six group controls plus two per summit
 cannot describe an authored landform 389 to 1380 units across to within 14 units.
 
-So this belongs with the boundaries, with one honest qualification: the sweep bounds *this*
-program, not every possible one. Enlarging the ridge control budget is the same class of
+So this belongs with the boundaries — and ADR-0066 then explains *why* the controls have so
+little to move: 79.7 per cent of the mountains' residual is the metric's own sampling floor,
+81.354 of 102.126. One honest qualification remains: the sweep bounds *this* program, not
+every possible one. Enlarging the ridge control budget is the same class of
 decision as ADR-0052's eight-form cap and is a human call, which is why it is in §2 rather
 than settled here.
 
@@ -110,14 +129,14 @@ not a gap.
 
 ## 2. What needs a human
 
-Five things, all specific.
+Six things, all specific.
 
 1. **Overturning ADR-0052 or ADR-0054.** Both boundaries are reachable only by raising a
    frozen budget — the terrain landform cap from 40 to about 101, or accepting a
    640-number sampled skyline. Both are repo-level decisions about what a Procedural
    Replacement is allowed to be, not fitting decisions, and §8 reserves them.
 
-2. **Native Firefox and Safari GPU gates.** Neither browser is installed on the normative
+3. **Native Firefox and Safari GPU gates.** Neither browser is installed on the normative
    host. Firefox needs a BiDi transport this repository does not have; Safari needs macOS.
    Reported as not evaluated since the Foundation and unchanged.
 
@@ -132,14 +151,14 @@ Five things, all specific.
    real, and if a reviewer's reading of the convergence order differs, the right call
    differs. The per-metric numbers are in §5.
 
-4. **Enlarging the horizon ridge control budget.** Six group controls plus two per summit
+5. **Enlarging the horizon ridge control budget.** Six group controls plus two per summit
    cannot describe these landforms to the threshold, and the sweep in §1 bounds what the
    current controls can do at single-digit per cent against an 86 per cent requirement.
    More summits or more controls per group is the same class of decision as ADR-0052's
    eight-form cap. This is now the largest single lever on the island — 37.4 per cent of
    the surface residual — and it is not mine to pull.
 
-5. **The triangle budget.** Now the tightest on the island at 0.132581 headroom, down from
+6. **The triangle budget.** Now the tightest on the island at 0.132581 headroom, down from
    0.202113, because the palm fit spent about a third of the remaining margin. The blossom
    and bamboo fits spent none — both were held at or below their previous counts, blossom
    by a constraint added to the fitter. Still passing. A mountain fit, which is the next
