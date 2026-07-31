@@ -7,7 +7,8 @@ status: proposed
 `paths` draws 2.927 times the reference's pixels and scores a silhouette IoU of 0.2233.
 Building it correctly would take the pixel ratio to about 1.0 and the IoU **down to 0.1027**.
 
-The metric prefers the wrong answer, and by a factor of two and a half. This is proposed
+The metric prefers the wrong answer by a factor of 2.17 on the rendered group and 1.75 in a
+constructed fixture where both sides are known. This is proposed
 rather than accepted for the same reason as ADR-0066: it says a calibrated gate is
 measuring the wrong thing, which is not a fitting decision.
 
@@ -54,6 +55,39 @@ three times too big. A blob that swallows the scatter keeps the whole intersecti
 only in union, while a correct scatter loses the intersection to sub-instance misalignment
 that a Procedural Replacement is explicitly not required to reproduce.
 
+## Put to the gate's own function
+
+The algebra above is checked against a rendered group, which is the right first test and a
+weak one: a rendered group has occlusion, mixed kinds and a camera in it. So the same
+question is put to `silhouetteEvidence` directly, on masks built in
+`test/scattered-footprint-metrics.test.mjs` where both sides are known because both were
+constructed. One reference scatter at the measured coverage; one candidate reproducing its
+statistics exactly with different instance positions; one candidate that is a single disc
+four times too big.
+
+| candidate | IoU | contour p95 | contour mean | draw ratio |
+| --- | --- | --- | --- | --- |
+| faithful scatter | **0.1045** | **16.556** | 6.125 | 1.003 |
+| over-drawn blob | **0.1824** | 96.000 | 33.798 | 4.014 |
+
+`c / (2 - c)` predicts 0.1027 against an observed 0.1045. The effect is real, it is in the
+gate's own code, and being right costs 43 per cent of the IoU.
+
+**And the claim about contour distance survives the test, which it needed to** — it was
+asserted in the first draft of this ADR before anything checked it. Contour prefers the
+faithful scatter by a factor of 5.8, 16.556 against 96.000, and the draw ratio prefers it
+outright at 1.003 against 4.014. Two of the three metrics rank the candidates correctly.
+
+With one qualification that matters: **contour's own floor on a scatter is 16.556, against a
+threshold of 6.536774.** So a faithful scatter cannot *pass* the contour gate either. It can
+only rank above a wrong one. Contour is the usable metric here in the sense that it points
+the right way, not in the sense that it can be satisfied — which is the same distinction
+ADR-0066 draws about the surface gates, arrived at independently.
+
+The rendered `paths` group reads 75.99, between the fixture's faithful 16.556 and its blob
+96.000, which is what a group containing both a scatter and three blockier `path-stone`
+should read.
+
 ## It explains `cover`, the worst group on the island
 
 `cover` scores IoU **0.0144**. Its populations are scattered small instances, and
@@ -80,12 +114,14 @@ the three whose footprints are least like a single blob.
 The over-draw is still real and still wrong. `paths` drawing 2.927 times the reference's
 pixels is a genuine defect that a human reviewer would see immediately, and the contour p95
 of 75.99 against a 6.536774 threshold is measuring something true — contour distance does
-not have this pathology, because it compares boundaries rather than areas.
+not share this pathology, and the fixture above shows it ranking the faithful scatter 5.8
+times better rather than worse.
 
 So the repair is probably not to stop caring about IoU on these groups but to notice that
-**contour distance and the draw ratio already say the right thing where IoU does not**. A
-gate stack that reads IoU, contour and pixel ratio together would have caught the paving
-slab years ago; reading IoU alone rewards keeping it.
+**contour distance and the draw ratio already say the right thing where IoU does not**, and
+that this is now measured rather than supposed. A gate stack that reads IoU, contour and
+pixel ratio together would have caught the paving slab long ago; reading IoU alone rewards
+keeping it.
 
 ## What was not done
 
