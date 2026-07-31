@@ -13,7 +13,7 @@ Scope of this run: tickets 01 → 06 in order. Ticket 07 and later are untouched
 | 02 measurement core copied with drift checks | resolved |
 | 03 CPU rasterizer, divergence tolerance, wall-clock | resolved |
 | 04 Complexity Budget Formula, global ceiling, Budget Proxy | resolved |
-| 05 generic perturbations, automatic Calibration Bracket | not started |
+| 05 generic perturbations, automatic Calibration Bracket | resolved |
 | 06 end-to-end geometry reconstruction | not started |
 
 Commits, one per ticket:
@@ -23,7 +23,8 @@ Commits, one per ticket:
 | 01 | `de7b2d9` |
 | 02 | `3263800` |
 | 03 | `daa21f8` |
-| 04 | current `HEAD` |
+| 04 | `214d8f2` |
+| 05 | current `HEAD` |
 
 A hash cannot be written inside the commit it names, so each ticket's hash lands
 in the following ticket's commit. If this table is one row short of the resolved
@@ -85,7 +86,7 @@ worker-thread path, on all eight units, verified by sha256 over every buffer.
 ## Verification block, current state
 
 ```
-npm test                                                    158 passing / 0 failing
+npm test                                                    167 passing / 0 failing
 npm run check:stone-v2-contract                             PASS (6 candidate, 3 evidence files)
 npm run check:patterned-appearance-v2-contract              PASS
 node scripts/run-stage-2-eight-object-certification.mjs --check
@@ -96,8 +97,8 @@ git status --short                                          no red-line file mod
 Baseline before any work: `npm test` was 92 passing / 0 failing. The package's own
 21 tests live in `packages/mesh-to-code/test/` and are discovered by the
 repository's `node --test` as well as by the package's own runner, which is why
-the count rose. The package suite is 66 tests after ticket 04, and the
-repository's own count is unchanged at 92: 92 + 66 = 158. Both suites pass
+the count rose. The package suite is 75 tests after ticket 05, and the
+repository's own count is unchanged at 92: 92 + 75 = 167. Both suites pass
 standalone.
 
 Repository-side aggregator, all passing (5 checks):
@@ -107,6 +108,7 @@ node scripts/check-decompiler-package.mjs        (relative path only, never a wo
 node scripts/check-decompiler-measurement-drift.mjs
 node scripts/run-decompiler-rasterizer-calibration.mjs --check   (needs the LFS reference)
 node scripts/run-decompiler-budget-calibration.mjs --check       (needs the LFS reference)
+node scripts/run-decompiler-baseline-calibration.mjs --check     (needs the LFS reference)
 cd packages/mesh-to-code && npm test
 cd packages/mesh-to-code && npm run check:neutrality
 cd packages/mesh-to-code && npm run check:package-contents
@@ -175,7 +177,33 @@ was required to make the analytic bounds metric agree with the frozen numbers, a
 it turned a FAIL into 3.794e-15. Any later emission path must not rely on root
 placement to position a unit. Found during ticket 03; details in that ticket.
 
-**Two Phase A findings worth carrying into ticket 05 and beyond.**
+**THE HEADLINE FINDING OF THIS RUN, from ticket 05.** An automatic reference-only
+Calibration Bracket produces geometry thresholds that four of the eight
+already-accepted candidates cannot meet — 10 metric rejections across stone and
+mushroom — and demotes 21 of 64 metric slots to diagnostic.
+
+The mechanism: the bracket calibrates the interval between a barely-perturbed
+reference and a damaged reference, and a compact Procedural Replacement is not
+inside that interval. Stone's accepted candidate scores mean silhouette IoU
+`0.89308` while the best destructive control on that metric scores `0.92440` — the
+candidate is further from the reference than the declared damage is. Mushroom:
+`0.83110` against `0.86222`. The frozen human-anchored thresholds sit at `0.84470`
+and `0.82000` precisely because a human supplied the reachability estimate a
+reference cannot.
+
+The Budget Proxy is the designed replacement for that human estimate, and on this
+corpus it cannot supply it: every unit's triangle budget already holds its whole
+reference, so the proxy is the reference and its bound is perfect. The mitigation
+is implemented and does not bite.
+
+Nothing was tuned away, and nothing should be. Phase B is not blocked, because its
+exit is measured under each unit's existing frozen baseline version rather than
+under the automatic one. What this bears on is Phase C and any new unit: the
+eligibility half of automatic acceptance works, and the reachability half is the
+open problem. Full numbers in the ticket 05 resolution and in
+`decompiler-automatic-baseline-v1.json`.
+
+**Two further Phase A findings.**
 First, the Budget Proxy reachability bound is non-binding on all eight regression
 units: the formula's triangle budget already holds each whole reference, so every
 per-metric bound is exactly perfect and the proxy supplies no discriminating
