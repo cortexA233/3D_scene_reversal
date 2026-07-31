@@ -54,9 +54,38 @@ unfinished work.
 | all ten fixedCameraGeometry metrics | — | — |
 
 `worst entity surface p95` is entirely horizon mountains — all eight worst entities are
-`horizon/mountain-*` — but the worst reads **41 per cent of its own 389-unit extent**,
-which is not a representation floor. The mountains have a fitted crest-ridge program and
-it is a poor fit; that is generator work nobody has done.
+`horizon/mountain-*`, and the worst reads 41 per cent of its own 389-unit extent. I first
+classified that as unfinished work. **It is not, and the correction is measured.**
+
+The sixteen groups *are* fitted, but `fit-horizon-ridge.mjs` fits them to the skyline —
+elevation-angle p95 and max, a depth term, coverage — and surface distance appears nowhere
+in that objective. So the obvious move was to fit the flanks for surface too. Sweeping every
+continuous group control over a twelvefold range says that cannot work:
+
+| control | mean surface p95, best over x0.5 to x6 | gain |
+| --- | --- | --- |
+| ridgeElongation | 96.090 at x0.5 | 5.91% |
+| ridgeApron | 100.529 at x1.5 | 1.56% |
+| flankFalloff | 101.091 at x1.5 | 1.01% |
+| spreadScale | 102.126 at x1 | **0% — already optimal** |
+| saddleDepth | 102.126 at x1 | **0% — already optimal** |
+
+The residual is 102.1257 and the threshold is 14.037975: an 86 per cent reduction is
+needed and the whole control budget offers single digits. The worst entity is pinned at
+exactly 159.2395 across every flank multiplier from x1 upward — completely insensitive.
+That two controls are already at their surface optimum is the other half of the evidence:
+the existing fit is not sloppy, it is *small*. Six group controls plus two per summit
+cannot describe an authored landform 389 to 1380 units across to within 14 units.
+
+So this belongs with the boundaries, with one honest qualification: the sweep bounds *this*
+program, not every possible one. Enlarging the ridge control budget is the same class of
+decision as ADR-0052's eight-form cap and is a human call, which is why it is in §2 rather
+than settled here.
+
+The 5.91 per cent from halving `ridgeElongation` is **not taken**. It would move the
+control the skyline fit chose deliberately, on the gate ADR-0052 already records as
+saturated, and a uniform multiplier across sixteen groups is a cruder instrument than the
+per-entity fit it would overwrite.
 
 The remaining object residual by kind, after all three vegetation fits:
 
@@ -68,10 +97,10 @@ The remaining object residual by kind, after all three vegetation fits:
 | blossom | 133 | 3.450 | 10.5% |
 | everything else | 295 | — | 23.0% |
 
-Every vegetation kind is now fitted to its measured profile. The next target is the
-horizon mountains, which are 37.4 per cent of the total on their own and whose crest-ridge
-program is a poor fit rather than a boundary — the worst reads 41 per cent of its own
-extent.
+Every vegetation kind is now fitted to its measured profile. The mountains are 37.4 per
+cent of the total on their own and are bounded by their control budget rather than by a
+missing fit — see below. That leaves no object kind where a measurable improvement is
+available within the current representations.
 
 `nativeAppearance` is **blocked, not failed**. ADR-0040 refuses to evaluate it until both
 geometry layers pass. That is the spec's own convergence order working as designed and is
@@ -81,7 +110,7 @@ not a gap.
 
 ## 2. What needs a human
 
-Four things, all specific.
+Five things, all specific.
 
 1. **Overturning ADR-0052 or ADR-0054.** Both boundaries are reachable only by raising a
    frozen budget — the terrain landform cap from 40 to about 101, or accepting a
@@ -103,7 +132,14 @@ Four things, all specific.
    real, and if a reviewer's reading of the convergence order differs, the right call
    differs. The per-metric numbers are in §5.
 
-4. **The triangle budget.** Now the tightest on the island at 0.132581 headroom, down from
+4. **Enlarging the horizon ridge control budget.** Six group controls plus two per summit
+   cannot describe these landforms to the threshold, and the sweep in §1 bounds what the
+   current controls can do at single-digit per cent against an 86 per cent requirement.
+   More summits or more controls per group is the same class of decision as ADR-0052's
+   eight-form cap. This is now the largest single lever on the island — 37.4 per cent of
+   the surface residual — and it is not mine to pull.
+
+5. **The triangle budget.** Now the tightest on the island at 0.132581 headroom, down from
    0.202113, because the palm fit spent about a third of the remaining margin. The blossom
    and bamboo fits spent none — both were held at or below their previous counts, blossom
    by a constraint added to the fitter. Still passing. A mountain fit, which is the next
