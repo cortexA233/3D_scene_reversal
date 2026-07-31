@@ -168,6 +168,38 @@ _Avoid_: Mesh decompiler, automatic model converter
 A repeatable, human-guided and measurement-assisted process that turns an Authored Reference into a Procedural Replacement; it may automate evidence extraction and parameter fitting without automatically inventing the generator program.
 _Avoid_: Automatic mesh converter, one-click reconstruction
 
+**Autonomous Object Decompiler**:
+A workflow that turns one input mesh into a Procedural Replacement without a human choosing its representation or authoring its generator, by composing Contract Operators under deterministic fitting, automatically derived acceptance gates, and a declared Reconstruction Tier.
+_Avoid_: Automated Scene Decompiler Workflow, one-click reconstruction, mesh-to-code AI
+
+**Contract Operator**:
+A reusable, parameterized geometry or appearance construction exposed as a pure deterministic function with a declared parameter signature and scalar count, containing no object-specific authored data and no asset access.
+_Avoid_: Helper function, generator, geometry util
+
+**Operator Library**:
+The project-owned, versioned set of Contract Operators available to an Autonomous Object Decompiler, which grows only by admitting operators that were authored under a recorded coverage failure.
+_Avoid_: Modeling DSL, shape grammar, geometry kernel
+
+**Structure Manifest**:
+The frozen, hash-bound record of every discrete decision that defines one Procedural Replacement — unit division, semantic grouping, operator composition, and any operator authored for it — from which all downstream generation and measurement must reproduce bit-for-bit.
+_Avoid_: Recipe, config, agent log, plan
+
+**Decision Point**:
+A named place where an Autonomous Object Decompiler suspends, publishes the mechanical evidence for one discrete choice, and requires an external decision in a declared schema before resuming; its evidence is always available in numeric form and never only as imagery.
+_Avoid_: Agent step, prompt, tool call, callback
+
+**Budget Proxy**:
+A reference-derived construct built at a Reconstruction Unit's declared compactness budget, used to bound how well any compact Procedural Replacement could score before a candidate exists.
+_Avoid_: Decimated reference, target mesh, candidate exemplar, human-approved anchor
+
+**Complexity Budget Formula**:
+The frozen published mapping from reference-side complexity measurements to one Reconstruction Unit's compactness budgets, applied identically to every unit and bounded by a global ceiling it may never exceed.
+_Avoid_: Per-object budget, tuned ceiling, compression ratio target
+
+**Reconstruction Tier**:
+The machine-enforced acceptance classification of a Procedural Replacement — accepted, below-gate, coarse, or rejected — recorded only in development-only evidence and read at build time, never exported by the Production Runtime.
+_Avoid_: Score, grade, quality flag, runtime status
+
 ## Shared facts
 
 - Reference-layout Delivery means the Eight-slot Lab Reference Layout, not island-village source-world placement. A stage populates only the slots for its available Procedural Replacements and never fills unfinished slots with Authored Reference assets; formal delivery requires all eight slots.
@@ -221,3 +253,8 @@ _Avoid_: Automatic mesh converter, one-click reconstruction
 - Development-only inspection of Candle's original model, material, and 512-pixel base-color texture identified irregular low-contrast stone mottling rather than periodic bands. The v3 Object-scoped Candidate Freeze retains only deterministic, resolution-independent value-noise controls and screen-derivative filtering; no asset bytes or sampled derivatives enter the Object Generator or Production Runtime.
 - Candle v3 passes the unchanged category-v1 geometry and semantic compound-material v2 gates, all four existing damage controls, nonvisual ceilings, and two stable native hardware-GPU repetitions in Firefox and Safari. Its 512-to-128 material scale-consistency error is `1.4766` mean and `7` P95 under hard maxima `2.5/8`.
 - `single-mesh-stage-2-eight-object-certification-v2` preserves the v1 eight-object certification and replaces only Candle's current positive evidence with the band-limited v3 freeze, Chrome acceptance, semantic damage controls, multi-scale material gate, and new Firefox/Safari evidence. Historical Stage 1 remains `2/4 FAIL` and no full-island result is claimed.
+- The Autonomous Object Decompiler is a separate workflow from the Scene Decompiler Workflow, not a replacement for it. The frozen Stage 1, Stage 1.5, and Stage 2 evidence was produced by the human-guided workflow and is never restated as an autonomous result; the eight hand-authored Object Generators remain the regression corpus and the seed for the Operator Library rather than material to be replaced.
+- The Decompiler Program promises only that a new object needs no hand-authored Object Generator. It does not promise that an arbitrary mesh reaches the `accepted` Reconstruction Tier. Hard pipeline metrics are measured on a held-out corpus drawn from `island-village.glb` and the unused asset GLBs, frozen by name before fitting begins.
+- Reference-side separability does not imply candidate reachability: Umbrella's reference-only `patterned-appearance-baseline-v2` passed its Calibration Bracket and then failed all seven metrics against a human-approved candidate. A Budget Proxy supplies that reachability bound from the Authored Reference alone, so an Autonomous Object Decompiler baseline still freezes before fitting.
+- Appearance cannot be fitted in the cheap feedback tiers because a Bounded Semantic Pattern Program executes as a shader. It is solved analytically from resolution-independent reference statistics, and the existing multi-scale material consistency check remains the guard against sampled appearance entering as shader constants.
+- A Reconstruction Tier below `accepted` still emits code, but only `accepted` units are admitted to the formal Reference-layout Delivery. Tier and its evidence are development-only and read at build time; no Procedural Replacement exports its own certification.
