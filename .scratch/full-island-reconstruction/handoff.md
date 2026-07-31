@@ -28,37 +28,28 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 12 — decorations (partial) | `lantern` and `npc-statue` landed as axial profiles (ADR-0060); the other 17 kinds are mostly single placements |
 | Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
-## Ticket 05's recorded boundary is crossable — start here
+## Ticket 05's boundary is closed, not crossable — do not re-open it
 
-The single most useful thing found this session. ADR-0052 recorded the skyline gate as
-unreachable; it is unreachable *by per-group tables under the eight-form cap*, which is a
-narrower claim than the ADR made. `measure-horizon-form-budget.mjs --families` reproduces
-all of this:
+ADR-0052 named three shared crest tables as the way through and left it unmeasured.
+`tools/development/fit-horizon-families.mjs` measures it and **it does not work.**
 
-- Per group the optimal bound crosses 0.945 degrees between **24 nodes (0.952)** and
-  **32 nodes (0.516)**. ADR-0052's table stopped at 24 and concluded "not reachable".
-- Per-group tables cannot take 32 nodes — 96 numbers per group against a compactness guard
-  of 60. **Shared tables can**: three families at 32 nodes reach **0.930 for 9.0 numbers per
-  group**, at 40 nodes **0.680 for 10.5**, at 48 nodes 0.522 for 12.0.
-- Clustering by measured shape, reading no mesh name, recovers families of **3/7/6** against
-  the 6/7/3 source-mesh split ADR-0052 states. Independent confirmation the families are real.
+- A shared table saturates at **3.670 degrees regardless of node count** — 16, 24, 32, 40, 48
+  all give the same number. The error is set by how much a family's members differ from each
+  other, not by sampling density, so no node budget reaches the 0.945 threshold.
+- What *does* reach it is shared node *positions* with per-group values: 0.680 degrees at 40
+  values per group, which is 640 numbers for a 720-bin skyline — the sampled skyline ADR-0052
+  prohibits.
+- The clustering is sound and worth keeping: reading no mesh name it recovers families of
+  **3/7/6** against the stated 6/7/3 source split.
+- No gate revision was ever needed. The threshold was not the problem.
 
-**Take three families at 40 nodes.** 0.680 against 0.945 is a 28 per cent margin; 32 nodes
-passes at 0.930 but 1.6 per cent is not a margin a real fitter holds, and ADR-0052's own fit
-landed where its bound predicted rather than on it.
-
-**No gate revision, no recalibration, no re-freeze.** ADR-0052 assumed this path needed a
-versioned gate revision because it framed the threshold as the problem. The threshold is
-fine; the candidate can reach it as frozen. What is left to build, in order:
-
-1. A reference-only measurement persisting the three shared tables plus each group's family
-   index, offset and range. The clustering and shared fit already exist in the tool — what
-   is missing is writing the *table*, not just its error bound.
-2. A recipe field per Horizon Group: family index, offset, range. Three numbers, replacing
-   the per-group peak and foothill controls.
-3. `crestRidge` reading a shared table instead of per-group summits.
-4. `measure:horizon`, capture, report. Targets `horizon profile p95` and `worst azimuth
-   horizon error`, both red at 0.0436 and 0.0657 radians against 0.0165.
+**Read this before trusting a bound.** An earlier version of the shared cost let each member
+interpolate through *its own* node values, which measures per-group values rather than a
+shared table, and reported 0.680 where the truth is 3.670. It was written up and committed as
+"the boundary is crossable" before the rebuild check caught it — the rebuild gave 4.909
+against a claimed 0.680, and a sevenfold disagreement between a bound and a rebuild of the
+same quantity can only mean one of them measures something else. That is the fourth time this
+milestone that redundancy, not a fixture, found a wrong measurement.
 
 ## Where ticket 07 actually stands now
 

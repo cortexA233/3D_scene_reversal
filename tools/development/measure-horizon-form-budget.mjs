@@ -176,17 +176,40 @@ export function clusterShapes(shapes, families) {
  * worst member's deviation rather than one group's. Each member's own scale maps the
  * normalised deviation back to degrees, which is why the members' ranges are carried in.
  */
-export function bestSharedPiecewise(members, segments) {
+export function bestSharedPiecewise(members, segments, { shared = true } = {}) {
   const count = members[0].shape.length;
+  /**
+   * The segment cost, and the distinction the first version of this got wrong.
+   *
+   * With `shared` false the cost lets each member interpolate through *its own* values at
+   * the node positions, so only the positions are shared. That is a real representation but
+   * it costs one value per node **per group**, and it is not what ADR-0052 proposed.
+   *
+   * With `shared` true — the default — every member is compared against one chord whose
+   * endpoints are the same for all of them. The endpoints are taken as the members'
+   * midrange, which is the value minimising the worst member's deviation at that node, and
+   * the cost is then the worst deviation any member has from that single chord. This is the
+   * cost of an actually shared table.
+   */
   const cost = Array.from({ length: count }, () => new Float64Array(count).fill(0));
+  const midrange = (at) => {
+    let low = Infinity;
+    let high = -Infinity;
+    for (const member of members) {
+      if (member.shape[at] < low) low = member.shape[at];
+      if (member.shape[at] > high) high = member.shape[at];
+    }
+    return (low + high) / 2;
+  };
+  const sharedAt = shared ? Float64Array.from({ length: count }, (_, at) => midrange(at)) : null;
   for (let from = 0; from < count; from += 1) {
     for (let to = from + 1; to < count; to += 1) {
       let worst = 0;
       for (const member of members) {
-        const start = member.shape[from];
-        const end = member.shape[to];
-        for (let at = from + 1; at < to; at += 1) {
-          const along = (at - from) / (to - from);
+        const start = shared ? sharedAt[from] : member.shape[from];
+        const end = shared ? sharedAt[to] : member.shape[to];
+        for (let at = from; at <= to; at += 1) {
+          const along = to === from ? 0 : (at - from) / (to - from);
           const error = Math.abs(start + (end - start) * along - member.shape[at]) * member.range;
           if (error > worst) worst = error;
         }
@@ -194,21 +217,41 @@ export function bestSharedPiecewise(members, segments) {
       cost[from][to] = worst;
     }
   }
+  // The breakpoints come back with the error, because a bound nobody can build to is only
+  // half a result: the table itself is what the recipe has to carry.
   let best = new Float64Array(count).fill(Infinity);
+  const cameFrom = Array.from({ length: segments + 1 }, () => new Int32Array(count).fill(-1));
   best[0] = 0;
-  for (let to = 1; to < count; to += 1) best[to] = cost[0][to];
+  for (let to = 1; to < count; to += 1) {
+    best[to] = cost[0][to];
+    cameFrom[1][to] = 0;
+  }
   for (let segment = 2; segment <= segments; segment += 1) {
     const next = new Float64Array(count).fill(Infinity);
     next[0] = 0;
     for (let to = 1; to < count; to += 1) {
       for (let split = 0; split < to; split += 1) {
         const value = Math.max(best[split], cost[split][to]);
-        if (value < next[to]) next[to] = value;
+        if (value < next[to]) {
+          next[to] = value;
+          cameFrom[segment][to] = split;
+        }
       }
     }
     best = next;
   }
-  return best[count - 1];
+  const breakpoints = [count - 1];
+  let at = count - 1;
+  for (let segment = segments; segment >= 1 && at > 0; segment -= 1) {
+    at = cameFrom[segment][at];
+    if (at < 0) break;
+    breakpoints.unshift(at);
+  }
+  return {
+    error: best[count - 1],
+    breakpoints,
+    table: breakpoints.map((index) => (shared ? sharedAt[index] : null)),
+  };
 }
 
 export async function measureHorizonFormBudget() {
@@ -292,7 +335,7 @@ export async function measureHorizonFamilyBudget({ families = [2, 3, 4], nodes =
       for (let slot = 0; slot < familyCount; slot += 1) {
         const members = groups.filter((_, index) => assignment[index] === slot);
         if (members.length === 0) continue;
-        perFamily.push(bestSharedPiecewise(members, nodeCount - 1));
+        perFamily.push(bestSharedPiecewise(members, nodeCount - 1).error);
       }
       const worst = Math.max(...perFamily);
       rows.push({

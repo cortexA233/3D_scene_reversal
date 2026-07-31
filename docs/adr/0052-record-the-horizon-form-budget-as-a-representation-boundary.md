@@ -11,25 +11,38 @@ Twenty-four crest nodes per group would be 1,152 numbers across the sixteen grou
 The gate stays red and the check that asserts it is marked outstanding rather than loosened or deleted, with this record as its reason. The declared resolution path is a shared form family: the sixteen groups are instances of three authored meshes, so three shared crest tables at twenty-four nodes would be 216 numbers rather than 1,152, and the per-group recipe would carry a family index and its existing placement. That changes what a Horizon Group's controls are and needs its own reference-only measurement, a versioned gate revision, and its own ADR, so it is named as the next step rather than taken here.
 
 
-## Superseded in part: the boundary is crossable
 
-The declared resolution path above has now been measured and it works, so the flat statement
-that the threshold "is therefore not reachable under this milestone's own production
-constraints" is too strong. It is not reachable *by per-group tables under the eight-form
-cap*, which is what was measured at the time.
+## The declared resolution path is now measured, and it is closed
 
-Two corrections. The node table above stops at 24, where the per-group bound is 0.952
-against 0.945 — just over. At **32 nodes it is 0.516**, comfortably under. And per-group
-tables cannot take 32 nodes because that is 96 numbers per group against the compactness
-guard's 60, but **shared tables can**: clustering the sixteen groups by measured shape gives
-families of 3, 7 and 6, and one shared table per family reaches **0.930 degrees at 32 nodes
-for 9.0 numbers per group** and **0.680 at 40 nodes for 10.5**.
+This record named a way through — three shared crest tables from clustering measured shape —
+and left it as the next step. It has been measured. **It does not work, and this record's
+conclusion stands with a stronger proof than it had.**
 
-The clustering reads no mesh name, as this record required, and recovering 3/7/6 against the
-stated 6/7/3 source split is independent confirmation that the families are real.
+`tools/development/fit-horizon-families.mjs` clusters the sixteen groups by measured profile
+shape, reading no mesh name as this record required, and the clustering recovers families of
+**3, 7 and 6** against the 6/7/3 source-mesh split — independent confirmation that the
+families are real. It then fits one shared table per family and rebuilds each group's own
+profile from it.
 
-One assumption in this record does not survive either: it expected the path to need a
-"versioned gate revision". It does not. The threshold is honestly calibrated and the
-candidate can reach it as frozen; what is needed is a measurement, a recipe field, a
-generator change and an ADR. `measure-horizon-form-budget.mjs --families` reproduces every
-number above. Ticket 05 carries the build order.
+| representation | numbers per group | worst error | reaches 0.945? |
+| --- | --- | --- | --- |
+| shared table, 3 families | 10.5 | **3.670** bound, **3.830** rebuilt | no |
+| shared node *positions*, per-group values | ~43 | 0.680 | yes |
+| today's two peaks and six scalars | 14 | 2.50 achieved | no |
+
+**The shared table's error is independent of node count.** 16, 24, 32, 40 and 48 nodes all
+give 3.670 degrees, because the error is set by how much a family's members differ from each
+other rather than by how finely the table is sampled. There is no node budget that reaches
+the threshold, so the compactness argument this record makes never even comes into play.
+
+The representation that *does* reach 0.945 is shared node positions with per-group values —
+and at 40 values per group that is 640 numbers to describe a 720-bin skyline, which is the
+sampled-skyline objection this record already raised, met at a smaller scale. The per-group
+bound crossing between 24 nodes (0.952) and 32 (0.516) is real and worth recording, and it is
+what that representation would buy; it does not change the verdict.
+
+One correction to this record's own framing: it expected the path to need a "versioned gate
+revision". No revision is needed or wanted, because the threshold was never the problem.
+
+So the horizon boundary is not "the next step, unmeasured" any more. It is closed, and the
+two skyline gates stay red with this as their reason.
