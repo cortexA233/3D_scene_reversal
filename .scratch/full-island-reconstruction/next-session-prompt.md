@@ -27,7 +27,7 @@
     git status --short
     git fetch origin && git rev-list --left-right --count HEAD...origin/experiment/claude-full-island-scene
 
-预期：分支 `experiment/claude-full-island-scene`，HEAD `14a0c0f`，工作区干净，与 origin
+预期：分支 `experiment/claude-full-island-scene`，HEAD `267da7b`，工作区干净，与 origin
 同步（0 0）。若不符，停止并报告。
 
 如果 worktree 不存在（被清理了），重建它：
@@ -43,7 +43,7 @@
 2. `.scratch/full-island-reconstruction/spec.md`
 3. 你要做的那个 ticket（`.scratch/full-island-reconstruction/issues/`）
 4. `AGENTS.md`、`CONTEXT.md`
-5. `docs/adr/0036` 到 `0058`
+5. `docs/adr/0036` 到 `0060`
 
 **不要只看 ticket 的 Status 或复选框。**以 git 提交、代码、冻结证据和可重复的检查为准，证据文件直接读，不要凭记忆。
 
@@ -51,47 +51,56 @@
 
 | 状态 | ticket |
 | --- | --- |
-| 完成 | 01（ADR-0051）、08、09、10（ADR-0056） |
-| 部分完成 | 06 —— plazas/decks（ADR-0057）与 rocks（ADR-0058）已落地，`paths` 真阻塞于 03 |
+| 完成 | 01（ADR-0051）、08、09、10（ADR-0056）、15（ADR-0059） |
+| 部分完成 | 06 —— plazas/decks（ADR-0057）、rocks（ADR-0058）已落地，`paths` 真阻塞于 03 |
+| 部分完成 | 12 —— `lantern`、`npc-statue` 已落地（ADR-0060），另 17 个 kind 多是单 placement |
 | 已落地、门禁仍红 | 04 海面、05 天际线（ADR-0052 记录的边界） |
 | 进行中 | 02 大气、11 材质 |
-| 阻塞于设计决策 | 07 —— 见 ticket 里的三个 finding |
-| 未开始 | 12、13、14、15（Firefox/Safari 是真阻塞）、16 |
+| 已诊断、待建 | 07 —— 桥的带状形体、两种树的地面结构，见 ticket 里的四个 finding |
+| 未开始 | 13、14、16 |
 | 边界已记录，不是待做项 | 03（ADR-0054）、05（ADR-0052） |
 
-门禁：`structuralCorrespondence` PASS；`worldGeometry` 8/13 红（`worst component deficit`
-已在 ticket 10 变绿）；`fixedCameraGeometry` 10/10 红；`nativeAppearance` 被前两层
-blocked（ADR-0040 排序规则，不是缺校准）。
+门禁：`structuralCorrespondence` PASS；`worldGeometry` 8/13 红；`fixedCameraGeometry`
+10/10 红；`nativeAppearance` 被前两层 blocked（ADR-0040 排序规则）。
 
-`npm test`：283 项，276 通过，6 todo，**1 失败**——ticket 04 的海面外观阈值。原来那个
-`stone-v2-calibration-contract` 失败**已结清**：它在这个 worktree 里 7/7 通过、在主仓库
-的同一个 commit 上失败，证实是某个工作副本磁盘上是 CRLF，冻结哈希本身是对的。不要为了
-让它变绿去重新冻结契约。
+`npm test`：287 项，280 通过，6 todo，**1 失败**——ticket 04 的海面外观阈值。
 
-累计进展：`surface p95` 均值 9.3025 → **7.192**；`worst group contour distance`
-223.84 → **151.62**；`component deficit` 9 → **0**；`plazas` 像素比 1.89 → 1.12；
-`rocks` contour 47.93 → 24.06。
+累计进展：`surface p95` 均值 9.3025 → **7.175**；`worst group contour distance`
+223.84 → **151.62**；`group world normal p95` 79.94 → **78.59**；`component deficit`
+9 → **0**；`plazas` 像素比 1.89 → 1.12；`rocks` contour 47.93 → 24.06；
+`decorations` IoU 0.429 → 0.452。
 
 ## 3. 建议顺序（可按证据调整，但要说明理由）
 
-按**证据充分程度**排，不是按数字大小：
+按**证据强度**排。前两项的测量都做完了，值都在 ticket 07 里，**不要重新测**：
 
-1. **`decorations`** —— IoU 0.431、像素比 1.52、58 个实体。最后一个未查明的人造过度
-   绘制组，而且实体数够多，不像桥只有两个样本撑不起参数。先跑
-   `tools/development/measure-plate-footprint.mjs`（把 `decorations` 的 kind 加进
-   `PLATE_KINDS`）看它的覆盖率和矩形分解，再决定形体族。
-2. **桥的带状形体** —— 设计已经明确（ticket 07 的 finding），但需要第四个逐实体控制
-   （轴向）。三个已测控制的值都在 ticket 07 里，别重新测。
-3. **`structures`** —— depth p95 58.9，全场最差。ticket 07 的主体，卡在"逐实体形体控制
-   vs 按测量比例拆 kind"这个设计决策上；plaza 已经证明了逐实体控制这条路可行。
-4. **11 材质的下半** —— roughness / transparency / emission 仍是手写的而不是测量的，
-   而且完全没有 bounded semantic pattern program，每个 family 都是一个平色。
-5. 12、13、14，然后 15、16。
+1. **桥的带状形体。** 三个已测控制在 ticket 07（coverage 0.568/0.432、`deckHeight`
+   0.712/0.443、profile spread 0.184/0.187 —— spread 两桥一致，是 family 常量）。
+   缺的是第四个：**轴向**。两桥最大两个矩形连成的轴是 **−119.2° 和 +136.1°**，即沿各自
+   包围盒的**相反对角线**。上一次用居中的十字+步道 plate 做，像素比 2.22→1.58、
+   contour/depth/normal 全好转、**IoU 0.362→0.295**，已回退。
+   几何约束要先算清楚：旋转带子的 AABB 必须精确等于 extent。桥 1 的 AABB 比例 0.75 配
+   60.8° 轴向要求 L≈3.02w，单条带子只覆盖 0.414 而实测 0.568，差额是栏杆/桥台/引道。
+2. **两种树的地面结构。** `wish-tree` + `swing-tree` 是 `structures` 组 40% 的 authored
+   像素、8 个 placement。缺的是地面结构不是树冠：authored 底部 reach 0.616–0.661 对候选
+   0.095–0.314。**支柱数量无法从径向平均剖面恢复** —— 显式声明它、说明是声明的、用实测
+   share/reach 这一对校验建出来的结果。别把树干加粗：reach 是均值，实心柱会画七倍宽。
+3. **`pavilion` / `pavilion-single`** —— 2,792 + 1,654 像素但各只有 1 个 placement。
+   证据薄，用 ADR-0060 的旋转剖面（`axialLathe`，`segments: 4` 或 8 给方形/八角平面）
+   而不是一堆盒子。
+4. **11 材质的下半** —— roughness / transparency / emission 仍是手写的，且完全没有
+   bounded semantic pattern program，每个 family 一个平色。
+5. 13、14，然后 16。
 
-**每次改村落的形体，捕获必须在环里。** 这个里程碑被回退的两次尝试（架构 massing 拟合、
-桥的 plate）**都栽在已有证据里已经记录、而设计步骤跳过了的东西上**。先读你已经付钱买到
-的分解再设计形体：`plate-footprint-v1.json` 每个资产记了最多六个矩形，它们的位置携带的
-是形体的**轴向**，不只是覆盖率。
+**每次改形体，捕获必须在环里。** 本里程碑回退过两次（架构 massing 拟合、桥的 plate），
+**两次都栽在已有证据里已经记录、而设计步骤跳过了的东西上**。先读你已经付钱买到的分解和
+剖面再设计形体：`plate-footprint-v1.json` 每个资产记了最多六个矩形（位置携带**轴向**），
+`axial-massing-v1.json` 记了每个 kind 逐分位的 share 和 reach（两侧同一个采样器）。
+
+**已经证明有效的三个做法**，优先复用而不是另发明：`axialLathe` 的单旋转曲面（比一堆图元
+好：回退那次剖面对了、contour 涨了五分之一）；已接受的 Bounded Support-plane Polyhedron
+（`canonicalSupportDirections` 已 import，径向求值，不复制冻结的凸包构造）；recipe 里的
+逐实体紧凑控制（`shape: {}`，两三个标量，有测试断言只有那几个键）。
 
 ## 4. 每个 ticket 的做法
 
@@ -170,11 +179,21 @@ blocked（ADR-0040 排序规则，不是缺校准）。
 **有两处已知不可能在当前约束下变绿，不要在上面空转，也不要伪造通过：**
 
 - **ticket 05 的天际线门禁**（ADR-0052）。八形态上限下不可达，这是控制预算的性质而不是拟合器的问题：动态规划给出的最优分段线性界在 8 节点是 3.257°、24 节点 0.952°，阈值 0.945°。唯一出路是共享形态族——16 个组只是 3 个源网格的实例，3 张 24 节点 crest 表是 216 个数而不是 1152 个。形态族要按**测量形状聚类**推导，绝不能用源网格身份。这是新表示，需要 reference-only 测量 + 版本化 gate 修订 + 自己的 ADR。做不做由证据和预算决定；不做就保持 `todo` 并说明。
-- **ticket 15 的 Firefox / Safari 原生 GPU 门禁**。两个浏览器都没装，这是真实 blocker，必须明确列为 blocker 而不是伪造通过。
+- **ticket 15 的 Firefox / Safari 原生 GPU 门禁**。ticket 15 本身**已完成**（ADR-0059）：
+  真正的阻塞不是"没装浏览器"，而是我们自己的 harness 每次启动都传
+  `--use-angle=swiftshader`，所以里程碑里每一次运行都是软件光栅化；这台机器其实有
+  Intel Arc 140T，`--use-angle=default` 就能拿到。Edge 已记录两次稳定的原生 GPU 运行。
+  Firefox / Safari 仍然拿不到，原因比"没装"更深：**Gecko 说 WebDriver BiDi、WebKit 说
+  WebKit inspector 协议，共享的 CDP harness 驱动不了任何一个**。写一个 BiDi 传输才是那份
+  工作。Safari 还需要 macOS（不可替代硬件）。两个都已按可复现命令记为 `unavailable`，
+  **不要伪造通过，也不要为此改共享 harness**（那会一次性移动里程碑里所有 rendered 测量）。
 
 另外两个**先于本任务存在**的红色，已诊断未修，都属于仓库级决定，请明确处理（修或明确记录为不修）而不是让它们悬着：
 
-- `test/stone-v2-calibration-contract.test.mjs`：CRLF vs LF，十一个冻结文件规范化成 LF 后哈希全部正确（`visual-metrics.mjs` 磁盘 32,795 字节 / LF 31,800 字节，sha 与冻结值精确吻合），`core.autocrlf` 是 `false`。
+- ~~`test/stone-v2-calibration-contract.test.mjs`~~ **已结清**：它在这个 worktree 里
+  7/7 通过、在原工作副本的同一个 commit 上失败，证实冻结哈希是对的、是某个工作副本磁盘上
+  是 CRLF。**不要为了让它变绿去重新冻结契约**——那会把一台机器的 checkout 状态烤进冻结
+  产物。修法是重规范化那个副本。
 - `npm run check:scene-parity-foundation`：把 `generationMs` 这个墙钟值放进逐字节比对，永远不可能通过（对着存档的 538.5，三次跑出 540.4 / 524.5 / 529.5）。`certify:` 本身正常。
 
 **只有以下情况才停下来问人：** 缺少外部授权或凭据；需要不可替代的硬件（如 macOS / Safari）；需要删除或重写来源不明的文件；需要修改 main 分支；或者要做一个会推翻已认证 Foundation 的决定。其余一律自己判断，重要且难以逆转的写 ADR。
@@ -186,8 +205,25 @@ blocked（ADR-0040 排序规则，不是缺校准）。
 - 若必须 compact，先把状态写进 `handoff.md` 再继续，不要重新开始。**本任务预计跨越多次 compaction，这是正常的，不要因此收尾。**
 - 临时脚本放 `.scratch/browser-tooling/`（已 gitignore），提交前清理；有长期价值的分析工具提升到 `tools/development/` 并让它可复现（例：`tools/development/measure-horizon-form-budget.mjs` 是 ADR-0052 的证据）。
 
-## 10. 启动动作
+## 10. 启动动作，和唯一一次结束报告
 
-先报告：分支/HEAD/工作区状态、从 handoff 与实际证据核对出的真实进度、你要处理的第一个 ticket 和理由、你将运行的第一个红色检查。报告后立即持续执行，不需要等确认。
+**开头**：报告分支/HEAD/工作区状态、从 handoff 与**实际证据**核对出的真实进度、你要处理的
+第一个 ticket 和理由、你将运行的第一个红色检查。报告后立即持续执行，**不要等确认**。
+
+**中途**：每完成一个 ticket 或一次回退，给一段简短进展（当前 ticket、跑过的检查、当前红色
+证据、下一步），然后**直接继续下一个**。不要在中途把阻塞项拿出来问——按第 8 节判断：能自己
+决定的就决定，重要且难以逆转的写 ADR。只有第 8 节列的五种情况才停下来问人。
+
+**结尾**：所有可执行 ticket 处理完之后，给一次**唯一的合并阻塞报告**，包含：
+
+1. 每个仍然红的门禁，以及它是"已记录的表示边界"（附 ADR）还是"未完成的工作"；
+2. 每个需要人工介入的项，说明**具体需要人做什么**（授权、硬件、仓库级决定），而不是笼统说
+   "被阻塞"；
+3. 每个被回退的尝试，附它的数字和被回退的原因；
+4. 每一处你**声明**而非测量的数字，以及为什么测量给不出它；
+5. 工作区状态、提交列表、`npm test` 与四层门禁的最终结果。
+
+报告要如实：失败就贴输出，跳过就说跳过，回退就说回退并给数字。**不要把未执行的门禁写成
+通过，不要为了让某个数字变绿去松动冻结阈值或重新冻结契约。**
 
 最终目标是完成全量程序化岛屿复现，不是只交付评估框架或又一个粗略 prototype。
