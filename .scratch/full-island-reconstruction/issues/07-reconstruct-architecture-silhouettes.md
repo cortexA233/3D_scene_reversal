@@ -4,16 +4,18 @@
 
 **Blocked by:** 06 - Reconstruct plazas, decks, paving, and path stones.
 
-**Status:** measured, and one attempt made and reverted. The authored massing is now
-known and the previous form was inverted against it; the fix regressed six of eight
-rendered gates and was not kept. Read the two findings below before trying again.
+**Status:** measured twice, one attempt made and reverted, and now blocked on a design
+decision rather than on a form. The authored massing is known, the authored footprint
+coverage is known, and both say the same thing: one kind is two different assets and the
+Scene Recipe carries nothing that tells them apart. Read the three findings below before
+trying again.
 
 - [ ] Add one non-interactive check that is red until the structures and bridges groups reach their calibrated per-group silhouette thresholds.
 - [ ] Build one architecture family program with compact per-entity controls for levels, eaves, platform, posts, and roof pitch.
 - [ ] Build a bridge program with deck, railing, abutment, and arch as separate semantic parts.
 - [ ] Keep the family's controls compact; a per-building transform list is not a reconstruction.
 - [ ] Keep every entity's anchor and Target AABB Extent exact.
-- [x] Report per-group silhouette, contour distance, depth, and world normal with the worst camera retained. — and the authored massing profile, which nothing measured before: `tools/development/measure-architecture-massing.mjs`.
+- [x] Report per-group silhouette, contour distance, depth, and world normal with the worst camera retained. — and the authored massing profile, which nothing measured before: `tools/development/measure-architecture-massing.mjs`, plus the authored footprint coverage: `tools/development/measure-plate-footprint.mjs`.
 - [ ] Improve the semantic component delta for these groups.
 
 
@@ -110,9 +112,57 @@ the proportions right is necessary and was not sufficient.
 2. **Fewer, smoother surfaces rather than more boxes.** The authored body is smooth at
    screen scale. A single tapered shell that widens towards the eave will reproduce the
    reach profile without eight silhouette seams.
-3. **The sampler first.** The massing profile is bounded by the same per-mesh sample
-   allocation that penalises part structure everywhere else: the new thin plinth is its
-   own part and drew 25.9 per cent of the samples in the base decile where the authored
-   building has 4.6, and the three single-placement kinds have 96 samples each, which
-   is enough for the sign of a taper and nothing finer. Fitting per-kind massing before
-   that is fitting a distorted measurement.
+3. ~~**The sampler first.**~~ Done: ADR-0055 gave the sample budget to the entity, so a
+   thin plinth no longer draws a part's worth of points for a part's worth of geometry.
+   The massing profile above was measured through the old allocation and the numbers in
+   the two findings should be re-read before they are trusted; the *signs* survive,
+   because the reference side was allocated the same way.
+
+## Finding: the plazas group's over-draw is footprint coverage, and it is not one number
+
+`tools/development/measure-plate-footprint.mjs` scan-converts the authored geometry's
+horizontal projection in the reference page, so coverage is the area a plate really
+shadows rather than where 96 samples happened to fall. Per distinct asset:
+
+| asset | triangles | coverage of its own rectangle | thickness / diagonal | rectangles claiming it |
+| --- | --- | --- | --- | --- |
+| plaza | 6,720 | **1.000** | 0.0038 | 1 claims all of it |
+| plaza | 2,298 | **0.341** | 0.0028 | 6 claim 0.144, 0.198 left over |
+| bridge | 8,160 | 0.568 | 0.172 | 6 claim **0.506** of 0.568 |
+| bridge | 6,216 | 0.432 | 0.230 | 6 claim 0.279 |
+| deck | 3,668 | 0.177 / 0.191 | 0.038 | **none** |
+| deck | 1,748 | 0.126 | 0.053 | **none** |
+
+The candidate's plaza is two stacked boxes filling their box, which is *correct for the
+6,720-triangle plaza and three times too dense for the other*. Three facts follow, and
+none of them is a generator tweak:
+
+- **A candidate cannot cover less of its rectangle by shrinking.** `placeEntity` scales
+  the local form until its AABB equals the Target AABB Extent exactly, so an inset plate
+  is scaled straight back out to the walls. Lower coverage has to come from concavity or
+  perforation. The authored plates confirm this is what they do: they reach the walls and
+  still cover a third, and their footprint reach — mean offset from centre, doubled, as a
+  fraction of extent — is 0.31 to 0.44 against 0.5 for a filled rectangle.
+- **The decks are not rectangle-decomposable.** At a 96-cell raster over a 70-by-93 unit
+  footprint, no rectangle reaches half a per cent of the box on any of the four, so the
+  occupancy is narrower than about 0.7 units everywhere: planks and railings, not a slab.
+  A bounded rectangle program cannot express that and a plate program should not pretend
+  to; this wants a walkway family, and it is worth re-running the decomposition with a
+  lower floor first to see how wide the boards actually are.
+- **One kind, two assets, and the recipe cannot tell them apart.** The two plazas differ
+  3-fold in coverage and the two bridges have opposite vertical massing — 9.8 per cent of
+  the 8,160-triangle bridge's area is below mid-height against 62.7 per cent of the
+  other's — while the recipe carries only anchor, extent, orientation and material. Any
+  single unparameterised program is wrong for one of each pair. This is the village's
+  actual blocker, and it is a design decision: either the recipe carries a compact
+  per-entity form control, or these kinds split on a measured proportion the way
+  `bamboo` and `bamboo-bed` did. Two placements is not enough to fit a split threshold
+  on, so the recipe route is the honest one.
+
+Do not reduce a plaza's coverage without matching where the coverage is. A candidate
+filling its box against a reference covering fraction c scores IoU = c exactly, which is
+the 0.367 already observed; a candidate covering c in uncorrelated places scores
+c squared over twice-c-minus-c-squared, about 0.21 at a third. The pixel ratio would
+report that regression as a fix. Every authored plate is centred to within 0.03 to 0.08
+of its box centre, so a *centred* correction is correlated with the reference and does
+not pay that penalty — which is the one thing that makes this tractable at all.

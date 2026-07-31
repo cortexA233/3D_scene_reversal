@@ -756,10 +756,39 @@ earlier was measured against the wrong thing.
 - Ticket 05 is **landed** and its remaining red is a recorded boundary, not
   unfinished work. Do not re-open it as a fitting problem; the next move is the
   shared form family described above.
-- Ticket 07: `structures` carries the worst group depth p95 at 58.7 averaged and
-  117.19 on the authored overview, and its pixel ratio is 0.90 — the buildings are
-  roughly the right size and the wrong depth, which is a massing problem rather
-  than a footprint one.
+- **The village is measured twice over and now blocked on a design decision, not on a
+  form.** Read ticket 07's three findings before touching it. The short version:
+  `plazas` draws 1.89 times the reference's pixels and `bridges` 2.11 because the
+  authored plates do not fill their boxes — measured by scan-conversion in the
+  reference page, coverage is 1.000 and 0.341 for the two plazas, 0.568 and 0.432 for
+  the two bridges, and 0.126 to 0.191 for the decks.
+  Three things follow. A candidate **cannot** cover less by shrinking, because
+  `placeEntity` scales its AABB onto the Target AABB Extent exactly, so lower coverage
+  must come from concavity. The decks are **not rectangle-decomposable** — no rectangle
+  reaches half a per cent of the box on any of them — so they are planks and railings
+  and want a walkway family rather than a plate. And each of those pairs is **two
+  different assets that the recipe cannot distinguish**: the plazas differ threefold in
+  coverage, the bridges have opposite vertical massing (9.8 against 62.7 per cent of
+  their area below mid-height), and the recipe carries only anchor, extent, orientation
+  and material. Any single unparameterised program is wrong for one of each pair, and
+  two placements is too few to fit a split threshold on, so the honest route is a
+  compact per-entity form control in the recipe.
+  Do not thin a plaza toward the measured coverage without matching **where** the
+  coverage is: filling the box scores IoU = the reference's coverage exactly, which is
+  the 0.367 already observed, and covering the right fraction in uncorrelated places
+  scores about 0.21. The pixel ratio reports that regression as a fix. The plates are
+  all centred to within 0.03-0.08 of their box centres, so a centred correction is
+  correlated and escapes that penalty — that is what makes the ticket tractable.
+- Ranked by **relative** error the village is not special. Divided by each kind's own
+  diagonal, every kind's `surface p95` sits between 10 and 33 per cent, and `mountain`
+  (9.6%) and `bamboo` (10.9%) are the best while `stone-block` (33.1%) and
+  `dumpling-house` (29.9%) are the worst. The absolute ranking is mostly a ranking of
+  size. Weighted by entity count the whole village is about 10 per cent of the aggregate
+  `surface p95` against `mountain`'s 34 and `palm`'s 21, so village work has to be
+  justified on the fixed-camera layer and human review, not on the world-geometry gate.
+- Ticket 07's own massing findings were measured through the pre-ADR-0055 sampler. The
+  signs survive because the reference was allocated the same way, but re-measure before
+  trusting the magnitudes.
 - **Ticket 11 is part done and its remaining half is geometry's.** Every family's
   albedo was hand-written, and the authored materials cannot correct one directly
   because the colour is in maps: all 236 palm placements are 0xffffff with a texture.
