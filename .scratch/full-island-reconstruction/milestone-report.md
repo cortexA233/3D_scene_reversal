@@ -1,6 +1,6 @@
 # Full Island Reconstruction — merged report
 
-State at `d3d7108` on `experiment/claude-full-island-scene`.
+State at `be51072` on `experiment/claude-full-island-scene`.
 
 ---
 
@@ -50,7 +50,7 @@ unfinished work.
 | gate | measured | threshold |
 | --- | --- | --- |
 | worst entity surface p95 | 159.2395 | 14.037975 |
-| over-tolerance surface fraction | 0.5892 | 0.1153 |
+| over-tolerance surface fraction | 0.5881 | 0.1153 |
 | all ten fixedCameraGeometry metrics | — | — |
 
 `worst entity surface p95` is entirely horizon mountains — all eight worst entities are
@@ -62,11 +62,15 @@ The remaining object residual by kind, after this milestone's palm fit:
 
 | kind | count | mean p95 | share of total |
 | --- | --- | --- | --- |
-| mountain | 16 | 102.126 | 36.2% |
-| palm | 156 | 5.011 | 17.4% |
-| blossom | 133 | 3.935 | 11.6% |
-| bamboo | 72 | 7.151 | 11.4% |
-| everything else | 295 | — | 23.4% |
+| mountain | 16 | 102.126 | 37.2% |
+| palm | 156 | 5.011 | 17.8% |
+| bamboo | 72 | 7.151 | 11.7% |
+| blossom | 133 | 3.450 | 10.5% |
+| everything else | 295 | — | 22.8% |
+
+`bamboo` is now the largest unfitted vegetation kind and is the obvious next target. Its
+authored profile has three empty deciles at 96 samples, so unlike the palm and the blossom
+it cannot be fitted against a complete measurement without deciding what the gap means.
 
 `nativeAppearance` is **blocked, not failed**. ADR-0040 refuses to evaluate it until both
 geometry layers pass. That is the spec's own convergence order working as designed and is
@@ -88,9 +92,10 @@ Four things, all specific.
    Reported as not evaluated since the Foundation and unchanged.
 
 3. **Whether the palm fit should be kept.** It improves the layer ADR-0040 orders first and
-   degrades the one behind it — the numbers are in §3 below. I kept it and recorded both
-   sides. A reviewer may reasonably decide the opposite; nothing about that decision is
-   measurable from here.
+   degrades three metrics in the one behind it — the numbers are in §5. I kept it and
+   recorded both sides. A reviewer may reasonably decide the opposite; nothing about that
+   decision is measurable from here. The blossom fit that followed has no such tension:
+   it improves eight of ten fixed-camera metrics and neither worst-group number moved.
 
 4. **The triangle budget.** Now the tightest on the island at 0.132581 headroom, down from
    0.202113, because the palm fit spent about a third of the remaining margin. Still
@@ -144,12 +149,13 @@ of mistake in this repository.
   are hand-authored values the coordinate search did not move. They are starting points
   that survived, not fitted results. Only `trunkBase`, `crownSpan`, `whorls` and
   `widthScale` were fitted.
-- **The palm search grid itself** — the candidate values on each axis are chosen, not
-  derived. A different grid could find a different optimum.
+- **The search grids themselves**, for both palm and blossom — the candidate values on
+  each axis are chosen, not derived. A different grid could find a different optimum, and
+  for blossom the search had not converged when its three passes ran out.
 - **The canopy triangle minima** — 400 palm, 600 blossom, 500 bamboo. Hand-set thresholds
   expressing "reads as foliage, not sticks, at overview distance". No measurement backs
   the specific numbers.
-- **The vegetation ratchets** — 5.1, 4.0, 6.7. Measured values plus chosen headroom.
+- **The vegetation ratchets** — 5.1, 3.5, 6.6. Measured values plus chosen headroom.
 - **Eight-sided plans** for the pavilions: "the closest single family value to both",
   chosen from two placements. The residual is recorded rather than tuned away.
 - **The pavilion's two interpolated reach bands** — 0.605 and 0.45 — linearly interpolated
@@ -184,11 +190,13 @@ recorded reason; five name the ADR holding them.
 `check:scene-parity-foundation` passes and was re-certified for the palm fit; the diff was
 measured values only, with no contract, threshold or budget moved.
 
-**What moved this session.** `surface p95` 6.7228 → **6.6319**; over-tolerance fraction
-0.6038 → **0.5892**; palm 5.4025 → **5.0110**. In the fixed-camera layer, depth
-20.550992 → 20.539355, worst depth 110.172588 → 109.561054 and world normals
-65.363956 → 64.994407 all improved, while silhouette IoU 0.508089 → 0.502066, contour p95
-25.86344 → 28.575683 and semantic agreement 0.946747 → 0.94511 went the other way. The
+**What moved this session.** `surface p95` 6.7228 → **6.5359**; over-tolerance fraction
+0.6038 → **0.5881**; palm 5.4025 → **5.0110**; blossom 3.9352 → **3.4503**. In the fixed-camera layer, taking both fits
+together, depth 20.550992 → 20.520484, worst depth 110.172588 → 109.561054 and world
+normals 65.363956 → 63.872436 improved, while silhouette IoU 0.508089 → 0.504017, contour
+p95 25.86344 → 28.566215, worst contour 186.6568 → 224.6922 and semantic agreement
+0.946747 → 0.945464 went the other way. All four of those losses are the palm's; the
+blossom fit moved eight of the ten metrics back toward their thresholds. The
 largest of those losses is in `wildlife`, whose geometry did not change — panda re-measures
 0.9221 and rock 3.8807, exactly as before — so it is occlusion, measured through a group
 contour statistic already recorded as unstable on sparse groups. Those two explanations
