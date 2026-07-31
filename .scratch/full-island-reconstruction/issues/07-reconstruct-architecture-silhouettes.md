@@ -182,6 +182,44 @@ its independent metrics say it improved; the one that disagrees is the one this 
 already records as unstable on sparse groups, held to an analytical fixture in
 `test/scene-pass-metrics.test.mjs`.
 
+## The two shops with real evidence are revolved surfaces too
+
+`shop-stall` has sixteen placements over 1,536 samples and `fruit-shop` seven, which is the
+only architecture evidence on this island that is not a sample of one. Both say the same
+thing, and it is *not* what the pavilions said: **neither tapers.** Each holds a
+near-constant 0.7 to 0.8 through its whole height and only widens off the base, 0.48 to
+0.75 and 0.61 to 0.69, with mass spread 5 to 14 per cent per decile.
+
+`architecture` put **31.5 per cent** of a shop-stall in its base decile against an authored
+5.6. That plinth was the single largest error in the family.
+
+Built as revolved profiles with a **four-segment plan turned a quarter**, because a shop is
+a box and four segments at phase zero would give a diamond covering half its own rectangle:
+
+| | before | after |
+| --- | --- | --- |
+| `shop-stall` surface p95 mean | 2.5214 | **2.0474** |
+| `shop-stall` surface p95 | 9.4555 | **7.8504** |
+| `fruit-shop` surface p95 mean | 2.6617 | **2.3379** |
+| `structures` silhouette IoU | 0.5654 | **0.5749** |
+| `structures` world normal p95 | 107.2 | **104.6** |
+| aggregate `surface p95` | 6.7374 | **6.7228** |
+| over-tolerance fraction | 0.6055 | **0.6038** |
+
+Stack: group IoU 0.507721 to **0.508089**, depth 20.583150 to **20.550992**, worst depth
+113.122969 to **110.172588**, normals 77.239404 to **76.948763**, semantic 0.946688 to
+**0.946747**, worst camera 0.911040 to **0.911074**. Against: worst IoU 0.111429 to
+0.109195 and contour 25.776138 to 25.863440, both marginal.
+
+The four-segment plan also recovers part of what the pavilions' eight-sided facets cost on
+normals — `structures` 107.2 back to 104.6.
+
+**Still on `architecture`:** `dumpling-house` (3), `dessert-shop`, `tea-booth`,
+`ring-booth`, `shop`, `pavilion-tower` and `umbrella` — one placement each except the
+dumpling houses. That is the thin evidence that sank two attempts in this ticket, and the
+measured profile for a single placement is 96 samples over ten deciles with bands coming
+back empty. They are left rather than guessed.
+
 ## Finding: the deck band along the measured axis was built and reverted too
 
 The next attempt this ticket asked for — "a deck band along a measured axis, not a plate"

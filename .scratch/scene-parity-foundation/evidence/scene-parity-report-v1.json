@@ -76,7 +76,7 @@
         {
           "name": "surface p95",
           "scope": "aggregate",
-          "value": 6.7374,
+          "value": 6.7228,
           "threshold": 2.4875,
           "direction": "atMost",
           "passed": false,
@@ -94,7 +94,7 @@
         {
           "name": "over-tolerance surface fraction",
           "scope": "aggregate",
-          "value": 0.6055,
+          "value": 0.6038,
           "threshold": 0.1153,
           "direction": "atMost",
           "passed": false,
@@ -192,9 +192,9 @@
         }
       ],
       "failures": [
-        "surface p95: 6.7374 is not <= 2.4875",
+        "surface p95: 6.7228 is not <= 2.4875",
         "worst entity surface p95: 159.2395 is not <= 14.037975",
-        "over-tolerance surface fraction: 0.6055 is not <= 0.1153",
+        "over-tolerance surface fraction: 0.6038 is not <= 0.1153",
         "terrain height p95: 8.532 is not <= 5.26875",
         "shore height p95: 7.9996 is not <= 2.85035",
         "land and sea agreement: 0.922721 is not >= 0.931361",
@@ -210,7 +210,7 @@
         {
           "name": "group silhouette IoU",
           "scope": "aggregate",
-          "value": 0.507721,
+          "value": 0.508089,
           "threshold": 0.724931,
           "direction": "atLeast",
           "passed": false,
@@ -219,7 +219,7 @@
         {
           "name": "worst group silhouette IoU",
           "scope": "worst-group",
-          "value": 0.111429,
+          "value": 0.109195,
           "threshold": 0.369228,
           "direction": "atLeast",
           "passed": false,
@@ -228,7 +228,7 @@
         {
           "name": "group contour distance p95",
           "scope": "aggregate",
-          "value": 25.776138,
+          "value": 25.86344,
           "threshold": 6.536774,
           "direction": "atMost",
           "passed": false,
@@ -246,7 +246,7 @@
         {
           "name": "group depth p95",
           "scope": "aggregate",
-          "value": 20.58315,
+          "value": 20.550992,
           "threshold": 8.173471,
           "direction": "atMost",
           "passed": false,
@@ -255,7 +255,7 @@
         {
           "name": "worst group depth p95",
           "scope": "worst-group",
-          "value": 113.122969,
+          "value": 110.172588,
           "threshold": 22.354947,
           "direction": "atMost",
           "passed": false,
@@ -264,7 +264,7 @@
         {
           "name": "group world normal p95",
           "scope": "aggregate",
-          "value": 77.239404,
+          "value": 76.948763,
           "threshold": 58.959694,
           "direction": "atMost",
           "passed": false,
@@ -273,7 +273,7 @@
         {
           "name": "semantic agreement",
           "scope": "aggregate",
-          "value": 0.946688,
+          "value": 0.946747,
           "threshold": 0.987465,
           "direction": "atLeast",
           "passed": false,
@@ -282,7 +282,7 @@
         {
           "name": "worst camera semantic agreement",
           "scope": "worst-camera",
-          "value": 0.91104,
+          "value": 0.911074,
           "threshold": 0.974068,
           "direction": "atLeast",
           "passed": false,
@@ -299,15 +299,15 @@
         }
       ],
       "failures": [
-        "group silhouette IoU: 0.507721 is not >= 0.724931",
-        "worst group silhouette IoU: 0.111429 is not >= 0.369228",
-        "group contour distance p95: 25.776138 is not <= 6.536774",
+        "group silhouette IoU: 0.508089 is not >= 0.724931",
+        "worst group silhouette IoU: 0.109195 is not >= 0.369228",
+        "group contour distance p95: 25.86344 is not <= 6.536774",
         "worst group contour distance: 186.6568 is not <= 39.2559",
-        "group depth p95: 20.58315 is not <= 8.173471",
-        "worst group depth p95: 113.122969 is not <= 22.354947",
-        "group world normal p95: 77.239404 is not <= 58.959694",
-        "semantic agreement: 0.946688 is not >= 0.987465",
-        "worst camera semantic agreement: 0.91104 is not >= 0.974068",
+        "group depth p95: 20.550992 is not <= 8.173471",
+        "worst group depth p95: 110.172588 is not <= 22.354947",
+        "group world normal p95: 76.948763 is not <= 58.959694",
+        "semantic agreement: 0.946747 is not >= 0.987465",
+        "worst camera semantic agreement: 0.911074 is not >= 0.974068",
         "worst semantic confusion fraction: 0.018047 is not <= 0.006534"
       ]
     },

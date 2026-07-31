@@ -1245,7 +1245,22 @@ const AXIAL_REACH_PROFILES = Object.freeze({
   "pavilion-single": Object.freeze([
     0.72, 0.59, 0.57, 0.47, 0.41, 0.46, 0.43, 0.55, 0.33, 0.21,
   ]),
+  /**
+   * The two shops with enough placements to mean something — sixteen `shop-stall` over
+   * 1,536 samples and seven `fruit-shop` — and they say the same thing the pavilions did
+   * not. Neither tapers: both hold a near-constant 0.7 to 0.8 through their whole height
+   * and only *widen* off the base, 0.48 to 0.75 and 0.61 to 0.69.
+   *
+   * The mass is spread evenly too, 5 to 14 per cent per decile, where `architecture` put
+   * **31.5 per cent** of a shop-stall in its base decile against an authored 5.6. That
+   * plinth is the single largest error in the family.
+   */
+  "shop-stall": Object.freeze([0.48, 0.68, 0.66, 0.62, 0.71, 0.69, 0.71, 0.78, 0.74, 0.75]),
+  "fruit-shop": Object.freeze([0.61, 0.74, 0.8, 0.83, 0.77, 0.7, 0.76, 0.71, 0.79, 0.69]),
 });
+
+/** A quarter turn, which is what makes four segments a square rather than a diamond. */
+const SQUARE_PLAN_PHASE = Math.PI / 4;
 
 /**
  * How many sides a revolved plan gets.
@@ -1260,6 +1275,10 @@ const AXIAL_REACH_PROFILES = Object.freeze({
 const AXIAL_PLAN_SEGMENTS = Object.freeze({
   pavilion: 8,
   "pavilion-single": 8,
+  // A shop is a box. Four segments turned a quarter give the axis-aligned square, which
+  // is the plan the authored stalls have and the one a diamond would halve.
+  "shop-stall": 4,
+  "fruit-shop": 4,
 });
 
 /**
@@ -1277,7 +1296,7 @@ const AXIAL_PLAN_SEGMENTS = Object.freeze({
  * inventing. And the authored decorations are one mesh each, so one semantic part is
  * the faithful count here rather than a loss of structure.
  */
-function axialLathe(profile, { segments = 20, id = "body" } = {}) {
+function axialLathe(profile, { segments = 20, id = "body", phase = 0 } = {}) {
   const points = [];
   /**
    * Flat end discs at the first and last measured radii, not a taper to a point.
@@ -1297,7 +1316,11 @@ function axialLathe(profile, { segments = 20, id = "body" } = {}) {
   });
   points.push(new THREE.Vector2(radius(profile.length - 1), 1));
   points.push(new THREE.Vector2(0, 1));
-  const geometry = new THREE.LatheGeometry(points, segments);
+  // `phase` turns the plan. It matters only at low segment counts and it matters a lot
+  // there: four segments at phase 0 put vertices on the axes and give a diamond covering
+  // half its own rectangle, while a quarter turn gives the axis-aligned square a shop
+  // actually is.
+  const geometry = new THREE.LatheGeometry(points, segments, phase, Math.PI * 2);
   geometry.computeVertexNormals();
   return part(new THREE.Mesh(geometry), id);
 }
@@ -1345,9 +1368,23 @@ const GENERATORS = Object.freeze({
   "pavilion-tower": (rng) => architecture(rng, { levels: 3, eaves: 1.1 }),
   "ring-booth": (rng) => architecture(rng, { levels: 1, eaves: 1.3 }),
   shop: (rng) => architecture(rng, { levels: 1 }),
-  "shop-stall": (rng) => architecture(rng, { levels: 1, eaves: 1.34, platform: 0.06 }),
+  "shop-stall": () =>
+    group([
+      axialLathe(AXIAL_REACH_PROFILES["shop-stall"], {
+        id: "stall",
+        segments: AXIAL_PLAN_SEGMENTS["shop-stall"],
+        phase: SQUARE_PLAN_PHASE,
+      }),
+    ]),
   "dumpling-house": (rng) => architecture(rng, { levels: 1 }),
-  "fruit-shop": (rng) => architecture(rng, { levels: 1 }),
+  "fruit-shop": () =>
+    group([
+      axialLathe(AXIAL_REACH_PROFILES["fruit-shop"], {
+        id: "shop",
+        segments: AXIAL_PLAN_SEGMENTS["fruit-shop"],
+        phase: SQUARE_PLAN_PHASE,
+      }),
+    ]),
   "tea-booth": (rng) => architecture(rng, { levels: 1, eaves: 1.26 }),
   "dessert-shop": (rng) => architecture(rng, { levels: 1 }),
   "swing-tree": (rng) => broadleaf(rng, { trunkFraction: 0.4, clusters: 8, spread: 0.4 }),
