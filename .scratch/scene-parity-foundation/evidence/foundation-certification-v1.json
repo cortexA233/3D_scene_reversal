@@ -25,7 +25,7 @@
       "thirdPartyInputs": 0,
       "triangles": 558521,
       "drawCalls": 1701,
-      "generationMs": 605,
+      "generationMs": 627.6,
       "geometryBytes": 26642948,
       "geometryCount": 1687,
       "auditPassed": true
@@ -36,9 +36,9 @@
       "checks": [
         {
           "metric": "generationMs",
-          "value": 605,
+          "value": 627.6,
           "maximum": 1000,
-          "headroomFraction": 0.395,
+          "headroomFraction": 0.3724,
           "passed": true,
           "wallClock": true
         },
@@ -119,7 +119,7 @@
           "worst group contour distance: 186.6568 is not <= 39.2559",
           "group depth p95: 20.550992 is not <= 8.173471",
           "worst group depth p95: 110.172588 is not <= 22.354947",
-          "group world normal p95: 76.948763 is not <= 58.95938",
+          "group world normal p95: 65.363956 is not <= 41.994434",
           "semantic agreement: 0.946747 is not >= 0.987465",
           "worst camera semantic agreement: 0.911074 is not >= 0.974068",
           "worst semantic confusion fraction: 0.018047 is not <= 0.006534"
@@ -401,8 +401,14 @@
         }
       },
       "groupWorldNormalDegrees": {
-        "meanP95": 76.948763,
+        "meanP95": 65.363956,
         "worst": {
+          "camera": "authoredOverview",
+          "label": "bridges",
+          "value": 89.969076
+        },
+        "signedMeanP95": 76.948763,
+        "signedWorst": {
           "camera": "oblique-west",
           "label": "decorations",
           "value": 146.357685
@@ -528,7 +534,7 @@
     "seedVersion": "scene-seed-fnv1a-mulberry32-v1",
     "sceneSeed": 20260729,
     "terrainProgram": "bounded-semantic-terrain-v1",
-    "baselineVersion": "scene-quality-baseline-v1.5",
+    "baselineVersion": "scene-quality-baseline-v1.6",
     "observationHost": {
       "hostKey": "windows-edge-150-swiftshader-subzero",
       "os": "windows",

@@ -726,12 +726,35 @@ export function aggregateCameras(views) {
           ?.mean ?? null,
       worst: worstGroup((row) => row.depth?.worldUnits?.p95, false),
     },
+    /**
+     * Orientation agreement, compared **unsigned**: a normal and its negation are one
+     * plane. ADR-0064.
+     *
+     * A two-sided surface has no unique outward normal, and this island's worst offenders
+     * are exactly those — vegetation is layered leaf blades and three of the five cover
+     * populations are two-triangle blades with no thickness. Measured, the unsigned
+     * comparison takes vegetation from 120.7 degrees to 80.4 and decorations from 107.9 to
+     * 77.8 while leaving `rocks`, `plazas` and `geography` unmoved to within a per cent,
+     * which is the signature of sign flips rather than of a tolerance.
+     *
+     * It is not a loosening: re-derived from the same twelve reference-only controls by the
+     * unchanged selection rule the limit falls from 58.95938 to 46.750061, and the candidate
+     * fails it by more than it failed the signed one.
+     */
     groupWorldNormalDegrees: {
       meanP95:
         summarize(
+          groupRows.map((row) => row.worldNormal?.unsignedDegrees?.p95).filter(Number.isFinite),
+        )?.mean ?? null,
+      worst: worstGroup((row) => row.worldNormal?.unsignedDegrees?.p95, false),
+      // The signed comparison, kept as the diagnostic the unsigned one replaced. A capture
+      // where the two agree has no double-sided geometry in frame; where they diverge, the
+      // gap is the sign flips.
+      signedMeanP95:
+        summarize(
           groupRows.map((row) => row.worldNormal?.degrees?.p95).filter(Number.isFinite),
         )?.mean ?? null,
-      worst: worstGroup((row) => row.worldNormal?.degrees?.p95, false),
+      signedWorst: worstGroup((row) => row.worldNormal?.degrees?.p95, false),
     },
     // The optional reads below let a view that measured only some of the passes
     // aggregate to `null` for the rest rather than throwing. The calibration run

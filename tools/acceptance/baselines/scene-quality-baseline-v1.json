@@ -1,6 +1,6 @@
 {
   "schemaVersion": "scene-quality-baseline-v1",
-  "version": "scene-quality-baseline-v1.5",
+  "version": "scene-quality-baseline-v1.6",
   "migrations": [
     {
       "version": "scene-quality-baseline-v1",
@@ -65,6 +65,15 @@
       "movedGeometryThresholds": [],
       "movedRenderedThresholds": [
         "fixedCameraGeometry/group world normal p95: 58.959694 -> 58.95938"
+      ]
+    },
+    {
+      "version": "scene-quality-baseline-v1.6",
+      "adr": "0064",
+      "change": "Gates orientation agreement on the *unsigned* comparison: a normal and its negation are one plane. ADR-0051 demoted `worst group world normal p95` and named this as the next refinement; it is taken here. The argument is about what a normal means rather than about tolerance — a two-sided surface has no unique outward normal, and this island's worst offenders are exactly those. Measured, the unsigned comparison takes `vegetation` from 120.7 degrees to 80.4 and `decorations` from 107.9 to 77.8, while `rocks`, `plazas` and `geography` move by a per cent or less; solid geometry does not move at all, which is the signature of sign flips rather than of a loosened tolerance. The controls, their damage magnitudes, and the selection rule are all unchanged, and the signed comparison is retained beside it as the diagnostic.",
+      "movedGeometryThresholds": [],
+      "movedRenderedThresholds": [
+        "fixedCameraGeometry/group world normal p95: 58.95938 -> 41.994434"
       ]
     }
   ],
@@ -262,7 +271,7 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupWorldNormalDegrees.meanP95",
         "direction": "atMost",
-        "threshold": 58.95938
+        "threshold": 41.994434
       },
       {
         "name": "semantic agreement",
@@ -323,7 +332,7 @@
       "name": "worst group world normal p95",
       "scope": "worst-group",
       "path": "passes.aggregate.groupWorldNormalDegrees.worst.value",
-      "reason": "mild reaches 174.072554 while damage reaches 167.611637, so this metric cannot tell them apart"
+      "reason": "mild reaches 89.792096 while damage reaches 89.603203, so this metric cannot tell them apart"
     }
   ]
 }

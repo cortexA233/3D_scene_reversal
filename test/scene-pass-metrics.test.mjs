@@ -280,7 +280,7 @@ test("camera aggregation keeps the worst view, not just the mean", () => {
     camera,
     silhouette: { intersectionOverUnion: iou, contourDistance: { p95: 1 } },
     depth: { worldUnits: { p95: 2 } },
-    worldNormal: { degrees: { p95: 3 } },
+    worldNormal: { degrees: { p95: 3 }, unsignedDegrees: { p95: 2 } },
     semantic: { agreementFraction: iou },
     appearance: { deltaE: { mean: deltaE } },
   });
@@ -322,7 +322,7 @@ test("cover is excluded from the worst-group intersection and from nothing else"
     candidatePixels: 100,
     contourDistance: { p95: contour },
     depth: { worldUnits: { p95: depth } },
-    worldNormal: { degrees: { p95: 4 } },
+    worldNormal: { degrees: { p95: 4 }, unsignedDegrees: { p95: 3 } },
   });
   const aggregate = aggregateCameras([
     {
@@ -348,7 +348,9 @@ test("cover is excluded from the worst-group intersection and from nothing else"
   // distribution question, and depth is measured where the mask already agrees.
   assert.equal(aggregate.groupContourDistance.worst.label, "cover");
   assert.equal(aggregate.groupDepthWorldUnits.worst.label, "cover");
-  assert.equal(aggregate.groupWorldNormalDegrees.worst.value, 4);
+  // Gated on the unsigned comparison, with the signed one retained beside it (ADR-0064).
+  assert.equal(aggregate.groupWorldNormalDegrees.worst.value, 3);
+  assert.equal(aggregate.groupWorldNormalDegrees.signedWorst.value, 4);
 });
 
 import { createReferenceObservationContract } from "../tools/reference/reference-observation-contract.mjs";
@@ -513,7 +515,7 @@ function emptyView() {
   return {
     silhouette: { intersectionOverUnion: 1, contourDistance: { p95: 0 } },
     depth: { worldUnits: { p95: 0 } },
-    worldNormal: { degrees: { p95: 0 } },
+    worldNormal: { degrees: { p95: 0 }, unsignedDegrees: { p95: 0 } },
     semantic: { agreementFraction: 1 },
     appearance: { deltaE: { mean: 0 } },
   };

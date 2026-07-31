@@ -470,20 +470,20 @@
       ],
       "samples": {
         "mild": [
-          46.005095,
+          31.656854,
           0.000001,
-          44.465198,
-          51.484861
+          34.121001,
+          35.228665
         ],
         "severe": [
-          81.382936
+          62.291743
         ]
       },
       "calibration": {
         "separable": true,
-        "threshold": 58.95938,
-        "mildWorst": 51.484861,
-        "severeBest": 81.382936,
+        "threshold": 41.994434,
+        "mildWorst": 35.228665,
+        "severeBest": 62.291743,
         "margin": 0.25
       }
     },
@@ -498,21 +498,21 @@
       ],
       "samples": {
         "mild": [
-          171.022024,
+          87.704226,
           0.000001,
-          152.603544,
-          174.072554
+          89.724957,
+          89.792096
         ],
         "severe": [
-          167.611637
+          89.603203
         ]
       },
       "calibration": {
         "separable": false,
-        "reason": "mild reaches 174.072554 while damage reaches 167.611637, so this metric cannot tell them apart",
+        "reason": "mild reaches 89.792096 while damage reaches 89.603203, so this metric cannot tell them apart",
         "threshold": null,
-        "mildWorst": 174.072554,
-        "severeBest": 167.611637
+        "mildWorst": 89.792096,
+        "severeBest": 89.603203
       }
     },
     {
@@ -765,7 +765,7 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupWorldNormalDegrees.meanP95",
         "direction": "atMost",
-        "threshold": 58.95938
+        "threshold": 41.994434
       },
       {
         "name": "semantic agreement",
@@ -826,7 +826,7 @@
       "name": "worst group world normal p95",
       "scope": "worst-group",
       "path": "passes.aggregate.groupWorldNormalDegrees.worst.value",
-      "reason": "mild reaches 174.072554 while damage reaches 167.611637, so this metric cannot tell them apart"
+      "reason": "mild reaches 89.792096 while damage reaches 89.603203, so this metric cannot tell them apart"
     }
   ]
 }

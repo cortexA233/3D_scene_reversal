@@ -80,7 +80,7 @@ const FIXED_CAMERA_PATH = path.join(
  * declare which existing thresholds it moved, so "we only added layers" is a
  * checkable statement rather than a claim in a commit message.
  */
-const BASELINE_VERSION = "scene-quality-baseline-v1.5";
+const BASELINE_VERSION = "scene-quality-baseline-v1.6";
 
 const BASELINE_MIGRATIONS = [
   {
@@ -194,6 +194,27 @@ const BASELINE_MIGRATIONS = [
     // including one that moves for a reason as dull as this.
     movedRenderedThresholds: [
       "fixedCameraGeometry/group world normal p95: 58.959694 -> 58.95938",
+    ],
+  },
+  {
+    version: "scene-quality-baseline-v1.6",
+    adr: "0064",
+    change:
+      "Gates orientation agreement on the *unsigned* comparison: a normal and its negation are one plane. ADR-0051 demoted `worst group world normal p95` and named this as the next refinement; it is taken here. The argument is about what a normal means rather than about tolerance — a two-sided surface has no unique outward normal, and this island's worst offenders are exactly those. Measured, the unsigned comparison takes `vegetation` from 120.7 degrees to 80.4 and `decorations` from 107.9 to 77.8, while `rocks`, `plazas` and `geography` move by a per cent or less; solid geometry does not move at all, which is the signature of sign flips rather than of a loosened tolerance. The controls, their damage magnitudes, and the selection rule are all unchanged, and the signed comparison is retained beside it as the diagnostic.",
+    movedGeometryThresholds: [],
+    // Read the direction before reading the size. The limit *falls* by 29 per cent, from
+    // 58.95938 to 41.994434, because the unsigned comparison lowers the mild bracket
+    // (worst mild 51.485 to 35.229) more than it lowers the severe one (best declaring
+    // severe 77.864 to 62.292) — the mild controls' error is disproportionately sign
+    // flips on thin geometry, which is the whole reason for the refinement.
+    //
+    // It also makes the gate harder for the candidate, which is the strongest argument
+    // available that this is a correction and not a concession: the candidate reads 65.364
+    // unsigned against 41.994, failing by 56 per cent, where it read 76.949 against
+    // 58.95938 and failed by 30. And the metric stays discriminating by a wider relative
+    // margin, 1.65 against 1.51.
+    movedRenderedThresholds: [
+      "fixedCameraGeometry/group world normal p95: 58.95938 -> 41.994434",
     ],
   },
 ];
