@@ -11,16 +11,21 @@ import {
   responseSchemaFor,
   responseSchemaRefFor,
 } from "../protocol/decision-points.mjs";
-import { runContractAudit } from "../audit/contract-audit.mjs";
-import { KERNEL_VERSION, OPERATOR_LIBRARY_VERSION } from "../version.mjs";
+import { fitPart } from "../fitting/fit.mjs";
+import { budgetFor, measureReferenceComplexity } from "../budget/index.mjs";
+import { getOperator } from "../operators/library.mjs";
+import { KERNEL_VERSION } from "../version.mjs";
 import { composeProgram } from "./compose.mjs";
-import { mechanicalEvidence, weldedConnectedComponents } from "./decompose.mjs";
+import { composeOperatorProgram } from "./compose-operators.mjs";
+import { weldedConnectedComponents } from "./decompose.mjs";
 import { artifactPaths } from "./paths.mjs";
 import { EXIT } from "./exit-codes.mjs";
-import { buildStructureManifest, serializeManifest } from "./manifest.mjs";
-import { assignTier, notEvaluatedAxis } from "./tier.mjs";
+import { reverseUnit } from "./reverse-unit.mjs";
 
 const RUN_STATE_VERSION = "mesh-to-code-run-state-v1";
+
+/** The stage the Calibration Bracket and final scoring both run at. */
+export const DEFAULT_BASELINE_STAGE = "final";
 
 class SuspendAtDecisionPoint extends Error {
   constructor(pending) {
@@ -32,18 +37,16 @@ class SuspendAtDecisionPoint extends Error {
 
 class DecisionSchemaInvalid extends Error {
   constructor(decisionPointId, failures) {
-    super(
-      `decision for ${decisionPointId} failed its schema: ${formatFailures(failures)}`,
-    );
+    super(`decision for ${decisionPointId} failed its schema: ${formatFailures(failures)}`);
     this.name = "DecisionSchemaInvalid";
     this.failures = failures;
   }
 }
 
 /**
- * The decision channel. A mock decider answers inline; an external decider
- * causes the driver to suspend, and a resumed run replays the answers already
- * recorded in the run state before asking for the next one.
+ * The decision channel. A mock decider answers inline; an external decider causes
+ * the driver to suspend, and a resumed run replays the answers already recorded in
+ * the run state before asking for the next one.
  */
 function createDecisionChannel({ decider, recorded, runId }) {
   const trace = [...recorded];
@@ -53,10 +56,7 @@ function createDecisionChannel({ decider, recorded, runId }) {
     async ask({ decisionPointId, round, evidence }) {
       if (cursor < trace.length) {
         const replayed = trace[cursor];
-        if (
-          replayed.decisionPoint !== decisionPointId ||
-          replayed.round !== round
-        ) {
+        if (replayed.decisionPoint !== decisionPointId || replayed.round !== round) {
           throw new Error(
             `resumed run diverged: expected ${replayed.decisionPoint}@${replayed.round}, reached ${decisionPointId}@${round}`,
           );
@@ -130,6 +130,7 @@ export async function runPipeline({
   decider = null,
   resume = false,
   emitInline = false,
+  baselineStageId = DEFAULT_BASELINE_STAGE,
 }) {
   const paths = artifactPaths(outDirectory);
   const ingested = await ingestMeshFile(input);
@@ -233,7 +234,14 @@ export async function runPipeline({
       paths,
       runId,
       emitInline,
+      baselineStageId,
+      emitFromManifest,
     });
+
+    if (result.evidenceDocument) {
+      await writeJson(paths.evidenceDocument, result.evidenceDocument);
+      await writeJson(paths.decisionTrace, buildDecisionTrace({ runId, channel, result }));
+    }
     await rm(paths.pendingDecision, { force: true });
     await rm(paths.decision, { force: true });
     await writeJson(paths.runState, {
@@ -271,6 +279,41 @@ export async function runPipeline({
   }
 }
 
+function buildDecisionTrace({ runId, channel, result }) {
+  return {
+    schemaVersion: "mesh-to-code-decision-trace-v1",
+    artifactRole: "development-only-decision-trace",
+    productionUse: "prohibited",
+    runId,
+    decisions: channel.trace,
+    fitting: Object.fromEntries(
+      Object.entries(result.fits ?? {}).map(([groupId, fit]) => [
+        groupId,
+        {
+          operatorId: fit.operatorId,
+          iterations: fit.iterations,
+          iterationCap: fit.iterationCap,
+          epsilon: fit.epsilon,
+          earlyStopped: fit.earlyStopped,
+          resolution: fit.resolution,
+          trace: fit.trace,
+        },
+      ]),
+    ),
+    baseline: result.baseline
+      ? {
+          version: result.baseline.record.version,
+          hash: result.baseline.baselineHash,
+          stageId: result.baselineStageId,
+          hardMetricCount: result.baseline.hardThresholds().length,
+          diagnosticMetricCount: result.baseline.diagnosticMetrics().length,
+          calibratedBeforeFitting: result.baseline.record.calibratedBeforeFitting,
+        }
+      : null,
+    operatorAuthoring: result.authoring ?? null,
+  };
+}
+
 export function mergeSelectors(selectors) {
   if (selectors.length === 1) return selectors[0];
   const positions = [];
@@ -290,166 +333,35 @@ export function mergeSelectors(selectors) {
   };
 }
 
-async function reverseUnit({ ingested, chosen, channel, paths, runId, emitInline }) {
-  const framed = toReconstructionFrame(chosen.mesh);
-  const evidence = mechanicalEvidence(framed.mesh);
-
-  const unitDivisionResponse = await channel.ask({
-    decisionPointId: "unit-division",
-    round: 0,
-    evidence,
-  });
-
-  const declared = unitDivisionResponse.units.flatMap((unit) => unit.components);
-  const known = new Set(evidence.components.map((component) => component.componentIndex));
-  const unknown = declared.filter((index) => !known.has(index));
-  const missing = [...known].filter((index) => !declared.includes(index));
-  if (unknown.length > 0 || missing.length > 0 || new Set(declared).size !== declared.length) {
-    return {
-      exitCode: EXIT.ERROR,
-      message:
-        "unit division must assign every mechanical component to exactly one unit " +
-        `(unknown: [${unknown}], unassigned: [${missing}])`,
-    };
-  }
-  if (unitDivisionResponse.units.length > 1) {
-    return {
-      exitCode: EXIT.ERROR,
-      message:
-        "multi-unit inputs need the composition module that returns units to their " +
-        "original placement, which this build does not emit yet",
-      failureClassification: "decomposition-failure",
-    };
-  }
-
-  const unit = unitDivisionResponse.units[0];
-  const components = weldedConnectedComponents(framed.mesh).components;
-  const groups = unit.components.map((componentIndex) => ({
-    groupId: `component-${componentIndex}`,
-    role: null,
-    components: [componentIndex],
-  }));
-  const groupMeshes = Object.fromEntries(
-    groups.map((group) => [group.groupId, components[group.components[0]].mesh]),
-  );
-
-  const manifest = buildStructureManifest({
-    kernelVersion: KERNEL_VERSION,
-    operatorLibraryVersion: OPERATOR_LIBRARY_VERSION,
-    input: {
-      sourceName: ingested.sourceName,
-      format: ingested.format,
-      sha256: ingested.sha256,
-      selector: chosen.selector,
-      triangleCount: chosen.mesh.triangleCount,
-      bounds: {
-        min: framed.sourceWorldBounds.min,
-        max: framed.sourceWorldBounds.max,
-        size: framed.sourceWorldBounds.size,
-        reconstructionFrameOriginInSourceWorld: framed.originInSourceWorld,
-      },
-    },
-    unitId: unit.unitId,
-    unitDivision: {
-      componentCount: evidence.componentCount,
-      separationRatio: evidence.separationRatio,
-      units: unitDivisionResponse.units,
-    },
-    semanticGrouping: { groups },
-    composition: {
-      kind: "stub-bounds-placeholder",
-      note: "walking skeleton: geometry is a bounds placeholder, not a fitted reconstruction",
-      parts: groups.map((group) => ({ groupId: group.groupId, operatorId: null })),
-    },
-    authoredOperators: [],
-  });
-
-  const emitted = await emitFromManifest({
-    manifest,
-    groupMeshes,
-    paths,
-    emitInline,
-  });
-
-  const contractAudit = await runContractAudit({
-    modules: emitted.modules,
-    generatorFile: paths.generator,
-  });
-
-  const quality = {
-    geometry: notEvaluatedAxis(
-      "the walking skeleton emits a bounds placeholder; no geometry metric was computed",
-    ),
-    appearance: notEvaluatedAxis(
-      "appearance solving is not part of this build; no appearance metric was computed",
-    ),
-    compactness: notEvaluatedAxis(
-      "the Complexity Budget Formula is not part of this build; no budget was applied",
-    ),
-  };
-
-  const tier = assignTier({ contractAudit, quality });
-
-  if (!tier.emitted) {
-    await rm(paths.runtime, { recursive: true, force: true });
-  }
-
-  const evidenceDocument = {
-    schemaVersion: "mesh-to-code-evidence-v1",
-    artifactRole: "development-only-reconstruction-evidence",
-    productionUse: "prohibited",
-    unitId: manifest.unitId,
-    manifestHash: manifest.manifestHash,
-    reconstructionTier: tier.tier,
-    tierRationale: tier.rationale,
-    contractAudit: {
-      passed: contractAudit.passed,
-      constraints: contractAudit.constraints,
-    },
-    quality,
-    failureClassification: tier.tier === "rejected" ? "contract-violation" : null,
-    decisionTrace: {
-      runId,
-      decisionCount: channel.trace.length,
-      traceHash: canonicalHash(channel.trace),
-    },
-    admittedToReferenceLayoutDelivery: tier.admittedToReferenceLayoutDelivery,
-    emitted: tier.emitted,
-  };
-
-  const validated = validate(evidenceDocument, loadSchema("evidence.schema.json"));
-  if (!validated.valid) {
-    throw new Error(
-      `kernel produced invalid evidence: ${formatFailures(validated.failures)}`,
-    );
-  }
-
-  await mkdir(paths.evidence, { recursive: true });
-  await writeFile(paths.structureManifest, serializeManifest(manifest));
-  await writeJson(paths.evidenceDocument, evidenceDocument);
-  await writeJson(paths.decisionTrace, {
-    schemaVersion: "mesh-to-code-decision-trace-v1",
-    artifactRole: "development-only-decision-trace",
-    productionUse: "prohibited",
-    runId,
-    decisions: channel.trace,
-  });
-
-  return {
-    exitCode: tier.emitted ? EXIT.SUCCESS : EXIT.EMISSION_WITHHELD,
-    message: `unit ${manifest.unitId}: tier ${tier.tier}`,
-    manifest,
-    evidence: evidenceDocument,
-    geometrySha256: contractAudit.geometrySha256,
-  };
-}
-
 /**
- * Everything downstream of the manifest. Exposed so `emit --manifest` can
- * reproduce an artifact directory bit-for-bit from a frozen manifest.
+ * Everything downstream of the manifest. Exposed so `emit --manifest` can reproduce
+ * an artifact directory bit-for-bit from a frozen manifest.
+ *
+ * Fitting is re-run here rather than read from the manifest, because the manifest
+ * records the discrete decisions and continuous parameters belong to deterministic
+ * numerical fitting. Re-running it is what makes "everything downstream of the
+ * manifest reproduces bit-for-bit" a claim about the pipeline rather than about a
+ * cache. The Calibration Bracket is deliberately not re-run: it sets the tier, not
+ * the parameters, so re-emission does not depend on it.
  */
-export async function emitFromManifest({ manifest, groupMeshes, paths, emitInline }) {
-  const program = composeProgram({ manifest, groupMeshes });
+export async function emitFromManifest({
+  manifest,
+  unitMesh = null,
+  groupMeshes,
+  paths,
+  emitInline,
+  authoredOperators = new Map(),
+  precomputedFits = null,
+}) {
+  let program;
+  if (manifest.composition.kind === "operator-composition") {
+    const fits =
+      precomputedFits ?? refit({ manifest, unitMesh, groupMeshes, authoredOperators });
+    program = composeOperatorProgram({ manifest, fits, authoredOperators });
+  } else {
+    program = composeProgram({ manifest, groupMeshes });
+  }
+
   await mkdir(paths.runtime, { recursive: true });
   for (const [name, source] of Object.entries(program.modules)) {
     await writeFile(path.join(paths.runtime, name), source);
@@ -459,3 +371,37 @@ export async function emitFromManifest({ manifest, groupMeshes, paths, emitInlin
   }
   return program;
 }
+
+/**
+ * Recompute the fit from the manifest and the mesh. Both the framing bounds and the
+ * budget are derived here rather than passed in, so re-emission depends on nothing
+ * but the manifest and the input — which is what makes the bit-for-bit claim mean
+ * something.
+ */
+function refit({ manifest, unitMesh, groupMeshes, authoredOperators }) {
+  if (unitMesh === null) {
+    throw new Error("re-emitting an operator composition needs the unit's framed mesh");
+  }
+  const referenceWorldBounds = meshBounds(unitMesh);
+  const budget = budgetFor(
+    measureReferenceComplexity({ mesh: unitMesh, materialRoleCount: 1 }),
+  ).budget;
+  const perPart = Math.max(4, Math.floor(budget.triangles / manifest.composition.parts.length));
+  const fits = {};
+  for (const part of manifest.composition.parts) {
+    const operator = authoredOperators.get(part.operatorId) ?? getOperator(part.operatorId);
+    const fit = fitPart({
+      operator,
+      targetMesh: groupMeshes[part.groupId],
+      referenceWorldBounds,
+      triangleBudget: perPart,
+    });
+    if (!fit.fitted) {
+      throw new Error(`re-emission could not refit ${part.groupId}: ${fit.detail}`);
+    }
+    fits[part.groupId] = fit;
+  }
+  return fits;
+}
+
+export { weldedConnectedComponents };

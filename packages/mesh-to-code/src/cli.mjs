@@ -1,7 +1,12 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { runPipeline, emitFromManifest, mergeSelectors } from "./kernel/run.mjs";
+import {
+  DEFAULT_BASELINE_STAGE,
+  emitFromManifest,
+  mergeSelectors,
+  runPipeline,
+} from "./kernel/run.mjs";
 import { artifactPaths } from "./kernel/paths.mjs";
 import { EXIT, EXIT_NAMES } from "./kernel/exit-codes.mjs";
 import { assertValidManifest } from "./kernel/manifest.mjs";
@@ -9,7 +14,7 @@ import { weldedConnectedComponents } from "./kernel/decompose.mjs";
 import { createMockDecider, MOCK_POLICIES } from "./decider/mock.mjs";
 import { generateFixtureObj, listFixtureKinds } from "./fixtures/generate.mjs";
 import { ingestMeshFile, IngestionError } from "./ingest/index.mjs";
-import { toReconstructionFrame } from "./geometry/mesh.mjs";
+import { createMesh, toReconstructionFrame } from "./geometry/mesh.mjs";
 import { stableStringify } from "./util/canonical-json.mjs";
 import { KERNEL_VERSION } from "./version.mjs";
 
@@ -17,6 +22,7 @@ const USAGE = `mesh-reverse ${KERNEL_VERSION}
 
   mesh-reverse run --input <mesh> --out <dir> [--decider mock|external]
                    [--policy <mock policy>] [--selector <name>] [--inline] [--resume]
+                   [--baseline-stage coarse|fine|final]
   mesh-reverse list --input <mesh>
   mesh-reverse decide --out <dir> [--policy <mock policy>]
   mesh-reverse emit --manifest <file> --input <mesh> --out <dir> [--inline]
@@ -36,6 +42,7 @@ const FLAGS_WITH_VALUES = new Set([
   "--selector",
   "--manifest",
   "--kind",
+  "--baseline-stage",
 ]);
 const BOOLEAN_FLAGS = new Set(["--inline", "--resume", "--help", "-h"]);
 
@@ -122,6 +129,7 @@ async function commandRun(options, stdout) {
         : null,
     resume: options.resume === true,
     emitInline: options.inline === true,
+    baselineStageId: options["baseline-stage"] ?? DEFAULT_BASELINE_STAGE,
   });
   stdout.write(`${EXIT_NAMES[result.exitCode]}: ${result.message}\n`);
   return result.exitCode;
@@ -192,18 +200,34 @@ async function commandEmit(options, stdout) {
   const groupMeshes = Object.fromEntries(
     manifest.semanticGrouping.groups.map((group) => [
       group.groupId,
-      components[group.components[0]].mesh,
+      mergeComponents(group.components, components),
     ]),
   );
   const paths = artifactPaths(require_(options, "out"));
   await emitFromManifest({
     manifest,
+    unitMesh: framed.mesh,
     groupMeshes,
     paths,
     emitInline: options.inline === true,
   });
   stdout.write(`re-emitted ${manifest.unitId} from ${manifest.manifestHash}\n`);
   return EXIT.SUCCESS;
+}
+
+/** Group meshes are merged the same way the pipeline merges them, so a re-emitted
+ * composition sees exactly the geometry the fit saw. */
+function mergeComponents(componentIndices, components) {
+  if (componentIndices.length === 1) return components[componentIndices[0]].mesh;
+  const positions = [];
+  const indices = [];
+  for (const componentIndex of componentIndices) {
+    const mesh = components[componentIndex].mesh;
+    const offset = positions.length / 3;
+    positions.push(...mesh.positions);
+    for (const index of mesh.indices) indices.push(offset + index);
+  }
+  return createMesh({ positions, indices, name: `group-${componentIndices.join("-")}` });
 }
 
 async function commandFixture(options, stdout) {

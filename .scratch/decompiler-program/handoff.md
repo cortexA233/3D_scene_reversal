@@ -14,7 +14,10 @@ Scope of this run: tickets 01 → 06 in order. Ticket 07 and later are untouched
 | 03 CPU rasterizer, divergence tolerance, wall-clock | resolved |
 | 04 Complexity Budget Formula, global ceiling, Budget Proxy | resolved |
 | 05 generic perturbations, automatic Calibration Bracket | resolved |
-| 06 end-to-end geometry reconstruction | not started |
+| 06 end-to-end geometry reconstruction | resolved |
+
+**All six tickets in this run's scope are resolved.** Ticket 07 and later are
+untouched and unclaimed.
 
 Commits, one per ticket:
 
@@ -24,7 +27,8 @@ Commits, one per ticket:
 | 02 | `3263800` |
 | 03 | `daa21f8` |
 | 04 | `214d8f2` |
-| 05 | current `HEAD` |
+| 05 | `7e58b17` |
+| 06 | current `HEAD` |
 
 A hash cannot be written inside the commit it names, so each ticket's hash lands
 in the following ticket's commit. If this table is one row short of the resolved
@@ -86,7 +90,7 @@ worker-thread path, on all eight units, verified by sha256 over every buffer.
 ## Verification block, current state
 
 ```
-npm test                                                    167 passing / 0 failing
+npm test                                                    176 passing / 0 failing
 npm run check:stone-v2-contract                             PASS (6 candidate, 3 evidence files)
 npm run check:patterned-appearance-v2-contract              PASS
 node scripts/run-stage-2-eight-object-certification.mjs --check
@@ -97,9 +101,10 @@ git status --short                                          no red-line file mod
 Baseline before any work: `npm test` was 92 passing / 0 failing. The package's own
 21 tests live in `packages/mesh-to-code/test/` and are discovered by the
 repository's `node --test` as well as by the package's own runner, which is why
-the count rose. The package suite is 75 tests after ticket 05, and the
-repository's own count is unchanged at 92: 92 + 75 = 167. Both suites pass
-standalone.
+the count rose. The package suite is 84 tests after ticket 06, and the
+repository's own count is unchanged at 92: 92 + 84 = 176. Both suites pass
+standalone. The package suite takes about 50 seconds, because several cases drive
+the whole pipeline as a subprocess.
 
 Repository-side aggregator, all passing (5 checks):
 
@@ -114,6 +119,26 @@ cd packages/mesh-to-code && npm run check:neutrality
 cd packages/mesh-to-code && npm run check:package-contents
 cd packages/mesh-to-code && npm run check:pack-install-run
 ```
+
+## Ticket 06 milestone, measured
+
+One command on a code-generated lathe-able fixture, at the complete twelve-view
+512-pixel protocol: tier `below-gate`, geometry gate **passed** with 8 of 8 metrics
+hard and 0 diagnostic, mean silhouette IoU `0.99002`, worst-view `0.98962`, edge P95
+`2` pixels, depth MAE `0.00486`, 768 triangles against a 768 budget, 36
+Object-specific Scalars against 80. All five contract constraints pass or are
+recorded not-applicable with a reason. The inline output hashes identically to the
+library-importing output.
+
+`below-gate` rather than `accepted` is the correct answer, not a shortfall:
+`accepted` means every hard gate passed, and appearance is a hard gate axis this
+build does not measure. It is recorded `evaluated: false` with a reason and named in
+the tier rationale.
+
+This is also a useful counterweight to the ticket 05 finding below. Where the
+operator genuinely matches the reference's shape family, the same automatic
+reference-only baseline is cleared with nothing demoted — the ticket 05 problem is
+about compact approximation of complex references, not about the bracket rule.
 
 ## Things worth knowing
 
@@ -234,6 +259,40 @@ code-generated OBJ, and ticket 03's calibration reads the reference GLB on the
 repository side, where `@gltf-transform` already exists, and injects geometry
 into the package by array.
 
+**The profile-lathe operator places geometry on its own axis at the origin.** A
+semantic group that is off-centre within its unit is therefore reconstructed in the
+wrong place. That is in scope for ticket 06's declared one-operator, one-component
+path; multi-group placement belongs to the decomposition and multi-unit composition
+ticket. Until then a multi-group input fits badly and fails its gate, which is
+visible rather than silent.
+
+**`--baseline-stage` exists for speed and defaults to `final`.** The Calibration
+Bracket scores every declared control, so the full protocol costs seconds per
+invocation. The package suite uses `coarse` for most cases and `final` for the
+milestone case, so the headline numbers are measured under real evaluation
+conditions.
+
+## Where ticket 07 picks up
+
+Nothing is left claimed or half-built. Tickets 07–16 are untouched.
+
+Two things ticket 07 should know. The Operator Library holds exactly one operator
+and `admitAuthoredOperator` already requires the recorded coverage failure, so
+seeding more operators is additive. And the escape-hatch path is live: authoring
+unlocks on a measured geometry-gate failure and a non-conformant authored operator
+already reaches the audit and withholds emission, so a real seeded operator can be
+dropped in without new plumbing.
+
 ## Open questions
 
-None blocking. One flagged for review: the esbuild deviation above.
+Two flagged for review, neither blocking:
+
+1. **The esbuild deviation** described above — `--inline` is dependency-free rather
+   than esbuild-treeshaken, because red line 5 forbids non-pure-JavaScript
+   dependencies and brief decision 16 asks for esbuild. Red line 5 was taken as
+   controlling.
+2. **The reachability half of automatic acceptance is unsolved**, per the ticket 05
+   finding. This is the one that matters. The Budget Proxy is the designed answer and
+   it does not bite on this corpus. Somebody has to decide what supplies the
+   reachability bound for a new unit before Phase C can mean anything, and no ADR
+   currently answers it.

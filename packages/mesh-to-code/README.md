@@ -39,21 +39,30 @@ Under construction. What works today:
   byte-stable across runs and between the serial and parallel paths;
 - the Complexity Budget Formula with frozen coefficients, per-axis floors and
   granularity, a single global ceiling, the complexity gate, and Budget Proxy
-  construction.
+  construction;
+- the generic perturbation manifest and an executable Calibration Bracket, with a
+  frozen-baseline handle that is structurally the only thing fitting accepts;
+- an Operator Library holding one profile-lathe Contract Operator, L0 analytic
+  profile extraction, bounded L1 refinement, the contract audit including the
+  complete-source scalar count, and Reconstruction Tier assignment.
 
-Not yet implemented, and reported rather than assumed: geometry fitting, the
-Operator Library, appearance solving, the multi-scale material consistency check,
-enforcement of a budget against an emitted unit, multi-unit
-composition, and ingestion of glTF/GLB, PLY, and STL. Any axis that has not been
-measured is recorded `not evaluated`; it is never recorded as passing.
+Not yet implemented, and reported rather than assumed: appearance solving, the
+multi-scale material consistency check, beam search over more than one structure
+candidate, multi-unit composition, and ingestion of glTF/GLB, PLY, and STL. Any
+axis that has not been measured is recorded `not evaluated`; it is never recorded
+as passing, which is why a geometrically clean reconstruction still lands at
+`below-gate` rather than `accepted`.
 
 ## Layout
 
 ```
 bin/                  the mesh-reverse entry point
 schemas/              the published JSON schemas the protocol validates against
-src/audit/            contract constraints: asset freedom, determinism, executability
+src/audit/            contract constraints and the complete-source scalar audit
+src/baseline/         the perturbation manifest, the Calibration Bracket, the freeze gate
 src/budget/           complexity measurement, the budget formula, the Budget Proxy
+src/fitting/          L0 analytic extraction and bounded L1 refinement
+src/operators/        the Operator Library and the Contract Operator definition
 src/decider/          the shipped mock decider
 src/emit/             deterministic source emission
 src/fixtures/         fixtures generated from code, because the package ships no asset

@@ -6,6 +6,7 @@ import { writeFile } from "node:fs/promises";
 import { EXIT } from "../src/kernel/exit-codes.mjs";
 import { artifactPaths } from "../src/kernel/paths.mjs";
 import {
+  decideAndResumeUntilDone,
   meshReverse,
   readJson,
   readTextIfPresent,
@@ -120,20 +121,15 @@ test("a written decision resumes to the same artifact as an uninterrupted mock r
       (await meshReverse(["run", "--input", input, "--out", suspended, "--inline"])).code,
       EXIT.SUSPENDED_AT_DECISION_POINT,
     );
-    assert.equal((await meshReverse(["decide", "--out", suspended])).code, EXIT.SUCCESS);
-    assert.equal(
-      (
-        await meshReverse([
-          "run",
-          "--input",
-          input,
-          "--out",
-          suspended,
-          "--resume",
-          "--inline",
-        ])
-      ).code,
-      EXIT.SUCCESS,
+    const driven = await decideAndResumeUntilDone({
+      input,
+      out: suspended,
+      extraRunArgs: ["--inline"],
+    });
+    assert.equal(driven.code, EXIT.SUCCESS, driven.stderr);
+    assert.ok(
+      driven.rounds.length > 1,
+      "the pipeline raises more than one Decision Point, so more than one resume is expected",
     );
 
     for (const relative of [...ARTIFACT_FILES, "runtime/generator.inline.js"]) {

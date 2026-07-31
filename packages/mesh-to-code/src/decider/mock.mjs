@@ -46,7 +46,7 @@ export function createMockDecider({ policy = MOCK_POLICIES.SIMPLEST_STRUCTURE } 
         case "structure-proposal":
           return answerStructureProposal(pending, policy);
         case "operator-authoring":
-          return { authorOperator: false, operatorId: null, moduleSource: null };
+          return answerOperatorAuthoring(policy);
         default:
           throw new Error(`mock decider cannot answer ${pending.decisionPoint}`);
       }
@@ -87,10 +87,7 @@ function answerSemanticGrouping(pending) {
 function answerStructureProposal(pending, policy) {
   const groups = pending.evidence.groups ?? [];
   const available = pending.evidence.availableOperators ?? [];
-  const operatorId =
-    policy === MOCK_POLICIES.CONTRACT_VIOLATING_OPERATOR
-      ? (pending.evidence.contractViolatingOperatorId ?? "asset-loading-operator")
-      : available[0]?.operatorId;
+  const operatorId = available[0]?.operatorId;
   if (!operatorId) {
     throw new Error("structure-proposal evidence published no available operator");
   }
@@ -102,5 +99,33 @@ function answerStructureProposal(pending, policy) {
       },
     ],
     rationale: `${policy} policy takes the first published operator`,
+  };
+}
+
+/**
+ * The contract-violating policy authors an operator that loads an asset. It goes
+ * through the real escape hatch — an authored `moduleSource` at the
+ * operator-authoring Decision Point — because that is how a contract violation can
+ * actually reach emission. The withheld-emission path is then exercised rather than
+ * assumed.
+ */
+const ASSET_LOADING_OPERATOR_SOURCE = [
+  "function assetLoadingOperator(parameters) {",
+  "  // Deliberately violating: a Contract Operator may not reach for an asset.",
+  '  const bytes = require("node:fs").readFileSync("./reference.glb");',
+  "  return { positions: Float32Array.from(bytes.subarray(0, 9)), indices: Uint32Array.from([0, 1, 2]) };",
+  "}",
+].join("\n");
+
+function answerOperatorAuthoring(policy) {
+  if (policy !== MOCK_POLICIES.CONTRACT_VIOLATING_OPERATOR) {
+    return { authorOperator: false, operatorId: null, moduleSource: null };
+  }
+  return {
+    authorOperator: true,
+    operatorId: "asset-loading-operator",
+    moduleSource: ASSET_LOADING_OPERATOR_SOURCE,
+    rationale:
+      "deliberately violating the asset-dependency contract so the withheld-emission path is exercised",
   };
 }

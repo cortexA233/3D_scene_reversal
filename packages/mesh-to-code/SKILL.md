@@ -70,6 +70,13 @@ malformed answer costs a retry and never corrupts a result.
 Prefer structural diversity over re-proposing one structure with different
 numbers: continuous parameters are fitted numerically and are not yours to set.
 
+`operator-authoring` is only ever asked after the library-only search has already
+failed this unit's geometry gate, and the pending evidence carries that recorded
+failure. An authored operator must be a Contract Operator — pure, deterministic,
+asset-free, with a declared parameter signature. One that is not gets composed in
+anyway and then withholds emission, so authoring a violating operator produces a
+diagnosis rather than a silent downgrade.
+
 ## What you get back
 
 `<dir>/runtime/` — the emitted Procedural Replacement. It loads no asset of any
@@ -113,3 +120,8 @@ anything, and as the baseline that a real decision has to beat.
 
 `--inline` additionally emits one self-contained file carrying only the
 operators the composition actually uses.
+
+`--baseline-stage coarse|fine|final` chooses the resolution the Calibration
+Bracket measures at. `final` is the complete twelve-view protocol and the default;
+the cheaper stages exist for fast iteration and produce different threshold values,
+so a result you intend to keep should be measured at `final`.

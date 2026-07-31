@@ -17,8 +17,21 @@ export const CLI = path.join(PACKAGE_ROOT, "bin", "mesh-reverse.mjs");
  * Invoke the command the way a harness would — as a process, reading its exit
  * code and its streams — so tests assert on the same externally observable
  * surface the Decision Point protocol exposes.
+ *
+ * `run` invocations get `--baseline-stage coarse` unless a test asks for a stage
+ * itself. The Calibration Bracket scores every declared control, so running it at
+ * the full twelve-view 512-pixel protocol costs seconds per invocation and would put
+ * this suite in the minutes. The stage changes the threshold values, not the shape of
+ * anything asserted here; the test that needs the complete protocol passes
+ * `--baseline-stage final` explicitly.
  */
-export async function meshReverse(args, { cwd = PACKAGE_ROOT } = {}) {
+function withDefaultBracketStage(args) {
+  if (args[0] !== "run" || args.includes("--baseline-stage")) return args;
+  return [...args, "--baseline-stage", "coarse"];
+}
+
+export async function meshReverse(rawArgs, { cwd = PACKAGE_ROOT } = {}) {
+  const args = withDefaultBracketStage(rawArgs);
   try {
     const { stdout, stderr } = await run(process.execPath, [CLI, ...args], {
       cwd,
@@ -54,6 +67,36 @@ export async function writeFixture(directory, kind) {
 
 export async function readJson(file) {
   return JSON.parse(await readFile(file, "utf8"));
+}
+
+/**
+ * Drive a suspended run to completion the way an external decider would: answer the
+ * pending decision, resume, and repeat until the command stops asking. The pipeline
+ * raises more than one Decision Point, so a single answer-and-resume is not the
+ * whole protocol.
+ */
+export async function decideAndResumeUntilDone({ input, out, extraRunArgs = [], limit = 8 }) {
+  const rounds = [];
+  for (let round = 0; round < limit; round += 1) {
+    const decided = await meshReverse(["decide", "--out", out]);
+    if (decided.code !== 0) {
+      return { code: decided.code, rounds, stderr: decided.stderr };
+    }
+    const resumed = await meshReverse([
+      "run",
+      "--input",
+      input,
+      "--out",
+      out,
+      "--resume",
+      ...extraRunArgs,
+    ]);
+    rounds.push(resumed.code);
+    if (resumed.code !== 2) {
+      return { code: resumed.code, rounds, stdout: resumed.stdout, stderr: resumed.stderr };
+    }
+  }
+  return { code: 2, rounds, stderr: `still suspended after ${limit} rounds` };
 }
 
 export async function readTextIfPresent(file) {
