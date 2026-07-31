@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mesh-to-code/pending-decision.schema.json",
+  "title": "Pending Decision",
+  "description": "Written by the kernel when it suspends at a Decision Point. Evidence is always numeric; imagery is optional so a text-only decider can still answer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifactRole",
+    "productionUse",
+    "runId",
+    "round",
+    "decisionPoint",
+    "question",
+    "evidence",
+    "responseSchema",
+    "imagery"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "mesh-to-code-pending-decision-v1" },
+    "artifactRole": { "const": "development-only-decision-request" },
+    "productionUse": { "const": "prohibited" },
+    "runId": { "type": "string", "minLength": 1 },
+    "round": { "type": "integer", "minimum": 0 },
+    "decisionPoint": {
+      "type": "string",
+      "enum": [
+        "unit-division",
+        "semantic-grouping",
+        "structure-proposal",
+        "operator-authoring"
+      ]
+    },
+    "question": { "type": "string", "minLength": 1 },
+    "evidence": { "type": "object" },
+    "responseSchema": { "type": "object" },
+    "responseSchemaRef": { "type": "string" },
+    "imagery": {
+      "description": "Optional preview paths. Never required to answer.",
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

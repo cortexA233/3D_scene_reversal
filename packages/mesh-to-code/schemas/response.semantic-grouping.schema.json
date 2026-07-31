@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mesh-to-code/response.semantic-grouping.schema.json",
+  "title": "Semantic grouping response",
+  "description": "Choose the semantic grouping for one Reconstruction Unit from the recomputable candidate groupings the mechanical layer published.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["groups"],
+  "properties": {
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["groupId", "components"],
+        "properties": {
+          "groupId": { "type": "string", "minLength": 1, "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "role": { "type": ["string", "null"] },
+          "components": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "rationale": { "type": ["string", "null"] }
+  }
+}

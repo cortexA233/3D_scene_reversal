@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mesh-to-code/response.operator-authoring.schema.json",
+  "title": "Operator authoring response",
+  "description": "Reached only after a library-only beam search has produced a measured geometry-gate failure for this Reconstruction Unit. Authored code must satisfy the Contract Operator definition; one-off object-specific generator source is not a permitted output.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["authorOperator"],
+  "properties": {
+    "authorOperator": { "type": "boolean" },
+    "operatorId": { "type": ["string", "null"], "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "moduleSource": { "type": ["string", "null"] },
+    "rationale": { "type": ["string", "null"] }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mesh-to-code/evidence.schema.json",
+  "title": "Reconstruction evidence",
+  "description": "Development-only evidence carrying the Reconstruction Tier. Read at build time; never exported by the Production Runtime.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifactRole",
+    "productionUse",
+    "unitId",
+    "manifestHash",
+    "reconstructionTier",
+    "contractAudit",
+    "quality",
+    "admittedToReferenceLayoutDelivery"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "mesh-to-code-evidence-v1" },
+    "artifactRole": { "const": "development-only-reconstruction-evidence" },
+    "productionUse": { "const": "prohibited" },
+    "unitId": { "type": "string", "minLength": 1 },
+    "manifestHash": { "type": "string", "minLength": 64 },
+    "reconstructionTier": {
+      "type": "string",
+      "enum": ["accepted", "below-gate", "coarse", "rejected"]
+    },
+    "tierRationale": { "type": "array", "items": { "type": "string" } },
+    "contractAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passed", "constraints"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "status"],
+            "properties": {
+              "id": { "type": "string" },
+              "status": {
+                "type": "string",
+                "enum": ["pass", "fail", "not-applicable"]
+              },
+              "detail": { "type": ["string", "null"] },
+              "measured": {}
+            }
+          }
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["geometry", "appearance", "compactness"],
+      "properties": {
+        "geometry": { "type": "object" },
+        "appearance": { "type": "object" },
+        "compactness": { "type": "object" }
+      }
+    },
+    "failureClassification": { "type": ["string", "null"] },
+    "decisionTrace": { "type": "object" },
+    "admittedToReferenceLayoutDelivery": { "type": "boolean" },
+    "emitted": { "type": "boolean" }
+  }
+}

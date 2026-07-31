@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mesh-to-code/response.unit-division.schema.json",
+  "title": "Unit division response",
+  "description": "Assign every mechanical component to exactly one Reconstruction Unit. There is no purely geometric criterion for \"is this one object?\", which is why the kernel publishes evidence and requires an external answer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["units"],
+  "properties": {
+    "units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["unitId", "components"],
+        "properties": {
+          "unitId": { "type": "string", "minLength": 1, "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "components": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "rationale": { "type": ["string", "null"] }
+  }
+}

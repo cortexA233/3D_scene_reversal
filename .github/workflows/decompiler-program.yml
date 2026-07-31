@@ -1,0 +1,92 @@
+name: Decompiler Program
+
+# The Decompiler Program package is not a workspace of this repository: the root
+# manifest and lockfile are frozen candidate files in two calibration contracts,
+# so the package is installed and tested independently and referenced from the
+# repository side by relative path.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  package:
+    name: Package suite and neutrality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # No agent harness is installed on this runner and none is set up here.
+      # That absence is the point: the full pipeline must run with the mock
+      # decider under nothing but Node.
+      - name: Assert no agent harness is present
+        run: |
+          for candidate in claude codex cursor-agent aider gemini copilot; do
+            if command -v "$candidate" >/dev/null 2>&1; then
+              echo "an agent harness is installed ($candidate); this job must prove the package runs without one"
+              exit 1
+            fi
+          done
+          echo "no agent harness on PATH"
+
+      - name: Install the package independently
+        working-directory: packages/mesh-to-code
+        run: npm ci
+
+      - name: Package test suite
+        working-directory: packages/mesh-to-code
+        run: npm test
+
+      - name: Full pipeline with the mock decider, no harness installed
+        working-directory: packages/mesh-to-code
+        run: npm run check:neutrality
+
+      - name: Package contents carry no asset, image, or report
+        working-directory: packages/mesh-to-code
+        run: npm run check:package-contents
+
+      - name: Pack, install into a clean directory, and run there
+        working-directory: packages/mesh-to-code
+        run: npm run check:pack-install-run
+
+      - name: The root manifest and lockfile are untouched
+        run: git diff --quiet HEAD -- package.json package-lock.json
+
+  repository:
+    name: Repository suite and frozen contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # `npm ci` only. `npm install` can rewrite the root lockfile, which is a
+      # frozen candidate file in two calibration contracts.
+      - name: Install repository dependencies
+        run: npm ci
+
+      - name: Repository test suite
+        run: npm test
+
+      - name: Stone v2 calibration contract
+        run: npm run check:stone-v2-contract
+
+      - name: Patterned Appearance v2 contract
+        run: npm run check:patterned-appearance-v2-contract
+
+      - name: Eight-object certification
+        run: node scripts/run-stage-2-eight-object-certification.mjs --check
+
+      # Browser-driven checks are deliberately absent: they shell out to a real
+      # Chrome through CHROME_BIN and are run on hardware, not here.
+
+      - name: Frozen files are unmodified
+        run: git diff --quiet HEAD

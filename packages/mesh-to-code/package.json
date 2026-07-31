@@ -1,0 +1,39 @@
+{
+  "name": "mesh-to-code",
+  "version": "0.1.0",
+  "description": "Autonomous Object Decompiler: reverse one mesh into a Code-only Three.js Procedural Replacement with a machine-enforced Reconstruction Tier.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "bin": {
+    "mesh-reverse": "bin/mesh-reverse.mjs"
+  },
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./measurement": "./src/measurement/index.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "schemas",
+    "SKILL.md",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "check:neutrality": "node scripts/check-harness-neutrality.mjs",
+    "check:pack-install-run": "node scripts/check-pack-install-run.mjs",
+    "check:package-contents": "node scripts/check-package-contents.mjs"
+  },
+  "peerDependencies": {
+    "three": ">=0.170.0"
+  },
+  "peerDependenciesMeta": {
+    "three": {
+      "optional": false
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

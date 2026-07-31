@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mesh-to-code/decision.schema.json",
+  "title": "Decision",
+  "description": "Written by the decider to answer one Decision Point. The envelope is validated first, then `response` is validated against the responseSchema the pending decision published.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runId", "round", "decisionPoint", "response", "decider"],
+  "properties": {
+    "schemaVersion": { "const": "mesh-to-code-decision-v1" },
+    "runId": { "type": "string", "minLength": 1 },
+    "round": { "type": "integer", "minimum": 0 },
+    "decisionPoint": {
+      "type": "string",
+      "enum": [
+        "unit-division",
+        "semantic-grouping",
+        "structure-proposal",
+        "operator-authoring"
+      ]
+    },
+    "response": { "type": "object" },
+    "decider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "minLength": 1 },
+        "policy": { "type": ["string", "null"] },
+        "modelIdentity": { "type": ["string", "null"] },
+        "promptVersion": { "type": ["string", "null"] },
+        "note": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

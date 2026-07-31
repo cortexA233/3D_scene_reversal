@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mesh-to-code/structure-manifest.schema.json",
+  "title": "Structure Manifest",
+  "description": "The frozen, hash-bound record of every discrete decision that defines one Procedural Replacement. The decider's output is confined to this document; everything downstream of it reproduces bit-for-bit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "artifactRole",
+    "productionUse",
+    "kernelVersion",
+    "operatorLibraryVersion",
+    "input",
+    "unitId",
+    "unitDivision",
+    "semanticGrouping",
+    "composition",
+    "authoredOperators",
+    "manifestHash"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "mesh-to-code-structure-manifest-v1" },
+    "artifactRole": { "const": "development-only-structure-manifest" },
+    "productionUse": { "const": "prohibited" },
+    "kernelVersion": { "type": "string", "minLength": 1 },
+    "operatorLibraryVersion": { "type": "string", "minLength": 1 },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceName", "format", "sha256", "triangleCount", "bounds"],
+      "properties": {
+        "sourceName": { "type": "string" },
+        "format": { "type": "string" },
+        "sha256": { "type": "string", "minLength": 64 },
+        "selector": { "type": ["string", "null"] },
+        "triangleCount": { "type": "integer", "minimum": 1 },
+        "bounds": { "type": "object" }
+      }
+    },
+    "unitId": { "type": "string", "minLength": 1 },
+    "unitDivision": { "type": "object" },
+    "semanticGrouping": { "type": "object" },
+    "composition": { "type": "object" },
+    "authoredOperators": { "type": "array" },
+    "manifestHash": { "type": "string", "minLength": 64 }
+  }
+}
