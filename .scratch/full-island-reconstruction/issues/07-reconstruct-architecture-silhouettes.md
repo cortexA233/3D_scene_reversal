@@ -150,6 +150,86 @@ parameter, which is exactly why it deserves its own step rather than being bolte
 after a mixed result — and why the reverted attempt's three controls are recorded
 here rather than left in the recipe as dead data.
 
+## Finding: these "placements" are material slices of one assembly, and the tree attempt was reverted
+
+`tools/development/measure-ground-structure.mjs` scan-converts the horizontal projection
+of a placement's lower height band at full triangle resolution. It was written to recover
+the upright count this ticket records as unrecoverable — and it is unrecoverable from a
+*radially averaged profile*, but not from the subject: a radial mean cannot separate N
+posts at radius r from a solid cylinder of radius r, and a scan conversion of the same
+band separates them at a glance.
+
+Two findings came out of it, and the first one is bigger than the ticket.
+
+**A `kind` here can be several material slices of one authored object.** The three
+`wish-tree` entities sit at XZ (119.54, 28.2), (119.53, 27.82) and (120.73, 29.28) — the
+same spot to within 1.2 units — with footprints of 51x61, 53x62 and 42x55 and *ceilings
+within 5 units of each other* at y≈100-105. They are `Wish_tree_fbx__wishtreefbx_21__0`,
+`__0001` and `__0002`: one authored tree exported as three meshes, each mesh's own AABB
+promoted to its own Identity-bearing Scene Entity. `swing-tree` is the same, two slices at
+x=236 plus two at x=239-243 plus one at x=280. Measured across the whole recipe, **137 of
+672 entities** sit in 58 such stacks: 110 in `vegetation` (blossom, palm), 15 in
+`structures` (two 5-slice `shop-stall` stacks, `swing-tree`, `wish-tree`), 6 in `paths`, 4
+in `rocks`, 2 in `decorations`.
+
+So the generator builds a whole tree, or a whole shop stall, inside each *slice's* box.
+That is ADR-0057's finding a third time and worse: not "one kind is two assets" but "one
+kind is one asset cut into pieces, and each piece is being asked to be the whole thing".
+The controls have to be per entity, and they were: `baseMembers` (the band's connected
+component count), `baseReach` (their cells-weighted mean centroid as a Chebyshev radius),
+`baseThickness` (how far past it they reach). All three measured, 24 numbers for 8
+entities. Do not re-derive the pooled per-kind reach for these kinds; it is an average
+over three different forms.
+
+**The form was built and reverted, and it is the third revert on the same mechanism.** A
+ring of members on the square perimeter of the measured radius, spanning the band, then a
+variant spanning up to the crown base. Both captured. The reverted numbers, per group,
+mean over the six cameras:
+
+| `structures` | before | band members | to crown base |
+| --- | --- | --- | --- |
+| silhouette IoU | 0.5010 | **0.4952** | **0.4952** |
+| contour p95 | 13.87 | **14.62** | **14.59** |
+| depth p95 | 58.86 | 58.43 | 58.43 |
+| world normal p95 | 95.5 | **101.5** | **102.8** |
+| candidate/reference pixels | 0.89 | 0.95 | 0.95 |
+
+Three of four the wrong way on the group it targets. In the stack, `group contour distance
+p95` went 25.48 to 27.46 and then 29.68, and `worst group contour distance` 151.62 to
+151.62 and then 186.66, against `worst group depth p95` 118.40 to 116.61 and `worst group
+silhouette IoU` 0.1099 to 0.1196 the right way. The radial statistics matched and the form
+family did not transfer — a ring of twelve members is not what the authored assembly draws
+at screen scale, whatever its reach profile says.
+
+**Do not compare `byKind[...].mean` against `byKind[...].p95`.** A mid-flight reading of
+this attempt did, and reported a halving that was not there. For the record, in the
+reverted state: `wish-tree` mean 17.6162 / p95 20.6968, `swing-tree` mean 11.0575 / p95
+19.6321, `deck` 18.701 / 21.1409, `plaza` 37.1074 / 38.0177, `bridge` 15.8742 / 18.8026,
+aggregate 6.7521 mean with pooled p95 12.159 and worst 159.2395.
+
+## Finding: `groupContourDistance` cannot referee a change to a neighbouring group
+
+Worth reading before designing the next attempt, because it changes what evidence to
+trust. The tree attempt moved `rocks` on `authoredOverview` by **one** candidate pixel —
+IoU unchanged at 0.204 to six figures — and its contour p95 went **43.1 to 186.7**. On
+`oblique-south`, thirteen pixels took it 7.2 to 53.7. `wildlife` did the same on three
+pixels, 53.3 to 120.1. Neither generator changed.
+
+The mechanism is in the metric and is not a defect in the sense ADR-0053 or ADR-0061 were.
+`contourDistance` collects, for every reference contour pixel, its distance to the nearest
+*candidate* contour pixel, so on a sparse scattered group one candidate pixel can be the
+nearest neighbour for a whole region and removing it moves all of them at once.
+`test/scene-pass-metrics.test.mjs` now holds this to an analytical fixture: nine candidate
+pixels move IoU by 0.036 and multiply contour p95 by more than 1.8.
+
+Two consequences. **Pair contour with the group's own IoU and pixel ratio** before
+believing it — and note that `rocks` contour "nearly doubling" when ADR-0057 shrank the
+plaza may have been partly this rather than uncovering. And making the metric robust is a
+versioned gate revision needing its own reference-only recalibration and ADR, and it
+invalidates every stored capture including the sixteen calibration partials; it is named
+here rather than taken as a side effect of a form change, because a metric edited to
+rescue the change that exposed it is a bought gate.
+
 ## Finding: the structures group's biggest slice is two tree kinds, and they are missing their ground structure
 
 Ranked by authored overview pixels, `structures` is not mostly buildings:

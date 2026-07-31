@@ -543,6 +543,58 @@ test("contour distance is undefined against a subject that rendered nothing", ()
   assert.ok(moved.contourDistance.p95 > 0 && moved.contourDistance.p95 < 100);
 });
 
+test("contour distance on a scattered group is unstable to a handful of pixels", () => {
+  /**
+   * A recorded property of the frozen metric, not a change to it.
+   *
+   * `contourDistance` collects, for every reference contour pixel, its distance to the
+   * nearest *candidate* contour pixel. On a sparse scattered group one candidate pixel
+   * can therefore be the nearest neighbour for a whole region of reference pixels, and
+   * removing it moves all of them at once. So a change that leaves the group's silhouette
+   * agreement alone — or improves it — can still multiply its contour p95.
+   *
+   * This is not hypothetical. Adding a ground structure to eight structural trees moved
+   * `rocks` on `authoredOverview` by *one* candidate pixel, leaving its IoU at 0.204 to
+   * six figures, while its contour p95 went 43.1 to 186.7; on `oblique-south` thirteen
+   * pixels took it 7.2 to 53.7. `wildlife` did the same on three pixels, 53.3 to 120.1.
+   * Those two groups' generators did not change at all.
+   *
+   * The consequence for whoever reads this layer: `groupContourDistance` cannot be used
+   * on its own to accept or reject a change to a *different* group, because the knock-on
+   * through occlusion is larger than the signal. Pair it with the group's own IoU and
+   * pixel ratio. Making the metric robust is a versioned gate revision with its own
+   * reference-only recalibration and ADR, and it invalidates every stored capture, so it
+   * is named here rather than taken as a side effect of a form change.
+   */
+  const speck = (rgba, cx, cy, radius) =>
+    fillRect(rgba, cx - radius, cy - radius, cx + radius + 1, cy + radius + 1, [255, 255, 255]);
+
+  // A near row of specks the candidate matches one for one, plus a tight far cluster the
+  // candidate covers with a single speck in its middle.
+  const reference = blank();
+  for (let index = 0; index < 5; index += 1) speck(reference, 8 + index * 10, 6, 2);
+  for (const x of [24, 30, 36]) speck(reference, x, 42, 2);
+
+  const paired = blank();
+  for (let index = 0; index < 5; index += 1) speck(paired, 9 + index * 10, 7, 2);
+  const lone = new Uint8Array(paired);
+  speck(lone, 30, 42, 1);
+
+  const withLone = silhouetteEvidence(reference, lone, WIDTH, HEIGHT);
+  const withoutLone = silhouetteEvidence(reference, paired, WIDTH, HEIGHT);
+
+  // Nine candidate pixels, and the silhouette agreement barely notices them.
+  assert.ok(
+    Math.abs(withLone.intersectionOverUnion - withoutLone.intersectionOverUnion) < 0.06,
+    `IoU moved ${withLone.intersectionOverUnion} to ${withoutLone.intersectionOverUnion}`,
+  );
+  // The contour p95 more than doubles on the same nine pixels.
+  assert.ok(
+    withoutLone.contourDistance.p95 > withLone.contourDistance.p95 * 1.8,
+    `contour p95 moved only ${withLone.contourDistance.p95} to ${withoutLone.contourDistance.p95}`,
+  );
+});
+
 test("nothing confused is a fraction of zero, and nothing compared is null", () => {
   // The gate stack reads a null as missing evidence and fails the metric, so a
   // subject that mislabels nothing must not report null for the metric that

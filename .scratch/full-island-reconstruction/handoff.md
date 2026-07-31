@@ -28,6 +28,33 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 12 — decorations (partial) | `lantern` and `npc-statue` landed as axial profiles (ADR-0060); the other 17 kinds are mostly single placements |
 | Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
+## The surface sampler followed tessellation, and it does not any more (ADR-0061)
+
+Every `surface p95` in this file that predates ADR-0061 was measured through a sampler
+that drew a triangle with uniform probability **per triangle**, so a point's chance of
+landing somewhere was proportional to the triangle density there rather than to the
+surface. ADR-0055 made exactly this argument at the mesh level and stopped there.
+
+It was found by measuring one quantity two ways. `measure-ground-structure.mjs` reports a
+placement's lower-band area share at full triangle resolution; the 96 gate samples report
+the same share. Five of eight structural-tree placements agreed and three were out by up
+to **thirty-five fold** — a band holding 31 per cent of the area drew one sample of
+ninety-six, which ninety-six draws cannot produce by chance. Across the candidate the two
+distributions differ by a mean total variation of 0.366.
+
+Both the within-mesh pick and the across-mesh split now follow world-space area.
+`scene-quality-baseline-v1.4` re-derives three thresholds — `surface p95` 2.454575 to
+2.4875, `worst entity` 13.9152 to 14.037975, `over-tolerance` 0.1204 to **0.1153** the
+other way. The candidate moved both ways too, by comparable amounts, and no gate changed
+state. Re-running the reference observation left the inventory, elevation and horizon
+evidence byte-identical; only the samples moved, and no rendered capture was invalidated.
+
+**One consequence to know:** the recipe's plate controls are derived from those samples, so
+the four decks' and one plaza's `perimeterShare` moved with the correction and the Scene
+Recipe had to be regenerated. The first ADR-0061 commit missed that and left
+`check:scene-recipe` red; the follow-up fixed it. Any future sampler change has the same
+reach — check `npm run check:scene-recipe` after one.
+
 ## Read this before trusting any number below
 
 `scene-quality-baseline-v1.2` and every rendered measurement in this file are
@@ -684,6 +711,37 @@ fixedCameraGeometry, nativeAppearance)` against baseline
 For contrast, the whole-frame numbers on the same capture: silhouette IoU 0.9969,
 contour p95 2.5, world normal p95 4.86 degrees. All three look close to perfect
 while the per-group figures above are nowhere near. None of them is gated.
+
+## Ticket 07: the tree attempt was reverted, and what it found is worth more
+
+Full numbers are in the ticket. Three things a fresh session needs before touching the
+village again:
+
+- **A `kind` can be several material slices of one authored object.** The three `wish-tree`
+  entities share an XZ position to within 1.2 units and top out within 5 units of each
+  other; they are `Wish_tree_fbx__wishtreefbx_21__0`, `__0001`, `__0002` — one tree exported
+  as three meshes, each mesh's AABB promoted to its own entity. **137 of 672 entities** sit
+  in 58 such stacks (110 vegetation, 15 structures including two 5-slice `shop-stall`
+  stacks, 6 paths, 4 rocks, 2 decorations). The generator builds a whole object inside each
+  slice's box. Controls for these kinds have to be per entity, and a pooled per-kind
+  profile is an average over several different forms.
+- **The form was reverted.** `structures` IoU 0.5010 to 0.4952, contour 13.87 to 14.59,
+  normals 95.5 to 102.8, against depth 58.86 to 58.43 — three of four the wrong way on the
+  group it targeted. In the stack, `group contour distance p95` 25.48 to 29.68 and `worst
+  group contour distance` 151.62 to 186.66, against `worst group depth p95` 118.40 to
+  116.61 and `worst group silhouette IoU` 0.1099 to 0.1196. Radial statistics matched; the
+  form family did not transfer. Third revert on that mechanism this milestone.
+- **`groupContourDistance` cannot referee a change to a neighbouring group.** The attempt
+  moved `rocks` on `authoredOverview` by *one* candidate pixel, IoU unchanged at 0.204, and
+  its contour p95 went 43.1 to 186.7; `wildlife` moved 53.3 to 120.1 on three pixels.
+  Neither generator changed. `contourDistance` measures each reference contour pixel's
+  distance to the nearest *candidate* contour pixel, so on a sparse group one candidate
+  pixel is the nearest neighbour for a whole region. `test/scene-pass-metrics.test.mjs`
+  holds it to an analytical fixture. Pair contour with the group's own IoU and pixel ratio;
+  and note ADR-0057's "`rocks` contour nearly doubled" may be partly this. Making the
+  metric robust is a versioned gate revision with its own reference-only recalibration and
+  ADR, and it invalidates every stored capture — it is **not** to be taken as a side effect
+  of a form change.
 
 ## Next steps
 

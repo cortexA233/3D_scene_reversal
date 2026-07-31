@@ -237,6 +237,24 @@ Axial massing: unchanged — ${recorded.kinds.map((row) => row.kind).join(", ")}
 `,
   );
 } else if (measured.length > 0) {
+  // Merge rather than replace. `--kinds wish-tree,swing-tree` used to drop every other
+  // kind's row from the file, which silently deleted the `lantern` and `npc-statue`
+  // evidence that `test/decoration-reconstruction.test.mjs` reads — a whole-file
+  // overwrite from a partial measurement. Same class of defect as the `--kinds` that
+  // matched nothing and printed an empty report (ADR-0060): a development tool that
+  // quietly discards evidence is worse than one that refuses.
+  let existing = [];
+  try {
+    const recorded = JSON.parse(await readFile(EVIDENCE_PATH, "utf8"));
+    if (recorded.schemaVersion === SCHEMA_VERSION) existing = recorded.kinds ?? [];
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  const fresh = new Set(measured.map((row) => row.kind));
+  const merged = [...existing.filter((row) => !fresh.has(row.kind)), ...measured].sort(
+    (left, right) => left.kind.localeCompare(right.kind),
+  );
+
   await mkdir(path.dirname(EVIDENCE_PATH), { recursive: true });
   await writeFile(
     EVIDENCE_PATH,
@@ -248,7 +266,7 @@ Axial massing: unchanged — ${recorded.kinds.map((row) => row.kind).join(", ")}
           "Half-extent and geometry share by height decile, pooled over each kind's " +
           "placements and normalised into each entity's own box. Both subjects go " +
           "through one sampler, so a difference here is a difference the surface gate sees.",
-        kinds: measured,
+        kinds: merged,
       },
       null,
       2,
@@ -257,7 +275,7 @@ Axial massing: unchanged — ${recorded.kinds.map((row) => row.kind).join(", ")}
   );
   process.stdout.write(
     `
-Wrote ${path.relative(PROJECT_ROOT, EVIDENCE_PATH)} (${measured.length} kinds)
+Wrote ${path.relative(PROJECT_ROOT, EVIDENCE_PATH)} (${measured.length} measured, ${merged.length} kinds on file)
 `,
   );
 }

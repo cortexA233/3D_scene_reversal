@@ -4426,7 +4426,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.1914,
-        "perimeterShare": 0.2621
+        "perimeterShare": 0.1984
       }
     },
     {
@@ -4455,7 +4455,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.1914,
-        "perimeterShare": 0.156
+        "perimeterShare": 0.1384
       }
     },
     {
@@ -4484,7 +4484,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.1769,
-        "perimeterShare": 0.21
+        "perimeterShare": 0.1762
       }
     },
     {
@@ -4513,7 +4513,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.1263,
-        "perimeterShare": 0.2362
+        "perimeterShare": 0.1413
       }
     },
     {
@@ -4537,7 +4537,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.3413,
-        "perimeterShare": 0.6737
+        "perimeterShare": 0.6746
       }
     },
     {

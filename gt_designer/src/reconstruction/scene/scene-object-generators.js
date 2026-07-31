@@ -1036,8 +1036,8 @@ function pile(rng, { pieces = 5 } = {}) {
  * and still 0.51 at the crown, where the generator's sphere gave 0.22.
  */
 const AXIAL_REACH_PROFILES = Object.freeze({
-  lantern: Object.freeze([0.57, 0.6, 0.62, 0.89, 0.86, 0.91, 0.74, 0.58, 0.62, 0.44]),
-  "npc-statue": Object.freeze([0.82, 0.87, 0.88, 0.86, 0.82, 0.74, 0.67, 0.75, 0.7, 0.51]),
+  lantern: Object.freeze([0.5, 0.64, 0.67, 0.81, 0.81, 0.84, 0.79, 0.69, 0.6, 0.38]),
+  "npc-statue": Object.freeze([0.64, 0.84, 0.81, 0.8, 0.76, 0.8, 0.71, 0.71, 0.62, 0.4]),
 });
 
 /**
@@ -1057,11 +1057,23 @@ const AXIAL_REACH_PROFILES = Object.freeze({
  */
 function axialLathe(profile, { segments = 20, id = "body" } = {}) {
   const points = [];
-  // A closed bottom and a closed top, so the surface is a solid rather than a tube.
+  /**
+   * Flat end discs at the first and last measured radii, not a taper to a point.
+   *
+   * Closing both ends at zero invents a taper the measurement contradicts: the authored
+   * lantern's crown decile reads a half-extent of 0.38 and its base 0.50, so a cone to a
+   * point is a shape claim the profile does not make. It also smeared the two end deciles
+   * together — measured through the corrected sampler (ADR-0061) the lantern read 0.47 at
+   * the base against 0.49 at the crown, where the authored form reads 0.50 against 0.38,
+   * so the closure was deciding which end was narrower.
+   */
+  const radius = (decile) => Math.max(0.01, profile[decile] / 2);
   points.push(new THREE.Vector2(0, 0));
+  points.push(new THREE.Vector2(radius(0), 0));
   profile.forEach((reach, decile) => {
     points.push(new THREE.Vector2(Math.max(0.01, reach / 2), (decile + 0.5) / profile.length));
   });
+  points.push(new THREE.Vector2(radius(profile.length - 1), 1));
   points.push(new THREE.Vector2(0, 1));
   const geometry = new THREE.LatheGeometry(points, segments);
   geometry.computeVertexNormals();
