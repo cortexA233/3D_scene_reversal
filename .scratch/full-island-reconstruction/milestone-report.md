@@ -59,16 +59,37 @@ measured here.
 
 So `surface p95 ≤ 2.4875` **cannot be met by any candidate, including a geometrically
 perfect one**, and this is the reason every fit in this milestone returned single-digit
-percentages while its profile proxy moved by half. Nothing was changed on the strength of
-it: the threshold, `SAMPLE_CAP` and the metric are all untouched.
+percentages while its profile proxy moved by half.
+
+The diagnosis is tested rather than argued: raising the sample count drives the floor down
+at one over the square root of n, to within four to five per cent over a sixteenfold range,
+which is what sparsity looks like and nothing else does. That also prices the repair per
+gate, and the three gates are not in the same position at all:
+
+| gate | floor at 96 | threshold | samples needed |
+| --- | --- | --- | --- |
+| surface p95 | 4.8990 | 2.4875 | about 4x |
+| over-tolerance fraction | **0.4701** | 0.1153 | about 16x |
+| worst entity surface p95 | 111.54 | 14.037975 | about 57x |
+
+`over-tolerance surface fraction` deserves separate notice: its floor is four times its
+threshold, the scene measures 0.5865, and eighty per cent of that is floor. It had never
+been quoted with a floor beside it. `worst entity` is a maximum over entities so its floor
+is set by the largest one, and no plausible sampling budget reaches its threshold.
+
+Nothing was changed on the strength of any of this: the thresholds, `SAMPLE_CAP` and the
+metric are all untouched.
 
 ### Unfinished work — no boundary, just not done
 
-| gate | measured | threshold |
-| --- | --- | --- |
-| worst entity surface p95 | 159.2395 | 14.037975 |
-| over-tolerance surface fraction | 0.5865 | 0.1153 |
-| all ten fixedCameraGeometry metrics | — | — |
+`worst entity surface p95` and `over-tolerance surface fraction` were in this section.
+ADR-0066 moves them out: both sit below their own metric's noise floor, the second by a
+factor of four.
+
+What remains genuinely unfinished is **the ten fixedCameraGeometry metrics**. That layer
+renders both subjects through the same frozen cameras at the same resolution and samples no
+point clouds, so nothing in ADR-0066 touches it — and it is now the only layer where a
+fitting effort is guaranteed to be measuring the candidate rather than the sampler.
 
 `worst entity surface p95` is entirely horizon mountains — all eight worst entities are
 `horizon/mountain-*`, and the worst reads 41 per cent of its own 389-unit extent. I first

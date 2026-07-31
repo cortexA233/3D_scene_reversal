@@ -58,20 +58,45 @@ const correspondence = JSON.parse(
  * area-weighted allocation, the traversal order — is identical to it on purpose: the only
  * difference between the two clouds must be which points on the surface were drawn.
  */
-function sampleWithOffset(root, offset) {
+function sampleWithOffset(root, offset, countScale = 1) {
   root.updateMatrixWorld(true);
   const meshes = [];
   root.traverse((child) => {
     if (child.isMesh) meshes.push(child);
   });
   const triangleCounts = meshes.map((mesh) => triangleCountOf(mesh.geometry));
-  const budget = sampleBudget(triangleCounts.reduce((sum, count) => sum + count, 0));
+  const budget = sampleBudget(triangleCounts.reduce((sum, count) => sum + count, 0)) * countScale;
   const allocation = allocateSamples(meshes.map(surfaceAreaOf), budget);
   const samples = [];
   meshes.forEach((mesh, index) => {
     samples.push(...sampleMeshSurface(mesh, index + 1 + offset, allocation[index]));
   });
   return samples;
+}
+
+/**
+ * Is the floor really sampling noise?
+ *
+ * The claim rests on it. If it is, raising the sample count must drive it down, and at the
+ * rate a nearest-neighbour distance falls: mean spacing in a two-dimensional sampling goes
+ * as `1 / sqrt(n)`, so four times the samples should halve it. If the floor barely moves
+ * instead, something other than sparsity is producing it and the diagnosis is wrong.
+ *
+ * This is the check that makes the finding safe to act on, so it is run rather than argued.
+ */
+function floorAtScale(holder, countScale, repeats) {
+  const floors = [];
+  const overs = [];
+  for (let repeat = 1; repeat <= repeats; repeat += 1) {
+    const left = sampleWithOffset(holder, 0, countScale);
+    const right = sampleWithOffset(holder, repeat * 1013, countScale);
+    const measured = surfaceDistance(left, right, TOLERANCE);
+    if (!measured) continue;
+    floors.push(measured.symmetric.p95);
+    overs.push(measured.symmetric.overToleranceFraction);
+  }
+  const mean = (values) => values.reduce((sum, value) => sum + value, 0) / values.length;
+  return floors.length ? { p95: mean(floors), overTolerance: mean(overs) } : null;
 }
 
 const { semanticIndex } = generateScene(ISLAND_SCENE_RECIPE);
@@ -131,4 +156,52 @@ for (const row of rows) {
 process.stdout.write(
   `\n  entity-weighted floor ${(weightedFloor / total).toFixed(4)} against a measured ` +
     `${(weightedMeasured / total).toFixed(4)}, threshold 2.4875\n`,
+);
+
+/**
+ * Does the floor fall like sampling noise, and what does it do to the other two gates?
+ *
+ * `overToleranceFraction` is the second worldGeometry surface metric and comes out of the
+ * same comparison, so it has a floor too and nobody has ever quoted it. `worst entity` is
+ * the third, and it is a maximum over entities, so its floor is the floor of whichever
+ * entity happens to be largest rather than the average.
+ */
+const SCALES = [1, 2, 4, 8, 16];
+const holders = [];
+for (const entity of ISLAND_SCENE_RECIPE.entities) {
+  const node = semanticIndex.get(entity.semanticId);
+  if (!node) continue;
+  holders.push({ entity, holder: node.object ?? node.node ?? node });
+}
+
+process.stdout.write("\nFloor against sample count, entity-weighted over all 672\n\n");
+process.stdout.write(
+  `  ${"samples/entity".padEnd(16)}${"floor p95".padStart(11)}${"vs 1/sqrt(n)".padStart(14)}` +
+    `${"over-tol floor".padStart(16)}${"worst entity".padStart(14)}\n`,
+);
+let base = null;
+for (const scale of SCALES) {
+  let weighted = 0;
+  let weightedOver = 0;
+  let worst = 0;
+  let counted = 0;
+  for (const { holder } of holders) {
+    const measured = floorAtScale(holder, scale, 2);
+    if (!measured) continue;
+    weighted += measured.p95;
+    weightedOver += measured.overTolerance;
+    if (measured.p95 > worst) worst = measured.p95;
+    counted += 1;
+  }
+  const floor = weighted / counted;
+  if (base === null) base = floor;
+  const predicted = base / Math.sqrt(scale);
+  process.stdout.write(
+    `  ${String(96 * scale).padEnd(16)}${floor.toFixed(4).padStart(11)}` +
+      `${predicted.toFixed(4).padStart(14)}${(weightedOver / counted).toFixed(4).padStart(16)}` +
+      `${worst.toFixed(2).padStart(14)}\n`,
+  );
+}
+process.stdout.write(
+  `\n  thresholds: surface p95 2.4875, over-tolerance 0.1153, worst entity 14.037975\n`,
 );

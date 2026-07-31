@@ -69,6 +69,43 @@ At least, because the floor measured here is candidate against candidate. Refere
 candidate compares two different tessellations and can only be noisier. 4.8964 is a lower
 bound.
 
+## It is sampling sparsity, and the cure is quantified
+
+The diagnosis rests on the floor being *sampling noise* rather than something else, so it is
+tested rather than argued. If it is sparsity, raising the sample count must drive it down at
+the rate a nearest-neighbour spacing falls -- one over the square root of n in a
+two-dimensional sampling, so four times the samples halves it. Entity-weighted over all 672:
+
+| samples/entity | floor p95 | predicted | over-tolerance floor | worst-entity floor |
+| --- | --- | --- | --- | --- |
+| **96 (shipped)** | 4.8990 | 4.8990 | **0.4701** | 111.54 |
+| 192 | 3.6143 | 3.4641 | 0.3754 | 71.45 |
+| 384 | 2.5479 | 2.4495 | 0.2814 | 51.03 |
+| 768 | 1.8188 | 1.7321 | 0.1890 | 36.92 |
+| 1536 | 1.2929 | 1.2248 | 0.1135 | 26.47 |
+| *threshold* | *2.4875* | | *0.1153* | *14.037975* |
+
+It tracks the prediction to within four to five per cent over a sixteenfold range, which is
+what sparsity looks like and what nothing else does.
+
+**All three worldGeometry surface gates are below their own metric's noise floor**, and by
+very different margins:
+
+- `surface p95` needs about **4x** the samples for its floor to reach 2.4875, and 8x to have
+  real headroom under it.
+- `over-tolerance surface fraction` needs about **16x**. Its floor at the shipped density is
+  **0.4701 against a 0.1153 threshold** -- four times the threshold -- and the scene
+  currently measures 0.5865, so eighty per cent of that number is floor. This metric has
+  never been quoted with a floor beside it.
+- `worst entity surface p95` needs roughly **57x**, extrapolating the same law from 26.47 at
+  1536 samples toward 14.037975. It is a maximum over entities, so its floor is set by the
+  largest entity rather than the average, and no plausible budget reaches it.
+
+That last row is the useful one for whoever picks this up: the three gates do not fail
+together for one reason, and a single change to `SAMPLE_CAP` would fix them at three
+different costs. Sixteen times the sampling is not free, and fifty-seven times is a
+different conversation from four.
+
 ## What it explains
 
 - **The mountains.** Sweeping every continuous ridge control over a twelvefold range moved
