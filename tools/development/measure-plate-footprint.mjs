@@ -215,6 +215,35 @@ const measureExpression = (targets) => String.raw`(async () => {
     const coverage = covered / (RASTER * RASTER);
 
     /**
+     * The footprint itself, coarsened to a grid a person can read.
+     *
+     * The rectangle decomposition below reduces a footprint to a bounded program, and for
+     * paving-slab it claimed only five of forty-two assets — which says the shape is not
+     * blocky and says nothing about what it is. A coverage number alone cannot be built
+     * from: a plate covering a fifth of its box in the wrong fifth scores worse than one
+     * that fills the box outright. So the occupancy is carried out as well as reduced, and
+     * the representation gets chosen after looking at it.
+     */
+    const MAP = 24;
+    const occupancyMap = [];
+    for (let row = 0; row < MAP; row += 1) {
+      let line = "";
+      for (let column = 0; column < MAP; column += 1) {
+        let hits = 0;
+        let cells = 0;
+        for (let v = Math.floor((row * RASTER) / MAP); v < Math.floor(((row + 1) * RASTER) / MAP); v += 1) {
+          for (let u = Math.floor((column * RASTER) / MAP); u < Math.floor(((column + 1) * RASTER) / MAP); u += 1) {
+            hits += occupancy[v * RASTER + u];
+            cells += 1;
+          }
+        }
+        const share = cells > 0 ? hits / cells : 0;
+        line += share > 0.75 ? "#" : share > 0.4 ? "+" : share > 0.1 ? "." : " ";
+      }
+      occupancyMap.push(line);
+    }
+
+    /**
      * A greedy axis-aligned rectangle decomposition of the occupied cells: at
      * each step take the largest all-occupied rectangle not yet claimed. It is
      * the compact form a generator can build, and stopping at a bounded count is
@@ -273,6 +302,7 @@ const measureExpression = (targets) => String.raw`(async () => {
       footprintArea: round(extent[0] * extent[2], 1),
       areaOverFootprint: round(area / (extent[0] * extent[2]), 3),
       coverage: round(coverage, 4),
+      occupancyMap,
       thicknessOverDiagonal: round(extent[1] / Math.hypot(extent[0], extent[2]), 4),
       verticalAreaProfile: heightBins.map((value) => round(value / area, 3)),
       rectangles,

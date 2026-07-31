@@ -121,30 +121,43 @@ are absent, where the plaza, deck and bridge each got theirs. `paving-slab` was 
 out of the plate program. Measured now, across 42 distinct assets and 57 placements, the
 authored coverage has a median of **0.186** against a candidate hexagon covering about 0.75.
 
-**The obvious fix would be a regression, and this is measured rather than feared.** The
-plate tool's own warning applies: a plate with the right coverage in the wrong places scores
-`c^2 / (2c - c^2)`, which at the measured mean coverage of 0.2435 is **IoU 0.1386 — below
-the 0.2233 the group scores now**. Halving the pixel ratio while lowering the IoU is a
-regression that reads as a fix in the draw ratio, which is exactly the trap the bridge
-attempt fell into earlier in this milestone.
+**The obvious fix would be a regression, and ADR-0067 says why in a stronger form than
+first appeared.** The authored paving slab is not a slab: carried out to a readable grid its
+footprint is a **scatter of small stones**, which is why the rectangle decomposition found
+nothing in 37 of 42 assets. Median coverage 0.1862 against a candidate hexagon at ~0.75.
 
-So the fix needs the footprint's *position*, and that is where it stops: the rectangle
-decomposition claims only **5 of the 42 assets**. For the other 37 the tool records how much
-is covered and not where. Extracting that — a better decomposition, or a representation
-suited to a scattered rather than blocky footprint — is the next concrete piece of work on
-this layer, and it is ordinary engineering rather than a boundary or a judgement.
+From that, two elementary results, both confirmed against the measurement:
 
-`worst entity surface p95` is entirely horizon mountains — all eight worst entities are
-`horizon/mountain-*`, and the worst reads 41 per cent of its own 389-unit extent. I first
-classified that as unfinished work. **It is not, and the correction is measured.**
+- a solid blob of coverage `C` containing a scatter of coverage `c` scores `c / C` =
+  **0.2483**, against an **observed 0.2233** — ten per cent, from first principles
+- two independent scatters of coverage `c` score `c / (2 - c)` = **0.1027**
 
-The sixteen groups *are* fitted, but `fit-horizon-ridge.mjs` fits them to the skyline —
-elevation-angle p95 and max, a depth term, coverage — and surface distance appears nowhere
-in that objective. So the obvious move was to fit the flanks for surface too. Sweeping every
-continuous group control over a twelvefold range says that cannot work:
+So a *faithful* reproduction scores **0.413x** what the current wrong one scores. The
+hexagon is not winning despite being three times too big; it is winning because it is. It
+swallows the scatter, keeps the whole intersection, and pays only in union.
 
-| control | mean surface p95, best over x0.5 to x6 | gain |
-| --- | --- | --- |
+This also explains `cover`, the worst group on the island: `c / (2 - c)` for a sparse
+scatter is about `c / 2`, so IoU near 0.014 is what two independent draws of a population
+covering ~3 per cent of frame score whatever their statistics.
+
+**It narrows ADR-0066's conclusion.** I wrote that `fixedCameraGeometry` was the one layer
+where fitting was guaranteed to measure the candidate. That holds for solid singular
+subjects — geography 0.9441, horizon 0.7927, vegetation 0.7129 — and fails for exactly the
+two worst groups, which are the scattered ones.
+
+What survives: **contour distance and the draw ratio do not have this pathology.** Contour
+compares boundaries rather than areas, and 75.99 against a 6.536774 threshold is measuring
+something true. Read together, those two would have caught the paving slab long ago; IoU
+alone rewards keeping it.
+
+So `paving-slab` was not rebuilt as a scatter, though that is plainly the faithful
+representation and the measurement to build it from now exists. Doing it improves the draw
+ratio and the contour distance and takes IoU from 0.2233 to about 0.1027 — one gate metric
+backwards by more than half, two forwards. That is a question about which of three
+disagreeing metrics the milestone means, and answering it by picking the one that flatters
+the change is what a fitting loop must not do.
+
+--- | --- | --- |
 | ridgeElongation | 96.090 at x0.5 | 5.91% |
 | ridgeApron | 100.529 at x1.5 | 1.56% |
 | flankFalloff | 101.091 at x1.5 | 1.01% |
@@ -193,14 +206,14 @@ not a gap.
 
 ## 2. What needs a human
 
-Six things, all specific.
+Seven things, all specific.
 
 1. **Overturning ADR-0052 or ADR-0054.** Both boundaries are reachable only by raising a
    frozen budget — the terrain landform cap from 40 to about 101, or accepting a
    640-number sampled skyline. Both are repo-level decisions about what a Procedural
    Replacement is allowed to be, not fitting decisions, and §8 reserves them.
 
-3. **Native Firefox and Safari GPU gates.** Neither browser is installed on the normative
+4. **Native Firefox and Safari GPU gates.** Neither browser is installed on the normative
    host. Firefox needs a BiDi transport this repository does not have; Safari needs macOS.
    Reported as not evaluated since the Foundation and unchanged.
 
@@ -215,14 +228,14 @@ Six things, all specific.
    real, and if a reviewer's reading of the convergence order differs, the right call
    differs. The per-metric numbers are in §5.
 
-5. **Enlarging the horizon ridge control budget.** Six group controls plus two per summit
+6. **Enlarging the horizon ridge control budget.** Six group controls plus two per summit
    cannot describe these landforms to the threshold, and the sweep in §1 bounds what the
    current controls can do at single-digit per cent against an 86 per cent requirement.
    More summits or more controls per group is the same class of decision as ADR-0052's
    eight-form cap. This is now the largest single lever on the island — 37.4 per cent of
    the surface residual — and it is not mine to pull.
 
-6. **The triangle budget.** Now the tightest on the island at 0.132581 headroom, down from
+7. **The triangle budget.** Now the tightest on the island at 0.132581 headroom, down from
    0.202113, because the palm fit spent about a third of the remaining margin. The blossom
    and bamboo fits spent none — both were held at or below their previous counts, blossom
    by a constraint added to the fitter. Still passing. A mountain fit, which is the next
