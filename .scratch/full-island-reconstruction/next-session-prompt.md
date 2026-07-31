@@ -2,35 +2,45 @@
 
 这是一个持续多轮、跨多次 compaction 的工程任务。除非遇到**必须人工介入**的问题（见第 8 节），否则不要停下来等指示：做完一个 ticket 就继续下一个。
 
-## 0. 工作目录
+## 0. 工作目录与分支（硬约束）
 
-**在 worktree 里工作，不要碰主仓库：**
+**这个任务只在 `experiment/claude-full-island-scene` 上做，并且只在一个独立的 worktree
+里做。两条都是硬约束，不是建议。**
 
-    C:/recent_project/3d_pcg_island
+    cd /c/recent_project/3d_pcg_island        # ← 在这里工作
 
-主仓库 `C:/recent_project/3d_pcg_reversal` 现在检出在 `generalized-single-model-pipeline`
-上，另一个会话在用它（reflog 显示来回切过几次）。本任务的分支
-`experiment/claude-full-island-scene` 检出在上面那个 worktree 里，`node_modules` 是指向
-主仓库的 junction（两个分支的依赖清单逐字相同，已核对过）。
+主仓库 `C:/recent_project/3d_pcg_reversal` 检出在 `generalized-single-model-pipeline`
+上，另一个会话在用它。**不要在主仓库里 checkout 本任务的分支，不要切换主仓库的分支，
+一行都不要动它。** 这就是本任务用独立 worktree 的原因：两条分支同时可用，互不打断。
 
-**每条命令都要用绝对路径 `cd` 回去** —— shell 的 cwd 每条命令后会重置：
+**每条命令都要用绝对路径 `cd` 回 worktree** —— shell 的 cwd 每条命令后会重置：
 
     cd /c/recent_project/3d_pcg_island && <command>
 
-`.claude/worktrees/` 下的残留目录都不要用。
+不变量，每次提交前都成立：
 
-开始前核对：
+- worktree 的当前分支**始终**是 `experiment/claude-full-island-scene`。**永远不要在这个
+  worktree 里 `git checkout` 到别的分支**，也不要 `git switch`。要看别的分支就 `git show`
+  或 `git log`，不要切换。
+- 所有提交和 push 都只去 `experiment/claude-full-island-scene`。**不动 main。**
+- `.claude/worktrees/` 下的残留目录（例如 `3d-pcg-reversal-eaf15c`）都不要用、不要清理。
+
+开始前核对，四项全部要对：
 
     cd /c/recent_project/3d_pcg_island
-    git branch --show-current
+    git worktree list
+    git branch --show-current      # 必须是 experiment/claude-full-island-scene
     git log --oneline -3
     git status --short
     git fetch origin && git rev-list --left-right --count HEAD...origin/experiment/claude-full-island-scene
 
-预期：分支 `experiment/claude-full-island-scene`，HEAD `267da7b`，工作区干净，与 origin
-同步（0 0）。若不符，停止并报告。
+预期：worktree 在 `experiment/claude-full-island-scene`，HEAD 在 `cc789d2` 或更新（提交
+比它新是正常的，报告差异后继续，不要当成异常停下），工作区干净，与 origin 同步（0 0）。
 
-如果 worktree 不存在（被清理了），重建它：
+**若当前分支不是 `experiment/claude-full-island-scene`，停下并报告，不要自己切换。**
+
+worktree 不存在（被清理了）时重建它——注意 `node_modules` 是指向主仓库的 junction，两条
+分支的依赖清单逐字相同，已核对过：
 
     cd /c/recent_project && git -C 3d_pcg_reversal worktree add ../3d_pcg_island experiment/claude-full-island-scene
     cmd //c "mklink /J C:\recent_project\3d_pcg_island\node_modules C:\recent_project\3d_pcg_reversal\node_modules"
@@ -200,7 +210,9 @@
 
 ## 9. 纪律
 
-- 只修改 `experiment/claude-full-island-scene`；不动 main；不 `git reset --hard`；不 force push；不删除来源不明的文件（仓库根有一个无害的未跟踪 `dev/null/` git-lfs hook 目录，留着别管）。
+- 只修改 `experiment/claude-full-island-scene`，且只在 `/c/recent_project/3d_pcg_island`
+  worktree 里改；**永远不要在该 worktree 里切分支，不要动主仓库的检出**；不动 main；
+  不 `git reset --hard`；不 force push；不删除来源不明的文件（仓库根有一个无害的未跟踪 `dev/null/` git-lfs hook 目录，留着别管）。
 - 定期给出简短进展：当前 ticket、已完成检查、当前红色证据、下一步。报告要如实：失败就贴输出，跳过就说跳过。
 - 若必须 compact，先把状态写进 `handoff.md` 再继续，不要重新开始。**本任务预计跨越多次 compaction，这是正常的，不要因此收尾。**
 - 临时脚本放 `.scratch/browser-tooling/`（已 gitignore），提交前清理；有长期价值的分析工具提升到 `tools/development/` 并让它可复现（例：`tools/development/measure-horizon-form-budget.mjs` 是 ADR-0052 的证据）。
