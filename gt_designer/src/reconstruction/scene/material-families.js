@@ -22,7 +22,10 @@ export function createMaterialFamilies(recipe) {
     return new THREE.MeshStandardMaterial({
       color: new THREE.Color(...family.albedo),
       roughness: family.roughness,
-      metalness: 0,
+      // Measured like the roughness beside it. Only `painted-timber` is non-zero, at
+      // 0.0406, and a hardcoded zero was the same kind of hand-written value the albedo
+      // turned out to be.
+      metalness: family.metalness ?? 0,
     });
   }
 

@@ -762,7 +762,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.2505,
         0.2188
       ],
-      "roughness": 0.96
+      "roughness": 0.8
     },
     {
       "id": "painted-timber",
@@ -772,7 +772,8 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.204,
         0.1757
       ],
-      "roughness": 0.72
+      "roughness": 0.749,
+      "metalness": 0.0406
     },
     {
       "id": "paving-stone",
@@ -782,7 +783,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.2507,
         0.2451
       ],
-      "roughness": 0.88
+      "roughness": 0.9163
     },
     {
       "id": "shore-rock",
@@ -792,7 +793,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.4874,
         0.4822
       ],
-      "roughness": 0.93
+      "roughness": 0.7804
     },
     {
       "id": "palm-foliage",
@@ -802,7 +803,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.176,
         0.0541
       ],
-      "roughness": 0.78
+      "roughness": 0.75
     },
     {
       "id": "blossom-foliage",
@@ -812,7 +813,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.2572,
         0.3019
       ],
-      "roughness": 0.74
+      "roughness": 0.8965
     },
     {
       "id": "bamboo-foliage",
@@ -822,7 +823,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.4594,
         0.1858
       ],
-      "roughness": 0.7
+      "roughness": 0.7537
     },
     {
       "id": "terrain-ground",
@@ -832,7 +833,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.14,
         0.0679
       ],
-      "roughness": 0.95
+      "roughness": 0.8
     },
     {
       "id": "ocean-surface",
@@ -852,7 +853,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         0.3205,
         0.3123
       ],
-      "roughness": 0.85
+      "roughness": 0.7776
     }
   ],
   "entities": [

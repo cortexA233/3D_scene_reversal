@@ -122,3 +122,64 @@ rather than glossed.
   map.
 - **No bounded semantic pattern programs yet.** Every family is still one flat colour.
   That is the third checkbox and the largest remaining piece of this ticket.
+
+
+## Roughness and metalness are measured now, and the rendered effect is noise
+
+The albedo had an excuse for being hand-written: it lives in maps the Production Runtime
+may not load, which is the whole reason a Material Family carries one. Roughness never
+did. The authored materials record it as a plain scalar on **957 of 993** surfaces, and
+every declared family has one over **100 per cent** of its own area, so the hand-written
+values were guesses with the answer sitting in the frozen inventory.
+
+They were wrong, and not by a little:
+
+| family | declared | measured |
+| --- | --- | --- |
+| `distant-rock` | 0.96 | **0.80** |
+| `terrain-ground` | 0.95 | **0.80** |
+| `shore-rock` | 0.93 | **0.78** |
+| `blossom-foliage` | 0.74 | **0.8965** |
+| `creature-fur` | 0.85 | 0.7776 |
+| `paving-stone` | 0.88 | 0.9163 |
+| `bamboo-foliage` | 0.70 | 0.7537 |
+| `painted-timber` | 0.72 | 0.749 |
+| `palm-foliage` | 0.78 | 0.75 |
+
+`metalness` was a hardcoded zero in `material-families.js` and is 0.0406 on
+`painted-timber`. `ocean-surface` is absent from the table because it is a
+`ShaderMaterial` and declares no roughness at all — measuring an absent parameter as zero
+would have reported the authored sea as a mirror, so the tool records null and the recipe
+keeps the declared value.
+
+**The rendered effect is within noise, and that is not a reason to revert it.** Global
+appearance DeltaE went 12.448958 to 12.452485, and per family three improved and seven got
+worse, none by more than 0.11: `painted-timber` 24.534 to 24.431 and `blossom-foliage`
+23.531 to 23.475 the right way, `palm-foliage` 36.131 to 36.176 and `terrain-ground` 24.083
+to 24.122 the other. That is what should happen, for the reason this ticket already
+recorded about the albedo: the residual left after a family's material is measured belongs
+to geometry — the authored canopy self-shadows and a sparser candidate cannot — so
+replacing a guessed roughness with the authored one is not expected to move DeltaE much.
+Reverting a measured value because a render moved 0.03 per cent would be fitting the
+material to the render, which is the thing this ticket exists to stop.
+
+The guard is the same one the `shore-rock` albedo mistake bought: the recipe takes a
+measured roughness only where `roughnessFraction` is essentially the whole family, because
+a family measured from 2.2 per cent of its surface is how the whole family once got one
+small prop's bright orange.
+
+## Measured and deliberately not carried yet
+
+Both are recorded so the next round starts from numbers rather than from nothing.
+
+- **Transparency.** `paving-stone` is **75 per cent** marked `transparent` at an opacity of
+  **1.0**, which is alpha-tested geometry rather than see-through surface: carrying it
+  would change render ordering and depth-write behaviour rather than fade anything, and it
+  is worth its own capture rather than a bolt-on. `painted-timber` is 0.02 per cent
+  transparent at 0.569. 41 of 993 authored materials are transparent at all.
+- **Emission.** Exactly **one** authored material in the whole scene carries an emissive
+  colour. Emission on this island is Semantic Lights (ticket 12), not emissive materials,
+  and a per-family emission term would be inventing one.
+
+Still open, unchanged: there are no Bounded Semantic Pattern Programs at all — every
+family is one flat colour.

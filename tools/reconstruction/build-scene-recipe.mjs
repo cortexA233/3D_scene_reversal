@@ -152,7 +152,32 @@ function materialFamilies(measuredAlbedo) {
     // `usable` is the tool's own statement that it reached enough of the family for
     // the number to mean anything. A family it did not reach keeps the declared
     // albedo, and the tool's evidence file records which and why.
-    return row?.usable && row.albedo ? { ...family, albedo: row.albedo } : family;
+    if (!row?.usable) return family;
+    const merged = { ...family };
+    if (row.albedo) merged.albedo = row.albedo;
+    /**
+     * Roughness and metalness, measured rather than declared.
+     *
+     * The albedo at least had an excuse for being hand-written — it lives in maps the
+     * Production Runtime may not load. Roughness never did: the authored materials record
+     * it as a plain scalar, 957 of 993 of them, and every family declares one over 100
+     * per cent of its own surface. The hand-written values were wrong by up to 0.17,
+     * with `terrain-ground` at 0.95 against a measured 0.80 and `distant-rock` 0.96
+     * against 0.80 — both far rougher than the authored surface, which is why the
+     * candidate's ground and distant ridges read flat.
+     *
+     * `roughnessFraction` is the share of the family's surface that declared one at all,
+     * and it has to be essentially all of it: a family measured from a sliver is the
+     * `shore-rock` albedo mistake, where 2.2 per cent of the surface carried a map and
+     * averaging only that gave the whole family one small prop's colour.
+     */
+    if (Number.isFinite(row.roughness) && row.roughnessFraction >= 0.9) {
+      merged.roughness = row.roughness;
+    }
+    if (Number.isFinite(row.metalness) && row.metalness > 0) {
+      merged.metalness = row.metalness;
+    }
+    return merged;
   });
 }
 

@@ -189,6 +189,18 @@ const MEASURE_EXPRESSION = String.raw`(async () => {
             meshes: 0,
             texturedMeshes: 0,
             baseColours: new Set(),
+            // The surface parameters beside the colour. Every one of these was
+            // hand-written in the Scene Recipe while the authored material records it
+            // as a plain scalar, which is a stranger gap than the albedo's: the albedo
+            // at least had the excuse of living in a texture the runtime may not load.
+            roughness: 0,
+            roughnessArea: 0,
+            metalness: 0,
+            metalnessArea: 0,
+            opacity: 0,
+            transparentArea: 0,
+            emissive: [0, 0, 0],
+            emissiveArea: 0,
           };
           // Every mesh that resolves to this family, textured or not. A family whose
           // textured meshes are a sliver of its own surface has not been measured, and
@@ -211,6 +223,31 @@ const MEASURE_EXPRESSION = String.raw`(async () => {
             // white for most authored surfaces, but not for all of them.
             const reflect = mean ? mean.albedo[channel] * base[channel] : base[channel];
             entry.albedo[channel] += reflect * area;
+          }
+          // Area-weighted, and each parameter weighted only by the surface that
+          // actually declares it: a ShaderMaterial has no roughness at all, and folding
+          // its absence in as zero would report the authored sea and sky as
+          // mirror-smooth surfaces belonging to families they do not belong to.
+          if (typeof material.roughness === "number") {
+            entry.roughness += material.roughness * area;
+            entry.roughnessArea += area;
+          }
+          if (typeof material.metalness === "number") {
+            entry.metalness += material.metalness * area;
+            entry.metalnessArea += area;
+          }
+          if (material.transparent === true) {
+            entry.transparentArea += area;
+            entry.opacity += (typeof material.opacity === "number" ? material.opacity : 1) * area;
+          }
+          if (material.emissive) {
+            const emissive = material.emissive.toArray();
+            if (emissive.some((channel) => channel > 0)) {
+              for (let channel = 0; channel < 3; channel += 1) {
+                entry.emissive[channel] += emissive[channel] * area;
+              }
+              entry.emissiveArea += area;
+            }
           }
           entry.baseColours.add(material.color ? material.color.getHexString() : "none");
           perFamily.set(resolved.material, entry);
@@ -236,6 +273,24 @@ const MEASURE_EXPRESSION = String.raw`(async () => {
         albedo: entry.area > 0 ? entry.albedo.map((sum) => round(sum / entry.area, 4)) : null,
         opaqueTexelFraction:
           entry.texturedArea > 0 ? round(entry.opaque / entry.texturedArea, 4) : null,
+        // Null rather than a default where nothing declared the parameter, so a family
+        // the walk did not reach cannot arrive in the recipe wearing a measured name.
+        roughness:
+          entry.roughnessArea > 0 ? round(entry.roughness / entry.roughnessArea, 4) : null,
+        roughnessFraction: round(entry.area > 0 ? entry.roughnessArea / entry.area : 0, 4),
+        metalness:
+          entry.metalnessArea > 0 ? round(entry.metalness / entry.metalnessArea, 4) : null,
+        // The share of the family's surface the author marked transparent, and the mean
+        // opacity over just that share. A family that is 3 per cent transparent should
+        // not have the other 97 per cent faded to match.
+        transparentFraction: round(entry.area > 0 ? entry.transparentArea / entry.area : 0, 4),
+        opacity:
+          entry.transparentArea > 0 ? round(entry.opacity / entry.transparentArea, 4) : null,
+        emissive:
+          entry.emissiveArea > 0
+            ? entry.emissive.map((sum) => round(sum / entry.emissiveArea, 4))
+            : null,
+        emissiveFraction: round(entry.area > 0 ? entry.emissiveArea / entry.area : 0, 4),
         authoredBaseColours: [...entry.baseColours].sort(),
       }))
       .sort((a, b) => b.surfaceArea - a.surfaceArea),
