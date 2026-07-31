@@ -1,6 +1,6 @@
 # Full Island Reconstruction — merged report
 
-State at `be51072` on `experiment/claude-full-island-scene`.
+State at `5acb697` on `experiment/claude-full-island-scene`.
 
 ---
 
@@ -50,7 +50,7 @@ unfinished work.
 | gate | measured | threshold |
 | --- | --- | --- |
 | worst entity surface p95 | 159.2395 | 14.037975 |
-| over-tolerance surface fraction | 0.5881 | 0.1153 |
+| over-tolerance surface fraction | 0.5865 | 0.1153 |
 | all ten fixedCameraGeometry metrics | — | — |
 
 `worst entity surface p95` is entirely horizon mountains — all eight worst entities are
@@ -58,19 +58,20 @@ unfinished work.
 which is not a representation floor. The mountains have a fitted crest-ridge program and
 it is a poor fit; that is generator work nobody has done.
 
-The remaining object residual by kind, after this milestone's palm fit:
+The remaining object residual by kind, after all three vegetation fits:
 
 | kind | count | mean p95 | share of total |
 | --- | --- | --- | --- |
-| mountain | 16 | 102.126 | 37.2% |
-| palm | 156 | 5.011 | 17.8% |
-| bamboo | 72 | 7.151 | 11.7% |
+| mountain | 16 | 102.126 | 37.4% |
+| palm | 156 | 5.011 | 17.9% |
+| bamboo | 72 | 6.785 | 11.2% |
 | blossom | 133 | 3.450 | 10.5% |
-| everything else | 295 | — | 22.8% |
+| everything else | 295 | — | 23.0% |
 
-`bamboo` is now the largest unfitted vegetation kind and is the obvious next target. Its
-authored profile has three empty deciles at 96 samples, so unlike the palm and the blossom
-it cannot be fitted against a complete measurement without deciding what the gap means.
+Every vegetation kind is now fitted to its measured profile. The next target is the
+horizon mountains, which are 37.4 per cent of the total on their own and whose crest-ridge
+program is a poor fit rather than a boundary — the worst reads 41 per cent of its own
+extent.
 
 `nativeAppearance` is **blocked, not failed**. ADR-0040 refuses to evaluate it until both
 geometry layers pass. That is the spec's own convergence order working as designed and is
@@ -91,16 +92,22 @@ Four things, all specific.
    host. Firefox needs a BiDi transport this repository does not have; Safari needs macOS.
    Reported as not evaluated since the Foundation and unchanged.
 
-3. **Whether the palm fit should be kept.** It improves the layer ADR-0040 orders first and
-   degrades three metrics in the one behind it — the numbers are in §5. I kept it and
-   recorded both sides. A reviewer may reasonably decide the opposite; nothing about that
-   decision is measurable from here. The blossom fit that followed has no such tension:
-   it improves eight of ten fixed-camera metrics and neither worst-group number moved.
+3. **Whether the vegetation fits should be kept — the largest open judgement.** Taken
+   together the three fits improve `worldGeometry` by 3.4 per cent and leave the
+   fixed-camera layer *worse on seven of its ten metrics*. That is a consistent direction,
+   not noise: fitting each form to its measured mass distribution makes it broader and
+   lower, which is right in three dimensions and changes what it draws in two.
+
+   I kept them because the layer they improve is the one ADR-0040 orders first, and
+   because the fixed-camera layer cannot pass until `worldGeometry` does. But the trade is
+   real, and if a reviewer's reading of the convergence order differs, the right call
+   differs. The per-metric numbers are in §5.
 
 4. **The triangle budget.** Now the tightest on the island at 0.132581 headroom, down from
-   0.202113, because the palm fit spent about a third of the remaining margin. Still
-   passing. The next form change of any size will need this raised or something else
-   given back.
+   0.202113, because the palm fit spent about a third of the remaining margin. The blossom
+   and bamboo fits spent none — both were held at or below their previous counts, blossom
+   by a constraint added to the fitter. Still passing. A mountain fit, which is the next
+   target and the largest one left, will need this raised or something else given back.
 
 ---
 
@@ -190,13 +197,30 @@ recorded reason; five name the ADR holding them.
 `check:scene-parity-foundation` passes and was re-certified for the palm fit; the diff was
 measured values only, with no contract, threshold or budget moved.
 
-**What moved this session.** `surface p95` 6.7228 → **6.5359**; over-tolerance fraction
-0.6038 → **0.5881**; palm 5.4025 → **5.0110**; blossom 3.9352 → **3.4503**. In the fixed-camera layer, taking both fits
-together, depth 20.550992 → 20.520484, worst depth 110.172588 → 109.561054 and world
-normals 65.363956 → 63.872436 improved, while silhouette IoU 0.508089 → 0.504017, contour
-p95 25.86344 → 28.566215, worst contour 186.6568 → 224.6922 and semantic agreement
-0.946747 → 0.945464 went the other way. All four of those losses are the palm's; the
-blossom fit moved eight of the ten metrics back toward their thresholds. The
+**What moved this session.** `surface p95` 6.7228 → **6.4967**; over-tolerance fraction
+0.6038 → **0.5865**; palm 5.4025 → **5.0110**; blossom 3.9352 → **3.4503**; bamboo
+7.1510 → **6.7849**. The fixed-camera layer went the other way overall, and this is the session's
+uncomfortable result rather than a footnote:
+
+| metric | start | end | |
+| --- | --- | --- | --- |
+| group contour distance p95 | 25.86344 | **24.370677** | better |
+| group world normal p95 | 65.363956 | **63.748894** | better |
+| group silhouette IoU | 0.508089 | 0.503639 | worse |
+| worst group silhouette IoU | 0.109195 | 0.092652 | worse |
+| worst group contour distance | 186.6568 | 224.6922 | worse |
+| group depth p95 | 20.550992 | 20.617152 | worse |
+| worst group depth p95 | 110.172588 | 115.343801 | worse |
+| semantic agreement | 0.946747 | 0.945501 | worse |
+| worst camera semantic agreement | 0.911074 | 0.907551 | worse |
+| worst semantic confusion | 0.018047 | 0.018512 | worse |
+
+Two of the losses are worst-group extremes on sparse groups, where this repository has
+already recorded the contour statistic as unstable and demonstrated it with an analytical
+fixture — and the largest, `wildlife` at 224.6922, is in a group whose geometry never
+changed, so it is occlusion. The aggregate losses are small and consistent, and they are
+not noise: the fits make each form broader and lower, which is what the measurement asked
+for in three dimensions and is not free in two. The
 largest of those losses is in `wildlife`, whose geometry did not change — panda re-measures
 0.9221 and rock 3.8807, exactly as before — so it is occlusion, measured through a group
 contour statistic already recorded as unstable on sparse groups. Those two explanations
