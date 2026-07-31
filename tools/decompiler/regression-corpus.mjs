@@ -169,9 +169,16 @@ export async function loadReferenceGeometry(unitId) {
 
   const positionArray = Float64Array.from(positions);
   const indexArray = Uint32Array.from(indices);
+  const materials = new Set(
+    node
+      .getMesh()
+      .listPrimitives()
+      .map((primitive) => primitive.getMaterial()?.getName() ?? "unnamed"),
+  );
   return {
     unitId,
     label: spec.label,
+    materialCount: materials.size,
     positions: positionArray,
     normals: hasAuthoredNormals
       ? Float64Array.from(normals)

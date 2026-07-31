@@ -36,11 +36,14 @@ Under construction. What works today:
 - a pure-JavaScript triangle rasterizer emitting silhouette, depth, and world-normal
   buffers in the shape those metric functions already accept, with progressive
   resolution, a reference-side buffer cache, and `worker_threads` parallelism —
-  byte-stable across runs and between the serial and parallel paths.
+  byte-stable across runs and between the serial and parallel paths;
+- the Complexity Budget Formula with frozen coefficients, per-axis floors and
+  granularity, a single global ceiling, the complexity gate, and Budget Proxy
+  construction.
 
 Not yet implemented, and reported rather than assumed: geometry fitting, the
-Operator Library, appearance solving, the Complexity Budget Formula and its
-global ceiling, the multi-scale material consistency check, multi-unit
+Operator Library, appearance solving, the multi-scale material consistency check,
+enforcement of a budget against an emitted unit, multi-unit
 composition, and ingestion of glTF/GLB, PLY, and STL. Any axis that has not been
 measured is recorded `not evaluated`; it is never recorded as passing.
 
@@ -50,6 +53,7 @@ measured is recorded `not evaluated`; it is never recorded as passing.
 bin/                  the mesh-reverse entry point
 schemas/              the published JSON schemas the protocol validates against
 src/audit/            contract constraints: asset freedom, determinism, executability
+src/budget/           complexity measurement, the budget formula, the Budget Proxy
 src/decider/          the shipped mock decider
 src/emit/             deterministic source emission
 src/fixtures/         fixtures generated from code, because the package ships no asset

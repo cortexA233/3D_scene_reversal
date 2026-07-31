@@ -1,0 +1,1681 @@
+{
+  "schemaVersion": "decompiler-budget-formula-v1",
+  "artifactRole": "development-only-phase-a-calibration",
+  "productionUse": "prohibited",
+  "program": "Decompiler Program",
+  "phase": "Phase A",
+  "purpose": "Back-calibrate the Complexity Budget Formula on the eight regression units, declare the global ceiling, and publish each unit's Budget Proxy reachability bound.",
+  "formula": {
+    "version": "decompiler-complexity-budget-formula-v1",
+    "featureNames": [
+      "intercept",
+      "log2ConnectedComponents",
+      "log2SymmetryReducedParts",
+      "log2MaterialRoles",
+      "contourCurvatureComplexity"
+    ],
+    "featureTransform": "counts enter as log2(1 + count); the contour ratio is already dimensionless and enters directly",
+    "linkFunction": "log2",
+    "linkFunctionReason": "the fit is linear in log2(budget) and the prediction exponentiates. The hand-set budgets span a 60x range while the transformed features span 6x, so a model linear in the budget itself cannot hold both ends: it granted Stone Path 1,600 triangles against a hand-set 96. Fitting the logarithm makes the model multiplicative in complexity, which is how the budgets behave, and makes every prediction positive by construction.",
+    "coefficients": {
+      "scalars": [
+        5.074889,
+        0.128606,
+        0.034551,
+        0,
+        0.336387
+      ],
+      "recipeBytes": [
+        9.748606,
+        0,
+        0.1787,
+        0,
+        0.242498
+      ],
+      "bundleGzipBytes": [
+        11.880284,
+        0.17214,
+        0,
+        0,
+        0.192229
+      ],
+      "triangles": [
+        7.445798,
+        0.603561,
+        0,
+        0,
+        0.816475
+      ],
+      "drawCalls": [
+        0,
+        0,
+        0.198507,
+        0,
+        0.173433
+      ],
+      "geometryMemoryBytes": [
+        13.20691,
+        0,
+        0.765449,
+        0,
+        0.706015
+      ],
+      "warmGenerationP95Milliseconds": [
+        2.094418,
+        0.084381,
+        0.131154,
+        0,
+        0.197897
+      ]
+    },
+    "safetyLiftFactor": 1.5,
+    "safetyLiftRule": "one factor applied identically to every axis and every unit, the smallest that keeps each unit's formula budget at or above the consumption an accepted candidate already has",
+    "axisGranularity": {
+      "scalars": 8,
+      "recipeBytes": 256,
+      "bundleGzipBytes": 512,
+      "triangles": 64,
+      "drawCalls": 1,
+      "geometryMemoryBytes": 4096,
+      "warmGenerationP95Milliseconds": 1
+    },
+    "axisFloor": {
+      "scalars": 16,
+      "recipeBytes": 256,
+      "bundleGzipBytes": 1024,
+      "triangles": 64,
+      "drawCalls": 1,
+      "geometryMemoryBytes": 4096,
+      "warmGenerationP95Milliseconds": 2
+    },
+    "fitMethod": "non-negative least squares against the eight hand-set budgets by exhaustive active-set search, with zero-variance feature columns excluded",
+    "fitConstraintReason": "coefficients are constrained non-negative because a budget must not shrink as the reference gets more complex. Unconstrained least squares on this corpus produces large opposite-signed pairs, because component count and distinct-part count move together; those cancel on the eight calibration points and extrapolate absurdly, which matters because extrapolation risk is this formula's named weakness and the global ceiling is its only backstop.",
+    "axisFits": {
+      "scalars": {
+        "activeFeatureNames": [
+          "intercept",
+          "log2ConnectedComponents",
+          "log2SymmetryReducedParts",
+          "contourCurvatureComplexity"
+        ],
+        "residualSumOfSquares": 1.047758,
+        "residualUnits": "squared log2 budget"
+      },
+      "recipeBytes": {
+        "activeFeatureNames": [
+          "intercept",
+          "log2SymmetryReducedParts",
+          "contourCurvatureComplexity"
+        ],
+        "residualSumOfSquares": 0.60876,
+        "residualUnits": "squared log2 budget"
+      },
+      "bundleGzipBytes": {
+        "activeFeatureNames": [
+          "intercept",
+          "log2ConnectedComponents",
+          "contourCurvatureComplexity"
+        ],
+        "residualSumOfSquares": 0.587199,
+        "residualUnits": "squared log2 budget"
+      },
+      "triangles": {
+        "activeFeatureNames": [
+          "intercept",
+          "log2ConnectedComponents",
+          "contourCurvatureComplexity"
+        ],
+        "residualSumOfSquares": 11.488586,
+        "residualUnits": "squared log2 budget"
+      },
+      "drawCalls": {
+        "activeFeatureNames": [
+          "log2SymmetryReducedParts",
+          "contourCurvatureComplexity"
+        ],
+        "residualSumOfSquares": 1.636628,
+        "residualUnits": "squared log2 budget"
+      },
+      "geometryMemoryBytes": {
+        "activeFeatureNames": [
+          "intercept",
+          "log2SymmetryReducedParts",
+          "contourCurvatureComplexity"
+        ],
+        "residualSumOfSquares": 11.113424,
+        "residualUnits": "squared log2 budget"
+      },
+      "warmGenerationP95Milliseconds": {
+        "activeFeatureNames": [
+          "intercept",
+          "log2ConnectedComponents",
+          "log2SymmetryReducedParts",
+          "contourCurvatureComplexity"
+        ],
+        "residualSumOfSquares": 0.639026,
+        "residualUnits": "squared log2 budget"
+      }
+    },
+    "excludedFeatureNames": [
+      "log2MaterialRoles"
+    ],
+    "excludedFeatureReason": "all eight regression references declare exactly one material, so log2MaterialRoles has no variance on this corpus and its coefficient is not identifiable from it. The term stays in the formula with a zero coefficient and is re-fit when appearance-derived role clustering exists; fitting a constant column would produce a number that looks calibrated and is not.",
+    "frozenCoefficientsMatchFreshFit": true,
+    "appliedIdentically": "budgetFor takes a complexity measurement and nothing else, so no per-object override path exists"
+  },
+  "globalCeiling": {
+    "scalars": 192,
+    "recipeBytes": 4096,
+    "bundleGzipBytes": 20480,
+    "triangles": 11520,
+    "drawCalls": 6,
+    "geometryMemoryBytes": 524288,
+    "warmGenerationP95Milliseconds": 24,
+    "derivation": "twice the largest hand-set budget across the eight regression units, per axis, rounded up to the axis granularity",
+    "policy": "no unit may exceed this for any reason; budgetFor clamps and reports the clamp",
+    "coarseCeilingMultiple": 3
+  },
+  "budgetProxy": {
+    "purpose": "a reference-derived reachability bound, so acceptance thresholds stay reference-only and freeze before fitting",
+    "method": "deterministic vertex-cluster decimation of the Authored Reference to the triangle budget",
+    "scoredThrough": "the same L1 stack a candidate is scored through: CPU rasterizer plus the copied metric functions, final twelve-view stage",
+    "appearanceNote": "L1 scores geometry only, because a Bounded Semantic Pattern Program executes as a shader. Role colours are part of the construction and no appearance reachability is claimed here."
+  },
+  "fitQuality": {
+    "perAxis": {
+      "scalars": {
+        "meanFormulaOverHandSet": 1.6041666666666667,
+        "maxFormulaOverHandSet": 2.25,
+        "maxAtUnit": "stone",
+        "minFormulaOverHandSet": 1,
+        "minAtUnit": "candle"
+      },
+      "recipeBytes": {
+        "meanFormulaOverHandSet": 1.6197916666666665,
+        "maxFormulaOverHandSet": 2,
+        "maxAtUnit": "bamboo-shoot",
+        "minFormulaOverHandSet": 1.125,
+        "minAtUnit": "candle"
+      },
+      "bundleGzipBytes": {
+        "meanFormulaOverHandSet": 1.5822916666666664,
+        "maxFormulaOverHandSet": 2,
+        "maxAtUnit": "bamboo-shoot",
+        "minFormulaOverHandSet": 1.125,
+        "minAtUnit": "candle"
+      },
+      "triangles": {
+        "meanFormulaOverHandSet": 2.311472537878788,
+        "maxFormulaOverHandSet": 8.666666666666666,
+        "maxAtUnit": "stone-path",
+        "minFormulaOverHandSet": 0.5833333333333334,
+        "minAtUnit": "blue-hat"
+      },
+      "drawCalls": {
+        "meanFormulaOverHandSet": 1.8125,
+        "maxFormulaOverHandSet": 2,
+        "maxAtUnit": "stone-path",
+        "minFormulaOverHandSet": 1,
+        "minAtUnit": "candle"
+      },
+      "geometryMemoryBytes": {
+        "meanFormulaOverHandSet": 2.298697916666667,
+        "maxFormulaOverHandSet": 8.8,
+        "maxAtUnit": "stone-path",
+        "minFormulaOverHandSet": 0.5416666666666666,
+        "minAtUnit": "blue-hat"
+      },
+      "warmGenerationP95Milliseconds": {
+        "meanFormulaOverHandSet": 1.59375,
+        "maxFormulaOverHandSet": 2,
+        "maxAtUnit": "bamboo-shoot",
+        "minFormulaOverHandSet": 1.1,
+        "minAtUnit": "candle"
+      }
+    },
+    "reading": "The formula reproduces the hand-set budgets loosely, and most loosely for the simplest units: with eight calibration points and three identifiable features the fit is pulled by the larger objects, so a trivially simple reference is granted several times the budget a human set for it. It never grants less than an accepted candidate already consumes, and it never exceeds the global ceiling. The consequence to carry forward is that the compactness axis of the Reconstruction Tier is permissive on simple inputs and the global ceiling is the real backstop, which is the extrapolation risk this formula was already known to carry, now measured."
+  },
+  "units": [
+    {
+      "unitId": "stone-path",
+      "label": "Stone Path",
+      "complexity": {
+        "triangleCount": 64,
+        "connectedComponentCount": 1,
+        "symmetryReducedPartCount": 1,
+        "materialRoleCount": 1,
+        "contourCurvatureComplexity": 1.1954682824393645,
+        "contourCurvatureComplexityWorstView": 1.3911325256543585,
+        "contourMeasurement": {
+          "stage": "fine",
+          "size": 256,
+          "viewCount": 8,
+          "definition": "perimeter / (2 * sqrt(pi * area)), a dimensionless ratio"
+        }
+      },
+      "features": {
+        "intercept": 1,
+        "log2ConnectedComponents": 1,
+        "log2SymmetryReducedParts": 1,
+        "log2MaterialRoles": 1,
+        "contourCurvatureComplexity": 1.1954682824393645
+      },
+      "formulaBudget": {
+        "scalars": 80,
+        "recipeBytes": 1792,
+        "bundleGzipBytes": 7680,
+        "triangles": 832,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 45056,
+        "warmGenerationP95Milliseconds": 9
+      },
+      "formulaDetail": {
+        "scalars": {
+          "raw": 49.872962198289606,
+          "lifted": 74.80944329743441,
+          "rounded": 80,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "recipeBytes": {
+          "raw": 1190.378506856389,
+          "lifted": 1785.5677602845835,
+          "rounded": 1792,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "bundleGzipBytes": {
+          "raw": 4981.027540479387,
+          "lifted": 7471.541310719082,
+          "rounded": 7680,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "triangles": {
+          "raw": 521.1045227224623,
+          "lifted": 781.6567840836935,
+          "rounded": 832,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "drawCalls": {
+          "raw": 1.324860674700029,
+          "lifted": 1.9872910120500435,
+          "rounded": 2,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "geometryMemoryBytes": {
+          "raw": 28851.876627425816,
+          "lifted": 43277.81494113873,
+          "rounded": 45056,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "warmGenerationP95Milliseconds": {
+          "raw": 5.842284387902242,
+          "lifted": 8.763426581853363,
+          "rounded": 9,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        }
+      },
+      "complexityGate": {
+        "tier": "full",
+        "worstCeilingRatio": 0.4359296289757284,
+        "overruns": []
+      },
+      "budgetComparison": {
+        "scalars": {
+          "formula": 80,
+          "handSet": 48,
+          "measuredConsumption": 33,
+          "formulaOverHandSet": 1.6666666666666667,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "recipeBytes": {
+          "formula": 1792,
+          "handSet": 1024,
+          "measuredConsumption": 618,
+          "formulaOverHandSet": 1.75,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "bundleGzipBytes": {
+          "formula": 7680,
+          "handSet": 4096,
+          "measuredConsumption": 1111,
+          "formulaOverHandSet": 1.875,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "triangles": {
+          "formula": 832,
+          "handSet": 96,
+          "measuredConsumption": 36,
+          "formulaOverHandSet": 8.666666666666666,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "drawCalls": {
+          "formula": 2,
+          "handSet": 1,
+          "measuredConsumption": 1,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "geometryMemoryBytes": {
+          "formula": 45056,
+          "handSet": 5120,
+          "measuredConsumption": 2592,
+          "formulaOverHandSet": 8.8,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "warmGenerationP95Milliseconds": {
+          "formula": 9,
+          "handSet": 5,
+          "measuredConsumption": 0.10000000894069672,
+          "formulaOverHandSet": 1.8,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        }
+      },
+      "budgetProxy": {
+        "constructed": true,
+        "budgetIsBinding": false,
+        "triangleBudget": 832,
+        "triangleCount": 64,
+        "vertexCount": 63,
+        "lattice": null,
+        "budgetUtilization": 0.07692307692307693,
+        "construction": {
+          "method": "the Authored Reference unchanged, because the triangle budget already holds it",
+          "latticeSelection": "not applicable",
+          "retains": "nothing; the proxy mesh is scored and discarded"
+        },
+        "materialRoles": [
+          {
+            "roleId": "role-0",
+            "color": null
+          }
+        ],
+        "materialRoleNote": "flat per-role colours substitute for the source texture; L1 does not score colour, so no appearance reachability is claimed here"
+      },
+      "reachabilityBound": {
+        "geometry.bounds.maxAxisRelativeError": 0,
+        "geometry.bounds.bottomAnchorErrorCanonical": 0,
+        "geometry.silhouette.meanIou": 1,
+        "geometry.silhouette.worstViewIou": 1,
+        "geometry.silhouette.meanEdgeDistancePixels": 0,
+        "geometry.silhouette.edgeDistanceP95Pixels": 0,
+        "geometry.depth.mae": 0,
+        "geometry.depth.p95": 0
+      }
+    },
+    {
+      "unitId": "stone",
+      "label": "Stone",
+      "complexity": {
+        "triangleCount": 212,
+        "connectedComponentCount": 1,
+        "symmetryReducedPartCount": 1,
+        "materialRoleCount": 1,
+        "contourCurvatureComplexity": 0.984716446444643,
+        "contourCurvatureComplexityWorstView": 1.020579801146445,
+        "contourMeasurement": {
+          "stage": "fine",
+          "size": 256,
+          "viewCount": 8,
+          "definition": "perimeter / (2 * sqrt(pi * area)), a dimensionless ratio"
+        }
+      },
+      "features": {
+        "intercept": 1,
+        "log2ConnectedComponents": 1,
+        "log2SymmetryReducedParts": 1,
+        "log2MaterialRoles": 1,
+        "contourCurvatureComplexity": 0.984716446444643
+      },
+      "formulaBudget": {
+        "scalars": 72,
+        "recipeBytes": 1792,
+        "bundleGzipBytes": 7680,
+        "triangles": 704,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 40960,
+        "warmGenerationP95Milliseconds": 9
+      },
+      "formulaDetail": {
+        "scalars": {
+          "raw": 47.481440895336306,
+          "lifted": 71.22216134300446,
+          "rounded": 72,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "recipeBytes": {
+          "raw": 1148.9479835488746,
+          "lifted": 1723.421975323312,
+          "rounded": 1792,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "bundleGzipBytes": {
+          "raw": 4843.099936906156,
+          "lifted": 7264.649905359233,
+          "rounded": 7680,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "triangles": {
+          "raw": 462.5146844925973,
+          "lifted": 693.772026738896,
+          "rounded": 704,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "drawCalls": {
+          "raw": 1.2917163735396935,
+          "lifted": 1.9375745603095402,
+          "rounded": 2,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "geometryMemoryBytes": {
+          "raw": 26024.513648395583,
+          "lifted": 39036.77047259337,
+          "rounded": 40960,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "warmGenerationP95Milliseconds": {
+          "raw": 5.675806597675345,
+          "lifted": 8.513709896513017,
+          "rounded": 9,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        }
+      },
+      "complexityGate": {
+        "tier": "full",
+        "worstCeilingRatio": 0.42075731819416795,
+        "overruns": []
+      },
+      "budgetComparison": {
+        "scalars": {
+          "formula": 72,
+          "handSet": 32,
+          "measuredConsumption": 32,
+          "formulaOverHandSet": 2.25,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "recipeBytes": {
+          "formula": 1792,
+          "handSet": 1024,
+          "measuredConsumption": 424,
+          "formulaOverHandSet": 1.75,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "bundleGzipBytes": {
+          "formula": 7680,
+          "handSet": 4096,
+          "measuredConsumption": 1402,
+          "formulaOverHandSet": 1.875,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "triangles": {
+          "formula": 704,
+          "handSet": 320,
+          "measuredConsumption": 80,
+          "formulaOverHandSet": 2.2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "drawCalls": {
+          "formula": 2,
+          "handSet": 1,
+          "measuredConsumption": 1,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "geometryMemoryBytes": {
+          "formula": 40960,
+          "handSet": 24576,
+          "measuredConsumption": 1488,
+          "formulaOverHandSet": 1.6666666666666667,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "warmGenerationP95Milliseconds": {
+          "formula": 9,
+          "handSet": 5,
+          "measuredConsumption": 0.20000000298023224,
+          "formulaOverHandSet": 1.8,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        }
+      },
+      "budgetProxy": {
+        "constructed": true,
+        "budgetIsBinding": false,
+        "triangleBudget": 704,
+        "triangleCount": 212,
+        "vertexCount": 324,
+        "lattice": null,
+        "budgetUtilization": 0.30113636363636365,
+        "construction": {
+          "method": "the Authored Reference unchanged, because the triangle budget already holds it",
+          "latticeSelection": "not applicable",
+          "retains": "nothing; the proxy mesh is scored and discarded"
+        },
+        "materialRoles": [
+          {
+            "roleId": "role-0",
+            "color": null
+          }
+        ],
+        "materialRoleNote": "flat per-role colours substitute for the source texture; L1 does not score colour, so no appearance reachability is claimed here"
+      },
+      "reachabilityBound": {
+        "geometry.bounds.maxAxisRelativeError": 0,
+        "geometry.bounds.bottomAnchorErrorCanonical": 0,
+        "geometry.silhouette.meanIou": 1,
+        "geometry.silhouette.worstViewIou": 1,
+        "geometry.silhouette.meanEdgeDistancePixels": 0,
+        "geometry.silhouette.edgeDistanceP95Pixels": 0,
+        "geometry.depth.mae": 0,
+        "geometry.depth.p95": 0
+      }
+    },
+    {
+      "unitId": "bamboo-shoot",
+      "label": "Bamboo Shoot",
+      "complexity": {
+        "triangleCount": 424,
+        "connectedComponentCount": 17,
+        "symmetryReducedPartCount": 14,
+        "materialRoleCount": 1,
+        "contourCurvatureComplexity": 1.9292944343611493,
+        "contourCurvatureComplexityWorstView": 2.014143008564334,
+        "contourMeasurement": {
+          "stage": "fine",
+          "size": 256,
+          "viewCount": 8,
+          "definition": "perimeter / (2 * sqrt(pi * area)), a dimensionless ratio"
+        }
+      },
+      "features": {
+        "intercept": 1,
+        "log2ConnectedComponents": 4.169925001442312,
+        "log2SymmetryReducedParts": 3.9068905956085187,
+        "log2MaterialRoles": 1,
+        "contourCurvatureComplexity": 1.9292944343611493
+      },
+      "formulaBudget": {
+        "scalars": 128,
+        "recipeBytes": 3072,
+        "bundleGzipBytes": 12288,
+        "triangles": 4480,
+        "drawCalls": 4,
+        "geometryMemoryBytes": 290816,
+        "warmGenerationP95Milliseconds": 16
+      },
+      "formulaDetail": {
+        "scalars": {
+          "raw": 84.164673897577,
+          "lifted": 126.2470108463655,
+          "rounded": 128,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "recipeBytes": {
+          "raw": 1930.3107351084018,
+          "lifted": 2895.4661026626027,
+          "rounded": 3072,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "bundleGzipBytes": {
+          "raw": 8017.636134306061,
+          "lifted": 12026.454201459092,
+          "rounded": 12288,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "triangles": {
+          "raw": 2973.245296718476,
+          "lifted": 4459.867945077714,
+          "rounded": 4480,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "drawCalls": {
+          "raw": 2.1586785892744227,
+          "lifted": 3.238017883911634,
+          "rounded": 4,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "geometryMemoryBytes": {
+          "raw": 193174.65684514144,
+          "lifted": 289761.98526771215,
+          "rounded": 290816,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "warmGenerationP95Milliseconds": {
+          "raw": 10.12946695226598,
+          "lifted": 15.194200428398972,
+          "rounded": 16,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        }
+      },
+      "complexityGate": {
+        "tier": "full",
+        "worstCeilingRatio": 0.706900903970362,
+        "overruns": []
+      },
+      "budgetComparison": {
+        "scalars": {
+          "formula": 128,
+          "handSet": 64,
+          "measuredConsumption": 64,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "recipeBytes": {
+          "formula": 3072,
+          "handSet": 1536,
+          "measuredConsumption": 676,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "bundleGzipBytes": {
+          "formula": 12288,
+          "handSet": 6144,
+          "measuredConsumption": 2483,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "triangles": {
+          "formula": 4480,
+          "handSet": 1536,
+          "measuredConsumption": 280,
+          "formulaOverHandSet": 2.9166666666666665,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "drawCalls": {
+          "formula": 4,
+          "handSet": 2,
+          "measuredConsumption": 2,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "geometryMemoryBytes": {
+          "formula": 290816,
+          "handSet": 98304,
+          "measuredConsumption": 8112,
+          "formulaOverHandSet": 2.9583333333333335,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "warmGenerationP95Milliseconds": {
+          "formula": 16,
+          "handSet": 8,
+          "measuredConsumption": 0.20000001788139343,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        }
+      },
+      "budgetProxy": {
+        "constructed": true,
+        "budgetIsBinding": false,
+        "triangleBudget": 4480,
+        "triangleCount": 424,
+        "vertexCount": 408,
+        "lattice": null,
+        "budgetUtilization": 0.09464285714285714,
+        "construction": {
+          "method": "the Authored Reference unchanged, because the triangle budget already holds it",
+          "latticeSelection": "not applicable",
+          "retains": "nothing; the proxy mesh is scored and discarded"
+        },
+        "materialRoles": [
+          {
+            "roleId": "role-0",
+            "color": null
+          }
+        ],
+        "materialRoleNote": "flat per-role colours substitute for the source texture; L1 does not score colour, so no appearance reachability is claimed here"
+      },
+      "reachabilityBound": {
+        "geometry.bounds.maxAxisRelativeError": 0,
+        "geometry.bounds.bottomAnchorErrorCanonical": 0,
+        "geometry.silhouette.meanIou": 1,
+        "geometry.silhouette.worstViewIou": 1,
+        "geometry.silhouette.meanEdgeDistancePixels": 0,
+        "geometry.silhouette.edgeDistanceP95Pixels": 0,
+        "geometry.depth.mae": 0,
+        "geometry.depth.p95": 0
+      }
+    },
+    {
+      "unitId": "blue-hat",
+      "label": "Blue Hat",
+      "complexity": {
+        "triangleCount": 704,
+        "connectedComponentCount": 2,
+        "symmetryReducedPartCount": 2,
+        "materialRoleCount": 1,
+        "contourCurvatureComplexity": 0.9385566910488631,
+        "contourCurvatureComplexityWorstView": 0.9541474724501706,
+        "contourMeasurement": {
+          "stage": "fine",
+          "size": 256,
+          "viewCount": 8,
+          "definition": "perimeter / (2 * sqrt(pi * area)), a dimensionless ratio"
+        }
+      },
+      "features": {
+        "intercept": 1,
+        "log2ConnectedComponents": 1.584962500721156,
+        "log2SymmetryReducedParts": 1.584962500721156,
+        "log2MaterialRoles": 1,
+        "contourCurvatureComplexity": 0.9385566910488631
+      },
+      "formulaBudget": {
+        "scalars": 80,
+        "recipeBytes": 2048,
+        "bundleGzipBytes": 8192,
+        "triangles": 896,
+        "drawCalls": 3,
+        "geometryMemoryBytes": 53248,
+        "warmGenerationP95Milliseconds": 10
+      },
+      "formulaDetail": {
+        "scalars": {
+          "raw": 50.18571957614296,
+          "lifted": 75.27857936421444,
+          "rounded": 80,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "recipeBytes": {
+          "raw": 1225.739696689287,
+          "lifted": 1838.6095450339305,
+          "rounded": 2048,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "bundleGzipBytes": {
+          "raw": 5161.36613063285,
+          "lifted": 7742.049195949276,
+          "rounded": 8192,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "triangles": {
+          "raw": 575.5221429472214,
+          "lifted": 863.2832144208321,
+          "rounded": 896,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "drawCalls": {
+          "raw": 1.3922351010083975,
+          "lifted": 2.0883526515125963,
+          "rounded": 3,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "geometryMemoryBytes": {
+          "raw": 34702.526081012824,
+          "lifted": 52053.789121519236,
+          "rounded": 53248,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "warmGenerationP95Milliseconds": {
+          "raw": 6.155049444177248,
+          "lifted": 9.232574166265872,
+          "rounded": 10,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        }
+      },
+      "complexityGate": {
+        "tier": "full",
+        "worstCeilingRatio": 0.44887928345554945,
+        "overruns": []
+      },
+      "budgetComparison": {
+        "scalars": {
+          "formula": 80,
+          "handSet": 64,
+          "measuredConsumption": 58,
+          "formulaOverHandSet": 1.25,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "recipeBytes": {
+          "formula": 2048,
+          "handSet": 1536,
+          "measuredConsumption": 783,
+          "formulaOverHandSet": 1.3333333333333333,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "bundleGzipBytes": {
+          "formula": 8192,
+          "handSet": 6144,
+          "measuredConsumption": 1867,
+          "formulaOverHandSet": 1.3333333333333333,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "triangles": {
+          "formula": 896,
+          "handSet": 1536,
+          "measuredConsumption": 704,
+          "formulaOverHandSet": 0.5833333333333334,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "drawCalls": {
+          "formula": 3,
+          "handSet": 2,
+          "measuredConsumption": 2,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "geometryMemoryBytes": {
+          "formula": 53248,
+          "handSet": 98304,
+          "measuredConsumption": 14768,
+          "formulaOverHandSet": 0.5416666666666666,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "warmGenerationP95Milliseconds": {
+          "formula": 10,
+          "handSet": 8,
+          "measuredConsumption": 0.30000001192092896,
+          "formulaOverHandSet": 1.25,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        }
+      },
+      "budgetProxy": {
+        "constructed": true,
+        "budgetIsBinding": false,
+        "triangleBudget": 896,
+        "triangleCount": 704,
+        "vertexCount": 388,
+        "lattice": null,
+        "budgetUtilization": 0.7857142857142857,
+        "construction": {
+          "method": "the Authored Reference unchanged, because the triangle budget already holds it",
+          "latticeSelection": "not applicable",
+          "retains": "nothing; the proxy mesh is scored and discarded"
+        },
+        "materialRoles": [
+          {
+            "roleId": "role-0",
+            "color": null
+          }
+        ],
+        "materialRoleNote": "flat per-role colours substitute for the source texture; L1 does not score colour, so no appearance reachability is claimed here"
+      },
+      "reachabilityBound": {
+        "geometry.bounds.maxAxisRelativeError": 0,
+        "geometry.bounds.bottomAnchorErrorCanonical": 0,
+        "geometry.silhouette.meanIou": 1,
+        "geometry.silhouette.worstViewIou": 1,
+        "geometry.silhouette.meanEdgeDistancePixels": 0,
+        "geometry.silhouette.edgeDistanceP95Pixels": 0,
+        "geometry.depth.mae": 0,
+        "geometry.depth.p95": 0
+      }
+    },
+    {
+      "unitId": "vase",
+      "label": "Vase",
+      "complexity": {
+        "triangleCount": 732,
+        "connectedComponentCount": 1,
+        "symmetryReducedPartCount": 1,
+        "materialRoleCount": 1,
+        "contourCurvatureComplexity": 1.2224138325070917,
+        "contourCurvatureComplexityWorstView": 1.2323303515634165,
+        "contourMeasurement": {
+          "stage": "fine",
+          "size": 256,
+          "viewCount": 8,
+          "definition": "perimeter / (2 * sqrt(pi * area)), a dimensionless ratio"
+        }
+      },
+      "features": {
+        "intercept": 1,
+        "log2ConnectedComponents": 1,
+        "log2SymmetryReducedParts": 1,
+        "log2MaterialRoles": 1,
+        "contourCurvatureComplexity": 1.2224138325070917
+      },
+      "formulaBudget": {
+        "scalars": 80,
+        "recipeBytes": 2048,
+        "bundleGzipBytes": 7680,
+        "triangles": 832,
+        "drawCalls": 2,
+        "geometryMemoryBytes": 45056,
+        "warmGenerationP95Milliseconds": 9
+      },
+      "formulaDetail": {
+        "scalars": {
+          "raw": 50.18728934086974,
+          "lifted": 75.28093401130461,
+          "rounded": 80,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "recipeBytes": {
+          "raw": 1195.7821868889669,
+          "lifted": 1793.6732803334503,
+          "rounded": 2048,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "bundleGzipBytes": {
+          "raw": 4998.943093668521,
+          "lifted": 7498.414640502782,
+          "rounded": 7680,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "triangles": {
+          "raw": 529.1120023439322,
+          "lifted": 793.6680035158984,
+          "rounded": 832,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "drawCalls": {
+          "raw": 1.3291591857181018,
+          "lifted": 1.9937387785771525,
+          "rounded": 2,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "geometryMemoryBytes": {
+          "raw": 29234.848649242787,
+          "lifted": 43852.27297386418,
+          "rounded": 45056,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "warmGenerationP95Milliseconds": {
+          "raw": 5.8639184104922935,
+          "lifted": 8.79587761573844,
+          "rounded": 9,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        }
+      },
+      "complexityGate": {
+        "tier": "full",
+        "worstCeilingRatio": 0.43790851570640876,
+        "overruns": []
+      },
+      "budgetComparison": {
+        "scalars": {
+          "formula": 80,
+          "handSet": 48,
+          "measuredConsumption": 44,
+          "formulaOverHandSet": 1.6666666666666667,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "recipeBytes": {
+          "formula": 2048,
+          "handSet": 1024,
+          "measuredConsumption": 576,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "bundleGzipBytes": {
+          "formula": 7680,
+          "handSet": 5120,
+          "measuredConsumption": 1227,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "triangles": {
+          "formula": 832,
+          "handSet": 1100,
+          "measuredConsumption": 768,
+          "formulaOverHandSet": 0.7563636363636363,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "drawCalls": {
+          "formula": 2,
+          "handSet": 1,
+          "measuredConsumption": 1,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "geometryMemoryBytes": {
+          "formula": 45056,
+          "handSet": 40960,
+          "measuredConsumption": 23484,
+          "formulaOverHandSet": 1.1,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "warmGenerationP95Milliseconds": {
+          "formula": 9,
+          "handSet": 5,
+          "measuredConsumption": 0.20000000298023224,
+          "formulaOverHandSet": 1.8,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        }
+      },
+      "budgetProxy": {
+        "constructed": true,
+        "budgetIsBinding": false,
+        "triangleBudget": 832,
+        "triangleCount": 732,
+        "vertexCount": 431,
+        "lattice": null,
+        "budgetUtilization": 0.8798076923076923,
+        "construction": {
+          "method": "the Authored Reference unchanged, because the triangle budget already holds it",
+          "latticeSelection": "not applicable",
+          "retains": "nothing; the proxy mesh is scored and discarded"
+        },
+        "materialRoles": [
+          {
+            "roleId": "role-0",
+            "color": null
+          }
+        ],
+        "materialRoleNote": "flat per-role colours substitute for the source texture; L1 does not score colour, so no appearance reachability is claimed here"
+      },
+      "reachabilityBound": {
+        "geometry.bounds.maxAxisRelativeError": 0,
+        "geometry.bounds.bottomAnchorErrorCanonical": 0,
+        "geometry.silhouette.meanIou": 1,
+        "geometry.silhouette.worstViewIou": 1,
+        "geometry.silhouette.meanEdgeDistancePixels": 0,
+        "geometry.silhouette.edgeDistanceP95Pixels": 0,
+        "geometry.depth.mae": 0,
+        "geometry.depth.p95": 0
+      }
+    },
+    {
+      "unitId": "candle",
+      "label": "Candle",
+      "complexity": {
+        "triangleCount": 852,
+        "connectedComponentCount": 3,
+        "symmetryReducedPartCount": 3,
+        "materialRoleCount": 1,
+        "contourCurvatureComplexity": 1.5653410624066386,
+        "contourCurvatureComplexityWorstView": 1.5787779731923162,
+        "contourMeasurement": {
+          "stage": "fine",
+          "size": 256,
+          "viewCount": 8,
+          "definition": "perimeter / (2 * sqrt(pi * area)), a dimensionless ratio"
+        }
+      },
+      "features": {
+        "intercept": 1,
+        "log2ConnectedComponents": 2,
+        "log2SymmetryReducedParts": 2,
+        "log2MaterialRoles": 1,
+        "contourCurvatureComplexity": 1.5653410624066386
+      },
+      "formulaBudget": {
+        "scalars": 96,
+        "recipeBytes": 2304,
+        "bundleGzipBytes": 9216,
+        "triangles": 1472,
+        "drawCalls": 3,
+        "geometryMemoryBytes": 90112,
+        "warmGenerationP95Milliseconds": 11
+      },
+      "formulaDetail": {
+        "scalars": {
+          "raw": 60.87438487434835,
+          "lifted": 91.31157731152253,
+          "rounded": 96,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "recipeBytes": {
+          "raw": 1433.770180288151,
+          "lifted": 2150.6552704322266,
+          "rounded": 2304,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "bundleGzipBytes": {
+          "raw": 5895.78396771986,
+          "lifted": 8843.67595157979,
+          "rounded": 9216,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "triangles": {
+          "raw": 976.1654254220397,
+          "lifted": 1464.2481381330595,
+          "rounded": 1472,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "drawCalls": {
+          "raw": 1.5894149245675875,
+          "lifted": 2.3841223868513812,
+          "rounded": 3,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "geometryMemoryBytes": {
+          "raw": 58776.92525844548,
+          "lifted": 88165.38788766821,
+          "rounded": 90112,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "warmGenerationP95Milliseconds": {
+          "raw": 7.136735478104594,
+          "lifted": 10.705103217156891,
+          "rounded": 11,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        }
+      },
+      "complexityGate": {
+        "tier": "full",
+        "worstCeilingRatio": 0.5250623218828678,
+        "overruns": []
+      },
+      "budgetComparison": {
+        "scalars": {
+          "formula": 96,
+          "handSet": 96,
+          "measuredConsumption": 85,
+          "formulaOverHandSet": 1,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "recipeBytes": {
+          "formula": 2304,
+          "handSet": 2048,
+          "measuredConsumption": 1034,
+          "formulaOverHandSet": 1.125,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "bundleGzipBytes": {
+          "formula": 9216,
+          "handSet": 8192,
+          "measuredConsumption": 2552,
+          "formulaOverHandSet": 1.125,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "triangles": {
+          "formula": 1472,
+          "handSet": 2048,
+          "measuredConsumption": 672,
+          "formulaOverHandSet": 0.71875,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "drawCalls": {
+          "formula": 3,
+          "handSet": 3,
+          "measuredConsumption": 3,
+          "formulaOverHandSet": 1,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "geometryMemoryBytes": {
+          "formula": 90112,
+          "handSet": 131072,
+          "measuredConsumption": 13008,
+          "formulaOverHandSet": 0.6875,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "warmGenerationP95Milliseconds": {
+          "formula": 11,
+          "handSet": 10,
+          "measuredConsumption": 0.30000001192092896,
+          "formulaOverHandSet": 1.1,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        }
+      },
+      "budgetProxy": {
+        "constructed": true,
+        "budgetIsBinding": false,
+        "triangleBudget": 1472,
+        "triangleCount": 852,
+        "vertexCount": 530,
+        "lattice": null,
+        "budgetUtilization": 0.5788043478260869,
+        "construction": {
+          "method": "the Authored Reference unchanged, because the triangle budget already holds it",
+          "latticeSelection": "not applicable",
+          "retains": "nothing; the proxy mesh is scored and discarded"
+        },
+        "materialRoles": [
+          {
+            "roleId": "role-0",
+            "color": null
+          }
+        ],
+        "materialRoleNote": "flat per-role colours substitute for the source texture; L1 does not score colour, so no appearance reachability is claimed here"
+      },
+      "reachabilityBound": {
+        "geometry.bounds.maxAxisRelativeError": 0,
+        "geometry.bounds.bottomAnchorErrorCanonical": 0,
+        "geometry.silhouette.meanIou": 1,
+        "geometry.silhouette.worstViewIou": 1,
+        "geometry.silhouette.meanEdgeDistancePixels": 0,
+        "geometry.silhouette.edgeDistanceP95Pixels": 0,
+        "geometry.depth.mae": 0,
+        "geometry.depth.p95": 0
+      }
+    },
+    {
+      "unitId": "mushroom",
+      "label": "Mushroom",
+      "complexity": {
+        "triangleCount": 1802,
+        "connectedComponentCount": 5,
+        "symmetryReducedPartCount": 4,
+        "materialRoleCount": 1,
+        "contourCurvatureComplexity": 3.254389074352578,
+        "contourCurvatureComplexityWorstView": 3.5642787262627915,
+        "contourMeasurement": {
+          "stage": "fine",
+          "size": 256,
+          "viewCount": 8,
+          "definition": "perimeter / (2 * sqrt(pi * area)), a dimensionless ratio"
+        }
+      },
+      "features": {
+        "intercept": 1,
+        "log2ConnectedComponents": 2.584962500721156,
+        "log2SymmetryReducedParts": 2.321928094887362,
+        "log2MaterialRoles": 1,
+        "contourCurvatureComplexity": 3.254389074352578
+      },
+      "formulaBudget": {
+        "scalars": 144,
+        "recipeBytes": 3072,
+        "bundleGzipBytes": 12288,
+        "triangles": 4928,
+        "drawCalls": 4,
+        "geometryMemoryBytes": 241664,
+        "warmGenerationP95Milliseconds": 15
+      },
+      "formulaDetail": {
+        "scalars": {
+          "raw": 95.822317606829,
+          "lifted": 143.7334764102435,
+          "rounded": 144,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "recipeBytes": {
+          "raw": 1981.9672280173552,
+          "lifted": 2972.9508420260327,
+          "rounded": 3072,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "bundleGzipBytes": {
+          "raw": 7917.599636959962,
+          "lifted": 11876.399455439943,
+          "rounded": 12288,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "triangles": {
+          "raw": 3242.9877781486593,
+          "lifted": 4864.481667222989,
+          "rounded": 4928,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "drawCalls": {
+          "raw": 2.0354354088247475,
+          "lifted": 3.053153113237121,
+          "rounded": 4,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "geometryMemoryBytes": {
+          "raw": 159353.92633010092,
+          "lifted": 239030.88949515138,
+          "rounded": 241664,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "warmGenerationP95Milliseconds": {
+          "raw": 9.5871613498999,
+          "lifted": 14.380742024849848,
+          "rounded": 15,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        }
+      },
+      "complexityGate": {
+        "tier": "full",
+        "worstCeilingRatio": 0.7486118563033516,
+        "overruns": []
+      },
+      "budgetComparison": {
+        "scalars": {
+          "formula": 144,
+          "handSet": 96,
+          "measuredConsumption": 78,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "recipeBytes": {
+          "formula": 3072,
+          "handSet": 2048,
+          "measuredConsumption": 658,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "bundleGzipBytes": {
+          "formula": 12288,
+          "handSet": 8192,
+          "measuredConsumption": 1343,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "triangles": {
+          "formula": 4928,
+          "handSet": 3840,
+          "measuredConsumption": 1560,
+          "formulaOverHandSet": 1.2833333333333334,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "drawCalls": {
+          "formula": 4,
+          "handSet": 2,
+          "measuredConsumption": 2,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "geometryMemoryBytes": {
+          "formula": 241664,
+          "handSet": 196608,
+          "measuredConsumption": 30840,
+          "formulaOverHandSet": 1.2291666666666667,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "warmGenerationP95Milliseconds": {
+          "formula": 15,
+          "handSet": 10,
+          "measuredConsumption": 0.5,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        }
+      },
+      "budgetProxy": {
+        "constructed": true,
+        "budgetIsBinding": false,
+        "triangleBudget": 4928,
+        "triangleCount": 1802,
+        "vertexCount": 2051,
+        "lattice": null,
+        "budgetUtilization": 0.3656655844155844,
+        "construction": {
+          "method": "the Authored Reference unchanged, because the triangle budget already holds it",
+          "latticeSelection": "not applicable",
+          "retains": "nothing; the proxy mesh is scored and discarded"
+        },
+        "materialRoles": [
+          {
+            "roleId": "role-0",
+            "color": null
+          }
+        ],
+        "materialRoleNote": "flat per-role colours substitute for the source texture; L1 does not score colour, so no appearance reachability is claimed here"
+      },
+      "reachabilityBound": {
+        "geometry.bounds.maxAxisRelativeError": 0,
+        "geometry.bounds.bottomAnchorErrorCanonical": 0,
+        "geometry.silhouette.meanIou": 1,
+        "geometry.silhouette.worstViewIou": 1,
+        "geometry.silhouette.meanEdgeDistancePixels": 0,
+        "geometry.silhouette.edgeDistanceP95Pixels": 0,
+        "geometry.depth.mae": 0,
+        "geometry.depth.p95": 0
+      }
+    },
+    {
+      "unitId": "umbrella",
+      "label": "Umbrella",
+      "complexity": {
+        "triangleCount": 3840,
+        "connectedComponentCount": 76,
+        "symmetryReducedPartCount": 28,
+        "materialRoleCount": 1,
+        "contourCurvatureComplexity": 1.3763993543941189,
+        "contourCurvatureComplexityWorstView": 2.184966884866571,
+        "contourMeasurement": {
+          "stage": "fine",
+          "size": 256,
+          "viewCount": 8,
+          "definition": "perimeter / (2 * sqrt(pi * area)), a dimensionless ratio"
+        }
+      },
+      "features": {
+        "intercept": 1,
+        "log2ConnectedComponents": 6.266786540694901,
+        "log2SymmetryReducedParts": 4.857980995127572,
+        "log2MaterialRoles": 1,
+        "contourCurvatureComplexity": 1.3763993543941189
+      },
+      "formulaBudget": {
+        "scalars": 144,
+        "recipeBytes": 3072,
+        "bundleGzipBytes": 14848,
+        "triangles": 7872,
+        "drawCalls": 4,
+        "geometryMemoryBytes": 368640,
+        "warmGenerationP95Milliseconds": 18
+      },
+      "formulaDetail": {
+        "scalars": {
+          "raw": 91.24580329518618,
+          "lifted": 136.86870494277926,
+          "rounded": 144,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "recipeBytes": {
+          "raw": 1978.9251009737475,
+          "lifted": 2968.3876514606213,
+          "rounded": 3072,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "bundleGzipBytes": {
+          "raw": 9565.551981888662,
+          "lifted": 14348.327972832994,
+          "rounded": 14848,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "triangles": {
+          "raw": 5227.776013460765,
+          "lifted": 7841.664020191148,
+          "rounded": 7872,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "drawCalls": {
+          "raw": 2.3022688292676237,
+          "lifted": 3.4534032439014357,
+          "rounded": 4,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "geometryMemoryBytes": {
+          "raw": 244115.65384697882,
+          "lifted": 366173.48077046825,
+          "rounded": 368640,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        },
+        "warmGenerationP95Milliseconds": {
+          "raw": 11.573430525474247,
+          "lifted": 17.36014578821137,
+          "rounded": 18,
+          "clampedToCeiling": false,
+          "liftedToFloor": false
+        }
+      },
+      "complexityGate": {
+        "tier": "full",
+        "worstCeilingRatio": 0.7247040164698783,
+        "overruns": []
+      },
+      "budgetComparison": {
+        "scalars": {
+          "formula": 144,
+          "handSet": 96,
+          "measuredConsumption": 83,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "recipeBytes": {
+          "formula": 3072,
+          "handSet": 2048,
+          "measuredConsumption": 1036,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "bundleGzipBytes": {
+          "formula": 14848,
+          "handSet": 10240,
+          "measuredConsumption": 3551,
+          "formulaOverHandSet": 1.45,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "triangles": {
+          "formula": 7872,
+          "handSet": 5760,
+          "measuredConsumption": 5336,
+          "formulaOverHandSet": 1.3666666666666667,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "drawCalls": {
+          "formula": 4,
+          "handSet": 2,
+          "measuredConsumption": 2,
+          "formulaOverHandSet": 2,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "geometryMemoryBytes": {
+          "formula": 368640,
+          "handSet": 262144,
+          "measuredConsumption": 221544,
+          "formulaOverHandSet": 1.40625,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        },
+        "warmGenerationP95Milliseconds": {
+          "formula": 18,
+          "handSet": 12,
+          "measuredConsumption": 1.2000000178813934,
+          "formulaOverHandSet": 1.5,
+          "formulaCoversConsumption": true,
+          "withinGlobalCeiling": true
+        }
+      },
+      "budgetProxy": {
+        "constructed": true,
+        "budgetIsBinding": false,
+        "triangleBudget": 7872,
+        "triangleCount": 3840,
+        "vertexCount": 3053,
+        "lattice": null,
+        "budgetUtilization": 0.4878048780487805,
+        "construction": {
+          "method": "the Authored Reference unchanged, because the triangle budget already holds it",
+          "latticeSelection": "not applicable",
+          "retains": "nothing; the proxy mesh is scored and discarded"
+        },
+        "materialRoles": [
+          {
+            "roleId": "role-0",
+            "color": null
+          }
+        ],
+        "materialRoleNote": "flat per-role colours substitute for the source texture; L1 does not score colour, so no appearance reachability is claimed here"
+      },
+      "reachabilityBound": {
+        "geometry.bounds.maxAxisRelativeError": 0,
+        "geometry.bounds.bottomAnchorErrorCanonical": 0,
+        "geometry.silhouette.meanIou": 1,
+        "geometry.silhouette.worstViewIou": 1,
+        "geometry.silhouette.meanEdgeDistancePixels": 0,
+        "geometry.silhouette.edgeDistanceP95Pixels": 0,
+        "geometry.depth.mae": 0,
+        "geometry.depth.p95": 0
+      }
+    }
+  ],
+  "verdict": {
+    "frozenCoefficientsMatchFreshFit": true,
+    "everyFormulaBudgetCoversAcceptedConsumption": true,
+    "everyFormulaBudgetWithinGlobalCeiling": true,
+    "everyProxyConstructed": true,
+    "unitsWhereTheTriangleBudgetIsBinding": [],
+    "bindingBudgetNote": "where the triangle budget already holds the whole reference the proxy is the reference, so the reachability bound is exactly perfect and the reading is that compactness is not what limits geometric fidelity for that unit."
+  },
+  "checkPolicy": "--check recomputes the complexity measurements, the formula budgets, the proxy construction, and the proxy scores and requires them to match the frozen report exactly."
+}

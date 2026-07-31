@@ -12,7 +12,7 @@ Scope of this run: tickets 01 → 06 in order. Ticket 07 and later are untouched
 | 01 package skeleton, decision protocol, mock decider | resolved |
 | 02 measurement core copied with drift checks | resolved |
 | 03 CPU rasterizer, divergence tolerance, wall-clock | resolved |
-| 04 Complexity Budget Formula, global ceiling, Budget Proxy | not started |
+| 04 Complexity Budget Formula, global ceiling, Budget Proxy | resolved |
 | 05 generic perturbations, automatic Calibration Bracket | not started |
 | 06 end-to-end geometry reconstruction | not started |
 
@@ -22,7 +22,8 @@ Commits, one per ticket:
 | ------ | ------ |
 | 01 | `de7b2d9` |
 | 02 | `3263800` |
-| 03 | current `HEAD` |
+| 03 | `daa21f8` |
+| 04 | current `HEAD` |
 
 A hash cannot be written inside the commit it names, so each ticket's hash lands
 in the following ticket's commit. If this table is one row short of the resolved
@@ -84,7 +85,7 @@ worker-thread path, on all eight units, verified by sha256 over every buffer.
 ## Verification block, current state
 
 ```
-npm test                                                    147 passing / 0 failing
+npm test                                                    158 passing / 0 failing
 npm run check:stone-v2-contract                             PASS (6 candidate, 3 evidence files)
 npm run check:patterned-appearance-v2-contract              PASS
 node scripts/run-stage-2-eight-object-certification.mjs --check
@@ -95,8 +96,8 @@ git status --short                                          no red-line file mod
 Baseline before any work: `npm test` was 92 passing / 0 failing. The package's own
 21 tests live in `packages/mesh-to-code/test/` and are discovered by the
 repository's `node --test` as well as by the package's own runner, which is why
-the count rose. The package suite is 55 tests after ticket 03, and the
-repository's own count is unchanged at 92: 92 + 55 = 147. Both suites pass
+the count rose. The package suite is 66 tests after ticket 04, and the
+repository's own count is unchanged at 92: 92 + 66 = 158. Both suites pass
 standalone.
 
 Repository-side aggregator, all passing (5 checks):
@@ -104,6 +105,8 @@ Repository-side aggregator, all passing (5 checks):
 ```
 node scripts/check-decompiler-package.mjs        (relative path only, never a workspace)
 node scripts/check-decompiler-measurement-drift.mjs
+node scripts/run-decompiler-rasterizer-calibration.mjs --check   (needs the LFS reference)
+node scripts/run-decompiler-budget-calibration.mjs --check       (needs the LFS reference)
 cd packages/mesh-to-code && npm test
 cd packages/mesh-to-code && npm run check:neutrality
 cd packages/mesh-to-code && npm run check:package-contents
@@ -171,6 +174,17 @@ unit where this bites: its root carries `y = -0.019646`. Reproducing the overwri
 was required to make the analytic bounds metric agree with the frozen numbers, and
 it turned a FAIL into 3.794e-15. Any later emission path must not rely on root
 placement to position a unit. Found during ticket 03; details in that ticket.
+
+**Two Phase A findings worth carrying into ticket 05 and beyond.**
+First, the Budget Proxy reachability bound is non-binding on all eight regression
+units: the formula's triangle budget already holds each whole reference, so every
+per-metric bound is exactly perfect and the proxy supplies no discriminating
+reachability information on this corpus. The mechanism works; the corpus does not
+exercise it. Second, the Complexity Budget Formula over-grants the simplest units
+by up to 8.7x relative to the hand-set budgets, so the compactness axis of the
+tier is permissive on simple inputs and the global ceiling is the real backstop.
+Both are recorded in the ticket 04 resolution and in
+`decompiler-budget-formula-v1.json`.
 
 **The divergence `--check` is not a CI job.** It reads the 69 MB Authored
 Reference, which is Git LFS content, so it sits with the other
