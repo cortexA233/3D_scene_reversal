@@ -35,6 +35,7 @@
     "check:plate-footprint": "node tools/development/measure-plate-footprint.mjs --check",
     "check:ground-plates": "node --test test/ground-plate-reconstruction.test.mjs",
     "check:bridges": "node --test test/bridge-reconstruction.test.mjs",
+    "check:pavilions": "node --test test/pavilion-reconstruction.test.mjs",
     "check:rocks": "node --test test/rock-reconstruction.test.mjs && node tools/development/measure-rock-supports.mjs --check",
     "measure:native-gpu": "node scripts/run-native-gpu-evidence.mjs",
     "check:native-gpu": "node scripts/run-native-gpu-evidence.mjs --check",

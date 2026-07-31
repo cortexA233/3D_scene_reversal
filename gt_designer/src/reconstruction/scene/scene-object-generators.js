@@ -1229,6 +1229,37 @@ function pile(rng, { pieces = 5 } = {}) {
 const AXIAL_REACH_PROFILES = Object.freeze({
   lantern: Object.freeze([0.5, 0.64, 0.67, 0.81, 0.81, 0.84, 0.79, 0.69, 0.6, 0.38]),
   "npc-statue": Object.freeze([0.64, 0.84, 0.81, 0.8, 0.76, 0.8, 0.71, 0.71, 0.62, 0.4]),
+  /**
+   * The two pavilions, which are single placements and so are measured as thinly as this
+   * repository ever measures anything: 96 samples over ten deciles, and two of the
+   * pavilion's ten bands came back empty. Those two are linearly interpolated from their
+   * measured neighbours — 0.605 between 0.60 and 0.61, and 0.45 between 0.44 and 0.46 —
+   * which is the smallest assumption available and is marked here rather than hidden.
+   *
+   * Both **taper**: widest at the base, 0.70 and 0.72, and narrowest at the crown, 0.15
+   * and 0.21. Both are bottom-heavy too, 32.3 and 41.7 per cent of their area in the base
+   * decile. The `architecture` family they used to be built by does the opposite — a wide
+   * plinth tapering to a four-sided cone with a hollow body.
+   */
+  pavilion: Object.freeze([0.7, 0.62, 0.6, 0.605, 0.61, 0.44, 0.45, 0.46, 0.48, 0.15]),
+  "pavilion-single": Object.freeze([
+    0.72, 0.59, 0.57, 0.47, 0.41, 0.46, 0.43, 0.55, 0.33, 0.21,
+  ]),
+});
+
+/**
+ * How many sides a revolved plan gets.
+ *
+ * The decorations are round and take the default. A pavilion is not: measured by scan
+ * conversion its footprint covers 0.6152 of its own rectangle and the single pavilion's
+ * 0.8458, against 0.5 for a diamond, 0.707 for a regular octagon and 1.0 for an aligned
+ * square. Eight sides is the closest single family value to both and it is what an
+ * authored pavilion roof is; picking a different count for each from one placement each
+ * would be fitting to a sample of one. The residual is recorded rather than tuned away.
+ */
+const AXIAL_PLAN_SEGMENTS = Object.freeze({
+  pavilion: 8,
+  "pavilion-single": 8,
 });
 
 /**
@@ -1294,8 +1325,23 @@ const GENERATORS = Object.freeze({
   mountain: horizonGroup,
 
   // Architecture
-  pavilion: (rng) => architecture(rng, { levels: 2 }),
-  "pavilion-single": (rng) => architecture(rng, { levels: 1, eaves: 1.24 }),
+  // One revolved surface through the measured taper, not a plinth-body-cone stack. The
+  // authored pavilions are one mesh each, so one semantic part is the faithful count —
+  // the same argument ADR-0060 made for the lantern and the statue.
+  pavilion: () =>
+    group([
+      axialLathe(AXIAL_REACH_PROFILES.pavilion, {
+        id: "pavilion",
+        segments: AXIAL_PLAN_SEGMENTS.pavilion,
+      }),
+    ]),
+  "pavilion-single": () =>
+    group([
+      axialLathe(AXIAL_REACH_PROFILES["pavilion-single"], {
+        id: "pavilion",
+        segments: AXIAL_PLAN_SEGMENTS["pavilion-single"],
+      }),
+    ]),
   "pavilion-tower": (rng) => architecture(rng, { levels: 3, eaves: 1.1 }),
   "ring-booth": (rng) => architecture(rng, { levels: 1, eaves: 1.3 }),
   shop: (rng) => architecture(rng, { levels: 1 }),

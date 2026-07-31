@@ -11,7 +11,7 @@ Scene Recipe carries nothing that tells them apart. Read the three findings belo
 trying again.
 
 - [ ] Add one non-interactive check that is red until the structures and bridges groups reach their calibrated per-group silhouette thresholds.
-- [ ] Build one architecture family program with compact per-entity controls for levels, eaves, platform, posts, and roof pitch.
+- [ ] Build one architecture family program with compact per-entity controls for levels, eaves, platform, posts, and roof pitch. — the two pavilions are done as revolved profiles; the sixteen `shop-stall`, seven `fruit-shop` and the rest still use `architecture`.
 - [x] Build a bridge program with deck, railing, abutment, and arch as separate semantic parts. — deck, two railings and two abutments, all clipped to the deck's own footprint (ADR-0063). No arch: the vertical profile carries that as `subDeckShare` instead.
 - [ ] Keep the family's controls compact; a per-building transform list is not a reconstruction.
 - [ ] Keep every entity's anchor and Target AABB Extent exact.
@@ -135,6 +135,52 @@ built deck's own principal axis against the control.
 
 The record of the reverted band is kept below because its geometry analysis is still the
 argument for the form.
+
+## The pavilions are revolved surfaces now
+
+Both are single placements, so the evidence is as thin as this repository gets: 96 samples
+over ten deciles, with two of the pavilion's bands empty (linearly interpolated from their
+measured neighbours, marked in the generator). The prompt's route was the right one — the
+accepted revolved profile rather than a stack of boxes.
+
+Both **taper**, which is the opposite of what `architecture` built: widest at the base,
+0.70 and 0.72, narrowest at the crown, 0.15 and 0.21, with 32.3 and 41.7 per cent of their
+area in the base decile alone. The candidate now does the same, and the base decile lands
+at 34.9 against 32.3 and 39.5 against 41.7.
+
+| | plate/stack | lathe |
+| --- | --- | --- |
+| `structures` silhouette IoU | 0.5010 | **0.5654** |
+| `structures` contour p95 | 13.87 | **13.57** |
+| `structures` world normal p95 | 95.5 | 107.2 |
+| `structures` candidate/reference pixels | 0.89 | **1.08** |
+| `pavilion` surface p95 | 18.641 | **15.5325** |
+| `pavilion-single` surface p95 | 17.6658 | **16.6195** |
+
+In the stack: group silhouette IoU 0.493780 to **0.507721**, worst group depth 118.403257
+to **113.122969**, semantic 0.946068 to **0.946688**, worst camera 0.910849 to **0.911040**,
+confusion 0.018105 to **0.018047**, depth 20.585709 to 20.583150. Against: contour p95
+23.773317 to 25.776138, worst contour 151.6212 to 186.6568, normals 76.136019 to 77.239404.
+
+**The eight-sided plan is a declared compromise.** Scan conversion puts the two authored
+footprints at 0.6152 and 0.8458 of their own rectangles, against 0.5 for a diamond, 0.707
+for a regular octagon and 1.0 for an aligned square. Eight sides is the closest single
+family value to both; choosing a different count for each, from one placement each, would
+be fitting to a sample of one. `check:pavilions` asserts the two measurements still
+straddle the octagon, so if a re-measurement ever moves both to the same side the
+compromise stops being one.
+
+**Two residuals, named.** `structures` world normal went 95.5 to 107.2 and the aggregate
+76.14 to 77.24: an eight-sided lathe has flat facets where an authored pavilion has sloped
+roof planes, and that is a real cost of this representation rather than a bug.
+
+And the contour regression is **not** `structures`. The worst contour is `rocks` on
+`authoredOverview` at 186.66, where rocks draws 410 pixels against 962 — while on the other
+five cameras its contour is 7.1 to 14.5 and its IoU rose to 0.545 to 0.617. Over the six
+cameras `rocks` IoU went 0.3929 to **0.4592** and its pixel ratio 1.33 to **0.98**. Both of
+its independent metrics say it improved; the one that disagrees is the one this ticket
+already records as unstable on sparse groups, held to an analytical fixture in
+`test/scene-pass-metrics.test.mjs`.
 
 ## Finding: the deck band along the measured axis was built and reverted too
 

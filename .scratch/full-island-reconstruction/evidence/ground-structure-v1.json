@@ -2,137 +2,148 @@
   "schemaVersion": "ground-structure-v1",
   "authority": "Assembled Authored Scene",
   "subject": "the lower band of the Assembled Authored Scene's structural trees",
-  "measuredAt": "2026-07-31T11:21:40.096Z",
+  "measuredAt": "2026-07-31T12:20:15.583Z",
   "raster": 96,
   "band": 1,
   "note": "Connected components of the horizontal projection of the geometry inside the bottom BAND of each placement's own height, by triangle scan-conversion. Ticket 07 records the upright count as unrecoverable from a radially averaged profile, which is true of that profile: a radial mean cannot separate N posts at radius r from a solid cylinder of radius r. A banded scan conversion can, because one is N blobs and the other is a disc. reach and areaShare use the same normalisation as axial-massing-v1.json so a form built to this file is built to numbers both read.",
   "kinds": [
     {
-      "kind": "bridge",
-      "placements": 2,
+      "kind": "pavilion",
+      "placements": 1,
       "areaShare": 1,
-      "reach": 0.5449,
-      "coverage": 0.4996,
+      "reach": 0.4268,
+      "coverage": 0.6152,
       "componentsPerPlacement": [
-        1,
         1
       ],
       "componentsMedian": 1,
-      "outerComponentReach": 0.009
+      "outerComponentReach": 0.087
+    },
+    {
+      "kind": "pavilion-single",
+      "placements": 1,
+      "areaShare": 1,
+      "reach": 0.4961,
+      "coverage": 0.8458,
+      "componentsPerPlacement": [
+        1
+      ],
+      "componentsMedian": 1,
+      "outerComponentReach": 0.063
     }
   ],
   "placements": [
     {
-      "semanticId": "bridges/bridge-p1321-p0088-p0980",
+      "semanticId": "structures/pavilion-p2145-p0251-n1430",
       "meshes": 1,
       "occupancyMap": [
-        "     .++###++.          ",
-        "   .++#######+..        ",
-        " ##############+        ",
-        ".##############+        ",
-        "+##############+        ",
-        "###############+        ",
-        "..#############+        ",
-        "   ############+        ",
-        "   #############.       ",
-        "   ###############+.    ",
-        "   ################+..  ",
-        "   ##################.  ",
-        "   ##################.  ",
-        "   ++################.  ",
-        "     +###############.  ",
-        "     ...#############.  ",
-        "        +############.  ",
-        "        .#############  ",
-        "         ###############",
-        "         ###############",
-        "         ##############+",
-        "         ##############.",
-        "         ##########++.  ",
-        "          .######..     "
+        "             +#         ",
+        "           .###+        ",
+        "          +#####.       ",
+        "        .########       ",
+        "    #############+      ",
+        "    ##############.     ",
+        "    ###############     ",
+        "  .################.    ",
+        ".+##################.   ",
+        "+####################   ",
+        " ####################.  ",
+        " .####################. ",
+        "  +###################+ ",
+        "..#####################.",
+        "########################",
+        "######################+ ",
+        "#####################.  ",
+        "####################.   ",
+        "####################.   ",
+        "####################.   ",
+        "######++#######......   ",
+        "######. #####.          ",
+        "        .###.           ",
+        "         ++             "
       ],
-      "triangles": 8160,
+      "triangles": 5252,
       "extent": [
-        54.94,
-        15.7,
-        73.2
+        67.07,
+        67.79,
+        66.37
       ],
       "band": 1,
-      "bandTriangles": 8160,
+      "bandTriangles": 5252,
       "areaShare": 1,
-      "reach": 0.5567,
-      "coverage": 0.5677,
+      "reach": 0.4268,
+      "coverage": 0.6152,
       "components": 1,
       "largest": [
         {
-          "cells": 5232,
+          "cells": 5670,
           "occupancyShare": 1,
           "centre": [
-            0.005,
-            0.002
+            -0.044,
+            0.033
           ],
-          "centroidReach": 0.01,
+          "centroidReach": 0.087,
           "outerReach": 0.99
         }
       ],
       "specks": 0,
-      "kind": "bridge"
+      "kind": "pavilion"
     },
     {
-      "semanticId": "bridges/bridge-p1456-p0170-n0810",
+      "semanticId": "structures/pavilion-single-p0309-p0349-n1550",
       "meshes": 1,
       "occupancyMap": [
-        "                 +####  ",
-        "                +#####  ",
-        "               +######..",
-        "              .#########",
-        "             +##########",
-        "            +###########",
-        "           +############",
-        "          +############.",
-        "         +############. ",
-        "        +############.  ",
-        "       +############.   ",
-        "      #############.    ",
-        "     #############.     ",
-        "    #############.      ",
-        "   #############.       ",
-        "  #############.        ",
-        " #############.         ",
-        "+############.          ",
-        "############.           ",
-        "###########.            ",
-        "##########.             ",
-        "++#######               ",
-        "  +#####                ",
-        "  +####.                "
+        "    .....+++++######### ",
+        "####################### ",
+        "####################### ",
+        "####################### ",
+        "####################### ",
+        "#######################.",
+        "#######################.",
+        "#######################.",
+        "+######################.",
+        "+######################+",
+        "+######################+",
+        ".######################+",
+        ".######################+",
+        ".#######################",
+        ".#######################",
+        " #######################",
+        " #######################",
+        " #######################",
+        " #######################",
+        " ##################+++++",
+        " +++...###########.     ",
+        "       ###########.     ",
+        "       ###########+     ",
+        "       #########++.     "
       ],
-      "triangles": 6216,
+      "triangles": 4120,
       "extent": [
-        71.84,
-        23.12,
-        70.17
+        55.22,
+        54.79,
+        64.15
       ],
       "band": 1,
-      "bandTriangles": 6216,
+      "bandTriangles": 4120,
       "areaShare": 1,
-      "reach": 0.533,
-      "coverage": 0.4315,
+      "reach": 0.4961,
+      "coverage": 0.8458,
       "components": 1,
       "largest": [
         {
-          "cells": 3977,
+          "cells": 7795,
           "occupancyShare": 1,
           "centre": [
-            0.004,
-            0.004
+            0.003,
+            -0.032
           ],
-          "centroidReach": 0.008,
+          "centroidReach": 0.063,
           "outerReach": 0.99
         }
       ],
       "specks": 0,
-      "kind": "bridge"
+      "kind": "pavilion-single"
     }
   ]
 }
