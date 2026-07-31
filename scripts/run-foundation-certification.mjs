@@ -61,6 +61,8 @@ const PRODUCTION_FILES = [
   "gt_designer/src/reconstruction/scene/terrain-generator.js",
   "gt_designer/src/reconstruction/scene/terrain-program.js",
   "gt_designer/src/reconstruction/scene/material-families.js",
+  // Shared with the Stone milestone: the canonical support-direction set (ADR-0058).
+  "gt_designer/src/reconstruction/objects/stone-generator.js",
   "gt_designer/src/reconstruction/core/rng.js",
 ];
 

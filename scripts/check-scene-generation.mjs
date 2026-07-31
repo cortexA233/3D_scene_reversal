@@ -39,6 +39,12 @@ const PERMITTED_RUNTIME_PATHS = new Set([
   "/src/reconstruction/scene/terrain-generator.js",
   "/src/reconstruction/scene/terrain-program.js",
   "/src/reconstruction/scene/material-families.js",
+  // The accepted Bounded Support-plane Polyhedron's canonical direction set,
+  // shared rather than restated: two copies of a definition is how the reference
+  // and the candidate came to disagree while both formulas read identically
+  // (ADR-0055). The module is hash-frozen under stone-geometry-baseline-v2, so
+  // the scene runtime is now coupled to it deliberately.
+  "/src/reconstruction/objects/stone-generator.js",
   "/src/reconstruction/core/rng.js",
   "/vendor/three/build/three.module.js",
 ]);

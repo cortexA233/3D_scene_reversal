@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0057.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0058.
 
 ## Where the work stands
 
@@ -23,7 +23,7 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 09 — distributed cover | landed; the reference measurement was wrong and is fixed (ADR-0053) |
 | Reconstruction 10 — semantic part structure | done; gate passes at 0 against 3.5 (ADR-0056) |
 | Reconstruction 11 — material families | in progress; every albedo is measured, distant-rock converged |
-| Reconstruction 06 — ground surfaces | plazas and decks landed (ADR-0057); `rocks` actionable and newly exposed; `paths` blocked on 03 |
+| Reconstruction 06 — ground surfaces | plazas, decks and rocks landed (ADR-0057, ADR-0058); `paths` blocked on 03 |
 | Reconstruction 07, 12-16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
 ## Read this before trusting any number below
@@ -776,9 +776,29 @@ earlier was measured against the wrong thing.
   **doubled** — 25.6 to 47.9 — and `bridges` IoU slipped 0.370 to 0.360. None of those
   generators changed; the plaza had been covering them. So a per-group score measured
   while a neighbour over-draws is not independent of that neighbour, and the ranking has
-  to be re-read after each over-draw is fixed. `rocks` is now the most exposed shape
-  error in the village and is ticket 06's own next checkbox, with `fit-stone-supports.mjs`
-  already written for it.
+  to be re-read after each over-draw is fixed. `bridges` at 2.22 is the last man-made
+  over-draw left, so `structures` and `decorations` are still being flattered.
+- **`rocks` is fixed, and it paid back ADR-0057's only regression (ADR-0058).** The
+  scene generator was building a jittered sphere where the accepted Bounded
+  Support-plane Polyhedron belonged. Measured along the 24 canonical directions the
+  candidate averaged 0.8382 against the authored 0.9412 and sat **inside** the
+  reference in 23 of 24 directions — a sphere in a box touches the six face centres
+  and falls short everywhere else. The authored profile reaches 0.95-1.05 in the eight
+  upward-leaning directions against 0.86-0.99 horizontally: a boxy mass filling its
+  upper corners.
+  `rocks` contour p95 **47.93 to 24.06**, IoU 0.359 to 0.380, world normal 83.34 to
+  68.74; and in the stack, worst group contour **186.24 to 151.62** and group world
+  normal p95 80.41 to **79.21**, below where it stood before the plaza change.
+  The polyhedron is evaluated radially — the boundary along a ray is the minimum of
+  `support[i] / (ray · direction[i])` — so the hull construction in
+  `objects/stone-generator.js` is not duplicated; that file is hash-frozen under
+  `stone-geometry-baseline-v2`. The *direction set* is imported rather than restated,
+  and the cost is declared: that module is now in `PERMITTED_RUNTIME_PATHS` and
+  `PRODUCTION_FILES`, the graph is 13 production files, and the scene runtime is
+  deliberately coupled to another milestone's frozen artefact.
+  Two residuals are named, not smoothed: the rock now **over**-draws at 1.26 with a
+  3.6 per cent profile overshoot, because it is built to reach a 96-sample
+  underestimate and then normalised onto its box, and one direction is 0.188 out.
 - **The rest of the village is still blocked on a design decision, not on a form.**
   Read ticket 07's three findings before touching it. The short version:
   `plazas` draws 1.89 times the reference's pixels and `bridges` 2.11 because the
@@ -886,9 +906,14 @@ earlier was measured against the wrong thing.
   with 995 CRLFs and 31,800 bytes as LF, whose sha256 matches the frozen value
   exactly. `core.autocrlf` is `false`, so nothing is converting on checkout. It is
   a working-copy line-ending state, not a code defect, and none of the eleven
-  files is one this milestone edits. Decide it deliberately — renormalising eleven
-  files or re-freezing the contract are both repo-wide calls — rather than letting
-  it sit as an unexplained red.
+  files is one this milestone edits.
+  **Settled.** The test passes 7 of 7 in a fresh `git worktree` checkout of this same
+  commit while still failing in the original working copy, which confirms the
+  diagnosis outright: the frozen hashes are correct and one working copy's files have
+  CRLF on disk. There is nothing to decide repo-wide and nothing to re-freeze — the
+  fix is to renormalise that working copy (`git rm --cached -r . && git reset --hard`,
+  or re-clone). Do not re-freeze the contract to match a local line-ending state; that
+  would bake one machine's checkout into a frozen artefact.
 - The reference GLB can be read offline on the development side:
   `@gltf-transform/core`, `@gltf-transform/extensions` and `draco3dgltf` are
   already devDependencies and `tools/development/fit-stone-supports.mjs` is the

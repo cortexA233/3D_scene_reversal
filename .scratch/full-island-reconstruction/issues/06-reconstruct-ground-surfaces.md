@@ -5,15 +5,15 @@
 **Blocked by:** 03 - Fit terrain elevation and the shore profile. **This is a real
 block, measured below, not a formality.**
 
-**Status:** `plazas` and `deck` landed — the over-draw was footprint coverage, not
-terrain, and the group's pixel ratio is 1.89 to **1.12**. `paths` remains genuinely
-blocked on 03. `rocks` is actionable and now more urgent than it was, because the
-plaza was covering it.
+**Status:** `plazas`, `deck` and `rocks` landed. The plaza over-draw was footprint
+coverage, not terrain (pixel ratio 1.89 to **1.12**), and the rocks were a jittered
+sphere where the accepted support-plane representation belonged (contour p95 47.9 to
+**24.1**). `paths` remains genuinely blocked on 03.
 
 - [ ] Add one non-interactive check that is red until the paths, plazas, and rocks groups reach their calibrated per-group silhouette thresholds.
 - [x] Reconstruct plazas and decks as bordered paved slabs following their measured footprints. — as a walk and crossing paths driven by two measured per-entity controls, ADR-0057. `npm run check:ground-plates`.
 - [ ] Reconstruct path stones and paving slabs with footprint extrusion, settled on the generated terrain.
-- [ ] Reconstruct shore and inland rocks with the accepted bounded support-plane representation.
+- [x] Reconstruct shore and inland rocks with the accepted bounded support-plane representation. — ADR-0058, evaluated radially so the hash-frozen hull construction is not duplicated. `npm run check:rocks`.
 - [ ] Keep every entity's anchor and Target AABB Extent exact.
 - [ ] Report per-group silhouette, depth, and world-normal evidence with the worst camera retained.
 - [ ] Confirm the terrain and coastline evidence did not regress.
@@ -102,21 +102,36 @@ shrinking it to its measured footprint uncovered errors that were already there.
 
 Two consequences. A per-group score measured while a neighbour over-draws is not
 independent of that neighbour, so the ranking has to be re-read after every
-over-draw is fixed. And `rocks` is now the group with the most exposed shape error
-in the village — which is the next checkbox anyway.
+over-draw is fixed. And `rocks` became the group with the most exposed shape error
+in the village, which is the next section.
 
-## `rocks` is actionable now
+## `rocks` was a jittered sphere where the accepted representation belonged
 
-`rocks` is the one group in this ticket whose error is its own shape. 39 entities,
-pixel ratio **0.99** — the right amount of pixel, in the wrong shape — with IoU
-0.3371 and contour p95 25.5. Its mean thickness of 8.40 units is comparable to the
-8.97 of terrain misfit beneath it, so unlike the slabs it is not dominated by where
-the ground is.
+39 entities, pixel ratio 1.03 — the right amount of pixel, in the wrong shape — IoU
+0.359, and a contour p95 that the plaza had been hiding. `mound` built a
+ring-and-side lattice whose radius is one minus half a roughness constant plus a
+random share of it, about a sphere, then stretched it onto the Target AABB Extent.
+A sphere inscribed in a box touches the six face centres and falls short everywhere
+else, and measured along the 24 canonical support directions that is exactly what it
+did:
 
-That is the third checkbox: the accepted Bounded Support-plane Polyhedron, which
-Stone v2 already proved at object scale under `stone-geometry-baseline-v2` and which
-`tools/development/fit-stone-supports.mjs` already fits. Doing `rocks` does not need
-ticket 03.
+| | authored | jittered sphere | support polyhedron |
+| --- | --- | --- | --- |
+| mean support over 24 directions | 0.9412 | 0.8382 | **0.9747** |
+| directions inside the reference | — | **23 of 24** | 6 of 24 |
+| mean absolute profile error | — | 0.103 short | **0.0428** |
+| `rocks` contour p95 | — | 47.93 | **24.06** |
+| `rocks` IoU | — | 0.359 | **0.380** |
+| `rocks` world normal p95 | — | 83.34 | **68.74** |
+
+The authored profile's shape is what a sphere cannot follow: the eight
+upward-leaning directions reach 0.95 to 1.05 against 0.86 to 0.99 horizontally — a
+boxy mass filling its upper corners. 24 numbers and one family spread for 39 rocks;
+a profile per entity would be 936 numbers.
+
+`group world normal p95` was the one metric ADR-0057 regressed, 79.37 to 80.41. It
+is now **79.21**, below where it started. Two residuals are named in ADR-0058 rather
+than smoothed over: the rock now over-draws at 1.26, and one direction is 0.188 out.
 
 ## Do not repeat this measurement blind
 

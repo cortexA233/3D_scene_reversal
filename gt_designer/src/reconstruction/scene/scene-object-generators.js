@@ -1,6 +1,7 @@
 import * as THREE from "three";
 
 import { createSeededRng } from "../core/rng.js";
+import { canonicalSupportDirections } from "../objects/stone-generator.js";
 
 /**
  * Local Object Generators for scene entity kinds.
@@ -877,9 +878,108 @@ function quadruped() {
   return group(parts);
 }
 
+/**
+ * The authored rocks' support profile, one distance per canonical direction,
+ * measured over all 39 placements by tools/development/measure-rock-supports.mjs.
+ *
+ * It is a *relative* profile. The Target AABB Extent rescales whatever this
+ * builds, so the absolute level carries no information and the shape is entirely
+ * in the ratios: the eight upward-leaning directions reach 0.95 to 1.05 while the
+ * horizontal ones reach 0.86 to 0.99, which is a boxy mass that fills its upper
+ * corners. The generator's jittered sphere reached 0.84 on average against the
+ * authored 0.94 and sat inside the reference in 23 of the 24 directions — a
+ * sphere in a box touches the six face centres and falls short everywhere else.
+ *
+ * Twenty-four numbers and one spread for 39 rocks. A support distance per
+ * direction per entity would be 936, and a per-entity form list is not a
+ * reconstruction; the spread plus the entity's own derived seed is what makes the
+ * 39 differ.
+ */
+const ROCK_SUPPORT_PROFILE = Object.freeze([
+  0.9293, 0.8686, 0.9888, 0.97, 0.8802, 0.931, 0.8801, 0.918,
+  0.9147, 0.923, 0.8814, 0.8614, 0.9072, 0.8909, 1.0483, 1.0491,
+  1.0212, 0.9857, 0.9507, 0.9468, 0.9747, 1.0255, 0.9618, 0.881,
+]);
+const ROCK_SUPPORT_SPREAD = 0.0779;
+
+/**
+ * A Bounded Support-plane Polyhedron, evaluated radially.
+ *
+ * The accepted Stone representation is the intersection of half-spaces at the 24
+ * canonical directions, and the boundary of that intersection along any ray is
+ * `min over i of support[i] / (ray · direction[i])` over the directions the ray
+ * points into. Evaluating it on a ring-and-side lattice gives the polyhedron's
+ * silhouette without duplicating the hull construction from
+ * `objects/stone-generator.js`, which is hash-frozen under
+ * `stone-geometry-baseline-v2` and must not be edited to add an export.
+ *
+ * The direction set itself is imported rather than restated, because two copies
+ * of a definition is how the reference and the candidate came to disagree while
+ * both formulas read identically.
+ */
+function supportPolyhedron(rng, { rings = 8, sides = 16, profile, spread = 0 } = {}) {
+  const directions = canonicalSupportDirections();
+  const distances = profile.map((distance) =>
+    Math.max(0.2, distance + (rng.nextFloat() - 0.5) * 2 * spread),
+  );
+  const positions = [];
+  const rows = [];
+  for (let ring = 0; ring <= rings; ring += 1) {
+    const polar = (ring / rings) * Math.PI;
+    const row = [];
+    for (let side = 0; side < sides; side += 1) {
+      const azimuth = (side / sides) * Math.PI * 2;
+      const ray = new THREE.Vector3(
+        Math.sin(polar) * Math.cos(azimuth),
+        Math.cos(polar),
+        Math.sin(polar) * Math.sin(azimuth),
+      );
+      let radius = Infinity;
+      directions.forEach((direction, index) => {
+        const towards = ray.dot(direction);
+        if (towards <= 1e-6) return;
+        const reach = distances[index] / towards;
+        if (reach < radius) radius = reach;
+      });
+      row.push(ray.multiplyScalar(Number.isFinite(radius) ? radius : 1));
+    }
+    rows.push(row);
+  }
+  for (let ring = 0; ring < rings; ring += 1) {
+    for (let side = 0; side < sides; side += 1) {
+      const next = (side + 1) % sides;
+      const a = rows[ring][side];
+      const b = rows[ring][next];
+      const c = rows[ring + 1][next];
+      const d = rows[ring + 1][side];
+      positions.push(...a, ...b, ...c, ...a, ...c, ...d);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(new Float32Array(positions), 3),
+  );
+  geometry.computeVertexNormals();
+  return new THREE.Mesh(geometry);
+}
+
 function mound(rng, { sides = 8 } = {}) {
   const solid = supportSolid(rng, { rings: 3, sides, roughness: 0.34 });
   solid.scale.setScalar(0.5);
+  solid.position.y = 0.5;
+  return group([part(solid, "mass")]);
+}
+
+/** A rock: the accepted support-plane representation at the measured profile. */
+function boulder(rng) {
+  const solid = supportPolyhedron(rng, {
+    profile: ROCK_SUPPORT_PROFILE,
+    spread: ROCK_SUPPORT_SPREAD,
+  });
+  const bounds = new THREE.Box3().setFromObject(solid);
+  const size = bounds.getSize(new THREE.Vector3());
+  solid.scale.set(1 / size.x, 1 / size.y, 1 / size.z);
   solid.position.y = 0.5;
   return group([part(solid, "mass")]);
 }
@@ -959,7 +1059,7 @@ const GENERATORS = Object.freeze({
   "stone-platform": (rng) => slab(rng, { sides: 6 }),
 
   // Rock
-  rock: mound,
+  rock: boulder,
   "stone-block": () => group([part(box(0.9, 1, 0.9, 0.5), "block")]),
 
   // Decoration and props

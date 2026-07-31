@@ -76,7 +76,7 @@
         {
           "name": "surface p95",
           "scope": "aggregate",
-          "value": 7.2219,
+          "value": 7.192,
           "threshold": 2.454575,
           "direction": "atMost",
           "passed": false,
@@ -94,7 +94,7 @@
         {
           "name": "over-tolerance surface fraction",
           "scope": "aggregate",
-          "value": 0.6201,
+          "value": 0.6212,
           "threshold": 0.1204,
           "direction": "atMost",
           "passed": false,
@@ -192,9 +192,9 @@
         }
       ],
       "failures": [
-        "surface p95: 7.2219 is not <= 2.454575",
+        "surface p95: 7.192 is not <= 2.454575",
         "worst entity surface p95: 155.2008 is not <= 13.9152",
-        "over-tolerance surface fraction: 0.6201 is not <= 0.1204",
+        "over-tolerance surface fraction: 0.6212 is not <= 0.1204",
         "terrain height p95: 8.532 is not <= 5.26875",
         "shore height p95: 7.9996 is not <= 2.85035",
         "land and sea agreement: 0.922721 is not >= 0.931361",
@@ -210,7 +210,7 @@
         {
           "name": "group silhouette IoU",
           "scope": "aggregate",
-          "value": 0.46762,
+          "value": 0.469877,
           "threshold": 0.724931,
           "direction": "atLeast",
           "passed": false,
@@ -228,7 +228,7 @@
         {
           "name": "group contour distance p95",
           "scope": "aggregate",
-          "value": 27.69612,
+          "value": 25.499852,
           "threshold": 6.536774,
           "direction": "atMost",
           "passed": false,
@@ -237,7 +237,7 @@
         {
           "name": "worst group contour distance",
           "scope": "worst-group",
-          "value": 186.2426,
+          "value": 151.6212,
           "threshold": 39.2559,
           "direction": "atMost",
           "passed": false,
@@ -246,7 +246,7 @@
         {
           "name": "group depth p95",
           "scope": "aggregate",
-          "value": 20.956563,
+          "value": 20.92677,
           "threshold": 8.173471,
           "direction": "atMost",
           "passed": false,
@@ -264,7 +264,7 @@
         {
           "name": "group world normal p95",
           "scope": "aggregate",
-          "value": 80.409374,
+          "value": 79.206184,
           "threshold": 58.959694,
           "direction": "atMost",
           "passed": false,
@@ -273,7 +273,7 @@
         {
           "name": "semantic agreement",
           "scope": "aggregate",
-          "value": 0.944593,
+          "value": 0.9446,
           "threshold": 0.987465,
           "direction": "atLeast",
           "passed": false,
@@ -282,7 +282,7 @@
         {
           "name": "worst camera semantic agreement",
           "scope": "worst-camera",
-          "value": 0.909438,
+          "value": 0.909413,
           "threshold": 0.974068,
           "direction": "atLeast",
           "passed": false,
@@ -299,15 +299,15 @@
         }
       ],
       "failures": [
-        "group silhouette IoU: 0.46762 is not >= 0.724931",
+        "group silhouette IoU: 0.469877 is not >= 0.724931",
         "worst group silhouette IoU: 0.109859 is not >= 0.369228",
-        "group contour distance p95: 27.69612 is not <= 6.536774",
-        "worst group contour distance: 186.2426 is not <= 39.2559",
-        "group depth p95: 20.956563 is not <= 8.173471",
+        "group contour distance p95: 25.499852 is not <= 6.536774",
+        "worst group contour distance: 151.6212 is not <= 39.2559",
+        "group depth p95: 20.92677 is not <= 8.173471",
         "worst group depth p95: 118.403257 is not <= 22.354947",
-        "group world normal p95: 80.409374 is not <= 58.959694",
-        "semantic agreement: 0.944593 is not >= 0.987465",
-        "worst camera semantic agreement: 0.909438 is not >= 0.974068",
+        "group world normal p95: 79.206184 is not <= 58.959694",
+        "semantic agreement: 0.9446 is not >= 0.987465",
+        "worst camera semantic agreement: 0.909413 is not >= 0.974068",
         "worst semantic confusion fraction: 0.017581 is not <= 0.006534"
       ]
     },
