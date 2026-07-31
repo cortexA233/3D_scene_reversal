@@ -804,13 +804,25 @@ function palm(rng, shape) {
  * flattened organic masses. The cluster is what makes the crown read as dense
  * foliage instead of a handful of separate balls.
  */
-function broadleaf(rng, { trunkFraction = 0.34, clusters = 9, spread = 0.42 } = {}) {
+function broadleaf(
+  rng,
+  {
+    trunkFraction = 0.34,
+    clusters = 9,
+    spread = 0.42,
+    // Two controls the fitted kinds move and the unfitted ones leave alone. Their
+    // defaults are the values every caller used before they existed, so a caller that
+    // does not pass them gets exactly the form it had.
+    baseRadius = 0.07,
+    crownLow = 0.32,
+  } = {},
+) {
   const branchMeshes = [];
   const canopyMeshes = [];
   const trunkHeight = trunkFraction;
   const { column, top } = trunkColumn(rng, {
     height: trunkHeight,
-    baseRadius: 0.07,
+    baseRadius,
     topRadius: 0.045,
     lean: (rng.nextFloat() - 0.5) * 0.14,
     segments: 3,
@@ -835,7 +847,7 @@ function broadleaf(rng, { trunkFraction = 0.34, clusters = 9, spread = 0.42 } = 
     lobe.scale.set(size, size * 0.72, size);
     lobe.position.set(
       top[0] + Math.cos(azimuth) * radial,
-      crownBase + crownHeight * (0.32 + rng.nextFloat() * 0.55),
+      crownBase + crownHeight * (crownLow + rng.nextFloat() * 0.55),
       Math.sin(azimuth) * radial,
     );
     canopyMeshes.push(lobe);
@@ -847,8 +859,23 @@ function broadleaf(rng, { trunkFraction = 0.34, clusters = 9, spread = 0.42 } = 
   ]);
 }
 
-function blossom(rng) {
-  return broadleaf(rng, { trunkFraction: 0.3, clusters: 10, spread: 0.44 });
+/**
+ * The blossom's form controls, fitted to its measured profile the way `PALM_FORM` was.
+ *
+ * 133 placements, and the same defect the palm had: the authored form carries 14.5 per
+ * cent of its area in the base decile at a reach of 0.58, and the candidate carried 2.8
+ * at 0.13 — a needle under a canopy where the subject is broad all the way down.
+ */
+const BLOSSOM_FORM = Object.freeze({
+  trunkFraction: 0.12,
+  clusters: 10,
+  spread: 0.6,
+  baseRadius: 0.07,
+  crownLow: 0,
+});
+
+function blossom(rng, shape) {
+  return broadleaf(rng, { ...BLOSSOM_FORM, ...(shape?.blossomForm ?? {}) });
 }
 
 /**

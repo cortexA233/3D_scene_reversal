@@ -32,16 +32,40 @@ const flag = (name, fallback) => {
   return index >= 0 && index + 1 < argv.length ? argv[index + 1] : fallback;
 };
 const SEEDS = Number(flag("--seeds", "10"));
-/** The shipped defaults, as the search's starting point. */
-const PALM_START = {
-  trunkHeight: 0.62,
-  trunkBase: 0.055,
-  trunkTop: 0.028,
-  crownSpan: 0,
-  whorls: 3,
-  lengthScale: 1,
-  widthScale: 1,
+const KIND = flag("--kind", "palm");
+/** The shipped defaults per kind, as the search's starting point. */
+const STARTS = {
+  palm: { trunkHeight: 0.62, trunkBase: 0.09, trunkTop: 0.028, crownSpan: 0.5, whorls: 5, lengthScale: 1, widthScale: 0.7 },
+  blossom: { trunkFraction: 0.3, clusters: 10, spread: 0.44, baseRadius: 0.07, crownLow: 0.32 },
 };
+const PALM_START = STARTS[KIND];
+
+/**
+ * The standing canopy minima, from `test/vegetation-reconstruction.test.mjs`.
+ *
+ * A search that ignores these finds forms it is not allowed to ship. Blossom's first run
+ * did exactly that: it took clusters from ten to eight, scored well, and produced a 548
+ * triangle canopy against a 600 minimum that exists because a crown of sparse facets reads
+ * as sticks at overview distance however well its profile fits. The constraint belongs in
+ * the search, not in a patch afterwards, so an infeasible candidate is rejected before it
+ * is ever scored.
+ */
+const CANOPY_MINIMUM = { palm: 400, blossom: 600, bamboo: 500 };
+
+function triangleCount(controls) {
+  const object = generateSceneObject(KIND, 991, controls ? { [`${KIND}Form`]: controls } : undefined);
+  let triangles = 0;
+  object.traverse((child) => {
+    if (!child.isMesh) return;
+    const position = child.geometry.attributes.position;
+    const index = child.geometry.index;
+    triangles += Math.floor((index ? index.count : position.count) / 3);
+  });
+  return triangles;
+}
+
+const feasible = (controls) =>
+  !(KIND in CANOPY_MINIMUM) || triangleCount(controls) >= CANOPY_MINIMUM[KIND];
 const DECILES = 10;
 
 const massing = JSON.parse(
@@ -50,7 +74,7 @@ const massing = JSON.parse(
     "utf8",
   ),
 );
-const authored = massing.kinds.find((row) => row.kind === "palm").authored;
+const authored = massing.kinds.find((row) => row.kind === KIND).authored;
 
 /**
  * The massing tool's profile, recomputed here from an object rather than from a scene.
@@ -114,13 +138,13 @@ function score(candidate) {
   return total;
 }
 
-function pooled(kind, palmForm) {
+function pooled(kind, controls) {
   const share = new Array(DECILES).fill(0);
   const reach = new Array(DECILES).fill(0);
   const seen = new Array(DECILES).fill(0);
   for (let seed = 0; seed < SEEDS; seed += 1) {
     const measured = profileOf(
-      generateSceneObject(kind, 4242 + seed * 17, palmForm ? { palmForm } : undefined),
+      generateSceneObject(kind, 4242 + seed * 17, controls ? { [`${KIND}Form`]: controls } : undefined),
     );
     for (let decile = 0; decile < DECILES; decile += 1) {
       share[decile] += measured.share[decile] / SEEDS;
@@ -136,7 +160,7 @@ function pooled(kind, palmForm) {
   };
 }
 
-const current = pooled("palm");
+const current = pooled(KIND);
 const show = (values) =>
   `[${values.map((value) => (value === null ? "   - " : value.toFixed(3).padStart(5))).join(" ")}]`;
 
@@ -155,17 +179,30 @@ process.stdout.write(`  profile distance ${score(current).toFixed(4)}\n`);
  * thousand and finds the same basin when the controls are as loosely coupled as these.
  * It is a proxy search either way — whatever it lands on is judged on the gate.
  */
-const AXES = {
-  crownSpan: [0, 0.2, 0.35, 0.5, 0.65, 0.8, 0.95],
-  whorls: [3, 4, 5, 6, 8],
-  lengthScale: [0.5, 0.65, 0.8, 1, 1.2],
-  widthScale: [0.7, 1, 1.4, 1.8],
-  trunkBase: [0.055, 0.09, 0.13, 0.18],
-  trunkHeight: [0.45, 0.55, 0.62, 0.72, 0.82],
+const AXIS_SETS = {
+  palm: {
+    crownSpan: [0, 0.2, 0.35, 0.5, 0.65, 0.8, 0.95],
+    whorls: [3, 4, 5, 6, 8],
+    lengthScale: [0.5, 0.65, 0.8, 1, 1.2],
+    widthScale: [0.7, 1, 1.4, 1.8],
+    trunkBase: [0.055, 0.09, 0.13, 0.18],
+    trunkHeight: [0.45, 0.55, 0.62, 0.72, 0.82],
+  },
+  // `clusters` is capped at its shipped 10. Triangle headroom is down to 0.132581 and
+  // more lobes is the one control here that spends it; a fit is not worth buying with
+  // the last of a budget the whole island shares.
+  blossom: {
+    trunkFraction: [0.12, 0.18, 0.24, 0.3, 0.38],
+    clusters: [8, 9, 10],
+    spread: [0.3, 0.38, 0.44, 0.52, 0.6],
+    baseRadius: [0.07, 0.11, 0.16, 0.22],
+    crownLow: [0, 0.12, 0.22, 0.32, 0.45],
+  },
 };
+const AXES = AXIS_SETS[KIND];
 
 let best = { ...PALM_START };
-let bestScore = score(pooled("palm", best));
+let bestScore = score(pooled(KIND, best));
 process.stdout.write(`  search start ${bestScore.toFixed(4)}
 `);
 for (let pass = 0; pass < 3; pass += 1) {
@@ -174,7 +211,8 @@ for (let pass = 0; pass < 3; pass += 1) {
     for (const value of values) {
       if (best[control] === value) continue;
       const trial = { ...best, [control]: value };
-      const trialScore = score(pooled("palm", trial));
+      if (!feasible(trial)) continue;
+      const trialScore = score(pooled(KIND, trial));
       if (trialScore < bestScore - 1e-6) {
         best = trial;
         bestScore = trialScore;
@@ -187,7 +225,7 @@ for (let pass = 0; pass < 3; pass += 1) {
   if (!moved) break;
 }
 
-const fitted = pooled("palm", best);
+const fitted = pooled(KIND, best);
 process.stdout.write(`
   fitted   share ${show(fitted.share)}
 `);
@@ -197,4 +235,6 @@ process.stdout.write(`
   profile distance ${bestScore.toFixed(4)} from ${score(current).toFixed(4)}
 `);
 process.stdout.write(`  ${JSON.stringify(best)}
+`);
+process.stdout.write(`  ${triangleCount(best)} triangles, minimum ${CANOPY_MINIMUM[KIND] ?? "none"}
 `);

@@ -53,8 +53,8 @@ const correspondence = JSON.parse(
  */
 const RECORDED = Object.freeze({
   palmSurfaceP95: 5.1,
-  blossomSurfaceP95: 4.0,
-  aggregateSurfaceP95: 6.7,
+  blossomSurfaceP95: 3.5,
+  aggregateSurfaceP95: 6.6,
 });
 
 function measure(kind, seed) {
