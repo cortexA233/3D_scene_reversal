@@ -18,6 +18,11 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import * as THREE from "three";
 
+import {
+  SCENE_RUNTIME_BUDGET_VERSION,
+  WALL_CLOCK_BUDGET_METRICS,
+  evaluateSceneRuntimeBudget,
+} from "../tools/acceptance/scene-runtime-budget.mjs";
 import { ISLAND_SCENE_RECIPE } from "../gt_designer/src/reconstruction/scene/island-scene-recipe.generated.js";
 import {
   SCENE_GENERATOR_VERSION,
@@ -172,6 +177,8 @@ async function isolatedProductionRun() {
         triangles: window.islandReplacement?.triangles ?? null,
         drawCalls: window.islandReplacement?.drawCalls ?? null,
         generationMs: window.islandReplacement?.generationMs ?? null,
+        geometryBytes: window.islandReplacement?.geometryBytes ?? null,
+        geometryCount: window.islandReplacement?.geometryCount ?? null,
         error: window.islandReplacement?.error ?? null
       }))()`,
     });
@@ -197,11 +204,32 @@ async function isolatedProductionRun() {
       triangles: run.state.triangles,
       drawCalls: run.state.drawCalls,
       generationMs: run.state.generationMs,
+      geometryBytes: run.state.geometryBytes,
+      geometryCount: run.state.geometryCount,
       auditPassed: true,
     };
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+}
+
+/**
+ * The report with every wall-clock value replaced by a placeholder, for the byte
+ * comparison. The values stay in the written report; only the comparison drops them.
+ */
+function normaliseWallClock(report) {
+  const copy = structuredClone(report);
+  const isolation = copy?.foundation?.productionIsolation;
+  const checks = copy?.foundation?.productionBudget?.checks;
+  for (const metric of WALL_CLOCK_BUDGET_METRICS) {
+    if (isolation && metric in isolation) isolation[metric] = "<wall-clock>";
+    for (const check of checks ?? []) {
+      if (check.metric !== metric) continue;
+      check.value = "<wall-clock>";
+      check.headroomFraction = "<wall-clock>";
+    }
+  }
+  return JSON.stringify(copy, null, 2);
 }
 
 /** The largest remaining discrepancies, ranked for the next milestone. */
@@ -294,6 +322,14 @@ async function main() {
     "the candidate evaluation command must exit non-zero while the gates are red",
   );
 
+  /**
+   * The frozen non-visual budgets, measured from the isolated production package rather
+   * than from the development page: a budget measured on a page that can reach the
+   * Authored Reference is not a budget on what ships.
+   */
+  const budget = evaluateSceneRuntimeBudget(isolation);
+  assert.equal(budget.version, SCENE_RUNTIME_BUDGET_VERSION);
+
   const report = {
     schemaVersion: "scene-parity-foundation-certification-v1",
     foundation: {
@@ -312,6 +348,7 @@ async function main() {
         identical: true,
       },
       productionIsolation: isolation,
+      productionBudget: budget,
       candidateCommandExitStatus: candidateCommandExit,
     },
     candidate: {
@@ -403,10 +440,27 @@ async function main() {
 
   const serialized = `${JSON.stringify(report, null, 2)}\n`;
   if (checkOnly) {
+    /**
+     * Compare everything except the wall clock, and hold the wall clock to its budget.
+     *
+     * This check could never pass while `generationMs` sat inside a byte-for-byte
+     * comparison: it is a measurement of how long the machine took, and three
+     * consecutive runs against a stored 538.5 produced 540.4, 524.5 and 529.5. The
+     * report keeps the value, because it is evidence; the comparison replaces it with a
+     * placeholder on both sides and the budget does the gating. Everything else is still
+     * compared exactly, so a changed threshold, gate result, or production file count
+     * still fails here.
+     */
+    const stored = JSON.parse(await readFile(REPORT_PATH, "utf8"));
     assert.equal(
-      await readFile(REPORT_PATH, "utf8"),
-      serialized,
+      normaliseWallClock(stored),
+      normaliseWallClock(report),
       "the Foundation certification report drifted",
+    );
+    assert.deepEqual(
+      budget.failures,
+      [],
+      "the Production Runtime is outside its frozen budgets",
     );
   } else {
     await mkdir(EVIDENCE_DIRECTORY, { recursive: true });

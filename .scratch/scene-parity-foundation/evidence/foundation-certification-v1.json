@@ -20,13 +20,62 @@
       "served": 13,
       "requests": 24,
       "externalRequests": 0,
-      "bundleBytes": 203769,
-      "bundleGzipBytes": 39936,
+      "bundleBytes": 204108,
+      "bundleGzipBytes": 40061,
       "thirdPartyInputs": 0,
       "triangles": 556749,
       "drawCalls": 1766,
-      "generationMs": 437.7,
+      "generationMs": 480.1,
+      "geometryBytes": 26637868,
+      "geometryCount": 1752,
       "auditPassed": true
+    },
+    "productionBudget": {
+      "version": "scene-runtime-budget-v1",
+      "passed": true,
+      "checks": [
+        {
+          "metric": "generationMs",
+          "value": 480.1,
+          "maximum": 1000,
+          "headroomFraction": 0.5199,
+          "passed": true,
+          "wallClock": true
+        },
+        {
+          "metric": "bundleGzipBytes",
+          "value": 40061,
+          "maximum": 65536,
+          "headroomFraction": 0.388718,
+          "passed": true,
+          "wallClock": false
+        },
+        {
+          "metric": "triangles",
+          "value": 556749,
+          "maximum": 700000,
+          "headroomFraction": 0.204644,
+          "passed": true,
+          "wallClock": false
+        },
+        {
+          "metric": "drawCalls",
+          "value": 1766,
+          "maximum": 2048,
+          "headroomFraction": 0.137695,
+          "passed": true,
+          "wallClock": false
+        },
+        {
+          "metric": "geometryBytes",
+          "value": 26637868,
+          "maximum": 41943040,
+          "headroomFraction": 0.364904,
+          "passed": true,
+          "wallClock": false
+        }
+      ],
+      "failures": []
     },
     "candidateCommandExitStatus": 1
   },

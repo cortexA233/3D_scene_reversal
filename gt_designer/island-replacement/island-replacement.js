@@ -94,6 +94,32 @@ function boot() {
   post.render();
 
   const triangles = renderer.info.render.triangles;
+  /**
+   * Retained geometry, in bytes.
+   *
+   * `renderer.info.memory` counts geometries and textures rather than bytes, and a count
+   * cannot be budgeted: 1,752 geometries says nothing about whether the island holds 25
+   * or 250 MiB. This sums each geometry's attribute and index arrays once, plus an
+   * instanced mesh's own matrix and colour arrays, which is what a Code-only Production
+   * Runtime actually retains — it holds no texture at all.
+   */
+  const countedGeometries = new Set();
+  let geometryBytes = 0;
+  scene.traverse((child) => {
+    const geometry = child.geometry;
+    if (!geometry) return;
+    if (child.isInstancedMesh) {
+      geometryBytes += child.instanceMatrix.array.byteLength;
+      if (child.instanceColor) geometryBytes += child.instanceColor.array.byteLength;
+    }
+    if (countedGeometries.has(geometry.uuid)) return;
+    countedGeometries.add(geometry.uuid);
+    for (const attribute of Object.values(geometry.attributes)) {
+      geometryBytes += attribute.array.byteLength;
+    }
+    if (geometry.index) geometryBytes += geometry.index.array.byteLength;
+  });
+
   window.islandReplacement = {
     ready: true,
     recipeVersion: report.recipeVersion,
@@ -107,6 +133,8 @@ function boot() {
     generationMs: Math.round(generationMs * 100) / 100,
     triangles,
     drawCalls: renderer.info.render.calls,
+    geometryBytes,
+    geometryCount: countedGeometries.size,
     semanticIds: [...semanticIndex.keys()],
     // Both go through the composer. A runtime whose public render bypassed the
     // post-processing would let an audit measure a frame nobody ever sees. Each
