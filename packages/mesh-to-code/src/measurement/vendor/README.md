@@ -49,3 +49,11 @@ which owns the per-object thresholds and their versions.
 | `tools/evaluation/geometric-diagnostics.mjs` | same | no |
 | `tools/evaluation/calibration-perturbations.mjs` | same | no |
 | `tools/ground-truth/mesh-analysis.mjs` | same | no |
+| `gt_designer/single-mesh-evaluation/evaluation-protocol.js` | same | no |
+
+The evaluation protocol is vendored for the same one-ruler reason as the metrics.
+It fixes the twelve-view set, the 512-pixel capture size, the 38-degree field of
+view, the canonical maximum dimension, the framing margin, and the rule that
+framing is derived from the Authored Reference bounds alone. A CPU-rasterized
+score is comparable to a browser capture only while those are identical, so a
+re-derivation would be a second ruler even if it started out numerically equal.

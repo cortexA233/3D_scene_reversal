@@ -46,7 +46,7 @@ async function walk(directory, results = []) {
     const full = path.join(directory, entry.name);
     if (entry.isDirectory()) {
       await walk(full, results);
-    } else if (entry.name.endsWith(".mjs")) {
+    } else if (entry.name.endsWith(".mjs") || entry.name.endsWith(".js")) {
       results.push(full);
     }
   }

@@ -96,6 +96,14 @@ jobs:
 
       # Browser-driven checks are deliberately absent: they shell out to a real
       # Chrome through CHROME_BIN and are run on hardware, not here.
+      #
+      # `run-decompiler-rasterizer-calibration.mjs --check` is also absent. It
+      # reads the 69 MB Authored Reference, which is Git LFS content this job does
+      # not fetch, so it belongs with the other reference-dependent calibrations
+      # that run on hardware. Its frozen report is committed, and the rasterizer's
+      # own behaviour — byte stability, the worker-thread path, progressive
+      # resolution, and buffer shape — is covered by the package suite above,
+      # which needs no reference asset.
 
       - name: Frozen files are unmodified
         run: git diff --quiet HEAD

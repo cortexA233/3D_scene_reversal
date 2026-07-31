@@ -11,24 +11,80 @@ Scope of this run: tickets 01 → 06 in order. Ticket 07 and later are untouched
 | ------ | ------ |
 | 01 package skeleton, decision protocol, mock decider | resolved |
 | 02 measurement core copied with drift checks | resolved |
-| 03 CPU rasterizer, divergence tolerance, wall-clock | not started |
+| 03 CPU rasterizer, divergence tolerance, wall-clock | resolved |
 | 04 Complexity Budget Formula, global ceiling, Budget Proxy | not started |
 | 05 generic perturbations, automatic Calibration Bracket | not started |
 | 06 end-to-end geometry reconstruction | not started |
 
-Last commit: `8e39af8` — ticket 02. Ticket 01 was `de7b2d9`.
+Commits, one per ticket:
 
-## Ticket 03 judgement gate
+| Ticket | Commit |
+| ------ | ------ |
+| 01 | `de7b2d9` |
+| 02 | `3263800` |
+| 03 | current `HEAD` |
 
-Not yet reached. The gate runs after ticket 03 and before ticket 04, comparing
-per-metric CPU-rasterizer-versus-browser divergence against the discrimination
-margin the fitting loop needs, and measured wall-clock against the declared
-budget. Numbers will be recorded here verbatim.
+A hash cannot be written inside the commit it names, so each ticket's hash lands
+in the following ticket's commit. If this table is one row short of the resolved
+ticket list, the missing hash is the current `HEAD`.
+
+## Ticket 03 judgement gate — PASSED, continuing to ticket 04
+
+Read from my own frozen report,
+`gt_designer/single-mesh-evaluation/reports/decompiler-rasterizer-divergence-v1.json`.
+
+**Divergence versus discrimination margin.** The margin is defined as the
+smallest distance, across the eight units, between an accepted candidate's
+browser-measured aggregate and the hard threshold it was accepted under — a
+divergence larger than that could flip an accepted verdict. The frozen tolerance
+is the observed maximum divergence times a 1.5 guard factor, rounded up to three
+significant digits.
+
+| Metric | Max divergence | Frozen tolerance | Margin | Tolerance / margin |
+| ------ | -------------: | ---------------: | -----: | -----------------: |
+| `bounds.maxAxisRelativeError` | 3.883e-15 | 5.830e-15 | 1.324e-2 | 0.0000 |
+| `bounds.bottomAnchorErrorCanonical` | 3.794e-15 | 5.700e-15 | 1.158e-2 | 0.0000 |
+| `silhouette.meanIou` | 2.710e-4 | 4.070e-4 | 1.110e-2 | 0.0367 |
+| `silhouette.worstViewIou` | 6.176e-4 | 9.270e-4 | 1.453e-2 | 0.0638 |
+| `silhouette.meanEdgeDistancePixels` | 6.329e-3 | 9.500e-3 | 2.397e-1 | 0.0396 |
+| `silhouette.edgeDistanceP95Pixels` | 2.861e-1 | 4.300e-1 | 1.113e+0 | 0.3863 |
+| `depth.mae` | 3.741e-5 | 5.620e-5 | 4.243e-3 | 0.0132 |
+| `depth.p95` | 0.000e+0 | 0.000e+0 | 7.413e-3 | 0.0000 |
+
+Every tolerance is below its margin. The worst case is
+`silhouette.edgeDistanceP95Pixels` at 38.6% of margin; every other metric is
+under 7%. Independently of the margin arithmetic: for all eight units across all
+eight metrics, the pass-or-fail verdict computed from CPU buffers equals the
+verdict computed from the browser's, so on the whole regression corpus the CPU
+ruler never flips an accepted unit.
+
+**Wall-clock versus declared budget.** The budget was declared before measuring
+and derived from the search shape: K≈3 candidates × R≈3 rounds × 40 iterations =
+360 coarse scores per unit.
+
+| Measure | Budget | Measured maximum | Factor |
+| ------- | -----: | ---------------: | -----: |
+| Coarse-stage fitting iteration | 150 ms | 17.0 ms (umbrella) | 0.11× |
+| Final twelve-view score | 2,000 ms | 753 ms (blue-hat) | 0.38× |
+| Per unit | 600,000 ms | 838 ms (blue-hat) | 0.001× |
+
+Per-unit coarse-iteration means, in ms: stone-path 12.0, stone 13.7,
+bamboo-shoot 10.9, blue-hat 16.5, vase 14.7, candle 12.7, mushroom 13.4,
+umbrella 17.0. Nothing is over budget, so no factor-of-overrun needs reporting.
+Measured on Node `v24.11.0` / `win32` / `x64`.
+
+**Decision: continue to ticket 04.** Neither stop condition fires. Divergence is
+between 0 and 39% of the margin the fitting loop needs, and wall-clock is between
+0.1% and 38% of the declared budget — under, not over, so this is not a case of
+working around backend evidence.
+
+**Byte stability:** two runs identical and the serial path identical to the
+worker-thread path, on all eight units, verified by sha256 over every buffer.
 
 ## Verification block, current state
 
 ```
-npm test                                                    138 passing / 0 failing
+npm test                                                    147 passing / 0 failing
 npm run check:stone-v2-contract                             PASS (6 candidate, 3 evidence files)
 npm run check:patterned-appearance-v2-contract              PASS
 node scripts/run-stage-2-eight-object-certification.mjs --check
@@ -39,8 +95,8 @@ git status --short                                          no red-line file mod
 Baseline before any work: `npm test` was 92 passing / 0 failing. The package's own
 21 tests live in `packages/mesh-to-code/test/` and are discovered by the
 repository's `node --test` as well as by the package's own runner, which is why
-the count rose. The package suite is 46 tests after ticket 02, and the
-repository's own count is unchanged at 92: 92 + 46 = 138. Both suites pass
+the count rose. The package suite is 55 tests after ticket 03, and the
+repository's own count is unchanged at 92: 92 + 55 = 147. Both suites pass
 standalone.
 
 Repository-side aggregator, all passing (5 checks):
@@ -106,6 +162,20 @@ ticket.
 `HUMAN_ANCHORED_PATTERN_ROLES_V3` is one unit's declared motif palette, which is
 object-specific baseline material, and semantic-pattern appearance belongs to
 ticket 10.
+
+**The evaluation frame silently re-anchors a generated root.** The harness's
+frame assigns `root.position` from the replacement transform's
+`translationBeforeScale`, which is always the origin, so a generator that
+positions its own root is measured at the origin regardless. Mushroom is the one
+unit where this bites: its root carries `y = -0.019646`. Reproducing the overwrite
+was required to make the analytic bounds metric agree with the frozen numbers, and
+it turned a FAIL into 3.794e-15. Any later emission path must not rely on root
+placement to position a unit. Found during ticket 03; details in that ticket.
+
+**The divergence `--check` is not a CI job.** It reads the 69 MB Authored
+Reference, which is Git LFS content, so it sits with the other
+reference-dependent calibrations that run on hardware. The rasterizer's own
+behaviour is covered by ten package tests that need no reference asset.
 
 **`dev/` was already untracked before this run started** and is not this work.
 

@@ -32,7 +32,11 @@ Under construction. What works today:
 - the contract audit for asset dependency, executability, and determinism;
 - Reconstruction Tier assignment;
 - byte-identical copies of the generic measurement modules, guarded by a drift
-  check, so the fitting loop and the terminal gates score with one ruler.
+  check, so the fitting loop and the terminal gates score with one ruler;
+- a pure-JavaScript triangle rasterizer emitting silhouette, depth, and world-normal
+  buffers in the shape those metric functions already accept, with progressive
+  resolution, a reference-side buffer cache, and `worker_threads` parallelism —
+  byte-stable across runs and between the serial and parallel paths.
 
 Not yet implemented, and reported rather than assumed: geometry fitting, the
 Operator Library, appearance solving, the Complexity Budget Formula and its
@@ -54,6 +58,7 @@ src/ingest/           input formats
 src/kernel/           the driver, decomposition, composition, manifest, tier
 src/measurement/      the measurement surface over byte-identical vendored copies
 src/protocol/         Decision Point definitions and schema loading
+src/rasterizer/       the pure-JavaScript CPU rasterizer and the L1 scoring stack
 src/util/             canonical JSON and the JSON Schema subset validator
 scripts/              the neutrality, pack-install-run, and content audits
 test/                 the package's own suite

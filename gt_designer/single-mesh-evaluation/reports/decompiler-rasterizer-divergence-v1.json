@@ -1,0 +1,1709 @@
+{
+  "schemaVersion": "decompiler-rasterizer-divergence-v1",
+  "artifactRole": "development-only-phase-a-calibration",
+  "productionUse": "prohibited",
+  "program": "Decompiler Program",
+  "phase": "Phase A",
+  "purpose": "Quantify CPU-rasterizer-versus-browser geometry divergence, freeze a per-metric tolerance, and publish measured wall-clock against a declared budget.",
+  "rasterizer": {
+    "backend": "pure-javascript-cpu",
+    "nativeDependencies": 0,
+    "passes": [
+      "silhouette",
+      "linear-depth",
+      "world-normal"
+    ],
+    "captureSize": 512,
+    "viewCount": 12,
+    "matchedConventions": [
+      "every pass material is THREE.DoubleSide, so nothing is culled and back faces flip their normal",
+      "captures read from a WebGLRenderTarget with no samples option, so they are not multisampled",
+      "depth carries -viewPosition.z, the view-space distance, clamped to [0,1] over (far-near)",
+      "world normals use normalize(mat3(modelMatrix) * normal), not the inverse transpose",
+      "framing is derived from the Authored Reference bounds alone and never reframed from the replacement"
+    ],
+    "progressiveResolution": [
+      {
+        "id": "coarse",
+        "size": 128,
+        "viewCount": 4,
+        "purpose": "coarse structure search"
+      },
+      {
+        "id": "fine",
+        "size": 256,
+        "viewCount": 8,
+        "purpose": "parameter refinement"
+      },
+      {
+        "id": "final",
+        "size": 512,
+        "viewCount": 12,
+        "purpose": "final scoring under the complete twelve-view protocol"
+      }
+    ]
+  },
+  "browserEvidenceSource": {
+    "kind": "frozen acceptance reports, read only",
+    "field": "visual.comparison.perView",
+    "reports": {
+      "stone-path": "stone-path-acceptance-v1.json",
+      "stone": "stone-acceptance-v3.json",
+      "bamboo-shoot": "bamboo-shoot-acceptance-v2.json",
+      "blue-hat": "blue-hat-acceptance-v2.json",
+      "vase": "vase-acceptance-v1.json",
+      "candle": "candle-acceptance-v3.json",
+      "mushroom": "mushroom-acceptance-v2.json",
+      "umbrella": "umbrella-acceptance-v4.json"
+    },
+    "note": "No browser was run and no capture was retaken. No frozen report, baseline, or gate was modified."
+  },
+  "environment": {
+    "nodeVersion": "v24.11.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "note": "Wall-clock is hardware-dependent and is published as measured evidence, not as a frozen value a check reproduces."
+  },
+  "units": [
+    {
+      "unitId": "stone-path",
+      "label": "Stone Path",
+      "referenceTriangleCount": 64,
+      "referenceNormalSource": "authored-NORMAL-attribute",
+      "replacementTriangleCount": 36,
+      "replacementDrawCallCount": 1,
+      "rootPositionDiscardedByFrame": false,
+      "discardedRootPosition": [
+        0,
+        0,
+        0
+      ],
+      "browserEvidence": "stone-path-acceptance-v1.json",
+      "geometryBaselineSource": "single-mesh-quality-baseline-v1",
+      "perMetric": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "cpu": 0.00004740732013349811,
+          "browser": 0.000047407320137381504,
+          "absoluteDivergence": 3.88339534140858e-15,
+          "threshold": 0.02,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.01995259267986262,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "cpu": 0.000021606715871772193,
+          "browser": 0.000021606715871772193,
+          "absoluteDivergence": 0,
+          "threshold": 0.02,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.01997839328412823,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanIou": {
+          "cpu": 0.9999803489407794,
+          "browser": 0.9999499840463271,
+          "absoluteDivergence": 0.000030364894452294955,
+          "threshold": 0.95,
+          "operator": ">=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.04994998404632711,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.worstViewIou": {
+          "cpu": 0.9999269486448974,
+          "browser": 0.999773276904474,
+          "absoluteDivergence": 0.00015367174042335563,
+          "threshold": 0.92,
+          "operator": ">=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.079773276904474,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "cpu": 0.0008849406902938532,
+          "browser": 0.0022444487911004425,
+          "absoluteDivergence": 0.0013595081008065894,
+          "threshold": 1.5,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 1.4977555512088996,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "cpu": 0,
+          "browser": 0,
+          "absoluteDivergence": 0,
+          "threshold": 4,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 4,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.mae": {
+          "cpu": 0.000004389794880873058,
+          "browser": 0.00004179649305697375,
+          "absoluteDivergence": 0.000037406698176100694,
+          "threshold": 0.015,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.014958203506943026,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.p95": {
+          "cpu": 0,
+          "browser": 0,
+          "absoluteDivergence": 0,
+          "threshold": 0.04,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.04,
+          "cpuVerdictMatchesBrowserVerdict": true
+        }
+      },
+      "perViewMaxDivergence": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "maximum": 3.88339534140858e-15,
+          "atView": "low-000"
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.worstViewIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.depth.mae": {
+          "maximum": 0.00005940246839247737,
+          "atView": "low-225"
+        },
+        "geometry.depth.p95": {
+          "maximum": 0,
+          "atView": null
+        }
+      },
+      "wallClock": {
+        "coarseIterationMillisecondsMean": 12.044900000000052,
+        "coarseIterationMillisecondsP95": 17.261799999999994,
+        "coarseIterationRepeats": 5,
+        "finalScoreMilliseconds": 547.5350000000001,
+        "perUnitMilliseconds": 615.6737
+      },
+      "referenceCache": {
+        "rasterizations": 16,
+        "cacheHits": 5,
+        "cachedEntries": 2
+      },
+      "byteStability": {
+        "twoRunsIdentical": true,
+        "serialMatchesWorkerThreads": true,
+        "coarseStageChecksums": [
+          {
+            "viewId": "low-000",
+            "checksums": {
+              "silhouette": "e162679e6c5b781de91322c145e6945ec263a0d2c855bb4b6a408deb3e4def83",
+              "depth": "19a6512a3559fe9eb81e3c39cc9d425b23a085ea18179d1bc902902725dcb5f3",
+              "worldNormal": "12d7d22734d3f4552b80021d2d191dbefeca6b46157200e7d0edd8be97493d6b"
+            }
+          },
+          {
+            "viewId": "low-090",
+            "checksums": {
+              "silhouette": "b845657e95c3f7eac7df6e2f514e4e8ece84da08f2a205f89976e4f9ee7f0a6e",
+              "depth": "e77988f399dc9c374622dc76eebad2fa5f87c37a068328090c86587f885d6ce0",
+              "worldNormal": "f0e2d4690289074f9adb7198dec109d43bd51a7633324506a8687cdc5f40620f"
+            }
+          },
+          {
+            "viewId": "low-180",
+            "checksums": {
+              "silhouette": "dfa6503a1c8a50ddc1a1fb988940ada6312dcbe3ea8da9791c302e83d64d4728",
+              "depth": "001ac0080974a4f107447a6b9fa656e9661e263f3217a840ccb6cc3d64300a46",
+              "worldNormal": "4337adb1767f51005026590255358a44e4f65b731735b82963e1e51127e9a477"
+            }
+          },
+          {
+            "viewId": "low-270",
+            "checksums": {
+              "silhouette": "8e031a23b16e05b2f63698ae2a5b04d2a2f7675c9db93d4a1b20da2fc713292d",
+              "depth": "bb567c161e06f848c589576f6e337465baffebfeb492e5d369fa07c942e74cf9",
+              "worldNormal": "2a8e4c250bbd33b2c482197099c6e6c22d1c129c2298ba3f1cb8a5fd3786fd1a"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "unitId": "stone",
+      "label": "Stone",
+      "referenceTriangleCount": 212,
+      "referenceNormalSource": "authored-NORMAL-attribute",
+      "replacementTriangleCount": 80,
+      "replacementDrawCallCount": 1,
+      "rootPositionDiscardedByFrame": false,
+      "discardedRootPosition": [
+        0,
+        0,
+        0
+      ],
+      "browserEvidence": "stone-acceptance-v3.json",
+      "geometryBaselineSource": "stone-geometry-baseline-v2",
+      "perMetric": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "cpu": 6.449522432240184e-8,
+          "browser": 6.449522321993078e-8,
+          "absoluteDivergence": 1.102471058501224e-15,
+          "threshold": 0.022,
+          "operator": "<=",
+          "thresholdSource": "stone-geometry-baseline-v2",
+          "acceptanceHeadroom": 0.021999935504776778,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "cpu": 0,
+          "browser": 0,
+          "absoluteDivergence": 0,
+          "threshold": 0.030824658817,
+          "operator": "<=",
+          "thresholdSource": "stone-geometry-baseline-v2",
+          "acceptanceHeadroom": 0.030824658817,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanIou": {
+          "cpu": 0.8931149451879116,
+          "browser": 0.8930835067692503,
+          "absoluteDivergence": 0.000031438418661267065,
+          "threshold": 0.844703618056,
+          "operator": ">=",
+          "thresholdSource": "stone-geometry-baseline-v2",
+          "acceptanceHeadroom": 0.048379888713250274,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.worstViewIou": {
+          "cpu": 0.8690966173401995,
+          "browser": 0.8690109301123639,
+          "absoluteDivergence": 0.0000856872278356402,
+          "threshold": 0.811907117733,
+          "operator": ">=",
+          "thresholdSource": "stone-geometry-baseline-v2",
+          "acceptanceHeadroom": 0.057103812379363905,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "cpu": 6.866701398958059,
+          "browser": 6.868654358146311,
+          "absoluteDivergence": 0.0019529591882516684,
+          "threshold": 10.600715268357,
+          "operator": "<=",
+          "thresholdSource": "stone-geometry-baseline-v2",
+          "acceptanceHeadroom": 3.7320609102106888,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "cpu": 23.769728648009426,
+          "browser": 23.769728648009426,
+          "absoluteDivergence": 0,
+          "threshold": 33.557641192199,
+          "operator": "<=",
+          "thresholdSource": "stone-geometry-baseline-v2",
+          "acceptanceHeadroom": 9.787912544189574,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.mae": {
+          "cpu": 0.02900026281443063,
+          "browser": 0.029000923376750257,
+          "absoluteDivergence": 6.605623196279109e-7,
+          "threshold": 0.040584035391,
+          "operator": "<=",
+          "thresholdSource": "stone-geometry-baseline-v2",
+          "acceptanceHeadroom": 0.011583112014249743,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.p95": {
+          "cpu": 0.10564533088984719,
+          "browser": 0.10564533088984719,
+          "absoluteDivergence": 0,
+          "threshold": 0.145860441186,
+          "operator": "<=",
+          "thresholdSource": "stone-geometry-baseline-v2",
+          "acceptanceHeadroom": 0.04021511029615281,
+          "cpuVerdictMatchesBrowserVerdict": true
+        }
+      },
+      "perViewMaxDivergence": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "maximum": 1.102471058501224e-15,
+          "atView": "low-000"
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.worstViewIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.depth.mae": {
+          "maximum": 0.00004371252246961749,
+          "atView": "low-045"
+        },
+        "geometry.depth.p95": {
+          "maximum": 0.007043022059322723,
+          "atView": "low-270"
+        }
+      },
+      "wallClock": {
+        "coarseIterationMillisecondsMean": 13.743280000000004,
+        "coarseIterationMillisecondsP95": 15.988200000000006,
+        "coarseIterationRepeats": 5,
+        "finalScoreMilliseconds": 719.6203,
+        "perUnitMilliseconds": 789.7073
+      },
+      "referenceCache": {
+        "rasterizations": 16,
+        "cacheHits": 5,
+        "cachedEntries": 2
+      },
+      "byteStability": {
+        "twoRunsIdentical": true,
+        "serialMatchesWorkerThreads": true,
+        "coarseStageChecksums": [
+          {
+            "viewId": "low-000",
+            "checksums": {
+              "silhouette": "608907f212dfcf48de9d25ea139c9df15e957aa7b8dd5a1f532679b4cae7ccf1",
+              "depth": "696849b55709aac292e70ad20508f7d39c3dad71365dcaf31d4e33ace8cc6e47",
+              "worldNormal": "20a8d9c04606fb970254fce7a1e34cf898458fee47286475d945be7e44ff9928"
+            }
+          },
+          {
+            "viewId": "low-090",
+            "checksums": {
+              "silhouette": "1c6e25346c5506e8113c0d053d1c5ec1d483d8fe0b72d35713eaf8789cff2562",
+              "depth": "ffc045458efa2c5838bcff3c84cbbef05a5e0238e5731f2ce1b2b7efd882e4df",
+              "worldNormal": "31db8a267460713672785e249c6c57e69a64ecbc6d7730981b5e958862c3662c"
+            }
+          },
+          {
+            "viewId": "low-180",
+            "checksums": {
+              "silhouette": "a65eba314d302b6c2983acd82c4446cb6470d4fdcce288242d0063bb881592d1",
+              "depth": "ef54d62010664a450429019e127109fec26a57ee4321682c68ef9c49004f5733",
+              "worldNormal": "af8282530edcdea24b6afd68481eec913f66c84fff5c4450bddf2c2e78b82122"
+            }
+          },
+          {
+            "viewId": "low-270",
+            "checksums": {
+              "silhouette": "2883e7dfed75f9ae121e56c2bb53fa36b074c49602f4d82e92f2e14f36a19d9e",
+              "depth": "e41446bd99bb2d8c05b115b4ae84ed8580ab3ac09687da8acdd255074b422277",
+              "worldNormal": "684b7b399ba00e7a761e46a80f3fef44334d07c7338eb55eed5d3819196b758f"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "unitId": "bamboo-shoot",
+      "label": "Bamboo Shoot",
+      "referenceTriangleCount": 424,
+      "referenceNormalSource": "authored-NORMAL-attribute",
+      "replacementTriangleCount": 280,
+      "replacementDrawCallCount": 2,
+      "rootPositionDiscardedByFrame": false,
+      "discardedRootPosition": [
+        0,
+        0,
+        0
+      ],
+      "browserEvidence": "bamboo-shoot-acceptance-v2.json",
+      "geometryBaselineSource": "bamboo-shoot-semantic-category-baseline-v2",
+      "perMetric": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "cpu": 0.008871833609410726,
+          "browser": 0.008871833609409338,
+          "absoluteDivergence": 1.3877787807814457e-15,
+          "threshold": 0.06444504163117752,
+          "operator": "<=",
+          "thresholdSource": "bamboo-shoot-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.05557320802176818,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "cpu": 0.03717458005385713,
+          "browser": 0.03717458005385713,
+          "absoluteDivergence": 0,
+          "threshold": 0.04875,
+          "operator": "<=",
+          "thresholdSource": "bamboo-shoot-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.011575419946142869,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanIou": {
+          "cpu": 0.9315106606445521,
+          "browser": 0.9312396888173983,
+          "absoluteDivergence": 0.00027097182715385415,
+          "threshold": 0.8862460459207883,
+          "operator": ">=",
+          "thresholdSource": "bamboo-shoot-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.04499364289661001,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.worstViewIou": {
+          "cpu": 0.8968627450980392,
+          "browser": 0.8965584861260908,
+          "absoluteDivergence": 0.00030425897194841234,
+          "threshold": 0.8592531497223016,
+          "operator": ">=",
+          "thresholdSource": "bamboo-shoot-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.03730533640378919,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "cpu": 1.0971374068656299,
+          "browser": 1.1018604268332295,
+          "absoluteDivergence": 0.0047230199675996065,
+          "threshold": 1.644927078996141,
+          "operator": "<=",
+          "thresholdSource": "bamboo-shoot-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.5430666521629115,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "cpu": 5.385164807134504,
+          "browser": 5.0990195135927845,
+          "absoluteDivergence": 0.28614529354171925,
+          "threshold": 6.212214450449026,
+          "operator": "<=",
+          "thresholdSource": "bamboo-shoot-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 1.1131949368562415,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.mae": {
+          "cpu": 0.004223325444958358,
+          "browser": 0.0042186438409965435,
+          "absoluteDivergence": 0.000004681603961814891,
+          "threshold": 0.00935322756389121,
+          "operator": "<=",
+          "thresholdSource": "bamboo-shoot-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.005134583722894667,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.p95": {
+          "cpu": 0.020997056342499678,
+          "browser": 0.020997056342499678,
+          "absoluteDivergence": 0,
+          "threshold": 0.03805716462078073,
+          "operator": "<=",
+          "thresholdSource": "bamboo-shoot-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.017060108278281052,
+          "cpuVerdictMatchesBrowserVerdict": true
+        }
+      },
+      "perViewMaxDivergence": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "maximum": 1.3877787807814457e-15,
+          "atView": "low-000"
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.worstViewIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.depth.mae": {
+          "maximum": 0.0000431543405307374,
+          "atView": "high-315"
+        },
+        "geometry.depth.p95": {
+          "maximum": 0,
+          "atView": null
+        }
+      },
+      "wallClock": {
+        "coarseIterationMillisecondsMean": 10.865840000000116,
+        "coarseIterationMillisecondsP95": 12.45640000000003,
+        "coarseIterationRepeats": 5,
+        "finalScoreMilliseconds": 529.344,
+        "perUnitMilliseconds": 584.5861
+      },
+      "referenceCache": {
+        "rasterizations": 16,
+        "cacheHits": 5,
+        "cachedEntries": 2
+      },
+      "byteStability": {
+        "twoRunsIdentical": true,
+        "serialMatchesWorkerThreads": true,
+        "coarseStageChecksums": [
+          {
+            "viewId": "low-000",
+            "checksums": {
+              "silhouette": "520a79a27aac595b8d704ed2baf0cac5809332a96e0bde19e27e5ec44ba1af15",
+              "depth": "f90bb8d972ad61dbd3660ae8d9ffb9af36112fb4c9fa041dd1c21292cb08b1ab",
+              "worldNormal": "44b10199ee72db0d44c1df645cfd1d43f212942f5d59f31b0a7117e71d7129e8"
+            }
+          },
+          {
+            "viewId": "low-090",
+            "checksums": {
+              "silhouette": "56ed9cc66e9690104d29147a8531983d979c302ec9e43c4c83ef977f07478378",
+              "depth": "baf26b1c4ed782aaeaf227257ece70d409e195970f042b5a98b684693f78f5fb",
+              "worldNormal": "6cd8b9018a4bc71412541f859d837119dcd5c1d2604f9d637817850dc00d886b"
+            }
+          },
+          {
+            "viewId": "low-180",
+            "checksums": {
+              "silhouette": "cda927950a8b0a36b7686c72a321db782b999b0aa7753b757278811cc5f16909",
+              "depth": "f535b56fa30e04ccf166818e04ec62b7f71407d71ddc8300fec1e7d7ca16a147",
+              "worldNormal": "75345f9a5dd1ffc359080925ecc85d593b90d7f056687d70bd964c3c0e45995f"
+            }
+          },
+          {
+            "viewId": "low-270",
+            "checksums": {
+              "silhouette": "472aa7facadf3dd7a7dadfdbb278131878c663193a798ee1297bf0465bef866d",
+              "depth": "2b875e90ebac2e8ffedf25a23366d91e511d0d62e5ebf8ecb82432d0a0aebacf",
+              "worldNormal": "01e8ee3654881d63c6f382f8a576ef4f1a2af6f661ed1644106f9c8c33bb000a"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "unitId": "blue-hat",
+      "label": "Blue Hat",
+      "referenceTriangleCount": 704,
+      "referenceNormalSource": "authored-NORMAL-attribute",
+      "replacementTriangleCount": 704,
+      "replacementDrawCallCount": 2,
+      "rootPositionDiscardedByFrame": false,
+      "discardedRootPosition": [
+        0,
+        0,
+        0
+      ],
+      "browserEvidence": "blue-hat-acceptance-v2.json",
+      "geometryBaselineSource": "blue-hat-semantic-category-baseline-v2",
+      "perMetric": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "cpu": 0.0032714086231429465,
+          "browser": 0.003271408623142007,
+          "absoluteDivergence": 9.39352762241441e-16,
+          "threshold": 0.04823156660927942,
+          "operator": "<=",
+          "thresholdSource": "blue-hat-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.044960157986137415,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "cpu": 0.020805321084690062,
+          "browser": 0.020805321084690062,
+          "absoluteDivergence": 0,
+          "threshold": 0.04875000000000007,
+          "operator": "<=",
+          "thresholdSource": "blue-hat-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.02794467891531001,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanIou": {
+          "cpu": 0.996060790258034,
+          "browser": 0.9960772922570696,
+          "absoluteDivergence": 0.000016501999035689607,
+          "threshold": 0.9163024887743573,
+          "operator": ">=",
+          "thresholdSource": "blue-hat-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.07977480348271238,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.worstViewIou": {
+          "cpu": 0.9947500975488631,
+          "browser": 0.99478436729408,
+          "absoluteDivergence": 0.00003426974521691939,
+          "threshold": 0.9462234193545142,
+          "operator": ">=",
+          "thresholdSource": "blue-hat-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.04856094793956589,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "cpu": 0.28001402613033527,
+          "browser": 0.27884920364185073,
+          "absoluteDivergence": 0.0011648224884845404,
+          "threshold": 5.430085192673615,
+          "operator": "<=",
+          "thresholdSource": "blue-hat-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 5.151235989031764,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "cpu": 1,
+          "browser": 1,
+          "absoluteDivergence": 0,
+          "threshold": 5.25,
+          "operator": "<=",
+          "thresholdSource": "blue-hat-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 4.25,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.mae": {
+          "cpu": 0.0018224681254952284,
+          "browser": 0.0018276166321641795,
+          "absoluteDivergence": 0.00000514850666895111,
+          "threshold": 0.039023740377965646,
+          "operator": "<=",
+          "thresholdSource": "blue-hat-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.03719612374580147,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.p95": {
+          "cpu": 0.0076665062358272406,
+          "browser": 0.0076665062358272406,
+          "absoluteDivergence": 0,
+          "threshold": 0.055582170209747365,
+          "operator": "<=",
+          "thresholdSource": "blue-hat-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.04791566397392012,
+          "cpuVerdictMatchesBrowserVerdict": true
+        }
+      },
+      "perViewMaxDivergence": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "maximum": 9.39352762241441e-16,
+          "atView": "low-000"
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.worstViewIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.depth.mae": {
+          "maximum": 0.00002209576517523326,
+          "atView": "low-270"
+        },
+        "geometry.depth.p95": {
+          "maximum": 0,
+          "atView": null
+        }
+      },
+      "wallClock": {
+        "coarseIterationMillisecondsMean": 16.53247999999985,
+        "coarseIterationMillisecondsP95": 20.700199999999768,
+        "coarseIterationRepeats": 5,
+        "finalScoreMilliseconds": 753.3232000000003,
+        "perUnitMilliseconds": 838.3225000000002
+      },
+      "referenceCache": {
+        "rasterizations": 16,
+        "cacheHits": 5,
+        "cachedEntries": 2
+      },
+      "byteStability": {
+        "twoRunsIdentical": true,
+        "serialMatchesWorkerThreads": true,
+        "coarseStageChecksums": [
+          {
+            "viewId": "low-000",
+            "checksums": {
+              "silhouette": "6dc92d588d9dfe65d697f5d10a4b5e099544b3a01811bef40814bd736ef7154c",
+              "depth": "62fbe79070f2df92e01fa22d3e4297cb261cbdc161b7ae45da05bdb9c2155eb5",
+              "worldNormal": "045213d6271c585e0772ccfc7c571eba8e170edd84fdd8607f57a014225ec37e"
+            }
+          },
+          {
+            "viewId": "low-090",
+            "checksums": {
+              "silhouette": "ee7ad8693aa6198ccd180a269735217a497898699e9b540286f5004309051f5b",
+              "depth": "6e9309ede6bf45eeba40f3ba4603f89715646547211bac606bc8bd312f7e108f",
+              "worldNormal": "1c62a4da64f7424d02d0c91ec31e9b9813b56da627f7ab49d79dc99bfab7b530"
+            }
+          },
+          {
+            "viewId": "low-180",
+            "checksums": {
+              "silhouette": "918790247b351bb8a99ad6acadc509c9218d745a5035f0f55250741e8745f16b",
+              "depth": "9339d4ab69c39eac3083f9cf7b37ca73294985454bec880170fb1e9b8d22ff28",
+              "worldNormal": "0a20861b7e14f3d24580f8e1a9faf3c230a3cb85cecbf49b4476a24042eddf71"
+            }
+          },
+          {
+            "viewId": "low-270",
+            "checksums": {
+              "silhouette": "e411b19af05d521537127232a57537e575533c772ad3db4f25b4123fa412f3ce",
+              "depth": "b6974ffb361af25b9a6c58ba0c35307e0025ca6c3db8a903fe6d2bb853c1673b",
+              "worldNormal": "d79301237ad50fed5847738333a1e540b004a30406466db37cb279e6445b964a"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "unitId": "vase",
+      "label": "Vase",
+      "referenceTriangleCount": 732,
+      "referenceNormalSource": "authored-NORMAL-attribute",
+      "replacementTriangleCount": 768,
+      "replacementDrawCallCount": 1,
+      "rootPositionDiscardedByFrame": false,
+      "discardedRootPosition": [
+        0,
+        0,
+        0
+      ],
+      "browserEvidence": "vase-acceptance-v1.json",
+      "geometryBaselineSource": "single-mesh-quality-baseline-v1",
+      "perMetric": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "cpu": 0.006757171039903349,
+          "browser": 0.006757171039903349,
+          "absoluteDivergence": 0,
+          "threshold": 0.02,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.013242828960096651,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "cpu": 0,
+          "browser": 3.794299872214038e-15,
+          "absoluteDivergence": 3.794299872214038e-15,
+          "threshold": 0.02,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.019999999999996205,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanIou": {
+          "cpu": 0.9947323944116991,
+          "browser": 0.99461527602344,
+          "absoluteDivergence": 0.00011711838825911869,
+          "threshold": 0.95,
+          "operator": ">=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.044615276023440065,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.worstViewIou": {
+          "cpu": 0.9915130369182894,
+          "browser": 0.9913522938806286,
+          "absoluteDivergence": 0.00016074303766078213,
+          "threshold": 0.92,
+          "operator": ">=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.07135229388062858,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "cpu": 0.2341083805570453,
+          "browser": 0.2404374810651463,
+          "absoluteDivergence": 0.00632910050810101,
+          "threshold": 1.5,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 1.2595625189348536,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "cpu": 2,
+          "browser": 2,
+          "absoluteDivergence": 0,
+          "threshold": 4,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 2,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.mae": {
+          "cpu": 0.0024640801063085765,
+          "browser": 0.0024744655547289532,
+          "absoluteDivergence": 0.000010385448420376694,
+          "threshold": 0.015,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.012525534445271047,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.p95": {
+          "cpu": 0.006558509288541815,
+          "browser": 0.006558509288541815,
+          "absoluteDivergence": 0,
+          "threshold": 0.04,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.03344149071145819,
+          "cpuVerdictMatchesBrowserVerdict": true
+        }
+      },
+      "perViewMaxDivergence": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "maximum": 3.794299872214038e-15,
+          "atView": "low-000"
+        },
+        "geometry.silhouette.meanIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.worstViewIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.depth.mae": {
+          "maximum": 0.00009379635372406642,
+          "atView": "high-225"
+        },
+        "geometry.depth.p95": {
+          "maximum": 0,
+          "atView": null
+        }
+      },
+      "wallClock": {
+        "coarseIterationMillisecondsMean": 14.69202000000023,
+        "coarseIterationMillisecondsP95": 18.274900000000343,
+        "coarseIterationRepeats": 5,
+        "finalScoreMilliseconds": 686.3744999999999,
+        "perUnitMilliseconds": 762.0066999999999
+      },
+      "referenceCache": {
+        "rasterizations": 16,
+        "cacheHits": 5,
+        "cachedEntries": 2
+      },
+      "byteStability": {
+        "twoRunsIdentical": true,
+        "serialMatchesWorkerThreads": true,
+        "coarseStageChecksums": [
+          {
+            "viewId": "low-000",
+            "checksums": {
+              "silhouette": "2e1885d5f4b25e8153eb68533e5256c20bffc45b1201401256f2b499b2847952",
+              "depth": "f3ebf03ca35a1a4137093b1e1baf855c68b69712a7813ed26e37476d164912b2",
+              "worldNormal": "2656ae333fc8d5edac08fccf1e0bd3ecc0fc841d93a12700e46df4452b56d7ff"
+            }
+          },
+          {
+            "viewId": "low-090",
+            "checksums": {
+              "silhouette": "614f84047ec14c281aa7e31be6f7369e86e064f5186ff9d57849519db4c899d1",
+              "depth": "bb26506df33d5b021dad2f8590f6b210ecbf08439e91af7ac52e1be33dd32227",
+              "worldNormal": "2b65b2ea7bea9e34abee169ddfe7a007c898fd5fdafee114c587594d3a0ef9ad"
+            }
+          },
+          {
+            "viewId": "low-180",
+            "checksums": {
+              "silhouette": "59028890de5b3cb51eb55ff86b67ff6197f1bc741b97de0035e7866475353721",
+              "depth": "d78ccf3b2a0987417a886e98af7471e44970ef51d371939073f058ad7be3c208",
+              "worldNormal": "ae936a96a28a93f4d787e78d13e9d03fdd3b04b1f346bbad908a655900e600ff"
+            }
+          },
+          {
+            "viewId": "low-270",
+            "checksums": {
+              "silhouette": "e1aae6a1e48193ce6a88ba3aa400444b4b53eac89a92fdb97331d8c023d0a4f7",
+              "depth": "6231e9c30fb9e5cac47d8fa61ffce3942fe50f2e9704203daa7264c0a698bbe3",
+              "worldNormal": "8be3f9b54177fe42205d8f128f609769423c64c29c19b516f6bc0adbf1590030"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "unitId": "candle",
+      "label": "Candle",
+      "referenceTriangleCount": 852,
+      "referenceNormalSource": "authored-NORMAL-attribute",
+      "replacementTriangleCount": 672,
+      "replacementDrawCallCount": 3,
+      "rootPositionDiscardedByFrame": false,
+      "discardedRootPosition": [
+        0,
+        0,
+        0
+      ],
+      "browserEvidence": "candle-acceptance-v3.json",
+      "geometryBaselineSource": "candle-semantic-category-baseline-v2",
+      "perMetric": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "cpu": 0.001989183203051351,
+          "browser": 0.001989183203051351,
+          "absoluteDivergence": 0,
+          "threshold": 0.0632190566289111,
+          "operator": "<=",
+          "thresholdSource": "candle-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.06122987342585975,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "cpu": 0.000043688630292965395,
+          "browser": 0.000043688630289537866,
+          "absoluteDivergence": 3.4275289854598934e-15,
+          "threshold": 0.04874999999999652,
+          "operator": "<=",
+          "thresholdSource": "candle-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.04870631136970698,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanIou": {
+          "cpu": 0.9950126247174499,
+          "browser": 0.994908726953796,
+          "absoluteDivergence": 0.00010389776365393733,
+          "threshold": 0.9206175589191302,
+          "operator": ">=",
+          "thresholdSource": "candle-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.07429116803466573,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.worstViewIou": {
+          "cpu": 0.9928856624319419,
+          "browser": 0.9927258251302837,
+          "absoluteDivergence": 0.00015983730165813892,
+          "threshold": 0.9000138886400514,
+          "operator": ">=",
+          "thresholdSource": "candle-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.09271193649023235,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "cpu": 0.15367256661799747,
+          "browser": 0.15786011141164102,
+          "absoluteDivergence": 0.004187544793643555,
+          "threshold": 2.7211746228308895,
+          "operator": "<=",
+          "thresholdSource": "candle-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 2.5633145114192484,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "cpu": 1.4142135623730951,
+          "browser": 1.4142135623730951,
+          "absoluteDivergence": 0,
+          "threshold": 6.546192127984564,
+          "operator": "<=",
+          "thresholdSource": "candle-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 5.131978565611469,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.mae": {
+          "cpu": 0.0019081377011933454,
+          "browser": 0.0019274896739681546,
+          "absoluteDivergence": 0.00001935197277480919,
+          "threshold": 0.025822990246922126,
+          "operator": "<=",
+          "thresholdSource": "candle-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.023895500572953973,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.p95": {
+          "cpu": 0.00647715411129595,
+          "browser": 0.00647715411129595,
+          "absoluteDivergence": 0,
+          "threshold": 0.2364161250622988,
+          "operator": "<=",
+          "thresholdSource": "candle-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.22993897095100285,
+          "cpuVerdictMatchesBrowserVerdict": true
+        }
+      },
+      "perViewMaxDivergence": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "maximum": 3.4275289854598934e-15,
+          "atView": "low-000"
+        },
+        "geometry.silhouette.meanIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.worstViewIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.depth.mae": {
+          "maximum": 0.00004807192744282632,
+          "atView": "low-045"
+        },
+        "geometry.depth.p95": {
+          "maximum": 0,
+          "atView": null
+        }
+      },
+      "wallClock": {
+        "coarseIterationMillisecondsMean": 12.661440000000038,
+        "coarseIterationMillisecondsP95": 15.197699999999713,
+        "coarseIterationRepeats": 5,
+        "finalScoreMilliseconds": 604.6869999999999,
+        "perUnitMilliseconds": 669.5222999999996
+      },
+      "referenceCache": {
+        "rasterizations": 16,
+        "cacheHits": 5,
+        "cachedEntries": 2
+      },
+      "byteStability": {
+        "twoRunsIdentical": true,
+        "serialMatchesWorkerThreads": true,
+        "coarseStageChecksums": [
+          {
+            "viewId": "low-000",
+            "checksums": {
+              "silhouette": "aae4c15726bd16ae09d2b3fcf76515524cabb54df30f4f4126718a08ca699c67",
+              "depth": "805130568de2760d4b5846e765473ed77be19d5769664dc661a81daffc4b0357",
+              "worldNormal": "809f7f4a9d64ab37212236648b2adcd46f704e3a36ef457fd0fa8d34c0e63bd0"
+            }
+          },
+          {
+            "viewId": "low-090",
+            "checksums": {
+              "silhouette": "f55d491f397f7734551151e8aedc48ebf96a119f5517e3011551f3326484999d",
+              "depth": "1c72e798071ff9f8b6ab1a442ae0a19e6c21ba69fe745adf8977ef69e8b80dd7",
+              "worldNormal": "7e1084db677ad77ef350b8a3802dd6930bc5fba5b31e6211ea05feb5c374c6c4"
+            }
+          },
+          {
+            "viewId": "low-180",
+            "checksums": {
+              "silhouette": "cb31aa112e408a5664ca3d6193441a90920207a5824d5b70e2a8a5b34ea23180",
+              "depth": "7a57cb3678d2b99801b81955ba0fae1683c75099ef75a11820d86dd031e5127b",
+              "worldNormal": "571d3175d8327374ae3ab154b1b76c51c4042f78e25d997fb92d7700a2592779"
+            }
+          },
+          {
+            "viewId": "low-270",
+            "checksums": {
+              "silhouette": "8ab25d9bceb1f49f791cfe86025a8071b91be9f99a7d65b40ffad6d9dde1c8e0",
+              "depth": "e4211d4db106dbb36cef812944293fd23fda9b7d5a7ce8104b448aea7813f5c7",
+              "worldNormal": "5bc34923cff53c16f4731d8e7c1ac938b6d841a594caf00be7876d4690a5809c"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "unitId": "mushroom",
+      "label": "Mushroom",
+      "referenceTriangleCount": 1802,
+      "referenceNormalSource": "authored-NORMAL-attribute",
+      "replacementTriangleCount": 1560,
+      "replacementDrawCallCount": 2,
+      "rootPositionDiscardedByFrame": true,
+      "discardedRootPosition": [
+        0,
+        -0.01964641362428665,
+        0
+      ],
+      "browserEvidence": "mushroom-acceptance-v2.json",
+      "geometryBaselineSource": "mushroom-semantic-category-baseline-v2",
+      "perMetric": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "cpu": 0.0028483477262015405,
+          "browser": 0.0028483477262015405,
+          "absoluteDivergence": 0,
+          "threshold": 0.050685267497310546,
+          "operator": "<=",
+          "thresholdSource": "mushroom-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.04783691977110901,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "cpu": 0.019609223150949318,
+          "browser": 0.019609223150949318,
+          "absoluteDivergence": 0,
+          "threshold": 0.047379137823624545,
+          "operator": "<=",
+          "thresholdSource": "mushroom-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.027769914672675228,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanIou": {
+          "cpu": 0.831120198293565,
+          "browser": 0.8310965545554737,
+          "absoluteDivergence": 0.000023643738091272404,
+          "threshold": 0.82,
+          "operator": ">=",
+          "thresholdSource": "mushroom-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.011096554555473759,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.worstViewIou": {
+          "cpu": 0.7742270938729623,
+          "browser": 0.7745334982014388,
+          "absoluteDivergence": 0.0003064043284765061,
+          "threshold": 0.76,
+          "operator": ">=",
+          "thresholdSource": "mushroom-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.014533498201438788,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "cpu": 2.9540088471757815,
+          "browser": 2.960282788266983,
+          "absoluteDivergence": 0.006273941091201607,
+          "threshold": 3.2,
+          "operator": "<=",
+          "thresholdSource": "mushroom-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.23971721173301708,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "cpu": 12.649110640673518,
+          "browser": 12.649110640673518,
+          "absoluteDivergence": 0,
+          "threshold": 15,
+          "operator": "<=",
+          "thresholdSource": "mushroom-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 2.350889359326482,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.mae": {
+          "cpu": 0.020766662605930165,
+          "browser": 0.020757116001643837,
+          "absoluteDivergence": 0.000009546604286328475,
+          "threshold": 0.025,
+          "operator": "<=",
+          "thresholdSource": "mushroom-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.0042428839983561645,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.p95": {
+          "cpu": 0.2225870973464816,
+          "browser": 0.2225870973464816,
+          "absoluteDivergence": 0,
+          "threshold": 0.23,
+          "operator": "<=",
+          "thresholdSource": "mushroom-semantic-category-baseline-v2",
+          "acceptanceHeadroom": 0.007412902653518405,
+          "cpuVerdictMatchesBrowserVerdict": true
+        }
+      },
+      "perViewMaxDivergence": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.worstViewIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.depth.mae": {
+          "maximum": 0.00004230245366769643,
+          "atView": "high-225"
+        },
+        "geometry.depth.p95": {
+          "maximum": 2.7755575615628914e-16,
+          "atView": "high-315"
+        }
+      },
+      "wallClock": {
+        "coarseIterationMillisecondsMean": 13.352880000000004,
+        "coarseIterationMillisecondsP95": 15.809100000000399,
+        "coarseIterationRepeats": 5,
+        "finalScoreMilliseconds": 623.0675999999994,
+        "perUnitMilliseconds": 692.3332999999993
+      },
+      "referenceCache": {
+        "rasterizations": 16,
+        "cacheHits": 5,
+        "cachedEntries": 2
+      },
+      "byteStability": {
+        "twoRunsIdentical": true,
+        "serialMatchesWorkerThreads": true,
+        "coarseStageChecksums": [
+          {
+            "viewId": "low-000",
+            "checksums": {
+              "silhouette": "6faacdb98b22e2e0acea4884f88bd200f981a37a962dbc1e31029a668f2b7060",
+              "depth": "50b69563cdef43218c3288a3d0cc0d78682283ddd9fd26f4637b5a22b70511ab",
+              "worldNormal": "402c755449397750dfaf81a9de272ea6c086ccf571b07d484e62747ce2a5d90e"
+            }
+          },
+          {
+            "viewId": "low-090",
+            "checksums": {
+              "silhouette": "6e1a4c1a4a75c85241dab783717d951a2827f979e7ba0f2c6eb344e34d5c8f79",
+              "depth": "6c9f12a48020a3032db27fcfa145d37e98baadaf8a05870e7aa7ac56b6be0e4f",
+              "worldNormal": "006f57ca0eeb6acfd8f44552ce1a3c2a9dc774a1f5abb6dd7eb0931672fa1a0b"
+            }
+          },
+          {
+            "viewId": "low-180",
+            "checksums": {
+              "silhouette": "d6e8f52dadb332f9279bc5cbc7c887774fbe7a7b32117676eef2a28fee19239c",
+              "depth": "e1ddb59ee13baf64b243139632b97c559a71142cac94659d60b75a2a8d671a8c",
+              "worldNormal": "70727b0d473ac73f71bc8b9c40a28e82d3f27ba9bb95e11b0d0f48c14cae69f6"
+            }
+          },
+          {
+            "viewId": "low-270",
+            "checksums": {
+              "silhouette": "306b6e6c63b8133300e943a1694846355f8a9eb9be4a7f8b08d22b398bdd7dd5",
+              "depth": "892ff5faf43c8630beda490fb69dcdd36fbd7ec447f8cea821252e732159a8cb",
+              "worldNormal": "795331584b42e663d286f708fcbeb6c8e9896d3d98c1f86aff1ad68acfb9a9e1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "unitId": "umbrella",
+      "label": "Umbrella",
+      "referenceTriangleCount": 3840,
+      "referenceNormalSource": "authored-NORMAL-attribute",
+      "replacementTriangleCount": 5336,
+      "replacementDrawCallCount": 2,
+      "rootPositionDiscardedByFrame": false,
+      "discardedRootPosition": [
+        0,
+        0,
+        0
+      ],
+      "browserEvidence": "umbrella-acceptance-v4.json",
+      "geometryBaselineSource": "single-mesh-quality-baseline-v1",
+      "perMetric": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "cpu": 0.0041994065066649966,
+          "browser": 0.0041994065066649966,
+          "absoluteDivergence": 0,
+          "threshold": 0.02,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.015800593493335003,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "cpu": 0,
+          "browser": 1.7763568394002505e-15,
+          "absoluteDivergence": 1.7763568394002505e-15,
+          "threshold": 0.02,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.019999999999998224,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanIou": {
+          "cpu": 0.9877455203689757,
+          "browser": 0.9878629310594343,
+          "absoluteDivergence": 0.0001174106904586747,
+          "threshold": 0.9,
+          "operator": ">=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.08786293105943432,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.worstViewIou": {
+          "cpu": 0.9653338061884918,
+          "browser": 0.965951409824437,
+          "absoluteDivergence": 0.0006176036359450965,
+          "threshold": 0.84,
+          "operator": ">=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.12595140982443698,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "cpu": 0.35855105469241905,
+          "browser": 0.35679933122226704,
+          "absoluteDivergence": 0.0017517234701520112,
+          "threshold": 2.5,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 2.143200668777733,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "cpu": 1,
+          "browser": 1,
+          "absoluteDivergence": 0,
+          "threshold": 8,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 7,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.mae": {
+          "cpu": 0.004888230657730118,
+          "browser": 0.004855670660389105,
+          "absoluteDivergence": 0.00003255999734101331,
+          "threshold": 0.03,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.025144329339610895,
+          "cpuVerdictMatchesBrowserVerdict": true
+        },
+        "geometry.depth.p95": {
+          "cpu": 0.045864647126119706,
+          "browser": 0.045864647126119706,
+          "absoluteDivergence": 0,
+          "threshold": 0.08,
+          "operator": "<=",
+          "thresholdSource": "single-mesh-quality-baseline-v1",
+          "acceptanceHeadroom": 0.034135352873880295,
+          "cpuVerdictMatchesBrowserVerdict": true
+        }
+      },
+      "perViewMaxDivergence": {
+        "geometry.bounds.maxAxisRelativeError": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.bounds.bottomAnchorErrorCanonical": {
+          "maximum": 1.7763568394002505e-15,
+          "atView": "low-000"
+        },
+        "geometry.silhouette.meanIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.worstViewIou": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.meanEdgeDistancePixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.silhouette.edgeDistanceP95Pixels": {
+          "maximum": 0,
+          "atView": null
+        },
+        "geometry.depth.mae": {
+          "maximum": 0.00020067921799771932,
+          "atView": "low-090"
+        },
+        "geometry.depth.p95": {
+          "maximum": 0,
+          "atView": null
+        }
+      },
+      "wallClock": {
+        "coarseIterationMillisecondsMean": 17.014500000000226,
+        "coarseIterationMillisecondsP95": 20.518099999999322,
+        "coarseIterationRepeats": 5,
+        "finalScoreMilliseconds": 698.4785999999995,
+        "perUnitMilliseconds": 787.7501000000002
+      },
+      "referenceCache": {
+        "rasterizations": 16,
+        "cacheHits": 5,
+        "cachedEntries": 2
+      },
+      "byteStability": {
+        "twoRunsIdentical": true,
+        "serialMatchesWorkerThreads": true,
+        "coarseStageChecksums": [
+          {
+            "viewId": "low-000",
+            "checksums": {
+              "silhouette": "fbeaaf88bd06c9c0a4651dfe68b2c1d290c298774de19428dc085cf057639ccf",
+              "depth": "0d3aea658c808ce9bc5497cb40ca8f119fe4a96d4235c706c0e0f65a0f9e216f",
+              "worldNormal": "9f2b6883f6108c38613bfd4fd754e6d5c82ec981ec5d9a718b59c70f3e55f6d6"
+            }
+          },
+          {
+            "viewId": "low-090",
+            "checksums": {
+              "silhouette": "e583c85850ffd7d759de09a4e08a75afed45325c1226506ee77f19e54b556826",
+              "depth": "ab68bb3a55fbaa91e93417f834e3bcc064309c9a85440f3056aca283a95ea268",
+              "worldNormal": "64bfd19c8a0a4d5d99c4174a1c7134b192ed2140ba81c2f576353e22d4c96936"
+            }
+          },
+          {
+            "viewId": "low-180",
+            "checksums": {
+              "silhouette": "5eadcb1afe0c159314c81071df95bb21a72b8c84e07990b6fd99bbc95f5be7d0",
+              "depth": "4948abbe0e11fab39b9069b8097bd675dc8f99520ff8cca1c2626dd9a1713bdf",
+              "worldNormal": "bdd55ac2e8f87db260ee4296dc90a0782b1bf950c768c40c4ab01d4de0591054"
+            }
+          },
+          {
+            "viewId": "low-270",
+            "checksums": {
+              "silhouette": "c3da066e1933e814c693a50a8bab22248c1b080be9bad65760b3b75296012233",
+              "depth": "8172a886e104f1106ca4bf1cef6d7d430070a8e6bb789cec932edf7aedb6697a",
+              "worldNormal": "9ccb46d1adcf9ce3e621a6000e3544c6279de68c45ec17089abafc20cca7cc3d"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "divergenceTolerance": {
+    "geometry.bounds.maxAxisRelativeError": {
+      "frozenTolerance": 5.83e-15,
+      "observedMaximumDivergence": 3.88339534140858e-15,
+      "observedAtUnit": "stone-path",
+      "guardFactor": 1.5,
+      "rule": "observed maximum absolute divergence across the eight regression units, times the guard factor, rounded up to three significant digits"
+    },
+    "geometry.bounds.bottomAnchorErrorCanonical": {
+      "frozenTolerance": 5.7e-15,
+      "observedMaximumDivergence": 3.794299872214038e-15,
+      "observedAtUnit": "vase",
+      "guardFactor": 1.5,
+      "rule": "observed maximum absolute divergence across the eight regression units, times the guard factor, rounded up to three significant digits"
+    },
+    "geometry.silhouette.meanIou": {
+      "frozenTolerance": 0.000407,
+      "observedMaximumDivergence": 0.00027097182715385415,
+      "observedAtUnit": "bamboo-shoot",
+      "guardFactor": 1.5,
+      "rule": "observed maximum absolute divergence across the eight regression units, times the guard factor, rounded up to three significant digits"
+    },
+    "geometry.silhouette.worstViewIou": {
+      "frozenTolerance": 0.000927,
+      "observedMaximumDivergence": 0.0006176036359450965,
+      "observedAtUnit": "umbrella",
+      "guardFactor": 1.5,
+      "rule": "observed maximum absolute divergence across the eight regression units, times the guard factor, rounded up to three significant digits"
+    },
+    "geometry.silhouette.meanEdgeDistancePixels": {
+      "frozenTolerance": 0.0095,
+      "observedMaximumDivergence": 0.00632910050810101,
+      "observedAtUnit": "vase",
+      "guardFactor": 1.5,
+      "rule": "observed maximum absolute divergence across the eight regression units, times the guard factor, rounded up to three significant digits"
+    },
+    "geometry.silhouette.edgeDistanceP95Pixels": {
+      "frozenTolerance": 0.43,
+      "observedMaximumDivergence": 0.28614529354171925,
+      "observedAtUnit": "bamboo-shoot",
+      "guardFactor": 1.5,
+      "rule": "observed maximum absolute divergence across the eight regression units, times the guard factor, rounded up to three significant digits"
+    },
+    "geometry.depth.mae": {
+      "frozenTolerance": 0.0000562,
+      "observedMaximumDivergence": 0.000037406698176100694,
+      "observedAtUnit": "stone-path",
+      "guardFactor": 1.5,
+      "rule": "observed maximum absolute divergence across the eight regression units, times the guard factor, rounded up to three significant digits"
+    },
+    "geometry.depth.p95": {
+      "frozenTolerance": 0,
+      "observedMaximumDivergence": 0,
+      "observedAtUnit": null,
+      "guardFactor": 1.5,
+      "rule": "observed maximum absolute divergence across the eight regression units, times the guard factor, rounded up to three significant digits"
+    }
+  },
+  "discriminationMargin": {
+    "geometry.bounds.maxAxisRelativeError": {
+      "margin": 0.013242828960096651,
+      "atUnit": "vase",
+      "definition": "the smallest distance, across the eight units, between an accepted candidate's browser-measured aggregate and the hard threshold it was accepted under; a divergence larger than this could flip an accepted verdict"
+    },
+    "geometry.bounds.bottomAnchorErrorCanonical": {
+      "margin": 0.011575419946142869,
+      "atUnit": "bamboo-shoot",
+      "definition": "the smallest distance, across the eight units, between an accepted candidate's browser-measured aggregate and the hard threshold it was accepted under; a divergence larger than this could flip an accepted verdict"
+    },
+    "geometry.silhouette.meanIou": {
+      "margin": 0.011096554555473759,
+      "atUnit": "mushroom",
+      "definition": "the smallest distance, across the eight units, between an accepted candidate's browser-measured aggregate and the hard threshold it was accepted under; a divergence larger than this could flip an accepted verdict"
+    },
+    "geometry.silhouette.worstViewIou": {
+      "margin": 0.014533498201438788,
+      "atUnit": "mushroom",
+      "definition": "the smallest distance, across the eight units, between an accepted candidate's browser-measured aggregate and the hard threshold it was accepted under; a divergence larger than this could flip an accepted verdict"
+    },
+    "geometry.silhouette.meanEdgeDistancePixels": {
+      "margin": 0.23971721173301708,
+      "atUnit": "mushroom",
+      "definition": "the smallest distance, across the eight units, between an accepted candidate's browser-measured aggregate and the hard threshold it was accepted under; a divergence larger than this could flip an accepted verdict"
+    },
+    "geometry.silhouette.edgeDistanceP95Pixels": {
+      "margin": 1.1131949368562415,
+      "atUnit": "bamboo-shoot",
+      "definition": "the smallest distance, across the eight units, between an accepted candidate's browser-measured aggregate and the hard threshold it was accepted under; a divergence larger than this could flip an accepted verdict"
+    },
+    "geometry.depth.mae": {
+      "margin": 0.0042428839983561645,
+      "atUnit": "mushroom",
+      "definition": "the smallest distance, across the eight units, between an accepted candidate's browser-measured aggregate and the hard threshold it was accepted under; a divergence larger than this could flip an accepted verdict"
+    },
+    "geometry.depth.p95": {
+      "margin": 0.007412902653518405,
+      "atUnit": "mushroom",
+      "definition": "the smallest distance, across the eight units, between an accepted candidate's browser-measured aggregate and the hard threshold it was accepted under; a divergence larger than this could flip an accepted verdict"
+    }
+  },
+  "wallClock": {
+    "declaredBudget": {
+      "coarseIterationMillisecondsMaximum": 150,
+      "finalScoreMillisecondsMaximum": 2000,
+      "perUnitMillisecondsMaximum": 600000,
+      "derivation": "K=3 structure candidates x R=3 rounds x 40 fitting iterations = 360 coarse-stage scores per unit; 360 x 150 ms = 54 s, plus 3 final-stage scores at 2 s = 6 s, inside a 600 s per-unit ceiling."
+    },
+    "measured": {
+      "coarseIterationMillisecondsMaximum": 17.014500000000226,
+      "coarseIterationMillisecondsMaximumAtUnit": "umbrella",
+      "finalScoreMillisecondsMaximum": 753.3232000000003,
+      "perUnitMillisecondsMaximum": 838.3225000000002
+    },
+    "withinBudget": {
+      "coarseIteration": true,
+      "finalScore": true,
+      "perUnit": true
+    },
+    "overBudgetFactor": {
+      "coarseIteration": 0.1134300000000015,
+      "finalScore": 0.37666160000000015,
+      "perUnit": 0.001397204166666667
+    },
+    "policy": "Exceeding the declared budget is backend evidence, reported as measured. It never weakens a gate, a threshold, or a tier."
+  },
+  "verdict": {
+    "perMetric": {
+      "geometry.bounds.maxAxisRelativeError": {
+        "toleranceBelowMargin": true,
+        "tolerance": 5.83e-15,
+        "margin": 0.013242828960096651,
+        "ratio": 4.402382615955383e-13
+      },
+      "geometry.bounds.bottomAnchorErrorCanonical": {
+        "toleranceBelowMargin": true,
+        "tolerance": 5.7e-15,
+        "margin": 0.011575419946142869,
+        "ratio": 4.924227394358457e-13
+      },
+      "geometry.silhouette.meanIou": {
+        "toleranceBelowMargin": true,
+        "tolerance": 0.000407,
+        "margin": 0.011096554555473759,
+        "ratio": 0.036678051548823615
+      },
+      "geometry.silhouette.worstViewIou": {
+        "toleranceBelowMargin": true,
+        "tolerance": 0.000927,
+        "margin": 0.014533498201438788,
+        "ratio": 0.06378368009900251
+      },
+      "geometry.silhouette.meanEdgeDistancePixels": {
+        "toleranceBelowMargin": true,
+        "tolerance": 0.0095,
+        "margin": 0.23971721173301708,
+        "ratio": 0.03963002877982971
+      },
+      "geometry.silhouette.edgeDistanceP95Pixels": {
+        "toleranceBelowMargin": true,
+        "tolerance": 0.43,
+        "margin": 1.1131949368562415,
+        "ratio": 0.3862755621350175
+      },
+      "geometry.depth.mae": {
+        "toleranceBelowMargin": true,
+        "tolerance": 0.0000562,
+        "margin": 0.0042428839983561645,
+        "ratio": 0.013245707406041212
+      },
+      "geometry.depth.p95": {
+        "toleranceBelowMargin": true,
+        "tolerance": 0,
+        "margin": 0.007412902653518405,
+        "ratio": 0
+      }
+    },
+    "toleranceBelowMargin": true,
+    "byteStability": {
+      "twoRunsIdentical": true,
+      "serialMatchesWorkerThreads": true
+    },
+    "cpuVerdictMatchesBrowserVerdictEverywhere": true
+  },
+  "checkPolicy": "--check recomputes the divergence, the tolerances, and the margins and requires them to match the frozen values exactly. Wall-clock is re-measured and compared against the declared budget rather than against the frozen measurement, because a frozen wall-clock number would drift with hardware."
+}
