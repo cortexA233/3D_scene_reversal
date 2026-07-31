@@ -1,7 +1,8 @@
 /**
  * Capture fixed scene passes and native appearance.
  *
- *   node scripts/run-scene-passes.mjs           # capture and record
+ *   node scripts/run-scene-passes.mjs
+ *   node scripts/run-scene-passes.mjs --aggregate   # re-combine stored rows, no browser           # capture and record
  *   node scripts/run-scene-passes.mjs --check   # verify the recorded evidence
  *
  * Both subjects are hosted in one browser context so every pass is
@@ -17,6 +18,7 @@ import { fileURLToPath } from "node:url";
 import { runLocalSceneAutomation } from "./lib/smoke-local-scene.mjs";
 import { createFrozenObservationClockPreload } from "../tools/reference/frozen-observation-clock.mjs";
 import { createReferenceObservationContract } from "../tools/reference/reference-observation-contract.mjs";
+import { aggregateCameras } from "../tools/evaluation/scene-pass-metrics.mjs";
 import { verifyScenePassProtocol } from "../tools/evaluation/scene-pass-protocol.mjs";
 
 const PROJECT_ROOT = path.resolve(
@@ -142,7 +144,47 @@ ${rows}
   return files.length;
 }
 
+/**
+ * Recomputes the aggregate from the per-view rows already on disk, without a browser.
+ *
+ * The calibration side has had this since ADR-0053: `run-fixed-camera-calibration.mjs
+ * --aggregate` rebuilds `aggregateCameras` from each control partial's stored rows, which
+ * is what made scoping the worst-group intersection a free change. The candidate side had
+ * no equivalent — the browser writes its aggregate at capture time — so changing how rows
+ * are *combined* cost a six-camera re-capture even when no pass changed. ADR-0064 paid that
+ * cost for a change that touched no pass, and recorded the asymmetry; this removes it.
+ *
+ * It only re-combines. Anything that changes what a *pass measures* still invalidates every
+ * stored capture and still needs the browser, and this cannot tell the difference — the
+ * same limit `--aggregate` has on the calibration side.
+ */
+async function reaggregate() {
+  const stored = JSON.parse(await readFile(REPORT_PATH, "utf8"));
+  assert.equal(stored.schemaVersion, "scene-pass-evidence-v1");
+  assert.ok(Array.isArray(stored.views) && stored.views.length > 0, "no stored views");
+  const report = { ...stored, aggregate: aggregateCameras(stored.views) };
+  const serialized = `${JSON.stringify(report, null, 2)}\n`;
+  if (checkOnly) {
+    assert.equal(
+      JSON.stringify(stored.aggregate),
+      JSON.stringify(report.aggregate),
+      "the stored aggregate does not match its own rows",
+    );
+    process.stdout.write("Scene passes: the stored aggregate matches its own rows\n");
+    return report;
+  }
+  await writeFile(REPORT_PATH, serialized);
+  process.stdout.write(
+    `Scene passes: re-aggregated ${stored.views.length} stored views without a capture\n`,
+  );
+  return report;
+}
+
 async function main() {
+  if (process.argv.includes("--aggregate")) {
+    await reaggregate();
+    return;
+  }
   const run = await capture();
   assert.equal(run.state.status, "ready", run.state.error ?? "scene passes did not complete");
 

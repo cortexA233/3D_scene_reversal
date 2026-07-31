@@ -16,6 +16,7 @@
     "measure:horizon": "node scripts/run-horizon-evidence.mjs",
     "check:horizon": "node --test test/horizon-evidence.test.mjs && node scripts/run-horizon-evidence.mjs --check",
     "capture:scene-passes": "node scripts/run-scene-passes.mjs",
+    "aggregate:scene-passes": "node scripts/run-scene-passes.mjs --aggregate",
     "check:scene-passes": "node --test test/scene-pass-metrics.test.mjs && node scripts/run-scene-passes.mjs --check",
     "calibrate:scene": "node scripts/run-scene-calibration.mjs",
     "check:scene-calibration": "node --test test/scene-calibration.test.mjs && node scripts/run-scene-calibration.mjs --check",

@@ -561,6 +561,12 @@ and get killed. Use a backgrounded shell for anything long.
 
 ## Re-measurement order when a pass metric changes
 
+**First ask whether the pass changed or only the aggregation.** Both sides can now
+re-combine stored rows offline — `run-fixed-camera-calibration.mjs --aggregate` and
+`npm run aggregate:scene-passes` — so a change to how per-camera, per-group rows are
+*combined* costs nothing. Only a change to what a pass *measures* needs the list below.
+Neither tool can tell the difference, so that judgement is yours.
+
 Anything under `tools/evaluation/scene-pass-metrics.mjs` is computed inside the
 browser at capture time and stored as summaries, so editing it invalidates every
 stored capture. Re-run **all** of these, not just the candidate side:
