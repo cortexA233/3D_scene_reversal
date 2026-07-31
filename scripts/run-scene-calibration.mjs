@@ -80,7 +80,7 @@ const FIXED_CAMERA_PATH = path.join(
  * declare which existing thresholds it moved, so "we only added layers" is a
  * checkable statement rather than a claim in a commit message.
  */
-const BASELINE_VERSION = "scene-quality-baseline-v1.6";
+const BASELINE_VERSION = "scene-quality-baseline-v1.7";
 
 const BASELINE_MIGRATIONS = [
   {
@@ -216,6 +216,31 @@ const BASELINE_MIGRATIONS = [
     movedRenderedThresholds: [
       "fixedCameraGeometry/group world normal p95: 58.95938 -> 41.994434",
     ],
+  },
+  {
+    version: "scene-quality-baseline-v1.7",
+    adr: "0066",
+    change:
+      "Re-derives the three worldGeometry surface thresholds after the surface sampling density was raised sixteenfold. ADR-0066 measured that `surfaceDistance` compares point clouds and `SAMPLE_CAP` was 96 per entity at every size, so the metric read a non-zero distance between a form and itself: an entity-weighted floor of 4.8964 against a `surface p95` threshold of 2.4875, which no candidate could pass however correct, and three quarters of the scene's residual was the metric compared with itself. The floor was confirmed to be sampling sparsity rather than anything else by falling as one over the square root of the count, to within four to five per cent over a sixteenfold range. All three constants moved together and not just the cap, because only 16 of 672 entities were clamped at it and the other 656 were bound by the sqrt(triangles) term. The reference is on both sides of every world-space control and both sides import one `sampleBudget`, so the bracket moves with the density; no threshold is chosen and no candidate result is consulted.",
+    // All three move *stricter*, by 13 to 20 per cent, which is the opposite of what a
+    // concession does and is what should happen: denser sampling resolves a mild
+    // control's damage more sharply, so the mild bracket tightens faster than the
+    // severe one.
+    //
+    // Read against the candidate, which is the test that matters. It improves but does
+    // not pass: `surface p95` 6.4967 to 4.324 against a threshold falling 2.4875 to
+    // 2.160875, so it goes from 2.61 times its limit to 2.00; `over-tolerance surface
+    // fraction` 0.5865 to 0.3763 against 0.1153 to 0.092575, from 5.09 times to 4.06.
+    // `worst entity surface p95` gets relatively *worse*, 159.2395 to 151.0286 against
+    // 14.037975 to 13.006425, from 11.34 times to 11.61 — it is a maximum over
+    // entities, its floor is set by the largest one, and ADR-0066 records that it needs
+    // roughly 57x rather than 16x. No gate changed state.
+    movedGeometryThresholds: [
+      "worldGeometry/surface p95: 2.4875 -> 2.160875",
+      "worldGeometry/worst entity surface p95: 14.037975 -> 13.006425",
+      "worldGeometry/over-tolerance surface fraction: 0.1153 -> 0.092575",
+    ],
+    movedRenderedThresholds: [],
   },
 ];
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "scene-quality-baseline-v1",
-  "version": "scene-quality-baseline-v1.6",
+  "version": "scene-quality-baseline-v1.7",
   "migrations": [
     {
       "version": "scene-quality-baseline-v1",
@@ -75,6 +75,17 @@
       "movedRenderedThresholds": [
         "fixedCameraGeometry/group world normal p95: 58.95938 -> 41.994434"
       ]
+    },
+    {
+      "version": "scene-quality-baseline-v1.7",
+      "adr": "0066",
+      "change": "Re-derives the three worldGeometry surface thresholds after the surface sampling density was raised sixteenfold. ADR-0066 measured that `surfaceDistance` compares point clouds and `SAMPLE_CAP` was 96 per entity at every size, so the metric read a non-zero distance between a form and itself: an entity-weighted floor of 4.8964 against a `surface p95` threshold of 2.4875, which no candidate could pass however correct, and three quarters of the scene's residual was the metric compared with itself. The floor was confirmed to be sampling sparsity rather than anything else by falling as one over the square root of the count, to within four to five per cent over a sixteenfold range. All three constants moved together and not just the cap, because only 16 of 672 entities were clamped at it and the other 656 were bound by the sqrt(triangles) term. The reference is on both sides of every world-space control and both sides import one `sampleBudget`, so the bracket moves with the density; no threshold is chosen and no candidate result is consulted.",
+      "movedGeometryThresholds": [
+        "worldGeometry/surface p95: 2.4875 -> 2.160875",
+        "worldGeometry/worst entity surface p95: 14.037975 -> 13.006425",
+        "worldGeometry/over-tolerance surface fraction: 0.1153 -> 0.092575"
+      ],
+      "movedRenderedThresholds": []
     }
   ],
   "calibratedFrom": [
@@ -136,21 +147,21 @@
         "scope": "aggregate",
         "path": "correspondence.surface.p95.mean",
         "direction": "atMost",
-        "threshold": 2.4875
+        "threshold": 2.160875
       },
       {
         "name": "worst entity surface p95",
         "scope": "worst-entity",
         "path": "correspondence.surface.p95.max",
         "direction": "atMost",
-        "threshold": 14.037975
+        "threshold": 13.006425
       },
       {
         "name": "over-tolerance surface fraction",
         "scope": "aggregate",
         "path": "correspondence.surface.overToleranceFraction.mean",
         "direction": "atMost",
-        "threshold": 0.1153
+        "threshold": 0.092575
       },
       {
         "name": "worst neighbourhood distance error",

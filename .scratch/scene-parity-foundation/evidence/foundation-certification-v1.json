@@ -25,7 +25,7 @@
       "thirdPartyInputs": 0,
       "triangles": 607193,
       "drawCalls": 1701,
-      "generationMs": 622.9,
+      "generationMs": 558.2,
       "geometryBytes": 30147332,
       "geometryCount": 1687,
       "auditPassed": true
@@ -36,9 +36,9 @@
       "checks": [
         {
           "metric": "generationMs",
-          "value": 622.9,
+          "value": 558.2,
           "maximum": 1000,
-          "headroomFraction": 0.3771,
+          "headroomFraction": 0.4418,
           "passed": true,
           "wallClock": true
         },
@@ -98,9 +98,9 @@
         "evaluated": true,
         "passed": false,
         "failures": [
-          "surface p95: 6.4967 is not <= 2.4875",
-          "worst entity surface p95: 159.2395 is not <= 14.037975",
-          "over-tolerance surface fraction: 0.5865 is not <= 0.1153",
+          "surface p95: 4.324 is not <= 2.160875",
+          "worst entity surface p95: 151.0286 is not <= 13.006425",
+          "over-tolerance surface fraction: 0.3763 is not <= 0.092575",
           "terrain height p95: 8.532 is not <= 5.26875",
           "shore height p95: 7.9996 is not <= 2.85035",
           "land and sea agreement: 0.922721 is not >= 0.931361",
@@ -145,44 +145,44 @@
     },
     "surface": {
       "count": 672,
-      "mean": 6.4967,
-      "rmse": 17.0121,
-      "p50": 3.1398,
-      "p95": 12.1407,
-      "max": 159.2395
+      "mean": 4.324,
+      "rmse": 12.125,
+      "p50": 1.8826,
+      "p95": 8.8383,
+      "max": 151.0286
     },
     "surfaceWorstEntities": [
       {
         "semanticId": "horizon/mountain-n0917-n0136-p12892",
-        "p95": 159.2395
+        "p95": 151.0286
       },
       {
         "semanticId": "horizon/mountain-p13705-n0034-p3644",
-        "p95": 124.5404
+        "p95": 107.7665
       },
       {
         "semanticId": "horizon/mountain-n9204-n0033-p11102",
-        "p95": 121.915
-      },
-      {
-        "semanticId": "horizon/mountain-p5857-n0343-p11498",
-        "p95": 105.498
-      },
-      {
-        "semanticId": "horizon/mountain-n10467-n0177-p5763",
-        "p95": 104.7647
-      },
-      {
-        "semanticId": "horizon/mountain-n3462-n0175-n14963",
-        "p95": 102.6759
+        "p95": 101.4802
       },
       {
         "semanticId": "horizon/mountain-p12963-n0247-n0827",
-        "p95": 102.2447
+        "p95": 73.2125
+      },
+      {
+        "semanticId": "horizon/mountain-p5857-n0343-p11498",
+        "p95": 69.0766
+      },
+      {
+        "semanticId": "horizon/mountain-p10270-n0243-n9219",
+        "p95": 67.3913
       },
       {
         "semanticId": "horizon/mountain-p12605-n0303-p7305",
-        "p95": 101.8116
+        "p95": 60.4436
+      },
+      {
+        "semanticId": "horizon/mountain-n3462-n0175-n14963",
+        "p95": 57.8748
       }
     ],
     "semanticStructure": {
@@ -501,14 +501,14 @@
       "magnitude": 8.532
     },
     {
-      "area": "object surfaces",
-      "detail": "symmetric distance p95 mean 6.4967, worst entity 159.2395",
-      "magnitude": 6.4967
-    },
-    {
       "area": "skyline",
       "detail": "profile p95 0.043636 rad, worst azimuth 0.065655",
       "magnitude": 4.3636
+    },
+    {
+      "area": "object surfaces",
+      "detail": "symmetric distance p95 mean 4.324, worst entity 151.0286",
+      "magnitude": 4.324
     },
     {
       "area": "semantic structure",
@@ -534,7 +534,7 @@
     "seedVersion": "scene-seed-fnv1a-mulberry32-v1",
     "sceneSeed": 20260729,
     "terrainProgram": "bounded-semantic-terrain-v1",
-    "baselineVersion": "scene-quality-baseline-v1.6",
+    "baselineVersion": "scene-quality-baseline-v1.7",
     "observationHost": {
       "hostKey": "windows-edge-150-swiftshader-subzero",
       "os": "windows",

@@ -39,8 +39,35 @@ import * as THREE from "three";
  * the tessellation bias. See ADR-0061.
  */
 
-export const SAMPLE_CAP = 96;
-export const SAMPLE_FLOOR = 12;
+/**
+ * The surface sampling density, raised sixteenfold from the 96/12/3 it was (ADR-0066).
+ *
+ * `surfaceDistance` compares point clouds, so two independent samplings of the same
+ * surface read a non-zero distance between a form and itself, and that reading is the
+ * point spacing. At the old density the entity-weighted floor was 4.8964 against a
+ * `surface p95` threshold of 2.4875 — the gate could not be passed by a geometrically
+ * perfect candidate, and three quarters of the scene's residual was the metric compared
+ * with itself.
+ *
+ * Sixteen times was chosen because the floor falls as one over the square root of the
+ * count, measured to within four to five per cent over that range, and sixteen is what
+ * brings the second of the three surface gates under its threshold:
+ *
+ *   gate                       floor at 96   floor at 1536   threshold
+ *   surface p95                     4.8990          1.2929      2.4875
+ *   over-tolerance fraction         0.4701          0.1135      0.1153
+ *   worst entity surface p95      111.5400         26.4700     14.0380
+ *
+ * The third is not reached and is not reachable by sampling: it is a maximum over
+ * entities, so its floor is set by the largest one, and it would need about 57x.
+ *
+ * All three constants move together, not just the cap. Only 16 of 672 entities were
+ * clamped at `SAMPLE_CAP`; the other 656 were bound by the `sqrt(triangles)` term, so
+ * raising the cap alone would have changed almost nothing.
+ */
+export const SAMPLE_CAP = 1536;
+export const SAMPLE_FLOOR = 192;
+export const SAMPLE_DENSITY = 48;
 
 /** How many triangles a geometry actually draws. */
 export function triangleCountOf(geometry) {
@@ -58,7 +85,10 @@ export function triangleCountOf(geometry) {
  */
 export function sampleBudget(triangleCount) {
   if (triangleCount <= 0) return 0;
-  return Math.min(SAMPLE_CAP, Math.max(SAMPLE_FLOOR, Math.round(Math.sqrt(triangleCount) * 3)));
+  return Math.min(
+    SAMPLE_CAP,
+    Math.max(SAMPLE_FLOOR, Math.round(Math.sqrt(triangleCount) * SAMPLE_DENSITY)),
+  );
 }
 
 /**

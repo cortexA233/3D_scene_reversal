@@ -4,6 +4,7 @@ import * as THREE from "three";
 
 import {
   SAMPLE_CAP,
+  SAMPLE_DENSITY,
   SAMPLE_FLOOR,
   allocateSamples,
   sampleBudget,
@@ -173,15 +174,26 @@ test("a part that exists is represented, and one that does not is not", () => {
   assert.deepEqual(allocateSamples([10, 10], 0), [0, 0]);
 });
 
-test("a single-mesh entity is sampled exactly as it was before", () => {
-  // The reference's authored placements are overwhelmingly one mesh each, so the fix
-  // must leave them untouched or every frozen number moves for no reason.
+test("a single-mesh entity draws exactly the entity formula's budget", () => {
+  /**
+   * The invariant ADR-0055 introduced: an entity's budget comes from its total triangle
+   * count, so a single-mesh entity draws exactly what the formula says and splitting a
+   * body into parts cannot change how many points describe it.
+   *
+   * Written against the live density rather than a literal. It was `* 3`, which was the
+   * right way to write it while the density was frozen and the wrong way once ADR-0066
+   * raised it sixteenfold: the test would then have been asserting the old constant
+   * rather than the invariant, and would have had to be edited to say the same thing.
+   */
   for (const triangles of [1, 12, 96, 720, 19_908]) {
     const root = entityOf([triangles]);
     assert.equal(
       sampleEntitySurface(root).length / 3,
-      Math.min(SAMPLE_CAP, Math.max(SAMPLE_FLOOR, Math.round(Math.sqrt(triangles) * 3))),
-      `a single mesh of ${triangles} triangles changed its sample count`,
+      Math.min(
+        SAMPLE_CAP,
+        Math.max(SAMPLE_FLOOR, Math.round(Math.sqrt(triangles) * SAMPLE_DENSITY)),
+      ),
+      `a single mesh of ${triangles} triangles did not draw the entity formula's budget`,
     );
   }
 });
