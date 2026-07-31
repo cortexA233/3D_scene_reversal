@@ -28,6 +28,39 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 12 — decorations (partial) | `lantern` and `npc-statue` landed as axial profiles (ADR-0060); the other 17 kinds are mostly single placements |
 | Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
+## State at the end of this session
+
+Six commits on `experiment/claude-full-island-scene`, all pushed, working tree clean.
+`npm test`: 302 tests, 295 pass, 6 todo, 1 fail (ticket 04's ocean appearance threshold,
+pre-existing). Gate stack: `structuralCorrespondence` PASS, `worldGeometry` 8 red,
+`fixedCameraGeometry` 10 red, `nativeAppearance` blocked by ADR-0040 ordering. Baseline
+`scene-quality-baseline-v1.4`.
+
+| ticket | change |
+| --- | --- |
+| 14 | **done** (ADR-0062). Five budgets frozen and met with 13.8-52.0% headroom. |
+| 13 | **candidate side done**, reference rendered per-moment repeatability left. |
+| 11 | roughness and metalness measured; transparency and emission measured, not carried. |
+| 12 | emissive relationship fixed; the other 17 decoration kinds untouched. |
+| 07 | attempted and **reverted**; three findings recorded, two measurement fixes landed. |
+
+**`npm run check:scene-parity-foundation` passes now.** It was structurally impossible
+before — it compared `generationMs`, a wall-clock value, byte for byte. That is one of the
+two pre-existing repo-level reds closed; the other, `stone-v2-calibration-contract`, was
+already settled as a working-copy line-ending state.
+
+Two measurement corrections landed this session and both changed persisted controls, which
+is the pattern to expect from any future one:
+
+- **ADR-0061**, the surface sampler, moved the four decks' and one plaza's
+  `perimeterShare` and both axial reach profiles. The first commit missed all of them and
+  left `check:scene-recipe` red.
+- The **`--kinds` overwrite** in `measure-architecture-massing.mjs` silently deleted the
+  `lantern` and `npc-statue` rows from its own evidence file. It merges now.
+
+Run `npm run check:scene-recipe` after any change to a measurement a control is derived
+from. Two of the three things ADR-0061 broke were caught only by a full `npm test`.
+
 ## The surface sampler followed tessellation, and it does not any more (ADR-0061)
 
 Every `surface p95` in this file that predates ADR-0061 was measured through a sampler
