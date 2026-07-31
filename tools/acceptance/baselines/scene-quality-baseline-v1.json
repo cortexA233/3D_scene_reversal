@@ -1,6 +1,6 @@
 {
   "schemaVersion": "scene-quality-baseline-v1",
-  "version": "scene-quality-baseline-v1.3",
+  "version": "scene-quality-baseline-v1.4",
   "migrations": [
     {
       "version": "scene-quality-baseline-v1",
@@ -44,6 +44,17 @@
         "worldGeometry/surface p95: 2.3479 -> 2.454575",
         "worldGeometry/worst entity surface p95: 13.758675 -> 13.9152",
         "worldGeometry/over-tolerance surface fraction: 0.11835 -> 0.1204"
+      ],
+      "movedRenderedThresholds": []
+    },
+    {
+      "version": "scene-quality-baseline-v1.4",
+      "adr": "0061",
+      "change": "Re-derives the worldGeometry surface thresholds after the surface sampler stopped following tessellation. ADR-0055 gave the sample budget to the entity and split it across meshes by triangle count; inside a mesh a triangle was still drawn with uniform probability, so a point's chance of landing somewhere was proportional to the triangle density there rather than to the surface. That measures how a subject happens to be tessellated, and an Exact-ish Reconstruction is explicitly not required to reproduce source topology. Measured on the authored scene, three of the eight structural-tree placements hold 20 to 36 per cent of their area in the bottom three height deciles and drew one sample of ninety-six there — wrong by up to thirty-five fold, far outside what ninety-six samples can produce by chance — and across the whole candidate the total-variation distance between the two distributions averages 0.366. Both the pick inside a mesh and the split across an entity's meshes now follow world-space area, which keeps ADR-0055's merge invariance (splitting a body in two splits its area in two) while removing the bias. The reference is on both sides of every world-space control, so its bracket moves with it; no threshold is chosen and no candidate result is consulted.",
+      "movedGeometryThresholds": [
+        "worldGeometry/surface p95: 2.454575 -> 2.4875",
+        "worldGeometry/worst entity surface p95: 13.9152 -> 14.037975",
+        "worldGeometry/over-tolerance surface fraction: 0.1204 -> 0.1153"
       ],
       "movedRenderedThresholds": []
     }
@@ -107,21 +118,21 @@
         "scope": "aggregate",
         "path": "correspondence.surface.p95.mean",
         "direction": "atMost",
-        "threshold": 2.454575
+        "threshold": 2.4875
       },
       {
         "name": "worst entity surface p95",
         "scope": "worst-entity",
         "path": "correspondence.surface.p95.max",
         "direction": "atMost",
-        "threshold": 13.9152
+        "threshold": 14.037975
       },
       {
         "name": "over-tolerance surface fraction",
         "scope": "aggregate",
         "path": "correspondence.surface.overToleranceFraction.mean",
         "direction": "atMost",
-        "threshold": 0.1204
+        "threshold": 0.1153
       },
       {
         "name": "worst neighbourhood distance error",

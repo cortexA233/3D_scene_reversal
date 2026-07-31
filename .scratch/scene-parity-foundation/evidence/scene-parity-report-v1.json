@@ -1,6 +1,6 @@
 {
   "schemaVersion": "scene-parity-gate-stack-v1",
-  "baselineVersion": "scene-quality-baseline-v1.3",
+  "baselineVersion": "scene-quality-baseline-v1.4",
   "infrastructure": {
     "passed": true,
     "failures": []
@@ -76,8 +76,8 @@
         {
           "name": "surface p95",
           "scope": "aggregate",
-          "value": 7.1748,
-          "threshold": 2.454575,
+          "value": 6.7504,
+          "threshold": 2.4875,
           "direction": "atMost",
           "passed": false,
           "missing": false
@@ -85,8 +85,8 @@
         {
           "name": "worst entity surface p95",
           "scope": "worst-entity",
-          "value": 155.2008,
-          "threshold": 13.9152,
+          "value": 159.2395,
+          "threshold": 14.037975,
           "direction": "atMost",
           "passed": false,
           "missing": false
@@ -94,8 +94,8 @@
         {
           "name": "over-tolerance surface fraction",
           "scope": "aggregate",
-          "value": 0.62,
-          "threshold": 0.1204,
+          "value": 0.6049,
+          "threshold": 0.1153,
           "direction": "atMost",
           "passed": false,
           "missing": false
@@ -192,9 +192,9 @@
         }
       ],
       "failures": [
-        "surface p95: 7.1748 is not <= 2.454575",
-        "worst entity surface p95: 155.2008 is not <= 13.9152",
-        "over-tolerance surface fraction: 0.62 is not <= 0.1204",
+        "surface p95: 6.7504 is not <= 2.4875",
+        "worst entity surface p95: 159.2395 is not <= 14.037975",
+        "over-tolerance surface fraction: 0.6049 is not <= 0.1153",
         "terrain height p95: 8.532 is not <= 5.26875",
         "shore height p95: 7.9996 is not <= 2.85035",
         "land and sea agreement: 0.922721 is not >= 0.931361",

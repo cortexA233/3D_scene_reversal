@@ -80,7 +80,7 @@ const FIXED_CAMERA_PATH = path.join(
  * declare which existing thresholds it moved, so "we only added layers" is a
  * checkable statement rather than a claim in a commit message.
  */
-const BASELINE_VERSION = "scene-quality-baseline-v1.3";
+const BASELINE_VERSION = "scene-quality-baseline-v1.4";
 
 const BASELINE_MIGRATIONS = [
   {
@@ -155,6 +155,31 @@ const BASELINE_MIGRATIONS = [
       "worldGeometry/surface p95: 2.3479 -> 2.454575",
       "worldGeometry/worst entity surface p95: 13.758675 -> 13.9152",
       "worldGeometry/over-tolerance surface fraction: 0.11835 -> 0.1204",
+    ],
+    movedRenderedThresholds: [],
+  },
+  {
+    version: "scene-quality-baseline-v1.4",
+    adr: "0061",
+    change:
+      "Re-derives the worldGeometry surface thresholds after the surface sampler stopped following tessellation. ADR-0055 gave the sample budget to the entity and split it across meshes by triangle count; inside a mesh a triangle was still drawn with uniform probability, so a point's chance of landing somewhere was proportional to the triangle density there rather than to the surface. That measures how a subject happens to be tessellated, and an Exact-ish Reconstruction is explicitly not required to reproduce source topology. Measured on the authored scene, three of the eight structural-tree placements hold 20 to 36 per cent of their area in the bottom three height deciles and drew one sample of ninety-six there — wrong by up to thirty-five fold, far outside what ninety-six samples can produce by chance — and across the whole candidate the total-variation distance between the two distributions averages 0.366. Both the pick inside a mesh and the split across an entity's meshes now follow world-space area, which keeps ADR-0055's merge invariance (splitting a body in two splits its area in two) while removing the bias. The reference is on both sides of every world-space control, so its bracket moves with it; no threshold is chosen and no candidate result is consulted.",
+    // Two loosen by about one per cent and one *tightens* by four, which is what a
+    // correction that changes where points land does to a bracket rather than what a
+    // concession does to it.
+    //
+    // The candidate moved in both directions too, and by comparable amounts: `surface
+    // p95` 7.1748 to 6.7504, `over-tolerance surface fraction` 0.62 to 0.6049, and
+    // `worst entity surface p95` 155.2008 to 159.2395 the other way. Every one of those
+    // is a few per cent, none is a gate changing state, and the aggregate stays 2.71
+    // times its threshold — a 1.3 per cent move cannot buy a pass that far away. Per
+    // kind the corrected sampler is not uniformly kinder either: `bridge` 23.96 to
+    // 18.80 and `pavilion-single` 21.10 to 17.67 improve while `swing-tree` 18.02 to
+    // 19.63 and `name-plate` 17.05 to 18.57 get worse, which is what should happen when
+    // the points move onto the surface each subject actually has.
+    movedGeometryThresholds: [
+      "worldGeometry/surface p95: 2.454575 -> 2.4875",
+      "worldGeometry/worst entity surface p95: 13.9152 -> 14.037975",
+      "worldGeometry/over-tolerance surface fraction: 0.1204 -> 0.1153",
     ],
     movedRenderedThresholds: [],
   },

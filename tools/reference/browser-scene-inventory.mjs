@@ -10,6 +10,7 @@ import {
   allocateSamples,
   sampleBudget,
   sampleMeshSurface,
+  surfaceAreaOf,
   triangleCountOf,
 } from "../evaluation/surface-sampling.mjs";
 import { placementKey } from "../reconstruction/scene-placements.mjs";
@@ -316,7 +317,12 @@ function placementSamples(meshes) {
   for (const members of groups.values()) {
     const triangleCounts = members.map((member) => triangleCountOf(member.object.geometry));
     const budget = sampleBudget(triangleCounts.reduce((sum, count) => sum + count, 0));
-    const allocation = allocateSamples(triangleCounts, budget);
+    // By area, not by triangle count — ADR-0061. Both sides import one implementation,
+    // so the split here and the split in `sampleEntitySurface` cannot drift apart.
+    const allocation = allocateSamples(
+      members.map((member) => surfaceAreaOf(member.object)),
+      budget,
+    );
     members.forEach((member, slot) => {
       // Seeded by the member's position within its own placement, so a placement's
       // samples do not depend on where it sits in the scene walk.

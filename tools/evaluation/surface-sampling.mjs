@@ -20,10 +20,23 @@ import * as THREE from "three";
  * one and the entire penalty was one-directional.
  *
  * That penalised the semantic part structure the milestone requires a generator to
- * have. So the entity's budget comes from its *total* triangle count and is split
- * across its meshes in proportion. A single-mesh entity is sampled exactly as
- * before; a multi-part entity is now sampled exactly as its own merged equivalent
- * would be, which is what makes the two subjects comparable at all.
+ * have. So the entity's budget comes from its *total* triangle count, and a
+ * multi-part entity is sampled exactly as its own merged equivalent would be, which
+ * is what makes the two subjects comparable at all.
+ *
+ * The same argument runs one level finer, and that is the rest of the module. A
+ * triangle is a division too. Picking one with uniform probability makes a point's
+ * chance of landing somewhere proportional to the *triangle density* there rather
+ * than to the surface, so the metric reads how each subject happens to be
+ * tessellated — and an Exact-ish Reconstruction is explicitly not required to
+ * reproduce source topology. Measured on the authored scene, three of the eight
+ * structural-tree placements hold 20 to 36 per cent of their area in the bottom three
+ * height deciles and drew one sample of ninety-six there, wrong by up to thirty-five
+ * fold; across the whole candidate the total-variation distance between the two
+ * distributions averages 0.366. Both the pick inside a mesh and the split across an
+ * entity's meshes therefore follow **world-space area**, which keeps the merge
+ * invariance above — splitting a body in two splits its area in two — while removing
+ * the tessellation bias. See ADR-0061.
  */
 
 export const SAMPLE_CAP = 96;
@@ -49,18 +62,52 @@ export function sampleBudget(triangleCount) {
 }
 
 /**
- * Splits an entity's budget across its meshes in proportion to their triangles,
+ * World-space triangle areas of one mesh, in draw order.
+ *
+ * World space rather than local: a mesh may carry a non-uniform scale, and the points
+ * this weights are compared in the shared world frame.
+ */
+export function triangleAreas(mesh) {
+  const geometry = mesh?.geometry;
+  const position = geometry?.attributes?.position;
+  if (!position) return [];
+  const index = geometry.index;
+  const count = Math.floor((index ? index.count : position.count) / 3);
+  const a = new THREE.Vector3();
+  const b = new THREE.Vector3();
+  const c = new THREE.Vector3();
+  const areas = new Array(count);
+  for (let triangle = 0; triangle < count; triangle += 1) {
+    const base = triangle * 3;
+    const i0 = index ? index.getX(base) : base;
+    const i1 = index ? index.getX(base + 1) : base + 1;
+    const i2 = index ? index.getX(base + 2) : base + 2;
+    a.fromBufferAttribute(position, i0).applyMatrix4(mesh.matrixWorld);
+    b.fromBufferAttribute(position, i1).applyMatrix4(mesh.matrixWorld);
+    c.fromBufferAttribute(position, i2).applyMatrix4(mesh.matrixWorld);
+    areas[triangle] = b.sub(a).cross(c.sub(a)).length() / 2;
+  }
+  return areas;
+}
+
+/** One mesh's world-space surface area. */
+export function surfaceAreaOf(mesh) {
+  return triangleAreas(mesh).reduce((sum, area) => sum + area, 0);
+}
+
+/**
+ * Splits an entity's budget across its meshes in proportion to their **area**,
  * distributing the rounding remainder to the largest parts so the total is exact.
  *
- * A mesh with triangles always gets at least one sample: a part that exists should
+ * A mesh with area always gets at least one sample: a part that exists should
  * be represented, and one point out of ninety-six cannot reproduce the old bias.
  */
-export function allocateSamples(triangleCounts, budget) {
-  const total = triangleCounts.reduce((sum, count) => sum + count, 0);
-  if (total <= 0 || budget <= 0) return triangleCounts.map(() => 0);
-  const exact = triangleCounts.map((count) => (count > 0 ? (count / total) * budget : 0));
+export function allocateSamples(weights, budget) {
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  if (total <= 0 || budget <= 0) return weights.map(() => 0);
+  const exact = weights.map((weight) => (weight > 0 ? (weight / total) * budget : 0));
   const allocated = exact.map((value, index) =>
-    triangleCounts[index] > 0 ? Math.max(1, Math.floor(value)) : 0,
+    weights[index] > 0 ? Math.max(1, Math.floor(value)) : 0,
   );
   let remainder = budget - allocated.reduce((sum, value) => sum + value, 0);
   const order = exact
@@ -68,7 +115,7 @@ export function allocateSamples(triangleCounts, budget) {
     .sort((left, right) => right.fraction - left.fraction);
   for (let step = 0; remainder > 0 && order.length > 0; step += 1) {
     const { index } = order[step % order.length];
-    if (triangleCounts[index] === 0) continue;
+    if (weights[index] === 0) continue;
     allocated[index] += 1;
     remainder -= 1;
   }
@@ -108,8 +155,38 @@ export function sampleMeshSurface(mesh, seed, count) {
   const matrix = new THREE.Matrix4();
   const samples = [];
 
+  /**
+   * A cumulative area table, so a triangle is drawn in proportion to how much surface
+   * it actually is. Uniform-per-triangle made a point's chance of landing somewhere
+   * proportional to the tessellation density there; a subject is not required to
+   * reproduce the other's topology, so that measured the wrong thing.
+   *
+   * A degenerate mesh — every triangle zero-area — falls back to uniform, because it
+   * has no surface to weight by and returning nothing would hide a part that exists.
+   */
+  const areas = triangleAreas(mesh);
+  const cumulative = new Float64Array(triangleCount);
+  let running = 0;
+  for (let triangle = 0; triangle < triangleCount; triangle += 1) {
+    running += areas[triangle];
+    cumulative[triangle] = running;
+  }
+  const totalArea = running;
+  const pickTriangle = (value) => {
+    if (!(totalArea > 0)) return Math.min(triangleCount - 1, Math.floor(value * triangleCount));
+    const target = value * totalArea;
+    let low = 0;
+    let high = triangleCount - 1;
+    while (low < high) {
+      const middle = (low + high) >> 1;
+      if (cumulative[middle] < target) low = middle + 1;
+      else high = middle;
+    }
+    return low;
+  };
+
   for (let sample = 0; sample < total; sample += 1) {
-    const triangle = Math.min(triangleCount - 1, Math.floor(rng() * triangleCount));
+    const triangle = pickTriangle(rng());
     const base = triangle * 3;
     const i0 = index ? index.getX(base) : base;
     const i1 = index ? index.getX(base + 1) : base + 1;
@@ -152,9 +229,12 @@ export function sampleEntitySurface(root) {
   root.traverse((child) => {
     if (child.isMesh) meshes.push(child);
   });
+  // The budget is a cost ceiling and stays on triangle count; the *split* is by area,
+  // so a finely-tessellated part draws its share of the surface rather than its share
+  // of the divisions.
   const triangleCounts = meshes.map((mesh) => triangleCountOf(mesh.geometry));
   const budget = sampleBudget(triangleCounts.reduce((sum, count) => sum + count, 0));
-  const allocation = allocateSamples(triangleCounts, budget);
+  const allocation = allocateSamples(meshes.map(surfaceAreaOf), budget);
   const samples = [];
   meshes.forEach((mesh, index) => {
     samples.push(...sampleMeshSurface(mesh, index + 1, allocation[index]));
