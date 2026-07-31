@@ -326,12 +326,29 @@ function buildSemanticLights(inventory, entities) {
   return inventory.lights
     .filter((light) => !GLOBAL_LIGHT_TYPES.includes(light.type))
     .map((light, index) => {
+      /**
+       * The entity a light sits on, by distance to its **box** rather than to its anchor.
+       *
+       * An anchor is an entity's bottom-centre, and a lantern's light sits at the top of
+       * the lantern, so an anchor distance is roughly the fixture's own height and the
+       * nearest anchor is usually something else entirely. Measured, the anchor rule
+       * attributed lights to a `panda`, a `bamboo-pile` and a `paving-slab`; the box rule
+       * puts the same lights on the `wish-tree`, `dessert-shop` and `plaza` that actually
+       * carry them. A wrong relationship in a frozen artefact is worse than none.
+       *
+       * Distance to an axis-aligned box is zero inside it, so "inside" and "just outside"
+       * are one continuous test rather than two rules.
+       */
       const nearest = entities.reduce((best, entity) => {
-        const distance = Math.hypot(
-          entity.anchor[0] - light.position[0],
-          entity.anchor[1] - light.position[1],
-          entity.anchor[2] - light.position[2],
-        );
+        let squared = 0;
+        for (let axis = 0; axis < 3; axis += 1) {
+          const half = axis === 1 ? 0 : entity.extent[axis] / 2;
+          const low = axis === 1 ? entity.anchor[1] : entity.anchor[axis] - half;
+          const high = axis === 1 ? entity.anchor[1] + entity.extent[1] : entity.anchor[axis] + half;
+          const outside = Math.max(low - light.position[axis], 0, light.position[axis] - high);
+          squared += outside * outside;
+        }
+        const distance = Math.sqrt(squared);
         return !best || distance < best.distance ? { entity, distance } : best;
       }, null);
       return {
@@ -347,8 +364,10 @@ function buildSemanticLights(inventory, entities) {
         decay: 2,
         castShadow: light.castShadow,
         // A light is associated with an emissive entity only when it actually
-        // sits on one; an unattached light stays explicit rather than invented.
-        emissiveSource: nearest && nearest.distance <= 25 ? nearest.entity.semanticId : null,
+        // sits on one; an unattached light stays explicit rather than invented. Five
+        // units is a light fixture's own scale on this island, against the 25 the anchor
+        // rule needed to reach past an entity's own height.
+        emissiveSource: nearest && nearest.distance <= 5 ? nearest.entity.semanticId : null,
       };
     });
 }

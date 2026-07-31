@@ -157,3 +157,63 @@ test("the Scene Recipe carries no source-node identity or dense payload", () => 
     );
   }
 });
+
+test("a Semantic Light names the entity it actually sits on, or names none", async () => {
+  /**
+   * Ticket 12's emissive relationship, and the reason it needed fixing rather than adding.
+   *
+   * The relationship existed and was wrong. It attributed each light to the entity whose
+   * *anchor* was nearest, and an anchor is a bottom-centre: a lantern's light sits at the
+   * top of the lantern, so the anchor distance is roughly the fixture's own height and the
+   * nearest anchor is usually something else. It put lights on a `panda`, a `bamboo-pile`
+   * and a `paving-slab`. Measuring distance to the entity's *box* instead — zero inside
+   * it, so inside and just-outside are one test — puts the same lights on the `wish-tree`,
+   * `dessert-shop` and `dumpling-house` that carry them.
+   *
+   * Fewer lights are attributed now, 15 against 19, and that is the point: a wrong
+   * relationship in a frozen artefact is worse than an absent one, and the 17 unattached
+   * lights stay explicitly null rather than being given the nearest thing.
+   */
+  const { ISLAND_SCENE_RECIPE: recipe } = await import(
+    "../gt_designer/src/reconstruction/scene/island-scene-recipe.generated.js"
+  );
+  const byId = new Map(recipe.entities.map((entity) => [entity.semanticId, entity]));
+  const boxDistance = (point, entity) => {
+    let squared = 0;
+    for (let axis = 0; axis < 3; axis += 1) {
+      const half = axis === 1 ? 0 : entity.extent[axis] / 2;
+      const low = axis === 1 ? entity.anchor[1] : entity.anchor[axis] - half;
+      const high =
+        axis === 1 ? entity.anchor[1] + entity.extent[1] : entity.anchor[axis] + half;
+      const outside = Math.max(low - point[axis], 0, point[axis] - high);
+      squared += outside * outside;
+    }
+    return Math.sqrt(squared);
+  };
+
+  let attributed = 0;
+  for (const light of recipe.semanticLights) {
+    if (light.emissiveSource === null) continue;
+    const entity = byId.get(light.emissiveSource);
+    assert.ok(entity, `${light.lightId} names an entity that is not in the recipe`);
+    const distance = boxDistance(light.position, entity);
+    assert.ok(
+      distance <= 5,
+      `${light.lightId} is ${distance.toFixed(1)} units from ${entity.kind}'s box`,
+    );
+    // And it is the *nearest* box, not merely a near one: a light inside two overlapping
+    // boxes should name the one it is actually in.
+    for (const other of recipe.entities) {
+      assert.ok(
+        boxDistance(light.position, other) >= distance - 1e-6,
+        `${light.lightId} names ${entity.kind} while sitting closer to ${other.kind}`,
+      );
+    }
+    attributed += 1;
+  }
+  assert.ok(attributed > 0, "no Semantic Light names an emissive source at all");
+  assert.ok(
+    attributed < recipe.semanticLights.length,
+    "every light found a source, which means the threshold is not discriminating",
+  );
+});

@@ -15073,7 +15073,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 28.44,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": null
+      "emissiveSource": "structures/wish-tree-p1195-p0193-p0282"
     },
     {
       "lightId": "lights/point-p1055-p0594-6",
@@ -15091,7 +15091,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 26.55,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": null
+      "emissiveSource": "structures/wish-tree-p1195-p0318-p0278"
     },
     {
       "lightId": "lights/point-p1027-p0726-7",
@@ -15127,7 +15127,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 36,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": null
+      "emissiveSource": "structures/wish-tree-p1195-p0318-p0278"
     },
     {
       "lightId": "lights/point-p0877-p0734-9",
@@ -15199,7 +15199,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 54,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p0779-p0259-p0480"
+      "emissiveSource": "structures/wish-tree-p1195-p0318-p0278"
     },
     {
       "lightId": "lights/point-p0994-p0643-13",
@@ -15217,7 +15217,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 34.11,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/bamboo-pile-p0947-p0205-p0631"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p2630-n1051-14",
@@ -15235,7 +15235,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 22.77,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "paths/paving-slab-p2653-p0260-n1145"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0305-p1643-15",
@@ -15253,7 +15253,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 45,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": null
+      "emissiveSource": "plazas/plaza-n0201-p0264-p1108"
     },
     {
       "lightId": "lights/point-p2464-n0896-16",
@@ -15271,7 +15271,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 22.77,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "plazas/deck-p2455-p0200-n0959"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p2567-n0507-17",
@@ -15289,7 +15289,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 22.77,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "vegetation/mushroom-p2486-p0210-n0391"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p2171-n0597-18",
@@ -15325,7 +15325,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 22.77,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "vegetation/mushroom-p2373-p0161-n0561"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0838-n0708-20",
@@ -15361,7 +15361,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 16.56,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "vegetation/bamboo-bed-p0792-p0256-n0631"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0933-p0235-22",
@@ -15379,7 +15379,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 54,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/shop-sign-p0860-p0273-p0174"
+      "emissiveSource": "structures/dumpling-house-p0781-p0261-n0002"
     },
     {
       "lightId": "lights/point-p1009-p0263-23",
@@ -15397,7 +15397,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 22.77,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "vegetation/bamboo-shoot-p1074-p0245-p0279"
+      "emissiveSource": "structures/wish-tree-p1195-p0193-p0282"
     },
     {
       "lightId": "lights/point-p0229-p0759-24",
@@ -15415,7 +15415,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 17.01,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "rocks/rock-p0070-p0452-p0778"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0636-p0731-25",
@@ -15451,7 +15451,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 17.01,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p0779-p0259-p0480"
+      "emissiveSource": null
     },
     {
       "lightId": "lights/point-p0655-p0315-27",
@@ -15469,7 +15469,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 17.01,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/shop-sign-p0788-p0273-p0259"
+      "emissiveSource": "structures/dumpling-house-p0781-p0261-n0002"
     },
     {
       "lightId": "lights/point-p0220-p0053-28",
@@ -15487,7 +15487,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 17.01,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/candle-p0233-p0260-p0052"
+      "emissiveSource": "decorations/yin-yang-p0357-p0266-n0046"
     },
     {
       "lightId": "lights/point-p0242-p0311-29",
@@ -15505,7 +15505,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 17.01,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/umbrella-p0235-p0253-p0328"
+      "emissiveSource": "structures/tea-booth-p0369-p0263-p0214"
     },
     {
       "lightId": "lights/point-p0966-n0046-30",
@@ -15523,7 +15523,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 30.33,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "wildlife/panda-p1018-p0209-n0032"
+      "emissiveSource": "structures/wish-tree-p1195-p0318-p0278"
     },
     {
       "lightId": "lights/point-p0604-n0109-31",
@@ -15541,7 +15541,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "intensity": 17.01,
       "decay": 2,
       "castShadow": false,
-      "emissiveSource": "decorations/stone-block-p0682-p0276-n0220"
+      "emissiveSource": "structures/dumpling-house-p0781-p0261-n0002"
     }
   ]
 });
