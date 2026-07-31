@@ -104,6 +104,52 @@ measure rendered contour and depth. An authored building is one smooth mesh of u
 discontinuities the reference does not have, and contour distance rose a fifth. Getting
 the proportions right is necessary and was not sufficient.
 
+## Finding: the plate controls transfer to a bridge and the plate *form* does not
+
+The plaza work (ADR-0057) gave bridges two of their three controls for free, and the
+third fell out of evidence already on disk. Measured from the vertical area profile
+in `plate-footprint-v1.json`:
+
+| | coverage | `deckHeight` | profile spread | area below mid-height |
+| --- | --- | --- | --- | --- |
+| bridge, 8,160 tri | 0.568 | **0.712** | 0.1842 | 9.8% |
+| bridge, 6,216 tri | 0.432 | **0.443** | 0.1871 | 62.7% |
+
+The two agree on the *spread* to within two per cent and differ two-fold on where
+that band sits, so `deckHeight` belongs in the recipe per entity and the spread
+belongs in the generator as a family constant. That division was measured, not
+chosen.
+
+Built as a plate lifted to `deckHeight` with railings above and abutments below, it
+was captured and **reverted**:
+
+| `bridges` | before | attempt |
+| --- | --- | --- |
+| candidate/reference pixels | 2.22 | **1.58** |
+| contour p95 | 20.49 | **19.00** |
+| depth p95 | 20.77 | **18.44** |
+| world normal p95 | 106.97 | **90.11** |
+| silhouette IoU | 0.362 | **0.295** |
+
+Four of five moved the right way and the group's IoU fell 18 per cent, taking the
+aggregate `group silhouette IoU` from 0.4699 to 0.4637. That is the trap ADR-0057
+documented, met from a different direction: coverage was matched and *where* the
+coverage sits was not.
+
+The rectangle decomposition had already said so and the attempt did not use it. The
+two largest rectangles of each authored bridge lie along an axis at **-119.2 and
++136.1 degrees** — the two bridges run along opposite diagonals of their own boxes,
+which is what a span does when its Typed Scene Orientation is zero and its AABB is
+world-aligned. A centred cross-and-walk plate cannot be either of them.
+
+So the next attempt is a **deck band along a measured axis**, not a plate: a band of
+the measured coverage crossing the box along that axis, with the railing on the band
+and the abutments at its ends. The axis is a fourth per-entity control and it is
+measurable from the decomposition. Two placements is thin ground for a fourth
+parameter, which is exactly why it deserves its own step rather than being bolted on
+after a mixed result — and why the reverted attempt's three controls are recorded
+here rather than left in the recipe as dead data.
+
 ## What the next attempt needs
 
 1. **Validate against the rendered gates, not the surface profile.** Contour distance

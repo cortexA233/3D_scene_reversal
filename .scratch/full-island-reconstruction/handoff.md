@@ -799,8 +799,26 @@ earlier was measured against the wrong thing.
   Two residuals are named, not smoothed: the rock now **over**-draws at 1.26 with a
   3.6 per cent profile overshoot, because it is built to reach a 96-sample
   underestimate and then normalised onto its box, and one direction is 0.188 out.
+- **`bridges` was attempted and reverted, and the finding is worth more than the
+  attempt.** Two of its three controls came free from ADR-0057 and the third fell out
+  of evidence already on disk: the two bridges agree on their profile *spread* (0.1842
+  and 0.1871) and differ two-fold on where the band sits (`deckHeight` 0.712 against
+  0.443), so the spread is a family constant and only `deckHeight` is per-entity.
+  Built as a plate at that height it took the group's pixel ratio 2.22 to **1.58**,
+  contour 20.49 to 19.00, depth 20.77 to 18.44 and normals 106.97 to 90.11 — and its
+  **IoU 0.362 to 0.295**, dropping the aggregate `group silhouette IoU` from 0.4699 to
+  0.4637. Reverted, exactly, with the evidence restored from the commit.
+  The cause is diagnosed and it is ADR-0057's own trap met from the other side:
+  coverage matched, *placement* of that coverage not. The rectangle decomposition had
+  already said so — the two largest rectangles of each bridge lie along axes at
+  **-119.2 and +136.1 degrees**, so the two bridges run along opposite diagonals of
+  their boxes. A centred cross-and-walk plate cannot be either.
+  Next attempt: a deck **band along a measured axis**, not a plate. The axis is a
+  fourth per-entity control, measurable from the decomposition, and it deserves its own
+  step rather than a bolt-on — which is why the three controls are in ticket 07 rather
+  than left in the recipe as dead data.
 - **The rest of the village is still blocked on a design decision, not on a form.**
-  Read ticket 07's three findings before touching it. The short version:
+  Read ticket 07's findings before touching it. The short version:
   `plazas` draws 1.89 times the reference's pixels and `bridges` 2.11 because the
   authored plates do not fill their boxes — measured by scan-conversion in the
   reference page, coverage is 1.000 and 0.341 for the two plazas, 0.568 and 0.432 for
