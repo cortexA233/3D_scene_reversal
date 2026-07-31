@@ -1,6 +1,6 @@
 {
   "schemaVersion": "scene-quality-baseline-v1",
-  "version": "scene-quality-baseline-v1.4",
+  "version": "scene-quality-baseline-v1.5",
   "migrations": [
     {
       "version": "scene-quality-baseline-v1",
@@ -57,6 +57,15 @@
         "worldGeometry/over-tolerance surface fraction: 0.1204 -> 0.1153"
       ],
       "movedRenderedThresholds": []
+    },
+    {
+      "version": "scene-quality-baseline-v1.5",
+      "adr": "0051",
+      "change": "Re-derives one rendered threshold after the twelve geometry calibration controls were re-captured. `worldNormalEvidence` gained an unsigned companion measurement — the same comparison treating a normal and its negation as one plane, which ADR-0051 named as its next refinement — and editing anything in `scene-pass-metrics.mjs` invalidates every stored capture, so the controls had to be re-run. The addition is purely additive: the signed computation is untouched and every control reproduced its stored signed value to four decimal places, `translate-0.15` at 44.465198 against a stored 44.465423. What moved is the fifth decimal of one derived limit, which is SwiftShader's own last-digit noise rather than a change of intent, and it moved *stricter*. Nothing gates on the unsigned measurement: adopting it is a separate revision and needs its own ADR.",
+      "movedGeometryThresholds": [],
+      "movedRenderedThresholds": [
+        "fixedCameraGeometry/group world normal p95: 58.959694 -> 58.95938"
+      ]
     }
   ],
   "calibratedFrom": [
@@ -253,7 +262,7 @@
         "scope": "aggregate",
         "path": "passes.aggregate.groupWorldNormalDegrees.meanP95",
         "direction": "atMost",
-        "threshold": 58.959694
+        "threshold": 58.95938
       },
       {
         "name": "semantic agreement",

@@ -238,6 +238,9 @@ export function worldNormalEvidence(
   requireRgba(candidateRgba, width, height, "candidate world normal");
   const errors = [];
   const allShared = [];
+  // Diagnostic companions: the same two sets under unsigned comparison.
+  const unsigned = [];
+  const allUnsigned = [];
   const range = correspondence ? correspondence.far - correspondence.near : 0;
   const tolerance =
     correspondence?.toleranceWorldUnits ?? SURFACE_CORRESPONDENCE_WORLD_UNITS;
@@ -255,7 +258,23 @@ export function worldNormalEvidence(
     const right = decode(candidateRgba);
     const dot = Math.min(1, Math.max(-1, left[0] * right[0] + left[1] * right[1] + left[2] * right[2]));
     const degrees = (Math.acos(dot) * 180) / Math.PI;
+    /**
+     * The same comparison treating a normal and its negation as one plane.
+     *
+     * Diagnostic only — nothing gates on it. ADR-0051 named it as the next refinement and
+     * the argument is about what a normal *means* rather than about tolerance: a two-sided
+     * surface has no unique outward normal, and this island's worst offenders are exactly
+     * those. Vegetation is layered leaf blades and reads 120.7 degrees; three of the five
+     * cover populations are two-triangle blades with no thickness at all.
+     *
+     * Reported beside the signed value rather than replacing it, because the gap between
+     * the two *is* the evidence: if the residual is mostly sign flips the unsigned number
+     * collapses, and if it is real rotation the two agree. Deciding to gate on it is a
+     * separate versioned revision and needs this number first.
+     */
+    const unsignedDegrees = (Math.acos(Math.abs(dot)) * 180) / Math.PI;
     allShared.push(degrees);
+    allUnsigned.push(unsignedDegrees);
     if (correspondence) {
       const referenceDepth =
         decodeLinearDepth(correspondence.referenceDepth, index) * range + correspondence.near;
@@ -264,9 +283,14 @@ export function worldNormalEvidence(
       if (Math.abs(referenceDepth - candidateDepth) > tolerance) continue;
     }
     errors.push(degrees);
+    unsigned.push(unsignedDegrees);
   }
   if (!correspondence) {
-    return { comparedPixels: errors.length, degrees: summarize(errors) };
+    return {
+      comparedPixels: errors.length,
+      degrees: summarize(errors),
+      unsignedDegrees: summarize(unsigned),
+    };
   }
   return {
     comparedPixels: errors.length,
@@ -281,6 +305,9 @@ export function worldNormalEvidence(
     // restriction that quietly discarded most of the frame is visible rather than
     // reported as agreement.
     allSharedPixelDegrees: summarize(allShared),
+    // Unsigned companions, diagnostic. Nothing gates on either.
+    unsignedDegrees: summarize(unsigned),
+    allSharedPixelUnsignedDegrees: summarize(allUnsigned),
   };
 }
 

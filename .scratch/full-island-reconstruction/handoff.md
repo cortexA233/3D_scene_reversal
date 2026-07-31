@@ -678,6 +678,15 @@ Which aggregates are weighted how, because this decides what a control may claim
 
 ### The measured bracket
 
+**These numbers are the v1.1 measurement from ADR-0051 and are stale.** They predate
+ADR-0053's pass-encoding correction, so every rendered value below was measured through the
+defect it fixed. They misled a later session into thinking a reference-only control had
+stopped reproducing: the world-normal column reads 39.37 for `translate-0.15` here, while the
+value the frozen 58.959694 threshold was actually derived from is **44.465**, and a fresh
+capture of that control reproduces it to four decimal places. Read
+`.scratch/scene-parity-foundation/evidence/fixed-camera-controls/*.json` for the live values;
+the table below is kept only because ADR-0051's reasoning refers to it.
+
 Mild is identity plus the three mild controls; severe samples come only from the
 controls that declare the metric.
 

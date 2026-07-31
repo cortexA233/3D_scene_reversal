@@ -177,3 +177,49 @@ confusion. It now reports 0 when pixels were compared and none were confused, an
 reserves null for a capture that compared no pixels. This was invisible while the
 candidate was red on every camera and would have appeared only at the end, which
 is the shape of defect this milestone's history keeps producing.
+
+
+## The declared unsigned refinement is measured, and it should be adopted
+
+This record demoted `worst group world normal p95` and named the way forward: "unsigned
+comparison, treating a normal and its negation as one plane; that changes what the metric
+means and belongs in its own revision." It is now measured, as a **diagnostic** reported
+beside the signed value, and it changes nothing that gates.
+
+The argument was always about what a normal *means* rather than about tolerance: a two-sided
+surface has no unique outward normal, and this island's worst offenders are exactly those.
+The measurement bears that out — the reduction lands on thin double-sided geometry and
+nowhere else:
+
+| group | signed p95 | unsigned p95 | |
+| --- | --- | --- | --- |
+| vegetation | 120.7 | **80.4** | 33% lower |
+| decorations | 107.9 | **77.8** | 28% |
+| structures | 104.6 | 85.9 | 18% |
+| cover | 102.5 | 85.0 | 17% |
+| rocks | 69.0 | 68.7 | 0% |
+| plazas | 17.1 | 17.0 | 1% |
+| geography | 0.9 | 0.9 | 0% |
+
+Solid geometry does not move at all. Vegetation is layered leaf blades and three of the five
+cover populations are two-triangle blades with no thickness.
+
+**It stays discriminating, and by a wider relative margin.** From the twelve re-captured
+geometry controls:
+
+| | worst mild | best declaring severe | ratio |
+| --- | --- | --- | --- |
+| signed | 51.485 | 77.864 | 1.51 |
+| unsigned | 35.229 | 58.271 | **1.65** |
+
+**And it makes the gate stricter for the candidate, which is the point worth recording.** The
+candidate's unsigned aggregate is 65.364 against a bracket whose limit must sit below 58.271
+— so it fails by about 40 per cent where the signed metric fails by 30. A refinement that
+cost the candidate margin cannot be a threshold loosened to reach green, and that is the
+strongest thing that can be said for adopting it.
+
+Recommended, as its own revision: gate the unsigned value, re-derive the limit from the
+bracket above by the unchanged selection rule, and demote or keep the signed value as the
+diagnostic. Nothing about the controls, their magnitudes, or the rule changes. It was not
+taken here because it is a frozen-threshold change and deserves a session that starts with
+it rather than one that ends with it.
