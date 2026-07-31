@@ -262,9 +262,37 @@ const measureExpression = (targets, band) => String.raw`(async () => {
     }
     components.sort((left, right) => right.cells - left.cells);
 
+    /**
+     * A coarse picture of the occupancy, so a human can look at the shape instead of
+     * inferring it from a decomposition. Both village reverts in this milestone designed a
+     * form from summary statistics of a footprint nobody had looked at: the bridge's band
+     * was derived from the axis between the two largest rectangles of a *greedy*
+     * axis-aligned cover, and a greedy cover of almost any blob yields two large offset
+     * rectangles whose centres define some axis.
+     */
+    const MAP = 24;
+    const map = [];
+    for (let row = 0; row < MAP; row += 1) {
+      let line = "";
+      for (let column = 0; column < MAP; column += 1) {
+        let filled = 0;
+        let cells = 0;
+        for (let v = Math.floor((row * RASTER) / MAP); v < Math.floor(((row + 1) * RASTER) / MAP); v += 1) {
+          for (let u = Math.floor((column * RASTER) / MAP); u < Math.floor(((column + 1) * RASTER) / MAP); u += 1) {
+            cells += 1;
+            filled += occupancy[v * RASTER + u];
+          }
+        }
+        const share = cells > 0 ? filled / cells : 0;
+        line += share > 0.66 ? "#" : share > 0.33 ? "+" : share > 0 ? "." : " ";
+      }
+      map.push(line);
+    }
+
     rows.push({
       semanticId,
       meshes: meshes.length,
+      occupancyMap: map,
       triangles: triangles.length,
       extent: extent.map((value) => round(value, 2)),
       band: BAND,
@@ -447,6 +475,9 @@ async function main() {
       `\n  ${row.semanticId}  (${row.kind}, ${row.triangles} tri, band ${row.bandTriangles} tri, ` +
         `${row.components} components, ${row.specks} specks)`,
     );
+    if (row.occupancyMap) {
+      for (const line of row.occupancyMap) console.log(`    |${line}|`);
+    }
     for (const entry of row.largest) {
       console.log(
         `    cells ${String(entry.cells).padStart(4)}  centre ${JSON.stringify(entry.centre)}` +

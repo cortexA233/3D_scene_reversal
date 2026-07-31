@@ -12,7 +12,7 @@ trying again.
 
 - [ ] Add one non-interactive check that is red until the structures and bridges groups reach their calibrated per-group silhouette thresholds.
 - [ ] Build one architecture family program with compact per-entity controls for levels, eaves, platform, posts, and roof pitch.
-- [ ] Build a bridge program with deck, railing, abutment, and arch as separate semantic parts.
+- [x] Build a bridge program with deck, railing, abutment, and arch as separate semantic parts. — deck, two railings and two abutments, all clipped to the deck's own footprint (ADR-0063). No arch: the vertical profile carries that as `subDeckShare` instead.
 - [ ] Keep the family's controls compact; a per-building transform list is not a reconstruction.
 - [ ] Keep every entity's anchor and Target AABB Extent exact.
 - [x] Report per-group silhouette, contour distance, depth, and world normal with the worst camera retained. — and the authored massing profile, which nothing measured before: `tools/development/measure-architecture-massing.mjs`, plus the authored footprint coverage: `tools/development/measure-plate-footprint.mjs`.
@@ -103,6 +103,38 @@ measure rendered contour and depth. An authored building is one smooth mesh of u
 20,000 triangles; eight boxes standing in for its body add silhouette edges and depth
 discontinuities the reference does not have, and contour distance rose a fifth. Getting
 the proportions right is necessary and was not sufficient.
+
+## The bridge is done (ADR-0063)
+
+The deck band along the measured axis landed. Four measured controls — `deckAxis`
+-119.2/+136.1 degrees, `deckHeight` 0.7119/0.4428, `footprintCoverage` 0.5677/0.4315,
+`subDeckShare` 0.098/0.627 — with the profile spread a family constant at 0.1857 because
+the two agree on it to 1.5 per cent.
+
+| `bridges` | plate | band |
+| --- | --- | --- |
+| silhouette IoU | 0.3624 | **0.5837** |
+| contour p95 | 20.49 | **9.70** |
+| depth p95 | 20.77 | **17.86** |
+| world normal p95 | 107.0 | **82.5** |
+| candidate/reference pixels | 2.22 | **1.31** |
+| `bridge` surface p95 | 15.8742 | **12.5352** |
+
+Seven of ten gated fixed-camera metrics improved, one regressed (`worst semantic confusion`
+0.017581 to 0.018105), two unchanged; aggregate `surface p95` 6.7535 to 6.7436. Knock-on:
+`rocks` contour 24.06 to **16.79** with no change to the rock generator, which is ADR-0057's
+uncovering effect confirming the over-draw diagnosis.
+
+**Two attempts failed before this one and the second failed on a bug, not a hypothesis.**
+The first band scored IoU 0.2885 — below the c²/(2c − c²) ≈ 0.33 that uncorrelated
+placement of the same area would score. `ExtrudeGeometry` plus `rotateX(-PI/2)` sends
+shape-Y to world **-Z**, so feeding a footprint's z into the shape's Y mirrors the plan and
+turns +136.1 into -136.1. Because these two bridges occupy almost exactly that pair of
+axes, each was built along *the other one's* diagonal. `check:bridges` now measures the
+built deck's own principal axis against the control.
+
+The record of the reverted band is kept below because its geometry analysis is still the
+argument for the form.
 
 ## Finding: the deck band along the measured axis was built and reverted too
 

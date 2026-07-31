@@ -86,6 +86,13 @@ const SURFACE_SAMPLES_PATH = path.join(
  */
 const PLATE_CONTROL_KINDS = ["plaza", "deck"];
 /**
+ * `bridge` carries its own triple instead. A footprint coverage plus a perimeter share
+ * cannot describe it — the two placements run along opposite diagonals of their own boxes
+ * and have opposite vertical massing — so it takes the coverage plus the axis and the deck
+ * height, all three from the same scan-converted measurement.
+ */
+const BRIDGE_CONTROL_KINDS = ["bridge"];
+/**
  * Compact controls persisted by the Reference-guided Fitting Loop. They are
  * fitted against the reference and then live in the Scene Recipe, so a clean
  * production run reproduces them without the fitter.
@@ -293,7 +300,50 @@ function plateControls(placement, plateCoverage, samples, members) {
   };
 }
 
-function buildEntities(inventory, horizonEvidence, fittedRidges, plateCoverage, samples) {
+/**
+ * The bridge's three controls, from the plate measurement's own decomposition.
+ *
+ * `deckAxis` is the bearing between the two largest rectangles of the authored footprint,
+ * which is where the plate attempt went wrong: it matched the coverage and the deck height
+ * and put them on a centred cross, while the decomposition had already recorded that the
+ * two bridges run along opposite diagonals at -119.2 and +136.1 degrees. `deckHeight` is
+ * the centroid of the vertical area profile and `footprintCoverage` the scan-converted
+ * coverage. The profile's *spread* is a family constant in the generator rather than a
+ * control, because the two bridges agree on it to 1.5 per cent — 0.1842 against 0.1871 —
+ * while `deckHeight` differs two-fold. That division was measured, not chosen.
+ */
+function bridgeControls(placement, bridgeAssets) {
+  const asset = bridgeAssets?.get(placement.semanticId);
+  if (!asset) return null;
+  const profile = asset.verticalAreaProfile ?? [];
+  const total = profile.reduce((sum, value) => sum + value, 0);
+  if (!(total > 0) || (asset.rectangles?.length ?? 0) < 2) return null;
+  const deckHeight =
+    profile.reduce((sum, value, decile) => sum + value * ((decile + 0.5) / profile.length), 0) /
+    total;
+  const [first, second] = asset.rectangles;
+  const axis = Math.atan2(second.centre[1] - first.centre[1], second.centre[0] - first.centre[0]);
+  // How much of the area sits below mid-height: 9.8 per cent for the flat span and 62.7
+  // for the arched one. Treating the two alike left the arched bridge hollow where the
+  // reference is solid, which the depth pass reads directly.
+  const half = Math.floor(profile.length / 2);
+  const subDeck = profile.slice(0, half).reduce((sum, value) => sum + value, 0) / total;
+  return {
+    footprintCoverage: round(asset.coverage, 4),
+    deckAxis: round(axis, 4),
+    deckHeight: round(deckHeight, 4),
+    subDeckShare: round(subDeck, 4),
+  };
+}
+
+function buildEntities(
+  inventory,
+  horizonEvidence,
+  fittedRidges,
+  plateCoverage,
+  samples,
+  bridgeAssets,
+) {
   const { placements, members } = readAuthoredPlacements(inventory, horizonEvidence);
   return placements.map((placement) => ({
     semanticId: placement.semanticId,
@@ -308,7 +358,9 @@ function buildEntities(inventory, horizonEvidence, fittedRidges, plateCoverage, 
       : {}),
     ...(() => {
       if (placement.shape) return {};
-      const controls = plateControls(placement, plateCoverage, samples, members);
+      const controls =
+        plateControls(placement, plateCoverage, samples, members) ??
+        bridgeControls(placement, bridgeAssets);
       return controls ? { shape: controls } : {};
     })(),
   }));
@@ -634,6 +686,7 @@ function buildRecipe(
   measuredAlbedo,
   plateCoverage,
   surfaceSamples,
+  bridgeAssets,
 ) {
   const entities = buildEntities(
     inventory,
@@ -641,6 +694,7 @@ function buildRecipe(
     fittedRidges,
     plateCoverage,
     surfaceSamples,
+    bridgeAssets,
   );
   return {
     schemaVersion: SCENE_RECIPE_SCHEMA_VERSION,
@@ -698,11 +752,15 @@ async function main() {
   // Plate coverage and the samples reach is inverted from. Both optional: on a
   // clean checkout the plate kinds fall back to the filled plate they were.
   const plateCoverage = new Map();
+  const bridgeAssets = new Map();
   let surfaceSamples = { samples: {} };
   try {
     const plate = JSON.parse(await readFile(PLATE_FOOTPRINT_PATH, "utf8"));
     assert.equal(plate.schemaVersion, "plate-footprint-v1");
     for (const asset of plate.assets) {
+      if (BRIDGE_CONTROL_KINDS.includes(asset.kind)) {
+        for (const semanticId of asset.placements) bridgeAssets.set(semanticId, asset);
+      }
       if (!PLATE_CONTROL_KINDS.includes(asset.kind)) continue;
       for (const semanticId of asset.placements) plateCoverage.set(semanticId, asset.coverage);
     }
@@ -729,6 +787,7 @@ async function main() {
     measuredAlbedo,
     plateCoverage,
     surfaceSamples,
+    bridgeAssets,
   );
   assert.deepEqual(
     validateSceneRecipe(recipe),

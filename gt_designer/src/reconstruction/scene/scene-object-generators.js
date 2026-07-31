@@ -202,19 +202,210 @@ function architecture(rng, { levels = 1, eaves = 1.18, platform = 0.1 } = {}) {
   return group(parts);
 }
 
-function bridge(rng) {
-  const deck = part(box(1, 0.12, 0.7, 0.62), "deck");
-  const parts = [deck];
-  for (const side of [-1, 1]) {
-    parts.push(part(box(1, 0.22, 0.05, 0.79, 0, side * 0.34), `railing-${side > 0 ? "north" : "south"}`));
+/**
+ * The two bridges' shared vertical profile spread, as a fraction of each one's own
+ * height. Measured at 0.1842 and 0.1871 from the vertical area profiles in
+ * `plate-footprint-v1.json` — they agree to 1.5 per cent, which is what makes this a
+ * family constant while `deckHeight` differs two-fold and is per entity.
+ */
+const BRIDGE_PROFILE_SPREAD = 0.1857;
+
+/** Clips a convex polygon by the half-plane `dot(point, normal) <= offset`. */
+function clipHalfPlane(polygon, normal, offset) {
+  const out = [];
+  for (let index = 0; index < polygon.length; index += 1) {
+    const current = polygon[index];
+    const next = polygon[(index + 1) % polygon.length];
+    const here = current[0] * normal[0] + current[1] * normal[1] - offset;
+    const there = next[0] * normal[0] + next[1] * normal[1] - offset;
+    if (here <= 0) out.push(current);
+    if ((here < 0 && there > 0) || (here > 0 && there < 0)) {
+      const t = here / (here - there);
+      out.push([current[0] + (next[0] - current[0]) * t, current[1] + (next[1] - current[1]) * t]);
+    }
   }
+  return out;
+}
+
+function polygonArea(polygon) {
+  let twice = 0;
+  for (let index = 0; index < polygon.length; index += 1) {
+    const [x0, z0] = polygon[index];
+    const [x1, z1] = polygon[(index + 1) % polygon.length];
+    twice += x0 * z1 - x1 * z0;
+  }
+  return Math.abs(twice) / 2;
+}
+
+/** The unit-square footprint of a band of `width` about the axis, exactly. */
+function bandFootprint(axis, width) {
+  const normal = [-Math.sin(axis), Math.cos(axis)];
+  let polygon = [
+    [-0.5, -0.5],
+    [0.5, -0.5],
+    [0.5, 0.5],
+    [-0.5, 0.5],
+  ];
+  polygon = clipHalfPlane(polygon, normal, width / 2);
+  polygon = clipHalfPlane(polygon, [-normal[0], -normal[1]], width / 2);
+  return polygon;
+}
+
+/**
+ * Extrudes an (x, z) footprint upward into a slab.
+ *
+ * The negated z is the whole reason the first band attempt failed, so it is spelled out.
+ * `ExtrudeGeometry` builds in the shape's own XY plane and extrudes along +Z, and
+ * `rotateX(-PI/2)` sends shape-Y to world **-Z**. Feeding a footprint's z straight into
+ * the shape's Y therefore mirrors the plan, which turns a band at +136.1 degrees into one
+ * at -136.1 — the *opposite diagonal*, which is exactly the pair of axes these two bridges
+ * occupy. The mirrored band scored a silhouette IoU below what uncorrelated placement of
+ * the same area would score, because it was anti-correlated by construction.
+ */
+function extrudeFootprint(footprint, depth, baseY) {
+  const shape = new THREE.Shape();
+  footprint.forEach(([x, z], index) => {
+    if (index === 0) shape.moveTo(x, -z);
+    else shape.lineTo(x, -z);
+  });
+  shape.closePath();
+  const geometry = new THREE.ExtrudeGeometry(shape, {
+    depth,
+    bevelEnabled: false,
+    curveSegments: 1,
+  });
+  geometry.rotateX(-Math.PI / 2);
+  geometry.translate(0, baseY, 0);
+  return geometry;
+}
+
+/**
+ * A bridge as a deck band along a measured axis, not a centred plate.
+ *
+ * The plate attempt matched this bridge's coverage and its deck height and was reverted:
+ * pixel ratio 2.22 to 1.58 and contour, depth and normals all improved while silhouette
+ * IoU fell 0.362 to 0.295. The rectangle decomposition had already said why — the two
+ * largest rectangles of each authored bridge lie along axes at -119.2 and +136.1 degrees,
+ * so the bridges run along opposite diagonals of their own boxes and a centred cross
+ * cannot be either. The occupancy raster confirms it directly: the 6,216-triangle bridge
+ * is a clean diagonal swathe of near-constant width.
+ *
+ * The footprint is the unit square clipped to a band about that axis — exact polygon
+ * arithmetic rather than a raster — and its width is bisected from the measured coverage,
+ * because the clipped area is monotonic in the width.
+ *
+ * The geometry leaves less freedom than it looks. `placeEntity` scales the generated AABB
+ * onto the Target AABB Extent exactly, so the band has to reach all four walls, and that
+ * sets a minimum width: 0.3849 at 60.8 degrees covering 0.4409, and 0.0271 at 136.1
+ * degrees where the axis is almost the box diagonal and the constraint costs nothing.
+ * Both measured coverages, 0.5677 and 0.4315, are above their own minimum, so one band
+ * reaches both and no filler is needed to make the numbers work.
+ */
+function bridge(
+  rng,
+  { deckAxis = 0, deckHeight = 0.62, footprintCoverage = 0.5, subDeckShare = 0.3 } = {},
+) {
+  const axis = deckAxis;
+  const height = Math.min(0.95, Math.max(0.05, deckHeight));
+  const coverage = Math.min(0.98, Math.max(0.05, footprintCoverage));
+
+  let low = 0.001;
+  let high = 2;
+  for (let step = 0; step < 40; step += 1) {
+    const middle = (low + high) / 2;
+    if (polygonArea(bandFootprint(axis, middle)) < coverage) low = middle;
+    else high = middle;
+  }
+  const width = high;
+  const footprint = bandFootprint(axis, width);
+  const thickness = Math.max(0.04, BRIDGE_PROFILE_SPREAD * 1.6);
+
+  const parts = [
+    part(new THREE.Mesh(extrudeFootprint(footprint, thickness, height)), "deck"),
+  ];
+
+  /**
+   * Railings along the deck's own long edges, pulled in by their own width. The deck has
+   * to be what sets the plan AABB: anything reaching past it grows the box the whole form
+   * is normalised onto, which would silently push the deck's coverage below the measured
+   * value its width was solved from.
+   */
+  const edges = footprint
+    .map((current, index) => {
+      const next = footprint[(index + 1) % footprint.length];
+      return {
+        midpoint: [(current[0] + next[0]) / 2, (current[1] + next[1]) / 2],
+        length: Math.hypot(next[0] - current[0], next[1] - current[1]),
+        angle: Math.atan2(next[1] - current[1], next[0] - current[0]),
+      };
+    })
+    .sort((left, right) => right.length - left.length);
+  const railWidth = Math.max(0.012, width * 0.06);
+  for (const [index, edge] of edges.slice(0, 2).entries()) {
+    const rail = box(edge.length * 0.98, thickness * 1.2, railWidth, height + thickness);
+    rail.rotation.y = -edge.angle;
+    rail.position.x = edge.midpoint[0] * (1 - railWidth);
+    rail.position.z = edge.midpoint[1] * (1 - railWidth);
+    parts.push(part(rail, `railing-${index === 0 ? "north" : "south"}`));
+  }
+
+  /**
+   * Abutments under the two ends of the span, clipped to the deck's own footprint so they
+   * cannot reach past it.
+   *
+   * How much of the span they take is measured, not shared. The one thing the two bridges
+   * most disagree about is how much mass sits under the deck — 9.8 per cent of the flat
+   * span's area is below mid-height against 62.7 per cent of the other's — and a single
+   * abutment size for both left the arched one hollow where the reference is solid, which
+   * the depth pass sees directly: `bridges` depth p95 went 20.77 to 22.43 with the two
+   * treated alike. `subDeckShare` is that fraction, read off the same vertical area
+   * profile `deckHeight` comes from.
+   */
+  const along = footprint.map(([x, z]) => x * Math.cos(axis) + z * Math.sin(axis));
+  const axialExtent = Math.max(...along) - Math.min(...along);
+  const underDeck = Math.min(0.9, Math.max(0.05, subDeckShare));
+  // Two abutments, so each takes half the span the measured share asks for.
+  const abutmentLength = axialExtent * Math.min(0.48, underDeck / 2);
+  const forward = [Math.cos(axis), Math.sin(axis)];
+  const sideways = [-Math.sin(axis), Math.cos(axis)];
   for (const end of [-1, 1]) {
-    parts.push(part(box(0.14, 0.56, 0.7, 0.28, end * 0.42), `abutment-${end > 0 ? "east" : "west"}`));
+    const centre = (axialExtent - abutmentLength) / 2;
+    const halfWidth = Math.max(0.05, width * 0.72) / 2;
+    let polygon = [
+      [-1, -1],
+      [1, -1],
+      [1, 1],
+      [-1, 1],
+    ].map(([lengthSide, widthSide]) => [
+      forward[0] * end * (centre + (lengthSide * abutmentLength) / 2) +
+        sideways[0] * widthSide * halfWidth,
+      forward[1] * end * (centre + (lengthSide * abutmentLength) / 2) +
+        sideways[1] * widthSide * halfWidth,
+    ]);
+    for (let index = 0; index < footprint.length && polygon.length >= 3; index += 1) {
+      const current = footprint[index];
+      const next = footprint[(index + 1) % footprint.length];
+      const normal = [next[1] - current[1], -(next[0] - current[0])];
+      const offset = current[0] * normal[0] + current[1] * normal[1];
+      const interior = footprint.reduce(
+        (sum, [x, z]) => sum + (x * normal[0] + z * normal[1] - offset),
+        0,
+      );
+      polygon =
+        interior <= 0
+          ? clipHalfPlane(polygon, normal, offset)
+          : clipHalfPlane(polygon, [-normal[0], -normal[1]], -offset);
+    }
+    if (polygon.length < 3) continue;
+    parts.push(
+      part(
+        new THREE.Mesh(extrudeFootprint(polygon, height + thickness, 0)),
+        `abutment-${end > 0 ? "east" : "west"}`,
+      ),
+    );
   }
-  const arch = part(cylinder(0.34, 0.34, 0.66, 12, 0.4), "arch");
-  arch.rotation.z = Math.PI / 2;
-  arch.scale.set(1, 1, 0.5);
-  parts.push(arch);
+
+  void rng;
   return group(parts);
 }
 
@@ -1084,6 +1275,21 @@ function figure() {
   return group([axialLathe(AXIAL_REACH_PROFILES["npc-statue"], { id: "figure" })]);
 }
 
+/**
+ * The bridge's compact per-entity controls, or nothing. Absent on a clean checkout
+ * without the plate measurement, in which case the bridge falls back to the centred plate
+ * it had — the same fallback the plate kinds have.
+ */
+function bridgeControls(shape) {
+  if (!Number.isFinite(shape?.deckAxis)) return undefined;
+  return {
+    deckAxis: shape.deckAxis,
+    deckHeight: shape.deckHeight,
+    footprintCoverage: shape.footprintCoverage,
+    subDeckShare: shape.subDeckShare,
+  };
+}
+
 const GENERATORS = Object.freeze({
   mountain: horizonGroup,
 
@@ -1101,7 +1307,7 @@ const GENERATORS = Object.freeze({
   "swing-tree": (rng) => broadleaf(rng, { trunkFraction: 0.4, clusters: 8, spread: 0.4 }),
   "wish-tree": (rng) => broadleaf(rng, { trunkFraction: 0.32, clusters: 11, spread: 0.46 }),
   willow,
-  bridge,
+  bridge: (rng, shape) => bridge(rng, bridgeControls(shape)),
 
   // Ground surfaces
   plaza: plate,

@@ -875,7 +875,13 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "heading",
         "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "painted-timber",
+      "shape": {
+        "footprintCoverage": 0.5677,
+        "deckAxis": -2.0811,
+        "deckHeight": 0.7119,
+        "subDeckShare": 0.098
+      }
     },
     {
       "semanticId": "bridges/bridge-p1456-p0170-n0810",
@@ -895,7 +901,13 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
         "type": "heading",
         "radians": 0
       },
-      "materialFamily": "painted-timber"
+      "materialFamily": "painted-timber",
+      "shape": {
+        "footprintCoverage": 0.4315,
+        "deckAxis": 2.3747,
+        "deckHeight": 0.4428,
+        "subDeckShare": 0.627
+      }
     },
     {
       "semanticId": "decorations/bamboo-pile-p0947-p0205-p0631",

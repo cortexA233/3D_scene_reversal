@@ -96,9 +96,28 @@ function validateEntity(entity, index, seen, errors) {
     if (!Number.isFinite(coverage) || coverage <= 0 || coverage > 1) {
       errors.push(`${label}: footprintCoverage must be a measured fraction in (0, 1]`);
     }
+    // A plate carries `perimeterShare`; a bridge carries the axis its span runs along and
+    // the height its deck sits at. Coverage alone cannot choose between them — a perimeter
+    // walk and a diagonal band of equal area are different forms — so one of the two has
+    // to accompany it.
     const share = entity.shape.perimeterShare;
-    if (!Number.isFinite(share) || share < 0 || share > 1) {
-      errors.push(`${label}: perimeterShare must accompany footprintCoverage as a fraction`);
+    const axis = entity.shape.deckAxis;
+    if (Number.isFinite(axis)) {
+      if (Math.abs(axis) > Math.PI) {
+        errors.push(`${label}: deckAxis must be a measured bearing in radians`);
+      }
+      const deckHeight = entity.shape.deckHeight;
+      if (!Number.isFinite(deckHeight) || deckHeight <= 0 || deckHeight >= 1) {
+        errors.push(`${label}: deckHeight must accompany deckAxis as a measured fraction`);
+      }
+      const subDeckShare = entity.shape.subDeckShare;
+      if (!Number.isFinite(subDeckShare) || subDeckShare < 0 || subDeckShare > 1) {
+        errors.push(`${label}: subDeckShare must accompany deckAxis as a measured fraction`);
+      }
+    } else if (!Number.isFinite(share) || share < 0 || share > 1) {
+      errors.push(
+        `${label}: footprintCoverage needs either perimeterShare or a measured deckAxis`,
+      );
     }
   }
   if ("position" in (entity ?? {}) || "size" in (entity ?? {}) || "yaw" in (entity ?? {})) {
