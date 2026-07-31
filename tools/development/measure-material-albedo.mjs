@@ -103,12 +103,68 @@ const MEASURE_EXPRESSION = String.raw`(async () => {
         sums[channel] += toLinear(data[index + channel]) * alpha;
       }
     }
+    /**
+     * Spatial statistics, for ticket 11's Bounded Semantic Pattern Programs.
+     *
+     * Every Material Family is one flat colour, and the spec lists a bounded pattern
+     * program as an accepted representation. The question a pattern program needs
+     * answered first is whether the authored maps *have* spatial variation worth
+     * reproducing, and at what scale — a texture whose luminance is nearly constant needs
+     * no program, and one whose variation is all at texel scale is invisible at the
+     * distances these cameras stand at.
+     *
+     * Two numbers, both alpha-weighted like the albedo. luminanceDeviation is the
+     * standard deviation of linear luminance over the map, as a fraction of its mean — a
+     * scale-free measure of how much the surface varies at all. neighbourContrast is the
+     * mean absolute luminance difference between horizontally adjacent cells over the same
+     * mean, which separates variation that survives downsampling from variation that does
+     * not: a smooth gradient has deviation without neighbour contrast, and per-texel noise
+     * has both.
+     */
+    let luminanceSum = 0;
+    let luminanceSquared = 0;
+    let luminanceWeight = 0;
+    const luminanceAt = (index) =>
+      toLinear(data[index]) * 0.2126 +
+      toLinear(data[index + 1]) * 0.7152 +
+      toLinear(data[index + 2]) * 0.0722;
+    for (let index = 0; index < data.length; index += 4) {
+      const alpha = data[index + 3] / 255;
+      if (alpha <= 0.02) continue;
+      const luminance = luminanceAt(index);
+      luminanceWeight += alpha;
+      luminanceSum += luminance * alpha;
+      luminanceSquared += luminance * luminance * alpha;
+    }
+    let contrastSum = 0;
+    let contrastCount = 0;
+    for (let row = 0; row < height; row += 1) {
+      for (let column = 0; column + 1 < width; column += 1) {
+        const here = (row * width + column) * 4;
+        const next = here + 4;
+        if (data[here + 3] / 255 <= 0.02 || data[next + 3] / 255 <= 0.02) continue;
+        contrastSum += Math.abs(luminanceAt(here) - luminanceAt(next));
+        contrastCount += 1;
+      }
+    }
+    const luminanceMean = luminanceWeight > 0 ? luminanceSum / luminanceWeight : 0;
+    const variance =
+      luminanceWeight > 0
+        ? Math.max(0, luminanceSquared / luminanceWeight - luminanceMean * luminanceMean)
+        : 0;
+
     const result =
       weight <= 0
         ? null
         : {
             albedo: sums.map((sum) => sum / weight),
             opaqueFraction: weight / (data.length / 4),
+            luminanceMean,
+            luminanceDeviation: luminanceMean > 0 ? Math.sqrt(variance) / luminanceMean : 0,
+            neighbourContrast:
+              luminanceMean > 0 && contrastCount > 0
+                ? contrastSum / contrastCount / luminanceMean
+                : 0,
           };
     cache.set(texture.uuid, result);
     return result;
@@ -186,6 +242,8 @@ const MEASURE_EXPRESSION = String.raw`(async () => {
             texturedArea: 0,
             albedo: [0, 0, 0],
             opaque: 0,
+            deviation: 0,
+            contrast: 0,
             meshes: 0,
             texturedMeshes: 0,
             baseColours: new Set(),
@@ -212,6 +270,8 @@ const MEASURE_EXPRESSION = String.raw`(async () => {
           const mean = map ? textureMean(map) : null;
           const base = material.color ? material.color.toArray() : [1, 1, 1];
           if (mean) {
+            entry.deviation += (mean.luminanceDeviation ?? 0) * area;
+            entry.contrast += (mean.neighbourContrast ?? 0) * area;
             entry.texturedArea += area;
             entry.texturedMeshes += 1;
             entry.opaque += mean.opaqueFraction * area;
@@ -273,6 +333,12 @@ const MEASURE_EXPRESSION = String.raw`(async () => {
         albedo: entry.area > 0 ? entry.albedo.map((sum) => round(sum / entry.area, 4)) : null,
         opaqueTexelFraction:
           entry.texturedArea > 0 ? round(entry.opaque / entry.texturedArea, 4) : null,
+        // Ticket 11's pattern-program evidence: how much the authored map varies, and how
+        // much of that variation survives downsampling.
+        luminanceDeviation:
+          entry.texturedArea > 0 ? round(entry.deviation / entry.texturedArea, 4) : null,
+        neighbourContrast:
+          entry.texturedArea > 0 ? round(entry.contrast / entry.texturedArea, 4) : null,
         // Null rather than a default where nothing declared the parameter, so a family
         // the walk did not reach cannot arrive in the recipe wearing a measured name.
         roughness:
