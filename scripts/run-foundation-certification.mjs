@@ -10,14 +10,13 @@
  */
 
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import * as THREE from "three";
 
+import { sceneSignature } from "../tools/acceptance/scene-signature.mjs";
 import {
   SCENE_RUNTIME_BUDGET_VERSION,
   WALL_CLOCK_BUDGET_METRICS,
@@ -70,39 +69,6 @@ const PRODUCTION_FILES = [
   "gt_designer/src/reconstruction/objects/stone-generator.js",
   "gt_designer/src/reconstruction/core/rng.js",
 ];
-
-function geometrySignature(object) {
-  object.updateMatrixWorld(true);
-  const hash = createHash("sha256");
-  object.traverse((child) => {
-    if (!child.isMesh) return;
-    hash.update(child.userData.semanticPart ?? "");
-    hash.update(new Float32Array(child.matrixWorld.elements));
-    hash.update(child.geometry.attributes.position.array);
-  });
-  return hash.digest("hex");
-}
-
-function sceneSignature(generated) {
-  const rows = [];
-  for (const [semanticId, record] of [...generated.semanticIndex.entries()].sort()) {
-    if (!record.object?.isObject3D) continue;
-    const bounds = new THREE.Box3().setFromObject(record.object);
-    rows.push([
-      semanticId,
-      record.kind,
-      record.group ?? "",
-      JSON.stringify(record.seeds ?? null),
-      bounds.min.toArray().map((v) => v.toFixed(6)).join(","),
-      bounds.max.toArray().map((v) => v.toFixed(6)).join(","),
-      geometrySignature(record.object),
-    ].join("|"));
-  }
-  return {
-    semanticIdCount: generated.semanticIndex.size,
-    digest: createHash("sha256").update(rows.join("\n")).digest("hex"),
-  };
-}
 
 /**
  * Builds and runs the island with the Authored Reference, its data, and every

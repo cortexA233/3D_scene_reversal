@@ -26,6 +26,11 @@ const ENTRYPOINT = path.join(
   "gt_designer/island-replacement/island-replacement.js",
 );
 
+/**
+ * The Production Runtime's entry page. It is the one production file allowed to read a
+ * clock, and only to time itself; every generator module is held to the full prohibition.
+ */
+const ENTRY_PAGE = "gt_designer/island-replacement/island-replacement.js";
 const FORBIDDEN_IMPORT = /(?:^|\/)(?:tools|scripts)\/|reference|measurement|fitting|acceptance|ground-truth|full-island-layout/i;
 const PERMITTED_RUNTIME_PATHS = new Set([
   "/island-replacement/",
@@ -76,6 +81,55 @@ async function auditImportGraph() {
   for (const file of files) {
     const source = await readFile(path.join(PROJECT_ROOT, file), "utf8");
     assert.doesNotMatch(source, /\bMath\.random\s*\(/, `${file} uses ambient randomness`);
+    /**
+     * Time and device state, forbidden as directly as ambient randomness is.
+     *
+     * Deterministic Generation is defined without "ambient randomness, time, device
+     * state, or GPU results", and only the randomness half was enforced. The ocean's
+     * phase is the case that proves the rule matters: the authored sea animates, and the
+     * candidate reproduces one repeatable phase by carrying `environment.ocean.phase` in
+     * the Environment Recipe rather than by reading a clock. A generator that reached for
+     * `performance.now()` instead would look identical in every stored capture, because
+     * the Frozen Observation Clock pins that value during measurement — and would then
+     * animate in delivery, where nothing pins it. That is a defect no rendered evidence
+     * in this repository could see, which is exactly why it belongs in the static audit.
+     *
+     * Scoped to the generator modules. The entry page legitimately reads a clock, and
+     * only to time itself: it brackets `generateScene` to report `generationMs`, which is
+     * the value ticket 14's budget gates. Instrumentation is not input, and the
+     * difference is checked below rather than assumed — the page may read the clock, and
+     * it may not hand the reading to the generator.
+     */
+    if (file !== ENTRY_PAGE) {
+      assert.doesNotMatch(
+        source,
+        /\bperformance\s*\.\s*now\s*\(/,
+        `${file} reads wall-clock time`,
+      );
+      assert.doesNotMatch(source, /\bDate\s*\.\s*now\s*\(/, `${file} reads wall-clock time`);
+      assert.doesNotMatch(source, /\bnew\s+Date\b/, `${file} reads wall-clock time`);
+      assert.doesNotMatch(
+        source,
+        /\brequestAnimationFrame\s*\(/,
+        `${file} drives structure from a frame callback`,
+      );
+      assert.doesNotMatch(
+        source,
+        /\bnavigator\s*\.|\bwindow\s*\.\s*(?:devicePixelRatio|screen)\b/,
+        `${file} reads device state`,
+      );
+    } else {
+      // The one call that turns a page into a scene, and the only argument it may take.
+      // A clock reading cannot reach generation through an argument that does not exist.
+      const calls = [...source.matchAll(/\bgenerateScene\s*\(([^)]*)\)/g)].map((match) =>
+        match[1].trim(),
+      );
+      assert.deepEqual(
+        calls,
+        ["ISLAND_SCENE_RECIPE"],
+        `${ENTRY_PAGE} calls generateScene with something other than the Scene Recipe alone`,
+      );
+    }
     assert.doesNotMatch(
       source,
       /(?:from\s*|import\s*\()["'][^"']+\.(?:glb|gltf|fbx|obj|png|jpe?g|webp|ktx2?|hdr|exr|json)[^"']*["']/i,

@@ -28,6 +28,7 @@
     "certify:scene-parity-foundation": "node scripts/run-foundation-certification.mjs",
     "check:scene-parity-foundation": "node scripts/run-foundation-certification.mjs --check",
     "check:scene-runtime-budget": "node --test test/scene-runtime-budget.test.mjs && node scripts/run-foundation-certification.mjs --check",
+    "check:dynamic-moments": "node --test test/dynamic-moment-stability.test.mjs",
     "check:vegetation": "node --test test/vegetation-reconstruction.test.mjs",
     "check:semantic-parts": "node --test test/semantic-part-structure.test.mjs && node tools/development/measure-creature-parts.mjs --check",
     "check:plate-footprint": "node tools/development/measure-plate-footprint.mjs --check",
