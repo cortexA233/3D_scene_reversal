@@ -135,3 +135,49 @@ in this repo for exactly this situation — calibrated from a new reference-only
 control that re-draws the scatter under the reference's own rule with a different
 stream. That is a new metric with its own bracket and versioned gate revision, so
 it is named here rather than taken.
+
+
+## The scattered rock's own support profile is measured, and the polyhedron was reverted
+
+The handoff named cover's remaining gap as generator *form*: "the authored rock is an
+80-triangle noise-displaced lump and the candidate's is a 20-triangle icosahedron stretched
+to the same bounding box, which under-draws it." ADR-0058 had given the thirty-nine
+identity-bearing rocks the accepted Bounded Support-plane Polyhedron and halved their
+contour p95, and nobody had given it to the 5,100 scattered ones.
+
+**The profile is now measured on the scatter's own base geometry** rather than borrowed, and
+measuring was worth it because the two forms are different: the scatter's mean support over
+the twenty-four canonical directions is **0.9811** against the identity rocks' 0.9412, and
+it reaches 1.02 to 1.07 in the horizontal diagonals where they reach 0.86 to 0.99. Both
+ground-rock populations share one base asset — identical at 80 triangles and 13.3526 unit
+area — so it is twenty-four numbers for 5,100 instances.
+`measure-cover-instances.mjs` records it, with the canonical directions imported from the
+hash-frozen stone generator and passed into the page as data rather than restated.
+
+**Building it was reverted, and the reason is a boundary rather than a mistake.**
+
+| `cover` | icosahedron | support polyhedron |
+| --- | --- | --- |
+| silhouette IoU | 0.0144 | **0.0127** |
+| contour p95 | 25.58 | **26.15** |
+| candidate/reference pixels | 0.762 | **0.606** |
+| island triangles | 558,521 | 640,121 |
+
+Every one of the group's own metrics got worse and it drew *less*, not more. The cause is
+resolution, not the profile. A support-plane polyhedron is the intersection of its
+half-spaces, so it is inscribed within them, and the lattice has to be fine enough for that
+inscription to approach the form. Three rings of six sides — 36 triangles — loses more than
+the icosahedron's 20 gains.
+
+And the lattice cannot simply be made finer, because there are **5,100 instances**. The
+authored base is 80 triangles, and matching that allocation exactly would draw 408,000
+triangles for the scatter alone and put the island near 865,000 against ticket 14's declared
+ceiling of 700,000. Even 36 triangles cost 82,000 and took the triangle budget's headroom
+from 20 to 8.6 per cent.
+
+So this is a real form-versus-budget boundary for *instanced* geometry, and it is the
+opposite of the identity rocks' situation, where 39 placements could afford a fine lattice.
+The declared next move, if cover's form is wanted: the reference draws its lump in 80
+triangles, so the question is what 80-triangle form reaches the measured profile best —
+which is a mesh-generation question rather than a lattice-resolution one, and it needs its
+own budget argument before it needs code.

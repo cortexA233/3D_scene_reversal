@@ -38,6 +38,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { canonicalSupportDirections } from "../../gt_designer/src/reconstruction/objects/stone-generator.js";
 import { runLocalSceneAutomation } from "../../scripts/lib/smoke-local-scene.mjs";
 import { createFrozenObservationClockPreload } from "../reference/frozen-observation-clock.mjs";
 import { createReferenceObservationContract } from "../reference/reference-observation-contract.mjs";
@@ -64,9 +65,14 @@ const contract = createReferenceObservationContract();
  * decomposition is done by hand for the same reason — a column's length is its
  * axis scale, and the fourth column is the translation.
  */
-const measureExpression = (camera, framebuffer) => String.raw`(async () => {
+const measureExpression = (camera, framebuffer, directions) => String.raw`(async () => {
   const CAMERA = ${JSON.stringify(camera)};
   const FRAMEBUFFER = ${JSON.stringify(framebuffer)};
+  // The accepted Bounded Support-plane Polyhedron's canonical directions, imported on the
+  // Node side from the hash-frozen stone generator and passed in as data rather than
+  // restated here. Two copies of a definition is how the reference and the candidate came
+  // to be sampled differently while both formulas read identically (ADR-0055).
+  const SUPPORT_DIRECTIONS = ${JSON.stringify(directions)};
   const round = (value, digits = 4) => {
     if (!Number.isFinite(value)) return null;
     const result = Number(value.toFixed(digits));
@@ -139,12 +145,39 @@ const measureExpression = (camera, framebuffer) => String.raw`(async () => {
       ];
       area += Math.hypot(cross[0], cross[1], cross[2]) * 0.5;
     }
+    /**
+     * The support distance along each canonical direction, in a frame normalised so the
+     * form's own box spans -1 to 1 per axis.
+     *
+     * This is the measurement ADR-0058 made for the thirty-nine identity-bearing rocks and
+     * nobody made for the 5,100 scattered ones, which still draw as an icosahedron
+     * stretched onto their box — a sphere in a box touches the six face centres and falls
+     * short everywhere else, and the cover group under-draws at a pixel ratio of 0.78.
+     *
+     * Absolute level does not matter: the form is rescaled onto its measured extent
+     * anyway, so what is recorded is the relative profile.
+     */
+    const centre = [0, 1, 2].map((axis) => (min[axis] + max[axis]) / 2);
+    const half = [0, 1, 2].map((axis) => Math.max(1e-6, (max[axis] - min[axis]) / 2));
+    const supports = SUPPORT_DIRECTIONS.map(() => -Infinity);
+    for (let vertex = 0; vertex < position.count; vertex += 1) {
+      const point = [0, 1, 2].map(
+        (axis) => (position.getComponent(vertex, axis) - centre[axis]) / half[axis],
+      );
+      SUPPORT_DIRECTIONS.forEach((direction, slot) => {
+        const projection =
+          point[0] * direction[0] + point[1] * direction[1] + point[2] * direction[2];
+        if (projection > supports[slot]) supports[slot] = projection;
+      });
+    }
+
     return {
       triangles,
       unitArea: round(area, 4),
       localBounds: { min: min.map((v) => round(v)), max: max.map((v) => round(v)) },
       localHeight: round(max[1] - min[1]),
       localWidth: round(Math.max(max[0] - min[0], max[2] - min[2])),
+      supportProfile: supports.map((value) => (Number.isFinite(value) ? round(value, 4) : null)),
     };
   };
 
@@ -478,6 +511,7 @@ async function measure() {
     postReadyExpression: measureExpression(
       cameraSet.authoredOverview,
       contract.capture.framebuffer,
+      canonicalSupportDirections().map((direction) => [direction.x, direction.y, direction.z]),
     ),
   });
   assert.equal(run.state?.error, undefined, run.state?.error);
