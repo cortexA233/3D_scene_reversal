@@ -85,3 +85,60 @@ Two smaller residuals, both understood:
   at these distances is +/- 4.7 azimuth bins of quantisation, wider than the whole
   error budget. A finer summit measurement would help a future fit; letting this
   fit move summits inside that window was tried and made the result worse.
+
+
+## The recorded boundary is crossable, and the measurement says so
+
+ADR-0052 recorded the skyline gate as unreachable and named the way through — three shared
+crest tables derived by clustering measured shape — as "the next step rather than taken
+here". Nobody measured whether it works. It does, with margin, and the reason ADR-0052
+could not see it is that its own table stopped at 24 nodes.
+
+**Two numbers, from `measure-horizon-form-budget.mjs --families`:**
+
+Per group, the optimal piecewise-linear bound crosses the 0.945-degree threshold between 24
+nodes (0.952, just over) and **32 nodes (0.516, comfortably under)**. ADR-0052 stopped at 24
+and concluded "not reachable"; one more row would have said otherwise.
+
+But per-group tables cannot take 32 nodes: that is 96 numbers per group against a
+compactness guard of 60. **Shared tables can.** Clustering the sixteen groups by measured
+shape — nothing reads a mesh name — and fitting *one* table per family:
+
+| families | sizes | nodes | worst error | reaches 0.945? | numbers/group |
+| --- | --- | --- | --- | --- | --- |
+| 3 | 3/7/6 | 24 | 1.441 | no | 7.5 |
+| 3 | 3/7/6 | **32** | **0.930** | **OK** | **9.0** |
+| 3 | 3/7/6 | **40** | **0.680** | **OK** | **10.5** |
+| 3 | 3/7/6 | 48 | 0.522 | OK | 12.0 |
+| 2 | 9/7 | 40 | 0.867 | OK | 8.0 |
+
+The clustering recovers families of **3, 7 and 6** against the 6/7/3 source-mesh split
+ADR-0052 states — arrived at from shape alone, which is the independent confirmation that
+the families are real and not an artefact of the distance measure.
+
+**Recommended: three families at 40 nodes.** 0.680 degrees against 0.945 is a 28 per cent
+margin, and 10.5 numbers per group is a sixth of the guard. Thirty-two nodes also passes but
+at 0.930 against 0.945 the margin is 1.6 per cent, which a real fitter will not hold — the
+bound is what an *optimal* approximation achieves, and ADR-0052's own fit landed where its
+bound predicted rather than on it.
+
+**No gate revision is needed, and that is the part worth noticing.** ADR-0052 assumed this
+path meant "reference-only measurement, versioned gate revision, own ADR", because it framed
+the problem as the threshold being wrong. The threshold is not wrong: the candidate can
+reach the frozen 0.945 as it stands. So this needs a measurement that writes three tables, a
+recipe field, a generator that reads it, and an ADR — and it must not touch a threshold.
+
+**What is left to build**, in order:
+
+1. A reference-only measurement writing the three shared tables plus each group's family
+   index, offset and range. The clustering and the shared fit already exist in
+   `measure-horizon-form-budget.mjs`; what is missing is persisting the *table* rather than
+   only its error bound.
+2. A recipe field per Horizon Group: family index, offset, range. Three numbers, replacing
+   the per-group peak and foothill controls.
+3. `crestRidge` reading a shared table instead of per-group summits.
+4. Re-measure `measure:horizon`, capture, and report. The two skyline gates — `horizon
+   profile p95` and `worst azimuth horizon error` — are the ones this targets, and both are
+   currently red at 0.0436 and 0.0657 radians against 0.0165.
+
+Nothing above is a threshold change, a calibration change, or a re-freeze.
