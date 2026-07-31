@@ -28,6 +28,38 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 12 — decorations (partial) | `lantern` and `npc-statue` landed as axial profiles (ADR-0060); the other 17 kinds are mostly single placements |
 | Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
+## Ticket 05's recorded boundary is crossable — start here
+
+The single most useful thing found this session. ADR-0052 recorded the skyline gate as
+unreachable; it is unreachable *by per-group tables under the eight-form cap*, which is a
+narrower claim than the ADR made. `measure-horizon-form-budget.mjs --families` reproduces
+all of this:
+
+- Per group the optimal bound crosses 0.945 degrees between **24 nodes (0.952)** and
+  **32 nodes (0.516)**. ADR-0052's table stopped at 24 and concluded "not reachable".
+- Per-group tables cannot take 32 nodes — 96 numbers per group against a compactness guard
+  of 60. **Shared tables can**: three families at 32 nodes reach **0.930 for 9.0 numbers per
+  group**, at 40 nodes **0.680 for 10.5**, at 48 nodes 0.522 for 12.0.
+- Clustering by measured shape, reading no mesh name, recovers families of **3/7/6** against
+  the 6/7/3 source-mesh split ADR-0052 states. Independent confirmation the families are real.
+
+**Take three families at 40 nodes.** 0.680 against 0.945 is a 28 per cent margin; 32 nodes
+passes at 0.930 but 1.6 per cent is not a margin a real fitter holds, and ADR-0052's own fit
+landed where its bound predicted rather than on it.
+
+**No gate revision, no recalibration, no re-freeze.** ADR-0052 assumed this path needed a
+versioned gate revision because it framed the threshold as the problem. The threshold is
+fine; the candidate can reach it as frozen. What is left to build, in order:
+
+1. A reference-only measurement persisting the three shared tables plus each group's family
+   index, offset and range. The clustering and shared fit already exist in the tool — what
+   is missing is writing the *table*, not just its error bound.
+2. A recipe field per Horizon Group: family index, offset, range. Three numbers, replacing
+   the per-group peak and foothill controls.
+3. `crestRidge` reading a shared table instead of per-group summits.
+4. `measure:horizon`, capture, report. Targets `horizon profile p95` and `worst azimuth
+   horizon error`, both red at 0.0436 and 0.0657 radians against 0.0165.
+
 ## Where ticket 07 actually stands now
 
 Four of the village's form problems are fixed and the fixed-camera layer has moved
