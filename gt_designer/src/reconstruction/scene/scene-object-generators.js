@@ -803,11 +803,7 @@ function grassClump(rng) {
 }
 
 function lantern() {
-  return group([
-    part(box(0.16, 0.62, 0.16, 0.31), "post"),
-    part(box(0.44, 0.3, 0.44, 0.78), "housing"),
-    part(cone(0.34, 0.14, 4, 0.96), "cap"),
-  ]);
+  return group([axialLathe(AXIAL_REACH_PROFILES.lantern, { id: "lantern" })]);
 }
 
 /**
@@ -1023,13 +1019,57 @@ function pile(rng, { pieces = 5 } = {}) {
   return group(parts);
 }
 
-function figure(rng) {
-  return group([
-    part(cylinder(0.22, 0.3, 0.55, 10, 0.275), "robe"),
-    part(sphere(0.2, 10, 8, 0.75), "head"),
-    part(box(0.62, 0.1, 0.18, 0.6), "arms"),
-    part(cylinder(0.34, 0.34, 0.08, 12, 0.04), "base"),
-  ]);
+/**
+ * Measured half-extent by height decile, as a fraction of the entity's own box
+ * half-width, pooled over every placement of the kind by
+ * `tools/development/measure-architecture-massing.mjs`.
+ *
+ * These are the two decoration kinds with enough placements to support a family
+ * program — ten lanterns and eight statues — and together they carry 48 per cent of
+ * the group's authored overview pixels. The rest of `decorations` is mostly single
+ * placements, which is the same thin evidence that sank the bridge attempt.
+ *
+ * Both were built inverted. The authored lantern is widest at three to five tenths
+ * of its height (0.89, 0.86, 0.91) and *narrowest* at the top (0.44); the generator
+ * was a thin post under a wide housing, reaching 0.16 at the bottom and 1.00 near
+ * the top. The authored statue is broad through its lower two thirds (0.82 to 0.88)
+ * and still 0.51 at the crown, where the generator's sphere gave 0.22.
+ */
+const AXIAL_REACH_PROFILES = Object.freeze({
+  lantern: Object.freeze([0.57, 0.6, 0.62, 0.89, 0.86, 0.91, 0.74, 0.58, 0.62, 0.44]),
+  "npc-statue": Object.freeze([0.82, 0.87, 0.88, 0.86, 0.82, 0.74, 0.67, 0.75, 0.7, 0.51]),
+});
+
+/**
+ * An Axial Layer Family form: one revolved surface through a measured radius
+ * profile.
+ *
+ * One surface rather than a stack of primitives, because the last attempt at
+ * village massing matched its profile and still regressed the rendered gates —
+ * eight boxes standing in for a smooth authored body added silhouette edges and
+ * depth discontinuities the reference does not have, and contour distance rose a
+ * fifth. A lathe reproduces the same profile with no seams.
+ *
+ * The profile is a radially averaged half-extent, so a revolved surface is exactly
+ * the form it describes; giving it a plan shape the measurement cannot see would be
+ * inventing. And the authored decorations are one mesh each, so one semantic part is
+ * the faithful count here rather than a loss of structure.
+ */
+function axialLathe(profile, { segments = 20, id = "body" } = {}) {
+  const points = [];
+  // A closed bottom and a closed top, so the surface is a solid rather than a tube.
+  points.push(new THREE.Vector2(0, 0));
+  profile.forEach((reach, decile) => {
+    points.push(new THREE.Vector2(Math.max(0.01, reach / 2), (decile + 0.5) / profile.length));
+  });
+  points.push(new THREE.Vector2(0, 1));
+  const geometry = new THREE.LatheGeometry(points, segments);
+  geometry.computeVertexNormals();
+  return part(new THREE.Mesh(geometry), id);
+}
+
+function figure() {
+  return group([axialLathe(AXIAL_REACH_PROFILES["npc-statue"], { id: "figure" })]);
 }
 
 const GENERATORS = Object.freeze({

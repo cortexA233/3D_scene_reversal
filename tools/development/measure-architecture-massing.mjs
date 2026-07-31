@@ -29,7 +29,8 @@
  *   node tools/development/measure-architecture-massing.mjs --kinds shop-stall,pavilion
  */
 
-import { readFile } from "node:fs/promises";
+import assert from "node:assert/strict";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -127,12 +128,37 @@ function pool(profiles) {
 }
 
 const requested = flag("--kinds")?.split(",").map((value) => value.trim());
-const structures = ISLAND_SCENE_RECIPE.entities.filter((entity) =>
-  ["structures", "bridges", "plazas"].includes(entity.group),
-);
+// Without `--kinds` this reports the village, which is what it was written for.
+// With it, any group is fair game — the profiles are normalised into each
+// entity's own box, so nothing about them is village-specific, and a `--kinds`
+// that silently matched nothing wasted a round of measurement once already.
+const structures = requested
+  ? ISLAND_SCENE_RECIPE.entities
+  : ISLAND_SCENE_RECIPE.entities.filter((entity) =>
+      ["structures", "bridges", "plazas"].includes(entity.group),
+    );
 const kinds = requested ?? [...new Set(structures.map((entity) => entity.kind))];
+if (requested) {
+  const unmatched = requested.filter(
+    (kind) => !structures.some((entity) => entity.kind === kind),
+  );
+  if (unmatched.length > 0) {
+    throw new Error(
+      `no entities of kind ${unmatched.join(", ")}; known kinds: ` +
+        [...new Set(ISLAND_SCENE_RECIPE.entities.map((entity) => entity.kind))].sort().join(", "),
+    );
+  }
+}
 
 const bar = (value) => "#".repeat(Math.max(0, Math.round(value * 40)));
+/**
+ * Evidence, so a test can assert against this comparison instead of recomputing it.
+ * Both subjects go through one sampler here; a test that measured the generated form
+ * its own way would report the difference between two methods as a shape error, which
+ * is what ADR-0055 was written about and what the first version of the decoration test
+ * did.
+ */
+const measured = [];
 for (const kind of kinds) {
   const entities = structures.filter((entity) => entity.kind === kind);
   if (entities.length === 0) continue;
@@ -150,6 +176,21 @@ for (const kind of kinds) {
   const left = pool(referenceProfiles);
   const right = pool(candidateProfiles);
   if (!left || !right) continue;
+  const round = (value) => (value === null ? null : Number(value.toFixed(4)));
+  measured.push({
+    kind,
+    placements: entities.length,
+    authored: {
+      aspect: round(left.aspect),
+      share: left.share.map(round),
+      reach: left.halfExtent.map(round),
+    },
+    candidate: {
+      aspect: round(right.aspect),
+      share: right.share.map(round),
+      reach: right.halfExtent.map(round),
+    },
+  });
 
   process.stdout.write(
     `\n${kind}  (${entities.length} placements, authored aspect ${left.aspect.toFixed(2)}, ` +
@@ -157,10 +198,11 @@ for (const kind of kinds) {
       "  height   authored share            candidate share          authored / candidate reach\n",
   );
   for (let level = DECILES - 1; level >= 0; level -= 1) {
-    const reachPair =
-      left.halfExtent[level] === null || right.halfExtent[level] === null
-        ? "      -    "
-        : `${left.halfExtent[level].toFixed(2)} / ${right.halfExtent[level].toFixed(2)}`;
+    // Each side prints its own reach or a dash. Suppressing the pair whenever
+    // either side was empty hid the authored value in exactly the bands where the
+    // candidate has no geometry — which are the bands worth reading.
+    const show = (value) => (value === null ? "   -" : value.toFixed(2));
+    const reachPair = `${show(left.halfExtent[level]).padStart(4)} / ${show(right.halfExtent[level])}`;
     process.stdout.write(
       `  ${String(level).padStart(2)}   ` +
         `${(left.share[level] * 100).toFixed(1).padStart(5)}% ${bar(left.share[level]).padEnd(22)}` +
@@ -169,4 +211,53 @@ for (const kind of kinds) {
         "\n",
     );
   }
+}
+
+const EVIDENCE_PATH = path.join(
+  PROJECT_ROOT,
+  ".scratch/full-island-reconstruction/evidence/axial-massing-v1.json",
+);
+const SCHEMA_VERSION = "axial-massing-v1";
+
+if (argv.includes("--check")) {
+  const recorded = JSON.parse(await readFile(EVIDENCE_PATH, "utf8"));
+  assert.equal(recorded.schemaVersion, SCHEMA_VERSION);
+  for (const row of recorded.kinds) {
+    const fresh = measured.find((entry) => entry.kind === row.kind);
+    if (!fresh) continue;
+    assert.deepEqual(
+      fresh.authored.reach,
+      row.authored.reach,
+      `${row.kind}: the authored reach profile moved`,
+    );
+  }
+  process.stdout.write(
+    `
+Axial massing: unchanged — ${recorded.kinds.map((row) => row.kind).join(", ")}
+`,
+  );
+} else if (measured.length > 0) {
+  await mkdir(path.dirname(EVIDENCE_PATH), { recursive: true });
+  await writeFile(
+    EVIDENCE_PATH,
+    `${JSON.stringify(
+      {
+        schemaVersion: SCHEMA_VERSION,
+        measuredAt: new Date().toISOString(),
+        note:
+          "Half-extent and geometry share by height decile, pooled over each kind's " +
+          "placements and normalised into each entity's own box. Both subjects go " +
+          "through one sampler, so a difference here is a difference the surface gate sees.",
+        kinds: measured,
+      },
+      null,
+      2,
+    )}
+`,
+  );
+  process.stdout.write(
+    `
+Wrote ${path.relative(PROJECT_ROOT, EVIDENCE_PATH)} (${measured.length} kinds)
+`,
+  );
 }

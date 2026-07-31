@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0059.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0060.
 
 ## Where the work stands
 
@@ -25,6 +25,7 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 11 — material families | in progress; every albedo is measured, distant-rock converged |
 | Reconstruction 06 — ground surfaces | plazas, decks and rocks landed (ADR-0057, ADR-0058); `paths` blocked on 03 |
 | Reconstruction 15 — native GPU evidence | done for every browser present (ADR-0059); Firefox/Safari need a non-CDP transport, not an install |
+| Reconstruction 12 — decorations (partial) | `lantern` and `npc-statue` landed as axial profiles (ADR-0060); the other 17 kinds are mostly single placements |
 | Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
 ## Read this before trusting any number below
@@ -842,6 +843,27 @@ earlier was measured against the wrong thing.
   fourth per-entity control, measurable from the decomposition, and it deserves its own
   step rather than a bolt-on — which is why the three controls are in ticket 07 rather
   than left in the recipe as dead data.
+- **`decorations` was the last unexplained man-made over-draw and two of its kinds are
+  fixed (ADR-0060).** It is 19 kinds over 58 placements with the pixels concentrated:
+  `npc-statue` 835, `lantern` 737, `name-plate` 659, `yin-yang` 505, nothing else above
+  250. Ten lanterns and eight statues carry 48 per cent of the group's authored pixels
+  and are the only two kinds with enough placements for a family program; the rest are
+  mostly single placements, which is the evidence thinness that sank the bridge.
+  Both were built **inverted**. The authored lantern is widest at three to five tenths
+  of its height (0.89, 0.86, 0.91) and narrowest at the crown (0.44); the generator was
+  a thin post under a wide housing, 0.16 at the bottom and 1.00 near the top. The
+  authored statue is broad through its lower two thirds and still 0.51 at the crown
+  where a sphere gave 0.22, and it put 23.9 per cent of its geometry in the bottom
+  decile against the reference's 10.2.
+  Ten numbers per kind, pooled, built as **one revolved surface** — the direct lesson of
+  the reverted architecture attempt, which matched its profile and raised contour a
+  fifth by adding seams a smooth authored body does not have.
+  `decorations` IoU 0.429 to **0.452**, contour 12.97 to 12.84, normals 117.43 to
+  **110.77**; `lantern` surface p95 4.384 to **3.407**. In the stack every changed
+  metric improved and none regressed — the first village change this milestone to manage
+  that — and draw calls fell 1,810 to **1,766** because two kinds went from three and
+  four primitives to one surface each. The pixel ratio went 1.52 to 1.60, the same trade
+  the support-plane rock made: a fuller form draws more while agreeing better in shape.
 - **The rest of the village is still blocked on a design decision, not on a form.**
   Read ticket 07's findings before touching it. The short version:
   `plazas` draws 1.89 times the reference's pixels and `bridges` 2.11 because the
