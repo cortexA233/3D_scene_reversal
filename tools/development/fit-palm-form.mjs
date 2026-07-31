@@ -36,7 +36,8 @@ const KIND = flag("--kind", "palm");
 /** The shipped defaults per kind, as the search's starting point. */
 const STARTS = {
   palm: { trunkHeight: 0.62, trunkBase: 0.09, trunkTop: 0.028, crownSpan: 0.5, whorls: 5, lengthScale: 1, widthScale: 0.7 },
-  blossom: { trunkFraction: 0.3, clusters: 10, spread: 0.44, baseRadius: 0.07, crownLow: 0.32 },
+  blossom: { trunkFraction: 0.12, clusters: 10, spread: 0.6, baseRadius: 0.07, crownLow: 0 },
+  bamboo: { canopyFloor: 0.6, lengthScale: 1, droop: 0.14, riseLow: 0.35, radiusScale: 0.46 },
 };
 const PALM_START = STARTS[KIND];
 
@@ -197,6 +198,13 @@ const AXIS_SETS = {
     spread: [0.3, 0.38, 0.44, 0.52, 0.6],
     baseRadius: [0.07, 0.11, 0.16, 0.22],
     crownLow: [0, 0.12, 0.22, 0.32, 0.45],
+  },
+  bamboo: {
+    canopyFloor: [0.6, 0.68, 0.74, 0.8, 0.85],
+    lengthScale: [0.6, 0.8, 1, 1.2],
+    droop: [0.02, 0.06, 0.1, 0.14, 0.2],
+    riseLow: [0.15, 0.25, 0.35, 0.5, 0.65],
+    radiusScale: [0.34, 0.4, 0.46, 0.54],
   },
 };
 const AXES = AXIS_SETS[KIND];

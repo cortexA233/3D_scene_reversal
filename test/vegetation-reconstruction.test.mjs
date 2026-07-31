@@ -22,39 +22,28 @@ const correspondence = JSON.parse(
 );
 
 /**
- * Recorded when the canopies landed. These are regression guards, not parity
- * gates: the fixed-camera and appearance layers have no calibrated thresholds
- * yet, so this ticket must not be allowed to silently give ground it gained.
- */
-/**
- * The ratchet, and one re-baselining with its reason.
- *
- * `palmSurfaceP95` was 6.5 and is 6.8. Palm's generated geometry is byte-identical —
- * nothing in this ticket's forms changed — and what moved was the measurement: ADR-0055
- * gave the surface sampler's budget to the entity rather than to each of its meshes, so
- * a palm's three parts no longer draw a per-mesh budget each and its measured p95 went
- * from 5.80 to 6.52 on both subjects at once.
- *
- * Re-baselining a ratchet because the measurement changed is the move that could hide a
- * real regression, so the two facts that make it safe are recorded rather than implied:
- * the candidate's palm geometry is unchanged, and the same correction took the aggregate
- * from 9.3025 to 7.2469 and `bamboo` from 29.01 to 7.34. A ratchet whose baseline was
- * measured by a different rule is not a ratchet; it is a comparison between two
- * different things.
- */
-/**
- * Ratchets, not gates. Each is the measured value with a little headroom, tightened
+ * Ratchets, not parity gates. Each is a measured value with a little headroom, tightened
  * whenever one improves so a later change cannot quietly give the ground back.
  *
- * `palm` came down from 5.4025 when its form controls were fitted to the measured
- * profile — the whorls spread down the trunk rather than gathered at its crown — and the
- * ceiling comes down with it. It was 6.8 for a form that measured 5.4, which is slack
- * wide enough to have hidden the whole regression the fit removed.
+ * All three vegetation kinds were fitted to their measured profiles: palm from 5.4025,
+ * blossom from 3.9352, bamboo from 7.1510. The ceilings came down with them. `palm` had
+ * sat at 6.8 for a form that measured 5.4, slack wide enough to have hidden the entire
+ * regression its fit removed, which is the argument for tightening rather than leaving
+ * room.
+ *
+ * One re-baselining in this file's history is worth keeping, because it is the move that
+ * could hide a real regression. `palmSurfaceP95` once went *up*, 6.5 to 6.8, with the
+ * candidate's geometry byte-identical: ADR-0055 gave the surface sampler's budget to the
+ * entity rather than to each of its meshes, and the measurement moved under both subjects
+ * at once. A ratchet whose baseline was measured by a different rule is not a ratchet, it
+ * is a comparison between two different things — so the re-baselining was recorded with
+ * the two facts that made it safe rather than performed quietly.
  */
 const RECORDED = Object.freeze({
   palmSurfaceP95: 5.1,
   blossomSurfaceP95: 3.5,
-  aggregateSurfaceP95: 6.6,
+  bambooSurfaceP95: 6.9,
+  aggregateSurfaceP95: 6.55,
 });
 
 function measure(kind, seed) {
@@ -134,6 +123,10 @@ test("the measured vegetation result has not regressed", () => {
   assert.ok(
     byKind.blossom.mean <= RECORDED.blossomSurfaceP95,
     `blossom surface p95 ${byKind.blossom.mean} regressed past ${RECORDED.blossomSurfaceP95}`,
+  );
+  assert.ok(
+    byKind.bamboo.mean <= RECORDED.bambooSurfaceP95,
+    `bamboo surface p95 ${byKind.bamboo.mean} regressed past ${RECORDED.bambooSurfaceP95}`,
   );
   assert.ok(
     correspondence.surface.p95.mean <= RECORDED.aggregateSurfaceP95,

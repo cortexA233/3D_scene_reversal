@@ -882,7 +882,31 @@ function blossom(rng, shape) {
  * A bamboo stand: segmented culms with node rings and leaf blades near the top,
  * built as an axial layer family rather than as bare cylinders.
  */
-function bambooClump(rng) {
+/**
+ * The bamboo's remaining form controls.
+ *
+ * Unlike the palm and the blossom this kind was already fitted — the canopy floor, the
+ * vertical ladder and the radial distribution were all measured off the 72 authored
+ * clumps. What was left unmeasured is how far the blades hang *below* the band they are
+ * drawn into. The authored asset has exactly nothing in the fourth, fifth and sixth
+ * deciles: 0 of 96 samples, identically in all 72 placements, which share one mesh. The
+ * candidate had 21.8 per cent of its area there, all of it drooping blade.
+ *
+ * At 96 samples "nothing" cannot be told from "under one per cent of the area", and that
+ * limit is real — but the surface gate compares point cloud against point cloud, so it
+ * sees the reference exactly as sparsely. A candidate carrying a fifth of its area where
+ * the reference cloud is empty is penalised for it either way.
+ */
+const BAMBOO_FORM = Object.freeze({
+  canopyFloor: 0.74,
+  lengthScale: 1.2,
+  droop: 0.02,
+  riseLow: 0.35,
+  radiusScale: 0.4,
+});
+
+function bambooClump(rng, shape) {
+  const form = { ...BAMBOO_FORM, ...(shape?.bambooForm ?? {}) };
   const culmMeshes = [];
   const leafMeshes = [];
   const culms = 4 + Math.floor(rng.nextFloat() * 4);
@@ -926,7 +950,7 @@ function bambooClump(rng) {
    * around each culm left the interior two radial deciles empty where the
    * reference has 8.6 per cent of its geometry.
    */
-  const CANOPY_FLOOR = 0.6;
+  const CANOPY_FLOOR = form.canopyFloor;
   // Enough blades that the canopy clears the foliage-mass floor `vegetation`
   // already gates — a stand may not become a handful of cards — while the culms
   // stay the small share of the triangles the authored clump gives them.
@@ -935,15 +959,15 @@ function bambooClump(rng) {
     // Triangular about the middle of the height band, then biased upward to match
     // the measured 7/35/42/16 ladder.
     const rise = (rng.nextFloat() + rng.nextFloat()) / 2;
-    const t = CANOPY_FLOOR + (1 - CANOPY_FLOOR) * (0.35 + rise * 0.65);
+    const t = CANOPY_FLOOR + (1 - CANOPY_FLOOR) * (form.riseLow + rise * (1 - form.riseLow));
     const azimuth = rng.nextFloat() * Math.PI * 2;
     // Triangular in radius: peaks mid-box and tapers to both the axis and the edge.
-    const radius = ((rng.nextFloat() + rng.nextFloat()) / 2) * 0.46;
+    const radius = ((rng.nextFloat() + rng.nextFloat()) / 2) * form.radiusScale;
     const blade = new THREE.Mesh(
       bladeGeometry({
-        length: 0.2 + rng.nextFloat() * 0.14,
+        length: (0.2 + rng.nextFloat() * 0.14) * form.lengthScale,
         width: 0.07,
-        droop: 0.14,
+        droop: form.droop,
         segments: 3,
         curl: 0.2,
       }),
