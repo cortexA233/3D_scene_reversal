@@ -42,10 +42,19 @@ const correspondence = JSON.parse(
  * measured by a different rule is not a ratchet; it is a comparison between two
  * different things.
  */
+/**
+ * Ratchets, not gates. Each is the measured value with a little headroom, tightened
+ * whenever one improves so a later change cannot quietly give the ground back.
+ *
+ * `palm` came down from 5.4025 when its form controls were fitted to the measured
+ * profile — the whorls spread down the trunk rather than gathered at its crown — and the
+ * ceiling comes down with it. It was 6.8 for a form that measured 5.4, which is slack
+ * wide enough to have hidden the whole regression the fit removed.
+ */
 const RECORDED = Object.freeze({
-  palmSurfaceP95: 6.8,
-  blossomSurfaceP95: 4.5,
-  aggregateSurfaceP95: 10.5,
+  palmSurfaceP95: 5.1,
+  blossomSurfaceP95: 4.0,
+  aggregateSurfaceP95: 6.7,
 });
 
 function measure(kind, seed) {

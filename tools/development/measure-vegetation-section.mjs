@@ -41,6 +41,19 @@ const LEVELS = Number(flag("--levels", "10"));
 const BANDS = Number(flag("--bands", "6"));
 const BUDGET = Number(flag("--budget", "4096"));
 const KINDS = (flag("--kinds", "palm") ?? "").split(",").filter(Boolean);
+/**
+ * Pool placements after turning each one to face the same way, and report a signed
+ * left-to-right section instead of a radius.
+ *
+ * Without this the pooling destroys the thing worth seeing. A leaning or arcing trunk
+ * sits off-centre at every height, but 156 placements at 156 different yaws smear that
+ * offset into a ring, and the radial view reports a plant with no core and a constant
+ * half-extent — which is what the unaligned run says about the palm and is an artefact of
+ * the pooling, not a property of the subject. Each placement is turned so its own mean
+ * horizontal offset points at +x first, which is a rotation about the entity's own axis
+ * and so changes nothing the surface gate measures.
+ */
+const ALIGN = argv.includes("--align");
 
 const [inventory, samples] = await Promise.all([
   readEvidence("scene-inventory-v1.json"),
@@ -64,21 +77,49 @@ function section(points, box) {
   const centreZ = (minZ + maxZ) / 2;
   const halfX = Math.max(1e-9, (maxX - minX) / 2);
   const halfZ = Math.max(1e-9, (maxZ - minZ) / 2);
-  const grid = Array.from({ length: LEVELS }, () => new Float64Array(BANDS));
+  const columns = ALIGN ? BANDS * 2 : BANDS;
+  const grid = Array.from({ length: LEVELS }, () => new Float64Array(columns));
   let total = 0;
+
+  // The placement's own facing: the direction of its mean horizontal offset, weighted
+  // equally over its samples. Undefined for a form that really is centred, in which case
+  // any direction will do and +x is taken.
+  let facingX = 1;
+  let facingZ = 0;
+  if (ALIGN) {
+    let sumX = 0;
+    let sumZ = 0;
+    for (let index = 0; index + 2 < points.length; index += 3) {
+      sumX += (points[index] - centreX) / halfX;
+      sumZ += (points[index + 2] - centreZ) / halfZ;
+    }
+    const magnitude = Math.hypot(sumX, sumZ);
+    if (magnitude > 1e-9) {
+      facingX = sumX / magnitude;
+      facingZ = sumZ / magnitude;
+    }
+  }
+
   // Samples are stored flat, as the surface gate stores them: x, y, z, x, y, z.
   for (let index = 0; index + 2 < points.length; index += 3) {
     const level = Math.min(
       LEVELS - 1,
       Math.max(0, Math.floor(((points[index + 1] - minY) / height) * LEVELS)),
     );
-    // Radius normalised per axis, so an entity whose box is not square does not read
-    // as off-centre mass purely because of its footprint's aspect.
+    // Normalised per axis, so an entity whose box is not square does not read as
+    // off-centre mass purely because of its footprint's aspect.
     const dx = (points[index] - centreX) / halfX;
     const dz = (points[index + 2] - centreZ) / halfZ;
-    const radius = Math.min(1, Math.hypot(dx, dz) / Math.SQRT2);
-    const band = Math.min(BANDS - 1, Math.max(0, Math.floor(radius * BANDS)));
-    grid[level][band] += 1;
+    let column;
+    if (ALIGN) {
+      // Signed distance along the placement's own facing, over [-1, 1].
+      const along = Math.max(-1, Math.min(1, dx * facingX + dz * facingZ));
+      column = Math.min(columns - 1, Math.max(0, Math.floor(((along + 1) / 2) * columns)));
+    } else {
+      const radius = Math.min(1, Math.hypot(dx, dz) / Math.SQRT2);
+      column = Math.min(columns - 1, Math.max(0, Math.floor(radius * columns)));
+    }
+    grid[level][column] += 1;
     total += 1;
   }
   return { grid, total };
@@ -103,7 +144,7 @@ const boxOf = (points) => {
 const RAMP = " .:-=+*#%@";
 const cell = (share) => {
   if (!(share > 0)) return " ";
-  const relative = share * BANDS;
+  const relative = share * (ALIGN ? BANDS * 2 : BANDS);
   const index = Math.min(RAMP.length - 1, Math.max(1, Math.round(relative * 2.5)));
   return RAMP[index];
 };
@@ -116,7 +157,7 @@ for (const kind of KINDS) {
   }
   const sides = { authored: null, candidate: null };
   for (const side of ["authored", "candidate"]) {
-    const pooled = Array.from({ length: LEVELS }, () => new Float64Array(BANDS));
+    const pooled = Array.from({ length: LEVELS }, () => new Float64Array(ALIGN ? BANDS * 2 : BANDS));
     let placements = 0;
     for (const entity of entities) {
       let points;
@@ -131,7 +172,9 @@ for (const kind of KINDS) {
       const { grid, total } = section(points, boxOf(points));
       if (total === 0) continue;
       for (let level = 0; level < LEVELS; level += 1) {
-        for (let band = 0; band < BANDS; band += 1) pooled[level][band] += grid[level][band] / total;
+        for (let band = 0; band < pooled[level].length; band += 1) {
+          pooled[level][band] += grid[level][band] / total;
+        }
       }
       placements += 1;
     }
@@ -156,7 +199,7 @@ for (const kind of KINDS) {
       const counts = sides[side].pooled[level];
       let sum = 0;
       for (const value of counts) sum += value;
-      if (!(sum > 0)) return " ".repeat(BANDS);
+      if (!(sum > 0)) return " ".repeat(ALIGN ? BANDS * 2 : BANDS);
       return Array.from(counts, (value) => cell(value / sum)).join("");
     };
     const share = (side) => {

@@ -718,13 +718,39 @@ function trunkColumn(rng, { height, baseRadius, topRadius, lean, segments = 4 })
   return { column, top: [offset, height, 0] };
 }
 
-function palm(rng) {
-  const trunkHeight = 0.62;
+/**
+ * The palm's form controls.
+ *
+ * Hand-authored constants until this, and never compared with the subject. Measured over
+ * 156 placements — the best-sampled profile on the island — the authored palm carries its
+ * mass evenly up its whole height and the candidate did not: 53 per cent in the top two
+ * deciles against an authored 18, on a trunk whose reach reads 0.23 where the subject
+ * reads 0.61. `crownSpan` is what closes that: the frond whorls are spread down the trunk
+ * instead of gathered at its top, which is the arrangement the aligned vertical section
+ * shows and the one the old three-whorl crown could not make.
+ *
+ * ADR-0065 records why this stayed a trunk-and-blade form rather than becoming an Axial
+ * Layer Family like the decorations.
+ */
+const PALM_FORM = Object.freeze({
+  trunkHeight: 0.62,
+  trunkBase: 0.09,
+  trunkTop: 0.028,
+  // Where the lowest whorl sits, as a fraction of the trunk. 0 is the old crown.
+  crownSpan: 0.5,
+  whorls: 5,
+  lengthScale: 1,
+  widthScale: 0.7,
+});
+
+function palm(rng, shape) {
+  const form = { ...PALM_FORM, ...(shape?.palmForm ?? {}) };
+  const trunkHeight = form.trunkHeight;
   const lean = (rng.nextFloat() - 0.5) * 0.22;
   const { column, top } = trunkColumn(rng, {
     height: trunkHeight,
-    baseRadius: 0.055,
-    topRadius: 0.028,
+    baseRadius: form.trunkBase,
+    topRadius: form.trunkTop,
     lean,
   });
   const frondMeshes = [];
@@ -736,24 +762,28 @@ function palm(rng) {
     { count: 6, length: 0.4, width: 0.26, droop: 0.16, pitch: 0.16 },
     { count: 4, length: 0.26, width: 0.2, droop: 0.04, pitch: 0.44 },
   ];
-  let index = 0;
-  for (const [layerIndex, layer] of layers.entries()) {
+  const whorls = Math.max(1, Math.round(form.whorls));
+  for (let whorl = 0; whorl < whorls; whorl += 1) {
+    // Whorls run from the crown down over `crownSpan` of the trunk. At 0 they all sit at
+    // the crown, which is the arrangement this replaced.
+    const down = whorls > 1 ? (whorl / (whorls - 1)) * form.crownSpan : 0;
+    const height = top[1] - 0.02 - down * trunkHeight;
+    const offset = top[0] * (1 - down);
+    const layer = layers[whorl % layers.length];
     const phase = rng.nextFloat() * Math.PI * 2;
     for (let frond = 0; frond < layer.count; frond += 1) {
       const azimuth = phase + (frond / layer.count) * Math.PI * 2;
       const blade = new THREE.Mesh(
         bladeGeometry({
-          length: layer.length * (0.86 + rng.nextFloat() * 0.28),
-          width: layer.width,
+          length: layer.length * form.lengthScale * (0.86 + rng.nextFloat() * 0.28),
+          width: layer.width * form.widthScale,
           droop: layer.droop,
         }),
       );
-      blade.position.set(top[0], top[1] - 0.02, top[2]);
+      blade.position.set(offset, height, top[2]);
       blade.rotation.set(0, -azimuth, layer.pitch + (rng.nextFloat() - 0.5) * 0.12);
       frondMeshes.push(blade);
-      index += 1;
     }
-    void layerIndex;
   }
   // Fruit sits under the crown and reads at overview distance.
   for (let fruit = 0; fruit < 3; fruit += 1) {
