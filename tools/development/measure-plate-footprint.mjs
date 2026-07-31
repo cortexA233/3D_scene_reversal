@@ -71,7 +71,16 @@ const contract = createReferenceObservationContract();
  * only as a resolved family — and the placements are therefore resolved offline
  * and their mesh paths handed to the page.
  */
-const PLATE_KINDS = ["plaza", "deck", "bridge"];
+// `paving-slab` and `path-stone` were left out when this was written, and the rendered
+// evidence says they should not have been: the `paths` group draws **2.927 times** the
+// reference's pixels at a silhouette IoU of 0.2233 and a contour p95 of 75.99, which is a
+// worse over-draw than the 1.89 and 2.11 that motivated the tool. They also carry no
+// footprint controls at all, where the plaza, deck and bridge each got theirs.
+//
+// The surface gate cannot see this. `paving-slab` reads 1.564 against its own sampling
+// floor of 1.601 (ADR-0066), so on the point-cloud metric those 57 slabs are already
+// indistinguishable from perfect while the render says they are three times too big.
+const PLATE_KINDS = ["plaza", "deck", "bridge", "paving-slab", "path-stone"];
 const RASTER = 96;
 const MAX_RECTANGLES = 6;
 

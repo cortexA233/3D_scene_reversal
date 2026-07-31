@@ -91,6 +91,49 @@ renders both subjects through the same frozen cameras at the same resolution and
 point clouds, so nothing in ADR-0066 touches it — and it is now the only layer where a
 fitting effort is guaranteed to be measuring the candidate rather than the sampler.
 
+Its residual is not spread evenly. Per group, pooled over the six cameras:
+
+| group | mean IoU | contour p95 | draw ratio |
+| --- | --- | --- | --- |
+| cover | **0.0144** | 26.16 | 0.752 |
+| paths | **0.2233** | **75.99** | **2.927** |
+| plazas | 0.3899 | 13.18 | 1.076 |
+| wildlife | 0.4325 | 60.02 | 0.734 |
+| decorations | 0.4518 | 12.83 | 1.588 |
+| rocks | 0.4674 | 13.64 | 0.993 |
+| structures | 0.5782 | 13.42 | 1.175 |
+| bridges | 0.5810 | 9.90 | 1.297 |
+| vegetation | 0.7129 | 9.23 | 1.081 |
+| horizon | 0.7927 | 21.17 | 0.975 |
+| geography | 0.9441 | 12.00 | 0.996 |
+
+*(thresholds: IoU >= 0.724931, contour p95 <= 6.536774)*
+
+**`paths` draws 2.927 times the reference's pixels** — a worse over-draw than the 1.89 and
+2.11 that originally motivated the plate program — and it is the clearest demonstration of
+why ADR-0066 matters. The group is 3 `path-stone` and 57 `paving-slab`, and `paving-slab`
+reads **1.564 on the surface gate against its own sampling floor of 1.601**. On the
+point-cloud metric those 57 slabs are already indistinguishable from a perfect
+reproduction. In the render they are three times too big.
+
+They also carry **no footprint controls at all** — `footprintCoverage` and `perimeterShare`
+are absent, where the plaza, deck and bridge each got theirs. `paving-slab` was simply left
+out of the plate program. Measured now, across 42 distinct assets and 57 placements, the
+authored coverage has a median of **0.186** against a candidate hexagon covering about 0.75.
+
+**The obvious fix would be a regression, and this is measured rather than feared.** The
+plate tool's own warning applies: a plate with the right coverage in the wrong places scores
+`c^2 / (2c - c^2)`, which at the measured mean coverage of 0.2435 is **IoU 0.1386 — below
+the 0.2233 the group scores now**. Halving the pixel ratio while lowering the IoU is a
+regression that reads as a fix in the draw ratio, which is exactly the trap the bridge
+attempt fell into earlier in this milestone.
+
+So the fix needs the footprint's *position*, and that is where it stops: the rectangle
+decomposition claims only **5 of the 42 assets**. For the other 37 the tool records how much
+is covered and not where. Extracting that — a better decomposition, or a representation
+suited to a scattered rather than blocky footprint — is the next concrete piece of work on
+this layer, and it is ordinary engineering rather than a boundary or a judgement.
+
 `worst entity surface p95` is entirely horizon mountains — all eight worst entities are
 `horizon/mountain-*`, and the worst reads 41 per cent of its own 389-unit extent. I first
 classified that as unfinished work. **It is not, and the correction is measured.**
