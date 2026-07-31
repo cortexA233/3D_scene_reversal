@@ -213,6 +213,44 @@ export async function previewPng(rgba, width, height, scale = 4) {
   return preview.toDataURL("image/png");
 }
 
+/**
+ * A difference preview: where the two subjects disagree, and which way.
+ *
+ * Human Parity Review has to be able to see *where* a number comes from, and a pair of
+ * side-by-side images does not show that — an eye cannot subtract two 1440x810 frames.
+ * Red is reference-only, blue is candidate-only, and grey is agreement, so a group the
+ * candidate over-draws and one it misses are different colours rather than both "wrong".
+ *
+ * Built from the same RGBA buffers the metrics read, in the same frame, so a reviewer's
+ * observation and the measurement cannot be about different pictures.
+ */
+export async function differencePng(reference, candidate, width, height, scale = 4) {
+  const rgba = new Uint8Array(width * height * 4);
+  for (let index = 0; index < rgba.length; index += 4) {
+    const left = reference[index] | reference[index + 1] | reference[index + 2];
+    const right = candidate[index] | candidate[index + 1] | candidate[index + 2];
+    const inLeft = left !== 0;
+    const inRight = right !== 0;
+    if (inLeft && inRight) {
+      // Agreement, dimmed, so the disagreement is what the eye lands on.
+      const shade = 40 + Math.round(Math.abs(left - right) / 8);
+      rgba[index] = shade;
+      rgba[index + 1] = shade;
+      rgba[index + 2] = shade;
+    } else if (inLeft) {
+      rgba[index] = 220;
+      rgba[index + 1] = 40;
+      rgba[index + 2] = 60;
+    } else if (inRight) {
+      rgba[index] = 50;
+      rgba[index + 1] = 120;
+      rgba[index + 2] = 235;
+    }
+    rgba[index + 3] = 255;
+  }
+  return previewPng(rgba, width, height, scale);
+}
+
 export function matrixDelta(actual, expected) {
   return Math.max(...actual.map((value, index) => Math.abs(value - expected[index])));
 }

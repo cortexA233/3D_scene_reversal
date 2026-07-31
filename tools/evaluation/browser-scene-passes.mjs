@@ -20,6 +20,7 @@ import {
   groupIndex,
   labelMasks,
   materialFamilyIndex,
+  differencePng,
   matrixDelta,
   previewPng,
   readCanvas,
@@ -427,6 +428,21 @@ async function main() {
       candidateSemantic: await previewPng(candidatePasses.semantic, width, height),
       referenceWorldNormal: await previewPng(referencePasses.worldNormal, width, height),
       candidateWorldNormal: await previewPng(candidatePasses.worldNormal, width, height),
+      // Where the two disagree, and which way: red is reference-only, blue is
+      // candidate-only. Ticket 16 asks for differences because a pair of side-by-side
+      // frames does not show a reviewer where a number came from.
+      silhouetteDifference: await differencePng(
+        referencePasses.silhouette,
+        candidatePasses.silhouette,
+        width,
+        height,
+      ),
+      semanticDifference: await differencePng(
+        referencePasses.semantic,
+        candidatePasses.semantic,
+        width,
+        height,
+      ),
     };
   }
 

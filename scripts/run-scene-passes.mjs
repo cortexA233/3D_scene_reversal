@@ -111,6 +111,8 @@ async function writeReviewPackage(previews) {
         "candidateSemantic",
         "referenceWorldNormal",
         "candidateWorldNormal",
+        "silhouetteDifference",
+        "semanticDifference",
       ]
         .map(
           (pass) =>
