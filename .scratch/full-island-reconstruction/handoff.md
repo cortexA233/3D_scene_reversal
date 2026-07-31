@@ -28,6 +28,38 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 12 — decorations (partial) | `lantern` and `npc-statue` landed as axial profiles (ADR-0060); the other 17 kinds are mostly single placements |
 | Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
+## Where this milestone now stands, and what a next session can and cannot do
+
+Every remaining gated failure is one of three things, and only the third is ordinary work:
+
+**Recorded boundaries, proved rather than declared.** Terrain height and shore (ADR-0054,
+needs ~101 landforms against a frozen 40, shore unreachable at any count). Skyline profile
+and worst azimuth (ADR-0052, and its declared resolution path is now *measured closed* — see
+below). `nativeAppearance` blocked by ADR-0040's ordering rule.
+
+**Blocked on another boundary.** `paths` owns the worst per-group IoU (0.1102) and the
+largest contour lever (7.43 of the 25.86 mean) and cannot be fixed in its own ticket: 37 of
+60 paving slabs float entirely above the candidate terrain by ~7 times their own thickness.
+That is ADR-0054's terrain, not a form problem.
+
+**Thin evidence.** What is left of tickets 07 and 12 is single placements. `name-plate` (659
+px) and `yin-yang` (505 px) have one placement each; `shop-sign` turns out to be at least two
+different assets sharing a kind (13,460 triangles against 84); the remaining architecture
+kinds are one placement each bar three dumpling houses. Three attempts were reverted this
+milestone on exactly this, and the fourth and fifth succeeded only where there were 16, 7, 6
+or 2 measured placements to fit against.
+
+**So the honest read is that the stack cannot go green without a repo-level decision** —
+either growing the terrain landform budget, or accepting the sampled-skyline representation,
+both of which existing ADRs decline on Production Runtime grounds. That decision is not one a
+session should take on its own.
+
+What *is* still ordinary work, in order of leverage: per-entity controls for
+`name-plate`/`yin-yang`/`umbrella`/`shop-sign` (measurements recorded in ticket 12, low
+ceiling); Bounded Semantic Pattern Programs for the Material Families (ticket 11, never
+started, and note the trap — fitting them against a render buys the appearance layer with
+the geometry layers).
+
 ## Ticket 05's boundary is closed, not crossable — do not re-open it
 
 ADR-0052 named three shared crest tables as the way through and left it unmeasured.
