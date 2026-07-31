@@ -10,14 +10,13 @@ Scope of this run: tickets 01 → 06 in order. Ticket 07 and later are untouched
 | Ticket | Status |
 | ------ | ------ |
 | 01 package skeleton, decision protocol, mock decider | resolved |
-| 02 measurement core copied with drift checks | not started |
+| 02 measurement core copied with drift checks | resolved |
 | 03 CPU rasterizer, divergence tolerance, wall-clock | not started |
 | 04 Complexity Budget Formula, global ceiling, Budget Proxy | not started |
 | 05 generic perturbations, automatic Calibration Bracket | not started |
 | 06 end-to-end geometry reconstruction | not started |
 
-Last commit: pending — this note is written before the ticket 01 commit and
-updated with the hash immediately after.
+Last commit: `8e39af8` — ticket 02. Ticket 01 was `de7b2d9`.
 
 ## Ticket 03 judgement gate
 
@@ -29,7 +28,7 @@ budget. Numbers will be recorded here verbatim.
 ## Verification block, current state
 
 ```
-npm test                                                    113 passing / 0 failing
+npm test                                                    138 passing / 0 failing
 npm run check:stone-v2-contract                             PASS (6 candidate, 3 evidence files)
 npm run check:patterned-appearance-v2-contract              PASS
 node scripts/run-stage-2-eight-object-certification.mjs --check
@@ -40,12 +39,15 @@ git status --short                                          no red-line file mod
 Baseline before any work: `npm test` was 92 passing / 0 failing. The package's own
 21 tests live in `packages/mesh-to-code/test/` and are discovered by the
 repository's `node --test` as well as by the package's own runner, which is why
-the count rose to 113. Both suites pass standalone.
+the count rose. The package suite is 46 tests after ticket 02, and the
+repository's own count is unchanged at 92: 92 + 46 = 138. Both suites pass
+standalone.
 
-Package-side checks, all passing:
+Repository-side aggregator, all passing (5 checks):
 
 ```
-node scripts/check-decompiler-package.mjs        (repository side, relative path only)
+node scripts/check-decompiler-package.mjs        (relative path only, never a workspace)
+node scripts/check-decompiler-measurement-drift.mjs
 cd packages/mesh-to-code && npm test
 cd packages/mesh-to-code && npm run check:neutrality
 cd packages/mesh-to-code && npm run check:package-contents
@@ -90,6 +92,20 @@ amended. Code, commits, reports, and tickets in this run say Phase A / B / C onl
 `node_modules` was absent at the start of this run and was installed with
 `npm ci`. The root lockfile hash is unchanged:
 `196401e3ca0ede3e31f80ccacbed2132eb55f6459dbadfb230963a989d337193`.
+
+**The vendored measurement copies carry object-specific symbols on purpose.**
+Byte-identity with `tools/evaluation/visual-metrics.mjs` means the copy contains
+`evaluateQualityGate`, and byte-identity with `calibration-perturbations.mjs`
+means it contains the Stone-specific constructors. The alternative was editing a
+frozen file. They are not re-exported, `OBJECT_SPECIFIC_EXPORTS_WITHHELD` names
+them, and a test asserts they stay unreachable. Ticket 02's two checkboxes are in
+literal tension here; the resolution and the reasoning are recorded in that
+ticket.
+
+**`tools/evaluation/patterned-appearance-metrics.mjs` was not copied.** Its
+`HUMAN_ANCHORED_PATTERN_ROLES_V3` is one unit's declared motif palette, which is
+object-specific baseline material, and semantic-pattern appearance belongs to
+ticket 10.
 
 **`dev/` was already untracked before this run started** and is not this work.
 

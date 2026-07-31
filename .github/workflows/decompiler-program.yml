@@ -39,6 +39,12 @@ jobs:
         working-directory: packages/mesh-to-code
         run: npm ci
 
+      # The repository originals are frozen, so drift can only originate in the
+      # package's vendored copies. This runs before the suite, because a drifted
+      # copy makes every measurement downstream of it untrustworthy.
+      - name: Vendored measurement copies are byte-identical
+        run: node scripts/check-decompiler-measurement-drift.mjs
+
       - name: Package test suite
         working-directory: packages/mesh-to-code
         run: npm test
@@ -84,6 +90,9 @@ jobs:
 
       - name: Eight-object certification
         run: node scripts/run-stage-2-eight-object-certification.mjs --check
+
+      - name: Decompiler package checks from the repository side
+        run: node scripts/check-decompiler-package.mjs
 
       # Browser-driven checks are deliberately absent: they shell out to a real
       # Chrome through CHROME_BIN and are run on hardware, not here.

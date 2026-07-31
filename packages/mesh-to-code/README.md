@@ -30,7 +30,9 @@ Under construction. What works today:
   measurements, pairwise gaps, separation ratio, shape-descriptor clusters;
 - hash-bound Structure Manifest emission that reproduces bit-for-bit;
 - the contract audit for asset dependency, executability, and determinism;
-- Reconstruction Tier assignment.
+- Reconstruction Tier assignment;
+- byte-identical copies of the generic measurement modules, guarded by a drift
+  check, so the fitting loop and the terminal gates score with one ruler.
 
 Not yet implemented, and reported rather than assumed: geometry fitting, the
 Operator Library, appearance solving, the Complexity Budget Formula and its
@@ -50,6 +52,7 @@ src/fixtures/         fixtures generated from code, because the package ships no
 src/geometry/         the internal triangle mesh and the Reconstruction Frame rule
 src/ingest/           input formats
 src/kernel/           the driver, decomposition, composition, manifest, tier
+src/measurement/      the measurement surface over byte-identical vendored copies
 src/protocol/         Decision Point definitions and schema loading
 src/util/             canonical JSON and the JSON Schema subset validator
 scripts/              the neutrality, pack-install-run, and content audits

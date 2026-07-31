@@ -20,10 +20,20 @@ const PROJECT_ROOT = path.resolve(
  */
 const PACKAGE_DIRECTORY = path.join(PROJECT_ROOT, "packages/mesh-to-code");
 
-const CHECKS = [
+/** Run inside the package directory. */
+const PACKAGE_CHECKS = [
   ["package test suite", ["--test"]],
   ["harness neutrality", ["scripts/check-harness-neutrality.mjs"]],
   ["package contents", ["scripts/check-package-contents.mjs"]],
+];
+
+/**
+ * Run from the repository root. The drift check compares the package's vendored
+ * measurement copies against the repository originals and the frozen contract
+ * hashes, so it can only live on this side of the one-way dependency.
+ */
+const REPOSITORY_CHECKS = [
+  ["measurement drift", ["scripts/check-decompiler-measurement-drift.mjs"]],
 ];
 
 const options = process.argv.slice(2);
@@ -35,23 +45,25 @@ for (const option of options) {
 }
 
 const results = [];
-for (const [label, args] of CHECKS) {
-  const command = [
-    `"${process.execPath}"`,
-    ...args.map((argument) => `"${argument}"`),
-  ].join(" ");
-  try {
-    const { stdout } = await exec(command, {
-      cwd: PACKAGE_DIRECTORY,
-      maxBuffer: 64 * 1024 * 1024,
-    });
-    results.push({ label, passed: true, tail: tail(stdout) });
-  } catch (error) {
-    results.push({
-      label,
-      passed: false,
-      tail: tail(`${error.stdout ?? ""}${error.stderr ?? error}`),
-    });
+for (const [checks, cwd] of [
+  [REPOSITORY_CHECKS, PROJECT_ROOT],
+  [PACKAGE_CHECKS, PACKAGE_DIRECTORY],
+]) {
+  for (const [label, args] of checks) {
+    const command = [
+      `"${process.execPath}"`,
+      ...args.map((argument) => `"${argument}"`),
+    ].join(" ");
+    try {
+      const { stdout } = await exec(command, { cwd, maxBuffer: 64 * 1024 * 1024 });
+      results.push({ label, passed: true, tail: tail(stdout) });
+    } catch (error) {
+      results.push({
+        label,
+        passed: false,
+        tail: tail(`${error.stdout ?? ""}${error.stderr ?? error}`),
+      });
+    }
   }
 }
 

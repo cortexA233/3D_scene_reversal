@@ -85,24 +85,40 @@ test("three is a peer dependency and nothing requires native compilation", async
   assert.equal(manifest.bin["mesh-reverse"], "bin/mesh-reverse.mjs");
 });
 
-test("the package resolves no dependency on the host repository", async () => {
+test("every import resolves inside the package or to a declared peer", async () => {
+  // Dependencies run one way: the host repository may depend on the package, the
+  // package never on the host repository. The vendored measurement tree mirrors
+  // the originals' paths on purpose, so this resolves each specifier rather than
+  // pattern-matching path text.
+  const declaredExternals = new Set(["three"]);
   const sources = (await walk(path.join(PACKAGE_ROOT, "src"))).filter((file) =>
     file.endsWith(".mjs"),
   );
   assert.ok(sources.length > 0);
+
   for (const file of sources) {
     const source = await readFile(file, "utf8");
-    const escapes = source.match(/from\s+["'][^"']*\.\.\/\.\.\/\.\.[^"']*["']/g) ?? [];
-    assert.deepEqual(
-      escapes,
-      [],
-      `${path.relative(PACKAGE_ROOT, file)} must not import above the package root`,
-    );
-    assert.equal(
-      /gt_designer|tools\/evaluation|scripts\//.test(source),
-      false,
-      `${path.relative(PACKAGE_ROOT, file)} must not reference host-repository paths`,
-    );
+    const specifiers = [
+      ...source.matchAll(/(?:from|import)\s+["']([^"']+)["']/g),
+    ].map((match) => match[1]);
+    const relativeFile = path.relative(PACKAGE_ROOT, file);
+
+    for (const specifier of specifiers) {
+      if (specifier.startsWith("node:")) continue;
+      if (!specifier.startsWith(".")) {
+        assert.ok(
+          declaredExternals.has(specifier.split("/")[0]),
+          `${relativeFile} imports "${specifier}", which is neither a Node builtin nor a declared peer`,
+        );
+        continue;
+      }
+      const resolved = path.resolve(path.dirname(file), specifier);
+      assert.equal(
+        resolved.startsWith(PACKAGE_ROOT + path.sep),
+        true,
+        `${relativeFile} imports "${specifier}", which resolves outside the package root`,
+      );
+    }
   }
 });
 
