@@ -168,6 +168,34 @@ _Avoid_: Mesh decompiler, automatic model converter
 A repeatable, human-guided and measurement-assisted process that turns an Authored Reference into a Procedural Replacement; it may automate evidence extraction and parameter fitting without automatically inventing the generator program.
 _Avoid_: Automatic mesh converter, one-click reconstruction
 
+**Semantic Object Family**:
+A versioned ontology class whose members share required functional part roles and affordance predicates, while finite declared alternatives may form semantic subtypes.
+_Avoid_: Visual category, embedding cluster, generator family
+
+**Structural Archetype**:
+A versioned, bounded template for a semantic object's hierarchy, contact or containment, symmetry, repetition, and optional articulation, independent of the program used to generate it.
+_Avoid_: Source topology, component dump, visual style
+
+**Representation Family**:
+A versioned set of Procedural Replacements expressible by one Object Generator and one bounded recipe schema without changing generator source or adding object-specific branches.
+_Avoid_: Semantic category, shared helper, universal generator
+
+**Restoration Profile**:
+A frozen, generator-independent evaluation contract that combines a Semantic Object Family, Structural Archetype, and Quality Profile into applicable measurements, controls, baselines, and hard gates.
+_Avoid_: Generator-specific score, candidate-tuned baseline, family label
+
+**Quality Profile**:
+A versioned cross-cutting policy for target restoration grade, evidence completeness, evaluation environment, Reference Independence, and resource budgets; it does not define object identity or structure. A new version requires a newly calibrated Restoration Profile rather than mutating an existing one.
+_Avoid_: Object category, difficulty discount, candidate exception
+
+**Reference Classification**:
+The versioned association of one Authored Reference with its Semantic Object Family and Structural Archetype, without choosing how a Procedural Replacement will generate it.
+_Avoid_: Candidate binding, generator classification, visual label
+
+**Candidate Family Binding**:
+The versioned association of one candidate attempt with a Reference Classification, Representation Family, compatibility evidence, and Restoration Profile; the profile is the single source of its Quality Profile.
+_Avoid_: Reference classification, category string, generator kind
+
 ## Shared facts
 
 - Reference-layout Delivery means the Eight-slot Lab Reference Layout, not island-village source-world placement. A stage populates only the slots for its available Procedural Replacements and never fills unfinished slots with Authored Reference assets; formal delivery requires all eight slots.
