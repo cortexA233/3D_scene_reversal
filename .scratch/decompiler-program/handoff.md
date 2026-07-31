@@ -28,7 +28,7 @@ Commits, one per ticket:
 | 03 | `daa21f8` |
 | 04 | `214d8f2` |
 | 05 | `7e58b17` |
-| 06 | current `HEAD` |
+| 06 | `963af8f` |
 
 A hash cannot be written inside the commit it names, so each ticket's hash lands
 in the following ticket's commit. If this table is one row short of the resolved
