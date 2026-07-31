@@ -172,3 +172,54 @@ test("the primary moment is the one every stored measurement was taken at", () =
     "more dynamic moments than the contract permits",
   );
 });
+
+test("the reference renders each declared moment repeatably, not just the primary one", () => {
+  /**
+   * Ticket 13's last open item. The observation visits 16,000 and 24,000 ms and recorded
+   * each moment's structural digests and state transition — but never whether the moment
+   * *renders* the same thing twice, which is the entire point of pinning the clock. A
+   * moment that drifted between runs would make every capture taken at it unreproducible
+   * and nothing would have said so.
+   *
+   * The envelope is the contract's own declared reference repeatability, unchanged: mean
+   * channel delta 0.15, standard-deviation delta 0.2, histogram L1 0.002, difference-hash
+   * distance 4.
+   */
+  const repeatability = observation.repeatability;
+  const declared = repeatability.declared.appearance;
+  const rows = repeatability.dynamicAppearanceDeltas;
+  assert.ok(Array.isArray(rows), "no per-moment appearance deltas were recorded");
+  assert.deepEqual(
+    rows.map((row) => row.momentMs),
+    contract.clock.dynamicMomentsMs,
+    "the per-moment evidence does not cover every declared dynamic moment",
+  );
+
+  for (const row of rows) {
+    for (const [metric, limit] of Object.entries(declared)) {
+      assert.ok(
+        row.deltas[metric] <= limit,
+        `moment ${row.momentMs} ms: ${metric} ${row.deltas[metric]} exceeds ${limit}`,
+      );
+    }
+  }
+
+  // The worst moment is retained, like every other layer's worst row.
+  assert.ok(repeatability.worstDynamicMoment, "no worst dynamic moment was retained");
+  assert.ok(
+    rows.every(
+      (row) =>
+        row.deltas.maximumMeanChannelDelta <=
+        repeatability.worstDynamicMoment.deltas.maximumMeanChannelDelta,
+    ),
+    "the retained worst moment is not the worst",
+  );
+
+  // And a dynamic moment is no less repeatable than the primary one, which is the
+  // assumption every threshold in the stack rests on.
+  assert.ok(
+    repeatability.worstDynamicMoment.deltas.maximumMeanChannelDelta <
+      declared.maximumMeanChannelDelta * 0.1,
+    "a dynamic moment is close enough to the envelope to be worth investigating",
+  );
+});

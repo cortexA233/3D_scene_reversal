@@ -927,6 +927,12 @@ async function observePrimary(clock) {
         dynamic: transition.immutability.after.dynamic,
         transforms: transition.immutability.after.transforms,
         stateTransition: transition.immutability,
+        // The rendered frame at this moment, so the declared repeatability envelope is
+        // exercised at every declared moment rather than only at the primary one. Until
+        // this existed a dynamic moment was checked for structural change and never for
+        // whether it renders the same thing twice — which is the whole point of pinning
+        // the clock.
+        appearance: await captureAppearanceMetrics(),
       });
     }
     referenceObservation.report = {

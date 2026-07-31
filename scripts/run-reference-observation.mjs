@@ -132,6 +132,11 @@ function assertAppearanceWithinDeclaredBounds(left, right, label) {
 function withoutAppearance(report) {
   const result = structuredClone(report);
   delete result.primary.result.appearance;
+  // The dynamic moments render too, and a rendered frame is the one thing two runs on this
+  // host do not reproduce bit for bit. Each moment's appearance is held to the declared
+  // repeatability envelope separately, below; everything else about a moment — its
+  // structural digests and its state transition — still has to match exactly.
+  for (const capture of result.dynamicCaptures ?? []) delete capture.appearance;
   return result;
 }
 
@@ -237,6 +242,9 @@ function stableEvidenceProjection(evidence) {
   delete result.appearanceIntegrity.primaryCapturePngSha256;
   delete result.appearanceIntegrity.primaryCaptureByteLength;
   delete result.repeatability.appearanceDeltas;
+  // Appearance-derived and therefore not bit-reproducible, like the deltas above.
+  delete result.repeatability.dynamicAppearanceDeltas;
+  delete result.repeatability.worstDynamicMoment;
   if (result.crossHost) delete result.crossHost.appearanceDeltas;
   for (const run of result.repeatability.independentRuns) {
     delete run.primaryCapturePngSha256;
@@ -449,6 +457,41 @@ async function main() {
     "independent native appearance runs",
   );
 
+  /**
+   * The same envelope at every declared dynamic moment.
+   *
+   * Until this existed, a dynamic moment was checked for structural change and never for
+   * whether it renders the same thing twice — which is the whole point of pinning the
+   * clock. A moment that drifted between runs would make every capture taken at it
+   * unreproducible, and nothing would have said so.
+   */
+  const dynamicAppearanceDeltas = runs[0].state.report.dynamicCaptures.map((capture, index) => {
+    const other = runs[1].state.report.dynamicCaptures[index];
+    assert.equal(
+      other.momentMs,
+      capture.momentMs,
+      "the two runs visited the declared dynamic moments in different orders",
+    );
+    return {
+      momentMs: capture.momentMs,
+      deltas: assertAppearanceWithinDeclaredBounds(
+        capture.appearance,
+        other.appearance,
+        `independent runs at moment ${capture.momentMs} ms`,
+      ),
+    };
+  });
+  // Per-moment evidence with the worst moment retained, which is what every other layer
+  // in this stack does and what ticket 13 asks for.
+  const worstDynamicMoment = dynamicAppearanceDeltas.reduce(
+    (worst, row) =>
+      worst === null ||
+      row.deltas.maximumMeanChannelDelta > worst.deltas.maximumMeanChannelDelta
+        ? row
+        : worst,
+    null,
+  );
+
   const report = runs[0].state.report;
   const evidence = {
     schemaVersion: "reference-observation-evidence-v1",
@@ -485,6 +528,8 @@ async function main() {
         })),
       })),
       appearanceDeltas,
+      dynamicAppearanceDeltas,
+      worstDynamicMoment,
       structuralExact: true,
       appearanceWithinDeclaredBounds: true,
     },
