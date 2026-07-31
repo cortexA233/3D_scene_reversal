@@ -28,6 +28,48 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 12 — decorations (partial) | `lantern` and `npc-statue` landed as axial profiles (ADR-0060); the other 17 kinds are mostly single placements |
 | Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
+## Where ticket 07 actually stands now
+
+Four of the village's form problems are fixed and the fixed-camera layer has moved
+substantially. Against the numbers this session started from:
+
+| gated metric | start | now |
+| --- | --- | --- |
+| group silhouette IoU | 0.471955 | **0.508089** |
+| group depth p95 | 20.862508 | **20.550992** |
+| worst group depth p95 | 118.403257 | **110.172588** |
+| group world normal p95 | 78.590629 | **76.948763** |
+| semantic agreement | 0.944691 | **0.946747** |
+| worst camera semantic agreement | 0.909687 | **0.911074** |
+| `surface p95` (world) | 7.1748 | **6.7228** |
+| over-tolerance fraction | 0.6218 | **0.6038** |
+| group contour distance p95 | 25.482738 | 25.863440 |
+| worst group contour distance | 151.6212 | 186.6568 |
+| worst group silhouette IoU | 0.109859 | 0.109195 |
+| worst semantic confusion fraction | 0.017581 | 0.018047 |
+
+Per group: `bridges` IoU 0.3624 to **0.5837** and contour 20.49 to **9.70** (ADR-0063);
+`structures` IoU 0.5010 to **0.5749**; `rocks` IoU 0.3804 to **0.4592** with its pixel ratio
+1.26 to **0.98**, from neighbours no longer over-drawing.
+
+**The two contour reds are one camera and one group.** `worst group contour` is `rocks` on
+`authoredOverview` at 186.66, where rocks draws 410 pixels against 962; its contour on the
+other five cameras is 7.1 to 14.5 and its IoU there is 0.545 to 0.617. Do not read that
+number as a rocks regression — its IoU and pixel ratio both improved. It is the sparse-group
+instability held to an analytical fixture in `test/scene-pass-metrics.test.mjs`.
+
+**What is left in 07, and why.** `dumpling-house` (3 placements), `dessert-shop`,
+`tea-booth`, `ring-booth`, `shop`, `pavilion-tower` and `umbrella` are still on
+`architecture`. Each is one placement bar the dumpling houses, and a single placement is 96
+samples over ten deciles with bands coming back empty — the thin evidence that sank two
+attempts here. `shop-stall` (16) and `fruit-shop` (7) were the only architecture kinds with
+real evidence and both are done.
+
+**The representation that keeps working** is the revolved profile: lantern, statue,
+pavilion x2, shop-stall, fruit-shop. `axialLathe` now takes `segments` and `phase` — four
+segments at phase zero is a diamond covering half its rectangle, a quarter turn makes it
+the axis-aligned square a shop is, and eight is what a pavilion roof is.
+
 ## State at the end of this session (second half)
 
 Eleven commits, all pushed, worktree clean. `npm test`: 307 tests, 300 pass, 6 todo, 1 fail
