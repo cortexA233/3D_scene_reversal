@@ -150,6 +150,54 @@ parameter, which is exactly why it deserves its own step rather than being bolte
 after a mixed result — and why the reverted attempt's three controls are recorded
 here rather than left in the recipe as dead data.
 
+## Finding: the structures group's biggest slice is two tree kinds, and they are missing their ground structure
+
+Ranked by authored overview pixels, `structures` is not mostly buildings:
+
+| kind | n | overview px | surface p95 |
+| --- | --- | --- | --- |
+| `wish-tree` | 3 | **3,944** | 17.56 |
+| `pavilion` | 1 | 2,792 | 18.78 |
+| `pavilion-single` | 1 | 1,654 | 21.10 |
+| `swing-tree` | 5 | **1,001** | 9.86 |
+| `dessert-shop` | 1 | 737 | 9.17 |
+| `tea-booth` | 1 | 621 | 9.38 |
+| `dumpling-house` | 3 | 614 | 10.08 |
+| `fruit-shop` | 7 | 536 | 2.95 |
+| `shop-stall` | 16 | 457 | 2.88 |
+| `ring-booth` | 1 | 101 | 12.65 |
+
+The two tree kinds are **40 per cent** of the group's authored pixels across eight
+placements — more than every shop and booth combined, and with enough placements to
+support a family program unlike the single-placement pavilions.
+
+Measured with the fixed massing tool, both say the same thing and it is not a canopy
+problem:
+
+| | authored base reach | candidate | authored base mass | candidate |
+| --- | --- | --- | --- | --- |
+| `wish-tree` | 0.661 | **0.314** | 9.4% | 12.7% |
+| `swing-tree` | 0.616 | **0.095** | 22.3% | 11.5% |
+
+The authored placements are broad all the way to the ground — reach 0.6 to 0.7 in the
+bottom three deciles — while the candidate is a thin trunk, 0.07 to 0.13 for
+`swing-tree`. The reason is that the placement is a tree **plus its structure**: a
+swing's frame, a wish rack and its offerings. Its AABB covers the whole assembly and
+the authored geometry fills the lower region out at radius 0.6, where `broadleaf` puts
+a bare trunk on the axis.
+
+`swing-tree` is also missing half its low mass outright, 11.5 per cent against 22.3.
+
+**What to build, and the one thing the measurement cannot say.** The low mass belongs
+*outward*, not on the axis — so the fix is uprights at the measured base reach carrying
+the measured base share, which is a swing frame and a wish rack rather than a fatter
+trunk. Widening the trunk into a solid taper at reach 0.65 would over-fill badly: reach
+is a mean over samples, so a thin frame at radius 0.6 reads 0.6 while carrying almost no
+area, and a solid column there would draw seven times the silhouette width down low.
+The number of uprights is **not** recoverable from a radially averaged profile. Declare
+it, say it is declared, and check the built share and reach against the measured pair —
+do not present a chosen count as measured.
+
 ## What the next attempt needs
 
 1. **Validate against the rendered gates, not the surface profile.** Contour distance

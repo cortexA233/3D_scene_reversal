@@ -864,6 +864,24 @@ earlier was measured against the wrong thing.
   that — and draw calls fell 1,810 to **1,766** because two kinds went from three and
   four primitives to one surface each. The pixel ratio went 1.52 to 1.60, the same trade
   the support-plane rock made: a fuller form draws more while agreeing better in shape.
+- **`structures` is mostly not buildings, and its biggest slice is diagnosed.** Ranked by
+  authored overview pixels: `wish-tree` 3,944 over 3 placements, `pavilion` 2,792 over 1,
+  `pavilion-single` 1,654 over 1, `swing-tree` 1,001 over 5, then every shop and booth
+  below 740. The two **tree** kinds are 40 per cent of the group across eight placements —
+  more than all the shops combined, and unlike the single-placement pavilions they have
+  enough placements for a family program.
+  Both are missing their ground structure, not their canopy. Authored base reach (bottom
+  three deciles) is 0.661 for `wish-tree` against a candidate 0.314, and 0.616 for
+  `swing-tree` against **0.095**; `swing-tree` also carries 22.3 per cent of its mass in
+  the bottom two deciles against the candidate's 11.5. The placement is a tree *plus its
+  structure* — a swing frame, a wish rack — so its AABB covers the assembly and the
+  authored geometry sits out at radius 0.6 where `broadleaf` puts a bare trunk on the axis.
+  The low mass belongs **outward**, so the fix is uprights at the measured base reach
+  carrying the measured base share, not a fatter trunk: reach is a mean, so a thin frame at
+  radius 0.6 reads 0.6 while carrying almost no area, and a solid column there would draw
+  seven times the silhouette width down low. The **upright count is not recoverable** from a
+  radially averaged profile — declare it, say so, and check the built share and reach
+  against the measured pair.
 - **The rest of the village is still blocked on a design decision, not on a form.**
   Read ticket 07's findings before touching it. The short version:
   `plazas` draws 1.89 times the reference's pixels and `bridges` 2.11 because the
