@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "native-gpu-evidence-v1",
+  "measuredAt": "2026-07-31T09:00:34.765Z",
+  "subject": "the Production Runtime under each browser present on this host",
+  "recipe": {
+    "schemaVersion": "island-scene-recipe-v1",
+    "sceneSeed": 20260729,
+    "entityCount": 672
+  },
+  "note": "Hardware ANGLE is requested per run through browserArguments, which are appended after the harness's own --use-angle=swiftshader and win. The shared harness is unchanged, so every other gate keeps its SwiftShader determinism. These numbers are a different host from the frozen evidence and must not move any threshold.",
+  "runsPerBrowser": 2,
+  "browsers": [
+    {
+      "id": "edge",
+      "engine": "chromium",
+      "status": "native-gpu",
+      "binary": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+      "protocol": "cdp",
+      "command": "CHROME_BIN=\"<path to edge>\" node scripts/run-native-gpu-evidence.mjs",
+      "host": {
+        "hostKey": "windows-edge-150-intel-r-arc-tm-140t-gpu-16gb-0x00007d51-direct3d11-vs-5-0-ps-5-0",
+        "os": "windows",
+        "browser": "edge-150",
+        "rasterizerBackend": "Intel(R) Arc(TM) 140T GPU (16GB) (0x00007D51) Direct3D11 vs_5_0 ps_5_0",
+        "acceleration": "hardware",
+        "threeRevision": "0.170.0"
+      },
+      "stability": {
+        "stable": true,
+        "differences": []
+      },
+      "runs": [
+        {
+          "gpu": {
+            "renderer": "ANGLE (Intel, Intel(R) Arc(TM) 140T GPU (16GB) (0x00007D51) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "vendor": "Google Inc. (Intel)",
+            "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+            "maxTextureSize": 16384,
+            "maxRenderbufferSize": 16384,
+            "acceleration": "hardware"
+          },
+          "colour": {
+            "colorDepth": 24,
+            "devicePixelRatio": 1,
+            "drawingBufferColorSpace": "srgb",
+            "unpackColorSpace": "srgb"
+          },
+          "threeRevision": "0.170.0",
+          "runtime": {
+            "contractErrors": [],
+            "entityCount": 672,
+            "semanticIdCount": 711,
+            "triangles": 549629,
+            "drawCalls": 1810,
+            "generationMs": 452.9
+          },
+          "platform": "Win32",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0"
+        },
+        {
+          "gpu": {
+            "renderer": "ANGLE (Intel, Intel(R) Arc(TM) 140T GPU (16GB) (0x00007D51) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "vendor": "Google Inc. (Intel)",
+            "glVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+            "maxTextureSize": 16384,
+            "maxRenderbufferSize": 16384,
+            "acceleration": "hardware"
+          },
+          "colour": {
+            "colorDepth": 24,
+            "devicePixelRatio": 1,
+            "drawingBufferColorSpace": "srgb",
+            "unpackColorSpace": "srgb"
+          },
+          "threeRevision": "0.170.0",
+          "runtime": {
+            "contractErrors": [],
+            "entityCount": 672,
+            "semanticIdCount": 711,
+            "triangles": 549629,
+            "drawCalls": 1810,
+            "generationMs": 445.8
+          },
+          "platform": "Win32",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0"
+        }
+      ]
+    },
+    {
+      "id": "chrome",
+      "engine": "chromium",
+      "status": "unavailable",
+      "reason": "no binary at any known path for chrome on this host",
+      "searched": [
+        "C:/Program Files/Google/Chrome/Application/chrome.exe",
+        "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "/usr/bin/google-chrome"
+      ],
+      "protocol": "cdp",
+      "note": null,
+      "command": "CHROME_BIN=\"<path to chrome>\" node scripts/run-native-gpu-evidence.mjs",
+      "runs": []
+    },
+    {
+      "id": "firefox",
+      "engine": "gecko",
+      "status": "unavailable",
+      "reason": "no binary at any known path for firefox on this host",
+      "searched": [
+        "C:/Program Files/Mozilla Firefox/firefox.exe",
+        "/Applications/Firefox.app/Contents/MacOS/firefox",
+        "/usr/bin/firefox"
+      ],
+      "protocol": "webdriver-bidi",
+      "note": "Gecko speaks WebDriver BiDi rather than CDP, so the shared harness cannot drive it as-is; a BiDi transport is the work, not the install.",
+      "command": "# firefox: needs a webdriver-bidi transport, then:\nCHROME_BIN=<firefox> node scripts/run-native-gpu-evidence.mjs",
+      "runs": []
+    },
+    {
+      "id": "safari",
+      "engine": "webkit",
+      "status": "unavailable",
+      "reason": "no binary at any known path for safari on this host",
+      "searched": [
+        "/Applications/Safari.app/Contents/MacOS/Safari"
+      ],
+      "protocol": "webkit-inspector",
+      "note": "macOS only. Irreplaceable hardware from this host.",
+      "command": "# safari: needs a webkit-inspector transport, then:\nCHROME_BIN=<safari> node scripts/run-native-gpu-evidence.mjs",
+      "runs": []
+    }
+  ]
+}

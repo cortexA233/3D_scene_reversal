@@ -1,7 +1,7 @@
 # Full Island Reconstruction — handoff
 
 Authority for a fresh session: this file, `spec.md`, the relevant ticket under
-`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0058.
+`issues/`, `CONTEXT.md`, and ADR-0036 through ADR-0059.
 
 ## Where the work stands
 
@@ -24,7 +24,8 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 10 — semantic part structure | done; gate passes at 0 against 3.5 (ADR-0056) |
 | Reconstruction 11 — material families | in progress; every albedo is measured, distant-rock converged |
 | Reconstruction 06 — ground surfaces | plazas, decks and rocks landed (ADR-0057, ADR-0058); `paths` blocked on 03 |
-| Reconstruction 07, 12-16 | ready-for-agent; 07 blocked on a per-entity form decision |
+| Reconstruction 15 — native GPU evidence | done for every browser present (ADR-0059); Firefox/Safari need a non-CDP transport, not an install |
+| Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
 ## Read this before trusting any number below
 
@@ -754,6 +755,30 @@ earlier was measured against the wrong thing.
   shelf's *radial* profile, not the per-node azimuthal controls an earlier note
   proposed: measured over 24 azimuths the shore signed bias runs -4.9 to +6.6 against
   an absolute p95 of 8.89, so the azimuthal term is the smaller one.
+- **Ticket 15's blocker was ours, not the host's (ADR-0059).** It was carried as
+  blocked on Firefox and Safari not being installed. `smoke-local-scene.mjs` passes
+  `--use-angle=swiftshader --enable-unsafe-swiftshader` on **every** launch, so every
+  run in this milestone is software-rasterised — the frozen reference observation says
+  so itself, `hostKey` `windows-edge-150-swiftshader-subzero`, `acceleration`
+  `software`. A gate that rejects software rendering could not have passed on any
+  number of browsers.
+  This host does have a GPU: `--use-angle=default` gives
+  `ANGLE (Intel, Intel(R) Arc(TM) 140T GPU (16GB) Direct3D11, D3D11)` with max texture
+  16384 against SwiftShader's 8192. `scripts/run-native-gpu-evidence.mjs` asks for it
+  per run through `browserArguments`, which land after the harness's flags and win, so
+  **the shared harness is unchanged** and every frozen threshold keeps the SwiftShader
+  determinism it was calibrated through. Two stable runs on Edge 150: 549,629
+  triangles and 1,810 draw calls, matching the SwiftShader counts exactly, which is
+  the useful cross-check because geometry is generated on the CPU.
+  It re-baselines nothing. A GPU host is a *different host*, not a better measurement
+  of the same one, so the record is shaped for `describeNormativeHost` and stays out of
+  every threshold.
+  **Chrome is not installed** — no binary, no `App Paths` entry, nothing on `PATH` —
+  and it would have been the same engine, ANGLE and adapter as Edge anyway. Firefox and
+  Safari are still out of reach for a deeper reason than installation: Gecko speaks
+  WebDriver BiDi and WebKit the WebKit inspector protocol, so **the CDP harness cannot
+  drive either and a BiDi transport is the work**. Both are recorded as `unavailable`
+  with the command that would run them.
 - Ticket 05 is **landed** and its remaining red is a recorded boundary, not
   unfinished work. Do not re-open it as a fitting problem; the next move is the
   shared form family described above.
