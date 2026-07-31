@@ -28,7 +28,47 @@ Scene Parity Foundation is complete and certified. `foundation=PASS` with
 | Reconstruction 12 — decorations (partial) | `lantern` and `npc-statue` landed as axial profiles (ADR-0060); the other 17 kinds are mostly single placements |
 | Reconstruction 07, 12-14, 16 | ready-for-agent; 07 blocked on a per-entity form decision |
 
-## State at the end of this session
+## State at the end of this session (second half)
+
+Eleven commits, all pushed, worktree clean. `npm test`: 307 tests, 300 pass, 6 todo, 1 fail
+(ticket 04's ocean threshold). Baseline `scene-quality-baseline-v1.4`.
+
+The fixed-camera layer moved for the first time this milestone:
+
+| gated metric | session start | now |
+| --- | --- | --- |
+| group silhouette IoU | 0.471955 | **0.493780** |
+| group contour distance p95 | 25.482738 | **23.773317** |
+| group depth p95 | 20.862508 | **20.585709** |
+| group world normal p95 | 78.590629 | **76.136019** |
+| semantic agreement | 0.944691 | **0.946068** |
+| worst camera semantic agreement | 0.909687 | **0.910849** |
+| worst group silhouette IoU | 0.109859 | **0.111429** |
+| worst semantic confusion fraction | 0.017581 | 0.018105 |
+| `surface p95` (world) | 7.1748 | **6.7436** |
+
+**The bridge landed (ADR-0063)** and it is the first village form to. `bridges` IoU
+0.3624 to **0.5837**, contour 20.49 to **9.70**, pixel ratio 2.22 to **1.31**. Knock-on:
+`rocks` contour 24.06 to 16.79 with no change to the rock generator.
+
+Two things about it are worth carrying forward. The second attempt failed on a *bug*, and
+the tell was arithmetic — IoU 0.2885, below the c²/(2c − c²) ≈ 0.33 that ADR-0057 predicts
+for uncorrelated placement of the same area. A form that agrees less than random is
+inverted, not mis-tuned, and it was: `ExtrudeGeometry` plus `rotateX(-PI/2)` sends shape-Y
+to world **-Z**, mirroring the plan, and these two bridges occupy almost exactly the mirror
+pair of axes so each was built along the other's diagonal. **If you extrude a footprint
+here, negate z.** `plate` uses the same pattern and is safe only because its footprint is
+symmetric under that mirror.
+
+And an intermediate evaluation was invalid before that: the recipe wiring had not landed, so
+both bridges built with the *default* axis 0 and the numbers measured were an axis-0 band.
+Check that the recipe actually carries the control before believing a capture.
+
+**`npm run workflow:full-island`** now runs the whole chain in dependency order.
+`--offline` skips the browser steps and is a determinism check: the seven offline steps
+reproduce every stored measurement byte-identically.
+
+## State at the earlier point in this session
 
 Six commits on `experiment/claude-full-island-scene`, all pushed, working tree clean.
 `npm test`: 302 tests, 295 pass, 6 todo, 1 fail (ticket 04's ocean appearance threshold,
