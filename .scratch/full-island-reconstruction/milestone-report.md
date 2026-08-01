@@ -2,6 +2,43 @@
 
 State at HEAD on `experiment/claude-full-island-scene`.
 
+> **Closing update.** Three human decisions were taken during this milestone and applied:
+> the surface sampling density was raised sixteenfold (ADR-0066), `paving-slab` was rebuilt
+> as a scatter (ADR-0067), and the Horizon Group control budget was enlarged along with the
+> triangle ceiling (ADR-0052 enlargement). Two further findings were recorded rather than
+> acted on: ADR-0068, that coastline shape and shore height are opposed, and a correction
+> that ADR-0067's own predictions were wrong on two of three counts.
+>
+> **No gate changed state.** What changed is what the instrument can see.
+
+## 0. What this milestone actually produced
+
+Not green gates. Three things worth more than the numbers moved:
+
+**The measurement was repaired.** Before ADR-0066 the surface gate's noise floor was 4.8964
+against a threshold of 2.4875 — no candidate could pass, however correct, and six kinds
+already measured at or below their own floor. After the repair the floor is 1.3875 against
+a threshold of 2.160875, and **no kind is unmeasurable any more**. Every remaining residual
+is now real shape error that a fit can address.
+
+**Two recorded boundaries turned out not to be boundaries, and one turned out to be
+harder.** ADR-0052's eight-form cap was never binding — the groups carried at most five
+summits against a cap of eight, and the real constraint was detection resolution. Lifting
+it took the skyline's worst azimuth from 3.7618 degrees to 1.97, below the 3.257 the ADR
+recorded as the cap's hard bound. The same pattern appeared again in the terrain: 28 of 32
+coast nodes, bounded by a separation rule rather than the budget. **A cited budget that has
+never been reached is not the constraint**, and that is now the first thing to check.
+`shore height p95`, by contrast, gained a piece of negative evidence and still has no
+remedy.
+
+**Where the work is left is now known, and it is not where the ticket list said.** Ranked by
+residual above each kind's own noise floor, times its placement count: mountain 547, palm
+361, blossom 258, bamboo 225, and then nothing above 66. Ticket 12's seventeen unbuilt
+decoration kinds do not appear — building them all would move the gates by less than the
+capture noise.
+
+
+
 ---
 
 ## 1. What is still red, and why
