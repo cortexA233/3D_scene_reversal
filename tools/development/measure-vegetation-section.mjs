@@ -54,6 +54,16 @@ const KINDS = (flag("--kinds", "palm") ?? "").split(",").filter(Boolean);
  * and so changes nothing the surface gate measures.
  */
 const ALIGN = argv.includes("--align");
+/**
+ * Report the horizontal plan instead of a vertical section.
+ *
+ * A radially averaged profile cannot see where mass sits around the axis, and for the
+ * horizon groups that is the whole remaining question: at the ADR-0066 sampling density
+ * their share and reach profiles agree with the authored ones to within a few per cent at
+ * every decile, while the surface distance is about 49 world units of real error. A
+ * difference that survives the average has to be in the plan.
+ */
+const PLAN = argv.includes("--plan");
 
 const [inventory, samples] = await Promise.all([
   readEvidence("scene-inventory-v1.json"),
@@ -77,6 +87,18 @@ function section(points, box) {
   const centreZ = (minZ + maxZ) / 2;
   const halfX = Math.max(1e-9, (maxX - minX) / 2);
   const halfZ = Math.max(1e-9, (maxZ - minZ) / 2);
+  if (PLAN) {
+    const size = BANDS * 4;
+    const grid = Array.from({ length: size }, () => new Float64Array(size));
+    let total = 0;
+    for (let index = 0; index + 2 < points.length; index += 3) {
+      const u = Math.min(size - 1, Math.max(0, Math.floor(((points[index] - minX) / Math.max(1e-9, maxX - minX)) * size)));
+      const v = Math.min(size - 1, Math.max(0, Math.floor(((points[index + 2] - minZ) / Math.max(1e-9, maxZ - minZ)) * size)));
+      grid[v][u] += 1;
+      total += 1;
+    }
+    return { grid, total };
+  }
   const columns = ALIGN ? BANDS * 2 : BANDS;
   const grid = Array.from({ length: LEVELS }, () => new Float64Array(columns));
   let total = 0;
@@ -144,7 +166,7 @@ const boxOf = (points) => {
 const RAMP = " .:-=+*#%@";
 const cell = (share) => {
   if (!(share > 0)) return " ";
-  const relative = share * (ALIGN ? BANDS * 2 : BANDS);
+  const relative = share * (PLAN ? BANDS * 4 : ALIGN ? BANDS * 2 : BANDS);
   const index = Math.min(RAMP.length - 1, Math.max(1, Math.round(relative * 2.5)));
   return RAMP[index];
 };
@@ -157,7 +179,9 @@ for (const kind of KINDS) {
   }
   const sides = { authored: null, candidate: null };
   for (const side of ["authored", "candidate"]) {
-    const pooled = Array.from({ length: LEVELS }, () => new Float64Array(ALIGN ? BANDS * 2 : BANDS));
+    const rows = PLAN ? BANDS * 4 : LEVELS;
+    const cols = PLAN ? BANDS * 4 : ALIGN ? BANDS * 2 : BANDS;
+    const pooled = Array.from({ length: rows }, () => new Float64Array(cols));
     let placements = 0;
     for (const entity of entities) {
       let points;
@@ -171,7 +195,7 @@ for (const kind of KINDS) {
       if (!points || points.length === 0) continue;
       const { grid, total } = section(points, boxOf(points));
       if (total === 0) continue;
-      for (let level = 0; level < LEVELS; level += 1) {
+      for (let level = 0; level < pooled.length; level += 1) {
         for (let band = 0; band < pooled[level].length; band += 1) {
           pooled[level][band] += grid[level][band] / total;
         }
@@ -187,7 +211,7 @@ for (const kind of KINDS) {
   process.stdout.write(
     `  ${"".padEnd(6)}${"authored  (core -> rim)".padEnd(BANDS + 12)}${"candidate (core -> rim)"}\n`,
   );
-  for (let level = LEVELS - 1; level >= 0; level -= 1) {
+  for (let level = sides.authored.pooled.length - 1; level >= 0; level -= 1) {
     /**
      * Each level's radial profile is normalised to that level's own total, not to the
      * whole entity's. The question here is where the mass sits *at a given height* —
@@ -199,7 +223,7 @@ for (const kind of KINDS) {
       const counts = sides[side].pooled[level];
       let sum = 0;
       for (const value of counts) sum += value;
-      if (!(sum > 0)) return " ".repeat(ALIGN ? BANDS * 2 : BANDS);
+      if (!(sum > 0)) return " ".repeat(PLAN ? BANDS * 4 : ALIGN ? BANDS * 2 : BANDS);
       return Array.from(counts, (value) => cell(value / sum)).join("");
     };
     const share = (side) => {

@@ -42,14 +42,26 @@ export const SCENE_RUNTIME_BUDGET = Object.freeze({
    */
   bundleGzipBytes: 64 * 1024,
   /**
-   * 700,000 triangles. The candidate has been as high as 678,000, when every palm frond
-   * and bamboo leaf was its own blade, and is lower now because matching the authored
-   * bamboo allocation removed 135,259 of them. This ceiling keeps that lesson: it is
-   * above the highest count the milestone has actually needed and an order of magnitude
-   * below the authored scene's own 3,211,043, so a generator cannot buy silhouette
-   * agreement with unbounded tessellation.
+   * 1,000,000 triangles, raised from 700,000.
+   *
+   * The original ceiling was set above the highest count the milestone had needed and an
+   * order of magnitude below the authored scene's 3,211,043, so that a generator could not
+   * buy silhouette agreement with unbounded tessellation. That principle is unchanged and
+   * the new ceiling is still under a third of the authored count; what changed is that the
+   * ceiling had started deciding the shape work rather than bounding it.
+   *
+   * The sizing fact: the sixteen horizon groups spend **8,316 triangles, 1.30 per cent of
+   * the scene, while carrying 37.9 per cent of its surface residual** — and after the
+   * ADR-0066 sampling repair 70 per cent of that residual is real shape error rather than
+   * measurement noise, where it had been 20. Enlarging the ridge control budget is the
+   * largest single lever left on the island and the old ceiling left 60,427 triangles for
+   * it, which is not enough to try anything.
+   *
+   * 1,000,000 leaves 360,427 — room to give the mountains forty times the geometry they
+   * have and still not reach it. If a change needs more than that, the case should be
+   * measured and made rather than accommodated in advance.
    */
-  triangles: 700_000,
+  triangles: 1_000_000,
   /**
    * 2,048 draw calls. The candidate drew 3,389 before canopies were merged into one
    * semantic part each, and 1,766 now. A power-of-two ceiling under the pre-merge figure
@@ -64,7 +76,11 @@ export const SCENE_RUNTIME_BUDGET = Object.freeze({
    * ceiling is set against the 678,000-triangle state, which would have retained about
    * 31 MiB, so it forbids that without forbidding the remaining work.
    */
-  geometryBytes: 40 * 1024 * 1024,
+  // Raised with the triangle ceiling and in the same proportion, because they measure the
+  // same thing through different units and leaving this one behind would have made it the
+  // binding constraint instead — 32,451,332 of 41,943,040 today, which the mountains would
+  // pass through long before they reached a million triangles.
+  geometryBytes: 60 * 1024 * 1024,
 });
 
 /** Which budgets are wall-clock and therefore may not be compared for equality. */
