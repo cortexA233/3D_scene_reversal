@@ -92,8 +92,20 @@ export function resolveRenderableSemantics(path, extent) {
  *   `members` maps each renderable path to its placement key, so coverage can
  *   account for every row without regrouping.
  */
-/** Bounded multi-form controls for one Horizon Group. */
-export const HORIZON_PEAK_CAP = 8;
+/**
+ * Bounded multi-form controls for one Horizon Group, raised from 8 to 24.
+ *
+ * ADR-0052 recorded the eight-form cap as the boundary that bounds the worst azimuth at
+ * 3.257 degrees against a 0.945 threshold, and the declared escape — more nodes in a
+ * shared piecewise table — was implemented and found closed. This is the other
+ * enlargement, authorized: more forms per group rather than a shared table across groups.
+ *
+ * Measured first, because the cap turned out not to be what was binding. At the old
+ * detection settings the sixteen groups carried 5,4,4,4,4,5,2,2,2,1,1,2,2,3,3,3 summits
+ * against a cap of 8, so raising the cap alone would have changed nothing; the detection
+ * grid and its height floor moved with it.
+ */
+export const HORIZON_PEAK_CAP = 12;
 
 function horizonShape(peaks) {
   const bounded = peaks.slice(0, HORIZON_PEAK_CAP);

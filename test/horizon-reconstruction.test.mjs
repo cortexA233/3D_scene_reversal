@@ -276,8 +276,14 @@ test("the skyline controls stay compact and carry no sampled profile", () => {
   const numbers = serialized.match(/-?\d+(?:\.\d+)?/g) ?? [];
 
   assert.ok(
-    numbers.length < EXPECTED_HORIZON_GROUPS * 60,
+    numbers.length < EXPECTED_HORIZON_GROUPS * 72,
     `the sixteen Horizon Groups retain ${numbers.length} numbers, which is approaching a sampled skyline`,
+    // 72 per group, from 60. 60 was the eight-form budget plus its group controls; the cap is now 12
+    // (ADR-0052 enlargement, authorized) and the groups retain 852 numbers against the
+    // 720-bin sampled skyline's 11,520, so the ratio the check exists to protect is
+    // intact — but 852 is also **33 per cent above the 640-number sampled skyline that
+    // was explicitly accepted as the alternative**, which is the comparison a reader
+    // should make and the reason this limit is stated rather than merely raised.
   );
   assert.doesNotMatch(serialized, /profile|skyline|azimuth|elevationAngle|bins/i);
   for (const mountain of mountains) {

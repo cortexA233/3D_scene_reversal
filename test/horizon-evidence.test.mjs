@@ -173,12 +173,22 @@ test("the runtime keeps no authored mountain mesh or sampled skyline", () => {
   const numbers = serialized.match(/-?\d+(?:\.\d+)?/g) ?? [];
 
   assert.ok(
-    numbers.length < EXPECTED_HORIZON_GROUPS * 60,
+    numbers.length < EXPECTED_HORIZON_GROUPS * 72,
+    // Raised with HORIZON_PEAK_CAP 8 -> 12 (ADR-0052 enlargement, authorized). The ratio
+    // this protects is intact -- a 720-bin sampled skyline would be 11,520 numbers against
+    // 1012 here -- but 1012 is also 58 per cent above the 640-number sampled skyline that
+    // was accepted as the alternative, which is the comparison a reader should make.
     `the sixteen Horizon Groups retain ${numbers.length} numbers, which is approaching a sampled skyline`,
   );
   assert.doesNotMatch(serialized, /profile|skyline|azimuth|elevationAngle/i);
   for (const mountain of mountains) {
-    assert.equal(mountain.shape.peaks.length + mountain.shape.foothills.length <= 8, true);
+    // Against the constant, not a literal 8. The literal was correct while the cap was
+    // frozen and wrong the moment ADR-0052's enlargement moved it, in the same way the
+    // sampling test's literal `* 3` was.
+    assert.equal(
+      mountain.shape.peaks.length + mountain.shape.foothills.length <= HORIZON_PEAK_CAP,
+      true,
+    );
   }
 });
 

@@ -166,7 +166,10 @@ test("the fitted artifact is compact and retains no reference data", () => {
   ]);
 
   assert.ok(
-    payload.length <= Object.keys(fitted.values).length * 24,
+    // 30 per fitted value, from 24. The persisted correction grew with the summit count
+    // when HORIZON_PEAK_CAP went 8 -> 12; it is still a per-group control set and not a
+    // profile, which is what the `doesNotMatch` below actually enforces.
+    payload.length <= Object.keys(fitted.values).length * 30,
     `the fitted artifact carries ${payload.length} numbers`,
   );
   assert.ok(payload.every(Number.isFinite));

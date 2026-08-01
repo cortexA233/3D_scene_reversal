@@ -13,20 +13,20 @@
     "determinism": {
       "repeatedGenerations": 2,
       "semanticIdCount": 711,
-      "sceneDigest": "a8b80b20c4235ac7a15ed4d1a4989586384352d28957242ba3367df94fdd8308",
+      "sceneDigest": "7fd864b4c4913c23b1b3c221db1fcea78b3e965e8fcb2bc3891fd8d6493ca8e7",
       "identical": true
     },
     "productionIsolation": {
       "served": 13,
       "requests": 24,
       "externalRequests": 0,
-      "bundleBytes": 211477,
-      "bundleGzipBytes": 42207,
+      "bundleBytes": 218548,
+      "bundleGzipBytes": 43556,
       "thirdPartyInputs": 0,
-      "triangles": 639573,
-      "drawCalls": 1701,
-      "generationMs": 600.2,
-      "geometryBytes": 32451332,
+      "triangles": 653169,
+      "drawCalls": 1699,
+      "generationMs": 594.5,
+      "geometryBytes": 33800900,
       "geometryCount": 1687,
       "auditPassed": true
     },
@@ -36,41 +36,41 @@
       "checks": [
         {
           "metric": "generationMs",
-          "value": 600.2,
+          "value": 594.5,
           "maximum": 1000,
-          "headroomFraction": 0.3998,
+          "headroomFraction": 0.4055,
           "passed": true,
           "wallClock": true
         },
         {
           "metric": "bundleGzipBytes",
-          "value": 42207,
+          "value": 43556,
           "maximum": 65536,
-          "headroomFraction": 0.355972,
+          "headroomFraction": 0.335388,
           "passed": true,
           "wallClock": false
         },
         {
           "metric": "triangles",
-          "value": 639573,
-          "maximum": 700000,
-          "headroomFraction": 0.086324,
+          "value": 653169,
+          "maximum": 1000000,
+          "headroomFraction": 0.346831,
           "passed": true,
           "wallClock": false
         },
         {
           "metric": "drawCalls",
-          "value": 1701,
+          "value": 1699,
           "maximum": 2048,
-          "headroomFraction": 0.169434,
+          "headroomFraction": 0.17041,
           "passed": true,
           "wallClock": false
         },
         {
           "metric": "geometryBytes",
-          "value": 32451332,
-          "maximum": 41943040,
-          "headroomFraction": 0.2263,
+          "value": 33800900,
+          "maximum": 62914560,
+          "headroomFraction": 0.462749,
           "passed": true,
           "wallClock": false
         }
@@ -98,14 +98,14 @@
         "evaluated": true,
         "passed": false,
         "failures": [
-          "surface p95: 4.3797 is not <= 2.160875",
-          "worst entity surface p95: 151.0286 is not <= 13.006425",
-          "over-tolerance surface fraction: 0.3834 is not <= 0.092575",
+          "surface p95: 3.9928 is not <= 2.160875",
+          "worst entity surface p95: 106.2998 is not <= 13.006425",
+          "over-tolerance surface fraction: 0.3785 is not <= 0.092575",
           "terrain height p95: 8.532 is not <= 5.26875",
           "shore height p95: 7.9996 is not <= 2.85035",
           "land and sea agreement: 0.922721 is not >= 0.931361",
-          "horizon profile p95: 0.043636 is not <= 0.0165",
-          "worst azimuth horizon error: 0.065655 is not <= 0.0165"
+          "horizon profile p95: 0.025509 is not <= 0.0165",
+          "worst azimuth horizon error: 0.03437 is not <= 0.0165"
         ],
         "reason": null
       },
@@ -113,16 +113,16 @@
         "evaluated": true,
         "passed": false,
         "failures": [
-          "group silhouette IoU: 0.502999 is not >= 0.724931",
+          "group silhouette IoU: 0.508135 is not >= 0.724931",
           "worst group silhouette IoU: 0.068273 is not >= 0.369228",
-          "group contour distance p95: 25.016649 is not <= 6.536774",
+          "group contour distance p95: 24.227209 is not <= 6.536774",
           "worst group contour distance: 224.6922 is not <= 39.2559",
-          "group depth p95: 20.690134 is not <= 8.173471",
+          "group depth p95: 19.590804 is not <= 8.173471",
           "worst group depth p95: 115.343801 is not <= 22.354947",
-          "group world normal p95: 66.251753 is not <= 41.994434",
-          "semantic agreement: 0.945479 is not >= 0.987465",
-          "worst camera semantic agreement: 0.907535 is not >= 0.974068",
-          "worst semantic confusion fraction: 0.018514 is not <= 0.006534"
+          "group world normal p95: 66.021915 is not <= 41.994434",
+          "semantic agreement: 0.951317 is not >= 0.987465",
+          "worst camera semantic agreement: 0.917695 is not >= 0.974068",
+          "worst semantic confusion fraction: 0.018528 is not <= 0.006534"
         ],
         "reason": null
       },
@@ -145,44 +145,44 @@
     },
     "surface": {
       "count": 672,
-      "mean": 4.3797,
-      "rmse": 12.1305,
-      "p50": 1.8862,
+      "mean": 3.9928,
+      "rmse": 9.6133,
+      "p50": 1.8826,
       "p95": 8.8383,
-      "max": 151.0286
+      "max": 106.2998
     },
     "surfaceWorstEntities": [
       {
         "semanticId": "horizon/mountain-n0917-n0136-p12892",
-        "p95": 151.0286
+        "p95": 106.2998
       },
       {
         "semanticId": "horizon/mountain-p13705-n0034-p3644",
-        "p95": 107.7665
+        "p95": 78.3028
       },
       {
         "semanticId": "horizon/mountain-n9204-n0033-p11102",
-        "p95": 101.4802
-      },
-      {
-        "semanticId": "horizon/mountain-p12963-n0247-n0827",
-        "p95": 73.2125
-      },
-      {
-        "semanticId": "horizon/mountain-p5857-n0343-p11498",
-        "p95": 69.0766
-      },
-      {
-        "semanticId": "horizon/mountain-p10270-n0243-n9219",
-        "p95": 67.3913
+        "p95": 72.483
       },
       {
         "semanticId": "horizon/mountain-p12605-n0303-p7305",
-        "p95": 60.4436
+        "p95": 58.5467
       },
       {
-        "semanticId": "horizon/mountain-n3462-n0175-n14963",
-        "p95": 57.8748
+        "semanticId": "horizon/mountain-p12963-n0247-n0827",
+        "p95": 58.5053
+      },
+      {
+        "semanticId": "horizon/mountain-n11978-n0044-p0122",
+        "p95": 54.2631
+      },
+      {
+        "semanticId": "horizon/mountain-p5857-n0343-p11498",
+        "p95": 53.2695
+      },
+      {
+        "semanticId": "horizon/mountain-p0998-n0042-n16559",
+        "p95": 50.8184
       }
     ],
     "semanticStructure": {
@@ -307,72 +307,72 @@
     },
     "horizon": {
       "groups": 16,
-      "profileP95": 0.043636,
+      "profileP95": 0.025509,
       "worstAzimuths": [
         {
-          "azimuthDegrees": 187.5,
-          "errorDegrees": 3.7617
+          "azimuthDegrees": 48,
+          "errorDegrees": 1.9693
         },
         {
-          "azimuthDegrees": 296.5,
-          "errorDegrees": 3.7055
+          "azimuthDegrees": 69.5,
+          "errorDegrees": 1.9269
         },
         {
-          "azimuthDegrees": 289,
-          "errorDegrees": 3.6645
+          "azimuthDegrees": 23,
+          "errorDegrees": 1.9052
         },
         {
-          "azimuthDegrees": 297,
-          "errorDegrees": 3.652
+          "azimuthDegrees": 92,
+          "errorDegrees": 1.8831
         },
         {
-          "azimuthDegrees": 296,
-          "errorDegrees": 3.5317
+          "azimuthDegrees": 255.5,
+          "errorDegrees": 1.7526
         },
         {
-          "azimuthDegrees": 187,
-          "errorDegrees": 3.5296
+          "azimuthDegrees": 241,
+          "errorDegrees": 1.7281
         },
         {
-          "azimuthDegrees": 289.5,
-          "errorDegrees": 3.3289
+          "azimuthDegrees": 8,
+          "errorDegrees": 1.6942
         },
         {
-          "azimuthDegrees": 303.5,
-          "errorDegrees": 3.3113
+          "azimuthDegrees": 343,
+          "errorDegrees": 1.6875
         }
       ],
       "worstSilhouette": [
         {
-          "semanticId": "horizon/mountain-p5206-n0195-n14447",
-          "p95Degrees": 3.6641
-        },
-        {
-          "semanticId": "horizon/mountain-n8045-n0112-n12155",
-          "p95Degrees": 3.0802
+          "semanticId": "horizon/mountain-p12605-n0303-p7305",
+          "p95Degrees": 1.6569
         },
         {
           "semanticId": "horizon/mountain-p5857-n0343-p11498",
-          "p95Degrees": 2.6235
-        },
-        {
-          "semanticId": "horizon/mountain-n9833-n0179-n6913",
-          "p95Degrees": 2.5274
-        },
-        {
-          "semanticId": "horizon/mountain-p12605-n0303-p7305",
-          "p95Degrees": 2.4645
+          "p95Degrees": 1.5643
         },
         {
           "semanticId": "horizon/mountain-p12963-n0247-n0827",
-          "p95Degrees": 2.4564
+          "p95Degrees": 1.4506
+        },
+        {
+          "semanticId": "horizon/mountain-n10467-n0177-p5763",
+          "p95Degrees": 1.3015
+        },
+        {
+          "semanticId": "horizon/mountain-n9833-n0179-n6913",
+          "p95Degrees": 1.2942
+        },
+        {
+          "semanticId": "horizon/mountain-n3462-n0175-n14963",
+          "p95Degrees": 1.185
         }
       ]
     },
     "fixedCamera": {
       "cameras": 6,
       "groupSilhouetteIoU": {
-        "mean": 0.502999,
+        "mean": 0.508135,
         "worst": {
           "camera": "authoredOverview",
           "label": "paths",
@@ -385,7 +385,7 @@
         }
       },
       "groupContourDistance": {
-        "meanP95": 25.016649,
+        "meanP95": 24.227209,
         "worst": {
           "camera": "authoredOverview",
           "label": "wildlife",
@@ -393,7 +393,7 @@
         }
       },
       "groupDepthWorldUnits": {
-        "meanP95": 20.690134,
+        "meanP95": 19.590804,
         "worst": {
           "camera": "authoredOverview",
           "label": "structures",
@@ -401,13 +401,13 @@
         }
       },
       "groupWorldNormalDegrees": {
-        "meanP95": 66.251753,
+        "meanP95": 66.021915,
         "worst": {
           "camera": "authoredOverview",
           "label": "bridges",
           "value": 89.981495
         },
-        "signedMeanP95": 80.064984,
+        "signedMeanP95": 79.915136,
         "signedWorst": {
           "camera": "oblique-west",
           "label": "paths",
@@ -415,10 +415,10 @@
         }
       },
       "silhouetteIoU": {
-        "mean": 0.996873,
+        "mean": 0.997123,
         "worst": {
           "camera": "authoredOverview",
-          "value": 0.984946
+          "value": 0.986443
         }
       },
       "contourDistance": {
@@ -429,62 +429,62 @@
         }
       },
       "depthWorldUnits": {
-        "meanP95": 36.650585,
+        "meanP95": 26.908666,
         "worst": {
           "camera": "authoredOverview",
-          "value": 63.96247
+          "value": 49.954419
         }
       },
       "worldNormalDegrees": {
-        "meanP95": 5.17695,
+        "meanP95": 5.527324,
         "worst": {
           "camera": "topDown",
           "value": 16.419864
         }
       },
       "semanticAgreement": {
-        "mean": 0.945479,
+        "mean": 0.951317,
         "worst": {
           "camera": "authoredOverview",
-          "value": 0.907535
+          "value": 0.917695
         }
       },
       "appearanceDeltaE": {
-        "meanMean": 12.428473,
+        "meanMean": 12.398201,
         "worst": {
           "camera": "authoredOverview",
-          "value": 16.578133
+          "value": 16.422353
         }
       },
       "appearanceByMaterialFamily": {
-        "meanMean": 22.680767,
+        "meanMean": 22.684814,
         "worst": {
           "camera": "authoredOverview",
           "label": "palm-foliage",
-          "value": 48.19128
+          "value": 48.189893
         }
       },
       "semanticConfusion": {
-        "worstFraction": 0.018514,
+        "worstFraction": 0.018528,
         "worst": {
           "camera": "authoredOverview",
           "transition": "geography->vegetation",
           "pixels": 16823,
-          "fraction": 0.018514
+          "fraction": 0.018528
         }
       }
     },
     "appearanceByRegion": {
-      "sky": 8.951781,
-      "geography": 16.629448,
-      "horizon": 12.006604,
+      "sky": 8.74642,
+      "geography": 16.488277,
+      "horizon": 11.705476,
       "structures": 33.177548,
       "bridges": 32.98212,
       "plazas": 36.374873,
       "paths": 30.778693,
       "rocks": 27.085559,
-      "decorations": 24.910976,
-      "vegetation": 40.212978,
+      "decorations": 24.912886,
+      "vegetation": 40.211987,
       "wildlife": 36.196695,
       "cover": 22.302778
     }
@@ -492,8 +492,8 @@
   "nextMilestoneResiduals": [
     {
       "area": "native appearance",
-      "detail": "mean DeltaE 12.428473, worst camera authoredOverview at 16.578133",
-      "magnitude": 12.428473
+      "detail": "mean DeltaE 12.398201, worst camera authoredOverview at 16.422353",
+      "magnitude": 12.398201
     },
     {
       "area": "terrain elevation",
@@ -502,13 +502,13 @@
     },
     {
       "area": "object surfaces",
-      "detail": "symmetric distance p95 mean 4.3797, worst entity 151.0286",
-      "magnitude": 4.3797
+      "detail": "symmetric distance p95 mean 3.9928, worst entity 106.2998",
+      "magnitude": 3.9928
     },
     {
       "area": "skyline",
-      "detail": "profile p95 0.043636 rad, worst azimuth 0.065655",
-      "magnitude": 4.3636
+      "detail": "profile p95 0.025509 rad, worst azimuth 0.03437",
+      "magnitude": 2.5509
     },
     {
       "area": "semantic structure",
@@ -523,7 +523,7 @@
     {
       "area": "fixed-camera silhouette",
       "detail": "worst group paths on authoredOverview at IoU 0.068273",
-      "magnitude": 0.497001
+      "magnitude": 0.491865
     }
   ],
   "environment": {

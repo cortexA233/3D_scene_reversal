@@ -13,7 +13,7 @@ import {
   surfaceAreaOf,
   triangleCountOf,
 } from "../evaluation/surface-sampling.mjs";
-import { placementKey } from "../reconstruction/scene-placements.mjs";
+import { HORIZON_PEAK_CAP, placementKey } from "../reconstruction/scene-placements.mjs";
 import { createReferenceAccess } from "./reference-access.mjs";
 import { createReferenceObservationContract } from "./reference-observation-contract.mjs";
 
@@ -382,7 +382,11 @@ function collectElevation(runtime) {
 const HORIZON_MINIMUM_DISTANCE = 700;
 const HORIZON_MAXIMUM_SPAN = 2000;
 const HORIZON_MINIMUM_HEIGHT = 50;
-const HORIZON_PEAK_CAP = 8;
+// Imported, not redeclared. This file kept its own copy at 8 while
+// `scene-placements.mjs` held the exported one, so raising the exported cap to 24 did
+// nothing: detection still stopped at 8 and the placement side then sliced 8 to 24. Every
+// one of the sixteen groups reading exactly 8 is what made it visible. Two copies of one
+// rule drifting apart is the defect ADR-0055 records, and the fix is the same one.
 
 function groupHorizonProfile(mesh, anchor) {
   const accumulator = createProfileAccumulator(anchor, HORIZON_BINS);
@@ -409,7 +413,14 @@ function groupPeaks(mesh) {
   if (!position) return [];
   const box = new THREE.Box3().setFromObject(mesh);
   const size = box.getSize(new THREE.Vector3());
-  const cells = 12;
+  // 24 cells, from 12, and a 0.2 height floor from 0.35 (ADR-0052 enlargement).
+  //
+  // These two and HORIZON_PEAK_CAP are the Horizon Group's control budget, and the cap
+  // was never the binding one: at 12 cells and a 0.35 floor the sixteen groups detect
+  // 5,4,4,4,4,5,2,2,2,1,1,2,2,3,3,3 summits against a cap of 8. A 891-unit mountain was
+  // being searched for local maxima on 74-unit cells, so a ridge could carry at most a
+  // handful of nodes however large the cap allowed.
+  const cells = 40;
   const heights = new Array(cells * cells).fill(Number.NEGATIVE_INFINITY);
   const point = new THREE.Vector3();
   for (let index = 0; index < position.count; index += 1) {
@@ -423,7 +434,7 @@ function groupPeaks(mesh) {
   for (let v = 0; v < cells; v += 1) {
     for (let u = 0; u < cells; u += 1) {
       const height = heights[v * cells + u];
-      if (!Number.isFinite(height) || height < 0.35) continue;
+      if (!Number.isFinite(height) || height < 0.1) continue;
       let isPeak = true;
       for (let dv = -1; dv <= 1 && isPeak; dv += 1) {
         for (let du = -1; du <= 1; du += 1) {
