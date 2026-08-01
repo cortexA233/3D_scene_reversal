@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: accepted
 ---
 
 # Silhouette IoU rewards over-drawing a scattered footprint
@@ -123,14 +123,44 @@ that this is now measured rather than supposed. A gate stack that reads IoU, con
 pixel ratio together would have caught the paving slab long ago; reading IoU alone rewards
 keeping it.
 
+## Outcome — built, and two of three predictions were wrong
+
+`paving-slab` was rebuilt as a scatter, authorized. It now carries per-entity
+`footprintCoverage` through the same recipe path the plaza and deck use — 57 placements
+from 0.1145 to 0.8028 — and the generator places `coverage / (pi * r^2)` flat stones with
+four pinned to the box edges so the AABB contract does not inflate them.
+
+This ADR predicted three things. **One held and two did not:**
+
+| | hexagon | scatter | predicted |
+| --- | --- | --- | --- |
+| draw ratio | 2.927 | **1.649** | improves — **held** |
+| contour p95 | 75.990 | 82.754 | improves — **wrong, it worsens** |
+| silhouette IoU | 0.2233 | 0.2184 | falls to ~0.1027 — **wrong, it barely moves** |
+
+Grain size is not the explanation: at a stone radius of 0.07 contour read 83.042 and at
+0.045 it read 82.754, so it sits near 83 either way while the hexagon sits at 76.
+
+The fixture that produced the predictions compared a scatter against *the same statistical
+scatter* in an empty frame. The real group is 57 paving slabs plus three blockier
+`path-stone`, with occlusion, terrain beneath, and an authored footprint whose structure a
+uniform random placement evidently does not reproduce. **The algebra was right about what
+IoU does to two independent scatters and wrong about this group**, which is the difference
+between a fixture and a scene, and is the limitation the fixture's own docstring claims to
+be free of.
+
+So the trade actually taken is: **the draw ratio improves by 44 per cent, and the two gate
+metrics get slightly worse** — contour by 9 per cent, IoU by 2, with `surface p95` also
+1.3 per cent worse because the scatter's stones sit where the reference's do not.
+
+Whether that is worth having is now a different question from the one that was authorized.
+The over-draw was the defect a human reviewer would see, and it is substantially repaired;
+but no gate metric improved, and the argument that two of three would has not survived
+contact with the scene.
+
 ## What was not done
 
-No threshold moved, no metric changed, and `paving-slab` was **not** rebuilt as a scatter,
-even though that is plainly the faithful representation and the measurement to build it from
-now exists. Doing it would improve the draw ratio from 2.927 toward 1.0, improve the contour
-distance, and take the silhouette IoU from 0.2233 to about 0.1027 — moving one gate metric
-backwards by more than half while moving two forwards.
-
-That trade needs a human, because it is a question about which of three disagreeing metrics
-the milestone means, and answering it by picking the one that flatters the change is exactly
-what a fitting loop must not do.
+No threshold moved and no metric changed. The IoU pathology itself is untouched: nothing
+here stops the gate preferring a blob over a scatter, it just no longer has a blob to
+prefer on this kind. Whether `silhouetteIoU` should be read alongside contour and the draw
+ratio rather than alone is still open, and `cover` at 0.0144 is still bounded the same way.

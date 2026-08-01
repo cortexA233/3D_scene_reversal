@@ -84,7 +84,12 @@ const SURFACE_SAMPLES_PATH = path.join(
  * its two placements have opposite vertical massing, which a footprint control
  * cannot carry, so it keeps its own form until that is measured.
  */
-const PLATE_CONTROL_KINDS = ["plaza", "deck"];
+// `paving-slab` joins them on the ADR-0067 decision. It had no footprint controls at all
+// while the plaza and the deck each had theirs, and measured it is not a slab: its
+// footprint is a scatter of small stones at a median coverage of 0.1862, against a
+// candidate hexagon covering about 0.75. Per entity rather than per family because the
+// 42 assets range from 0.115 to 0.803 and one of them really is a solid slab.
+const PLATE_CONTROL_KINDS = ["plaza", "deck", "paving-slab"];
 /**
  * `bridge` carries its own triple instead. A footprint coverage plus a perimeter share
  * cannot describe it — the two placements run along opposite diagonals of their own boxes

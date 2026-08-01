@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: accepted
 ---
 
 # The surface threshold is calibrated without the noise it is applied to
@@ -133,6 +133,46 @@ them invalidates every stored capture.
 
 And it does not touch the other layers. `fixedCameraGeometry` renders both subjects through
 the same frozen cameras at the same resolution and does not sample point clouds at all.
+
+## Outcome — accepted and applied
+
+The sixteenfold rise was authorized and landed. What it bought, measured rather than
+predicted:
+
+| | before | after |
+| --- | --- | --- |
+| entity-weighted floor | 4.8964 | **1.3875** |
+| `surface p95` candidate | 6.4967 | 4.324 |
+| `surface p95` threshold | 2.4875 | **2.160875** |
+| distance from passing | 2.61x | **2.00x** |
+
+**The point of the change is the first row against the third.** The floor was 4.8964 against
+a threshold of 2.4875, so no candidate could pass however correct. It is now 1.3875 against
+2.160875 — the gate has headroom under it and can, for the first time, distinguish a correct
+candidate from an incorrect one. That is what was broken and it is fixed.
+
+The thresholds were re-derived and all three moved **stricter** by 13 to 20 per cent, which
+is the opposite of a concession: denser sampling resolves a mild control's damage more
+sharply, so the mild bracket tightens faster than the severe one. Every move is declared in
+`scene-quality-baseline-v1.7`.
+
+Two corrections to what this ADR said before the change:
+
+**The floor and the error do not add.** This ADR said three quarters of the residual was
+the metric compared with itself, which invited subtracting one from the other. Doing that
+gives a "real error" of 1.60 at the old density and 2.94 at the new one, and error does not
+grow when an instrument improves. Sparse sampling understates a true mismatch as well as
+adding noise to it, so the two are not separable terms. The defensible statement is the one
+in the table: the floor was above the threshold and is now well below it.
+
+**The predicted floor was slightly optimistic and the reason was already recorded.** 1.2929
+was predicted, 1.3875 measured — the ADR flagged its own figure as a lower bound because it
+was measured candidate-against-candidate while the gate compares two different
+tessellations.
+
+`worst entity surface p95` is unchanged in kind: 151.0286 against 13.006425, relatively
+slightly worse at 11.61x. It is a maximum over entities, its floor is set by the largest
+one, and 57x rather than 16x is what it would need.
 
 ## What was not done
 

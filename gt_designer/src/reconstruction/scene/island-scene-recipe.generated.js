@@ -3011,7 +3011,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.191,
+        "perimeterShare": 0.2781
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0310-p0264-p0641",
@@ -3036,7 +3040,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1764,
+        "perimeterShare": 0.1963
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0519-p0257-p0707",
@@ -3061,7 +3069,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.7028,
+        "perimeterShare": 0.5578
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0617-p0260-n1242",
@@ -3086,7 +3098,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1713,
+        "perimeterShare": 0.1932
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0716-p0434-n1744",
@@ -3111,7 +3127,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1812,
+        "perimeterShare": 0.2144
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0970-p0301-n1432",
@@ -3136,7 +3156,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.176,
+        "perimeterShare": 0.1939
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0984-p0301-n1407",
@@ -3161,7 +3185,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1901,
+        "perimeterShare": 0.3031
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0985-p0301-n1407",
@@ -3186,7 +3214,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1961,
+        "perimeterShare": 0.3073
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0989-p0251-n1339",
@@ -3211,7 +3243,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1726,
+        "perimeterShare": 0.1926
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0994-p0241-n1328",
@@ -3236,7 +3272,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1934,
+        "perimeterShare": 0.3049
+      }
     },
     {
       "semanticId": "paths/paving-slab-n0999-p0301-n1389",
@@ -3261,7 +3301,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1817,
+        "perimeterShare": 0.2057
+      }
     },
     {
       "semanticId": "paths/paving-slab-n1001-p0241-n1317",
@@ -3286,7 +3330,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1867,
+        "perimeterShare": 0.2037
+      }
     },
     {
       "semanticId": "paths/paving-slab-n1011-p0260-n1300",
@@ -3311,7 +3359,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1897,
+        "perimeterShare": 0.2946
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0174-p0262-n0342",
@@ -3336,7 +3388,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1966,
+        "perimeterShare": 0.3076
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0186-p0263-n0416",
@@ -3361,7 +3417,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1799,
+        "perimeterShare": 0.2132
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0316-p0254-n1215",
@@ -3386,7 +3446,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1734,
+        "perimeterShare": 0.1909
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0318-p0253-n1247",
@@ -3411,7 +3475,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1787,
+        "perimeterShare": 0.1916
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0339-p0253-n1269",
@@ -3436,7 +3504,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1874,
+        "perimeterShare": 0.2614
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0952-p0126-n0696",
@@ -3461,7 +3533,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.6647,
+        "perimeterShare": 0.1335
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0952-p0128-n0532",
@@ -3486,7 +3562,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.7345,
+        "perimeterShare": 0.1997
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0958-p0122-n0610",
@@ -3511,7 +3591,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.8028,
+        "perimeterShare": 0.3399
+      }
     },
     {
       "semanticId": "paths/paving-slab-p0959-p0127-n0464",
@@ -3536,7 +3620,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.7704,
+        "perimeterShare": 0.2698
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1022-p0246-n1703",
@@ -3561,7 +3649,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1913,
+        "perimeterShare": 0.2625
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1044-p0242-n1768",
@@ -3586,7 +3678,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.191,
+        "perimeterShare": 0.2935
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1056-p0152-n1719",
@@ -3611,7 +3707,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1898,
+        "perimeterShare": 0.2988
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1067-p0242-n1754",
@@ -3636,7 +3736,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1862,
+        "perimeterShare": 0.2672
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1109-p0248-n1731",
@@ -3661,7 +3765,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1713,
+        "perimeterShare": 0.2141
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1114-p0251-n1806",
@@ -3686,7 +3794,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1744,
+        "perimeterShare": 0.2028
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1563-p0259-p1055",
@@ -3711,7 +3823,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1733,
+        "perimeterShare": 0.1907
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1633-p0260-p1097",
@@ -3736,7 +3852,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1787,
+        "perimeterShare": 0.2851
+      }
     },
     {
       "semanticId": "paths/paving-slab-p1693-p0260-p1088",
@@ -3761,7 +3881,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1724,
+        "perimeterShare": 0.1912
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2204-p0253-n1216",
@@ -3786,7 +3910,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1837,
+        "perimeterShare": 0.2287
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2241-p0253-n1792",
@@ -3811,7 +3939,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1837,
+        "perimeterShare": 0.3017
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2377-p0253-n1771",
@@ -3836,7 +3968,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1982,
+        "perimeterShare": 0.3094
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2474-p0174-p0637",
@@ -3861,7 +3997,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1706,
+        "perimeterShare": 0.2046
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2518-p0175-p0651",
@@ -3886,7 +4026,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1145,
+        "perimeterShare": 0.1193
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2536-p0260-n1614",
@@ -3911,7 +4055,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1988,
+        "perimeterShare": 0.2037
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2547-p0227-n1605",
@@ -3936,7 +4084,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1803,
+        "perimeterShare": 0.1978
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2548-p0225-n1606",
@@ -3961,7 +4113,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1935,
+        "perimeterShare": 0.3124
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2559-p0226-n1595",
@@ -3986,7 +4142,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1935,
+        "perimeterShare": 0.1889
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2563-p0227-n1591",
@@ -4011,7 +4171,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1207,
+        "perimeterShare": 0.1241
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2563-p0229-n1593",
@@ -4036,7 +4200,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1867,
+        "perimeterShare": 0.3117
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2578-p0222-n1575",
@@ -4061,7 +4229,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1158,
+        "perimeterShare": 0.194
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2591-p0223-n1570",
@@ -4086,7 +4258,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1304,
+        "perimeterShare": 0.1185
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2605-p0258-n1555",
@@ -4111,7 +4287,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1897,
+        "perimeterShare": 0.2383
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2636-p0253-n1171",
@@ -4136,7 +4316,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1764,
+        "perimeterShare": 0.1909
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2650-p0259-n1150",
@@ -4161,7 +4345,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1758,
+        "perimeterShare": 0.1966
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2653-p0260-n1145",
@@ -4186,7 +4374,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.195,
+        "perimeterShare": 0.3048
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2741-p0260-n1279",
@@ -4211,7 +4403,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1988,
+        "perimeterShare": 0.3097
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2747-p0225-n1267",
@@ -4236,7 +4432,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1935,
+        "perimeterShare": 0.2842
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2748-p0227-n1271",
@@ -4261,7 +4461,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1803,
+        "perimeterShare": 0.2075
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2756-p0226-n1256",
@@ -4286,7 +4490,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1935,
+        "perimeterShare": 0.2781
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2756-p0229-n1250",
@@ -4311,7 +4519,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1867,
+        "perimeterShare": 0.2744
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2759-p0227-n1253",
@@ -4336,7 +4548,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1207,
+        "perimeterShare": 0.1818
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2768-p0222-n1234",
@@ -4361,7 +4577,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1158,
+        "perimeterShare": 0.1235
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2775-p0223-n1223",
@@ -4386,7 +4606,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1304,
+        "perimeterShare": 0.2364
+      }
     },
     {
       "semanticId": "paths/paving-slab-p2783-p0258-n1201",
@@ -4411,7 +4635,11 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
           0
         ]
       },
-      "materialFamily": "paving-stone"
+      "materialFamily": "paving-stone",
+      "shape": {
+        "footprintCoverage": 0.1897,
+        "perimeterShare": 0.301
+      }
     },
     {
       "semanticId": "plazas/deck-n0426-p0132-n0699",
@@ -4439,7 +4667,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.1914,
-        "perimeterShare": 0.1984
+        "perimeterShare": 0.2624
       }
     },
     {
@@ -4468,7 +4696,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.1914,
-        "perimeterShare": 0.1384
+        "perimeterShare": 0.1861
       }
     },
     {
@@ -4497,7 +4725,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.1769,
-        "perimeterShare": 0.1762
+        "perimeterShare": 0.2271
       }
     },
     {
@@ -4526,7 +4754,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.1263,
-        "perimeterShare": 0.1413
+        "perimeterShare": 0.1756
       }
     },
     {
@@ -4550,7 +4778,7 @@ export const ISLAND_SCENE_RECIPE = Object.freeze({
       "materialFamily": "paving-stone",
       "shape": {
         "footprintCoverage": 0.3413,
-        "perimeterShare": 0.6746
+        "perimeterShare": 0.6445
       }
     },
     {

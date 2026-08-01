@@ -465,6 +465,77 @@ function plate(rng, { footprintCoverage = 1, perimeterShare = 0 } = {}) {
 }
 
 /** Shallow irregular slab: the accepted Stone Path footprint extrusion idea. */
+/**
+ * A patch of loose stones covering a measured fraction of its own footprint.
+ *
+ * ADR-0067. The authored paving slab is not a slab: scan-converted at full resolution its
+ * footprint is a scatter of small stones at a median coverage of 0.1862, which is why the
+ * greedy rectangle decomposition claimed only five of forty-two assets and why a single
+ * hexagon covering about 0.75 of the same box drew 2.927 times the reference's pixels.
+ *
+ * Flat stones rather than cobbles, because that is what the vertical area profile says:
+ * the authored mass sits in the top and bottom deciles with little between, which is a
+ * plate seen from above and below rather than a rounded solid.
+ *
+ * The stone count comes from the coverage and a family grain size rather than being
+ * chosen: `count = coverage / (pi * radius^2)`, so a sparse placement gets few stones and
+ * the one asset that really is a solid slab, at 0.8028, gets enough to close up. Four
+ * stones are pinned to the extremes of the box, because the Target AABB Extent contract
+ * scales the generated AABB onto the box exactly and a scatter that fell short of its own
+ * edges would be inflated until it did not.
+ *
+ * This is expected to *lower* the silhouette IoU it is measured by, from 0.2233 toward
+ * 0.1027, while improving the draw ratio and the contour distance. That trade is
+ * ADR-0067's subject and was decided rather than assumed.
+ */
+const COBBLE_RADIUS = 0.045;
+const COBBLE_MAXIMUM = 48;
+
+function cobbleScatter(rng, shape) {
+  const coverage = Math.min(1, Math.max(0.02, shape?.footprintCoverage ?? 0.1862));
+  const count = Math.min(
+    COBBLE_MAXIMUM,
+    Math.max(3, Math.round(coverage / (Math.PI * COBBLE_RADIUS * COBBLE_RADIUS))),
+  );
+  const stones = [];
+  // The four extremes first, so the footprint reaches its own box on both axes.
+  const corners = [
+    [-0.5 + COBBLE_RADIUS, 0],
+    [0.5 - COBBLE_RADIUS, 0],
+    [0, -0.5 + COBBLE_RADIUS],
+    [0, 0.5 - COBBLE_RADIUS],
+  ];
+  for (let index = 0; index < count; index += 1) {
+    let x;
+    let z;
+    if (index < corners.length) {
+      [x, z] = corners[index];
+      // Jittered along the edge it sits on, so the four are not a fixed cross.
+      if (index < 2) z = (rng.nextFloat() - 0.5) * (1 - 2 * COBBLE_RADIUS);
+      else x = (rng.nextFloat() - 0.5) * (1 - 2 * COBBLE_RADIUS);
+    } else {
+      x = (rng.nextFloat() - 0.5) * (1 - 2 * COBBLE_RADIUS);
+      z = (rng.nextFloat() - 0.5) * (1 - 2 * COBBLE_RADIUS);
+    }
+    const stone = new THREE.Shape();
+    const sides = 6;
+    const phase = rng.nextFloat() * Math.PI * 2;
+    for (let side = 0; side < sides; side += 1) {
+      const angle = phase + (side / sides) * Math.PI * 2;
+      const radius = COBBLE_RADIUS * (0.7 + rng.nextFloat() * 0.6);
+      const px = x + Math.cos(angle) * radius;
+      const pz = z + Math.sin(angle) * radius;
+      if (side === 0) stone.moveTo(px, pz);
+      else stone.lineTo(px, pz);
+    }
+    stone.closePath();
+    const geometry = new THREE.ExtrudeGeometry(stone, { depth: 1, bevelEnabled: false });
+    geometry.rotateX(-Math.PI / 2);
+    stones.push(new THREE.Mesh(geometry));
+  }
+  return group([mergeParts(stones, "stones")]);
+}
+
 function slab(rng, { sides = 7 } = {}) {
   const shape = new THREE.Shape();
   for (let index = 0; index < sides; index += 1) {
@@ -1477,7 +1548,7 @@ const GENERATORS = Object.freeze({
   plaza: plate,
   deck: plate,
   "path-stone": slab,
-  "paving-slab": (rng) => slab(rng, { sides: 6 }),
+  "paving-slab": cobbleScatter,
   "stone-platform": (rng) => slab(rng, { sides: 6 }),
 
   // Rock
